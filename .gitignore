@@ -32,8 +32,4 @@ yarn-error.log*
 
 # vercel
 .vercel
-/.idea/modules.xml
-/.idea/php.xml
-/.idea/trip3.iml
-/.idea/vcs.xml
-/.idea/workspace.xml
+/.idea/*
