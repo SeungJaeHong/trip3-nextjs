@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
         {
-            name: 'demo',
+            name: 'trip3',
             script: './start.js',
             env: {
                 HOST: 'localhost',
