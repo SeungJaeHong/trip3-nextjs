@@ -1,7 +1,8 @@
-import Navbar from "./Navbar";
+import Navbar from './Navbar'
 
 type Props = {
     title: string
+    children?: JSX.Element | JSX.Element[]
 }
 
 const Header = (props: Props) => {

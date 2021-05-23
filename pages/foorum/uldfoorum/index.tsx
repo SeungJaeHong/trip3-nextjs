@@ -1,11 +1,30 @@
-function MainForumIndex() {
+import axios from 'axios'
+import ForumRow from "../../../components/Forum/ForumRow";
+
+const MainForumIndex = (props: any) => {
+    const posts = props?.content?.data || []
+
     return (
-        <div className="container mx-auto">
-            <div className="h-96 pt-12 text-2xl text-center text-gray-600">
-                Üldfoorum
+        <div className="p-6 pt-12 lg:container lg:mx-auto bg-gray-50">
+            <div className="grid gap-8">
+                {posts.map((post: any) => {
+                    return <ForumRow {...post} key={post.id}/>
+                })}
             </div>
         </div>
     )
+}
+
+export const getServerSideProps = async () => {
+    const url = 'http://localhost:8000/api/forum'
+    const response = await axios.get(url)
+
+    return {
+        props: {
+            content: response.data
+        }
+    }
+
 }
 
 MainForumIndex.title = 'Üldfoorum'
