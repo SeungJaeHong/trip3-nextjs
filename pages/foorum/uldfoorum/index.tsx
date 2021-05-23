@@ -1,11 +1,13 @@
-function Home() {
+function MainForumIndex() {
     return (
         <div className="container mx-auto">
             <div className="h-96 pt-12 text-2xl text-center text-gray-600">
-                HomePage
+                Üldfoorum
             </div>
         </div>
     )
 }
 
-export default Home
+MainForumIndex.title = 'Üldfoorum'
+
+export default MainForumIndex

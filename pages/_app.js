@@ -1,9 +1,9 @@
 import '../styles/globals.css'
-import MainLayout from "../layouts/MainLayout";
+import MainLayout from '../components/layouts/MainLayout'
 
 function MyApp({ Component, pageProps }) {
     return (
-        <MainLayout>
+        <MainLayout component={Component}>
             <Component {...pageProps} />
         </MainLayout>
     )
