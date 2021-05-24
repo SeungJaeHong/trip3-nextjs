@@ -16,7 +16,7 @@ const MainForumIndex = (props: any) => {
 }
 
 export const getServerSideProps = async () => {
-    const url = 'http://localhost:8000/api/forum'
+    const url = process.env.LARAVEL_API_URL + '/forum'
     const response = await axios.get(url)
 
     return {
@@ -24,7 +24,6 @@ export const getServerSideProps = async () => {
             content: response.data
         }
     }
-
 }
 
 MainForumIndex.title = 'Üldfoorum'
