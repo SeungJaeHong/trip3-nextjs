@@ -4,6 +4,8 @@ import ForumRow from '../../../components/Forum/ForumRow'
 const MainForumIndex = (props: any) => {
     const posts = props?.content?.data || []
 
+    console.log(props, 'props')
+
     return (
         <div className="p-6 pt-12 lg:container lg:mx-auto bg-gray-50">
             <div className="grid gap-8">
