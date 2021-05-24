@@ -1,6 +1,16 @@
-This is [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## About
 
-## Installation
+Trip stack **frontend** experiment built on [Next.js](https://nextjs.org/) and bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+IMPORTANT! See also the **backend** part [https://github.com/kkallasm/trip3-laravel](https://github.com/kkallasm/trip3-laravel).
+
+## Demo
+
+[https://tripstaging.eu](https://tripstaging.eu)
+
+## Development
+
+### Installation
 
 First, run the development server:
 
