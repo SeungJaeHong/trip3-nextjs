@@ -1,5 +1,5 @@
 import axios from 'axios'
-import ForumRow from "../../../components/Forum/ForumRow";
+import ForumRow from '../../../components/Forum/ForumRow'
 
 const MainForumIndex = (props: any) => {
     const posts = props?.content?.data || []
@@ -16,6 +16,9 @@ const MainForumIndex = (props: any) => {
 }
 
 export const getServerSideProps = async () => {
+
+    console.log(process.env.LARAVEL_API_URL, 'laravel api route')
+
     const url = process.env.LARAVEL_API_URL + '/forum'
     const response = await axios.get(url)
 

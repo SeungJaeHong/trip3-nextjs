@@ -29,7 +29,7 @@ const links = [
     },
 ];
 
-const Navbar = (props: any) => {
+const Navbar = () => {
     return (
         <div className="relative flex justify-between h-6 items-center">
             <div className="mt-4">
