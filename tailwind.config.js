@@ -5,7 +5,9 @@ module.exports = {
     variants: {
         extend: {},
     },
-    plugins: [],
+    plugins: [
+        require('@tailwindcss/typography'),
+    ],
     theme: {
         fontFamily: {
             sans: ["Sailec", "sans-serif"],
