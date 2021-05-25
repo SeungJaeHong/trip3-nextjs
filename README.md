@@ -69,4 +69,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
  - typescript types (any is used at the moment)
  - authentication with backend
  - LARAVEL_API_URL to more generic variable
+ - eslint & prettier
  - ...
