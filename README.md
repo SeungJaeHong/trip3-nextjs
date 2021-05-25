@@ -12,7 +12,7 @@ NOTE! It can be used with any other BACKEND system/framework which supports cook
 
 ## Development
 
-It's better to spin up API backend server before doing npm run's and stuff because some pages need SSR and API to build up.
+It's better to spin up API backend server before doing npm run's and stuff because some pages need SSR and API to build up (for the first print).
 
 ### Installation
 
