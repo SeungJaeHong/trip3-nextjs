@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import TripLogoDark from "./icons/TripDarkLogo"
 import SearchIcon from "./icons/SearchIcon"
+import {useAuth} from "../context/AuthContext"
 
 const links = [
     {
@@ -19,17 +20,27 @@ const links = [
         title: 'Uudised',
         route: '/uudised'
     },
-    {
-        title: 'Registreeru',
-        route: '/'
-    },
-    {
-        title: 'Logi sisse',
-        route: '/'
-    },
 ];
 
+const loginLink = (user: any) => {
+   if (!user) {
+       return (
+           <Link href={'/login'}>
+               <a className="font-medium text-gray-500 text-md">Logi sisse</a>
+           </Link>
+       )
+   }
+
+   return null
+}
+
 const Navbar = () => {
+    const {user, logout} = useAuth()
+    const onLogoutClick = () => {
+        logout()
+        //show notification
+    }
+
     return (
         <div className="relative flex justify-between h-6 items-center">
             <div className="mt-4">
@@ -48,6 +59,8 @@ const Navbar = () => {
                         </Link>
                     )
                 })}
+                {loginLink(user)}
+                {user && <a className="font-medium text-gray-500 text-md cursor-pointer" onClick={onLogoutClick}>Logi välja</a>}
             </div>
         </div>
     )

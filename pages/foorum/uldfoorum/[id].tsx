@@ -28,7 +28,7 @@ const ForumShow = (props: any) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const id = context.query.id
-    const url = process.env.LARAVEL_API_URL + '/forum/' + id
+    const url = process.env.API_BASE_URL + '/forum/' + id
     const response = await axios.get(url)
 
     return {

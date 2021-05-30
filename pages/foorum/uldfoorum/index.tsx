@@ -41,13 +41,12 @@ const MainForumIndex = (props: any) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const page = context.query?.page
-    let url = process.env.LARAVEL_API_URL + '/forum'
+    let url = process.env.API_BASE_URL + '/forum'
     if (page) {
         url += '?page=' + page
     }
 
     const response = await axios.get(url)
-
     return {
         props: {
             content: response.data,

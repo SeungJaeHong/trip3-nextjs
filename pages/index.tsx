@@ -1,9 +1,15 @@
 import Image from 'next/image'
+import {useUser} from "../context/AuthContext"
 
-function Home() {
+const Home = () => {
+    const user = useUser()
+
     return (
         <div className="container mx-auto">
-            <h3 className="pt-12 pb-12 text-xl text-center text-gray-600">HomePage</h3>
+            <div className="p-12">
+                user: { JSON.stringify(user) }
+            </div>
+
             <div className="pb-12">
                 <Image
                     src="https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
