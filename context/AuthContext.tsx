@@ -22,7 +22,8 @@ type Props = {
     children: ReactNode;
 };
 
-export const AuthProvider = ({ children, authUser }) => {
+// @ts-ignore
+export const AuthProvider = ({children, authUser}) => {
     const [user, setUser] = useState(authUser)
 
     const getUser = async () => {
@@ -79,6 +80,7 @@ export const AuthProvider = ({ children, authUser }) => {
     }
 
     return (
+        // @ts-ignore
         <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
