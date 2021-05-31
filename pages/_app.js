@@ -24,6 +24,7 @@ function MyApp({ Component, pageProps, user }) {
 
 // this makes every page SSR
 // not recommended approach but we always get the user first this way
+// probably changes later
 MyApp.getInitialProps = async appContext => {
     let user = undefined
 

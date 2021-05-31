@@ -8,7 +8,6 @@ const MainLayout = (props: any) => {
             <Head>
                 <title>{props.component?.title || 'Trip.ee'}</title>
             </Head>
-            <Header title={props.component.title} />
             {props.children}
             <Footer />
         </div>

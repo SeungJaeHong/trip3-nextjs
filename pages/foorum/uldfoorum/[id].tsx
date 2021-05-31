@@ -1,9 +1,10 @@
+import React, {Fragment} from 'react'
 import axios from 'axios'
 import {GetServerSideProps} from 'next'
-import {Fragment} from 'react'
 import Head from 'next/head'
-import ForumPost from "../../../components/Forum/ForumPost";
-import ForumComment from "../../../components/Forum/ForumComment";
+import ForumPost from "../../../components/Forum/ForumPost"
+import ForumComment from "../../../components/Forum/ForumComment"
+import Header from "../../../components/Header"
 
 const ForumShow = (props: any) => {
     return (
@@ -12,6 +13,7 @@ const ForumShow = (props: any) => {
                 <title>Üldfoorum</title>
                 <meta name="description" content={props.content.title} />
             </Head>
+            <Header title={'Üldfoorum'} />
             <div className="p-6 pt-20 lg:container lg:mx-auto bg-gray-50">
                 <ForumPost {...props.content} />
             </div>
@@ -38,6 +40,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-ForumShow.title = 'Üldfoorum'
+//ForumShow.title = 'Üldfoorum'
 
 export default ForumShow

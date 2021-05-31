@@ -1,7 +1,9 @@
+import React, {Fragment} from 'react'
 import axios from 'axios'
 import ForumRow from '../../../components/Forum/ForumRow'
 import {GetServerSideProps} from "next"
 import Link from 'next/link'
+import Header from "../../../components/Header"
 
 const MainForumIndex = (props: any) => {
     const posts = props?.content?.data || []
@@ -12,30 +14,33 @@ const MainForumIndex = (props: any) => {
     const prevPageUrl = props?.content?.prev_page_url ? '/foorum/uldfoorum?page=' + prevPage : null
 
     return (
-        <div className="p-6 pt-12 lg:container lg:mx-auto bg-gray-50">
-            <div className="grid gap-8">
-                {posts.map((post: any) => {
-                    return <ForumRow {...post} key={post.id}/>
-                })}
-            </div>
-            <div className="flex justify-center gap-4 pt-16 pb-12">
-                {prevPageUrl &&
-                <Link href={prevPageUrl}>
-                    <a className="px-6 py-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 active:bg-green-600">
-                        Prev
-                    </a>
-                </Link>
-                }
+        <Fragment>
+            <Header title={'Foorum'} />
+            <div className="p-6 pt-12 lg:container lg:mx-auto bg-gray-50">
+                <div className="grid gap-8">
+                    {posts.map((post: any) => {
+                        return <ForumRow {...post} key={post.id}/>
+                    })}
+                </div>
+                <div className="flex justify-center gap-4 pt-16 pb-12">
+                    {prevPageUrl &&
+                    <Link href={prevPageUrl}>
+                        <a className="px-6 py-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 active:bg-green-600">
+                            Prev
+                        </a>
+                    </Link>
+                    }
 
-                {nextPageUrl &&
-                <Link href={nextPageUrl}>
-                    <a className="px-6 py-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 active:bg-green-600">
-                        Next
-                    </a>
-                </Link>
-                }
+                    {nextPageUrl &&
+                    <Link href={nextPageUrl}>
+                        <a className="px-6 py-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 active:bg-green-600">
+                            Next
+                        </a>
+                    </Link>
+                    }
+                </div>
             </div>
-        </div>
+        </Fragment>
     )
 }
 
@@ -54,6 +59,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-MainForumIndex.title = 'Foorum'
+//MainForumIndex.title = 'Foorum'
 
 export default MainForumIndex
