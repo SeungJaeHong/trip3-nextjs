@@ -17,7 +17,7 @@ const Home = () => {
                      backgroundSize: "cover",
                      backgroundPosition: "50% 50%"
                 }}>
-                <div className="max-w-screen-xl inset-0 grid gap-11 lg:mx-auto">
+                <div className="max-w-6xl inset-0 grid gap-11 lg:mx-auto">
                     <div className="pb-10">
                         <Navbar />
                     </div>
@@ -35,7 +35,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <div className="max-w-screen-xl mx-auto">
+            <div className="max-w-6xl mx-auto">
                 <div className="p-12">
                     user: { JSON.stringify(user) }
                 </div>

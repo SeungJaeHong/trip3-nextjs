@@ -14,10 +14,10 @@ const ForumShow = (props: any) => {
                 <meta name="description" content={props.content.title} />
             </Head>
             <Header title={'Üldfoorum'} />
-            <div className="p-6 pt-20 lg:container lg:mx-auto bg-gray-50">
+            <div className="pt-20 max-w-6xl lg:mx-auto bg-gray-50">
                 <ForumPost {...props.content} />
             </div>
-            <div className="p-6 pt-12 pb-24 lg:container lg:mx-auto grid grid-cols-1 md:grid-cols-[auto,1fr] gap-x-8">
+            <div className="pt-12 pb-24 max-w-6xl lg:mx-auto grid grid-cols-1 md:grid-cols-[auto,1fr] gap-x-8">
                 <div className="grid gap-4">
                     {props.content.comments.map((comment: any) => {
                         return <ForumComment {...comment} key={comment.id} />

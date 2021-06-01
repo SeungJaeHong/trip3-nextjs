@@ -16,7 +16,7 @@ const MainForumIndex = (props: any) => {
     return (
         <Fragment>
             <Header title={'Foorum'} />
-            <div className="p-6 pt-12 lg:container lg:mx-auto bg-gray-50">
+            <div className="pt-12 max-w-6xl lg:mx-auto bg-gray-50">
                 <div className="grid gap-8">
                     {posts.map((post: any) => {
                         return <ForumRow {...post} key={post.id}/>
