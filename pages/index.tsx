@@ -9,27 +9,27 @@ const Home = () => {
 
     return (
         <Fragment>
-            <div className="relative p-6 pb-0 overflow-hidden bg-gray-700 lg:px-0 lg:pt-10"
+            <div className="relative p-6 pb-14 overflow-hidden bg-gray-700 lg:px-0 lg:pt-10"
                  style={{
-                     backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url(/images/bg5.jpg)",
+                     backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url(/images/bg.jpg)",
                      width: "100%",
                      backgroundRepeat: "no-repeat",
                      backgroundSize: "cover",
                      backgroundPosition: "50% 50%"
                 }}>
-                <div className="container inset-0 grid gap-12 lg:mx-auto">
+                <div className="container inset-0 grid gap-11 lg:mx-auto">
                     <div className="pb-10">
                         <Navbar />
                     </div>
-                    <div className="flex text-center relative w-full">
+                    <div className="flex text-center relative w-1/2 mx-auto mb-14">
                         <div className="w-full relative">
                             <input
                                 type="text"
                                 autoComplete="off"
-                                placeholder="Kuhu sa soovid minna?"
-                                className="w-1/2 h-12 bg-white bg-opacity-20 placeholder-white text-lg text-center" />
-                            <div className="pl-2 pt-1 absolute top-6 left-0 cursor-pointer fill-white">
-                                <SearchIcon width={'26'} height={'26'} />
+                                placeholder="Kuhu sa täna tahaksid minna?"
+                                className="w-full h-14 bg-white bg-opacity-20 placeholder-white text-xl pt-1 pl-14 text-white outline-none" />
+                            <div className="pl-2 pt-1 absolute top-3 left-1 cursor-pointer fill-white fill-current text-white">
+                                <SearchIcon width={'26'} height={'26'}/>
                             </div>
                         </div>
                     </div>

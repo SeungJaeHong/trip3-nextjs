@@ -56,7 +56,7 @@ const Navbar = (props: Props) => {
 
     return (
         <div className="relative flex justify-between h-6 items-center">
-            <div className="mt-4">
+            <div className="mt-6">
                 <Link href="/">
                     <a>
                         {getLogo()}
