@@ -1,0 +1,15 @@
+.Footer {
+    padding-top: 2.5rem;
+    padding-bottom: 5rem;
+    background-color: lightgray;
+
+    .Content {
+        display: grid;
+        justify-content: center;
+        gap: 2rem;
+        text-align: center;
+        grid-column: 4;
+        padding: 0 1rem;
+        margin: 0 auto;
+    }
+}

@@ -30,7 +30,7 @@ const Home = () => {
                 </div>
             </div>
             <div className={clsx([containerStyle.container_lg, styles.Content])}>
-                <div className="p-12">
+                <div>
                     user: { JSON.stringify(user) }
                 </div>
 

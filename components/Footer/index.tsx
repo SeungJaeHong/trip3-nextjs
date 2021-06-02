@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import TripLogoText from "../../icons/TripLogoText"
 import RssIcon from "../../icons/RssIcon"
+import styles from './Footer.module.scss'
+import clsx from "clsx"
+import containerStyle from "../../styles/containers.module.scss"
 
 const col1 = [
     {
@@ -96,8 +99,8 @@ const social = [
 
 const Index = (props: any) => {
     return (
-        <div className="pt-12 pb-24 pl-6 pr-6 bg-gray-100">
-            <div className="container grid justify-center gap-4 text-center lg:mx-auto grid-cols-0 md:grid-cols-4 md:justify-start md:text-left">
+        <div className={styles.Footer}>
+            <div className={clsx([containerStyle.container_lg, styles.Content])}>
                 <Link href={'/'}>
                     <a>
                         <TripLogoText className="h-6 fill-current text-gray-600"/>

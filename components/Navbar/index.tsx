@@ -36,12 +36,12 @@ const Index = (props: Props) => {
         //show notification
     }
 
-    const textColorCss = props.darkMode ? 'text-blue-400' : 'text-white'
+    //todo: const textColorCss = props.darkMode ? 'text-blue-400' : 'text-white'
     const loginLink = (user: any) => {
         if (!user) {
             return (
                 <Link href={'/login'}>
-                    <a className={"font-medium text-md " + textColorCss}>Logi sisse</a>
+                    <a>Logi sisse</a>
                 </Link>
             )
         }
@@ -65,16 +65,16 @@ const Index = (props: Props) => {
                 </Link>
             </div>
             <div className={styles.Links}>
-                {props.showSearch && <SearchIcon className={"w-5 h-5 fill-current " + textColorCss} />}
+                {props.showSearch && <SearchIcon />}
                 {links.map(link => {
                     return (
                         <Link href={link.route} key={link.title}>
-                            <a className={"font-medium text-md " + textColorCss}>{link.title}</a>
+                            <a>{link.title}</a>
                         </Link>
                     )
                 })}
                 {loginLink(user)}
-                {user && <a className={"font-medium text-md cursor-pointer " + textColorCss} onClick={onLogoutClick}>Logi välja</a>}
+                {user && <a onClick={onLogoutClick}>Logi välja</a>}
             </div>
         </div>
     )
