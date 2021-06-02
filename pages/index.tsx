@@ -5,12 +5,13 @@ import Navbar from "../components/Navbar"
 import FrontPageSearch from "../components/FrontPageSearch"
 import containerStyle from '../styles/containers.module.scss'
 import styles from './Homepage.module.scss'
+import clsx from 'clsx'
 
 const Home = () => {
     const user = useUser()
 
     return (
-        <div className={styles.Homepage}>
+        <>
             <div className={styles.Header}
                  style={{
                      backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url(/images/bg.jpg)",
@@ -19,7 +20,7 @@ const Home = () => {
                      backgroundSize: "cover",
                      backgroundPosition: "50% 50%"
                 }}>
-                <div className={styles.Content}>
+                <div className={clsx([containerStyle.container_lg, styles.Content])}>
                     <div className={styles.Navbar}>
                         <Navbar />
                     </div>
@@ -28,7 +29,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <div className={styles.Body}>
+            <div className={clsx([containerStyle.container_lg, styles.Content])}>
                 <div className="p-12">
                     user: { JSON.stringify(user) }
                 </div>
@@ -70,7 +71,7 @@ const Home = () => {
                     />
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
