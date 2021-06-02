@@ -1,0 +1,29 @@
+.Homepage {
+    width: 100%;
+
+    .Header {
+        position: relative;
+
+        .Content {
+            max-width: 80rem;
+            width: 100%;
+            margin: 0 auto;
+
+            .Navbar {
+                padding-bottom: 2.5rem;
+                padding-top: 1.5rem;
+            }
+
+            .Search {
+                border: 1px solid red;
+            }
+        }
+    }
+}
+
+.Body {
+    max-width: 80rem;
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid green;
+}

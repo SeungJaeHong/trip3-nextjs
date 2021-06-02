@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import TripLogoText from "./icons/TripLogoText";
-import RssIcon from "./icons/RssIcon";
+import TripLogoText from "../../icons/TripLogoText"
+import RssIcon from "../../icons/RssIcon"
 
 const col1 = [
     {
@@ -94,7 +94,7 @@ const social = [
     },
 ];
 
-const Footer = (props: any) => {
+const Index = (props: any) => {
     return (
         <div className="pt-12 pb-24 pl-6 pr-6 bg-gray-100">
             <div className="container grid justify-center gap-4 text-center lg:mx-auto grid-cols-0 md:grid-cols-4 md:justify-start md:text-left">
@@ -158,4 +158,4 @@ const Footer = (props: any) => {
     )
 }
 
-export default Footer
+export default Index

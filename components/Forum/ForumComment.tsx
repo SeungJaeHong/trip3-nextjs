@@ -1,4 +1,4 @@
-import UserIcon from '../icons/UserIcon'
+import UserIcon from '../../icons/UserIcon'
 import Link from 'next/link'
 import {Fragment} from 'react'
 

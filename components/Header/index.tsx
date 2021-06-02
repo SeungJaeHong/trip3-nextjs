@@ -1,11 +1,11 @@
-import Navbar from './Navbar'
+import Navbar from '../Navbar'
 
 type Props = {
     title: string
     children?: JSX.Element | JSX.Element[]
 }
 
-const Header = (props: Props) => {
+const Index = (props: Props) => {
     return (
         <div className="relative p-6 pb-0 overflow-hidden bg-gray-100 lg:px-0 lg:pt-10">
             <div className="max-w-6xl mx-auto inset-0 grid gap-6 lg:mx-auto">
@@ -20,4 +20,4 @@ const Header = (props: Props) => {
     )
 }
 
-export default Header
+export default Index

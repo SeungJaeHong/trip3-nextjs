@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
     async redirects() {
         return [
@@ -7,6 +9,9 @@ module.exports = {
                 permanent: false,
             },
         ]
+    },
+    sassOptions: {
+        includePaths: [path.join(__dirname, 'styles')],
     },
     images: {
         domains: ['images.pexels.com'], //just for testing

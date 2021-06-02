@@ -1,8 +1,9 @@
 import Link from 'next/link'
-import TripLogoDark from "./icons/TripDarkLogo"
-import SearchIcon from "./icons/SearchIcon"
-import {useAuth} from "../context/AuthContext"
-import TripLogo from "./icons/TripLogo"
+import TripLogoDark from "../../icons/TripDarkLogo"
+import SearchIcon from "../../icons/SearchIcon"
+import {useAuth} from "../../context/AuthContext"
+import TripLogo from "../../icons/TripLogo"
+import styles from './Navbar.module.scss'
 
 const links = [
     {
@@ -28,7 +29,7 @@ type Props = {
     showSearch?: boolean
 }
 
-const Navbar = (props: Props) => {
+const Index = (props: Props) => {
     const {user, logout} = useAuth()
     const onLogoutClick = () => {
         logout()
@@ -55,15 +56,15 @@ const Navbar = (props: Props) => {
     }
 
     return (
-        <div className="relative flex justify-between h-6 items-center">
-            <div className="mt-6">
+        <div className={styles.Navbar}>
+            <div className={styles.Logo}>
                 <Link href="/">
                     <a>
                         {getLogo()}
                     </a>
                 </Link>
             </div>
-            <div className="items-center hidden space-x-4 lg:flex">
+            <div className={styles.Links}>
                 {props.showSearch && <SearchIcon className={"w-5 h-5 fill-current " + textColorCss} />}
                 {links.map(link => {
                     return (
@@ -79,9 +80,9 @@ const Navbar = (props: Props) => {
     )
 }
 
-Navbar.defaultProps = {
+Index.defaultProps = {
     darkMode: false,
     showSearch: false
 }
 
-export default Navbar
+export default Index

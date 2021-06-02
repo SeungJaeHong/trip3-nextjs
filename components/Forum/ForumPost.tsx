@@ -1,4 +1,4 @@
-import UserIcon from '../icons/UserIcon'
+import UserIcon from '../../icons/UserIcon'
 
 const ForumPost = (props: any) => {
     return (

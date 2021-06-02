@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import UserIcon from '../icons/UserIcon'
+import UserIcon from '../../icons/UserIcon'
 
 const ForumRow = (props: any) => {
     return (

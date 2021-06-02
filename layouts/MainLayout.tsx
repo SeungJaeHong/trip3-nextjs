@@ -1,16 +1,15 @@
 import Head from 'next/head'
-import Footer from "../Footer";
-import Header from "../Header";
+import Index from "../components/Footer"
 
 const MainLayout = (props: any) => {
     return (
-        <div>
+        <>
             <Head>
                 <title>{props.component?.title || 'Trip.ee'}</title>
             </Head>
             {props.children}
-            <Footer />
-        </div>
+            <Index />
+        </>
     )
 }
 

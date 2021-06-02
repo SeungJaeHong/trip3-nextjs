@@ -1,7 +1,7 @@
 import App from 'next/app'
-import '../styles/globals.css'
+import '../styles/globals.scss'
 import NextNprogress from 'nextjs-progressbar'
-import MainLayout from '../components/layouts/MainLayout'
+import MainLayout from '../layouts/MainLayout'
 import {AuthProvider} from "../context/AuthContext"
 import ApiClient from "../lib/ApiClient"
 
