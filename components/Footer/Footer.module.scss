@@ -6,9 +6,8 @@
     .Content {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-        //grid-template-columns: auto auto auto auto;
         gap: 4rem;
-        padding: 0 2rem;
+        padding: 0 2rem 5rem 2rem;
         margin: 0 auto;
     }
 
@@ -30,6 +29,30 @@
             width: 100px;
             height: 25px;
             fill: #ffffff;
+        }
+    }
+
+    .SocialLinks {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+
+        a {
+            color: #ffffff;
+            font-size: 1rem;
+            padding: 1.75rem;
+
+            &:hover {
+                opacity: .8;
+            }
+
+            svg {
+                width: 18px;
+                height: 18px;
+                fill: #ffffff;
+                margin-right: 0.75rem;
+            }
         }
     }
 }

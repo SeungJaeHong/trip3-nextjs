@@ -118,7 +118,7 @@ const Footer = (props: any) => {
                     {col1.map(item => {
                         return (
                             <Link href={item.route} key={item.title}>
-                                <a className="text-base font-medium text-gray-600">
+                                <a>
                                     {item.title}
                                 </a>
                             </Link>
@@ -129,7 +129,7 @@ const Footer = (props: any) => {
                     {col2.map(item => {
                         return (
                             <Link href={item.route} key={item.title}>
-                                <a className="text-base font-medium text-gray-600">
+                                <a>
                                     {item.title}
                                 </a>
                             </Link>
@@ -140,7 +140,7 @@ const Footer = (props: any) => {
                     {col3.map(item => {
                         return (
                             <Link href={item.route} key={item.title}>
-                                <a className="text-base font-medium text-gray-600">
+                                <a>
                                     {item.title}
                                 </a>
                             </Link>
@@ -148,12 +148,11 @@ const Footer = (props: any) => {
                     })}
                 </div>
             </div>
-            <div className="h-16" />
-            <div className="flex flex-col items-center justify-center gap-6 md:flex-row">
+            <div className={styles.SocialLinks}>
                 {social.map(item => {
                     return (
                         <Link href={item.route} key={item.title}>
-                            <a className="flex items-center gap-2 text-sm text-gray-600 text-base font-medium">
+                            <a>
                                 <RssIcon className="hidden w-4 h-4 md:block fill-current text-gray-600" />
                                 {item.title}
                             </a>
