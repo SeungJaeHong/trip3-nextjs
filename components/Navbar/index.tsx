@@ -22,6 +22,10 @@ const links = [
         title: 'Uudised',
         route: '/uudised'
     },
+    {
+        title: 'Reisipakkumised',
+        route: '/'
+    },
 ];
 
 type Props = {

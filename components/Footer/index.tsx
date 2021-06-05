@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import TripLogoText from "../../icons/TripLogoText"
+import TripTextLogo from "../../icons/TripTextLogo"
 import RssIcon from "../../icons/RssIcon"
 import styles from './Footer.module.scss'
 import clsx from "clsx"
@@ -97,16 +97,24 @@ const social = [
     },
 ];
 
-const Index = (props: any) => {
+const Footer = (props: any) => {
     return (
-        <div className={styles.Footer}>
+        <div className={styles.Footer} style={{
+            backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(/images/footer5.jpg)",
+            width: "100%",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            backgroundPosition: "50% 50%"
+        }}>
             <div className={clsx([containerStyle.container_lg, styles.Content])}>
-                <Link href={'/'}>
-                    <a>
-                        <TripLogoText className="h-6 fill-current text-gray-600"/>
-                    </a>
-                </Link>
-                <div className="grid gap-6 auto-rows-max">
+                <div className={styles.Col}>
+                    <Link href={'/'}>
+                        <a>
+                            <TripTextLogo />
+                        </a>
+                    </Link>
+                </div>
+                <div className={styles.Col}>
                     {col1.map(item => {
                         return (
                             <Link href={item.route} key={item.title}>
@@ -117,7 +125,7 @@ const Index = (props: any) => {
                         )
                     })}
                 </div>
-                <div className="grid gap-6 auto-rows-max">
+                <div className={styles.Col}>
                     {col2.map(item => {
                         return (
                             <Link href={item.route} key={item.title}>
@@ -128,7 +136,7 @@ const Index = (props: any) => {
                         )
                     })}
                 </div>
-                <div className="grid gap-6 auto-rows-max">
+                <div className={styles.Col}>
                     {col3.map(item => {
                         return (
                             <Link href={item.route} key={item.title}>
@@ -161,4 +169,4 @@ const Index = (props: any) => {
     )
 }
 
-export default Index
+export default Footer

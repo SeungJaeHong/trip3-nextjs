@@ -1,4 +1,4 @@
-const TripLogoText = (props: any) => {
+const TripTextLogo = (props: any) => {
     return (
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
              viewBox="0 0 235.6465 67.8503" xmlSpace="preserve" {...props}>
@@ -39,4 +39,4 @@ const TripLogoText = (props: any) => {
     )
 }
 
-export default TripLogoText
+export default TripTextLogo

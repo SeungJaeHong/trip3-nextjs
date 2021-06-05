@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Index from "../components/Footer"
+import Footer from "../components/Footer"
 
 const MainLayout = (props: any) => {
     return (
@@ -8,7 +8,7 @@ const MainLayout = (props: any) => {
                 <title>{props.component?.title || 'Trip.ee'}</title>
             </Head>
             {props.children}
-            <Index />
+            <Footer />
         </>
     )
 }
