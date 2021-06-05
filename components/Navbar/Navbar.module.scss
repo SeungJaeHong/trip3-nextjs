@@ -1,3 +1,6 @@
+@import "./styles/variables";
+@import "./styles/mixins";
+
 .Navbar {
     display: flex;
     width: 100%;
@@ -18,9 +21,13 @@
         display: flex;
         justify-content: center;
 
+        @include tablet() {
+            display: none;
+        }
+
         a {
             padding: 0.75rem;
-            color: #ffffff;
+            color: $white;
             font-weight: 500;
             font-size: 1rem;
             line-height: 1.5rem;
@@ -33,6 +40,60 @@
         svg {
             height: 1.25rem;
             width: 1.25rem;
+        }
+
+        &.LinksMobile {
+            display: none;
+
+            @include tablet() {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 2rem;
+
+                a {
+                    font-size: 1.25rem;
+                }
+            }
+        }
+    }
+
+    .MenuIcon {
+        display: none;
+
+        @include tablet() {
+            display: flex;
+        }
+
+        svg {
+            width: 2rem;
+            height: 2rem;
+            fill: $white;
+            cursor: pointer;
+        }
+    }
+
+    .MobileMenu {
+        background: $green;
+        bottom: 0;
+        left: 0;
+        padding: 2rem;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 10000;
+        overflow-y: scroll;
+
+        .CloseIcon {
+            display: flex;
+            justify-content: flex-end;
+
+            svg {
+                width: 2rem;
+                height: 2rem;
+                fill: $white;
+                cursor: pointer;
+            }
         }
     }
 }
