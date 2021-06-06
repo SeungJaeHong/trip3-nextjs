@@ -4,6 +4,7 @@ import RssIcon from "../../icons/RssIcon"
 import styles from './Footer.module.scss'
 import clsx from "clsx"
 import containerStyle from "../../styles/containers.module.scss"
+import Navbar from "../Navbar";
 
 const col1 = [
     {
@@ -97,15 +98,26 @@ const social = [
     },
 ];
 
-const Footer = (props: any) => {
-    return (
-        <div className={styles.Footer} style={{
+type Props = {
+    simple: boolean
+}
+
+const Footer = (props: Props) => {
+    let style = {}
+    if (!props.simple) {
+        style = {
             backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(/images/footer5.jpg)",
             width: "100%",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "50% 50%"
-        }}>
+        }
+    }
+
+    return (
+        <div className={clsx(styles.Footer, {
+            [styles.Simple]: props.simple
+        })} style={style}>
             <div className={clsx([containerStyle.container_lg, styles.Content])}>
                 <div className={styles.Col}>
                     <Link href={'/'}>
@@ -153,19 +165,22 @@ const Footer = (props: any) => {
                     return (
                         <Link href={item.route} key={item.title}>
                             <a>
-                                <RssIcon className="hidden w-4 h-4 md:block fill-current text-gray-600" />
+                                <RssIcon />
                                 {item.title}
                             </a>
                         </Link>
                     )
                 })}
             </div>
-            <div className="h-12" />
-            <div className="text-base text-center text-gray-400">
+            <div className={styles.CopyRight}>
                 Copyright © 1998 - {new Date().getFullYear()}
             </div>
         </div>
     )
+}
+
+Footer.defaultProps = {
+    simple: false,
 }
 
 export default Footer

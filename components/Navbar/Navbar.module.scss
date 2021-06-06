@@ -10,7 +10,12 @@
     align-items: center;
 
     .Logo {
-        margin-top: 1.5rem;
+        margin-top: 3rem;
+        margin-left: 1rem;
+
+        @include sm() {
+            margin-left: 0;
+        }
 
         a {
             display: block;
@@ -93,6 +98,14 @@
                 height: 2rem;
                 fill: $white;
                 cursor: pointer;
+            }
+        }
+    }
+
+    &.Dark {
+        .Links {
+            a {
+                color: $gray-dark;
             }
         }
     }

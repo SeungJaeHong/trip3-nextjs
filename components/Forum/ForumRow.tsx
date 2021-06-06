@@ -5,7 +5,7 @@ const ForumRow = (props: any) => {
     return (
         <div className="grid grid-cols-[auto,1fr] gap-4">
             <div className="overflow-hidden text-gray-200 transform -translate-y-1 rounded-full w-14 h-14">
-                <UserIcon />
+                <UserIcon width={34} height={34}/>
             </div>
             <Link href={'/foorum/uldfoorum/' + props.id}>
                 <a className="grid gap-1 auto-rows-min">

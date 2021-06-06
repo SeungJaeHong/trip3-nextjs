@@ -4,7 +4,7 @@ const ForumPost = (props: any) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-[auto,1fr] gap-x-8">
             <div className="w-14">
-                <UserIcon className="text-gray-200 w-14 h-14 fill-current"/>
+                <UserIcon width={30}/>
             </div>
             <div className="grid gap-4">
                 <h1 className="text-3xl font-bold tracking-tight text-color-500">

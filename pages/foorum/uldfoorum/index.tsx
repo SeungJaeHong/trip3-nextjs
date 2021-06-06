@@ -59,6 +59,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-//MainForumIndex.title = 'Foorum'
-
 export default MainForumIndex

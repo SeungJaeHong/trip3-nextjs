@@ -1,7 +1,9 @@
 import React, {Fragment, useEffect, useState} from "react"
 import Router from "next/router";
 import { useAuth } from "../../context/AuthContext"
-import Header from "../../components/Header";
+import Navbar from "../../components/Navbar"
+import styles from './Login.module.scss'
+import clsx from "clsx";
 
 const Login = () => {
     const [formInput, setFormInput] = useState({email: '', password: ''})
@@ -33,16 +35,17 @@ const Login = () => {
     }, [user]);
 
     return (
-        <Fragment>
-            <Header title={'Login'} />
-            <div className="w-full max-w-xs mx-auto pt-6 pb-3">
+        <div className={styles.Container}>
+            <div className={clsx(styles.Navbar, styles.BackgroundGray)}>
+                <Navbar darkMode={true}/>
+            </div>
+            <div className={clsx(styles.Form, styles.BackgroundGray)}>
                 <span className="flex">
                     Email: corene88@example.net
                 </span>
                 <span className="pb-3 flex">
                     Psw: password
                 </span>
-
                 <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
@@ -72,10 +75,10 @@ const Login = () => {
                     </div>
                 </form>
             </div>
-        </Fragment>
+        </div>
     )
 }
 
-//Login.title = 'Login'
+Login.simpleFooter = true
 
 export default Login

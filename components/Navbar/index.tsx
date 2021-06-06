@@ -33,11 +33,11 @@ const links = [
 ];
 
 type Props = {
-    darkMode?: boolean
+    darkMode: boolean
     showSearch?: boolean
 }
 
-const Index = (props: Props) => {
+const Navbar = (props: Props) => {
     const {user, logout} = useAuth()
     const [menuOpen, setMenuOpen] = useState(false)
     const onLogoutClick = () => {
@@ -90,7 +90,9 @@ const Index = (props: Props) => {
     }
 
     return (
-        <div className={styles.Navbar}>
+        <div className={clsx(styles.Navbar, {
+            [styles.Dark]: props.darkMode
+        })}>
             <div className={styles.Logo}>
                 <Link href="/">
                     <a>
@@ -118,9 +120,9 @@ const Index = (props: Props) => {
     )
 }
 
-Index.defaultProps = {
+Navbar.defaultProps = {
     darkMode: false,
     showSearch: false
 }
 
-export default Index
+export default Navbar

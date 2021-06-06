@@ -1,3 +1,6 @@
+@import "styles/variables";
+@import "styles/mixins";
+
 .Footer {
     padding-top: 5rem;
     padding-bottom: 5rem;
@@ -17,7 +20,7 @@
         grid-auto-rows: max-content;
 
         a {
-            color: #ffffff;
+            color: $white;
             font-size: 1rem;
 
             &:hover {
@@ -28,7 +31,7 @@
         svg {
             width: 100px;
             height: 25px;
-            fill: #ffffff;
+            fill: $white;
         }
     }
 
@@ -39,7 +42,7 @@
         flex-wrap: wrap;
 
         a {
-            color: #ffffff;
+            color: $white;
             font-size: 1rem;
             padding: 1.75rem;
 
@@ -50,9 +53,35 @@
             svg {
                 width: 18px;
                 height: 18px;
-                fill: #ffffff;
+                fill: $white;
                 margin-right: 0.75rem;
             }
+        }
+    }
+
+    .CopyRight {
+        display: flex;
+        justify-content: center;
+        color: $white;
+        opacity: .5;
+        padding-top: 1rem;
+    }
+
+    &.Simple {
+        background-color: $white;
+
+        .Col, .SocialLinks {
+            a {
+                color: $gray-dark;
+            }
+
+            svg {
+                fill: $gray-dark;
+            }
+        }
+
+        .CopyRight {
+            color: $gray-dark;
         }
     }
 }

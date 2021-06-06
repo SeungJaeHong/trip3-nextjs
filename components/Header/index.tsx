@@ -1,23 +1,36 @@
 import Navbar from '../Navbar'
+import clsx from "clsx"
+import containerStyle from "../../styles/containers.module.scss"
+import styles from "./Header.module.scss"
 
 type Props = {
     title: string
     children?: JSX.Element | JSX.Element[]
 }
 
-const Index = (props: Props) => {
+const Header = (props: Props) => {
     return (
-        <div className="relative p-6 pb-0 overflow-hidden bg-gray-100 lg:px-0 lg:pt-10">
-            <div className="max-w-6xl mx-auto inset-0 grid gap-6 lg:mx-auto">
-                <div className="pb-10">
-                    <Navbar darkMode={true} />
-                </div>
-                <h1 className="text-4xl font-bold tracking-tight text-gray-500 lg:text-5xl pt-4 pb-12">
+        <div className={styles.Header}
+             style={{
+                 backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url(/images/header6.jpg)",
+                 width: "100%",
+                 backgroundRepeat: "no-repeat",
+                 backgroundSize: "cover",
+                 backgroundPosition: "50% 50%"
+             }}>
+            <div className={clsx([containerStyle.container_xl, styles.Container])}>
+                <h2 className={styles.Navbar}>
+                    <Navbar />
+                </h2>
+                <div className={styles.Title}>
                     {props.title}
-                </h1>
+                </div>
+                <div className={styles.Content}>
+                    {props.children}
+                </div>
             </div>
         </div>
     )
 }
 
-export default Index
+export default Header

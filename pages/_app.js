@@ -9,10 +9,10 @@ function MyApp({ Component, pageProps, user }) {
     return (
         <AuthProvider authUser={user}>
             <NextNprogress
-                color="#29D"
+                color="#37a0eb"
                 startPosition={0.3}
                 stopDelayMs={200}
-                height="1"
+                height="2"
                 options={{ showSpinner: false }}
             />
             <MainLayout component={Component}>

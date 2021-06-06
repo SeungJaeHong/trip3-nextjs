@@ -1,0 +1,47 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.Container {
+    position: relative;
+}
+
+.BackgroundGray {
+    background-color: $gray-light;
+}
+
+.Navbar {
+    padding-bottom: 4rem;
+    padding-top: 1.5rem;
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0;
+}
+
+.Content {
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.Header {
+    position: relative;
+    overflow: hidden;
+}
+
+.Search {
+    padding-bottom: 7rem;
+    width: 50%;
+    margin: 0 auto;
+
+    @include md() {
+        width: 60%;
+    }
+
+    @include sm() {
+        width: 100%;
+    }
+}

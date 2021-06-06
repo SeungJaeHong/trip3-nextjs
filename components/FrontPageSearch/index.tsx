@@ -1,7 +1,7 @@
 import styles from './FrontPageSearch.module.scss'
 import SearchIcon from "../../icons/SearchIcon"
 
-const Index = () => {
+const FrontPageSearch = () => {
     return (
         <div className={styles.FrontPageSearch}>
             <input
@@ -17,4 +17,4 @@ const Index = () => {
     )
 }
 
-export default Index
+export default FrontPageSearch
