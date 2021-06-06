@@ -14,7 +14,7 @@ module.exports = {
         includePaths: [path.join(__dirname, 'styles')],
     },
     images: {
-        domains: ['images.pexels.com'], //just for testing
+        domains: ['images.pexels.com', 'trip.ee'], //just for testing
     },
     env: {
         API_BASE_URL: process.env.API_BASE_URL,

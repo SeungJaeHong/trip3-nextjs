@@ -28,6 +28,14 @@ export type User = {
     images?: Image[] | null;
 };
 
+export type Destination = {
+    id: number;
+    name: string;
+    slug: string,
+    description: string;
+    parentDestination: Destination | null;
+};
+
 export type Comment = {
     id: number;
     user_id: number;
@@ -58,6 +66,7 @@ export type Content = {
     user?: User | null;
     comments?: Comment[] | null;
     images?: Image[] | null;
+    destinations?: Destination[] | null
 };
 
 export type Image = {

@@ -7,7 +7,6 @@
 }
 
 .Header {
-    position: relative;
     overflow: hidden;
 }
 
@@ -27,5 +26,22 @@
 
     @include sm() {
         width: 100%;
+    }
+}
+
+.FlightOffers {
+    margin: -3rem auto 1rem auto;
+    display: flex;
+    flex: 0 0 83.333333%;
+    max-width: 83.333333%;
+    width: 100%;
+
+    @include md() {
+        flex-direction: column;
+    }
+
+    .FlightOfferCard {
+        flex: 1 1 0;
+        border: none;
     }
 }

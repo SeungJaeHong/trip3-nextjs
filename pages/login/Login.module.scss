@@ -21,27 +21,3 @@
     align-items: center;
     padding: 4rem 0;
 }
-
-.Content {
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-.Header {
-    position: relative;
-    overflow: hidden;
-}
-
-.Search {
-    padding-bottom: 7rem;
-    width: 50%;
-    margin: 0 auto;
-
-    @include md() {
-        width: 60%;
-    }
-
-    @include sm() {
-        width: 100%;
-    }
-}
