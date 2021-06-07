@@ -1,0 +1,27 @@
+@import "./styles/variables";
+@import "./styles/mixins";
+
+.MoreLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        opacity: .8;
+    }
+
+    .Title {
+        font-size: 0.9rem;
+        color: $blue;
+        font-weight: 500;
+    }
+
+    .Icon {
+        svg {
+            width: 0.8rem;
+            height: 0.8rem;
+            margin-left: .5rem;
+            fill: $gray-dark;
+        }
+    }
+}

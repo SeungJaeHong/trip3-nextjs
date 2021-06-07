@@ -6,6 +6,7 @@ import containerStyle from '../styles/containers.module.scss'
 import styles from './Homepage.module.scss'
 import clsx from 'clsx'
 import FlightOfferCard from "../components/FlightOffer/FlightOfferCard";
+import MoreLink from "../components/MoreLink";
 
 const Home = () => {
     const user = useUser()
@@ -30,15 +31,31 @@ const Home = () => {
                 </div>
             </div>
             <div className={clsx([containerStyle.container_xl, styles.Content])}>
-                <div className={styles.FlightOffers}>
-                    <div className={styles.FlightOfferCard}>
-                        <FlightOfferCard content={'test'} color={'#8b84d7'} />
+                <div className={styles.CenteredContainer}>
+                    <div className={styles.FlightOffers}>
+                        <div className={styles.FlightOfferCard}>
+                            <FlightOfferCard content={'test'} color={'#8b84d7'} />
+                        </div>
+                        <div className={styles.FlightOfferCard}>
+                            <FlightOfferCard content={'test'} color={'#f5b800'} />
+                        </div>
+                        <div className={styles.FlightOfferCard}>
+                            <FlightOfferCard content={'test'} color={'#ed6464'} />
+                        </div>
                     </div>
-                    <div className={styles.FlightOfferCard}>
-                        <FlightOfferCard content={'test'} color={'#f5b800'} />
+                    <div className={styles.MoreFlightsLink}>
+                        <MoreLink title={'Vaata kõiki sooduspakkumisi'} route={'/'} />
                     </div>
-                    <div className={styles.FlightOfferCard}>
-                        <FlightOfferCard content={'test'} color={'#ed6464'} />
+                    <div className={styles.JoinTripBlock}>
+                        <div className={styles.TripDescription}>
+                            <span className={styles.DescriptionText}>
+                                Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.
+                            </span>
+                            <MoreLink title={'Loe lähemalt Trip.ee-st'} route={'/'} />
+                        </div>
+                        <button className={styles.JoinButton}>
+                            Liitu Trip.ee-ga
+                        </button>
                     </div>
                 </div>
             </div>

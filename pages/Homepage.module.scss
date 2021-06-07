@@ -29,19 +29,83 @@
     }
 }
 
-.FlightOffers {
-    margin: -2.6rem auto 1rem auto;
+.CenteredContainer {
     display: flex;
+    flex-direction: column;
     flex: 0 0 83.333333%;
     max-width: 83.333333%;
     width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
 
-    @include sm() {
+.FlightOffers {
+    display: flex;
+    margin: -2.6rem auto 1rem auto;
+    width: 100%;
+
+    @include md() {
         flex-direction: column;
     }
 
     .FlightOfferCard {
         flex: 1 1 0;
         border: none;
+    }
+}
+
+.MoreFlightsLink {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+
+    @include sm() {
+        justify-content: center;
+    }
+}
+
+.JoinTripBlock {
+    display: flex;
+    width: 100%;
+    padding: 0 3rem 2rem 3rem;
+
+    @include sm() {
+        flex-direction: column;
+        padding: 0;
+        margin-bottom: 1rem;
+    }
+
+    .TripDescription {
+        display: flex;
+        flex-direction: column;
+        flex: 3;
+        align-items: flex-start;
+        margin-right: 2rem;
+
+        @include sm() {
+            margin-right: 0;
+        }
+
+        .DescriptionText {
+            font-size: 1.2rem;
+            line-height: 1.5rem;
+            font-weight: 800;
+            color: $gray-dark;
+            margin-bottom: .5rem;
+
+            @include sm() {
+                font-size: 1rem;
+                line-height: 1.4rem;
+                font-weight: 500;
+            }
+        }
+    }
+
+    .JoinButton {
+        flex: 1;
+        height: 40px;
+        margin-top: 1rem;
     }
 }
