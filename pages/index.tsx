@@ -7,10 +7,13 @@ import styles from './Homepage.module.scss'
 import clsx from 'clsx'
 import FlightOfferCard from "../components/FlightOffer/FlightOfferCard";
 import MoreLink from "../components/MoreLink";
+import BlockTitle from "../components/BlockTitle";
+import ForumList from "../components/Forum/ForumList";
 
 const Home = () => {
     const user = useUser()
 
+    //todo: refactor to more components
     return (
         <>
             <div className={styles.Header}
@@ -56,6 +59,12 @@ const Home = () => {
                         <button className={styles.JoinButton}>
                             Liitu Trip.ee-ga
                         </button>
+                    </div>
+                    <div className={styles.ForumBlock}>
+                        <BlockTitle title={'Tripikad räägivad'} route={'/'} />
+                    </div>
+                    <div className={styles.ForumBlock}>
+                        <ForumList items={[]} />
                     </div>
                 </div>
             </div>

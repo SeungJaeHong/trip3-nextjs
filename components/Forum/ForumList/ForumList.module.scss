@@ -1,0 +1,13 @@
+@import "./styles/variables";
+@import "./styles/mixins";
+
+.ForumList {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+
+    .ForumRow {
+        margin-bottom: 1rem;
+    }
+}

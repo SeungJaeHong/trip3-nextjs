@@ -1,0 +1,43 @@
+@import "./styles/variables";
+@import "./styles/mixins";
+
+.ForumRow {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+
+    .UserIcon {
+        padding-right: 1rem;
+        fill: #d1d4d6;
+
+        svg {
+            height: 3.5rem;
+            width: 3.5rem;
+        }
+    }
+
+    .Content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .Title {
+            color: $gray-dark;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .Meta {
+            display: flex;
+            width: 100%;
+            align-items: center;
+
+            > span {
+                margin-right: 1rem;
+                font-size: .9rem;
+                color: #6c747a;
+            }
+        }
+    }
+}
