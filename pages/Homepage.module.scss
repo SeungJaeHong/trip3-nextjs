@@ -30,13 +30,13 @@
 }
 
 .FlightOffers {
-    margin: -3rem auto 1rem auto;
+    margin: -2.6rem auto 1rem auto;
     display: flex;
     flex: 0 0 83.333333%;
     max-width: 83.333333%;
     width: 100%;
 
-    @include md() {
+    @include sm() {
         flex-direction: column;
     }
 
