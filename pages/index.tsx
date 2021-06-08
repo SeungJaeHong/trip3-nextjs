@@ -9,6 +9,7 @@ import FlightOfferCard from "../components/FlightOffer/FlightOfferCard";
 import MoreLink from "../components/MoreLink";
 import BlockTitle from "../components/BlockTitle";
 import ForumList from "../components/Forum/ForumList";
+import Button from "../components/Button";
 
 const Home = () => {
     const user = useUser()
@@ -56,15 +57,17 @@ const Home = () => {
                             </span>
                             <MoreLink title={'Loe lähemalt Trip.ee-st'} route={'/'} />
                         </div>
-                        <button className={styles.JoinButton}>
-                            Liitu Trip.ee-ga
-                        </button>
+                        <div className={styles.JoinButton}>
+                            <Button title={'Liitu Trip.ee-ga'}/>
+                        </div>
                     </div>
                     <div className={styles.ForumBlock}>
-                        <BlockTitle title={'Tripikad räägivad'} route={'/'} />
-                    </div>
-                    <div className={styles.ForumBlock}>
-                        <ForumList items={[]} />
+                        <div className={styles.ForumBlockTitle}>
+                            <BlockTitle title={'Tripikad räägivad'} route={'/'} />
+                        </div>
+                        <div className={styles.ForumList}>
+                            <ForumList items={[]} />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -3,12 +3,6 @@
 
 .BlockTitle {
     display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &:hover {
-        opacity: .8;
-    }
 
     .Title {
         font-size: .9rem;
@@ -17,16 +11,9 @@
         font-weight: 500;
         text-transform: uppercase;
         letter-spacing: .05em;
-    }
 
-    /*.Icon {
-        display: flex;
-
-        svg {
-            width: 1rem;
-            height: 1rem;
-            margin-left: .6rem;
-            fill: $gray-dark;
+        &:hover {
+            opacity: .8;
         }
-    }*/
+    }
 }

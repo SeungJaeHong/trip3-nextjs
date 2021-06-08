@@ -69,7 +69,7 @@
 .JoinTripBlock {
     display: flex;
     width: 100%;
-    padding: 0 3rem 2rem 3rem;
+    padding: 0 3rem 1rem 3rem;
 
     @include sm() {
         flex-direction: column;
@@ -88,10 +88,13 @@
             margin-right: 0;
         }
 
+        @include lg() {
+            flex: 2;
+        }
+
         .DescriptionText {
-            font-size: 1.2rem;
-            line-height: 1.5rem;
-            font-weight: 800;
+            font-size: 1.1rem;
+            line-height: 1.7rem;
             color: $gray-dark;
             margin-bottom: .5rem;
 
@@ -105,14 +108,18 @@
 
     .JoinButton {
         flex: 1;
-        height: 40px;
-        margin-top: 1rem;
+        margin-top: 1.2rem;
     }
 }
 
 .ForumBlock {
     display: flex;
+    flex-direction: column;
     width: 100%;
     justify-content: flex-start;
     margin-top: 1rem;
+
+    .ForumBlockTitle {
+        margin: .5rem 0 1.5rem 0;
+    }
 }
