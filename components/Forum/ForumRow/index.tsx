@@ -1,12 +1,18 @@
 import Link from 'next/link'
 import styles from './ForumRow.module.scss'
 import UserIcon from '../../../icons/UserIcon'
+import clsx from "clsx";
 
 const ForumRow = (props: any) => {
     return (
         <div className={styles.ForumRow}>
             <div className={styles.UserIcon}>
                 <UserIcon />
+                <div className={clsx(styles.CommentCountContainer, {
+                    [styles.CommentUnread]: false
+                })}>
+                    <span className={styles.CommentCount}>14</span>
+                </div>
             </div>
             <div className={styles.Content}>
                 <Link href={'/'}>
@@ -17,14 +23,16 @@ const ForumRow = (props: any) => {
                     </a>
                 </Link>
                 <div className={styles.Meta}>
-                    <span className="text-base text-gray-500">
+                    <span className={styles.MetaItem}>
                         Täna 13:21
                     </span>
-                    <span className="text-base text-gray-500">
+                    <span className={clsx(styles.MetaItem, styles.ReadCount)}>
                         Loetud 347 korda
                     </span>
-                    <span className="text-base font-medium text-cyan-500">
-                        SomeUser
+                    <span className={clsx(styles.MetaItem, styles.Creator)}>
+                        <Link href={'/'} >
+                            <a>SomeUser</a>
+                        </Link>
                     </span>
                 </div>
             </div>

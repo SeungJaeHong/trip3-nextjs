@@ -112,14 +112,48 @@
     }
 }
 
-.ForumBlock {
+.ForumContainer {
     display: flex;
-    flex-direction: column;
     width: 100%;
-    justify-content: flex-start;
-    margin-top: 1rem;
 
-    .ForumBlockTitle {
-        margin: .5rem 0 1.5rem 0;
+    @include md() {
+        flex-direction: column;
+    }
+
+    .ForumBlock {
+        display: flex;
+        flex: 2;
+        flex-direction: column;
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 1rem;
+
+        .ForumBlockTitle {
+            margin: .5rem 0 1.5rem 0;
+        }
+    }
+
+    .SidebarContent {
+        display: flex;
+        width: 100%;
+        flex: 1;
+        justify-content: center;
+        padding: 5rem 0 0 2rem;
+
+        .ForumLinks {
+            display: flex;
+            flex-direction: column;
+
+            .ForumLink {
+                margin-bottom: 2rem;
+
+                .ForumDescription {
+                    display: flex;
+                    font-size: 1rem;
+                    color: $gray-dark;
+                    margin-top: 1rem;
+                }
+            }
+        }
     }
 }
