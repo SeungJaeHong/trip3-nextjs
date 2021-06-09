@@ -1,0 +1,11 @@
+@import "./styles/variables";
+@import "./styles/mixins";
+
+.NewsCard {
+    display: flex;
+    align-items: center;
+
+    .Background {
+        display: flex;
+    }
+}

@@ -10,6 +10,7 @@ import MoreLink from "../components/MoreLink";
 import BlockTitle from "../components/BlockTitle";
 import ForumList from "../components/Forum/ForumList";
 import Button from "../components/Button";
+import NewsCard from "../components/NewsCard";
 
 const Home = () => {
     const user = useUser()
@@ -86,6 +87,21 @@ const Home = () => {
                                     <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={styles.NewsContainer}>
+                    <BlockTitle title={'Uudised'} route={'/'} />
+                    <div className={styles.NewsCards}>
+                        <div className={styles.NewsCard}>
+                            <NewsCard />
+                        </div>
+                        <div className={styles.NewsCard}>
+                            <NewsCard />
+                        </div>
+                        <div className={styles.NewsCard}>
+                            <NewsCard />
                         </div>
                     </div>
                 </div>
