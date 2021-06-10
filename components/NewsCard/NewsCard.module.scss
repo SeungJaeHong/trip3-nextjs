@@ -3,9 +3,23 @@
 
 .NewsCard {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    width: 100%;
 
     .Background {
         display: flex;
+        position: relative;
+        padding-bottom: 50%;
+        width: 100%;
+    }
+
+    .Title {
+        margin-top: .6rem;
+
+        a {
+            color: $blue;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
     }
 }

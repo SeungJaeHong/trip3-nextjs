@@ -10,9 +10,16 @@ const NewsCard = (props: any) => {
                 <Image
                     src={"https://trip.ee/images/medium/Tai-rand-12_vq7f.jpeg"}
                     alt="Picture of the author"
-                    width={350}
-                    height={200}
+                    layout="fill"
+                    objectFit="cover"
+                    //width={350}
+                    //height={200}
                 />
+            </div>
+            <div className={styles.Title}>
+                <Link href={'/'}>
+                    <a> Tai meelitab turiste Phuketile tagasi 1$ hotellitubadega </a>
+                </Link>
             </div>
         </div>
     )
