@@ -33,6 +33,7 @@ const TravelmatesIndex = (props: any) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const url = 'https://random-data-api.com/api/beer/random_beer'
     const response = await axios.get(url)
+
     return {
         props: {
             content: response.data,
