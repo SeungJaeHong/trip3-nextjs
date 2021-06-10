@@ -5,7 +5,7 @@ import MainLayout from '../layouts/MainLayout'
 import {AuthProvider} from "../context/AuthContext"
 import ApiClient from "../lib/ApiClient"
 
-function MyApp({ Component, pageProps, user }) {
+function MyApp({ Component, pageProps, user = null }) {
     return (
         <AuthProvider authUser={user}>
             <NextNprogress
@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps, user }) {
 // this makes every page SSR
 // not recommended approach but we always get the user first this way
 // probably changes later
-MyApp.getInitialProps = async appContext => {
+/*MyApp.getInitialProps = async appContext => {
     let user = undefined
 
     //todo: refactor to function
@@ -40,6 +40,6 @@ MyApp.getInitialProps = async appContext => {
     const appProps = await App.getInitialProps(appContext)
 
     return { ...appProps, user }
-}
+}*/
 
 export default MyApp

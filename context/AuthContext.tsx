@@ -70,7 +70,7 @@ export const AuthProvider = ({children, authUser}) => {
     }
 
     useEffect(() => {
-        getUser()
+        //getUser()
     }, [])
 
     const value = {
