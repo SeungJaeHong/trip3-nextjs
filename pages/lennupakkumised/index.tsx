@@ -7,7 +7,7 @@ const FlightsIndex = (props: any) => {
     const item = props.content
     return (
         <Fragment>
-            <Header title={'Lennupakkumised'}/>
+            <Header title={'Lennupakkumised'} />
             <div>
                 <table style={{'border': '1px solid', 'margin': '0 auto', 'borderSpacing': '10px'}}>
                     <tbody>

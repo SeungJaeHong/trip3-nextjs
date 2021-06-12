@@ -1,0 +1,37 @@
+@import "./styles/variables";
+@import "./styles/mixins";
+
+.ShortNewsListItem {
+    display: flex;
+    width: 100%;
+
+    .Dot {
+        width: .4rem;
+        height: .4rem;
+        border-radius: .2rem;
+        background: $green;
+        margin-right: .8rem;
+        margin-top: .5rem;
+    }
+
+    .ShortNewsContent {
+        display: flex;
+        flex-direction: column;
+
+        .Title {
+            display: flex;
+            align-items: center;
+
+            a {
+                color: $blue;
+                font-size: 1rem;
+                font-weight: 600;
+            }
+        }
+
+        .Date {
+            color: $gray-darker;
+            font-size: .8rem;
+        }
+    }
+}

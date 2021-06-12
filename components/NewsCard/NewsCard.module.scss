@@ -6,20 +6,21 @@
     flex-direction: column;
     width: 100%;
 
+    a {
+        display: block;
+    }
+
     .Background {
         display: flex;
         position: relative;
-        padding-bottom: 50%;
+        padding-bottom: 55%;
         width: 100%;
     }
 
     .Title {
         margin-top: .6rem;
-
-        a {
-            color: $blue;
-            font-size: 1.2rem;
-            font-weight: 500;
-        }
+        color: $blue;
+        font-size: 1.2rem;
+        font-weight: 500;
     }
 }

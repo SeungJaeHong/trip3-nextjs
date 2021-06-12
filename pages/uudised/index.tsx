@@ -14,10 +14,6 @@ const NewsIndex = () => {
         });
     }, []);
 
-    if (!Object.keys(data).length) {
-        return <div>LOADING!</div>
-    }
-
     return (
         <Fragment>
             <Header title={'Uudised'} />

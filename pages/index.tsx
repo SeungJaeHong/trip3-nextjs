@@ -1,5 +1,6 @@
 import {useUser} from "../context/AuthContext"
 import React from 'react'
+import Link from 'next/link'
 import Navbar from "../components/Navbar"
 import FrontPageSearch from "../components/FrontPageSearch"
 import containerStyle from '../styles/containers.module.scss'
@@ -11,6 +12,8 @@ import BlockTitle from "../components/BlockTitle";
 import ForumList from "../components/Forum/ForumList";
 import Button from "../components/Button";
 import NewsCard from "../components/NewsCard";
+import ShortNewsListItem from "../components/ShortNewsListItem";
+import ImageGallery from "../components/ImageGallery";
 
 const Home = () => {
     const user = useUser()
@@ -93,7 +96,7 @@ const Home = () => {
 
                 <div className={styles.NewsContainer}>
                     <BlockTitle title={'Uudised'} route={'/'} />
-                    <div className={styles.NewsCards}>
+                    <div className={styles.News}>
                         <div className={styles.NewsCard}>
                             <NewsCard />
                         </div>
@@ -104,7 +107,40 @@ const Home = () => {
                             <NewsCard />
                         </div>
                     </div>
+                    <div className={styles.ShortNews}>
+                        <div className={styles.NewsCard}>
+                            <NewsCard />
+                        </div>
+                        <div className={styles.ShortNewsList}>
+                            <div className={styles.ShortNewsListItem}>
+                                <ShortNewsListItem
+                                    title={'Helsingi Vantaa lennujaamas on vaid 1200 lendajat päevas'}
+                                    date={'Täna 12:42'} />
+                            </div>
+                            <div className={styles.ShortNewsListItem}>
+                                <ShortNewsListItem
+                                    title={'Eesti peatab ajutiselt lennuliikluse Ühendkuningriigiga (ERR)'}
+                                    date={'Eile 15:46'} />
+                            </div>
+                            <div className={styles.ShortNewsListItem}>
+                                <ShortNewsListItem
+                                    title={'Eestisse saab liikumispiiranguta 21 Euroopa riigist'}
+                                    date={'3. mai 18:44'} />
+                            </div>
+                            <div className={styles.ShortNewsListItem}>
+                                <ShortNewsListItem
+                                    title={'Sitsiilia pakub reisimiseks turismivautšereid'}
+                                    date={'1. mai 11:23'} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <BlockTitle title={'Viimati lisatud pildid '} route={'/'} />
+            </div>
+
+            <div className={styles.ImageGalleryContainer}>
+                <ImageGallery images={[]} />
             </div>
         </>
     )
