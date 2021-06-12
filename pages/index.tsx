@@ -136,12 +136,25 @@ const Home = () => {
                     </div>
                 </div>
 
-                <BlockTitle title={'Viimati lisatud pildid '} route={'/'} />
+                <BlockTitle title={'Viimati lisatud pildid'} route={'/'} />
             </div>
 
             <div className={styles.ImageGalleryContainer}>
                 <ImageGallery images={[]} />
             </div>
+
+                <div className={styles.BottomContainer}>
+                    <div className={clsx([containerStyle.container_xl, styles.Content])}>
+                        <div className={styles.TravelFlightContainer}>
+                            <div className={styles.TravelmateFlightBlock}>
+                                <BlockTitle title={'Soodsad lennupiletid'} route={'/'} />
+                            </div>
+                            <div className={styles.TravelmateFlightBlock}>
+                                <BlockTitle title={'Reisikaaslased'} route={'/'} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </>
     )
 }

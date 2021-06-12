@@ -248,3 +248,23 @@
     width: 100%;
     margin-top: 1rem;
 }
+
+.BottomContainer {
+    background: $gray-light;
+
+    .TravelFlightContainer {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        padding-top: 2rem;
+
+        .TravelmateFlightBlock {
+            display: flex;
+            width: 50%;
+
+            @include lg() {
+                width: 100%;
+            }
+        }
+    }
+}
