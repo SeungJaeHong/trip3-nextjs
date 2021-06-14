@@ -14,6 +14,7 @@ import Button from "../components/Button";
 import NewsCard from "../components/NewsCard";
 import ShortNewsListItem from "../components/ShortNewsListItem";
 import ImageGallery from "../components/ImageGallery";
+import FlightOfferRow from "../components/FlightOffer/FlightOfferRow";
 
 const Home = () => {
     const user = useUser()
@@ -143,18 +144,35 @@ const Home = () => {
                 <ImageGallery images={[]} />
             </div>
 
-                <div className={styles.BottomContainer}>
-                    <div className={clsx([containerStyle.container_xl, styles.Content])}>
-                        <div className={styles.TravelFlightContainer}>
-                            <div className={styles.TravelmateFlightBlock}>
-                                <BlockTitle title={'Soodsad lennupiletid'} route={'/'} />
+            <div className={styles.BottomContainer}>
+                <div className={clsx([containerStyle.container_xl, styles.Content])}>
+                    <div className={styles.TravelFlightContainer}>
+                        <div className={styles.TravelmateFlightBlock}>
+                            <BlockTitle title={'Soodsad lennupiletid'} route={'/'} />
+                            <div className={styles.FlightOffersBlock}>
+                                <div className={styles.FlightOffersRow}>
+                                    <FlightOfferRow title={'Edasi-tagasi lennupiletid suvel Tallinnast Kreetale 173€'} />
+                                </div>
+                                <div className={styles.FlightOffersRow}>
+                                    <FlightOfferRow title={'Otselennud Horvaatiasse: edasi-tagasi lennupiletid Riiast Splitti 108€'} />
+                                </div>
+                                <div className={styles.FlightOffersRow}>
+                                    <FlightOfferRow title={'Edasi-tagasi lennupiletid sügisel Tallinnast Dubaisse al 256€'} />
+                                </div>
+                                <div className={styles.FlightOffersRow}>
+                                    <FlightOfferRow title={'Otselennud suveks: edasi-tagasi lennupiletid Riiast Maltale al 38€'} />
+                                </div>
                             </div>
-                            <div className={styles.TravelmateFlightBlock}>
-                                <BlockTitle title={'Reisikaaslased'} route={'/'} />
+                        </div>
+                        <div className={clsx(styles.TravelmateFlightBlock, styles.Travelmates)}>
+                            <BlockTitle title={'Reisikaaslased'} route={'/'} />
+                            <div className={styles.TravelmatesBlock}>
+                                Siin
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </>
     )
 }

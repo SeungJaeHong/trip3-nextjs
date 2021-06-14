@@ -1,0 +1,46 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.FlightOfferRow {
+    display: flex;
+    width: 100%;
+
+    .Icon {
+        display: flex;
+        margin-right: .8rem;
+
+        svg {
+            width: 36px;
+            height: 36px;
+            fill: $blue;
+        }
+    }
+
+    .Content {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+
+        a {
+            color: $blue;
+            font-size: 1.3rem;
+            font-weight: 500;
+            display: block;
+            margin-bottom: .3rem;
+
+            &:hover {
+                color: $blue-hover;
+            }
+        }
+
+        .Meta {
+            display: flex;
+
+            .MetaItem {
+                margin-right: 1rem;
+                font-size: 0.875rem;
+                color: $gray-darker;
+            }
+        }
+    }
+}

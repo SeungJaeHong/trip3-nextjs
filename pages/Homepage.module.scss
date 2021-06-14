@@ -260,10 +260,39 @@
 
         .TravelmateFlightBlock {
             display: flex;
+            flex-direction: column;
             width: 50%;
 
             @include lg() {
                 width: 100%;
+            }
+
+            .FlightOffersBlock {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                margin: 1.5rem 0 2rem 0;
+
+                .FlightOffersRow {
+                    display: flex;
+                    width: 100%;
+                    margin-bottom: 2rem;
+                }
+            }
+
+            .TravelmatesBlock {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                margin: 1.5rem 0 2rem 0;
+            }
+
+            &.Travelmates {
+                padding-left: 2.5rem;
+
+                @include lg() {
+                    padding-left: 0;
+                }
             }
         }
     }
