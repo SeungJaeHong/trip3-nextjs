@@ -1,22 +1,26 @@
 @import "styles/variables";
 @import "styles/mixins";
 
-.FlightOfferRow {
+.TravelmateRow {
     display: flex;
     width: 100%;
 
-    .Icon {
+    .Avatar {
         display: flex;
         margin-right: .8rem;
 
-        svg {
-            width: 2.5rem;
-            height: 2.5rem;
-            fill: $blue;
+        a {
+            display: block;
 
-            @include sm() {
-                width: 2rem;
-                height: 2rem;
+            svg {
+                width: 4rem;
+                height: 4rem;
+                fill: $gray;
+
+                @include sm() {
+                    width: 3rem;
+                    height: 3rem;
+                }
             }
         }
     }
@@ -27,7 +31,7 @@
         flex-direction: column;
 
         .Title {
-            color: $blue;
+            color: $gray-dark;
             font-size: 1.3rem;
             font-weight: 500;
             display: block;
@@ -38,17 +42,26 @@
             }
 
             &:hover {
-                color: $blue-hover;
+                color: $gray-dark-hover;
             }
         }
 
         .Meta {
             display: flex;
 
-            .MetaItem {
+            a {
                 margin-right: 1rem;
                 font-size: 0.875rem;
                 color: $gray-darker;
+                white-space: nowrap;
+
+                &.Creator {
+                    color: $blue-light;
+
+                    &:hover {
+                        color: $blue-hover;
+                    }
+                }
             }
         }
     }

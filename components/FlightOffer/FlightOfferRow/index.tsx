@@ -15,7 +15,7 @@ const FlightOfferRow = (props: Props) => {
             </div>
             <div className={styles.Content}>
                 <Link href={'/'}>
-                    <a>{props.title}</a>
+                    <a className={styles.Title}>{props.title}</a>
                 </Link>
                 <div className={styles.Meta}>
                     <span className={styles.MetaItem}>Täna 23:31</span>

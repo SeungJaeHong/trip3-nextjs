@@ -15,6 +15,7 @@ import NewsCard from "../components/NewsCard";
 import ShortNewsListItem from "../components/ShortNewsListItem";
 import ImageGallery from "../components/ImageGallery";
 import FlightOfferRow from "../components/FlightOffer/FlightOfferRow";
+import TravelmateRow from "../components/TravelmateRow";
 
 const Home = () => {
     const user = useUser()
@@ -167,7 +168,18 @@ const Home = () => {
                         <div className={clsx(styles.TravelmateFlightBlock, styles.Travelmates)}>
                             <BlockTitle title={'Reisikaaslased'} route={'/'} />
                             <div className={styles.TravelmatesBlock}>
-                                Siin
+                                <div className={styles.TravelmatesRow}>
+                                    <TravelmateRow title={'Alates 26.06.21 kuhugile nädalaks reisile?'} />
+                                </div>
+                                <div className={styles.TravelmatesRow}>
+                                    <TravelmateRow title={'Juulis Itaalia (Rooma ja lähiümbrus) või L-Prantsusmaale?'} />
+                                </div>
+                                <div className={styles.TravelmatesRow}>
+                                    <TravelmateRow title={'Kultuur ja puhkus Vahemere või Musta mere ääres juuli või august 21'} />
+                                </div>
+                                <div className={styles.TravelmatesRow}>
+                                    <TravelmateRow title={'Juulis algusega 19.07 - kaheks, kolmeks nädalaks autoga Euroopasse'} />
+                                </div>
                             </div>
                         </div>
                     </div>
