@@ -2,9 +2,14 @@ import React, {Fragment} from 'react'
 import Header from "../../components/Header"
 import {GetServerSideProps} from "next";
 import axios from "axios";
+import {useUser} from "../../context/AuthContext";
 
 const TravelmatesIndex = (props: any) => {
     const item = props.content
+    const user = useUser()
+
+    console.log(user)
+
     return (
         <Fragment>
             <Header title={'Reisikaaslased'} />

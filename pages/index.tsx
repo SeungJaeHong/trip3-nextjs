@@ -20,6 +20,8 @@ import TravelmateRow from "../components/TravelmateRow";
 const Home = () => {
     const user = useUser()
 
+    console.log(user)
+
     //todo: refactor to more components
     return (
         <>

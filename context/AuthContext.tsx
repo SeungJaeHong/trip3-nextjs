@@ -26,7 +26,7 @@ type Props = {
 export const AuthProvider = ({children, authUser}) => {
     const [user, setUser] = useState(authUser)
 
-    const getUser = async () => {
+    /*const getUser = async () => {
         try {
             let res = await ApiClient.get(`/user`);
             setUser(res.data)
@@ -34,7 +34,7 @@ export const AuthProvider = ({children, authUser}) => {
             //setUser(undefined)
             //throw error;
         }
-    };
+    };*/
 
     const login = async (email: string, password: string) => {
         try {
@@ -69,9 +69,9 @@ export const AuthProvider = ({children, authUser}) => {
         }
     }
 
-    useEffect(() => {
+    /*useEffect(() => {
         //getUser()
-    }, [])
+    }, [])*/
 
     const value = {
         user,
