@@ -5,6 +5,7 @@ import Head from 'next/head'
 import ForumPost from "../../../components/Forum/ForumPost"
 import ForumComment from "../../../components/Forum/ForumComment"
 import Header from "../../../components/Header"
+import Footer from "../../../components/Footer";
 
 const ForumShow = (props: any) => {
     return (
@@ -24,6 +25,7 @@ const ForumShow = (props: any) => {
                     })}
                 </div>
             </div>
+            <Footer />
         </Fragment>
     )
 }

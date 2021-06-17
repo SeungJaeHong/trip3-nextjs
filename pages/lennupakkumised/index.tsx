@@ -2,6 +2,7 @@ import React, {Fragment} from 'react'
 import Header from "../../components/Header"
 import {GetServerSideProps} from "next";
 import axios from "axios";
+import Footer from "../../components/Footer";
 
 const FlightsIndex = (props: any) => {
     const item = props.content
@@ -26,6 +27,7 @@ const FlightsIndex = (props: any) => {
                     </tbody>
                 </table>
             </div>
+            <Footer />
         </Fragment>
     )
 }

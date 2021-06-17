@@ -3,6 +3,7 @@ import Header from "../../components/Header"
 import {GetServerSideProps} from "next";
 import axios from "axios";
 import {useUser} from "../../context/AuthContext";
+import Footer from "../../components/Footer";
 
 const TravelmatesIndex = (props: any) => {
     const item = props.content
@@ -29,6 +30,7 @@ const TravelmatesIndex = (props: any) => {
                     </tbody>
                 </table>
             </div>
+            <Footer />
         </Fragment>
     )
 }

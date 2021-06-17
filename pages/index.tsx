@@ -16,13 +16,14 @@ import ShortNewsListItem from "../components/ShortNewsListItem";
 import ImageGallery from "../components/ImageGallery";
 import FlightOfferRow from "../components/FlightOffer/FlightOfferRow";
 import TravelmateRow from "../components/TravelmateRow";
-import {GetServerSideProps} from "next";
+import {GetServerSideProps} from "next"
 import axios from "axios";
+import Footer from "../components/Footer"
 
-const Home = () => {
-    const user = useUser()
+const Home = (content: any, user: any) => {
+    //const user = useUser()
 
-    //console.log(user)
+    console.log(user)
 
     //todo: refactor to more components
     return (
@@ -189,6 +190,8 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+
+            <Footer />
         </>
     )
 }
@@ -202,6 +205,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
         props: {
             content: {},
+            user: {}
         }
     }
 }

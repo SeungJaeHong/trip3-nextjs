@@ -16,9 +16,11 @@ function MyApp({ Component, pageProps, user }) {
                 height="2"
                 options={{ showSpinner: false }}
             />
-            <MainLayout component={Component}>
+            <Component {...pageProps} />
+
+            {/*<MainLayout component={Component}>
                 <Component {...pageProps} />
-            </MainLayout>
+            </MainLayout>*/}
         </>
         /*<AuthProvider authUser={user}>
             <NextNprogress

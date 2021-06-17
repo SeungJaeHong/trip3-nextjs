@@ -4,6 +4,7 @@ import ForumRow from '../../../components/Forum/ForumRow'
 import {GetServerSideProps} from "next"
 import Link from 'next/link'
 import Header from "../../../components/Header"
+import Footer from "../../../components/Footer";
 
 const MainForumIndex = (props: any) => {
     const posts = props?.content?.data || []
@@ -40,6 +41,7 @@ const MainForumIndex = (props: any) => {
                     }
                 </div>
             </div>
+            <Footer />
         </Fragment>
     )
 }
