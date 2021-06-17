@@ -16,11 +16,13 @@ import ShortNewsListItem from "../components/ShortNewsListItem";
 import ImageGallery from "../components/ImageGallery";
 import FlightOfferRow from "../components/FlightOffer/FlightOfferRow";
 import TravelmateRow from "../components/TravelmateRow";
+import {GetServerSideProps} from "next";
+import axios from "axios";
 
 const Home = () => {
     const user = useUser()
 
-    console.log(user)
+    //console.log(user)
 
     //todo: refactor to more components
     return (
@@ -189,6 +191,19 @@ const Home = () => {
             </div>
         </>
     )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    //const url = 'https://random-data-api.com/api/cannabis/random_cannabis'
+    //const response = await axios.get(url)
+
+    console.log('home')
+
+    return {
+        props: {
+            content: {},
+        }
+    }
 }
 
 export default Home

@@ -6,9 +6,7 @@ import {useUser} from "../../context/AuthContext";
 
 const TravelmatesIndex = (props: any) => {
     const item = props.content
-    const user = useUser()
-
-    console.log(user)
+    //const user = useUser()
 
     return (
         <Fragment>

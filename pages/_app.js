@@ -7,9 +7,8 @@ import ApiClient from "../lib/ApiClient"
 
 function MyApp({ Component, pageProps, user }) {
 
-
     return (
-        <AuthProvider authUser={user}>
+        <>
             <NextNprogress
                 color="#37a0eb"
                 startPosition={0.3}
@@ -20,18 +19,31 @@ function MyApp({ Component, pageProps, user }) {
             <MainLayout component={Component}>
                 <Component {...pageProps} />
             </MainLayout>
-        </AuthProvider>
+        </>
+        /*<AuthProvider authUser={user}>
+            <NextNprogress
+                color="#37a0eb"
+                startPosition={0.3}
+                stopDelayMs={200}
+                height="2"
+                options={{ showSpinner: false }}
+            />
+            <MainLayout component={Component}>
+                <Component {...pageProps} />
+            </MainLayout>
+        </AuthProvider>*/
     )
 }
 
 // this makes every page SSR
 // not recommended approach but we always get the user first this way
 // probably changes later
-MyApp.getInitialProps = async appContext => {
+/*MyApp.getInitialProps = async appContext => {
     const appProps = await App.getInitialProps(appContext)
     let user = undefined
 
-    //todo: refactor to function
+    console.log('user')
+
     try {
         let res = await ApiClient.get('/user')
         user = res.data
@@ -40,6 +52,6 @@ MyApp.getInitialProps = async appContext => {
     }
 
     return { ...appProps, user }
-}
+}*/
 
 export default MyApp
