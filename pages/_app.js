@@ -5,10 +5,13 @@ import MainLayout from '../layouts/MainLayout'
 import {AuthProvider} from "../context/AuthContext"
 import ApiClient from "../lib/ApiClient"
 
-function MyApp({ Component, pageProps, user }) {
+function MyApp({ Component, pageProps }) {
+
+    const user = pageProps?.user
+    console.log(pageProps, 'props')
 
     return (
-        <>
+        <AuthProvider authUser={user}>
             <NextNprogress
                 color="#37a0eb"
                 startPosition={0.3}
@@ -21,19 +24,7 @@ function MyApp({ Component, pageProps, user }) {
             {/*<MainLayout component={Component}>
                 <Component {...pageProps} />
             </MainLayout>*/}
-        </>
-        /*<AuthProvider authUser={user}>
-            <NextNprogress
-                color="#37a0eb"
-                startPosition={0.3}
-                stopDelayMs={200}
-                height="2"
-                options={{ showSpinner: false }}
-            />
-            <MainLayout component={Component}>
-                <Component {...pageProps} />
-            </MainLayout>
-        </AuthProvider>*/
+        </AuthProvider>
     )
 }
 
