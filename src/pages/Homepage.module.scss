@@ -1,0 +1,305 @@
+@import "../styles/variables";
+@import "../styles/mixins";
+
+.Content {
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.Header {
+    overflow: hidden;
+}
+
+.Navbar {
+    padding-bottom: 4rem;
+    padding-top: 1.5rem;
+}
+
+.Search {
+    padding-bottom: 7rem;
+    width: 50%;
+    margin: 0 auto;
+
+    @include md() {
+        width: 60%;
+    }
+
+    @include sm() {
+        width: 100%;
+    }
+}
+
+.CenteredContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 83.333333%;
+    max-width: 83.333333%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+
+    @include lg() {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+.FlightOffers {
+    display: flex;
+    margin: -2.6rem auto 1rem auto;
+    width: 100%;
+
+    @include md() {
+        flex-direction: column;
+    }
+
+    .FlightOfferCard {
+        flex: 1 1 0;
+        border: none;
+    }
+}
+
+.MoreFlightsLink {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+
+    @include sm() {
+        justify-content: center;
+    }
+}
+
+.JoinTripBlock {
+    display: flex;
+    width: 100%;
+    padding: 0 3rem 1rem 3rem;
+
+    @include sm() {
+        flex-direction: column;
+        padding: 0;
+        margin-bottom: 1rem;
+    }
+
+    .TripDescription {
+        display: flex;
+        flex-direction: column;
+        flex: 3;
+        align-items: flex-start;
+        margin-right: 2rem;
+
+        @include sm() {
+            margin-right: 0;
+        }
+
+        @include lg() {
+            flex: 2;
+        }
+
+        .DescriptionText {
+            font-size: 1.1rem;
+            line-height: 1.7rem;
+            color: $gray-dark;
+            margin-bottom: .5rem;
+
+            @include sm() {
+                font-size: 1rem;
+                line-height: 1.4rem;
+                font-weight: 500;
+            }
+        }
+    }
+
+    .JoinButton {
+        flex: 1;
+        margin-top: 1.2rem;
+    }
+}
+
+.ForumContainer {
+    display: flex;
+    width: 100%;
+
+    @include md() {
+        flex-direction: column;
+    }
+
+    .ForumBlock {
+        display: flex;
+        flex: 2;
+        flex-direction: column;
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 1rem;
+
+        .ForumBlockTitle {
+            margin: .5rem 0 1.5rem 0;
+        }
+    }
+
+    .SidebarContent {
+        display: flex;
+        width: 100%;
+        flex: 1;
+        justify-content: center;
+        padding: 5rem 0 0 2rem;
+
+        .ForumLinks {
+            display: flex;
+            flex-direction: column;
+
+            .ForumLink {
+                margin-bottom: 2rem;
+
+                .ForumDescription {
+                    display: flex;
+                    font-size: 1rem;
+                    color: $gray-dark;
+                    margin-top: 1rem;
+                }
+            }
+        }
+    }
+}
+
+.NewsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 2rem 0;
+
+    .News {
+        display: inline-flex;
+        gap: 2rem;
+        margin: 1rem 0 2rem 0;
+
+        @include md() {
+            flex-direction: column;
+        }
+
+        .NewsCard {
+            width: 100%;
+            flex: 1;
+        }
+    }
+
+    .ShortNews {
+        display: inline-flex;
+        gap: 3rem;
+        margin: 1rem 0 1.5rem 0;
+
+        @include md() {
+            flex-direction: column;
+        }
+
+        .NewsCard {
+            width: 100%;
+            flex: 1;
+        }
+
+        .ShortNewsList {
+            display: flex;
+            flex-direction: column;
+            flex: 2;
+
+            .ShortNewsListItem {
+                display: flex;
+                width: 100%;
+                margin-bottom: .5rem;
+
+                .Dot {
+                    width: .4rem;
+                    height: .4rem;
+                    border-radius: .2rem;
+                    background: $green;
+                    margin-right: .8rem;
+                    margin-top: .5rem;
+                }
+
+                .ShortNewsContent {
+                    display: flex;
+                    flex-direction: column;
+
+                    .Title {
+                        display: flex;
+                        align-items: center;
+
+                        a {
+                            color: $blue;
+                            font-size: 1rem;
+                            font-weight: 600;
+                        }
+                    }
+
+                    .Date {
+                        color: $gray-darker;
+                        font-size: .8rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.ImageGalleryContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.BottomContainer {
+    background: $gray-light;
+
+    .TravelFlightContainer {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        padding-top: 2rem;
+
+        .TravelmateFlightBlock {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+
+            @include lg() {
+                width: 100%;
+            }
+
+            .FlightOffersBlock {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                margin: 1.5rem 0 2rem 0;
+
+                .FlightOffersRow {
+                    display: flex;
+                    width: 100%;
+                    margin-bottom: 2rem;
+                }
+            }
+
+            .TravelmatesBlock {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                margin: 1.5rem 0 2rem 0;
+
+                .TravelmatesRow {
+                    display: flex;
+                    width: 100%;
+                    margin-bottom: 2rem;
+                }
+            }
+
+            &.Travelmates {
+                padding-left: 2.5rem;
+
+                @include lg() {
+                    padding-left: 0;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.Button {
+    display: flex;
+    align-items: center;
+    background: $green;
+    border-radius: 3px;
+    font-size: 1rem;
+    line-height: 1.6rem;
+    font-weight: 500;
+    justify-content: center;
+    padding: 12px 36px;
+    text-align: center;
+    transition: all .2s;
+    cursor: pointer;
+    height: 3rem;
+
+    &:hover {
+        background: $green-hover;
+    }
+
+    .Title {
+        color: $white;
+    }
+}

@@ -1,0 +1,94 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.ForumRow {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+
+    .UserIcon {
+        margin-right: 1.6rem;
+        position: relative;
+        height: 3.5rem;
+        width: 3.5rem;
+
+        svg {
+            height: 3.5rem;
+            width: 3.5rem;
+            fill: #d1d4d6;
+        }
+
+        .CommentCountContainer {
+            position: absolute;
+            bottom: -5px;
+            right: -10px;
+            width: 1.8rem;
+            height: 1.8rem;
+            border-radius: 1rem;
+            background: $white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 3px #d1d4d6;
+
+            .CommentCount {
+                font-size: .875rem;
+                line-height: 100%;
+                font-weight: 500;
+                color: $red;
+                letter-spacing: .5px;
+            }
+
+            &.CommentUnread {
+                background: $red;
+
+                .CommentCount {
+                    color: $white;
+                }
+            }
+        }
+    }
+
+    .Content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .Title {
+            color: $gray-dark;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 3px;
+
+            &:hover {
+                color: $gray-dark-hover;
+            }
+        }
+
+        .Meta {
+            display: flex;
+            width: 100%;
+            align-items: center;
+
+            .MetaItem {
+                margin-right: 1rem;
+                font-size: 0.875rem;
+                color: $gray-darker;
+
+                &.ReadCount {
+                    color: $orange-dark;
+                }
+
+                &.Creator {
+                    a {
+                        color: $blue-light;
+
+                        &:hover {
+                            color: $blue;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
