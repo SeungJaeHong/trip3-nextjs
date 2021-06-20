@@ -1,5 +1,3 @@
-import {useUser} from "../context/AuthContext"
-import React from 'react'
 import Link from 'next/link'
 import Navbar from "../components/Navbar"
 import FrontPageSearch from "../components/FrontPageSearch"
@@ -19,6 +17,7 @@ import TravelmateRow from "../components/TravelmateRow";
 import {GetServerSideProps} from "next"
 import axios from "axios";
 import Footer from "../components/Footer"
+import ApiClient from "../lib/ApiClient";
 
 const Home = (content: any, user: any) => {
     //const user = useUser()
@@ -200,12 +199,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     //const url = 'https://random-data-api.com/api/cannabis/random_cannabis'
     //const response = await axios.get(url)
 
-    console.log('home')
+    let user = null
+
+    try {
+        const res = await ApiClient.get('/user')
+        user = res.data
+    } catch (error) {
+        console.log(error)
+    }
 
     return {
         props: {
-            content: {},
-            user: {}
+            user: user,
+            flightOffers: {},
+            forumPosts: {},
         }
     }
 }
