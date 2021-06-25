@@ -17,12 +17,19 @@ import TravelmateRow from "../components/TravelmateRow";
 import {GetServerSideProps} from "next"
 import axios from "axios";
 import Footer from "../components/Footer"
-import ApiClient from "../lib/ApiClient";
+import ApiClient from "../lib/ApiClient"
+import {Content} from '../types'
 
-const Home = (content: any, user: any) => {
+type Props = {
+    flightOffers: Content[],
+    forumPosts: Content[],
+}
+
+const Home = (props: Props) => {
     //const user = useUser()
 
-    console.log(user)
+    //console.log(user)
+    console.log(props.flightOffers, 'HOME')
 
     //todo: refactor to more components
     return (
@@ -48,13 +55,13 @@ const Home = (content: any, user: any) => {
                 <div className={styles.CenteredContainer}>
                     <div className={styles.FlightOffers}>
                         <div className={styles.FlightOfferCard}>
-                            <FlightOfferCard content={'test'} color={'#8b84d7'} />
+                            <FlightOfferCard content={props.flightOffers[0]} color={'#8b84d7'} />
                         </div>
                         <div className={styles.FlightOfferCard}>
-                            <FlightOfferCard content={'test'} color={'#f5b800'} />
+                            <FlightOfferCard content={props.flightOffers[1]} color={'#f5b800'} />
                         </div>
                         <div className={styles.FlightOfferCard}>
-                            <FlightOfferCard content={'test'} color={'#ed6464'} />
+                            <FlightOfferCard content={props.flightOffers[2]} color={'#ed6464'} />
                         </div>
                     </div>
                     <div className={styles.MoreFlightsLink}>
@@ -199,21 +206,26 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     //const url = 'https://random-data-api.com/api/cannabis/random_cannabis'
     //const response = await axios.get(url)
 
-    let user = null
-
-    try {
-        const res = await ApiClient.get('/user')
-        user = res.data
-    } catch (error) {
-        console.log(error)
+    //let user = null
+    const data = {
+        user: null,
+        flightOffers: [],
+        forumPosts: []
     }
 
+    try {
+        const res = await ApiClient.get('/frontpage')
+        data.user = res.data.user
+        data.flightOffers = res.data.flightOffers
+
+    } catch (error) {
+        //console.log(error)
+    }
+
+    console.log(data, 'DATA')
+
     return {
-        props: {
-            user: user,
-            flightOffers: {},
-            forumPosts: {},
-        }
+        props: data
     }
 }
 

@@ -8,7 +8,7 @@ import ApiClient from "../lib/ApiClient"
 function MyApp({ Component, pageProps }) {
 
     const user = pageProps?.user
-    console.log(pageProps, 'props')
+    //console.log(user, 'user app')
 
     return (
         <AuthProvider authUser={user}>
@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
                 color="#37a0eb"
                 startPosition={0.3}
                 stopDelayMs={200}
-                height="2"
+                height={2}
                 options={{ showSpinner: false }}
             />
             <Component {...pageProps} />
