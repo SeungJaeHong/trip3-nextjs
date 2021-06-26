@@ -1,39 +1,17 @@
-import Link from 'next/link'
 import styles from './ForumList.module.scss'
-import UserIcon from '../../../icons/UserIcon'
-import ForumRow from "../ForumRow";
+import ForumRow from "../ForumRow"
+import {ForumRowItem} from "../../../types"
 
-//todo: row components and stuff
-const ForumList = (props: any) => {
+const ForumList = (props: {items: ForumRowItem[]}) => {
     return (
         <div className={styles.ForumList}>
-            <div className={styles.ForumRow}>
-                <ForumRow />
-            </div>
-            <div className={styles.ForumRow}>
-                <ForumRow />
-            </div>
-            <div className={styles.ForumRow}>
-                <ForumRow />
-            </div>
-            <div className={styles.ForumRow}>
-                <ForumRow />
-            </div>
-            <div className={styles.ForumRow}>
-                <ForumRow />
-            </div>
-            <div className={styles.ForumRow}>
-                <ForumRow />
-            </div>
-            <div className={styles.ForumRow}>
-                <ForumRow />
-            </div>
-            <div className={styles.ForumRow}>
-                <ForumRow />
-            </div>
-            <div className={styles.ForumRow}>
-                <ForumRow />
-            </div>
+            {props.items.map((item: ForumRowItem) => {
+                return (
+                    <div className={styles.ForumRow} key={item.id}>
+                        <ForumRow {...item} />
+                    </div>
+                )
+            })}
         </div>
     )
 }

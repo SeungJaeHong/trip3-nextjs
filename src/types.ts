@@ -17,7 +17,6 @@ export type User = {
     notify_follow?: boolean;
     role?: string;
     verified?: boolean;
-    remember_token?: string | null;
     active_at?: string | null;
     company?: boolean;
     contents?: Content[] | null;
@@ -32,6 +31,11 @@ export type Destination = {
     slug: string,
     description: string;
     parentDestination: Destination | null;
+};
+
+export type Topic = {
+    id: number;
+    name: string;
 };
 
 export type Comment = {
@@ -72,5 +76,18 @@ export type Image = {
     created_at: string | null;
     updated_at: string | null;
     content?: Content[] | null;
-    user?: User[] | null;
+    user?: User | null;
 };
+
+
+export type ForumRowItem = {
+    id: number;
+    title: string;
+    updatedAt: string;
+    isUnread: boolean;
+    viewsCount: number;
+    commentsCount: number;
+    user: User;
+    destinations?: Destination[] | null;
+    topics?: Topic[] | null;
+}

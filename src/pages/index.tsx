@@ -18,20 +18,16 @@ import {GetServerSideProps} from "next"
 import axios from "axios";
 import Footer from "../components/Footer"
 import ApiClient from "../lib/ApiClient"
-import {Content} from '../types'
+import {Content, ForumRowItem} from '../types'
 
 type Props = {
     flightOffers: Content[],
-    forumPosts: Content[],
+    forumPosts: ForumRowItem[],
 }
 
 const Home = (props: Props) => {
     //const user = useUser()
 
-    //console.log(user)
-    console.log(props.flightOffers, 'HOME')
-
-    //todo: refactor to more components
     return (
         <>
             <div className={styles.Header}
@@ -85,7 +81,7 @@ const Home = (props: Props) => {
                                 <BlockTitle title={'Tripikad räägivad'} route={'/'} />
                             </div>
                             <div className={styles.ForumList}>
-                                <ForumList items={[]} />
+                                <ForumList items={props.forumPosts} />
                             </div>
                         </div>
                         <div className={styles.SidebarContent}>
@@ -217,12 +213,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         const res = await ApiClient.get('/frontpage')
         data.user = res.data.user
         data.flightOffers = res.data.flightOffers
-
+        data.forumPosts = res.data.forumPosts
     } catch (error) {
         //console.log(error)
     }
-
-    console.log(data, 'DATA')
 
     return {
         props: data

@@ -1,37 +1,38 @@
 import Link from 'next/link'
 import styles from './ForumRow.module.scss'
 import UserIcon from '../../../icons/UserIcon'
-import clsx from "clsx";
+import clsx from "clsx"
+import {ForumRowItem} from "../../../types"
 
-const ForumRow = (props: any) => {
+const ForumRow = (item: ForumRowItem) => {
     return (
         <div className={styles.ForumRow}>
             <div className={styles.UserIcon}>
                 <UserIcon />
                 <div className={clsx(styles.CommentCountContainer, {
-                    [styles.CommentUnread]: false
+                    [styles.CommentUnread]: item.isUnread
                 })}>
-                    <span className={styles.CommentCount}>14</span>
+                    <span className={styles.CommentCount}>{item.commentsCount}</span>
                 </div>
             </div>
             <div className={styles.Content}>
                 <Link href={'/'}>
                     <a>
                         <div className={styles.Title}>
-                            Lorem Ipsum is simply dummy text of the printing
+                            {item.title}
                         </div>
                     </a>
                 </Link>
                 <div className={styles.Meta}>
                     <span className={styles.MetaItem}>
-                        Täna 13:21
+                        {item.updatedAt}
                     </span>
                     <span className={clsx(styles.MetaItem, styles.ReadCount)}>
-                        Loetud 347 korda
+                        Loetud {item.viewsCount} korda
                     </span>
                     <span className={clsx(styles.MetaItem, styles.Creator)}>
                         <Link href={'/'} >
-                            <a>SomeUser</a>
+                            <a>{item.user.name}</a>
                         </Link>
                     </span>
                 </div>
