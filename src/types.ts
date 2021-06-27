@@ -29,7 +29,6 @@ export type Destination = {
     id: number;
     name: string;
     slug: string,
-    description: string;
     parentDestination: Destination | null;
 };
 
