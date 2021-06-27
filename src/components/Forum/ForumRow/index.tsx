@@ -39,7 +39,7 @@ const ForumRow = (item: ForumRowItem) => {
                     {item.destinations?.map((destination: Destination) => {
                         return (
                             <div className={clsx(styles.MetaItem, styles.Tag)} key={destination.id}>
-                                <Tag title={'Hipaania'} type={'destination'} />
+                                <Tag title={'Hipaania'} type={'destination'} route={'/'} />
                             </div>
                         )
                     })}
