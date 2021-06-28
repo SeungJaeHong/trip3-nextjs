@@ -2,7 +2,7 @@ import Link from 'next/link'
 import styles from './ForumRow.module.scss'
 import UserIcon from '../../../icons/UserIcon'
 import clsx from "clsx"
-import {Destination, ForumRowItem} from "../../../types"
+import {Destination, ForumRowItem, Topic} from "../../../types"
 import Tag from "../../Tag";
 
 const ForumRow = (item: ForumRowItem) => {
@@ -39,7 +39,14 @@ const ForumRow = (item: ForumRowItem) => {
                     {item.destinations?.map((destination: Destination) => {
                         return (
                             <div className={clsx(styles.MetaItem, styles.Tag)} key={destination.id}>
-                                <Tag title={'Hipaania'} type={'destination'} route={'/'} />
+                                <Tag title={destination.name} type={'destination'} route={'/'} />
+                            </div>
+                        )
+                    })}
+                    {item.topics?.map((topic: Topic) => {
+                        return (
+                            <div className={clsx(styles.MetaItem, styles.Tag)} key={topic.id}>
+                                <Tag title={topic.name} route={'/'} />
                             </div>
                         )
                     })}
