@@ -119,44 +119,50 @@
 
 .ForumContainer {
     display: flex;
+    flex-direction: column;
     width: 100%;
 
-    @include md() {
-        flex-direction: column;
+    .ForumBlockTitle {
+        margin: 1.5rem 0 .5rem 0;
     }
 
     .ForumBlock {
         display: flex;
-        flex: 2;
-        flex-direction: column;
         width: 100%;
-        justify-content: flex-start;
-        margin-top: 1rem;
 
-        .ForumBlockTitle {
-            margin: .5rem 0 1.5rem 0;
-        }
-    }
-
-    .SidebarContent {
-        display: flex;
-        width: 100%;
-        flex: 1;
-        justify-content: center;
-        padding: 5rem 0 0 2rem;
-
-        .ForumLinks {
-            display: flex;
+        @include md() {
             flex-direction: column;
+        }
 
-            .ForumLink {
-                margin-bottom: 2rem;
+        .ForumList {
+            display: flex;
+            flex: 2;
+            flex-direction: column;
+            width: 100%;
+            justify-content: flex-start;
+            margin-top: 1rem;
+        }
 
-                .ForumDescription {
-                    display: flex;
-                    font-size: 1rem;
-                    color: $gray-dark;
-                    margin-top: 1rem;
+        .SidebarContent {
+            display: flex;
+            width: 100%;
+            flex: 1;
+            justify-content: center;
+            padding: 1rem 0 0 2rem;
+
+            .ForumLinks {
+                display: flex;
+                flex-direction: column;
+
+                .ForumLink {
+                    margin-bottom: 2rem;
+
+                    .ForumDescription {
+                        display: flex;
+                        font-size: 1rem;
+                        color: $gray-dark;
+                        margin-top: 1rem;
+                    }
                 }
             }
         }

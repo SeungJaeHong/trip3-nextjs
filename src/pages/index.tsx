@@ -76,27 +76,27 @@ const Home = (props: Props) => {
                     </div>
 
                     <div className={styles.ForumContainer}>
+                        <div className={styles.ForumBlockTitle}>
+                            <BlockTitle title={'Tripikad räägivad'} route={'/'} />
+                        </div>
                         <div className={styles.ForumBlock}>
-                            <div className={styles.ForumBlockTitle}>
-                                <BlockTitle title={'Tripikad räägivad'} route={'/'} />
-                            </div>
                             <div className={styles.ForumList}>
                                 <ForumList items={props.forumPosts} />
                             </div>
-                        </div>
-                        <div className={styles.SidebarContent}>
-                            <div className={styles.ForumLinks}>
-                                <div className={styles.ForumLink}>
-                                    <MoreLink title={'Üldfoorum'} route={'/'} large={true} />
-                                    <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
-                                </div>
-                                <div className={styles.ForumLink}>
-                                    <MoreLink title={'Ost-müük'} route={'/'} large={true} />
-                                    <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
-                                </div>
-                                <div className={styles.ForumLink}>
-                                    <MoreLink title={'Elu välismaal'} route={'/'} large={true} />
-                                    <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
+                            <div className={styles.SidebarContent}>
+                                <div className={styles.ForumLinks}>
+                                    <div className={styles.ForumLink}>
+                                        <MoreLink title={'Üldfoorum'} route={'/'} large={true} />
+                                        <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
+                                    </div>
+                                    <div className={styles.ForumLink}>
+                                        <MoreLink title={'Ost-müük'} route={'/'} large={true} />
+                                        <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
+                                    </div>
+                                    <div className={styles.ForumLink}>
+                                        <MoreLink title={'Elu välismaal'} route={'/'} large={true} />
+                                        <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

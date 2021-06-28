@@ -68,12 +68,12 @@
             display: flex;
             width: 100%;
             align-items: center;
+            flex-wrap: wrap;
 
             .MetaItem {
                 margin-right: 1rem;
                 font-size: 0.875rem;
                 color: $gray-darker;
-                white-space: nowrap;
 
                 &.ReadCount {
                     color: $orange-dark;
