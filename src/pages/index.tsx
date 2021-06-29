@@ -8,9 +8,7 @@ import FlightOfferCard from "../components/FlightOffer/FlightOfferCard";
 import MoreLink from "../components/MoreLink";
 import BlockTitle from "../components/BlockTitle";
 import ForumList from "../components/Forum/ForumList";
-import Button from "../components/Button";
-import NewsCard from "../components/NewsCard";
-import ShortNewsListItem from "../components/ShortNewsListItem";
+import Button from "../components/Button"
 import ImageGallery from "../components/ImageGallery";
 import FlightOfferRow from "../components/FlightOffer/FlightOfferRow";
 import TravelmateRow from "../components/TravelmateRow";
@@ -19,6 +17,7 @@ import axios from "axios";
 import Footer from "../components/Footer"
 import ApiClient from "../lib/ApiClient"
 import {Content, ForumRowItem} from '../types'
+import FrontpageNewsBlock from "../components/News/FrontpageNewsBlock"
 
 type Props = {
     flightOffers: Content[],
@@ -104,45 +103,7 @@ const Home = (props: Props) => {
                 </div>
 
                 <div className={styles.NewsContainer}>
-                    <BlockTitle title={'Uudised'} route={'/'} />
-                    <div className={styles.News}>
-                        <div className={styles.NewsCard}>
-                            <NewsCard />
-                        </div>
-                        <div className={styles.NewsCard}>
-                            <NewsCard />
-                        </div>
-                        <div className={styles.NewsCard}>
-                            <NewsCard />
-                        </div>
-                    </div>
-                    <div className={styles.ShortNews}>
-                        <div className={styles.NewsCard}>
-                            <NewsCard />
-                        </div>
-                        <div className={styles.ShortNewsList}>
-                            <div className={styles.ShortNewsListItem}>
-                                <ShortNewsListItem
-                                    title={'Helsingi Vantaa lennujaamas on vaid 1200 lendajat päevas'}
-                                    date={'Täna 12:42'} />
-                            </div>
-                            <div className={styles.ShortNewsListItem}>
-                                <ShortNewsListItem
-                                    title={'Eesti peatab ajutiselt lennuliikluse Ühendkuningriigiga (ERR)'}
-                                    date={'Eile 15:46'} />
-                            </div>
-                            <div className={styles.ShortNewsListItem}>
-                                <ShortNewsListItem
-                                    title={'Eestisse saab liikumispiiranguta 21 Euroopa riigist'}
-                                    date={'3. mai 18:44'} />
-                            </div>
-                            <div className={styles.ShortNewsListItem}>
-                                <ShortNewsListItem
-                                    title={'Sitsiilia pakub reisimiseks turismivautšereid'}
-                                    date={'1. mai 11:23'} />
-                            </div>
-                        </div>
-                    </div>
+                    <FrontpageNewsBlock />
                 </div>
 
                 <BlockTitle title={'Viimati lisatud pildid'} route={'/'} />
@@ -199,10 +160,6 @@ const Home = (props: Props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    //const url = 'https://random-data-api.com/api/cannabis/random_cannabis'
-    //const response = await axios.get(url)
-
-    //let user = null
     const data = {
         user: null,
         flightOffers: [],
@@ -215,7 +172,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         data.flightOffers = res.data.flightOffers
         data.forumPosts = res.data.forumPosts
     } catch (error) {
-        //console.log(error)
+        //console.error(error)
     }
 
     return {
