@@ -10,11 +10,6 @@
     padding: 3px 6px;
     transition: all .2s;
 
-    &:hover {
-        color: $gray-dark-hover;
-        border: 1px solid $gray-dark-hover;
-    }
-
     .Title {
         color: $gray-darker;
         font-size: .8rem;
@@ -22,16 +17,27 @@
         white-space: nowrap;
     }
 
-    &.Destination {
-        border: 1px solid $orange-dark;
+    &:hover {
+        border: 1px solid $gray-dark-hover;
 
         .Title {
-            color: $orange-dark;
+            color: $gray-dark-hover;
+        }
+    }
+
+    &.Destination {
+        border: 1px solid $orange;
+
+        .Title {
+            color: $orange;
         }
 
         &:hover {
-            color: $orange-dark;
             border: 1px solid $orange-dark;
+
+            .Title {
+                color: $orange-dark;
+            }
         }
     }
 }

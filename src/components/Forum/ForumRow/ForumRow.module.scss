@@ -74,9 +74,10 @@
                 margin-right: 1rem;
                 font-size: 0.875rem;
                 color: $gray-darker;
+                margin-bottom: 4px;
 
                 &.ReadCount {
-                    color: $orange-dark;
+                    color: $orange;
                 }
 
                 &.Creator {

@@ -57,7 +57,7 @@ const Home = (props: Props) => {
                             <FlightOfferCard content={props.flightOffers[1]} color={'#f5b800'} />
                         </div>
                         <div className={styles.FlightOfferCard}>
-                            <FlightOfferCard content={props.flightOffers[2]} color={'#ed6464'} />
+                            <FlightOfferCard content={props.flightOffers[2]} color={'#FF5050'} />
                         </div>
                     </div>
                     <div className={styles.MoreFlightsLink}>
