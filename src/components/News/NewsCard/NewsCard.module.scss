@@ -22,5 +22,16 @@
         color: $blue;
         font-size: 1.2rem;
         font-weight: 500;
+
+        .CommentCount {
+            color: $red;
+            font-weight: 400;
+        }
+    }
+
+    &:hover {
+        .Title {
+            color: $blue-hover;
+        }
     }
 }

@@ -16,12 +16,12 @@ import {GetServerSideProps} from "next"
 import axios from "axios";
 import Footer from "../components/Footer"
 import ApiClient from "../lib/ApiClient"
-import {Content, ForumRowItem} from '../types'
+import {Content, ForumRowType} from '../types'
 import FrontpageNewsBlock from "../components/News/FrontpageNewsBlock"
 
 type Props = {
     flightOffers: Content[],
-    forumPosts: ForumRowItem[],
+    forumPosts: ForumRowType[],
 }
 
 const Home = (props: Props) => {

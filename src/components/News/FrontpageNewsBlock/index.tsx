@@ -4,6 +4,7 @@ import NewsCard from "../NewsCard"
 import ShortNewsListItem from "../../ShortNewsListItem"
 import {useEffect, useState} from "react"
 import {getNewsData} from "../../../api/frontpage"
+import {NewsCardType, ShortNewsListItemType} from "../../../types"
 
 const FrontpageNewsBlock = () => {
     const [news, setNews] = useState([]);
@@ -23,25 +24,23 @@ const FrontpageNewsBlock = () => {
         <div className={styles.FrontpageNewsBlock}>
             <BlockTitle title={'Uudised'} route={'/'} />
             <div className={styles.News}>
-                {news.slice(0, 3).map((news: any) => {
+                {news.slice(0, 3).map((newsItem: NewsCardType) => {
                     return (
-                        <div className={styles.NewsCard} key={news.id}>
-                            <NewsCard />
+                        <div className={styles.NewsCard} key={newsItem.id}>
+                            <NewsCard {...newsItem} />
                         </div>
                     )
                 })}
             </div>
             <div className={styles.ShortNews}>
                 <div className={styles.NewsCard}>
-                    <NewsCard />
+                    <NewsCard {...news[3]} />
                 </div>
                 <div className={styles.ShortNewsList}>
-                    {shortNews.map((shortNews: any) => {
+                    {shortNews.map((shortNewsItem: ShortNewsListItemType) => {
                         return (
-                            <div className={styles.ShortNewsListItem} key={shortNews.id}>
-                                <ShortNewsListItem
-                                    title={'Helsingi Vantaa lennujaamas on vaid 1200 lendajat päevas'}
-                                    date={'Täna 12:42'} />
+                            <div className={styles.ShortNewsListItem} key={shortNewsItem.id}>
+                                <ShortNewsListItem {...shortNewsItem} />
                             </div>
                         )
                     })}

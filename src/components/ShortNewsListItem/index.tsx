@@ -1,12 +1,8 @@
 import Link from 'next/link'
 import styles from './ShortNewsListItem.module.scss'
+import {ShortNewsListItemType} from "../../types"
 
-type Props = {
-    title: string,
-    date: string
-}
-
-const ShortNewsListItem = (props: Props) => {
+const ShortNewsListItem = (item: ShortNewsListItemType) => {
     return (
         <div className={styles.ShortNewsListItem}>
             <div className={styles.Dot} />
@@ -14,12 +10,12 @@ const ShortNewsListItem = (props: Props) => {
                 <div className={styles.Title}>
                     <Link href={'/'}>
                         <a>
-                            {props.title}
+                            {item.title}
                         </a>
                     </Link>
                 </div>
                 <div className={styles.Date}>
-                    {props.date}
+                    {item.createdAt}
                 </div>
             </div>
         </div>

@@ -2,10 +2,10 @@ import Link from 'next/link'
 import styles from './ForumRow.module.scss'
 import UserIcon from '../../../icons/UserIcon'
 import clsx from "clsx"
-import {Destination, ForumRowItem, Topic} from "../../../types"
+import {Destination, ForumRowType, Topic} from "../../../types"
 import Tag from "../../Tag";
 
-const ForumRow = (item: ForumRowItem) => {
+const ForumRow = (item: ForumRowType) => {
     return (
         <div className={styles.ForumRow}>
             <div className={styles.UserIcon}>

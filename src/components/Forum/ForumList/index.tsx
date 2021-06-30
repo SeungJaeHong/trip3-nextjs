@@ -1,11 +1,11 @@
 import styles from './ForumList.module.scss'
 import ForumRow from "../ForumRow"
-import {ForumRowItem} from "../../../types"
+import {ForumRowType} from "../../../types"
 
-const ForumList = (props: {items: ForumRowItem[]}) => {
+const ForumList = (props: {items: ForumRowType[]}) => {
     return (
         <div className={styles.ForumList}>
-            {props.items.map((item: ForumRowItem) => {
+            {props.items.map((item: ForumRowType) => {
                 return (
                     <div className={styles.ForumRow} key={item.id}>
                         <ForumRow {...item} />

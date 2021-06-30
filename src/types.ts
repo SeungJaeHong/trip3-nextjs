@@ -79,7 +79,7 @@ export type Image = {
 };
 
 
-export type ForumRowItem = {
+export type ForumRowType = {
     id: number;
     title: string;
     updatedAt: string;
@@ -89,4 +89,19 @@ export type ForumRowItem = {
     user: User;
     destinations?: Destination[] | null;
     topics?: Topic[] | null;
+}
+
+export type NewsCardType = {
+    id: number;
+    title: string;
+    slug: string;
+    createdAt: string;
+    commentsCount: number;
+}
+
+export type ShortNewsListItemType = {
+    id: number;
+    title: string;
+    slug: string;
+    createdAt: string;
 }

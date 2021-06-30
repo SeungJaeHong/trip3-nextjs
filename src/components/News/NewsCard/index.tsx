@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from './NewsCard.module.scss'
+import {NewsCardType} from "../../../types"
 
-const NewsCard = (props: any) => {
+const NewsCard = (item: NewsCardType) => {
     return (
         <div className={styles.NewsCard}>
             <Link href={'/'}>
@@ -16,7 +17,7 @@ const NewsCard = (props: any) => {
                         />
                     </div>
                     <div className={styles.Title}>
-                        Tai meelitab turiste Phuketile tagasi 1$ hotellitubadega
+                        {item.title} {item.commentsCount > 0 && <span className={styles.CommentCount}>({item.commentsCount})</span>}
                     </div>
                 </a>
             </Link>
