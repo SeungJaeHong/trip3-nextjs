@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import type { Content } from '../../types'
+import type { Content } from '../../../types'
 import styles from './FlightOfferCard.module.scss'
 
 type Props = {
