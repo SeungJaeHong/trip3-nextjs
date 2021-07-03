@@ -48,11 +48,13 @@
 
         .Meta {
             display: flex;
+            flex-wrap: wrap;
 
             .MetaItem {
                 margin-right: $spacer * 4;
                 font-size: $font-size-small;
                 color: $gray-darker;
+                margin-bottom: $spacer;
 
                 &.Creator {
                     color: $blue-light;
