@@ -11,13 +11,13 @@ import ForumList from "../components/Forum/ForumList";
 import Button from "../components/Button"
 import ImageGallery from "../components/ImageGallery";
 import FlightOfferCard from "../components/FlightOffer/FlightOfferCard"
-import TravelmateRow from "../components/TravelmateRow"
 import axios from "axios";
 import Footer from "../components/Footer"
 import ApiClient from "../lib/ApiClient"
 import {Content, ForumRowType} from '../types'
 import FrontpageNewsBlock from "../components/News/FrontpageNewsBlock"
 import FlightOffersLatest from "../components/FlightOffer/FlightOffersLatest";
+import TravelmatesLatest from "../components/Travelmate/TravelmatesLatest";
 
 type Props = {
     flightOffers: Content[],
@@ -123,21 +123,7 @@ const Home = (props: Props) => {
                             <FlightOffersLatest />
                         </div>
                         <div className={clsx(styles.TravelmateFlightBlock, styles.Travelmates)}>
-                            <BlockTitle title={'Reisikaaslased'} route={'/'} />
-                            <div className={styles.TravelmatesBlock}>
-                                <div className={styles.TravelmatesRow}>
-                                    <TravelmateRow title={'Alates 26.06.21 kuhugile nädalaks reisile?'} />
-                                </div>
-                                <div className={styles.TravelmatesRow}>
-                                    <TravelmateRow title={'Juulis Itaalia (Rooma ja lähiümbrus) või L-Prantsusmaale?'} />
-                                </div>
-                                <div className={styles.TravelmatesRow}>
-                                    <TravelmateRow title={'Kultuur ja puhkus Vahemere või Musta mere ääres juuli või august 21'} />
-                                </div>
-                                <div className={styles.TravelmatesRow}>
-                                    <TravelmateRow title={'Juulis algusega 19.07 - kaheks, kolmeks nädalaks autoga Euroopasse'} />
-                                </div>
-                            </div>
+                            <TravelmatesLatest />
                         </div>
                     </div>
                 </div>

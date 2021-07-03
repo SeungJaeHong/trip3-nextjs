@@ -1,5 +1,5 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
 
 .TravelmateRow {
     display: flex;
@@ -7,19 +7,19 @@
 
     .Avatar {
         display: flex;
-        margin-right: .8rem;
+        margin-right: $spacer * 4;
 
         a {
             display: block;
 
             svg {
-                width: 4rem;
-                height: 4rem;
+                width: $spacer * 16;
+                height: $spacer * 16;
                 fill: $gray;
 
                 @include sm() {
-                    width: 3rem;
-                    height: 3rem;
+                    width: $spacer * 12;
+                    height: $spacer * 12;
                 }
             }
         }
@@ -49,11 +49,10 @@
         .Meta {
             display: flex;
 
-            a {
-                margin-right: 1rem;
-                font-size: 0.875rem;
+            .MetaItem {
+                margin-right: $spacer * 4;
+                font-size: $font-size-small;
                 color: $gray-darker;
-                white-space: nowrap;
 
                 &.Creator {
                     color: $blue-light;

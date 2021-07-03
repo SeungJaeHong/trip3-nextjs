@@ -113,3 +113,13 @@ export type FlightOfferRowType = {
     createdAt: string;
     destinations?: Destination[] | null;
 }
+
+export type TravelmateRowType = {
+    id: number;
+    title: string;
+    slug: string;
+    createdAt: string;
+    user: User;
+    destinations?: Destination[] | null;
+    topics?: Topic[] | null;
+}
