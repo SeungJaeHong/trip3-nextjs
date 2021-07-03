@@ -60,7 +60,7 @@ const Home = (props: Props) => {
                         </div>
                     </div>
                     <div className={styles.MoreFlightsLink}>
-                        <MoreLink title={'Vaata kõiki sooduspakkumisi'} route={'/'} />
+                        <MoreLink title={'Vaata kõiki lennupakkumisi'} route={'/'} />
                     </div>
                     <div className={styles.JoinTripBlock}>
                         <div className={styles.TripDescription}>
@@ -98,6 +98,9 @@ const Home = (props: Props) => {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div className={styles.ViewMoreForumPosts}>
+                            <MoreLink route={'/'} title={'Kõik postitused'} />
                         </div>
                     </div>
                 </div>
