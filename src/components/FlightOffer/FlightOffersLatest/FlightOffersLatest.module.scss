@@ -1,0 +1,18 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.FlightOffersLatest {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+
+    .Content {
+        margin: $spacer * 6 0 $spacer * 5 0;
+    }
+
+    .ViewMore {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+    }
+}

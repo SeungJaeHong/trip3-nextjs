@@ -105,3 +105,11 @@ export type ShortNewsListItemType = {
     slug: string;
     createdAt: string;
 }
+
+export type FlightOfferRowType = {
+    id: number;
+    title: string;
+    slug: string;
+    createdAt: string;
+    destinations?: Destination[] | null;
+}

@@ -21,6 +21,9 @@ const NewsCard = (item: NewsCardType) => {
                     </div>
                 </a>
             </Link>
+            <div className={styles.CreatedAt}>
+                {item.createdAt}
+            </div>
         </div>
     )
 }

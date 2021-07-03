@@ -1,19 +1,16 @@
 import styles from "./BlockTitle.module.scss"
-import Link from "next/link"
 
 type Props = {
     title: string
-    route: string
+    route?: string //todo: remove after
 }
 
 const BlockTitle = (props: Props) => {
     return (
         <div className={styles.BlockTitle}>
-            <Link href={props.route}>
-                <a className={styles.Title}>
-                    {props.title}
-                </a>
-            </Link>
+            <span className={styles.Title}>
+                {props.title}
+            </span>
         </div>
 
     )

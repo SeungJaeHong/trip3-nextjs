@@ -5,21 +5,17 @@
     display: flex;
     align-items: center;
 
-    &:hover {
-        opacity: .8;
-    }
-
     .Title {
-        font-size: 0.9rem;
+        font-size: $font-size-small;
         color: $blue;
         font-weight: 500;
     }
 
     .Icon {
         svg {
-            width: 0.8rem;
-            height: 0.8rem;
-            margin-left: .5rem;
+            width: $spacer * 3;
+            height: $spacer * 3;
+            margin-left: $spacer * 2;
             fill: $gray;
         }
     }
@@ -34,6 +30,18 @@
             svg {
                 width: 1rem;
                 height: 1rem;
+            }
+        }
+    }
+
+    &:hover {
+        .Title {
+            color: $blue-hover;
+        }
+
+        .Icon {
+            svg {
+                fill: $gray-darker;
             }
         }
     }

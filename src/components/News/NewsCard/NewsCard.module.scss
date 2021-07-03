@@ -34,4 +34,11 @@
             color: $blue-hover;
         }
     }
+
+    .CreatedAt {
+        display: flex;
+        font-size: 0.875rem;
+        color: $gray-darker;
+        margin-top: 4px;
+    }
 }
