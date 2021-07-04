@@ -22,7 +22,7 @@ export type User = {
     contents?: Content[] | null;
     comments?: Comment[] | null;
     images?: Image[] | null;
-    profile_image?: Image | null;
+    avatar?: string | null;
 };
 
 export type Destination = {

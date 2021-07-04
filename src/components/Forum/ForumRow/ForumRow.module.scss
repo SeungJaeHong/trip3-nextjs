@@ -7,14 +7,14 @@
     justify-content: flex-start;
 
     .UserIcon {
-        margin-right: 1.6rem;
+        margin-right: $spacer * 6;
         position: relative;
-        height: 3.5rem;
-        width: 3.5rem;
+        height: $spacer * 14;
+        width: $spacer * 14;
 
         svg {
-            height: 3.5rem;
-            width: 3.5rem;
+            height: $spacer * 14;
+            width: $spacer * 14;
             fill: #d1d4d6;
         }
 
@@ -22,17 +22,17 @@
             position: absolute;
             bottom: -5px;
             right: -10px;
-            width: 1.8rem;
-            height: 1.8rem;
+            width: $spacer * 7;
+            height: $spacer * 7;
             border-radius: 1rem;
             background: $white;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 3px #d1d4d6;
+            box-shadow: 0 0 5px #d1d4d6;
 
             .CommentCount {
-                font-size: .875rem;
+                font-size: $font-size-small;
                 line-height: 100%;
                 font-weight: 500;
                 color: $red;
@@ -71,10 +71,10 @@
             flex-wrap: wrap;
 
             .MetaItem {
-                margin-right: 1rem;
-                font-size: 0.875rem;
+                margin-right: $spacer * 4;
+                font-size: $font-size-small;
                 color: $gray-darker;
-                margin-bottom: 4px;
+                margin-bottom: $spacer;
 
                 &.ReadCount {
                     color: $orange;
@@ -91,7 +91,7 @@
                 }
 
                 &.Tag {
-                    margin-right: .5rem;
+                    margin-right: $spacer * 2;
                 }
             }
         }

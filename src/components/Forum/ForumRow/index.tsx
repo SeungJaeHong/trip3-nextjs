@@ -1,15 +1,15 @@
 import Link from 'next/link'
 import styles from './ForumRow.module.scss'
-import UserIcon from '../../../icons/UserIcon'
 import clsx from "clsx"
 import {Destination, ForumRowType, Topic} from "../../../types"
 import Tag from "../../Tag";
+import UserAvatar from "../../User/UserAvatar"
 
 const ForumRow = (item: ForumRowType) => {
     return (
         <div className={styles.ForumRow}>
             <div className={styles.UserIcon}>
-                <UserIcon />
+                <UserAvatar {...item.user} />
                 <div className={clsx(styles.CommentCountContainer, {
                     [styles.CommentUnread]: item.isUnread
                 })}>
