@@ -1,24 +1,30 @@
 import Link from 'next/link'
-import type { Content } from '../../../types'
+import type {FlightOfferCardType} from '../../../types'
 import styles from './FlightOfferCard.module.scss'
 
-type Props = {
-    content: Content,
-    color: string
-}
+const FlightOfferCard = (item: FlightOfferCardType) => {
+    const getColor = () => {
+        switch(item.color) {
+            case 'purple':
+                return '#8b84d7'
+            case 'yellow':
+                return '#f5b800'
+            default:
+                return '#FF5050'
+        }
+    }
 
-const FlightOfferCard = (props: Props) => {
     return (
         <div className={styles.FlightOfferCard}>
-            <div className={styles.DestinationContainer} style={{'backgroundColor': props.color}}>
+            <div className={styles.DestinationContainer} style={{'backgroundColor': getColor()}}>
                 <div className={styles.Destination}>
                     <Link href={'/'}>
-                        <a>Hispaania</a>
+                        <a>{item.destination?.name}</a>
                     </Link>
                 </div>
                 <div className={styles.ParentDestination}>
                     <Link href={'/'}>
-                        <a>Euroopa</a>
+                        <a>{item.destination?.parentDestination?.name}</a>
                     </Link>
                 </div>
             </div>
@@ -27,7 +33,7 @@ const FlightOfferCard = (props: Props) => {
                 <a className={styles.Content}>
                     <div className={styles.Background} style={
                         {
-                            backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(https://www.trip.ee/images/medium/altea-2333716_960_720_5lav.jpeg)",
+                            backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(" + item.imageUrl + ")",
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
                             backgroundPosition: "50% 50%"
@@ -35,12 +41,16 @@ const FlightOfferCard = (props: Props) => {
                     }>
                     </div>
                     <div className={styles.Title}>
-                        {props.content.title}
+                        {item.title}
                     </div>
                 </a>
             </Link>
         </div>
     )
+}
+
+FlightOfferCard.defaultProps = {
+    color: 'red'
 }
 
 export default FlightOfferCard

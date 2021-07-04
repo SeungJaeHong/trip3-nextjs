@@ -14,13 +14,13 @@ import FlightOfferCard from "../components/FlightOffer/FlightOfferCard"
 import axios from "axios";
 import Footer from "../components/Footer"
 import ApiClient from "../lib/ApiClient"
-import {Content, ForumRowType} from '../types'
+import {FlightOfferCardType, ForumRowType} from '../types'
 import FrontpageNewsBlock from "../components/News/FrontpageNewsBlock"
 import FlightOffersLatest from "../components/FlightOffer/FlightOffersLatest";
 import TravelmatesLatest from "../components/Travelmate/TravelmatesLatest";
 
 type Props = {
-    flightOffers: Content[],
+    flightOffers: FlightOfferCardType[],
     forumPosts: ForumRowType[],
 }
 
@@ -50,13 +50,13 @@ const Home = (props: Props) => {
                 <div className={styles.CenteredContainer}>
                     <div className={styles.FlightOffers}>
                         <div className={styles.FlightOfferCard}>
-                            <FlightOfferCard content={props.flightOffers[0]} color={'#8b84d7'} />
+                            <FlightOfferCard {...props.flightOffers[0]} color={'purple'} />
                         </div>
                         <div className={styles.FlightOfferCard}>
-                            <FlightOfferCard content={props.flightOffers[1]} color={'#f5b800'} />
+                            <FlightOfferCard {...props.flightOffers[1]} color={'yellow'} />
                         </div>
                         <div className={styles.FlightOfferCard}>
-                            <FlightOfferCard content={props.flightOffers[2]} color={'#FF5050'} />
+                            <FlightOfferCard {...props.flightOffers[2]} color={'red'} />
                         </div>
                     </div>
                     <div className={styles.MoreFlightsLink}>
