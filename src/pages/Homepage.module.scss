@@ -1,22 +1,17 @@
 @import "../styles/variables";
 @import "../styles/mixins";
 
-.Content {
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
 .Header {
     overflow: hidden;
 }
 
 .Navbar {
-    padding-bottom: 4rem;
-    padding-top: 1.5rem;
+    padding-bottom: $spacer * 16;
+    padding-top: $spacer * 6;
 }
 
 .Search {
-    padding-bottom: 7rem;
+    padding-bottom: $spacer * 28;
     width: 50%;
     margin: 0 auto;
 

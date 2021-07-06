@@ -1,0 +1,11 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.Search {
+    padding: $spacer * 5 0 $spacer * 8 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    align-items: center;
+}

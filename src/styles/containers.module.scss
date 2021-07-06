@@ -1,9 +1,24 @@
+@import "variables";
+@import "mixins";
+
 .container_xl {
-    max-width: 80rem;
+    max-width: 1280px;
     width: 100%;
+    padding: 0 $spacer * 8;
+    margin: 0 auto;
+
+    @include xs() {
+        padding: 0 $spacer * 6;
+    }
 }
 
 .container_lg {
-    max-width: 64rem;
+    max-width: 1024px;
     width: 100%;
+    padding: 0 $spacer * 8;
+    margin: 0 auto;
+
+    @include xs() {
+        padding: 0 $spacer * 6;
+    }
 }

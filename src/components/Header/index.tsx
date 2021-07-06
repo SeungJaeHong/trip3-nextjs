@@ -4,7 +4,7 @@ import containerStyle from "../../styles/containers.module.scss"
 import styles from "./Header.module.scss"
 
 type Props = {
-    title: string
+    title?: string
     children?: JSX.Element | JSX.Element[]
 }
 
@@ -22,12 +22,13 @@ const Header = (props: Props) => {
                 <div className={styles.Navbar}>
                     <Navbar />
                 </div>
-                <div className={styles.Title}>
-                    {props.title}
-                </div>
-                <div className={styles.Content}>
-                    {props.children}
-                </div>
+                {props.title &&
+                    <div className={styles.Title}>
+                        {props.title}
+                    </div>
+                }
+
+                {props.children}
             </div>
         </div>
     )

@@ -5,41 +5,30 @@ import {GetServerSideProps} from "next"
 import Link from 'next/link'
 import Header from "../../../components/Header"
 import Footer from "../../../components/Footer";
+import ForumTabs from "../../../components/Forum/ForumTabs"
+import clsx from "clsx";
+import styles from "./Uldfoorum.module.scss"
+import containerStyle from "../../../styles/containers.module.scss"
+import MainSearchInput from "../../../components/MainSearchInput"
 
 const MainForumIndex = (props: any) => {
-    const posts = props?.content?.data || []
-    const currentPage = props?.content?.current_page || 1
-    const prevPage = currentPage > 1 ? currentPage - 1 : null
-    const nextPage = currentPage + 1
-    const nextPageUrl = props?.content?.next_page_url ? '/foorum/uldfoorum?page=' + nextPage : null
-    const prevPageUrl = props?.content?.prev_page_url ? '/foorum/uldfoorum?page=' + prevPage : null
+    //const posts = props?.content?.data || []
+    //const currentPage = props?.content?.current_page || 1
+    //const prevPage = currentPage > 1 ? currentPage - 1 : null
+    //const nextPage = currentPage + 1
+    //const nextPageUrl = props?.content?.next_page_url ? '/foorum/uldfoorum?page=' + nextPage : null
+    //const prevPageUrl = props?.content?.prev_page_url ? '/foorum/uldfoorum?page=' + prevPage : null
 
     return (
         <Fragment>
-            <Header title={'Foorum'} />
-            <div className="pt-12 max-w-6xl lg:mx-auto bg-gray-50">
-                <div className="grid gap-8">
-                    {posts.map((post: any) => {
-                        return <ForumRow {...post} key={post.id}/>
-                    })}
+            <Header>
+                <div className={styles.Search}>
+                    <MainSearchInput placeholder={'Otsi üldfoorumist...'} />
                 </div>
-                <div className="flex justify-center gap-4 pt-16 pb-12">
-                    {prevPageUrl &&
-                    <Link href={prevPageUrl}>
-                        <a className="px-6 py-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 active:bg-green-600">
-                            Prev
-                        </a>
-                    </Link>
-                    }
-
-                    {nextPageUrl &&
-                    <Link href={nextPageUrl}>
-                        <a className="px-6 py-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 active:bg-green-600">
-                            Next
-                        </a>
-                    </Link>
-                    }
-                </div>
+                <ForumTabs />
+            </Header>
+            <div className={containerStyle.container_xl}>
+                Content
             </div>
             <Footer />
         </Fragment>

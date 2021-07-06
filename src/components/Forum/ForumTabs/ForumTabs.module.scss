@@ -1,0 +1,40 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.ForumTabs {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    .Tab {
+        background: transparent;
+        display: flex;
+        align-items: center;
+        padding: $spacer * 4 $spacer * 6;
+        cursor: pointer;
+
+        .Title {
+            color: $white;
+            font-weight: 500;
+            line-height: 24px;
+            font-size: $font-size-normal;
+        }
+
+        &.Active {
+            background: $white;
+
+            .Title {
+                color: $blue;
+            }
+        }
+
+        &:hover {
+            background: $white;
+
+            .Title {
+                color: $blue;
+            }
+        }
+    }
+}

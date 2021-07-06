@@ -5,13 +5,8 @@
     overflow: hidden;
 }
 
-.Container {
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
 .Navbar {
-    margin: 1.5rem 0 3rem 0;
+    margin: $spacer * 6 0 $spacer * 12 0;
 }
 
 .Title {
@@ -20,5 +15,5 @@
     justify-content: center;
     color: $white;
     font-weight: 600;
-    margin-bottom: 2rem;
+    margin-bottom: $spacer * 8;
 }
