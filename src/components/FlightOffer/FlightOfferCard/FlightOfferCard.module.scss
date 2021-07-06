@@ -18,6 +18,10 @@
                 font-size: 1.5rem;
                 line-height: 2rem;
                 font-weight: 600;
+
+                &:hover {
+                    color: $gray-light;
+                }
             }
         }
 
@@ -27,6 +31,10 @@
                 line-height: 1.2rem;
                 font-weight: 500;
                 opacity: .8;
+
+                &:hover {
+                    color: $gray-light;
+                }
             }
         }
     }
@@ -65,7 +73,7 @@
 
         &:hover {
             .Title {
-                color: $gray-light;
+                color: $gray;
             }
         }
     }

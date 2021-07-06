@@ -9,12 +9,13 @@
 
     .LinkTitle {
         color: $white;
+        font-weight: 500;
         cursor: pointer;
     }
 
     &:hover {
         .LinkTitle {
-            opacity: .8;
+            color: $gray;
         }
     }
 
