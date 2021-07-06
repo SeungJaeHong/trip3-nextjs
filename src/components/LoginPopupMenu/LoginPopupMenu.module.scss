@@ -1,0 +1,68 @@
+@import "../../styles/variables";
+
+.LoginPopupMenu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: $spacer * 3;
+    cursor: pointer;
+
+    .LinkTitle {
+        color: $white;
+        cursor: pointer;
+    }
+
+    &:hover {
+        .LinkTitle {
+            opacity: .8;
+        }
+    }
+
+    .PopUpMenu {
+        width: 180px;
+        position: absolute;
+        right: 0;
+        top: 48px;
+        display: none;
+
+        .ArrowWrapper {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: $spacer * 6;
+
+            .Arrow {
+                width: 0;
+                height: 0;
+                border-left: 6px solid transparent;
+                border-right: 6px solid transparent;
+                border-bottom: 6px solid $green;
+            }
+        }
+
+        .Links {
+            border-radius: 3px;
+            background: $green;
+            padding: $spacer * 1.5 0;
+
+            .LinkWrapper {
+                padding: $spacer * 3 $spacer * 6;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+
+                .Link {
+                    color: $white;
+                    font-weight: 500;
+                }
+
+                &:hover {
+                    background: $green-hover;
+                }
+            }
+        }
+
+        &.Open {
+            display: block;
+        }
+    }
+}

@@ -19,9 +19,9 @@ const Header = (props: Props) => {
                  backgroundPosition: "50% 50%"
              }}>
             <div className={clsx([containerStyle.container_xl, styles.Container])}>
-                <h2 className={styles.Navbar}>
+                <div className={styles.Navbar}>
                     <Navbar />
-                </h2>
+                </div>
                 <div className={styles.Title}>
                     {props.title}
                 </div>

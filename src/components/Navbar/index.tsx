@@ -8,6 +8,8 @@ import clsx from "clsx"
 import MenuIcon from "../../icons/MenuIcon"
 import {useState} from "react"
 import CloseIcon from "../../icons/CloseIcon"
+import LoginPopupMenu from "../LoginPopupMenu"
+import React from 'react'
 
 const links = [
     {
@@ -26,10 +28,10 @@ const links = [
         title: 'Uudised',
         route: '/uudised'
     },
-    {
+    /*{
         title: 'Reisipakkumised',
         route: '/'
-    },
+    },*/
 ];
 
 type Props = {
@@ -45,13 +47,10 @@ const Navbar = (props: Props) => {
         //show notification
     }
 
-    //todo: const textColorCss = props.darkMode ? 'text-blue-400' : 'text-white'
     const loginLink = (user: any) => {
         if (!user) {
             return (
-                <Link href={'/login'}>
-                    <a>Logi sisse</a>
-                </Link>
+                <LoginPopupMenu />
             )
         }
 
@@ -62,6 +61,23 @@ const Navbar = (props: Props) => {
         return props.darkMode
             ? <TripLogoDark width={200} heigth={150} />
             : <TripLogo width={200} heigth={150} />
+    }
+
+    const mobileMenuUserLinks = () => {
+        if (user) {
+            return <a onClick={onLogoutClick}>Logi välja</a>
+        } else {
+            return (
+                <React.Fragment>
+                    <Link href={'/login'}>
+                        <a>Logi sisse</a>
+                    </Link>
+                    <Link href={'/registreeri'}>
+                        <a>Registreeri</a>
+                    </Link>
+                </React.Fragment>
+            )
+        }
     }
 
     const showMobileMenu = () => {
@@ -79,8 +95,7 @@ const Navbar = (props: Props) => {
                                 </Link>
                             )
                         })}
-                        {loginLink(user)}
-                        {user && <a onClick={onLogoutClick}>Logi välja</a>}
+                        {mobileMenuUserLinks()}
                     </div>
                 </div>
             )

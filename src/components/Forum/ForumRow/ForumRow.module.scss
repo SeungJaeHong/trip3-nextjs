@@ -9,18 +9,18 @@
     .UserIcon {
         margin-right: $spacer * 6;
         position: relative;
-        height: $spacer * 14;
-        width: $spacer * 14;
+        height: $spacer * 15;
+        width: $spacer * 15;
 
         svg {
-            height: $spacer * 14;
-            width: $spacer * 14;
+            height: $spacer * 15;
+            width: $spacer * 15;
             fill: #d1d4d6;
         }
 
         .CommentCountContainer {
             position: absolute;
-            bottom: -5px;
+            bottom: -3px;
             right: -10px;
             width: $spacer * 7;
             height: $spacer * 7;
@@ -57,7 +57,7 @@
             color: $gray-dark;
             font-size: 1.2rem;
             font-weight: 500;
-            margin-bottom: 3px;
+            margin-bottom: $spacer;
 
             &:hover {
                 color: $gray-dark-hover;
