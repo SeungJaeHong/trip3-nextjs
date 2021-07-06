@@ -10,6 +10,7 @@ import clsx from "clsx";
 import styles from "./Uldfoorum.module.scss"
 import containerStyle from "../../../styles/containers.module.scss"
 import MainSearchInput from "../../../components/MainSearchInput"
+import Select from 'react-select'
 
 const MainForumIndex = (props: any) => {
     //const posts = props?.content?.data || []
@@ -19,13 +20,43 @@ const MainForumIndex = (props: any) => {
     //const nextPageUrl = props?.content?.next_page_url ? '/foorum/uldfoorum?page=' + nextPage : null
     //const prevPageUrl = props?.content?.prev_page_url ? '/foorum/uldfoorum?page=' + prevPage : null
 
+    const options = [
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' },
+        { value: 'value1', label: 'Value1' },
+        { value: 'value2', label: 'Value2' }
+    ]
+
     return (
         <Fragment>
             <Header>
                 <div className={styles.Search}>
                     <MainSearchInput placeholder={'Otsi üldfoorumist...'} />
                 </div>
-                <ForumTabs />
+                <div className={styles.Filters}>
+                    <div className={styles.Select}>
+                        <Select
+                            instanceId={'select1'}
+                            options={options}
+                            className={styles.Select}
+                            classNamePrefix={'ForumFilter'}
+                            isClearable={true}
+                            placeholder={'Sihtkoht'} />
+                    </div>
+                    <div className={styles.Select}>
+                        <Select
+                            instanceId={'select2'}
+                            options={options}
+                            className={styles.Select}
+                            classNamePrefix={'ForumFilter'}
+                            isClearable={true}
+                            placeholder={'Valdkond'} />
+                    </div>
+                </div>
+                <div className={styles.Tabs}>
+                    <ForumTabs />
+                </div>
             </Header>
             <div className={containerStyle.container_xl}>
                 Content

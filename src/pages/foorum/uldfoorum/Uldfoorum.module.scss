@@ -2,10 +2,98 @@
 @import "../../../styles/mixins";
 
 .Search {
-    padding: $spacer * 5 0 $spacer * 8 0;
+    padding: $spacer * 5 0 $spacer * 5 0;
     margin: 0 auto;
     display: flex;
     justify-content: center;
     width: 50%;
     align-items: center;
+
+    @include lg() {
+        width: 75%;
+    }
+
+    @include md() {
+        width: 100%;
+    }
+}
+
+.Filters {
+    display: flex;
+    margin: 0 auto;
+    width: 50%;
+    gap: $spacer * 8;
+
+    @include lg() {
+        width: 75%;
+    }
+
+    @include md() {
+        width: 100%;
+    }
+
+    @include sm() {
+        flex-direction: column;
+        width: 100%;
+        gap: $spacer * 4;
+    }
+
+    .Select {
+        border-color: $white;
+        color: $white;
+        width: 100%;
+
+        :global(.ForumFilter__control) {
+            background: rgba(84, 90, 95, .3);
+            cursor: pointer;
+            border-color: rgba(255, 255, 255, .7);
+            box-shadow: none;
+            height: 50px;
+        }
+
+        :global(.ForumFilter__placeholder) {
+            color: $white;
+            font-family: $font-family-sailec;
+            opacity: .8;
+        }
+
+        :global(.ForumFilter__control--menu-is-open, .ForumFilter__control--is-focused) {
+            border-color: $white;
+            box-shadow: none;
+        }
+
+        :global(.ForumFilter__input) {
+            color: $white;
+        }
+
+        :global(.ForumFilter__single-value) {
+            color: $white;
+        }
+
+        :global(.ForumFilter__option) {
+            color: $gray-darker;
+            cursor: pointer;
+        }
+
+        :global(.ForumFilter__option--is-selected) {
+            color: $gray-dark-hover;
+            background-color: $blue;
+        }
+
+        :global(.ForumFilter__menu-notice) {
+            color: $gray-dark;
+        }
+
+        :global(.ForumFilter__indicator) {
+            color: $white;
+
+            &:hover {
+                color: $gray;
+            }
+        }
+    }
+}
+
+.Tabs {
+    margin-top: $spacer * 15;
 }
