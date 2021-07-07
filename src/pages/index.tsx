@@ -37,7 +37,7 @@ const Home = (props: Props) => {
                      backgroundSize: "cover",
                      backgroundPosition: "50% 50%"
                 }}>
-                <div className={clsx([containerStyle.container_xl, styles.Content])}>
+                <div className={clsx([containerStyle.ContainerXl, styles.Content])}>
                     <div className={styles.Navbar}>
                         <Navbar />
                     </div>
@@ -46,7 +46,7 @@ const Home = (props: Props) => {
                     </div>
                 </div>
             </div>
-            <div className={clsx([containerStyle.container_xl, styles.Content])}>
+            <div className={clsx([containerStyle.ContainerXl, styles.Content])}>
                 <div className={styles.CenteredContainer}>
                     <div className={styles.FlightOffers}>
                         <div className={styles.FlightOfferCard}>
@@ -117,7 +117,7 @@ const Home = (props: Props) => {
             </div>
 
             <div className={styles.BottomContainer}>
-                <div className={clsx([containerStyle.container_xl, styles.Content])}>
+                <div className={clsx([containerStyle.ContainerXl, styles.Content])}>
                     <div className={styles.TravelFlightContainer}>
                         <div className={styles.TravelmateFlightBlock}>
                             <FlightOffersLatest />

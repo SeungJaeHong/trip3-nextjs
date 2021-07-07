@@ -11,8 +11,18 @@ import styles from "./Uldfoorum.module.scss"
 import containerStyle from "../../../styles/containers.module.scss"
 import MainSearchInput from "../../../components/MainSearchInput"
 import Select from 'react-select'
+import {ForumRowType} from "../../../types"
+import ForumList from "../../../components/Forum/ForumList"
 
-const MainForumIndex = (props: any) => {
+type Props = {
+    forumPosts: ForumRowType[],
+    currentPage: number
+}
+
+const MainForumIndex = (props: Props) => {
+
+    console.log(props)
+
     //const posts = props?.content?.data || []
     //const currentPage = props?.content?.current_page || 1
     //const prevPage = currentPage > 1 ? currentPage - 1 : null
@@ -37,7 +47,7 @@ const MainForumIndex = (props: any) => {
                 <div className={styles.Filters}>
                     <div className={styles.Select}>
                         <Select
-                            instanceId={'select1'}
+                            instanceId={'destination'}
                             options={options}
                             className={styles.Select}
                             classNamePrefix={'ForumFilter'}
@@ -46,7 +56,7 @@ const MainForumIndex = (props: any) => {
                     </div>
                     <div className={styles.Select}>
                         <Select
-                            instanceId={'select2'}
+                            instanceId={'topic'}
                             options={options}
                             className={styles.Select}
                             classNamePrefix={'ForumFilter'}
@@ -54,12 +64,24 @@ const MainForumIndex = (props: any) => {
                             placeholder={'Valdkond'} />
                     </div>
                 </div>
-                <div className={styles.Tabs}>
+                <div className={clsx(containerStyle.CenteredContainer, styles.Tabs)}>
                     <ForumTabs />
                 </div>
             </Header>
-            <div className={containerStyle.container_xl}>
-                Content
+            <div className={containerStyle.ContainerXl}>
+                <div className={containerStyle.CenteredContainer}>
+                    <div className={styles.Content}>
+                        <div className={styles.ForumList}>
+                            <ForumList items={props.forumPosts} />
+                            <div>
+                                Paginator
+                            </div>
+                        </div>
+                        <div className={styles.Sidebar}>
+                            Sidebar
+                        </div>
+                    </div>
+                </div>
             </div>
             <Footer />
         </Fragment>
@@ -68,16 +90,27 @@ const MainForumIndex = (props: any) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const page = context.query?.page
+    const destination = context.query?.destination
+    const topic = context.query?.topic
     let url = process.env.API_BASE_URL + '/forum'
     if (page) {
         url += '?page=' + page
     }
 
-    const response = await axios.get(url)
+    const data = {
+        user: null,
+        forumPosts: [],
+        currentPage: page || 1,
+        hasMore: false,
+    }
+
+    const res = await axios.get(url)
+    data.user = res.data.user
+    data.forumPosts = res.data.forumList?.items
+    data.hasMore = res.data.forumList?.hasMore
+
     return {
-        props: {
-            content: response.data,
-        }
+        props: data
     }
 }
 

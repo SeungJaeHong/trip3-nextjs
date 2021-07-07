@@ -1,7 +1,7 @@
 @import "variables";
 @import "mixins";
 
-.container_xl {
+.ContainerXl {
     max-width: 1280px;
     width: 100%;
     padding: 0 $spacer * 8;
@@ -20,5 +20,21 @@
 
     @include xs() {
         padding: 0 $spacer * 6;
+    }
+}
+
+.CenteredContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 83.333333%;
+    max-width: 83.333333%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+
+    @include lg() {
+        width: 100%;
+        max-width: 100%;
     }
 }

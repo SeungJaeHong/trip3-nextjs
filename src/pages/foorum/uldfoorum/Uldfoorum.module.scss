@@ -98,3 +98,23 @@
 .Tabs {
     margin-top: $spacer * 15;
 }
+
+.Content {
+    display: flex;
+    width: 100%;
+    padding: $spacer * 10 0;
+
+    @include md() {
+        flex-direction: column;
+    }
+
+    .ForumList {
+        flex: 2;
+    }
+
+    .Sidebar {
+        flex: 1;
+        padding-left: $spacer * 8;
+    }
+}
+
