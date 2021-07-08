@@ -1,6 +1,5 @@
 import React, {Fragment} from 'react'
 import axios from 'axios'
-import ForumRow from '../../../components/Forum/ForumRow'
 import {GetServerSideProps} from "next"
 import Link from 'next/link'
 import Header from "../../../components/Header"
@@ -13,22 +12,22 @@ import MainSearchInput from "../../../components/MainSearchInput"
 import Select from 'react-select'
 import {ForumRowType} from "../../../types"
 import ForumList from "../../../components/Forum/ForumList"
+import SimplePaginator from "../../../components/Paginator/SimplePaginator";
+import {objectToQueryString} from "../../../helpers";
+import BlockTitle from "../../../components/BlockTitle";
+import Button from "../../../components/Button";
 
 type Props = {
     forumPosts: ForumRowType[],
-    currentPage: number
+    currentPage: number,
+    topic?: number,
+    destination?: number,
+    hasMore: boolean,
 }
 
 const MainForumIndex = (props: Props) => {
 
     console.log(props)
-
-    //const posts = props?.content?.data || []
-    //const currentPage = props?.content?.current_page || 1
-    //const prevPage = currentPage > 1 ? currentPage - 1 : null
-    //const nextPage = currentPage + 1
-    //const nextPageUrl = props?.content?.next_page_url ? '/foorum/uldfoorum?page=' + nextPage : null
-    //const prevPageUrl = props?.content?.prev_page_url ? '/foorum/uldfoorum?page=' + prevPage : null
 
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
@@ -37,6 +36,36 @@ const MainForumIndex = (props: Props) => {
         { value: 'value1', label: 'Value1' },
         { value: 'value2', label: 'Value2' }
     ]
+
+    const getNextPageUrl = () => {
+        if (!props.hasMore) {
+            return undefined
+        }
+
+        const urlParams = {
+            topic: props.topic,
+            destination: props.destination,
+            page: props.currentPage + 1
+        }
+
+        const queryString = objectToQueryString(urlParams)
+        return '/foorum/uldfoorum?' + queryString
+    }
+
+    const getPreviousPageUrl = () => {
+        if (props.currentPage > 1) {
+            const urlParams = {
+                topic: props.topic,
+                destination: props.destination,
+                page: props.currentPage - 1
+            }
+
+            const queryString = objectToQueryString(urlParams)
+            return '/foorum/uldfoorum?' + queryString
+        } else {
+            return undefined
+        }
+    }
 
     return (
         <Fragment>
@@ -73,12 +102,20 @@ const MainForumIndex = (props: Props) => {
                     <div className={styles.Content}>
                         <div className={styles.ForumList}>
                             <ForumList items={props.forumPosts} />
-                            <div>
-                                Paginator
+                            <div className={styles.Paginator}>
+                                <SimplePaginator
+                                    nextPageUrl={getNextPageUrl()}
+                                    previousPageUrl={getPreviousPageUrl()} />
                             </div>
                         </div>
                         <div className={styles.Sidebar}>
-                            Sidebar
+                            <BlockTitle title={'Üldfoorum'} />
+                            <div className={styles.ForumDescription}>
+                                Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi.
+                            </div>
+                            <div className={styles.AddNewTopic}>
+                                <Button title={'Alusta uut teemat'} route={'/'} />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -100,7 +137,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const data = {
         user: null,
         forumPosts: [],
-        currentPage: page || 1,
+        currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
         hasMore: false,
     }
 

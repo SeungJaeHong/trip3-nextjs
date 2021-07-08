@@ -1,0 +1,40 @@
+@import "../../../styles/variables";
+
+.SimplePaginator {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: $spacer * 4;
+
+    .Button {
+        display: flex;
+        background: $gray;
+        border-radius: 3px;
+
+        a, span {
+            line-height: 100%;
+            color: $gray-darker;
+            padding: $spacer * 3 $spacer * 6;
+            background: $gray;
+        }
+
+        &.Disabled {
+            cursor: not-allowed;
+            background: $gray-light;
+
+            span {
+                background: $gray-light;
+                color: $gray;
+            }
+
+        }
+
+        &:hover:not(.Disabled) {
+            background: $gray-darker;
+
+            a {
+                color: $white;
+            }
+        }
+    }
+}

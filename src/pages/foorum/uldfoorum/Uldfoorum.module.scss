@@ -105,6 +105,7 @@
     display: flex;
     width: 100%;
     padding-top: $spacer * 15;
+    padding-bottom: $spacer * 5;
 
     @include md() {
         flex-direction: column;
@@ -112,11 +113,25 @@
 
     .ForumList {
         flex: 3;
+
+        .Paginator {
+            margin: $spacer * 10 0;
+        }
     }
 
     .Sidebar {
         flex: 1;
         padding-left: $spacer * 8;
+
+        .ForumDescription {
+            font-size: $font-size-normal;
+            color: $gray-darker;
+            margin: $spacer * 4 0;
+        }
+
+        .AddNewTopic {
+            padding: $spacer * 4 0;
+        }
     }
 }
 
