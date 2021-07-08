@@ -18,9 +18,12 @@
         line-height: 1.75rem;
         padding-left: $spacer * 15;
         font-weight: 500;
+        font-family: $font-family-sailec;
 
         &::placeholder {
             color: $white;
+            font-weight: 400;
+            font-size: 1.2rem;
         }
 
         @include lg() {
