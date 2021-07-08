@@ -1,21 +1,20 @@
 import React, {Fragment} from 'react'
 import axios from 'axios'
 import {GetServerSideProps} from "next"
-import Link from 'next/link'
 import Header from "../../../components/Header"
-import Footer from "../../../components/Footer";
+import Footer from "../../../components/Footer"
 import ForumTabs from "../../../components/Forum/ForumTabs"
-import clsx from "clsx";
+import clsx from "clsx"
 import styles from "./Uldfoorum.module.scss"
 import containerStyle from "../../../styles/containers.module.scss"
 import MainSearchInput from "../../../components/MainSearchInput"
 import Select from 'react-select'
 import {ForumRowType} from "../../../types"
 import ForumList from "../../../components/Forum/ForumList"
-import SimplePaginator from "../../../components/Paginator/SimplePaginator";
-import {objectToQueryString} from "../../../helpers";
-import BlockTitle from "../../../components/BlockTitle";
-import Button from "../../../components/Button";
+import SimplePaginator from "../../../components/Paginator/SimplePaginator"
+import {objectToQueryString} from "../../../helpers"
+import BlockTitle from "../../../components/BlockTitle"
+import Button from "../../../components/Button"
 
 type Props = {
     forumPosts: ForumRowType[],
@@ -67,6 +66,23 @@ const MainForumIndex = (props: Props) => {
         }
     }
 
+    const showList = () => {
+        if (!props.forumPosts.length) {
+            return <div>Tulemusi ei leitud</div>
+        }
+
+        return (
+            <Fragment>
+                <ForumList items={props.forumPosts} />
+                <div className={styles.Paginator}>
+                    <SimplePaginator
+                        nextPageUrl={getNextPageUrl()}
+                        previousPageUrl={getPreviousPageUrl()} />
+                </div>
+            </Fragment>
+        )
+    }
+
     return (
         <Fragment>
             <Header>
@@ -101,12 +117,7 @@ const MainForumIndex = (props: Props) => {
                 <div className={containerStyle.CenteredContainer}>
                     <div className={styles.Content}>
                         <div className={styles.ForumList}>
-                            <ForumList items={props.forumPosts} />
-                            <div className={styles.Paginator}>
-                                <SimplePaginator
-                                    nextPageUrl={getNextPageUrl()}
-                                    previousPageUrl={getPreviousPageUrl()} />
-                            </div>
+                            {showList()}
                         </div>
                         <div className={styles.Sidebar}>
                             <BlockTitle title={'Üldfoorum'} />
@@ -129,7 +140,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const page = context.query?.page
     const destination = context.query?.destination
     const topic = context.query?.topic
-    let url = process.env.API_BASE_URL + '/forum'
+    let url = process.env.API_BASE_URL + '/forum/general'
     if (page) {
         url += '?page=' + page
     }
