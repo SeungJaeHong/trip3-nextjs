@@ -16,7 +16,7 @@ import styles from "./ForumIndexPage.module.scss"
 import { useRouter } from 'next/router'
 
 type Props = {
-    type: 'general' | 'buysell' | 'foreign' | 'other',
+    type: 'general' | 'buysell' | 'foreign' | 'other' | 'follows',
     title: string,
     description: string,
     searchPlaceholder: string,
@@ -67,26 +67,13 @@ const ForumIndexPage = (props: Props) => {
         }
     }
 
-    const showList = () => {
-        if (!props.forumPosts.length) {
-            return <div>Tulemusi ei leitud</div>
+    const renderSearchAndFilters = () => {
+        if (props.type === 'follows') {
+            return null
         }
 
         return (
             <Fragment>
-                <ForumList items={props.forumPosts} />
-                <div className={styles.Paginator}>
-                    <SimplePaginator
-                        nextPageUrl={getNextPageUrl()}
-                        previousPageUrl={getPreviousPageUrl()} />
-                </div>
-            </Fragment>
-        )
-    }
-
-    return (
-        <Fragment>
-            <Header>
                 <div className={styles.Search}>
                     <MainSearchInput placeholder={props.searchPlaceholder} />
                 </div>
@@ -110,6 +97,33 @@ const ForumIndexPage = (props: Props) => {
                             placeholder={'Valdkond'} />
                     </div>
                 </div>
+            </Fragment>
+        )
+    }
+
+    const showList = () => {
+        if (!props.forumPosts.length) {
+            return <div>Tulemusi ei leitud</div>
+        }
+
+        return (
+            <Fragment>
+                <ForumList items={props.forumPosts} />
+                <div className={styles.Paginator}>
+                    <SimplePaginator
+                        nextPageUrl={getNextPageUrl()}
+                        previousPageUrl={getPreviousPageUrl()} />
+                </div>
+            </Fragment>
+        )
+    }
+
+    return (
+        <Fragment>
+            <Header>
+                <Fragment>
+                    {renderSearchAndFilters()}
+                </Fragment>
                 <div className={clsx(containerStyle.CenteredContainer, styles.Tabs)}>
                     <ForumTabs />
                 </div>

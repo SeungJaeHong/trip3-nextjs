@@ -42,13 +42,15 @@ const ForumTabs = () => {
         <div className={styles.ForumTabs}>
             {tabs.map(tab => {
                 return (
-                    <div className={clsx(styles.Tab, {
-                        [styles.Active]: tab.active
-                    })} key={tab.route} onClick={() => router.push(tab.route)}>
-                        <span className={styles.Title}>
-                            {tab.title}
-                        </span>
-                    </div>
+                    <Link href={tab.route} key={tab.route}>
+                        <a className={clsx(styles.Tab, {
+                            [styles.Active]: tab.active
+                        })}>
+                            <span className={styles.Title}>
+                                {tab.title}
+                            </span>
+                        </a>
+                    </Link>
                 )
             })}
         </div>

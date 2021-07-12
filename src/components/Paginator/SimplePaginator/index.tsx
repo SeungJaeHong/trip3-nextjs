@@ -32,6 +32,10 @@ const SimplePaginator = (props: Props) => {
         }
     }
 
+    if (!props.previousPageUrl && !props.nextPageUrl) {
+        return null
+    }
+
     return (
         <div className={styles.SimplePaginator}>
             <div className={clsx(styles.Button, {
