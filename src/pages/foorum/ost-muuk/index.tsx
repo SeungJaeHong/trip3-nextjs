@@ -1,20 +1,8 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import axios from 'axios'
 import {GetServerSideProps} from "next"
-import Header from "../../../components/Header"
-import Footer from "../../../components/Footer"
-import ForumTabs from "../../../components/Forum/ForumTabs"
-import clsx from "clsx"
-import styles from "../uldfoorum/Uldfoorum.module.scss"
-import containerStyle from "../../../styles/containers.module.scss"
-import MainSearchInput from "../../../components/MainSearchInput"
-import Select from 'react-select'
 import {ForumRowType} from "../../../types"
-import ForumList from "../../../components/Forum/ForumList"
-import SimplePaginator from "../../../components/Paginator/SimplePaginator"
-import {objectToQueryString} from "../../../helpers"
-import BlockTitle from "../../../components/BlockTitle"
-import Button from "../../../components/Button"
+import ForumIndexPage from "../../../components/Forum/ForumIndexPage"
 
 type Props = {
     forumPosts: ForumRowType[],
@@ -25,115 +13,12 @@ type Props = {
 }
 
 const BuySellForumIndex = (props: Props) => {
-
-    console.log(props)
-
-    const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' },
-        { value: 'value1', label: 'Value1' },
-        { value: 'value2', label: 'Value2' }
-    ]
-
-    const getNextPageUrl = () => {
-        if (!props.hasMore) {
-            return undefined
-        }
-
-        const urlParams = {
-            topic: props.topic,
-            destination: props.destination,
-            page: props.currentPage + 1
-        }
-
-        const queryString = objectToQueryString(urlParams)
-        return '/foorum/ost-muuk?' + queryString
-    }
-
-    const getPreviousPageUrl = () => {
-        if (props.currentPage > 1) {
-            const urlParams = {
-                topic: props.topic,
-                destination: props.destination,
-                page: props.currentPage - 1
-            }
-
-            const queryString = objectToQueryString(urlParams)
-            return '/foorum/ost-muuk?' + queryString
-        } else {
-            return undefined
-        }
-    }
-
-    const showList = () => {
-        if (!props.forumPosts.length) {
-            return <div>Tulemusi ei leitud</div>
-        }
-
-        return (
-            <Fragment>
-                <ForumList items={props.forumPosts} />
-                <div className={styles.Paginator}>
-                    <SimplePaginator
-                        nextPageUrl={getNextPageUrl()}
-                        previousPageUrl={getPreviousPageUrl()} />
-                </div>
-            </Fragment>
-        )
-    }
-
-    return (
-        <Fragment>
-            <Header>
-                <div className={styles.Search}>
-                    <MainSearchInput placeholder={'Otsi ost-müük foorumist...'} />
-                </div>
-                <div className={styles.Filters}>
-                    <div className={styles.Select}>
-                        <Select
-                            instanceId={'destination'}
-                            options={options}
-                            className={styles.Select}
-                            classNamePrefix={'ForumFilter'}
-                            isClearable={true}
-                            placeholder={'Sihtkoht'} />
-                    </div>
-                    <div className={styles.Select}>
-                        <Select
-                            instanceId={'topic'}
-                            options={options}
-                            className={styles.Select}
-                            classNamePrefix={'ForumFilter'}
-                            isClearable={true}
-                            placeholder={'Valdkond'} />
-                    </div>
-                </div>
-                <div className={clsx(containerStyle.CenteredContainer, styles.Tabs)}>
-                    <ForumTabs />
-                </div>
-            </Header>
-            <div className={containerStyle.ContainerXl}>
-                <div className={containerStyle.CenteredContainer}>
-                    <div className={styles.Content}>
-                        <div className={styles.ForumList}>
-                            {showList()}
-                        </div>
-                        <div className={styles.Sidebar}>
-                            <BlockTitle title={'Ost-müük'} />
-                            <div className={styles.ForumDescription}>
-                                Lennupiletite, reisivarustuse ja muu reisimiseks vajaliku ost ja müük.
-                            </div>
-                            <div className={styles.AddNewTopic}>
-                                <Button title={'Alusta uut teemat'} route={'/'} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <Footer />
-        </Fragment>
-    )
+    return <ForumIndexPage
+        type={'buysell'}
+        title={'Ost-müük'}
+        description={'Lennupiletite, reisivarustuse ja muu reisimiseks vajaliku ost ja müük.'}
+        searchPlaceholder={'Otsi ost-müük foorumist...'}
+        {...props} />
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
