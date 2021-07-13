@@ -69,7 +69,7 @@ const ForumIndexPage = (props: Props) => {
 
     const renderSearchAndFilters = () => {
         if (props.type === 'follows') {
-            return null
+            return <div className={styles.NoSearch} />
         }
 
         return (

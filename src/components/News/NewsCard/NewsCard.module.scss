@@ -20,7 +20,7 @@
     .Title {
         margin-top: .6rem;
         color: $blue;
-        font-size: 1.2rem;
+        font-size: $font-size-medium;
         font-weight: 500;
 
         .CommentCount {
@@ -37,7 +37,7 @@
 
     .CreatedAt {
         display: flex;
-        font-size: 0.875rem;
+        font-size: $font-size-small;
         color: $gray-darker;
         margin-top: 4px;
     }

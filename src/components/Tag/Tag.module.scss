@@ -12,9 +12,13 @@
 
     .Title {
         color: $gray-darker;
-        font-size: .8rem;
+        font-size: .75rem;
         line-height: 110%;
         white-space: nowrap;
+
+        @include xs() {
+            line-height: 100%;
+        }
     }
 
     &:hover {

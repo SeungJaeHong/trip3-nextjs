@@ -14,10 +14,10 @@
         border: 1px solid rgba(255, 255, 255, .3);
         outline: none;
         color: $white;
-        font-size: 1.25rem;
+        font-size: $font-size-medium;
         line-height: 1.75rem;
         padding-left: $spacer * 15;
-        font-weight: 500;
+        font-weight: 600;
         font-family: $font-family-sailec;
 
         &::placeholder {
