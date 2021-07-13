@@ -7,7 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto $spacer * 12 auto;
+    margin: 0 auto $spacer * 10 auto;
 
     @include sm() {
         margin-bottom: $spacer * 8;
@@ -36,6 +36,10 @@
 
         @include md() {
             padding-right: 0;
+
+            .Paginator {
+                margin: $spacer * 6 0 $spacer * 10 0;
+            }
         }
     }
 
