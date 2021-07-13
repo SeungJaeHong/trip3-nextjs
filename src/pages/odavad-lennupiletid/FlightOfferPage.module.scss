@@ -26,8 +26,13 @@
 
     .FlightOfferList {
         display: flex;
+        flex-direction: column;
         flex: 2;
         padding-right: $spacer * 18;
+
+        .Paginator {
+            margin-top: $spacer * 10;
+        }
 
         @include md() {
             padding-right: 0;

@@ -9,6 +9,9 @@ import FlightOfferFilterTabs from "../../components/FlightOffer/FlightOfferFilte
 import {FlightOfferRowType} from "../../types";
 import FlightOfferList from "../../components/FlightOffer/FlightOfferList";
 import MoreLink from "../../components/MoreLink";
+import SimplePaginator from "../../components/Paginator/SimplePaginator";
+import {objectToQueryString} from "../../helpers";
+import {useRouter} from "next/router"
 
 type Props = {
     flightOffers: FlightOfferRowType[],
@@ -19,6 +22,35 @@ type Props = {
 }
 
 const FlightsIndex = (props: Props) => {
+    const router = useRouter()
+    const getNextPageUrl = () => {
+        if (!props.hasMore) {
+            return undefined
+        }
+
+        const urlParams = {
+            filter: props.filter,
+            page: props.currentPage + 1
+        }
+
+        const queryString = objectToQueryString(urlParams)
+        return router.pathname + '?' + queryString
+    }
+
+    const getPreviousPageUrl = () => {
+        if (props.currentPage > 1) {
+            const urlParams = {
+                filter: props.filter,
+                page: props.currentPage - 1
+            }
+
+            const queryString = objectToQueryString(urlParams)
+            return router.pathname + '?' + queryString
+        } else {
+            return undefined
+        }
+    }
+
     return (
         <Fragment>
             <Header title={'Lennupakkumised'}>
@@ -31,6 +63,11 @@ const FlightsIndex = (props: Props) => {
                     <div className={styles.Content}>
                         <div className={styles.FlightOfferList}>
                             <FlightOfferList items={props.flightOffers} />
+                            <div className={styles.Paginator}>
+                                <SimplePaginator
+                                    nextPageUrl={getNextPageUrl()}
+                                    previousPageUrl={getPreviousPageUrl()} />
+                            </div>
                         </div>
                         <div className={styles.Sidebar}>
                             <div className={styles.DescriptionBlock}>
