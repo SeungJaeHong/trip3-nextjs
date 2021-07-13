@@ -12,6 +12,7 @@ import MoreLink from "../../components/MoreLink";
 import SimplePaginator from "../../components/Paginator/SimplePaginator";
 import {objectToQueryString} from "../../helpers";
 import {useRouter} from "next/router"
+import Button from "../../components/Button";
 
 type Props = {
     flightOffers: FlightOfferRowType[],
@@ -83,6 +84,9 @@ const FlightsIndex = (props: Props) => {
                                 <div className={styles.MoreLink}>
                                     <MoreLink route={'/'} title={'Mis on veahind'} medium={true} />
                                 </div>
+                            </div>
+                            <div className={styles.AddNewButton}>
+                                <Button title={'Lisa uus pakkumine'} route={'/'} />
                             </div>
                         </div>
                     </div>
