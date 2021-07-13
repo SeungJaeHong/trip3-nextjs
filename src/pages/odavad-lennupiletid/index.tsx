@@ -5,7 +5,7 @@ import axios from "axios";
 import Footer from "../../components/Footer";
 import containerStyle from "../../styles/containers.module.scss";
 import styles from "./FlightOfferPage.module.scss"
-import FlightOfferFilterTabs from "../../components/FlightOffer/FlightOfferFilterTags"
+import FlightOfferFilterTags from "../../components/FlightOffer/FlightOfferFilterTags"
 import {FlightOfferRowType} from "../../types";
 import FlightOfferList from "../../components/FlightOffer/FlightOfferList";
 import MoreLink from "../../components/MoreLink";
@@ -56,7 +56,7 @@ const FlightsIndex = (props: Props) => {
         <Fragment>
             <Header title={'Lennupakkumised'}>
                 <div className={styles.FlightOfferTabs}>
-                    <FlightOfferFilterTabs />
+                    <FlightOfferFilterTags />
                 </div>
             </Header>
             <div className={containerStyle.ContainerXl}>
