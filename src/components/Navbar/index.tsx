@@ -14,7 +14,7 @@ import React from 'react'
 const links = [
     {
         title: 'Lennupakkumised',
-        route: '/lennupakkumised'
+        route: '/odavad-lennupiletid'
     },
     {
         title: 'Reisikaaslased',

@@ -1,0 +1,60 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.FlightOfferTabs {
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto $spacer * 12 auto;
+
+    @include sm() {
+        margin-bottom: $spacer * 8;
+    }
+}
+
+.Content {
+    display: flex;
+    width: 100%;
+    margin: $spacer * 15 0;
+
+    @include md() {
+        flex-direction: column;
+        margin: $spacer * 10 0;
+    }
+
+    .FlightOfferList {
+        display: flex;
+        flex: 2;
+        padding-right: $spacer * 18;
+
+        @include md() {
+            padding-right: 0;
+        }
+    }
+
+    .Sidebar {
+        flex: 1;
+
+        .DescriptionBlock {
+            background: $gray-light;
+            padding: $spacer * 6;
+
+            .DescriptionFirstPart {
+                color: $gray-dark-hover;
+                margin-bottom: $spacer * 2;
+                font-weight: 500;
+            }
+
+            .DescriptionSecondPart {
+                color: $gray-dark;
+                padding-bottom: $spacer * 3;
+            }
+
+            .MoreLink {
+                margin-top: $spacer * 2;
+            }
+        }
+    }
+}

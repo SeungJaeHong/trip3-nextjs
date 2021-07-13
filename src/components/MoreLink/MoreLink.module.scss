@@ -12,6 +12,9 @@
     }
 
     .Icon {
+        display: flex;
+        justify-content: center;
+
         svg {
             width: $spacer * 3;
             height: $spacer * 3;
@@ -28,8 +31,22 @@
 
         .Icon {
             svg {
-                width: 1rem;
-                height: 1rem;
+                width: $spacer * 4;
+                height: $spacer * 4;
+            }
+        }
+    }
+
+    &.Medium {
+        .Title {
+            font-size: $font-size-normal;
+            line-height: 1.5rem;
+        }
+
+        .Icon {
+            svg {
+                width: $spacer * 3;
+                height: $spacer * 3;
             }
         }
     }

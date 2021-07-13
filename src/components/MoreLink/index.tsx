@@ -7,12 +7,14 @@ type Props = {
     title: string
     route: string
     large: boolean
+    medium: boolean
 }
 
 const MoreLink = (props: Props) => {
     return (
         <Link href={props.route}>
             <a className={clsx(styles.MoreLink, {
+                [styles.Medium]: props.medium,
                 [styles.Large]: props.large
             })}>
                 <span className={styles.Title}>{props.title}</span>
@@ -25,7 +27,8 @@ const MoreLink = (props: Props) => {
 }
 
 MoreLink.defaultProps = {
-    large: false
+    large: false,
+    medium: false
 }
 
 export default MoreLink

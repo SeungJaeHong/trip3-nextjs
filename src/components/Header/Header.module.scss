@@ -1,4 +1,5 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
 .Header {
     position: relative;
@@ -16,4 +17,8 @@
     color: $white;
     font-weight: 600;
     margin-bottom: $spacer * 8;
+
+    @include sm() {
+        font-size: 2rem;
+    }
 }

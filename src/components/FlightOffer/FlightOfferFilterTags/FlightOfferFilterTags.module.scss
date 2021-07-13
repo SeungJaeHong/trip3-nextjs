@@ -1,0 +1,49 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.FlightOfferFilterTags {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: $spacer * 2;
+    padding-bottom: $spacer * 3;
+
+    @include sm() {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+
+    .Tag {
+        display: flex;
+        padding: 8px 20px;
+        border-radius: 32px;
+        border: 1px solid $white;
+        cursor: pointer;
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+
+        .Title {
+            color: $white;
+            font-weight: 500;
+            font-size: $font-size-normal;
+            white-space: nowrap;
+        }
+
+        &.Selected {
+            background: $green;
+            border: 1px solid $green;
+        }
+
+        &:hover {
+            background: $green;
+            border: 1px solid $green;
+        }
+
+        @include md() {
+            padding: 4px 10px;
+        }
+    }
+}

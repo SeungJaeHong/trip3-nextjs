@@ -9,7 +9,7 @@ import Navbar from "../Navbar";
 const col1 = [
     {
         title: 'Lennupakkumised',
-        route: '/lennupakkumised'
+        route: '/odavad-lennupiletid'
     },
     {
         title: 'Reisikaaslased',
