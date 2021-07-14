@@ -1,0 +1,54 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.TravelmateCard {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: $gray-light;
+    position: relative;
+    padding: $spacer * 6 $spacer * 14;
+
+    .UserName {
+        color: $gray-darker;
+        font-size: $font-size-small;
+        margin-bottom: $spacer;
+
+        &:hover {
+            color: $gray-dark-hover;
+        }
+    }
+
+    .Title {
+        color: $blue;
+        font-size: $font-size-medium;
+        font-weight: 500;
+        margin-bottom: $spacer * 4;
+
+        &:hover {
+            color: $blue-hover;
+        }
+    }
+
+    .Tags {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: $spacer * 2;
+    }
+
+    .UserAvatar {
+        height: 74px;
+        width: 74px;
+        position: absolute;
+        top: 20px;
+        left: -37px;
+
+        @include sm() {
+            height: 60px;
+            width: 60px;
+            top: 20px;
+            left: -30px;
+        }
+    }
+}

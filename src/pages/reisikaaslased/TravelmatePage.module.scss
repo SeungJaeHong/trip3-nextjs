@@ -1,0 +1,77 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.Content {
+    display: flex;
+    width: 100%;
+    margin: $spacer * 15 0;
+
+    @include md() {
+        flex-direction: column;
+        margin: $spacer * 10 0;
+    }
+
+    .TravelmateGridContainer {
+        display: flex;
+        flex-direction: column;
+        flex: 3;
+
+        .TravelmateGrid {
+            padding-right: $spacer * 15;
+            padding-left: $spacer * 8;
+            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: $spacer * 10 $spacer * 15;
+
+            @include lg() {
+                flex: 1;
+                padding-left: $spacer * 10;
+                padding-right: $spacer * 12;
+                grid-template-columns: 1fr;
+                gap: $spacer * 8;
+            }
+
+            @include md() {
+                padding-right: 0;
+                padding-left: $spacer * 6;
+            }
+        }
+
+        .Paginator {
+            margin-top: $spacer * 15;
+
+            @include md() {
+                margin: $spacer * 6 0 $spacer * 10 0;
+            }
+        }
+    }
+
+    .Sidebar {
+        flex: 1;
+
+        .DescriptionBlock {
+            background: $gray-light;
+            padding: $spacer * 6;
+
+            .DescriptionFirstPart {
+                color: $gray-dark-hover;
+                margin-bottom: $spacer * 3;
+                font-weight: 500;
+            }
+
+            .DescriptionSecondPart {
+                color: $gray-dark;
+                padding-bottom: $spacer * 3;
+            }
+
+            .MoreLink {
+                margin-top: $spacer * 2;
+            }
+
+            .AddNewButton {
+                margin-top: $spacer * 6;
+            }
+        }
+    }
+}
