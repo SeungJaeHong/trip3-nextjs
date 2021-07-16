@@ -12,6 +12,8 @@ import {objectToQueryString} from "../../helpers";
 import {useRouter} from "next/router"
 import Button from "../../components/Button"
 import TravelmateCard from "../../components/Travelmate/TravelmateCard";
+import BlockTitle from "../../components/BlockTitle";
+import TravelmateFilter from "../../components/Travelmate/TravelmateFilter";
 
 type Props = {
     travelmates: TravelmateRowType[],
@@ -88,6 +90,13 @@ const TravelmatesIndex = (props: Props) => {
                             <div className={styles.AddNewButton}>
                                 <Button title={'Lisa kuulutus'} route={'/'} />
                             </div>
+                        </div>
+                        <div className={styles.FilterBlock}>
+                            <BlockTitle title={'Filter'} />
+                            <div className={styles.Intro}>
+                                Kui ei leia sobivat kaaslast, siis ehk aitab Sind filter.
+                            </div>
+                            <TravelmateFilter />
                         </div>
                     </div>
                 </div>

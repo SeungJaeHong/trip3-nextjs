@@ -1,0 +1,13 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.TravelmateFilter {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .Field {
+        width: 100%;
+        margin-bottom: $spacer * 2;
+    }
+}

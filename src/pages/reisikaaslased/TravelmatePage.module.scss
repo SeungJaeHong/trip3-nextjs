@@ -49,10 +49,12 @@
 
     .Sidebar {
         flex: 1;
+        flex-direction: column;
 
         .DescriptionBlock {
             background: $gray-light;
             padding: $spacer * 6;
+            margin-bottom: $spacer * 6;
 
             .DescriptionFirstPart {
                 color: $gray-dark-hover;
@@ -71,6 +73,17 @@
 
             .AddNewButton {
                 margin-top: $spacer * 6;
+            }
+        }
+
+        .FilterBlock {
+            background: $gray-light;
+            padding: $spacer * 4 $spacer * 6 $spacer * 6 $spacer * 6;
+
+            .Intro {
+                color: $gray-dark;
+                font-weight: 500;
+                margin: $spacer * 2 0 $spacer * 4 0;
             }
         }
     }
