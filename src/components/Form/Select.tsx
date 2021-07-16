@@ -28,6 +28,7 @@ const FormSelect = (props: Props) => {
                 className={clsx(styles.FormSelect, props.className)}
                 classNamePrefix={'FormSelect'}
                 isClearable={true}
+                noOptionsMessage={() => 'Valikud puuduvad'}
                 placeholder={props.placeholder} />
         </div>
 

@@ -7,5 +7,24 @@
 
     .FormSelect {
         width: 100%;
+
+        :global(.FormSelect__value-container) {
+            padding: 6px 8px;
+        }
+
+        :global(.FormSelect__placeholder) {
+            font-family: $font-family-sailec;
+            font-size: $font-size-normal;
+            opacity: .7;
+        }
+
+        :global(.FormSelect__input) {
+            font-family: $font-family-sailec;
+        }
+
+        :global(.FormSelect__single-value) {
+            font-weight: 500;
+            font-family: $font-family-sailec;
+        }
     }
 }
