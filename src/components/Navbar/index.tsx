@@ -50,7 +50,7 @@ const Navbar = (props: Props) => {
     const loginLink = (user: any) => {
         if (!user) {
             return (
-                <LoginPopupMenu />
+                <LoginPopupMenu darkMode={props.darkMode} />
             )
         }
 

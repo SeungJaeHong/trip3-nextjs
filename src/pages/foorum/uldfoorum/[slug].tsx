@@ -2,13 +2,11 @@ import React, {Fragment} from 'react'
 import axios from 'axios'
 import {GetServerSideProps} from 'next'
 import Head from 'next/head'
-import ForumPost from "../../../components/Forum/ForumPost"
-import ForumComment from "../../../components/Forum/ForumComment"
 import Header from "../../../components/Header"
 import Footer from "../../../components/Footer";
 import clsx from "clsx";
 import containerStyle from "../../../styles/containers.module.scss";
-import styles from "../../../components/Forum/ForumIndexPage/ForumIndexPage.module.scss";
+import styles from "./ForumShowPage.module.scss";
 import BlockTitle from "../../../components/BlockTitle";
 import Button from "../../../components/Button";
 import {Content} from "../../../types"
@@ -22,19 +20,18 @@ type Props = {
 const ForumShow = (props: Props) => {
     return (
         <Fragment>
-            <Header title={props.post.title}>
-            </Header>
+            <Header withBackgroundMap={true} className={styles.Header} />
             <div className={containerStyle.ContainerXl}>
-                <div className={containerStyle.CenteredContainer}>
+                {/*<div className={containerStyle.CenteredContainer}>*/}
                     <div className={styles.Content}>
-                        <div className={styles.ForumList}>
-                            Content
+                        <div className={styles.ForumPost}>
+                            Post
                         </div>
                         <div className={styles.Sidebar}>
                             Sidebar
                         </div>
                     </div>
-                </div>
+                {/*</div>*/}
             </div>
             <Footer />
         </Fragment>

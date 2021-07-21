@@ -66,4 +66,16 @@
             display: block;
         }
     }
+
+    &.Dark {
+        .LinkTitle {
+            color: $gray-darker;
+        }
+
+        &:hover {
+            .LinkTitle {
+                color: $gray-dark-hover;
+            }
+        }
+    }
 }

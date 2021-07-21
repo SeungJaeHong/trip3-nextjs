@@ -4,6 +4,11 @@
 .Header {
     position: relative;
     display: flex;
+
+    &.Light {
+        background-color: $gray-light;
+        overflow-y: hidden;
+    }
 }
 
 .Navbar {

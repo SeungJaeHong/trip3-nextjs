@@ -3,7 +3,11 @@ import { useRouter } from 'next/router'
 import clsx from "clsx"
 import styles from "./LoginPopupMenu.module.scss"
 
-const LoginPopupMenu = () => {
+type Props = {
+    darkMode: boolean
+}
+
+const LoginPopupMenu = (props: Props) => {
     const router = useRouter()
     const [open, setOpen] = useState(false)
 
@@ -13,7 +17,9 @@ const LoginPopupMenu = () => {
     }
 
     return (
-        <div className={styles.LoginPopupMenu} onMouseOver={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+        <div className={clsx(styles.LoginPopupMenu, {
+            [styles.Dark]: props.darkMode
+        })} onMouseOver={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
             <span className={styles.LinkTitle}>
                 Minu Trip.ee
             </span>
