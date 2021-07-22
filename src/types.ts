@@ -54,11 +54,11 @@ export type Content = {
     slug: string
     url?: string
     status?: boolean
-    created_at: string
-    updated_at: string
-    start_at?: string
-    end_at?: string
-    duration?: string
+    createdAt: string
+    updatedAt: string
+    //start_at?: string
+    //end_at?: string
+    //duration?: string
     price?: number
     user: User;
     comments?: Comment[] | null;
