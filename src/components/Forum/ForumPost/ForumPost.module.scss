@@ -7,10 +7,11 @@
     width: 100%;
     border: 1px solid $gray;
     padding: $spacer * 10;
+    padding-top: $spacer * 8;
 
     .Title {
         font-size: $font-size-xlarge;
-        font-weight: 500;
+        font-weight: 600;
         color: $gray-dark-hover;
         padding-bottom: $spacer * 6;
     }
@@ -20,7 +21,7 @@
         width: 100%;
         font-size: $font-size-small;
         gap: $spacer * 3;
-        padding-bottom: $spacer * 5;
+        //padding-bottom: $spacer * 3;
         position: relative;
         padding-left: $spacer * 3;
 
@@ -46,7 +47,8 @@
     }
 
     .Body {
-        color: $gray-darker;
-        font-size: $font-size-normal;
+        color: $gray-dark;
+        font-family: $font-family-sailec;
+        font-size: $font-size-medium;
     }
 }

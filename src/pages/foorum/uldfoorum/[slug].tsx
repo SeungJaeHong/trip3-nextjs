@@ -10,7 +10,7 @@ import styles from "./ForumShowPage.module.scss";
 import BlockTitle from "../../../components/BlockTitle";
 import Button from "../../../components/Button";
 import {Content} from "../../../types"
-import ForumPost from "../../../components/Forum/ForumPost";
+import ForumPost from "../../../components/Forum/ForumPost"
 
 type Props = {
     post: Content,

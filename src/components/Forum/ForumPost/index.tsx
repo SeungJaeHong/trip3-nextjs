@@ -1,9 +1,16 @@
 import Link from 'next/link'
 import styles from './ForumPost.module.scss'
 import {Content} from "../../../types"
-import UserAvatar from "../../User/UserAvatar";
+import UserAvatar from "../../User/UserAvatar"
+import ReactMarkdown from 'react-markdown'
+import {render} from 'react-dom'
+
 
 const ForumPost = (item: Content) => {
+
+    const text = '# Hello, MDX I 3 Markdown and JSX'
+
+
     return (
         <div className={styles.ForumPost}>
             <div className={styles.Title}>
@@ -21,7 +28,7 @@ const ForumPost = (item: Content) => {
                 </div>
             </div>
             <div className={styles.Body}>
-                {item.body}
+                <ReactMarkdown>{item.body}</ReactMarkdown>
             </div>
         </div>
     )

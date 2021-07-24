@@ -17,7 +17,7 @@ const ForumRow = (item: ForumRowType) => {
                 </div>
             </div>
             <div className={styles.Content}>
-                <Link href={'/'}>
+                <Link href={item.url}>
                     <a>
                         <div className={styles.Title}>
                             {item.title}

@@ -60,31 +60,33 @@ export type Content = {
     //end_at?: string
     //duration?: string
     price?: number
-    user: User;
-    comments?: Comment[] | null;
-    images?: Image[] | null;
+    user: User
+    comments?: Comment[] | null
+    images?: Image[] | null
     destinations?: Destination[] | null
 }
 
 export type Image = {
-    id: number;
-    filename: string;
-    created_at: string | null;
-    updated_at: string | null;
-    content?: Content[] | null;
-    user?: User | null;
+    id: number
+    filename: string
+    created_at: string | null
+    updated_at: string | null
+    content?: Content[] | null
+    user?: User | null
 }
 
 export type ForumRowType = {
-    id: number;
-    title: string;
-    updatedAt: string;
-    isUnread: boolean;
-    viewsCount: number;
-    commentsCount: number;
-    user: User;
-    destinations?: Destination[] | null;
-    topics?: Topic[] | null;
+    id: number
+    title: string
+    type: string
+    url: string
+    updatedAt: string
+    isUnread: boolean
+    viewsCount: number
+    commentsCount: number
+    user: User
+    destinations?: Destination[] | null
+    topics?: Topic[] | null
 }
 
 export type ForumFullType = {
