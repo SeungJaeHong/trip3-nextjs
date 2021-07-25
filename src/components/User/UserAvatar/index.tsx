@@ -7,7 +7,7 @@ import {useState, useRef, useEffect} from "react"
 
 const UserAvatar = (user: User) => {
     if (!user.avatar) {
-        return <UserIcon/>
+        return <UserIcon fill={'#d1d4d6'} />
     }
 
     const borderWidth = 4

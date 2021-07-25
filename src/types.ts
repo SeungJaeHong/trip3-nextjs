@@ -32,18 +32,21 @@ export type Destination = {
 }
 
 export type Topic = {
-    id: number;
-    name: string;
+    id: number
+    name: string
 }
 
 export type Comment = {
     id: number
-    content: Content
+    contentId: number
+    //content: Content
     user: User
     body: string
     status: boolean
-    created_at: string
-    updated_at: string
+    likes: number
+    dislikes: number
+    createdAt: string
+    updatedAt: string
 }
 
 export type Content = {
@@ -61,9 +64,9 @@ export type Content = {
     //duration?: string
     price?: number
     user: User
-    comments?: Comment[] | null
-    images?: Image[] | null
-    destinations?: Destination[] | null
+    comments?: Comment[]
+    images?: Image[]
+    destinations?: Destination[]
 }
 
 export type Image = {

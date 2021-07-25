@@ -1,0 +1,11 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+.ForumPostComments {
+    display: flex;
+    flex-direction: column;
+
+    .CommentRow {
+        margin-bottom: $spacer * 6;
+    }
+}

@@ -7,10 +7,11 @@ import Footer from "../../../components/Footer";
 import clsx from "clsx";
 import containerStyle from "../../../styles/containers.module.scss";
 import styles from "./ForumShowPage.module.scss";
-import BlockTitle from "../../../components/BlockTitle";
 import Button from "../../../components/Button";
 import {Content} from "../../../types"
 import ForumPost from "../../../components/Forum/ForumPost"
+import ForumPostComments from "../../../components/Forum/ForumPostComments";
+import MoreLink from "../../../components/MoreLink";
 
 type Props = {
     post: Content,
@@ -25,8 +26,16 @@ const ForumShow = (props: Props) => {
             <div className={containerStyle.ContainerXl}>
                 {/*<div className={containerStyle.CenteredContainer}>*/}
                     <div className={styles.Content}>
-                        <div className={styles.ForumPost}>
-                            <ForumPost {...props.post} />
+                        <div className={styles.ForumContent}>
+                            <div className={styles.ForumPost}>
+                                <ForumPost {...props.post} />
+                            </div>
+                            <div className={styles.LatestCommentLink}>
+                                <MoreLink route={'/'} title={'Mine uusima kommentaari juurde'} />
+                            </div>
+                            <div>
+                                <ForumPostComments comments={props.post.comments} />
+                            </div>
                         </div>
                         <div className={styles.Sidebar}>
                             Sidebar

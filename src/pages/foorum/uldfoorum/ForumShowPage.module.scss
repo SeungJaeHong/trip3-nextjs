@@ -16,11 +16,22 @@
         flex-direction: column;
     }
 
-    .ForumPost {
+    .ForumContent {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
         flex: 3;
-        background: $white;
 
+        .ForumPost {
+            background: $white;
+            margin-bottom: $spacer * 2;
+        }
 
+        .LatestCommentLink {
+            margin-bottom: $spacer * 8;
+            display: flex;
+            justify-content: flex-end;
+        }
     }
 
     .Sidebar {

@@ -1,16 +1,12 @@
 import Link from 'next/link'
-import styles from './ForumPost.module.scss'
-import {Content} from "../../../types"
+import styles from './ForumComment.module.scss'
+import {Comment} from "../../../types"
+import ReactMarkdown from "react-markdown"
 import UserAvatar from "../../User/UserAvatar"
-import ReactMarkdown from 'react-markdown'
 
-const ForumPost = (item: Content) => {
-
+const ForumComment = (item: Comment) => {
     return (
-        <div className={styles.ForumPost}>
-            <div className={styles.Title}>
-                {item.title}
-            </div>
+        <div className={styles.ForumComment}>
             <div className={styles.MetaData}>
                 <Link href={'/'}>
                     <a className={styles.User}>{item.user.name}</a>
@@ -29,4 +25,4 @@ const ForumPost = (item: Content) => {
     )
 }
 
-export default ForumPost
+export default ForumComment

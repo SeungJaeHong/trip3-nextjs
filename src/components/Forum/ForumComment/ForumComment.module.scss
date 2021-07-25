@@ -1,15 +1,14 @@
 @import "../../../styles/variables";
 @import "../../../styles/mixins";
 
-.ForumPost {
+.ForumComment {
     display: flex;
     flex-direction: column;
     width: 100%;
-    border: 1px solid $gray;
+    border: 2px solid $gray;
     padding: $spacer * 10;
     padding-left: $spacer * 12;
     padding-top: $spacer * 8;
-    box-shadow: 0 1px 10px 0 #d1d4d6;
 
     .Title {
         font-size: $font-size-xlarge;
@@ -39,16 +38,16 @@
 
         .UserAvatar {
             position: absolute;
-            width: 64px;
-            height: 64px;
-            left: -80px;
-            top: -20px;
+            width: 48px;
+            height: 48px;
+            left: -72px;
+            top: -10px;
         }
     }
 
     .Body {
         color: $gray-dark;
         font-family: $font-family-sailec;
-        font-size: $font-size-medium;
+        font-size: $font-size-normal;
     }
 }
