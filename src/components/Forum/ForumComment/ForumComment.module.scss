@@ -6,9 +6,10 @@
     flex-direction: column;
     width: 100%;
     border: 2px solid $gray;
-    padding: $spacer * 10;
+    padding: $spacer * 8;
     padding-left: $spacer * 12;
-    padding-top: $spacer * 8;
+    padding-bottom: $spacer * 6;
+    padding-top: $spacer * 6;
 
     .Title {
         font-size: $font-size-xlarge;
@@ -23,6 +24,7 @@
         font-size: $font-size-small;
         gap: $spacer * 3;
         position: relative;
+        margin-bottom: $spacer;
 
         .User {
             color: $blue;
@@ -33,7 +35,7 @@
         }
 
         .CreatedDate {
-            color: $gray-darker;
+            color: hsl(204, 6, 65);
         }
 
         .UserAvatar {
@@ -49,5 +51,66 @@
         color: $gray-dark;
         font-family: $font-family-sailec;
         font-size: $font-size-normal;
+    }
+
+    .Actions {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+        .Buttons {
+            font-size: $font-size-small;
+            color: $gray;
+            display: flex;
+            gap: $spacer * 2;
+            align-items: flex-end;
+
+            .ActionButton {
+                font-weight: 400;
+                color: hsl(204, 6, 65);
+                cursor: pointer;
+
+                &:hover {
+                    color: $gray-darker;
+                }
+            }
+        }
+
+        .Thumbs {
+            margin-top: $spacer;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+
+            .Thumb {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+
+                svg {
+                    height: 20px;
+                    width: 20px;
+                    fill: hsl(204, 6, 65);
+                }
+
+                .ThumbsCount {
+                    font-size: $font-size-xsmall;
+                    color: $gray-darker;
+                    margin-left: $spacer;
+                }
+
+                &:hover {
+                    svg {
+                        fill: $green;
+                    }
+
+                    &.ThumbDown {
+                        svg {
+                            fill: $red;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
