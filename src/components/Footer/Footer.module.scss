@@ -12,6 +12,10 @@
         gap: 4rem;
         padding-bottom: $spacer * 20;
         margin: 0 auto;
+
+        @include sm() {
+            text-align: center;
+        }
     }
 
     .Col {

@@ -50,5 +50,18 @@
         color: $gray-dark;
         font-family: $font-family-sailec;
         font-size: $font-size-medium;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+
+    @include sm() {
+        padding: $spacer * 8;
+
+        .MetaData .UserAvatar {
+            width: 46px;
+            height: 46px;
+            left: -55px;
+            top: -15px;
+        }
     }
 }

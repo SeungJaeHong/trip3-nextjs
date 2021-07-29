@@ -33,7 +33,7 @@ const ForumShow = (props: Props) => {
                             <div className={styles.LatestCommentLink}>
                                 <MoreLink route={'/'} title={'Mine uusima kommentaari juurde'} />
                             </div>
-                            <div>
+                            <div className={styles.CommentsContainer}>
                                 <ForumPostComments comments={props.post.comments} />
                             </div>
                         </div>
@@ -50,9 +50,13 @@ const ForumShow = (props: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const slug = context.query.slug
-    const url = process.env.API_BASE_URL + '/forum/general/' + slug
-    const response = await axios.get(url)
+    const page = context.query?.page
+    let url = process.env.API_BASE_URL + '/forum/general/' + slug
+    if (page) {
+        url += '?page=' + page
+    }
 
+    const response = await axios.get(url)
     const data = {
         user: response.data.user,
         post: response.data.post,
