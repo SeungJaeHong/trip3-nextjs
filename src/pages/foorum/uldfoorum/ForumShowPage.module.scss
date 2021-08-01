@@ -10,7 +10,7 @@
     position: relative;
     width: 100%;
     margin-top: $spacer * -35;
-    padding-bottom: $spacer * 5;
+    padding-bottom: $spacer * 8;
 
     @include md() {
         flex-direction: column;
@@ -28,7 +28,7 @@
         }
 
         .LatestCommentLink {
-            margin-bottom: $spacer * 8;
+            margin-bottom: $spacer * 2;
             display: flex;
             justify-content: flex-end;
         }

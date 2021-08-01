@@ -16,7 +16,7 @@ import MoreLink from "../../../components/MoreLink";
 type Props = {
     post: Content,
     currentPage: number,
-    hasMore: boolean
+    lastPage: number
 }
 
 const ForumShow = (props: Props) => {
@@ -30,12 +30,14 @@ const ForumShow = (props: Props) => {
                             <div className={styles.ForumPost}>
                                 <ForumPost {...props.post} />
                             </div>
-                            <div className={styles.LatestCommentLink}>
+                            {props.post.comments?.length ? <div className={styles.LatestCommentLink}>
                                 <MoreLink route={'/'} title={'Mine uusima kommentaari juurde'} />
-                            </div>
-                            <div className={styles.CommentsContainer}>
-                                <ForumPostComments comments={props.post.comments} />
-                            </div>
+                            </div> : null}
+                            <ForumPostComments
+                                post={props.post}
+                                comments={props.post.comments}
+                                currentPage={props.currentPage}
+                                lastPage={props.lastPage} />
                         </div>
                         <div className={styles.Sidebar}>
                             Sidebar
@@ -60,7 +62,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const data = {
         user: response.data.user,
         post: response.data.post,
-        //hasMoreComments: response.data.hasMoreComments,
+        currentPage: response.data.currentPage,
+        lastPage: response.data.lastPage
     }
 
     return {

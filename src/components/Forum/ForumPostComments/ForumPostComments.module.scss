@@ -5,6 +5,14 @@
     display: flex;
     flex-direction: column;
 
+    .Paginator {
+        margin-bottom: $spacer * 8;
+
+        &.Bottom {
+            margin: $spacer * 4 0;
+        }
+    }
+
     .CommentRow {
         margin-bottom: $spacer * 6;
     }
