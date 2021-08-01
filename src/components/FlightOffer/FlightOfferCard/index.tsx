@@ -29,7 +29,7 @@ const FlightOfferCard = (item: FlightOfferCardType) => {
                 </div>
             </div>
 
-            <Link href={'/'}>
+            <Link href={'/odavad-lennupiletid/' + item.slug}>
                 <a className={styles.Content}>
                     <div className={styles.Background} style={
                         {

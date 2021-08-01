@@ -1,11 +1,12 @@
 import styles from "./Tag.module.scss"
 import Link from "next/link"
 import {MouseEventHandler} from "react"
-import clsx from "clsx";
+import clsx from "clsx"
 
 type Props = {
     title: string
     type?: string
+    large?: boolean
     route?: string
     onClick?: MouseEventHandler<HTMLDivElement> | undefined
 }
@@ -15,7 +16,8 @@ const Tag = (props: Props) => {
         return (
             <Link href={props.route}>
                 <a className={clsx(styles.Tag, {
-                    [styles.Destination]: props.type === 'destination'
+                    [styles.Destination]: props.type === 'destination',
+                    [styles.Large]: props.large
                 })}>
                     <span className={styles.Title}>{props.title}</span>
                 </a>
@@ -24,12 +26,17 @@ const Tag = (props: Props) => {
     } else {
         return (
             <div className={clsx(styles.Tag, {
-                [styles.Destination]: props.type === 'destination'
+                [styles.Destination]: props.type === 'destination',
+                [styles.Large]: props.large
             })} onClick={props.onClick ?? undefined}>
                 <span className={styles.Title}>{props.title}</span>
             </div>
         )
     }
+}
+
+Tag.defaultProps = {
+    large: false
 }
 
 export default Tag

@@ -44,4 +44,10 @@
             }
         }
     }
+
+    &.Large {
+        .Title {
+            font-size: $font-size-normal;
+        }
+    }
 }

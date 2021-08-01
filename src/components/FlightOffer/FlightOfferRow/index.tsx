@@ -11,7 +11,7 @@ const FlightOfferRow = (item: FlightOfferRowType) => {
                 <TicketsIcon />
             </div>
             <div className={styles.Content}>
-                <Link href={'/'}>
+                <Link href={'/odavad-lennupiletid/' + item.slug}>
                     <a className={styles.Title}>{item.title}</a>
                 </Link>
                 <div className={styles.Meta}>

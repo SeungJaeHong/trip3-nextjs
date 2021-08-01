@@ -71,3 +71,68 @@
         }
     }
 }
+
+.HeaderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .HeaderTitle {
+        font-size: $font-size-xxlarge;
+        line-height: 2.75rem;
+        color: $white;
+        font-weight: 600;
+        padding-top: $spacer * 20;
+        padding-bottom: $spacer * 5;
+        max-width: 720px;
+
+        @include sm() {
+            padding-top: $spacer * 10;
+        }
+    }
+
+    .HeaderDate {
+        font-size: $font-size-small;
+        font-weight: 500;
+        color: $white;
+        padding-bottom: $spacer * 5;
+    }
+
+    .Tags {
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: $spacer * 8;
+    }
+}
+
+.BodyContainer {
+    display: flex;
+    width: 100%;
+    padding: $spacer * 8 0;
+
+    @include md() {
+        flex-direction: column;
+    }
+
+    .Body {
+        flex: 3;
+        color: $gray-dark;
+        font-family: $font-family-sailec;
+        font-size: $font-size-medium;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        -ms-word-break: break-all;
+        word-break: break-all;
+    }
+
+    .Sidebar {
+        flex: 1;
+        padding-left: $spacer * 10;
+
+        @include md() {
+            padding-left: 0;
+        }
+    }
+}
+

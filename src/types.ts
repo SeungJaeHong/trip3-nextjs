@@ -58,7 +58,7 @@ export type Content = {
     url?: string
     status?: boolean
     createdAt: string
-    updatedAt: string
+    updatedAt?: string
     //start_at?: string
     //end_at?: string
     //duration?: string
@@ -79,6 +79,18 @@ export type Image = {
     updated_at: string | null
     content?: Content[] | null
     user?: User | null
+}
+
+export type FlightContent = {
+    id: number
+    title: string
+    body: string
+    slug: string
+    createdAt: string
+    backgroundImageUrl: string
+    user: User
+    destinations?: Destination[]
+    topics?: Topic[]
 }
 
 export type ForumRowType = {
