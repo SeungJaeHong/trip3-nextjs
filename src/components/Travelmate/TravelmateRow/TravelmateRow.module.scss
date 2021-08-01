@@ -64,6 +64,13 @@
                     }
                 }
             }
+
+            .Tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: $spacer * 2;
+                margin-bottom: $spacer;
+            }
         }
     }
 }

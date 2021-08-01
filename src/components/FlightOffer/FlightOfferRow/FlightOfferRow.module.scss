@@ -46,10 +46,17 @@
             display: flex;
             flex-wrap: wrap;
 
-            .MetaItem {
+            .CreatedDate {
                 margin-right: $spacer * 4;
                 font-size: $font-size-small;
                 color: $gray-darker;
+                margin-bottom: $spacer;
+            }
+
+            .Tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: $spacer * 2;
                 margin-bottom: $spacer;
             }
         }

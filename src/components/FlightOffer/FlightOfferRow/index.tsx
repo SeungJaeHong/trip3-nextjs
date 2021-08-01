@@ -15,14 +15,12 @@ const FlightOfferRow = (item: FlightOfferRowType) => {
                     <a className={styles.Title}>{item.title}</a>
                 </Link>
                 <div className={styles.Meta}>
-                    <span className={styles.MetaItem}>{item.createdAt}</span>
-                    {item.destinations?.map((destination: Destination) => {
-                        return (
-                            <div className={styles.MetaItem} key={destination.id}>
-                                <Tag title={destination.name} type={'destination'} route={'/'} />
-                            </div>
-                        )
-                    })}
+                    <span className={styles.CreatedDate}>{item.createdAt}</span>
+                    <div className={styles.Tags}>
+                        {item.destinations?.map((destination: Destination) => {
+                            return <Tag title={destination.name} type={'destination'} route={'/'} key={destination.id} />
+                        })}
+                    </div>
                 </div>
             </div>
         </div>

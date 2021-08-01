@@ -26,20 +26,14 @@ const TravelmateRow = (item: TravelmateRowType) => {
                     <Link href={'/'}>
                         <a className={clsx(styles.MetaItem, styles.Creator)}>{item.user.name}</a>
                     </Link>
-                    {item.destinations?.map((destination: Destination) => {
-                        return (
-                            <div className={styles.MetaItem} key={destination.id}>
-                                <Tag title={destination.name} type={'destination'} route={'/'} />
-                            </div>
-                        )
-                    })}
-                    {item.topics?.map((topic: Topic) => {
-                        return (
-                            <div className={styles.MetaItem} key={topic.id}>
-                                <Tag title={topic.name} route={'/'} />
-                            </div>
-                        )
-                    })}
+                    <div className={styles.Tags}>
+                        {item.destinations?.map((destination: Destination) => {
+                            return <Tag title={destination.name} type={'destination'} route={'/'} key={destination.id} />
+                        })}
+                        {item.topics?.map((topic: Topic) => {
+                            return <Tag title={topic.name} route={'/'} key={topic.id} />
+                        })}
+                    </div>
                 </div>
             </div>
         </div>
