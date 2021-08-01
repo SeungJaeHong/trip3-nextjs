@@ -9,7 +9,8 @@
     padding: $spacer * 10;
     padding-left: $spacer * 12;
     padding-top: $spacer * 8;
-    box-shadow: 0 1px 10px 0 #d1d4d6;
+    padding-bottom: $spacer * 8;
+    box-shadow: 0 1px 10px 0 $gray;
 
     .Title {
         font-size: $font-size-xlarge;
@@ -54,6 +55,81 @@
         word-wrap: break-word;
         -ms-word-break: break-all;
         word-break: break-all;
+    }
+
+    .Actions {
+        display: flex;
+        width: 100%;
+        justify-content: flex-start;
+        margin-bottom: $spacer * 3;
+
+        .Buttons {
+            font-size: $font-size-small;
+            color: $gray;
+            display: flex;
+            gap: $spacer * 2;
+            align-items: flex-end;
+
+            .ActionButton {
+                font-weight: 400;
+                color: hsl(204, 6, 65);
+                cursor: pointer;
+                opacity: .7;
+
+                &:hover {
+                    color: $gray-darker;
+                }
+            }
+        }
+    }
+
+    .BottomData {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+        .Tags {
+            display: flex;
+            gap: $spacer * 2;
+            flex-wrap: wrap;
+        }
+
+        .Thumbs {
+            margin-top: $spacer;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+
+            .Thumb {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+
+                svg {
+                    height: 20px;
+                    width: 20px;
+                    fill: hsl(204, 6, 65);
+                }
+
+                .ThumbsCount {
+                    font-size: $font-size-xsmall;
+                    color: $gray-darker;
+                    margin-left: $spacer;
+                }
+
+                &:hover {
+                    svg {
+                        fill: $green;
+                    }
+
+                    &.ThumbDown {
+                        svg {
+                            fill: $red;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @include sm() {

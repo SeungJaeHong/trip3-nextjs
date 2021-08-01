@@ -62,11 +62,14 @@ export type Content = {
     //start_at?: string
     //end_at?: string
     //duration?: string
+    likes?: number
+    dislikes?: number
     price?: number
     user: User
     comments?: Comment[]
     images?: Image[]
     destinations?: Destination[]
+    topics?: Topic[]
 }
 
 export type Image = {
