@@ -26,10 +26,10 @@ const FlightOfferShow = (props: Props) => {
                     </div>
                     <div className={styles.Tags}>
                         {props.flight.destinations?.map((destination: Destination) => {
-                            return <Tag title={destination.name} type={'destination'} route={'/'} large={true} key={destination.id} />
+                            return <Tag title={destination.name} type={'destination'} large={true} key={destination.id} />
                         })}
                         {props.flight.topics?.map((topic: Topic) => {
-                            return <Tag title={topic.name} route={'/'} large={true} key={topic.id} />
+                            return <Tag title={topic.name} large={true} key={topic.id} />
                         })}
                     </div>
                 </div>
