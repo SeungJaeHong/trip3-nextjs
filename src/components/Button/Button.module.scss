@@ -15,13 +15,26 @@
     transition: all .2s;
     cursor: pointer;
     height: 3rem;
-
-    &:hover {
-        background: $green-hover;
-    }
+    box-shadow: 0 0 6px 0 $gray;
 
     .Title {
         color: $white;
         font-weight: 500;
+    }
+
+    &.Light {
+        background: $white;
+
+        .Title {
+            color: $blue;
+        }
+    }
+
+    &:hover {
+        background: $green-hover;
+
+        &.Light {
+            background: $gray-light;
+        }
     }
 }

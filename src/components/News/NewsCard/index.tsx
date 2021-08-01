@@ -10,8 +10,8 @@ const NewsCard = (item: NewsCardType) => {
                 <a>
                     <div className={styles.Background}>
                         <Image
-                            src={"https://trip.ee/images/medium/Tai-rand-12_vq7f.jpeg"}
-                            alt="Picture of the author"
+                            src={item.imageUrl}
+                            alt=""
                             layout="fill"
                             objectFit="cover"
                         />

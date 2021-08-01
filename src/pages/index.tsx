@@ -85,15 +85,15 @@ const Home = (props: Props) => {
                             <div className={styles.SidebarContent}>
                                 <div className={styles.ForumLinks}>
                                     <div className={styles.ForumLink}>
-                                        <MoreLink title={'Üldfoorum'} route={'/'} large={true} />
+                                        <MoreLink title={'Üldfoorum'} route={'/foorum/uldfoorum'} large={true} />
                                         <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
                                     </div>
                                     <div className={styles.ForumLink}>
-                                        <MoreLink title={'Ost-müük'} route={'/'} large={true} />
+                                        <MoreLink title={'Ost-müük'} route={'/foorum/ost-muuk'} large={true} />
                                         <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
                                     </div>
                                     <div className={styles.ForumLink}>
-                                        <MoreLink title={'Elu välismaal'} route={'/'} large={true} />
+                                        <MoreLink title={'Elu välismaal'} route={'/foorum/elu-valismaal'} large={true} />
                                         <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
                                     </div>
                                 </div>

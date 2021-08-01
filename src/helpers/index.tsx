@@ -9,19 +9,24 @@ export const objectToQueryString = (obj: any) => {
     return str.join('&')
 }
 
-export const getForumUrlByTypeAndSlug = (type: string, slug: string) => {
-    let url = '/foorum/uldfoorum/' + slug
+export const getForumUrlByType = (type: string) => {
+    let url = '/foorum/uldfoorum'
     switch(type) {
         case 'buysell':
-            url = '/foorum/ost-muuk/' + slug
+            url = '/foorum/ost-muuk'
             break;
         case 'expat':
-            url = '/foorum/elu-valismaal/' + slug
+            url = '/foorum/elu-valismaal'
             break;
         case 'misc':
-            url = '/foorum/vaba-teema/' + slug
+            url = '/foorum/vaba-teema'
             break;
     }
 
     return url
+}
+
+export const getForumUrlByTypeAndSlug = (type: string, slug: string) => {
+    let url = getForumUrlByType(type)
+    return url + '/' + slug
 }

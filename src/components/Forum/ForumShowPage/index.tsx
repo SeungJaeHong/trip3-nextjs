@@ -7,6 +7,8 @@ import ForumPost from "../ForumPost"
 import MoreLink from "../../MoreLink"
 import ForumPostComments from "../ForumPostComments"
 import Footer from "../../Footer"
+import Button from "../../Button"
+import {getForumUrlByType} from "../../../helpers"
 
 type Props = {
     post: Content,
@@ -15,6 +17,8 @@ type Props = {
 }
 
 const ForumShowPage = (props: Props) => {
+    console.log(props)
+
     return (
         <Fragment>
             <Header withBackgroundMap={true} className={styles.Header} />
@@ -35,7 +39,29 @@ const ForumShowPage = (props: Props) => {
                             lastPage={props.lastPage} />
                     </div>
                     <div className={styles.Sidebar}>
-                        Sidebar
+                        <div className={styles.SidebarButton}>
+                            <Button title={'Otsi foorumist'} light={true} route={getForumUrlByType(props.post.type)} />
+                        </div>
+                        <div className={styles.SidebarButton}>
+                            <Button title={'Alusta uut teemat'} light={true} route={'/'} />
+                        </div>
+                        {/*<div className={styles.ForumLinks}>
+                            <div className={styles.ForumLink}>
+                                <MoreLink title={'Üldfoorum'} route={'/'} large={true} />
+                            </div>
+                            <div className={styles.ForumLink}>
+                                <MoreLink title={'Ost-müük'} route={'/'} large={true} />
+                            </div>
+                            <div className={styles.ForumLink}>
+                                <MoreLink title={'Elu välismaal'} route={'/'} large={true} />
+                            </div>
+                            <div className={styles.ForumLink}>
+                                <MoreLink title={'Vaba teema'} route={'/'} large={true} />
+                            </div>
+                            <div className={styles.ForumLink}>
+                                <MoreLink title={'Minu jälgimised'} route={'/'} large={true} />
+                            </div>
+                        </div>*/}
                     </div>
                 </div>
                 {/*</div>*/}

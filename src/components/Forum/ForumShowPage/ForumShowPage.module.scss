@@ -36,16 +36,25 @@
 
     .Sidebar {
         flex: 1;
-        padding-left: $spacer * 8;
+        flex-direction: column;
+        padding-left: $spacer * 12;
 
-        .ForumDescription {
-            font-size: $font-size-normal;
-            color: $gray-darker;
-            margin: $spacer * 4 0;
+        .SidebarButton {
+            margin: $spacer * 3 0;
         }
 
-        .AddNewTopic {
-            padding: $spacer * 4 0;
+        .ForumLinks {
+            display: flex;
+            flex-direction: column;
+            margin-top: $spacer * 8;
+
+            .ForumLink {
+                margin-bottom: $spacer * 2;
+            }
+        }
+
+        @include sm() {
+            padding-left: 0;
         }
     }
 }

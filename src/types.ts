@@ -105,11 +105,12 @@ export type ForumFullType = {
 }
 
 export type NewsCardType = {
-    id: number;
-    title: string;
-    slug: string;
-    createdAt: string;
-    commentsCount: number;
+    id: number
+    title: string
+    slug: string
+    imageUrl: string
+    createdAt: string
+    commentsCount: number
 }
 
 export type ShortNewsListItemType = {
