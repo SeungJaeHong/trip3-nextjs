@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import axios from 'axios'
 import {GetServerSideProps} from 'next'
 import {Content} from "../../../types"
@@ -10,14 +10,14 @@ type Props = {
     lastPage: number
 }
 
-const ForumShow = (props: Props) => {
+const FreeTopicShow = (props: Props) => {
     return <ForumShowPage {...props} />
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const slug = context.query.slug
     const page = context.query?.page
-    let url = process.env.API_BASE_URL + '/forum/general/' + slug
+    let url = process.env.API_BASE_URL + '/forum/misc/' + slug
     if (page) {
         url += '?page=' + page
     }
@@ -35,4 +35,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-export default ForumShow
+export default FreeTopicShow
