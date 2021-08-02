@@ -35,7 +35,7 @@
         }
 
         .CreatedDate {
-            color: hsl(204, 6, 63);
+            color: hsl(204, 6%, 65%);
         }
 
         .UserAvatar {
@@ -72,7 +72,7 @@
 
             .ActionButton {
                 font-weight: 400;
-                color: hsl(204, 6, 65);
+                color: hsl(204, 6%, 65%);
                 cursor: pointer;
                 opacity: .7;
 
@@ -108,7 +108,7 @@
                 svg {
                     height: 20px;
                     width: 20px;
-                    fill: hsl(204, 6, 65);
+                    fill: hsl(204, 6%, 65%);
                 }
 
                 .ThumbsCount {
