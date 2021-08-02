@@ -8,6 +8,7 @@ import containerStyle from "../../styles/containers.module.scss"
 import Tag from "../../components/Tag";
 import ReactMarkdown from "react-markdown";
 import clsx from "clsx";
+import Button from "../../components/Button"
 
 type Props = {
     flight: FlightContent
@@ -39,8 +40,10 @@ const FlightOfferShow = (props: Props) => {
                     <div className={styles.Body}>
                         <ReactMarkdown>{props.flight.body}</ReactMarkdown>
                     </div>
-                    <div className={styles.Sidebar}>
-                        Sidebar
+                    <div className={styles.SidebarShow}>
+                        <div className={styles.AddNewOffer}>
+                            <Button title={'Lisa uus pakkumine'} route={'/'} />
+                        </div>
                     </div>
                 </div>
             </div>

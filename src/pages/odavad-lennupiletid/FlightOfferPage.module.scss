@@ -125,14 +125,19 @@
         word-wrap: break-word;
         -ms-word-break: break-all;
         word-break: break-all;
+        padding-right: $spacer * 4;
     }
 
-    .Sidebar {
+    .SidebarShow {
         flex: 1;
-        padding-left: $spacer * 10;
+        padding-left: $spacer * 12;
 
         @include md() {
             padding-left: 0;
+        }
+
+        .AddNewOffer {
+            margin-top: $spacer * 5;
         }
     }
 }
