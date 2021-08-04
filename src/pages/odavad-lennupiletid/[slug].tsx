@@ -5,8 +5,7 @@ import {Destination, FlightContent, Topic} from "../../types"
 import Header from "../../components/Header"
 import styles from "./FlightOfferPage.module.scss"
 import containerStyle from "../../styles/containers.module.scss"
-import Tag from "../../components/Tag";
-import ReactMarkdown from "react-markdown";
+import Tag from "../../components/Tag"
 import clsx from "clsx";
 import Button from "../../components/Button"
 
@@ -37,9 +36,7 @@ const FlightOfferShow = (props: Props) => {
             </Header>
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.BodyContainer}>
-                    <div className={styles.Body}>
-                        <ReactMarkdown>{props.flight.body}</ReactMarkdown>
-                    </div>
+                    <div className={styles.Body} dangerouslySetInnerHTML={{ __html: props.flight.body }} />
                     <div className={styles.SidebarShow}>
                         <div className={styles.AddNewOffer}>
                             <Button title={'Lisa uus pakkumine'} route={'/'} />
