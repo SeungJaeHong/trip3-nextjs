@@ -134,6 +134,44 @@
                 color: $blue-hover;
             }
         }
+
+        :global(.FlightAvailableTimes) {
+            display: flex;
+            margin: $spacer * 10 0;
+
+            @include sm() {
+                flex-direction: column;
+                gap: $spacer * 6;
+            }
+
+            :global(.FlightAvailableTimesCol) {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+
+                :global(.FlightAvailableTimesHeader) {
+                    display: flex;
+                    font-size: $font-size-medium;
+                    font-weight: 600;
+                    color: $gray-dark-hover;
+                    margin-bottom: $spacer * 5;
+                }
+
+                :global(.FlightAvailableTimesRow) {
+                    display: flex;
+                    padding: $spacer 0;
+
+                    p {
+                        padding: 0;
+                        margin: 0;
+
+                        a {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .SidebarShow {
