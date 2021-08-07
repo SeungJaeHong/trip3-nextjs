@@ -146,30 +146,43 @@
         flex-direction: column;
     }
 
-    .Body {
+    .BodyWithComments {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
         flex: 3;
-        color: $gray-dark;
-        font-family: $font-family-sailec;
-        font-size: $font-size-medium;
-        overflow-wrap: break-word;
-        word-wrap: break-word;
-        padding-right: $spacer * 2;
 
-        @include md() {
-            font-size: $font-size-normal;
-        }
+        .Body {
+            color: $gray-dark;
+            font-family: $font-family-sailec;
+            font-size: $font-size-medium;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            padding-right: $spacer * 2;
 
-        a {
-            color: $blue;
-            word-break: break-all;
+            @include md() {
+                font-size: $font-size-normal;
+            }
 
-            &:hover {
-                color: $blue-hover;
+            a {
+                color: $blue;
+                word-break: break-all;
+
+                &:hover {
+                    color: $blue-hover;
+                }
+            }
+
+            img {
+                width: 100%;
             }
         }
 
-        img {
-            width: 100%;
+        .Comments {
+            display: flex;
+            flex-direction: column;
+            margin-top: $spacer * 5;
+            gap: $spacer * 3;
         }
     }
 

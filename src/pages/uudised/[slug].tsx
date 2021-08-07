@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react'
 import axios from 'axios'
 import {GetServerSideProps} from 'next'
-import {Destination, NewsContent, Topic} from "../../types"
+import {Comment, Destination, NewsContent, Topic} from "../../types"
 import Header from "../../components/Header"
 import styles from "./NewsPage.module.scss"
 import containerStyle from "../../styles/containers.module.scss"
@@ -10,6 +10,7 @@ import clsx from "clsx"
 import Button from "../../components/Button"
 import UserAvatar from "../../components/User/UserAvatar";
 import Footer from "../../components/Footer";
+import ForumComment from "../../components/Forum/ForumComment";
 
 type Props = {
     news: NewsContent
@@ -43,7 +44,14 @@ const NewsShow = (props: Props) => {
             </Header>
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.BodyContainer}>
-                    <div className={styles.Body} dangerouslySetInnerHTML={{ __html: props.news.body }} />
+                    <div className={styles.BodyWithComments}>
+                        <div className={styles.Body} dangerouslySetInnerHTML={{ __html: props.news.body }} />
+                        <div className={styles.Comments}>
+                            {props.news.comments?.map((comment: Comment) => {
+                                return <ForumComment {...comment} key={comment.id} />
+                            })}
+                        </div>
+                    </div>
                     <div className={styles.SidebarShow}>
                         <div className={styles.AddNewNews}>
                             <Button title={'Lisa uus uudis'} route={'/'} />

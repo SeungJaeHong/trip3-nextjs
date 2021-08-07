@@ -62,6 +62,10 @@
             word-break: break-all;
         }
 
+        img {
+            width: 100%;
+        }
+
         @include sm() {
             font-size: $font-size-normal;
         }
