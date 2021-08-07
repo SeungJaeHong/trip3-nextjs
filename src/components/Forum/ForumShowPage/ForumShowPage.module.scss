@@ -16,6 +16,10 @@
         flex-direction: column;
     }
 
+    @include sm() {
+        margin-top: $spacer * -40;
+    }
+
     .ForumContent {
         display: flex;
         width: 100%;

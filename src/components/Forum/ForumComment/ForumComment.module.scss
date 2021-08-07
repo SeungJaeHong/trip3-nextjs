@@ -7,7 +7,7 @@
     width: 100%;
     border: 2px solid $gray;
     padding: $spacer * 8;
-    padding-left: $spacer * 12;
+    padding-left: $spacer * 8;
     padding-bottom: $spacer * 6;
     padding-top: $spacer * 6;
 
@@ -42,8 +42,8 @@
             position: absolute;
             width: 48px;
             height: 48px;
-            left: -72px;
-            top: -10px;
+            left: -57px;
+            top: -13px;
         }
     }
 
@@ -125,7 +125,7 @@
         .MetaData .UserAvatar {
             width: 40px;
             height: 40px;
-            left: -50px;
+            left: -52px;
             top: -10px;
         }
     }

@@ -7,7 +7,7 @@
     width: 100%;
     border: 1px solid $gray;
     padding: $spacer * 10;
-    padding-left: $spacer * 12;
+    padding-left: $spacer * 10;
     padding-top: $spacer * 8;
     padding-bottom: $spacer * 8;
     box-shadow: 0 1px 10px 0 $gray;
@@ -17,6 +17,10 @@
         font-weight: 600;
         color: $gray-dark-hover;
         padding-bottom: $spacer * 6;
+
+        @include sm() {
+            font-size: $font-size-large;
+        }
     }
 
     .MetaData {
@@ -40,10 +44,10 @@
 
         .UserAvatar {
             position: absolute;
-            width: 64px;
-            height: 64px;
-            left: -80px;
-            top: -20px;
+            width: 56px;
+            height: 56px;
+            left: -68px;
+            top: -19px;
         }
     }
 
@@ -55,6 +59,10 @@
         word-wrap: break-word;
         -ms-word-break: break-all;
         word-break: break-all;
+
+        @include sm() {
+            font-size: $font-size-normal;
+        }
     }
 
     .Actions {
