@@ -7,16 +7,16 @@
 
     .Icon {
         display: flex;
-        margin-right: .8rem;
+        margin-right: $spacer;
 
         svg {
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 40px;
+            height: 40px;
             fill: $blue;
 
             @include sm() {
-                width: 2rem;
-                height: 2rem;
+                width: 32px;
+                height: 32px;
             }
         }
     }
@@ -31,7 +31,7 @@
             font-size: $font-size-medium;
             font-weight: 500;
             display: block;
-            margin-bottom: .3rem;
+            margin-bottom: $spacer * 0.5;
 
             @include sm() {
                 font-size: $font-size-normal;
@@ -47,17 +47,17 @@
             flex-wrap: wrap;
 
             .CreatedDate {
-                margin-right: $spacer * 4;
+                margin-right: $spacer * 2;
                 font-size: $font-size-small;
                 color: $gray-darker;
-                margin-bottom: $spacer;
+                margin-bottom: $spacer * 0.5;
             }
 
             .Tags {
                 display: flex;
                 flex-wrap: wrap;
-                gap: $spacer * 2;
-                margin-bottom: $spacer;
+                gap: $spacer;
+                margin-bottom: $spacer * 0.5;
             }
         }
     }

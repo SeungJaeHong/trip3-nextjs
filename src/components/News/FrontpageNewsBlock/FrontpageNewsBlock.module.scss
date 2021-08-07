@@ -7,10 +7,10 @@
     width: 100%;
 
     .NewsGrid {
-        margin: $spacer * 6 0;
+        margin: $spacer * 3 0;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        gap: $spacer * 8;
+        gap: $spacer * 4;
         flex-wrap: wrap;
 
         @include md() {

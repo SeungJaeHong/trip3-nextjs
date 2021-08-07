@@ -6,12 +6,12 @@
     width: 100%;
     position: relative;
     justify-content: space-between;
-    height: $spacer * 12;
+    height: 48px;
     align-items: center;
 
     .Logo {
-        margin-top: $spacer * 12;
-        margin-left: $spacer * 4;
+        margin-top: $spacer * 6;
+        margin-left: $spacer * 2;
 
         @include sm() {
             margin-left: 0;
@@ -31,7 +31,7 @@
         }
 
         a {
-            padding: $spacer * 3;
+            padding: $spacer * 1.5;
             color: $white;
             font-weight: 500;
             font-size: $font-size-normal;
@@ -43,8 +43,8 @@
         }
 
         svg {
-            height: $spacer * 5;
-            width: $spacer * 5;
+            height: 20px;
+            width: 20px;
         }
 
         &.LinksMobile {
@@ -54,7 +54,7 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                margin-top: $spacer * 8;
+                margin-top: $spacer * 4;
 
                 a {
                     font-size: 1.25rem;
@@ -71,8 +71,8 @@
         }
 
         svg {
-            width: $spacer * 8;
-            height: $spacer * 8;
+            width: 32px;
+            height: 32px;
             fill: $white;
             cursor: pointer;
         }
@@ -94,8 +94,8 @@
             justify-content: flex-end;
 
             svg {
-                width: $spacer * 8;
-                height: $spacer * 8;
+                width: 32px;
+                height: 32px;
                 fill: $white;
                 cursor: pointer;
             }

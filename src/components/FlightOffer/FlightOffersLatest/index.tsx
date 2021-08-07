@@ -24,7 +24,7 @@ const FlightOffersLatest = () => {
                 <FlightOfferList items={flights} />
             </div>
             <div className={styles.ViewMore}>
-                <MoreLink route={'/'} title={'Kõik pakkumised'} />
+                <MoreLink route={'/odavad-lennupiletid'} title={'Kõik pakkumised'} />
             </div>
         </div>
     )

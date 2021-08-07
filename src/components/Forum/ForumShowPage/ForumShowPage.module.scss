@@ -2,22 +2,22 @@
 @import "../../../styles/mixins";
 
 .Header {
-    padding-bottom: 200px;
+    padding-bottom: $spacer * 25;
 }
 
 .Content {
     display: flex;
     position: relative;
     width: 100%;
-    margin-top: $spacer * -35;
-    padding-bottom: $spacer * 8;
+    margin-top: $spacer * -18;
+    padding-bottom: $spacer * 4;
 
     @include md() {
         flex-direction: column;
     }
 
     @include sm() {
-        margin-top: $spacer * -40;
+        margin-top: $spacer * -20;
     }
 
     .ForumContent {
@@ -28,11 +28,11 @@
 
         .ForumPost {
             background: $white;
-            margin-bottom: $spacer * 2;
+            margin-bottom: $spacer;
         }
 
         .LatestCommentLink {
-            margin-bottom: $spacer * 2;
+            margin-bottom: $spacer;
             display: flex;
             justify-content: flex-end;
         }
@@ -41,19 +41,19 @@
     .Sidebar {
         flex: 1;
         flex-direction: column;
-        padding-left: $spacer * 12;
+        padding-left: $spacer * 6;
 
         .SidebarButton {
-            margin: $spacer * 3 0;
+            margin: $spacer * 1.5 0;
         }
 
         .ForumLinks {
             display: flex;
             flex-direction: column;
-            margin-top: $spacer * 8;
+            margin-top: $spacer * 4;
 
             .ForumLink {
-                margin-bottom: $spacer * 2;
+                margin-bottom: $spacer;
             }
         }
 

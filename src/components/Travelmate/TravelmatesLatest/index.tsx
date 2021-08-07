@@ -24,7 +24,7 @@ const TravelmatesLatest = () => {
                 <TravelmateList items={travelmates} />
             </div>
             <div className={styles.ViewMore}>
-                <MoreLink route={'/'} title={'Kõik reisikaaslased'} />
+                <MoreLink route={'/reisikaaslased'} title={'Kõik reisikaaslased'} />
             </div>
         </div>
     )

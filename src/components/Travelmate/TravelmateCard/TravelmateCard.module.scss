@@ -7,7 +7,7 @@
     width: 100%;
     background: $gray-light;
     position: relative;
-    padding: $spacer * 6 $spacer * 14;
+    padding: $spacer * 3 $spacer * 7;
 
     .UserName {
         color: $gray-darker;
@@ -23,7 +23,7 @@
         color: $blue;
         font-size: $font-size-medium;
         font-weight: 500;
-        margin-bottom: $spacer * 4;
+        margin-bottom: $spacer * 2;
 
         &:hover {
             color: $blue-hover;
@@ -34,7 +34,7 @@
         display: flex;
         width: 100%;
         flex-wrap: wrap;
-        gap: $spacer * 2;
+        gap: $spacer;
     }
 
     .UserAvatar {

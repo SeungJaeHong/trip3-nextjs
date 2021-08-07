@@ -6,12 +6,12 @@
 }
 
 .Navbar {
-    padding-bottom: $spacer * 16;
-    padding-top: $spacer * 6;
+    padding-bottom: $spacer * 8;
+    padding-top: $spacer * 3;
 }
 
 .Search {
-    padding-bottom: $spacer * 28;
+    padding-bottom: $spacer * 14;
     width: 50%;
     margin: 0 auto;
 
@@ -21,6 +21,7 @@
 
     @include sm() {
         width: 100%;
+        padding-bottom: $spacer * 12;
     }
 }
 
@@ -42,7 +43,7 @@
 
 .FlightOffers {
     display: flex;
-    margin: -2.6rem auto 1rem auto;
+    margin: $spacer * -5.5 auto $spacer * 2 auto;
     width: 100%;
 
     @include md() {
@@ -59,7 +60,7 @@
     display: flex;
     width: 100%;
     justify-content: flex-end;
-    margin-bottom: $spacer * 4;
+    margin-bottom: $spacer * 2;
 
     @include sm() {
         justify-content: center;
@@ -74,7 +75,7 @@
     @include sm() {
         flex-direction: column;
         padding: 0;
-        margin-bottom: 1rem;
+        margin-bottom: $spacer * 2;
     }
 
     .TripDescription {
@@ -82,7 +83,7 @@
         flex-direction: column;
         flex: 3;
         align-items: flex-start;
-        margin-right: 2rem;
+        margin-right: $spacer * 4;
 
         @include sm() {
             margin-right: 0;
@@ -96,8 +97,8 @@
             font-size: $font-size-normal;
             line-height: 1.7rem;
             color: $gray-dark;
-            margin-bottom: $spacer * 2;
-            padding-right: $spacer * 8;
+            margin-bottom: $spacer;
+            padding-right: $spacer * 4;
             font-weight: 500;
 
             @include sm() {
@@ -109,7 +110,7 @@
 
     .JoinButton {
         flex: 1;
-        margin-top: 1.2rem;
+        margin-top: $spacer * 2.5;
     }
 }
 
@@ -119,7 +120,7 @@
     width: 100%;
 
     .ForumBlockTitle {
-        margin: 1.5rem 0 .5rem 0;
+        margin: $spacer * 3 0 $spacer 0;
     }
 
     .ForumBlock {
@@ -136,7 +137,7 @@
             flex-direction: column;
             width: 100%;
             justify-content: flex-start;
-            margin-top: 1rem;
+            margin-top: $spacer * 2;
         }
 
         .SidebarContent {
@@ -144,10 +145,10 @@
             width: 100%;
             flex: 1;
             justify-content: center;
-            padding: 1rem 0 0 2.5rem;
+            padding: $spacer * 2 0 0 $spacer * 5;
 
             @include md() {
-                padding: 1rem 0 0 0;
+                padding: $spacer * 2 0 0 0;
                 justify-content: flex-start;
             }
 
@@ -156,13 +157,13 @@
                 flex-direction: column;
 
                 .ForumLink {
-                    margin-bottom: $spacer * 8;
+                    margin-bottom: $spacer * 4;
 
                     .ForumDescription {
                         display: flex;
                         font-size: $font-size-normal;
                         color: $gray-dark;
-                        margin-top: $spacer * 4;
+                        margin-top: $spacer * 2;
                     }
                 }
             }
@@ -183,14 +184,14 @@
 .NewsContainer {
     display: flex;
     width: 100%;
-    margin: 2rem 0;
+    margin: $spacer * 4 0;
 }
 
 .ImageGalleryContainer {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-top: $spacer * 6;
+    margin-top: $spacer * 3;
 }
 
 .BottomContainer {
@@ -200,7 +201,7 @@
         display: flex;
         flex-wrap: wrap;
         width: 100%;
-        padding: $spacer * 8 0;
+        padding: $spacer * 4 0;
 
         .TravelmateFlightBlock {
             display: flex;
@@ -212,7 +213,7 @@
             }
 
             &.Travelmates {
-                padding-left: 2.5rem;
+                padding-left: $spacer * 5;
 
                 @include lg() {
                     padding-left: 0;

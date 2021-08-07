@@ -6,12 +6,12 @@
     width: 100%;
 
     .Dot {
-        width: $spacer * 2;
-        height: $spacer * 2;
-        border-radius: $spacer;
+        width: 8px;
+        height: 8px;
+        border-radius: $spacer * 0.5;
         background: $green;
-        margin-right: $spacer * 3;
-        margin-top: $spacer * 2;
+        margin-right: $spacer * 1.5;
+        margin-top: $spacer;
     }
 
     .ShortNewsContent {

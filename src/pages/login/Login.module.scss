@@ -10,8 +10,8 @@
 }
 
 .Navbar {
-    padding-bottom: 4rem;
-    padding-top: 1.5rem;
+    padding-bottom: $spacer * 8;
+    padding-top: $spacer * 3;
 }
 
 .Form {
@@ -19,5 +19,5 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 4rem 0;
+    padding: $spacer * 8 0;
 }

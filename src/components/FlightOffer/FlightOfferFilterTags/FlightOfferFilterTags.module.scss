@@ -8,8 +8,8 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: $spacer * 2;
-    padding-bottom: $spacer * 3;
+    gap: $spacer;
+    padding-bottom: $spacer * 1.5;
 
     @include sm() {
         justify-content: flex-start;
@@ -19,7 +19,7 @@
 
     .Tag {
         display: flex;
-        padding: 6px 20px;
+        padding: $spacer * 0.8 $spacer * 2.5;
         border-radius: 32px;
         border: 1px solid $white;
         cursor: pointer;
@@ -43,7 +43,7 @@
         }
 
         @include md() {
-            padding: 4px 10px;
+            padding: $spacer * 0.5 $spacer * 1.5;
         }
     }
 }

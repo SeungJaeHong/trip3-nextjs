@@ -6,17 +6,17 @@
     flex-direction: column;
     width: 100%;
     border: 1px solid $gray;
-    padding: $spacer * 10;
-    padding-left: $spacer * 10;
-    padding-top: $spacer * 8;
-    padding-bottom: $spacer * 8;
+    padding: $spacer * 5;
+    padding-left: $spacer * 5;
+    padding-top: $spacer * 4;
+    padding-bottom: $spacer * 4;
     box-shadow: 0 1px 10px 0 $gray;
 
     .Title {
         font-size: $font-size-xlarge;
         font-weight: 600;
         color: $gray-dark-hover;
-        padding-bottom: $spacer * 6;
+        padding-bottom: $spacer * 3;
 
         @include sm() {
             font-size: $font-size-large;
@@ -27,7 +27,7 @@
         display: flex;
         width: 100%;
         font-size: $font-size-small;
-        gap: $spacer * 3;
+        gap: $spacer * 1.5;
         position: relative;
 
         .User {
@@ -69,13 +69,13 @@
         display: flex;
         width: 100%;
         justify-content: flex-start;
-        margin-bottom: $spacer * 3;
+        margin-bottom: $spacer * 1.5;
 
         .Buttons {
             font-size: $font-size-small;
             color: $gray;
             display: flex;
-            gap: $spacer * 2;
+            gap: $spacer;
             align-items: flex-end;
 
             .ActionButton {
@@ -98,15 +98,15 @@
 
         .Tags {
             display: flex;
-            gap: $spacer * 2;
+            gap: $spacer;
             flex-wrap: wrap;
         }
 
         .Thumbs {
-            margin-top: $spacer;
+            margin-top: $spacer * 0.5;
             display: flex;
             justify-content: flex-end;
-            gap: 12px;
+            gap: $spacer * 1.5;
 
             .Thumb {
                 display: flex;
@@ -141,7 +141,7 @@
     }
 
     @include sm() {
-        padding: $spacer * 8;
+        padding: $spacer * 4;
 
         .MetaData .UserAvatar {
             width: 46px;

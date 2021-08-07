@@ -4,11 +4,11 @@
     display: flex;
     width: 100%;
     justify-content: center;
-    gap: $spacer * 3;
+    gap: $spacer * 1.5;
 
     .PageNumber {
         display: flex;
-        padding: $spacer $spacer * 3;
+        padding: $spacer * 0.5 $spacer * 1.5;
         border-bottom: 2px solid $gray-darker;
         color: $gray-darker;
         cursor: pointer;
@@ -32,7 +32,7 @@
         font-size: $font-size-medium;
         font-weight: 500;
         display: flex;
-        padding: 0 $spacer * 4;
+        padding: 0 $spacer * 2;
 
         &.ArrowDisabled {
             color: $gray;
@@ -47,7 +47,7 @@
     .Dots {
         color: $gray-darker;
         font-weight: 500;
-        padding: $spacer;
+        padding: $spacer * 0.5;
         letter-spacing: 1px;
     }
 }

@@ -4,7 +4,7 @@
     display: flex;
     width: 100%;
     justify-content: center;
-    gap: $spacer * 4;
+    gap: $spacer * 2;
 
     .Button {
         display: flex;
@@ -14,7 +14,7 @@
         a, span {
             line-height: 100%;
             color: $gray-darker;
-            padding: $spacer * 3 $spacer * 6;
+            padding: $spacer * 1.5 $spacer * 3;
             background: $gray;
         }
 

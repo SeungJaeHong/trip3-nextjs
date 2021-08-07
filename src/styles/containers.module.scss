@@ -4,22 +4,22 @@
 .ContainerXl {
     max-width: 1280px;
     width: 100%;
-    padding: 0 $spacer * 8;
+    padding: 0 $spacer * 4;
     margin: 0 auto;
 
     @include sm() {
-        padding: 0 $spacer * 6;
+        padding: 0 $spacer * 3;
     }
 }
 
 .containerLg {
     max-width: 1024px;
     width: 100%;
-    padding: 0 $spacer * 8;
+    padding: 0 $spacer * 4;
     margin: 0 auto;
 
     @include sm() {
-        padding: 0 $spacer * 6;
+        padding: 0 $spacer * 3;
     }
 }
 

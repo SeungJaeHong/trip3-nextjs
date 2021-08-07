@@ -7,38 +7,38 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto $spacer * 10 auto;
+    margin: 0 auto $spacer * 5 auto;
 
     @include sm() {
-        margin-bottom: $spacer * 8;
+        margin-bottom: $spacer * 3;
     }
 }
 
 .Content {
     display: flex;
     width: 100%;
-    margin: $spacer * 15 0;
+    margin: $spacer * 7 0;
 
     @include md() {
         flex-direction: column;
-        margin: $spacer * 10 0;
+        margin: $spacer * 5 0;
     }
 
     .FlightOfferList {
         display: flex;
         flex-direction: column;
         flex: 2;
-        padding-right: $spacer * 18;
+        padding-right: $spacer * 9;
 
         .Paginator {
-            margin-top: $spacer * 10;
+            margin-top: $spacer * 5;
         }
 
         @include md() {
             padding-right: 0;
 
             .Paginator {
-                margin: $spacer * 6 0 $spacer * 10 0;
+                margin: $spacer * 3 0 $spacer * 5 0;
             }
         }
     }
@@ -48,26 +48,26 @@
 
         .DescriptionBlock {
             background: $gray-light;
-            padding: $spacer * 6;
+            padding: $spacer * 3;
 
             .DescriptionFirstPart {
                 color: $gray-dark-hover;
-                margin-bottom: $spacer * 2;
+                margin-bottom: $spacer;
                 font-weight: 500;
             }
 
             .DescriptionSecondPart {
                 color: $gray-dark;
-                padding-bottom: $spacer * 3;
+                padding-bottom: $spacer * 1.5;
             }
 
             .MoreLink {
-                margin-top: $spacer * 2;
+                margin-top: $spacer;
             }
         }
 
         .AddNewButton {
-            margin-top: $spacer * 8;
+            margin-top: $spacer * 4;
         }
     }
 }
@@ -83,13 +83,13 @@
         line-height: 2.75rem;
         color: $white;
         font-weight: 600;
-        padding-top: $spacer * 20;
-        padding-bottom: $spacer * 5;
+        padding-top: $spacer * 10;
+        padding-bottom: $spacer * 2.5;
         max-width: 720px;
 
         @include md() {
             font-size: $font-size-large;
-            padding-top: $spacer * 10;
+            padding-top: $spacer * 5;
         }
     }
 
@@ -97,21 +97,21 @@
         font-size: $font-size-small;
         font-weight: 500;
         color: $white;
-        padding-bottom: $spacer * 5;
+        padding-bottom: $spacer * 2.5;
     }
 
     .Tags {
         display: flex;
         flex-wrap: wrap;
-        padding-bottom: $spacer * 8;
-        gap: $spacer * 2;
+        padding-bottom: $spacer * 4;
+        gap: $spacer;
     }
 }
 
 .BodyContainer {
     display: flex;
     width: 100%;
-    padding: $spacer * 8 0;
+    padding: $spacer * 4 0;
 
     @include lg() {
         flex-direction: column;
@@ -126,7 +126,7 @@
         word-wrap: break-word;
         -ms-word-break: break-all;
         word-break: break-all;
-        padding-right: $spacer * 4;
+        padding-right: $spacer * 2;
 
         @include md() {
             font-size: $font-size-normal;
@@ -146,11 +146,11 @@
 
         :global(.FlightAvailableTimes) {
             display: flex;
-            margin: $spacer * 10 0;
+            margin: $spacer * 5 0;
 
             @include sm() {
                 flex-direction: column;
-                gap: $spacer * 6;
+                gap: $spacer * 3;
             }
 
             :global(.FlightAvailableTimesCol) {
@@ -163,7 +163,7 @@
                     font-size: $font-size-medium;
                     font-weight: 600;
                     color: $gray-dark-hover;
-                    margin-bottom: $spacer * 5;
+                    margin-bottom: $spacer * 2.5;
                 }
 
                 :global(.FlightAvailableTimesRow) {
@@ -185,14 +185,14 @@
 
     .SidebarShow {
         flex: 1;
-        padding-left: $spacer * 12;
+        padding-left: $spacer * 6;
 
         @include lg() {
             padding-left: 0;
         }
 
         .AddNewOffer {
-            margin-top: $spacer * 5;
+            margin-top: $spacer * 2.5;
         }
     }
 }

@@ -4,11 +4,11 @@
 .Content {
     display: flex;
     width: 100%;
-    margin: $spacer * 15 0;
+    margin: $spacer * 7 0;
 
     @include md() {
         flex-direction: column;
-        margin: $spacer * 10 0;
+        margin: $spacer * 5 0;
     }
 
     .TravelmateGridContainer {
@@ -17,32 +17,32 @@
         flex: 3;
 
         .TravelmateGrid {
-            padding-right: $spacer * 15;
-            padding-left: $spacer * 8;
+            padding-right: $spacer * 8;
+            padding-left: $spacer * 4;
             flex-wrap: wrap;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: $spacer * 10 $spacer * 15;
+            gap: $spacer * 5 $spacer * 8;
 
             @include lg() {
                 flex: 1;
-                padding-left: $spacer * 10;
-                padding-right: $spacer * 12;
+                padding-left: $spacer * 5;
+                padding-right: $spacer * 6;
                 grid-template-columns: 1fr;
-                gap: $spacer * 8;
+                gap: $spacer * 4;
             }
 
             @include md() {
                 padding-right: 0;
-                padding-left: $spacer * 6;
+                padding-left: $spacer * 3;
             }
         }
 
         .Paginator {
-            margin-top: $spacer * 15;
+            margin-top: $spacer * 8;
 
             @include md() {
-                margin: $spacer * 6 0 $spacer * 10 0;
+                margin: $spacer * 3 0 $spacer * 5 0;
             }
         }
     }
@@ -53,37 +53,37 @@
 
         .DescriptionBlock {
             background: $gray-light;
-            padding: $spacer * 6;
-            margin-bottom: $spacer * 6;
+            padding: $spacer * 3;
+            margin-bottom: $spacer * 3;
 
             .DescriptionFirstPart {
                 color: $gray-dark-hover;
-                margin-bottom: $spacer * 3;
+                margin-bottom: $spacer * 1.5;
                 font-weight: 500;
             }
 
             .DescriptionSecondPart {
                 color: $gray-dark;
-                padding-bottom: $spacer * 3;
+                padding-bottom: $spacer * 1.5;
             }
 
             .MoreLink {
-                margin-top: $spacer * 2;
+                margin-top: $spacer;
             }
 
             .AddNewButton {
-                margin-top: $spacer * 6;
+                margin-top: $spacer * 3;
             }
         }
 
         .FilterBlock {
             background: $gray-light;
-            padding: $spacer * 4 $spacer * 6 $spacer * 6 $spacer * 6;
+            padding: $spacer * 2 $spacer * 3 $spacer * 3 $spacer * 3;
 
             .Intro {
                 color: $gray-dark;
                 font-weight: 500;
-                margin: $spacer * 2 0 $spacer * 4 0;
+                margin: $spacer 0 $spacer * 2 0;
             }
         }
     }

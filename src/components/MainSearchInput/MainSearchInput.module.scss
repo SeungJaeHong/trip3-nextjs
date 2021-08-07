@@ -16,7 +16,7 @@
         color: $white;
         font-size: $font-size-medium;
         line-height: 1.75rem;
-        padding-left: $spacer * 15;
+        padding-left: $spacer * 8;
         font-weight: 600;
         font-family: $font-family-sailec;
 
@@ -30,16 +30,29 @@
             font-size: 1.1rem;
             line-height: 1.55rem;
         }
+
+        @include sm() {
+            padding-left: $spacer * 6;
+        }
     }
 
     .Icon {
-        top: 1rem;
-        left: 1rem;
+        top: 16px;
+        left: 16px;
         position: absolute;
         cursor: pointer;
 
         svg {
             fill: $white;
+        }
+
+        @include sm() {
+            top: 20px;
+
+            svg {
+                width: 20px;
+                height: 20px;
+            }
         }
     }
 }

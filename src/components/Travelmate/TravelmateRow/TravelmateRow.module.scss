@@ -7,19 +7,19 @@
 
     .Avatar {
         display: flex;
-        margin-right: $spacer * 4;
+        margin-right: $spacer * 2;
 
         a {
             display: block;
 
             svg {
-                width: $spacer * 16;
-                height: $spacer * 16;
+                width: 64px;
+                height: 64px;
                 fill: $gray;
 
                 @include sm() {
-                    width: $spacer * 12;
-                    height: $spacer * 12;
+                    width: 48px;
+                    height: 48px;
                 }
             }
         }
@@ -35,7 +35,7 @@
             font-size: $font-size-medium;
             font-weight: 500;
             display: block;
-            margin-bottom: .3rem;
+            margin-bottom: $spacer * 0.5;
 
             @include sm() {
                 font-size: $font-size-normal;
@@ -51,10 +51,10 @@
             flex-wrap: wrap;
 
             .MetaItem {
-                margin-right: $spacer * 4;
+                margin-right: $spacer * 2;
                 font-size: $font-size-small;
                 color: $gray-darker;
-                margin-bottom: $spacer;
+                margin-bottom: $spacer * 0.5;
 
                 &.Creator {
                     color: $blue-light;
@@ -68,8 +68,8 @@
             .Tags {
                 display: flex;
                 flex-wrap: wrap;
-                gap: $spacer * 2;
-                margin-bottom: $spacer;
+                gap: $spacer;
+                margin-bottom: $spacer * 0.5;
             }
         }
     }

@@ -2,15 +2,15 @@
 @import "../../styles/mixins";
 
 .Footer {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: $spacer * 10;
+    padding-bottom: $spacer * 10;
     overflow: hidden;
 
     .Content {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
         gap: 4rem;
-        padding-bottom: $spacer * 20;
+        padding-bottom: $spacer * 10;
         margin: 0 auto;
 
         @include sm() {
@@ -20,7 +20,7 @@
 
     .Col {
         display: grid;
-        gap: 1rem;
+        gap: $spacer * 2;
         grid-auto-rows: max-content;
 
         a {
@@ -48,7 +48,7 @@
         a {
             color: $white;
             font-size: 1rem;
-            padding: 1.75rem;
+            padding: $spacer * 4;
 
             &:hover {
                 opacity: .8;
@@ -58,7 +58,7 @@
                 width: 18px;
                 height: 18px;
                 fill: $white;
-                margin-right: 0.75rem;
+                margin-right: $spacer * 1.5;
             }
         }
     }
@@ -68,7 +68,7 @@
         justify-content: center;
         color: $white;
         opacity: .5;
-        padding-top: 1rem;
+        padding-top: $spacer * 2;
     }
 
     &.Simple {
