@@ -57,11 +57,7 @@ const TravelmatesIndex = (props: Props) => {
 
     return (
         <Fragment>
-            <Header title={'Reisikaaslased'}>
-                <div>
-                    HEader
-                </div>
-            </Header>
+            <Header title={'Reisikaaslased'} />
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.Content}>
                     <div className={styles.TravelmateGridContainer}>

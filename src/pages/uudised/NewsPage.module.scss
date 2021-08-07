@@ -1,0 +1,86 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.Search {
+    padding-bottom: $spacer * 9;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    align-items: center;
+
+    @include lg() {
+        width: 75%;
+    }
+
+    @include md() {
+        width: 100%;
+    }
+}
+
+.Content {
+    display: flex;
+    width: 100%;
+    margin: $spacer * 7 0;
+
+    @include md() {
+        flex-direction: column;
+        margin: $spacer * 5 0;
+    }
+
+    .NewsGridContainer {
+        display: flex;
+        flex-direction: column;
+        flex: 3;
+
+        .NewsGrid {
+            padding-right: $spacer * 8;
+            padding-left: $spacer * 4;
+            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: $spacer * 5;
+
+            @include lg() {
+                flex: 1;
+                padding-left: $spacer * 5;
+                padding-right: $spacer * 6;
+                grid-template-columns: 1fr;
+                gap: $spacer * 4;
+            }
+
+            @include md() {
+                padding-right: 0;
+                padding-left: $spacer * 3;
+            }
+        }
+
+        .Paginator {
+            margin-top: $spacer * 8;
+
+            @include md() {
+                margin: $spacer * 3 0 $spacer * 5 0;
+            }
+        }
+    }
+
+    .Sidebar {
+        flex: 1;
+        flex-direction: column;
+
+        .DescriptionBlock {
+            background: $gray-light;
+            padding: $spacer * 3;
+            margin-bottom: $spacer * 3;
+
+            .Description {
+                color: $gray-dark-hover;
+                font-weight: 500;
+            }
+
+            .AddNewButton {
+                margin-top: $spacer * 3;
+            }
+        }
+    }
+}
