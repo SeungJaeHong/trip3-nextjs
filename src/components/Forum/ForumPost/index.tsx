@@ -26,7 +26,7 @@ const ForumPost = (item: Content) => {
                 </div>
             </div>
             <div className={styles.Body}>
-                <ReactMarkdown>{item.body}</ReactMarkdown>
+                <ReactMarkdown linkTarget={'_blank'} children={item.body} />
             </div>
             <div className={styles.Actions}>
                 <div className={styles.Buttons}>

@@ -17,8 +17,6 @@ type Props = {
 }
 
 const ForumShowPage = (props: Props) => {
-    console.log(props)
-
     return (
         <Fragment>
             <Header withBackgroundMap={true} className={styles.Header} />
