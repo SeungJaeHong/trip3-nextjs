@@ -7,18 +7,18 @@
     padding: 0 $spacer * 8;
     margin: 0 auto;
 
-    @include xs() {
+    @include sm() {
         padding: 0 $spacer * 6;
     }
 }
 
-.container_lg {
+.containerLg {
     max-width: 1024px;
     width: 100%;
     padding: 0 $spacer * 8;
     margin: 0 auto;
 
-    @include xs() {
+    @include sm() {
         padding: 0 $spacer * 6;
     }
 }

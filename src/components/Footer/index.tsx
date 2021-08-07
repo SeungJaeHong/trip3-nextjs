@@ -118,7 +118,7 @@ const Footer = (props: Props) => {
         <div className={clsx(styles.Footer, {
             [styles.Simple]: props.simple
         })} style={style}>
-            <div className={clsx([containerStyle.container_lg, styles.Content])}>
+            <div className={clsx([containerStyle.containerLg, styles.Content])}>
                 <div className={styles.Col}>
                     <Link href={'/'}>
                         <a>

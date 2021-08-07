@@ -22,9 +22,9 @@
             position: absolute;
             bottom: -3px;
             right: -10px;
-            width: $spacer * 7;
-            height: $spacer * 7;
-            border-radius: 1rem;
+            width: 28px;
+            height: 28px;
+            border-radius: 16px;
             background: $white;
             display: flex;
             justify-content: center;
@@ -44,6 +44,29 @@
 
                 .CommentCount {
                     color: $white;
+                }
+            }
+        }
+
+        @include sm() {
+            margin-right: $spacer * 5;
+            height: $spacer * 12;
+            width: $spacer * 12;
+
+            svg {
+                height: $spacer * 12;
+                width: $spacer * 12;
+                fill: #d1d4d6;
+            }
+
+            .CommentCountContainer {
+                width: 22px;
+                height: 22px;
+                bottom: -3px;
+                right: -6px;
+
+                .CommentCount {
+                    font-size: $font-size-xsmall;
                 }
             }
         }
