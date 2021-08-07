@@ -57,8 +57,10 @@
         font-size: $font-size-medium;
         overflow-wrap: break-word;
         word-wrap: break-word;
-        -ms-word-break: break-all;
-        word-break: break-all;
+
+        a {
+            word-break: break-all;
+        }
 
         @include sm() {
             font-size: $font-size-normal;

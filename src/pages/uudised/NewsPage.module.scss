@@ -153,8 +153,6 @@
         font-size: $font-size-medium;
         overflow-wrap: break-word;
         word-wrap: break-word;
-        //-ms-word-break: break-all;
-        //word-break: break-all;
         padding-right: $spacer * 2;
 
         @include md() {
@@ -163,6 +161,7 @@
 
         a {
             color: $blue;
+            word-break: break-all;
 
             &:hover {
                 color: $blue-hover;
