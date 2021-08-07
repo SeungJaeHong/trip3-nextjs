@@ -50,4 +50,16 @@
             font-size: $font-size-normal;
         }
     }
+
+    &.White {
+        border: 1px solid $white;
+
+        .Title {
+            color: $white;
+        }
+
+        &:hover {
+            opacity: .8;
+        }
+    }
 }

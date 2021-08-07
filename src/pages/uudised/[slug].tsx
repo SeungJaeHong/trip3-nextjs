@@ -36,7 +36,7 @@ const NewsShow = (props: Props) => {
                             return <Tag title={destination.name} type={'destination'} large={true} key={destination.id} />
                         })}
                         {props.news.topics?.map((topic: Topic) => {
-                            return <Tag title={topic.name} large={true} key={topic.id} />
+                            return <Tag title={topic.name} large={true} white={true} key={topic.id} />
                         })}
                     </div>
                 </div>
