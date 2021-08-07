@@ -1,35 +1,41 @@
 import React, {Fragment} from 'react'
 import axios from 'axios'
 import {GetServerSideProps} from 'next'
-import {Destination, FlightContent, Topic} from "../../types"
+import {Destination, NewsContent, Topic} from "../../types"
 import Header from "../../components/Header"
-import styles from "./FlightOfferPage.module.scss"
+import styles from "./NewsPage.module.scss"
 import containerStyle from "../../styles/containers.module.scss"
 import Tag from "../../components/Tag"
-import clsx from "clsx";
+import clsx from "clsx"
 import Button from "../../components/Button"
+import UserAvatar from "../../components/User/UserAvatar";
 import Footer from "../../components/Footer";
 
 type Props = {
-    flight: FlightContent
+    news: NewsContent
 }
 
-const FlightOfferShow = (props: Props) => {
+const NewsShow = (props: Props) => {
     return (
         <Fragment>
-            <Header backgroundImage={props.flight.backgroundImageUrl}>
+            <Header backgroundImage={props.news.backgroundImageUrl}>
                 <div className={clsx(containerStyle.CenteredContainer, styles.HeaderContainer)}>
                     <div className={styles.HeaderTitle}>
-                        {props.flight.title}
+                        {props.news.title}
                     </div>
-                    <div className={styles.HeaderDate}>
-                        {props.flight.createdAt}
+                    <div className={styles.DateAndUser}>
+                        <div className={styles.User}>
+                            <UserAvatar {...props.news.user} />
+                        </div>
+                        <div className={styles.HeaderDate}>
+                            {props.news.createdAt}
+                        </div>
                     </div>
                     <div className={styles.Tags}>
-                        {props.flight.destinations?.map((destination: Destination) => {
+                        {props.news.destinations?.map((destination: Destination) => {
                             return <Tag title={destination.name} type={'destination'} large={true} key={destination.id} />
                         })}
-                        {props.flight.topics?.map((topic: Topic) => {
+                        {props.news.topics?.map((topic: Topic) => {
                             return <Tag title={topic.name} large={true} key={topic.id} />
                         })}
                     </div>
@@ -37,10 +43,10 @@ const FlightOfferShow = (props: Props) => {
             </Header>
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.BodyContainer}>
-                    <div className={styles.Body} dangerouslySetInnerHTML={{ __html: props.flight.body }} />
+                    <div className={styles.Body} dangerouslySetInnerHTML={{ __html: props.news.body }} />
                     <div className={styles.SidebarShow}>
-                        <div className={styles.AddNewOffer}>
-                            <Button title={'Lisa uus pakkumine'} route={'/'} />
+                        <div className={styles.AddNewNews}>
+                            <Button title={'Lisa uus uudis'} route={'/'} />
                         </div>
                     </div>
                 </div>
@@ -52,18 +58,12 @@ const FlightOfferShow = (props: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const slug = context.query.slug
-    //const page = context.query?.page
-    let url = process.env.API_BASE_URL + '/flight/' + slug
-    /*if (page) {
-        url += '?page=' + page
-    }*/
+    let url = process.env.API_BASE_URL + '/news/' + slug
 
     const response = await axios.get(url)
     const data = {
         user: response.data.user,
-        flight: response.data.flight,
-        //currentPage: response.data.currentPage,
-        //lastPage: response.data.lastPage
+        news: response.data.news,
     }
 
     return {
@@ -71,4 +71,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-export default FlightOfferShow
+export default NewsShow

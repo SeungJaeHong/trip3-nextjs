@@ -11,6 +11,7 @@ import MainSearchInput from "../../components/MainSearchInput"
 import NewsCard from "../../components/News/NewsCard"
 import {useRouter} from "next/router"
 import {objectToQueryString} from "../../helpers"
+import Footer from "../../components/Footer"
 
 type Props = {
     news?: NewsCardType[],
@@ -85,6 +86,7 @@ const NewsIndex = (props: Props) => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </Fragment>
     )
 }

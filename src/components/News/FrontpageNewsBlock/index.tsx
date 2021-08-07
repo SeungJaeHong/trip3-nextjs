@@ -27,7 +27,7 @@ const FrontpageNewsBlock = () => {
                 })}
             </div>
             <div className={styles.ViewMore}>
-                <MoreLink route={'/'} title={'Kõik uudised'} />
+                <MoreLink route={'/uudised'} title={'Kõik uudised'} />
             </div>
         </div>
     )

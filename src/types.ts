@@ -88,9 +88,21 @@ export type FlightContent = {
     slug: string
     createdAt: string
     backgroundImageUrl: string
+    destinations?: Destination[]
+    topics?: Topic[]
+}
+
+export type NewsContent = {
+    id: number
+    title: string
+    body: string
+    slug: string
+    createdAt: string
+    backgroundImageUrl: string
     user: User
     destinations?: Destination[]
     topics?: Topic[]
+    comments?: Comment[]
 }
 
 export type ForumRowType = {

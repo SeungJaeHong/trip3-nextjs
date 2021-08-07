@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
                 color="#37a0eb"
                 startPosition={0.3}
                 stopDelayMs={200}
-                height={2}
+                height={3}
                 options={{ showSpinner: false }}
             />
             <Component {...pageProps} />

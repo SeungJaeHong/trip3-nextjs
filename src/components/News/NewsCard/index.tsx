@@ -6,7 +6,7 @@ import {NewsCardType} from "../../../types"
 const NewsCard = (item: NewsCardType) => {
     return (
         <div className={styles.NewsCard}>
-            <Link href={'/'}>
+            <Link href={'/uudised/' + item.slug}>
                 <a>
                     <div className={styles.Background}>
                         <Image

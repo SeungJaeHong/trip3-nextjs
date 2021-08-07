@@ -84,3 +84,106 @@
         }
     }
 }
+
+.HeaderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .HeaderTitle {
+        font-size: $font-size-xxlarge;
+        line-height: 2.75rem;
+        color: $white;
+        font-weight: 600;
+        padding-top: $spacer * 10;
+        padding-bottom: $spacer * 2;
+        max-width: 720px;
+
+        @include md() {
+            font-size: $font-size-large;
+            padding-top: $spacer * 5;
+        }
+    }
+
+    .DateAndUser {
+        display: flex;
+        padding-bottom: $spacer * 2.5;
+        align-items: center;
+
+        .User {
+            width: 50px;
+            height: 50px;
+            margin-right: $spacer * 2;
+
+            @include sm() {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        .HeaderDate {
+            font-size: $font-size-small;
+            font-weight: 500;
+            color: $white;
+        }
+    }
+
+    .Tags {
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: $spacer * 4;
+        gap: $spacer;
+    }
+}
+
+.BodyContainer {
+    display: flex;
+    width: 100%;
+    padding: $spacer * 4 0 $spacer * 6 0;
+
+    @include lg() {
+        flex-direction: column;
+    }
+
+    .Body {
+        flex: 3;
+        color: $gray-dark;
+        font-family: $font-family-sailec;
+        font-size: $font-size-medium;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        //-ms-word-break: break-all;
+        //word-break: break-all;
+        padding-right: $spacer * 2;
+
+        @include md() {
+            font-size: $font-size-normal;
+        }
+
+        a {
+            color: $blue;
+
+            &:hover {
+                color: $blue-hover;
+            }
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .SidebarShow {
+        flex: 1;
+        padding-left: $spacer * 6;
+
+        @include lg() {
+            padding-left: 0;
+        }
+
+        .AddNewNews {
+            margin-top: $spacer * 2.5;
+        }
+    }
+}
