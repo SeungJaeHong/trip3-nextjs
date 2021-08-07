@@ -87,7 +87,8 @@
         padding-bottom: $spacer * 5;
         max-width: 720px;
 
-        @include sm() {
+        @include md() {
+            font-size: $font-size-large;
             padding-top: $spacer * 10;
         }
     }
@@ -112,7 +113,7 @@
     width: 100%;
     padding: $spacer * 8 0;
 
-    @include md() {
+    @include lg() {
         flex-direction: column;
     }
 
@@ -127,12 +128,20 @@
         word-break: break-all;
         padding-right: $spacer * 4;
 
+        @include md() {
+            font-size: $font-size-normal;
+        }
+
         a {
             color: $blue;
 
             &:hover {
                 color: $blue-hover;
             }
+        }
+
+        img {
+            width: 100%;
         }
 
         :global(.FlightAvailableTimes) {
@@ -178,7 +187,7 @@
         flex: 1;
         padding-left: $spacer * 12;
 
-        @include md() {
+        @include lg() {
             padding-left: 0;
         }
 
