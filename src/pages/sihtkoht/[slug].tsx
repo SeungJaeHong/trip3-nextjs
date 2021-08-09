@@ -105,7 +105,7 @@ const DestinationPage = (props: Props) => {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+/*export const getServerSideProps: GetServerSideProps = async (context) => {
     const slug = context.query.slug
     const page = context.query?.page
     let url = process.env.API_BASE_URL + '/forum/general/' + slug
@@ -124,6 +124,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
         props: data
     }
-}
+}*/
 
 export default DestinationPage
