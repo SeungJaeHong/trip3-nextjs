@@ -18,15 +18,15 @@ const FlightOfferCard = (item: FlightOfferCardType) => {
         <div className={styles.FlightOfferCard}>
             <div className={styles.DestinationContainer} style={{'backgroundColor': getColor()}}>
                 <div className={styles.Destination}>
-                    <Link href={'/'}>
-                        <a>{item.destination?.name}</a>
+                    <Link href={'/sihtkoht/' + item.destination.slug}>
+                        <a>{item.destination.name}</a>
                     </Link>
                 </div>
-                <div className={styles.ParentDestination}>
-                    <Link href={'/'}>
-                        <a>{item.destination?.parentDestination?.name}</a>
+                {item.destination.parentDestination && <div className={styles.ParentDestination}>
+                    <Link href={'/sihtkoht/' + item.destination.parentDestination.slug}>
+                        <a>{item.destination.parentDestination.name}</a>
                     </Link>
-                </div>
+                </div>}
             </div>
 
             <Link href={'/odavad-lennupiletid/' + item.slug}>

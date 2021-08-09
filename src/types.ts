@@ -156,12 +156,12 @@ export type FlightOfferRowType = {
 }
 
 export type FlightOfferCardType = {
-    id: number;
-    title: string;
-    slug: string;
-    imageUrl: string;
-    destination: Destination | null;
-    color?: 'purple' | 'yellow' | 'red';
+    id: number
+    title: string
+    slug: string
+    imageUrl: string
+    destination: Destination
+    color?: 'purple' | 'yellow' | 'red'
 }
 
 export type TravelmateRowType = {
