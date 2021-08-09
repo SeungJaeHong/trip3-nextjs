@@ -2,19 +2,24 @@
 @import "../../styles/mixins";
 
 .Footer {
-    padding-top: $spacer * 10;
-    padding-bottom: $spacer * 10;
+    padding: $spacer * 10 0;
     overflow: hidden;
+
+    @include sm() {
+        padding-top: $spacer * 6;
+    }
 
     .Content {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-        gap: 4rem;
+        gap: $spacer * 8;
         padding-bottom: $spacer * 10;
         margin: 0 auto;
 
         @include sm() {
             text-align: center;
+            padding-bottom: $spacer * 5;
+            gap: $spacer * 4;
         }
     }
 

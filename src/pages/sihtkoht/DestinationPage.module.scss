@@ -1,0 +1,184 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.HeaderContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: $spacer * 16;
+    padding-top: $spacer * 4;
+
+    @include sm() {
+        justify-content: center;
+    }
+
+    .NextDestination {
+        font-size: $font-size-medium;
+        color: $yellow;
+        font-weight: 500;
+        cursor: pointer;
+
+        @include sm() {
+            display: none;
+        }
+
+        &:hover {
+            color: $white;
+        }
+    }
+
+    .DestinationName {
+        font-size: 3rem;
+        color: $white;
+        font-weight: 600;
+        display: flex;
+        position: relative;
+
+        .ParentDestinationName {
+            display: flex;
+            justify-content: flex-end;
+            color: $white;
+            font-size: $font-size-normal;
+            position: absolute;
+            bottom: -12px;
+            right: 0;
+            cursor: pointer;
+
+            &:hover {
+                color: $gray;
+            }
+        }
+    }
+}
+
+.YellowContainer {
+    background: $yellow;
+    padding-bottom: $spacer * 8;
+
+    .DataContainer {
+        display: flex;
+        width: 100%;
+        gap: $spacer * 8;
+
+        .FlightOffersBlock {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            margin-top: -47px;
+            z-index: 2;
+
+            .FlightOffersHeader {
+                background: $white;
+                display: flex;
+                justify-content: space-between;
+                padding: $spacer * 1.5 $spacer * 2;
+                align-items: center;
+
+                .Title {
+                    text-transform: uppercase;
+                    font-size: $font-size-small;
+                    color: $yellow;
+                    font-weight: 600;
+                }
+            }
+
+            .FlightOfferCard {
+                display: flex;
+                width: 100%;
+                height: 150px;
+                position: relative;
+                box-shadow: 0 2px 6px 0 $yellow-dark;
+
+                .CardBackgroundLayer {
+                    background: rgba(0, 0, 0, 0.3);
+                    position: absolute;
+                    display: flex;
+                    height: 100%;
+                    width: 100%;
+                    justify-content: center;
+                    align-items: center;
+                    padding: $spacer * 4;
+                    text-align: center;
+
+                    .FlightOfferTitle {
+                        color: $white;
+                        font-weight: 500;
+                        font-size: $font-size-medium;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: $gray;
+                        }
+                    }
+                }
+            }
+        }
+
+        .MetaDataBlock {
+            flex: 3;
+            display: flex;
+            position: relative;
+
+            .InfoContainer {
+                display: flex;
+                flex-direction: column;
+
+                .InfoTable {
+                    padding-top: $spacer * 4;
+                    border: 0;
+                    color: $white;
+                    display: flex;
+
+                    td {
+                        padding: $spacer 0;
+                        font-weight: 500;
+                    }
+
+                    .TableRowKey {
+                        color: $yellow-dark;
+                        padding-right: $spacer * 5;
+                    }
+                }
+
+                .Description {
+                    color: $white;
+                    font-size: $font-size-normal;
+                    max-width: 400px;
+                    margin-top: $spacer * 3;
+
+                    .ReadMore {
+                        font-weight: 600;
+                        cursor: pointer;
+                        color: $yellow-dark;
+                        margin-left: $spacer;
+                        white-space: nowrap;
+
+                        &:hover {
+                            color: $white;
+                        }
+                    }
+                }
+            }
+
+            .Map {
+                display: flex;
+                position: absolute;
+                right: -40px;
+                top: -40px;
+                z-index: 2;
+
+                svg {
+                    height: 400px;
+                    fill: $yellow-dark;
+                }
+            }
+        }
+    }
+}
+
+.RelatedContent {
+    background: $white;
+    padding: $spacer * 20;
+    padding-top: $spacer * 3;
+}
+

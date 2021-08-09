@@ -8,6 +8,7 @@ type Props = {
     route: string
     large: boolean
     medium: boolean
+    noSvg: boolean
 }
 
 const MoreLink = (props: Props) => {
@@ -18,9 +19,9 @@ const MoreLink = (props: Props) => {
                 [styles.Large]: props.large
             })}>
                 <span className={styles.Title}>{props.title}</span>
-                <span className={styles.Icon}>
+                {!props.noSvg && <span className={styles.Icon}>
                     <ArrowRightIcon />
-                </span>
+                </span>}
             </a>
         </Link>
     )
@@ -28,7 +29,8 @@ const MoreLink = (props: Props) => {
 
 MoreLink.defaultProps = {
     large: false,
-    medium: false
+    medium: false,
+    noSvg: false
 }
 
 export default MoreLink
