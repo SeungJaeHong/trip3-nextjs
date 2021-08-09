@@ -122,6 +122,7 @@
             .InfoContainer {
                 display: flex;
                 flex-direction: column;
+                z-index: 3;
 
                 .InfoTable {
                     padding-top: $spacer * 4;
@@ -130,7 +131,7 @@
                     display: flex;
 
                     td {
-                        padding: $spacer 0;
+                        padding: $spacer * 0.5 0;
                         font-weight: 500;
                     }
 
@@ -145,6 +146,7 @@
                     font-size: $font-size-normal;
                     max-width: 400px;
                     margin-top: $spacer * 3;
+                    font-weight: 500;
 
                     .ReadMore {
                         font-weight: 600;
