@@ -105,6 +105,17 @@ export type NewsContent = {
     comments?: Comment[]
 }
 
+export type DestinationContent = {
+    id: number
+    name: string
+    slug: string
+    backgroundImageUrl: string
+    description: string
+    parentDestination?: Destination
+    nextDestination?: Destination
+    previousDestination?: Destination
+}
+
 export type ForumRowType = {
     id: number
     title: string
@@ -119,7 +130,7 @@ export type ForumRowType = {
     topics?: Topic[] | null
 }
 
-export type ForumFullType = {
+/*export type ForumFullType = {
     id: number
     title: string
     slug: string
@@ -129,7 +140,7 @@ export type ForumFullType = {
     destinations?: Destination[] | null
     topics?: Topic[] | null
     comments?: Comment[]
-}
+}*/
 
 export type NewsCardType = {
     id: number

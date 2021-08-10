@@ -7,11 +7,13 @@ import styles from "./DestinationPage.module.scss"
 import containerStyle from "../../styles/containers.module.scss"
 import MoreLink from "../../components/MoreLink"
 import Image from 'next/image'
-import ImageGallery from "../../components/ImageGallery";
-import DottedMapIcon from "../../icons/DottedMapIcon";
+import ImageGallery from "../../components/ImageGallery"
+import DottedMapIcon from "../../icons/DottedMapIcon"
+import {DestinationContent, ForumRowType} from "../../types"
 
 type Props = {
-
+    destination: DestinationContent
+    forumPosts?: ForumRowType[]
 }
 
 const DestinationPage = (props: Props) => {
@@ -21,8 +23,8 @@ const DestinationPage = (props: Props) => {
                 <div className={styles.HeaderContainer}>
                     <div className={styles.NextDestination}>‹ Prantsusmaa</div>
                     <div className={styles.DestinationName}>
-                        Malta
-                        <span className={styles.ParentDestinationName}>Euroopa ›</span>
+                        {props.destination.name}
+                        <span className={styles.ParentDestinationName}>{props.destination.parentDestination?.name} ›</span>
                     </div>
                     <div className={styles.NextDestination}>Kreeka ›</div>
                 </div>
@@ -105,25 +107,18 @@ const DestinationPage = (props: Props) => {
     )
 }
 
-/*export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
     const slug = context.query.slug
-    const page = context.query?.page
-    let url = process.env.API_BASE_URL + '/forum/general/' + slug
-    if (page) {
-        url += '?page=' + page
-    }
-
+    const url = process.env.API_BASE_URL + '/destination/' + slug
     const response = await axios.get(url)
     const data = {
         user: response.data.user,
-        post: response.data.post,
-        currentPage: response.data.currentPage,
-        lastPage: response.data.lastPage
+        destination: response.data.destination
     }
 
     return {
         props: data
     }
-}*/
+}
 
 export default DestinationPage
