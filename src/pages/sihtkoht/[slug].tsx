@@ -21,12 +21,12 @@ const DestinationPage = (props: Props) => {
         <Fragment>
             <Header backgroundImage={'https://trip.ee/images/large/Ateena-acropolis-px_kfwx.jpeg'}>
                 <div className={styles.HeaderContainer}>
-                    <div className={styles.NextDestination}>‹ Prantsusmaa</div>
+                    <div className={styles.NextDestination}>{props.destination.previousDestination ? '‹ ' + props.destination.previousDestination.name : ''}</div>
                     <div className={styles.DestinationName}>
                         {props.destination.name}
-                        <span className={styles.ParentDestinationName}>{props.destination.parentDestination?.name} ›</span>
+                        {props.destination.parentDestination?.name && <span className={styles.ParentDestinationName}>{props.destination.parentDestination.name} ›</span>}
                     </div>
-                    <div className={styles.NextDestination}>Kreeka ›</div>
+                    <div className={styles.NextDestination}>{props.destination.nextDestination ? props.destination.nextDestination.name + ' ›' : ''}</div>
                 </div>
             </Header>
             <div className={styles.YellowContainer}>
