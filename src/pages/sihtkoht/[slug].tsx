@@ -10,6 +10,7 @@ import Image from 'next/image'
 import ImageGallery from "../../components/ImageGallery"
 import DottedMapIcon from "../../icons/DottedMapIcon"
 import {DestinationContent, ForumRowType} from "../../types"
+import Link from "next/link"
 
 type Props = {
     destination: DestinationContent
@@ -21,12 +22,28 @@ const DestinationPage = (props: Props) => {
         <Fragment>
             <Header backgroundImage={'https://trip.ee/images/large/Ateena-acropolis-px_kfwx.jpeg'}>
                 <div className={styles.HeaderContainer}>
-                    <div className={styles.NextDestination}>{props.destination.previousDestination ? '‹ ' + props.destination.previousDestination.name : ''}</div>
+                    {
+                        props.destination.previousDestination ?
+                            <Link href={'/sihtkoht/' + props.destination.previousDestination.slug}>
+                                <a className={styles.NextDestination}>‹ {props.destination.previousDestination.name}</a>
+                            </Link> : null
+                    }
                     <div className={styles.DestinationName}>
                         {props.destination.name}
-                        {props.destination.parentDestination?.name && <span className={styles.ParentDestinationName}>{props.destination.parentDestination.name} ›</span>}
+                        {props.destination.parentDestination?.name &&
+                        <Link href={'/sihtkoht/' + props.destination.parentDestination.slug}>
+                            <a className={styles.ParentDestinationName}>
+                                {props.destination.parentDestination.name} ›
+                            </a>
+                        </Link>
+                        }
                     </div>
-                    <div className={styles.NextDestination}>{props.destination.nextDestination ? props.destination.nextDestination.name + ' ›' : ''}</div>
+                    {
+                        props.destination.nextDestination ?
+                            <Link href={'/sihtkoht/' + props.destination.nextDestination.slug}>
+                                <a className={styles.NextDestination}>{props.destination.nextDestination.name} ›</a>
+                            </Link> : null
+                    }
                 </div>
             </Header>
             <div className={styles.YellowContainer}>
