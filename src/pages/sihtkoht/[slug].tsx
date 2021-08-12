@@ -11,6 +11,7 @@ import ImageGallery from "../../components/ImageGallery"
 import DottedMapIcon from "../../icons/DottedMapIcon"
 import {DestinationContent, ForumRowType} from "../../types"
 import Link from "next/link"
+import Tag from "../../components/Tag"
 
 type Props = {
     destination: DestinationContent
@@ -18,6 +19,31 @@ type Props = {
 }
 
 const DestinationPage = (props: Props) => {
+    const renderChildDestinations = () => {
+        if (!props.destination.childDestinations?.length) {
+            return null
+        }
+
+        return (
+            <div className={styles.MoreDestinations}>
+                <div className={styles.PopularDestinationTitle}>
+                    Populaarsed sihtkohad
+                </div>
+                <div className={styles.ChildDestinations}>
+                    {props.destination.childDestinations?.map(destination => {
+                        return <Tag
+                            title={destination.name}
+                            type={'destination'}
+                            route={'/sihtkoht/' + destination.slug}
+                            white={true}
+                            large={true}
+                            key={destination.id} />
+                    })}
+                </div>
+            </div>
+        )
+    }
+
     return (
         <Fragment>
             <Header backgroundImage={'https://trip.ee/images/large/Ateena-acropolis-px_kfwx.jpeg'}>
@@ -111,6 +137,13 @@ const DestinationPage = (props: Props) => {
                             </div>
                         </div>
                     </div>
+
+                    {renderChildDestinations()}
+
+                    {/*<div>
+                        tahab minna, on käinud
+                    </div>*/}
+
                 </div>
             </div>
             <div>

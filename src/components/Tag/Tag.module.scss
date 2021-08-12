@@ -46,6 +46,8 @@
     }
 
     &.Large {
+        padding: 4px 10px;
+
         .Title {
             font-size: $font-size-normal;
         }
@@ -59,7 +61,12 @@
         }
 
         &:hover {
+            border: 1px solid $white;
             opacity: .8;
+
+            .Title {
+                color: $white;
+            }
         }
     }
 }

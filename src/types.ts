@@ -114,6 +114,7 @@ export type DestinationContent = {
     parentDestination?: Destination
     nextDestination?: Destination
     previousDestination?: Destination
+    childDestinations?: Destination[]
 }
 
 export type ForumRowType = {
