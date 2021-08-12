@@ -18,7 +18,7 @@ const FlightOfferRow = (item: FlightOfferRowType) => {
                     <span className={styles.CreatedDate}>{item.createdAt}</span>
                     <div className={styles.Tags}>
                         {item.destinations?.map((destination: Destination) => {
-                            return <Tag title={destination.name} type={'destination'} route={'/'} key={destination.id} />
+                            return <Tag title={destination.name} type={'destination'} route={'/sihtkoht/' + destination.slug} key={destination.id} />
                         })}
                     </div>
                 </div>

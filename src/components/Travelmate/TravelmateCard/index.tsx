@@ -19,7 +19,7 @@ const TravelmateCard = (item: TravelmateRowType) => {
             </Link>
             <div className={styles.Tags}>
                 {item.destinations?.map((destination: Destination) => {
-                    return <Tag title={destination.name} route={'/'} type={'destination'} key={destination.id}/>
+                    return <Tag title={destination.name} route={'/sihtkoht/' + destination.slug} type={'destination'} key={destination.id}/>
                 })}
                 {item.topics?.map((topic: Topic) => {
                     return <Tag title={topic.name} route={'/'} key={topic.id }/>

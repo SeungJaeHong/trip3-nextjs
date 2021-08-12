@@ -28,7 +28,7 @@ const TravelmateRow = (item: TravelmateRowType) => {
                     </Link>
                     <div className={styles.Tags}>
                         {item.destinations?.map((destination: Destination) => {
-                            return <Tag title={destination.name} type={'destination'} route={'/'} key={destination.id} />
+                            return <Tag title={destination.name} type={'destination'} route={'/sihtkoht/' + destination.slug} key={destination.id} />
                         })}
                         {item.topics?.map((topic: Topic) => {
                             return <Tag title={topic.name} route={'/'} key={topic.id} />

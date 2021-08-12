@@ -34,7 +34,7 @@ const NewsShow = (props: Props) => {
                     </div>
                     <div className={styles.Tags}>
                         {props.news.destinations?.map((destination: Destination) => {
-                            return <Tag title={destination.name} type={'destination'} large={true} key={destination.id} />
+                            return <Tag title={destination.name} type={'destination'} route={'/sihtkoht/' + destination.slug} large={true} key={destination.id} />
                         })}
                         {props.news.topics?.map((topic: Topic) => {
                             return <Tag title={topic.name} large={true} white={true} key={topic.id} />
