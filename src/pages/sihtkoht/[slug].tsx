@@ -57,7 +57,7 @@ const DestinationPage = (props: Props) => {
                             <div className={styles.FlightOfferCard}>
                                 <Image
                                     src={'https://trip.ee/images/medium/florian-wehde-WBGjg0DsO_g-unsplash_mljo.jpeg'}
-                                    alt="Picture of the author"
+                                    alt=""
                                     layout={'fill'}
                                     objectFit={'cover'}/>
                                 <div className={styles.CardBackgroundLayer}>
@@ -69,7 +69,7 @@ const DestinationPage = (props: Props) => {
                             <div className={styles.FlightOfferCard}>
                                 <Image
                                     src={'https://trip.ee/images/medium/venice-3183168_960_720_9sr0.jpeg'}
-                                    alt="Picture of the author"
+                                    alt=""
                                     layout={'fill'}
                                     objectFit={'cover'}/>
                                 <div className={styles.CardBackgroundLayer}>
@@ -116,8 +116,10 @@ const DestinationPage = (props: Props) => {
             <div>
                 <ImageGallery images={[]} />
             </div>
-            <div className={styles.RelatedContent}>
-                Content
+            <div className={containerStyle.ContainerXl}>
+                <div className={styles.RelatedContent}>
+                    Content
+                </div>
             </div>
             <Footer />
         </Fragment>
