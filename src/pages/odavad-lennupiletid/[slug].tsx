@@ -27,7 +27,7 @@ const FlightOfferShow = (props: Props) => {
                     </div>
                     <div className={styles.Tags}>
                         {props.flight.destinations?.map((destination: Destination) => {
-                            return <Tag title={destination.name} type={'destination'} large={true} key={destination.id} />
+                            return <Tag title={destination.name} type={'destination'} route={'/sihtkoht/' + destination.slug} large={true} key={destination.id} />
                         })}
                         {props.flight.topics?.map((topic: Topic) => {
                             return <Tag title={topic.name} large={true} key={topic.id} />
@@ -52,18 +52,12 @@ const FlightOfferShow = (props: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const slug = context.query.slug
-    //const page = context.query?.page
     let url = process.env.API_BASE_URL + '/flight/' + slug
-    /*if (page) {
-        url += '?page=' + page
-    }*/
 
     const response = await axios.get(url)
     const data = {
         user: response.data.user,
-        flight: response.data.flight,
-        //currentPage: response.data.currentPage,
-        //lastPage: response.data.lastPage
+        flight: response.data.flight
     }
 
     return {

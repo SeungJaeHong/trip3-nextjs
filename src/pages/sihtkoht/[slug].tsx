@@ -12,6 +12,8 @@ import DottedMapIcon from "../../icons/DottedMapIcon"
 import {DestinationContent, ForumRowType} from "../../types"
 import Link from "next/link"
 import Tag from "../../components/Tag"
+import PinIcon from "../../icons/PinIcon";
+import StarIcon from "../../icons/StarIcon";
 
 type Props = {
     destination: DestinationContent
@@ -140,9 +142,16 @@ const DestinationPage = (props: Props) => {
 
                     {renderChildDestinations()}
 
-                    {/*<div>
-                        tahab minna, on käinud
-                    </div>*/}
+                    <div className={styles.HaveBeenBlock}>
+                        <div className={styles.BlockItem}>
+                            <PinIcon />
+                            <span>232</span>
+                        </div>
+                        <div className={styles.BlockItem}>
+                            <StarIcon />
+                            <span>43</span>
+                        </div>
+                    </div>
 
                 </div>
             </div>

@@ -45,7 +45,7 @@
             color: $white;
             font-size: $font-size-normal;
             position: absolute;
-            bottom: -12px;
+            bottom: -15px;
             right: 0;
             cursor: pointer;
 
@@ -58,7 +58,7 @@
 
 .YellowContainer {
     background: $yellow;
-    padding-bottom: $spacer * 8;
+    padding-bottom: $spacer * 6;
 
     .DataContainer {
         display: flex;
@@ -182,7 +182,7 @@
                 display: flex;
                 position: absolute;
                 right: -40px;
-                top: -40px;
+                top: -30px;
                 z-index: 2;
 
                 svg {
@@ -208,6 +208,7 @@
         display: flex;
         flex-direction: column;
         width: 100%;
+        padding-bottom: $spacer * 2;
 
         .PopularDestinationTitle {
             color: $yellow-dark;
@@ -220,6 +221,30 @@
             display: flex;
             flex-wrap: wrap;
             gap: $spacer;
+        }
+    }
+
+    .HaveBeenBlock {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        gap: $spacer * 3.5;
+
+        .BlockItem {
+            display: flex;
+            align-items: center;
+
+            span {
+                color: $white;
+                margin-left: $spacer;
+                font-weight: 600;
+            }
+
+            svg {
+                fill: $white;
+                width: 35px;
+                height: 35px;
+            }
         }
     }
 }
