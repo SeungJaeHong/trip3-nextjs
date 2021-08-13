@@ -113,19 +113,19 @@ const DestinationPage = (props: Props) => {
                                     <tbody>
                                     <tr>
                                         <td className={styles.TableRowKey}>Suunakood</td>
-                                        <td>+93</td>
+                                        <td>{props.destination.facts?.phoneCode}</td>
                                     </tr>
                                     <tr>
                                         <td className={styles.TableRowKey}>Valuuta</td>
-                                        <td>EUR</td>
+                                        <td>{props.destination.facts?.currency}</td>
                                     </tr>
                                     <tr>
                                         <td className={styles.TableRowKey}>Rahvaarv</td>
-                                        <td>1 464 000</td>
+                                        <td>{props.destination.facts?.population}</td>
                                     </tr>
                                     <tr>
                                         <td className={styles.TableRowKey}>Ajavöönd</td>
-                                        <td>GMT + 1</td>
+                                        <td>{props.destination.facts?.timezone}</td>
                                     </tr>
                                     </tbody>
                                 </table>

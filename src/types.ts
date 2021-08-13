@@ -114,7 +114,14 @@ export type DestinationContent = {
     parentDestination?: Destination
     nextDestination?: Destination
     previousDestination?: Destination
-    childDestinations?: Destination[]
+    childDestinations?: Destination[],
+    facts: {
+        phoneCode?: string
+        area?: number
+        currency?: string
+        population?: number
+        timezone?: string
+    }
 }
 
 export type ForumRowType = {
