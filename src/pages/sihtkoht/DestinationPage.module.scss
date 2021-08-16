@@ -48,6 +48,7 @@
             bottom: -15px;
             right: 0;
             cursor: pointer;
+            white-space: nowrap;
 
             &:hover {
                 color: $gray;
