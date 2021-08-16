@@ -114,7 +114,9 @@ export type DestinationContent = {
     parentDestination?: Destination
     nextDestination?: Destination
     previousDestination?: Destination
-    childDestinations?: Destination[],
+    childDestinations?: Destination[]
+    usersHaveBeen?: number
+    usersWantsToGo?: number
     facts: {
         phoneCode?: string
         area?: number

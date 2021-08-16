@@ -145,11 +145,11 @@ const DestinationPage = (props: Props) => {
                     <div className={styles.HaveBeenBlock}>
                         <div className={styles.BlockItem}>
                             <PinIcon />
-                            <span>232</span>
+                            <span>{props.destination.usersHaveBeen || 0}</span>
                         </div>
                         <div className={styles.BlockItem}>
                             <StarIcon />
-                            <span>43</span>
+                            <span>{props.destination.usersWantsToGo || 0}</span>
                         </div>
                     </div>
 
