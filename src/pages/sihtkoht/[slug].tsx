@@ -82,30 +82,24 @@ const DestinationPage = (props: Props) => {
                                 <span className={styles.Title}>Head pakkumised</span>
                                 <MoreLink route={'/odavad-lennupiletid'} title={'Veel ›'} noSvg={true} />
                             </div>
-                            <div className={styles.FlightOfferCard}>
-                                <Image
-                                    src={'https://trip.ee/images/medium/florian-wehde-WBGjg0DsO_g-unsplash_mljo.jpeg'}
-                                    alt=""
-                                    layout={'fill'}
-                                    objectFit={'cover'}/>
-                                <div className={styles.CardBackgroundLayer}>
-                                    <span className={styles.FlightOfferTitle}>
-                                        Edasi-tagasi lennupiletid Tallinnast Madriidi alates 110€
-                                    </span>
-                                </div>
-                            </div>
-                            <div className={styles.FlightOfferCard}>
-                                <Image
-                                    src={'https://trip.ee/images/medium/venice-3183168_960_720_9sr0.jpeg'}
-                                    alt=""
-                                    layout={'fill'}
-                                    objectFit={'cover'}/>
-                                <div className={styles.CardBackgroundLayer}>
-                                    <span className={styles.FlightOfferTitle}>
-                                        Edasi-tagasi lennupiletid Tallinnast Madriidi alates 110€
-                                    </span>
-                                </div>
-                            </div>
+                            {
+                                props.destination.flights?.map(flight => {
+                                    return (
+                                        <div className={styles.FlightOfferCard}>
+                                            <Image
+                                                src={flight.imageUrl}
+                                                alt=""
+                                                layout={'fill'}
+                                                objectFit={'cover'}/>
+                                            <div className={styles.CardBackgroundLayer}>
+                                            <span className={styles.FlightOfferTitle}>
+                                                {flight.title}
+                                            </span>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                         <div className={styles.MetaDataBlock}>
                             <div className={styles.InfoContainer}>

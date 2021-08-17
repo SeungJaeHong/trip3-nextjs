@@ -117,6 +117,7 @@ export type DestinationContent = {
     childDestinations?: Destination[]
     usersHaveBeen?: number
     usersWantsToGo?: number
+    flights?: FlightOfferCardType[]
     facts: {
         phoneCode?: string
         area?: number
