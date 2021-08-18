@@ -12,8 +12,8 @@ import DottedMapIcon from "../../icons/DottedMapIcon"
 import {DestinationContent, ForumRowType} from "../../types"
 import Link from "next/link"
 import Tag from "../../components/Tag"
-import PinIcon from "../../icons/PinIcon";
-import StarIcon from "../../icons/StarIcon";
+import PinIcon from "../../icons/PinIcon"
+import StarIcon from "../../icons/StarIcon"
 
 type Props = {
     destination: DestinationContent
@@ -85,18 +85,20 @@ const DestinationPage = (props: Props) => {
                             {
                                 props.destination.flights?.map(flight => {
                                     return (
-                                        <div className={styles.FlightOfferCard}>
-                                            <Image
-                                                src={flight.imageUrl}
-                                                alt=""
-                                                layout={'fill'}
-                                                objectFit={'cover'}/>
-                                            <div className={styles.CardBackgroundLayer}>
-                                            <span className={styles.FlightOfferTitle}>
-                                                {flight.title}
-                                            </span>
-                                            </div>
-                                        </div>
+                                        <Link href={'/odavad-lennupiletid/' + flight.slug}>
+                                            <a className={styles.FlightOfferCard}>
+                                                <Image
+                                                    src={flight.imageUrl}
+                                                    alt=""
+                                                    layout={'fill'}
+                                                    objectFit={'cover'}/>
+                                                <div className={styles.CardBackgroundLayer}>
+                                                <span className={styles.FlightOfferTitle}>
+                                                    {flight.title}
+                                                </span>
+                                                </div>
+                                            </a>
+                                        </Link>
                                     )
                                 })
                             }
