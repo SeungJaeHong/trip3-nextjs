@@ -110,7 +110,8 @@ export type DestinationContent = {
     name: string
     slug: string
     backgroundImageUrl: string
-    description: string
+    description?: string
+    descriptionPreview?: string
     parentDestination?: Destination
     nextDestination?: Destination
     previousDestination?: Destination

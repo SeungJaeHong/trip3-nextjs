@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useState} from 'react'
 import axios from 'axios'
 import {GetServerSideProps} from 'next'
 import Header from "../../components/Header"
@@ -21,6 +21,7 @@ type Props = {
 }
 
 const DestinationPage = (props: Props) => {
+    const [showMore, setShowMore] = useState(false)
     const renderChildDestinations = () => {
         if (!props.destination.childDestinations?.length) {
             return null
@@ -44,6 +45,19 @@ const DestinationPage = (props: Props) => {
                 </div>
             </div>
         )
+    }
+
+    const renderDescription = () => {
+        if (props.destination.description?.length) {
+            return (
+                <div className={styles.Description}>
+                    {showMore ? props.destination.description : props.destination.descriptionPreview}
+                    <span className={styles.ReadMore} onClick={() => setShowMore(!showMore)}>{showMore ? 'Loe vähem ›' : 'Loe edasi ›'}</span>
+                </div>
+            )
+        }
+
+        return null
     }
 
     return (
@@ -85,7 +99,7 @@ const DestinationPage = (props: Props) => {
                             {
                                 props.destination.flights?.map(flight => {
                                     return (
-                                        <Link href={'/odavad-lennupiletid/' + flight.slug}>
+                                        <Link href={'/odavad-lennupiletid/' + flight.slug} key={flight.id}>
                                             <a className={styles.FlightOfferCard}>
                                                 <Image
                                                     src={flight.imageUrl}
@@ -125,10 +139,9 @@ const DestinationPage = (props: Props) => {
                                     </tr>
                                     </tbody>
                                 </table>
-                                <div className={styles.Description}>
-                                    1,5 miljoni elanikuga Baierimaa pealinna Münchenit hinnatakse parima elukvaliteediga linnaks tervel Saksamaal.
-                                    Sellele võib muidugi vastu vaielda, sest Müncheni lähedal leidub... <span className={styles.ReadMore}>Loe edasi ›</span>
-                                </div>
+
+                                {renderDescription()}
+
                             </div>
                             <div className={styles.Map}>
                                 <DottedMapIcon />
