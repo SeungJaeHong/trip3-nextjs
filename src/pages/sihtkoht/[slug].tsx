@@ -9,7 +9,7 @@ import MoreLink from "../../components/MoreLink"
 import Image from 'next/image'
 import ImageGallery from "../../components/ImageGallery"
 import DottedMapIcon from "../../icons/DottedMapIcon"
-import {DestinationContent, ForumRowType} from "../../types"
+import {Destination, DestinationContent, ForumRowType} from "../../types"
 import Link from "next/link"
 import Tag from "../../components/Tag"
 import PinIcon from "../../icons/PinIcon"
@@ -21,9 +21,10 @@ type Props = {
 }
 
 const DestinationPage = (props: Props) => {
+    const destination = props.destination
     const [showMore, setShowMore] = useState(false)
     const renderChildDestinations = () => {
-        if (!props.destination.childDestinations?.length) {
+        if (!destination.childDestinations?.length) {
             return null
         }
 
@@ -33,14 +34,14 @@ const DestinationPage = (props: Props) => {
                     Populaarsed sihtkohad
                 </div>
                 <div className={styles.ChildDestinations}>
-                    {props.destination.childDestinations?.map(destination => {
+                    {destination.childDestinations?.map((d: Destination) => {
                         return <Tag
-                            title={destination.name}
+                            title={d.name}
                             type={'destination'}
-                            route={'/sihtkoht/' + destination.slug}
+                            route={'/sihtkoht/' + d.slug}
                             white={true}
                             large={true}
-                            key={destination.id} />
+                            key={d.id} />
                     })}
                 </div>
             </div>
@@ -48,10 +49,10 @@ const DestinationPage = (props: Props) => {
     }
 
     const renderDescription = () => {
-        if (props.destination.description?.length) {
+        if (destination.description?.length) {
             return (
                 <div className={styles.Description}>
-                    {showMore ? props.destination.description : props.destination.descriptionPreview}
+                    {showMore ? destination.description : destination.descriptionPreview}
                     <span className={styles.ReadMore} onClick={() => setShowMore(!showMore)}>{showMore ? 'Loe vähem ›' : 'Loe edasi ›'}</span>
                 </div>
             )
@@ -65,25 +66,25 @@ const DestinationPage = (props: Props) => {
             <Header backgroundImage={'https://trip.ee/images/large/Ateena-acropolis-px_kfwx.jpeg'}>
                 <div className={styles.HeaderContainer}>
                     {
-                        props.destination.previousDestination ?
-                            <Link href={'/sihtkoht/' + props.destination.previousDestination.slug}>
-                                <a className={styles.NextDestination}>‹ {props.destination.previousDestination.name}</a>
+                        destination.previousDestination ?
+                            <Link href={'/sihtkoht/' + destination.previousDestination.slug}>
+                                <a className={styles.NextDestination}>‹ {destination.previousDestination.name}</a>
                             </Link> : <span className={styles.NextDestination}></span>
                     }
                     <div className={styles.DestinationName}>
-                        {props.destination.name}
-                        {props.destination.parentDestination?.name &&
-                        <Link href={'/sihtkoht/' + props.destination.parentDestination.slug}>
+                        {destination.name}
+                        {destination.parentDestination?.name &&
+                        <Link href={'/sihtkoht/' + destination.parentDestination.slug}>
                             <a className={styles.ParentDestinationName}>
-                                {props.destination.parentDestination.name} ›
+                                {destination.parentDestination.name} ›
                             </a>
                         </Link>
                         }
                     </div>
                     {
-                        props.destination.nextDestination ?
-                            <Link href={'/sihtkoht/' + props.destination.nextDestination.slug}>
-                                <a className={styles.NextDestination}>{props.destination.nextDestination.name} ›</a>
+                        destination.nextDestination ?
+                            <Link href={'/sihtkoht/' + destination.nextDestination.slug}>
+                                <a className={styles.NextDestination}>{destination.nextDestination.name} ›</a>
                             </Link> : <span className={styles.NextDestination}></span>
                     }
                 </div>
@@ -97,7 +98,7 @@ const DestinationPage = (props: Props) => {
                                 <MoreLink route={'/odavad-lennupiletid'} title={'Veel ›'} noSvg={true} />
                             </div>
                             {
-                                props.destination.flights?.map(flight => {
+                                destination.flights?.map(flight => {
                                     return (
                                         <Link href={'/odavad-lennupiletid/' + flight.slug} key={flight.id}>
                                             <a className={styles.FlightOfferCard}>
@@ -123,19 +124,19 @@ const DestinationPage = (props: Props) => {
                                     <tbody>
                                     <tr>
                                         <td className={styles.TableRowKey}>Suunakood</td>
-                                        <td>{props.destination.facts?.phoneCode}</td>
+                                        <td>{destination.facts?.phoneCode}</td>
                                     </tr>
                                     <tr>
                                         <td className={styles.TableRowKey}>Valuuta</td>
-                                        <td>{props.destination.facts?.currency}</td>
+                                        <td>{destination.facts?.currency}</td>
                                     </tr>
                                     <tr>
                                         <td className={styles.TableRowKey}>Rahvaarv</td>
-                                        <td>{props.destination.facts?.population}</td>
+                                        <td>{destination.facts?.population}</td>
                                     </tr>
                                     <tr>
                                         <td className={styles.TableRowKey}>Ajavöönd</td>
-                                        <td>{props.destination.facts?.timezone}</td>
+                                        <td>{destination.facts?.timezone}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -154,11 +155,11 @@ const DestinationPage = (props: Props) => {
                     <div className={styles.HaveBeenBlock}>
                         <div className={styles.BlockItem}>
                             <PinIcon />
-                            <span>{props.destination.usersHaveBeen || 0}</span>
+                            <span>{destination.usersHaveBeen || 0}</span>
                         </div>
                         <div className={styles.BlockItem}>
                             <StarIcon />
-                            <span>{props.destination.usersWantsToGo || 0}</span>
+                            <span>{destination.usersWantsToGo || 0}</span>
                         </div>
                     </div>
 
