@@ -119,6 +119,7 @@ export type DestinationContent = {
     usersHaveBeen?: number
     usersWantsToGo?: number
     flights?: FlightOfferCardType[]
+    forumPosts?: ForumRowType[]
     facts: {
         phoneCode?: string
         area?: number

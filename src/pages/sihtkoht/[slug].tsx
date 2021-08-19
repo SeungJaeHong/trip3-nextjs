@@ -9,15 +9,15 @@ import MoreLink from "../../components/MoreLink"
 import Image from 'next/image'
 import ImageGallery from "../../components/ImageGallery"
 import DottedMapIcon from "../../icons/DottedMapIcon"
-import {Destination, DestinationContent, ForumRowType} from "../../types"
+import {Destination, DestinationContent} from "../../types"
 import Link from "next/link"
 import Tag from "../../components/Tag"
 import PinIcon from "../../icons/PinIcon"
 import StarIcon from "../../icons/StarIcon"
+import ForumList from "../../components/Forum/ForumList"
 
 type Props = {
     destination: DestinationContent
-    forumPosts?: ForumRowType[]
 }
 
 const DestinationPage = (props: Props) => {
@@ -170,7 +170,7 @@ const DestinationPage = (props: Props) => {
             </div>
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.RelatedContent}>
-                    Content
+                    <ForumList items={destination.forumPosts} />
                 </div>
             </div>
             <Footer />
