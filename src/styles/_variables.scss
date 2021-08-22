@@ -36,3 +36,33 @@ $gray-darker: #6c747a;
 $gray-dark: #545a5f;
 $gray-dark-hover: #303436;
 $cyan: #4AC9E3;
+
+
+$xs-screen-width: 480px;
+$sm-screen-width: 600px;
+$md-screen-width: 768px;
+$lg-screen-width: 1024px;
+
+@mixin xs() {
+    @media (max-width: $xs-screen-width) {
+        @content;
+    }
+}
+
+@mixin sm() {
+    @media (max-width: $sm-screen-width) {
+        @content;
+    }
+}
+
+@mixin md() {
+    @media (max-width: $md-screen-width) {
+        @content;
+    }
+}
+
+@mixin lg() {
+    @media (max-width: $lg-screen-width) {
+        @content;
+    }
+}
