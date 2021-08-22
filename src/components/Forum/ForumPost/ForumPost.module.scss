@@ -59,6 +59,11 @@
 
         a {
             word-break: break-all;
+            color: $blue;
+
+            &:hover {
+                color: $blue-hover;
+            }
         }
 
         img {
