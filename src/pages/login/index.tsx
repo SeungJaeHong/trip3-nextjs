@@ -4,85 +4,44 @@ import { useAuth } from "../../context/AuthContext"
 import Navbar from "../../components/Navbar"
 import styles from './Login.module.scss'
 import clsx from "clsx";
-import Footer from "../../components/Footer";
+import Footer from "../../components/Footer"
+import containerStyle from "../../styles/containers.module.scss"
+import BackgroundMap from "../../components/BackgroundMap";
+import Link from "next/link";
+import LoginForm from "../../components/LoginForm";
 
-const Login = () => {
-    const [formInput, setFormInput] = useState({email: '', password: ''})
-    const { user, login } = useAuth()
-
-    const signIn = (e: any) => {
-        e.preventDefault()
-
-        if (formInput) {
-            if (login(formInput.email, formInput.password)) {
-                //todo: show success notifocation
-            } else {
-                console.log('invalid data')
-            }
-        } else {
-            console.log('fill fields')
-        }
-    }
-
-    const updateFormInput = (e: any) => {
-        e.persist()
-        setFormInput(prevState => ({...prevState, [e.target.name]: e.target.value}))
-    }
-
-    useEffect(() => {
-        if (user) {
-            Router.replace("/");
-        }
-    }, [user]);
-
+const LoginPage = () => {
     return (
-        <>
+        <Fragment>
             <div className={styles.Container}>
-                <div className={clsx(styles.Navbar, styles.BackgroundGray)}>
-                    <Navbar darkMode={true}/>
-                </div>
-                <div className={clsx(styles.Form, styles.BackgroundGray)}>
-                    <span className="flex">
-                        Email: corene88@example.net
-                    </span>
-                    <span className="pb-3 flex">
-                        Psw: password
-                    </span>
-                    <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                        <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                                Email
-                            </label>
-                            <input
-                                onChange={updateFormInput}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="email" name="email" type="text" placeholder="Email" autoComplete={'off'} />
-                        </div>
-                        <div className="mb-6">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                                Password
-                            </label>
-                            <input
-                                onChange={updateFormInput}
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="password" name="password" type="password" autoComplete={'off'} />
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <button
-                                onClick={signIn}
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                type="submit">
-                                Sign In
-                            </button>
-                        </div>
-                    </form>
+                <BackgroundMap />
+                <div className={containerStyle.ContainerXl}>
+                    <div className={clsx(styles.Navbar)}>
+                        <Navbar darkMode={true} />
+                    </div>
+                    <div className={styles.Title}>
+                        Logi sisse
+                    </div>
+                    <div className={styles.RegisterTitle}>
+                        Pole veel kasutaja?
+                        <Link href={'/register'}>
+                            <a>Registreeri siin</a>
+                        </Link>
+                    </div>
+                    <div className={styles.Form}>
+                        <span>
+                            Email: corene88@example.net
+                        </span>
+                        <span>
+                            Psw: password
+                        </span>
+                        <LoginForm />
+                    </div>
                 </div>
             </div>
             <Footer simple={true} />
-        </>
+        </Fragment>
     )
 }
 
-Login.simpleFooter = true
-
-export default Login
+export default LoginPage

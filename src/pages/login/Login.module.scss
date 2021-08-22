@@ -2,10 +2,7 @@
 
 .Container {
     position: relative;
-}
-
-.BackgroundGray {
-    background-color: $gray-light;
+    background: $gray-light;
 }
 
 .Navbar {
@@ -13,10 +10,37 @@
     padding-top: $spacer * 3;
 }
 
+.Title {
+    font-weight: 600;
+    font-size: 3rem;
+    color: $gray-dark;
+    display: flex;
+    justify-content: center;
+    margin-bottom: $spacer * 6;
+}
+
+.RegisterTitle {
+    display: flex;
+    justify-content: center;
+    color: $gray-dark;
+    font-weight: 500;
+    font-size: $font-size-medium;
+    margin-bottom: $spacer * 4;
+
+    a {
+        color: $blue;
+        margin-left: $spacer;
+
+        &:hover {
+            color: $blue-hover;
+        }
+    }
+}
+
 .Form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: $spacer * 8 0;
+    padding-bottom: $spacer * 6;
 }
