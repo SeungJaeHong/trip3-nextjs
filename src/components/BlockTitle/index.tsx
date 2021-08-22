@@ -1,19 +1,24 @@
 import styles from "./BlockTitle.module.scss"
+import clsx from "clsx"
 
 type Props = {
-    title: string
-    route?: string //todo: remove after
+    title: string,
+    className: string
 }
 
 const BlockTitle = (props: Props) => {
     return (
-        <div className={styles.BlockTitle}>
-            <span className={styles.Title}>
-                {props.title}
-            </span>
+        <div className={clsx(styles.BlockTitle, {
+            [props.className]: true
+        })}>
+            {props.title}
         </div>
 
     )
+}
+
+BlockTitle.defaultProps = {
+    className: ''
 }
 
 export default BlockTitle

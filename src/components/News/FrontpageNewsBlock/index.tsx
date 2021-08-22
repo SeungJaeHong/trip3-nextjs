@@ -20,7 +20,7 @@ const FrontpageNewsBlock = () => {
 
     return (
         <div className={styles.FrontpageNewsBlock}>
-            <BlockTitle title={'Uudised'} route={'/'} />
+            <BlockTitle title={'Uudised'} />
             <div className={styles.NewsGrid}>
                 {news.map((newsItem: NewsCardType) => {
                     return <NewsCard {...newsItem} key={newsItem.id} />

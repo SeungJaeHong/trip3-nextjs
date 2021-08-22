@@ -15,6 +15,7 @@ import Tag from "../../components/Tag"
 import PinIcon from "../../icons/PinIcon"
 import StarIcon from "../../icons/StarIcon"
 import ForumList from "../../components/Forum/ForumList"
+import BlockTitle from "../../components/BlockTitle"
 
 type Props = {
     destination: DestinationContent
@@ -170,7 +171,16 @@ const DestinationPage = (props: Props) => {
             </div>
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.RelatedContent}>
-                    <ForumList items={destination.forumPosts} />
+                    <div className={styles.ForumContent}>
+                        <BlockTitle title={'Tripikad räägivad'} className={styles.ForumBlockTitle} />
+                        <ForumList items={destination.forumPosts} />
+                        <div className={styles.MoreForumLink}>
+                            <MoreLink route={'/foorum/uldfoorum'} title={'Kõik positused'} />
+                        </div>
+                    </div>
+                    <div className={styles.AdsContent}>
+                        Ads
+                    </div>
                 </div>
             </div>
             <Footer />

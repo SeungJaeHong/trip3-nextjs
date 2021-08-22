@@ -76,7 +76,7 @@ const Home = (props: Props) => {
 
                     <div className={styles.ForumContainer}>
                         <div className={styles.ForumBlockTitle}>
-                            <BlockTitle title={'Tripikad räägivad'} route={'/'} />
+                            <BlockTitle title={'Tripikad räägivad'} />
                         </div>
                         <div className={styles.ForumBlock}>
                             <div className={styles.ForumList}>
@@ -109,7 +109,7 @@ const Home = (props: Props) => {
                     <FrontpageNewsBlock />
                 </div>
 
-                <BlockTitle title={'Viimati lisatud pildid'} route={'/'} />
+                <BlockTitle title={'Viimati lisatud pildid'} />
             </div>
 
             <div className={styles.ImageGalleryContainer}>

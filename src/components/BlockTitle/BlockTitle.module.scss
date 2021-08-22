@@ -4,17 +4,10 @@
 .BlockTitle {
     display: flex;
     cursor: default;
-
-    .Title {
-        font-size: $font-size-normal;
-        line-height: 2rem;
-        color: $green;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: .05em;
-
-        /*&:hover {
-            color: $green-hover;
-        }*/
-    }
+    font-size: $font-size-normal;
+    line-height: 2rem;
+    color: $green;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .05em;
 }

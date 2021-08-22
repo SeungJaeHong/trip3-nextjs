@@ -19,7 +19,7 @@ const FlightOffersLatest = () => {
 
     return (
         <div className={styles.FlightOffersLatest}>
-            <BlockTitle title={'Lennupakkumised'} route={'/'} />
+            <BlockTitle title={'Lennupakkumised'} />
             <div className={styles.Content}>
                 <FlightOfferList items={flights} />
             </div>

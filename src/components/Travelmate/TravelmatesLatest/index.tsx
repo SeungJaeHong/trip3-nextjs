@@ -19,7 +19,7 @@ const TravelmatesLatest = () => {
 
     return (
         <div className={styles.TravelmatesLatest}>
-            <BlockTitle title={'Reisikaaslased'} route={'/'} />
+            <BlockTitle title={'Reisikaaslased'} />
             <div className={styles.Content}>
                 <TravelmateList items={travelmates} />
             </div>

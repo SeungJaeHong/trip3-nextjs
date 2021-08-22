@@ -254,5 +254,38 @@
 .RelatedContent {
     background: $white;
     padding: $spacer * 5 0;
+    display: flex;
+
+    @include lg() {
+        flex-direction: column;
+    }
+
+    .ForumContent {
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+        padding-right: $spacer * 6;
+
+        @include lg() {
+            flex: 1;
+            margin-bottom: $spacer * 4;
+            padding-right: 0;
+        }
+
+        .ForumBlockTitle {
+            color: $yellow;
+            margin-bottom: $spacer * 3;
+        }
+
+        .MoreForumLink {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+
+    .AdsContent {
+        flex: 1;
+        display: flex;
+    }
 }
 
