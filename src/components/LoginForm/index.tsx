@@ -34,32 +34,45 @@ const LoginForm = () => {
     }, [user]);
 
     return (
-        <div>
-            <form>
-                <div>
-                    <label htmlFor="email">
-                        Email
-                    </label>
-                    <input
-                        onChange={updateFormInput}
-                        id="email" name="email" type="text" placeholder="Email" autoComplete={'off'} />
+        <div className={styles.LoginForm}>
+            <div className={styles.Tabs}>
+                <div className={styles.Tab}>
+                    Kasutajanimi
                 </div>
-                <div>
-                    <label htmlFor="password">
-                        Password
-                    </label>
-                    <input
-                        onChange={updateFormInput}
-                        id="password" name="password" type="password" autoComplete={'off'} />
+                <div className={clsx(styles.Tab, styles.Social, styles.Facebook)}>
+                    Facebook
                 </div>
-                <div>
-                    <button
-                        onClick={signIn}
-                        type="submit">
-                        Sign In
-                    </button>
+                <div className={clsx(styles.Tab, styles.Social, styles.Google)}>
+                    Google
                 </div>
-            </form>
+            </div>
+            <div className={styles.FormContainer}>
+                <form>
+                    <div>
+                        <label htmlFor="email">
+                            Email
+                        </label>
+                        <input
+                            onChange={updateFormInput}
+                            id="email" name="email" type="text" placeholder="Email" autoComplete={'off'} />
+                    </div>
+                    <div>
+                        <label htmlFor="password">
+                            Password
+                        </label>
+                        <input
+                            onChange={updateFormInput}
+                            id="password" name="password" type="password" autoComplete={'off'} />
+                    </div>
+                    <div>
+                        <button
+                            onClick={signIn}
+                            type="submit">
+                            Sign In
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
 
     )

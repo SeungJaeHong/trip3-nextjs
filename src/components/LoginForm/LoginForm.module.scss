@@ -2,6 +2,51 @@
 
 .LoginForm {
     display: flex;
+    flex-direction: column;
     width: 100%;
+    background: $white;
+    max-width: 520px;
+    z-index: 2;
 
+    .Tabs {
+        display: flex;
+        width: 100%;
+
+        @include sm() {
+            flex-direction: column;
+        }
+
+        .Tab {
+            flex: 1;
+            display: flex;
+            color: $blue;
+            font-weight: 600;
+            font-size: $font-size-medium;
+            height: 50px;
+            justify-content: center;
+            align-items: center;
+
+            &.Social {
+                color: $white;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: .8;
+                }
+            }
+
+            &.Facebook {
+                background: $blue-dark;
+            }
+
+            &.Google {
+                background: $red-dark;
+            }
+        }
+    }
+
+    .FormContainer {
+        display: flex;
+        padding: $spacer * 4;
+    }
 }

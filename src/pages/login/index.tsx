@@ -29,12 +29,6 @@ const LoginPage = () => {
                         </Link>
                     </div>
                     <div className={styles.Form}>
-                        <span>
-                            Email: corene88@example.net
-                        </span>
-                        <span>
-                            Psw: password
-                        </span>
                         <LoginForm />
                     </div>
                 </div>
