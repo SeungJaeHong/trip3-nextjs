@@ -5,7 +5,6 @@ import ForumList from "../ForumList";
 import SimplePaginator from "../../Paginator/SimplePaginator";
 import Header from "../../Header";
 import MainSearchInput from "../../MainSearchInput";
-import Select from "react-select";
 import clsx from "clsx";
 import containerStyle from "../../../styles/containers.module.scss";
 import ForumTabs from "../ForumTabs";
@@ -14,6 +13,7 @@ import Button from "../../Button"
 import Footer from "../../Footer"
 import styles from "./ForumIndexPage.module.scss"
 import { useRouter } from 'next/router'
+import FormSelect from "../../Form/FormSelect"
 
 type Props = {
     type: 'general' | 'buysell' | 'foreign' | 'other' | 'follows',
@@ -79,22 +79,20 @@ const ForumIndexPage = (props: Props) => {
                 </div>
                 <div className={styles.Filters}>
                     <div className={styles.Select}>
-                        <Select
-                            instanceId={'destination'}
+                        <FormSelect
+                            id={'destination'}
                             options={options}
+                            placeholder={'Sihtkoht'}
                             className={styles.Select}
-                            classNamePrefix={'ForumFilter'}
-                            isClearable={true}
-                            placeholder={'Sihtkoht'} />
+                            classNamePrefix={'ForumFilter'} />
                     </div>
                     <div className={styles.Select}>
-                        <Select
-                            instanceId={'topic'}
+                        <FormSelect
+                            id={'topic'}
                             options={options}
+                            placeholder={'Valdkond'}
                             className={styles.Select}
-                            classNamePrefix={'ForumFilter'}
-                            isClearable={true}
-                            placeholder={'Valdkond'} />
+                            classNamePrefix={'ForumFilter'} />
                     </div>
                 </div>
             </Fragment>

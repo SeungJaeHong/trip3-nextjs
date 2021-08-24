@@ -5,9 +5,11 @@ import clsx from "clsx";
 
 type Props = {
     id: string,
-    options: [],
+    options: { value: string, label: string }[],
     placeholder?: string,
     className?: string
+    classNamePrefix?: string
+    isClearable: boolean
 }
 
 const FormSelect = (props: Props) => {
@@ -26,13 +28,18 @@ const FormSelect = (props: Props) => {
                 instanceId={props.id}
                 options={props.options}
                 className={clsx(styles.FormSelect, props.className)}
-                classNamePrefix={'FormSelect'}
-                isClearable={true}
+                classNamePrefix={props.classNamePrefix}
+                isClearable={props.isClearable}
                 noOptionsMessage={() => 'Valikud puuduvad'}
                 placeholder={props.placeholder} />
         </div>
 
     )
+}
+
+FormSelect.defaultProps = {
+    classNamePrefix: 'FormSelect',
+    isClearable: true
 }
 
 export default FormSelect
