@@ -1,0 +1,25 @@
+@import "../../../styles/variables";
+
+.FormInput {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    label {
+        color: $gray-darker;
+        margin-bottom: $spacer;
+        font-size: $font-size-normal;
+        font-weight: 500;
+        line-height: 1.2rem
+    }
+
+    input {
+        font-size: $font-size-medium;
+        font-weight: 600;
+        border-radius: 3px;
+        border: 2px solid $gray;
+        color: $gray-dark;
+        padding: $spacer * 1.5;
+        width: 100%;
+    }
+}

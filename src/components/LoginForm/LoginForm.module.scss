@@ -5,7 +5,7 @@
     flex-direction: column;
     width: 100%;
     background: $white;
-    max-width: 520px;
+    max-width: 500px;
     z-index: 2;
 
     .Tabs {
@@ -25,6 +25,17 @@
             height: 50px;
             justify-content: center;
             align-items: center;
+
+            @include sm() {
+                width: 100%;
+                flex: none;
+            }
+
+            &.UserName {
+                @include sm() {
+                    display: none;
+                }
+            }
 
             &.Social {
                 color: $white;
@@ -47,6 +58,14 @@
 
     .FormContainer {
         display: flex;
-        padding: $spacer * 4;
+        padding: $spacer * 5;
+
+        form {
+            width: 100%;
+
+            .FormInput {
+                margin-bottom: $spacer * 3;
+            }
+        }
     }
 }

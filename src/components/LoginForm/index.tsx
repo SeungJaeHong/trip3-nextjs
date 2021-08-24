@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react"
 import styles from "./LoginForm.module.scss"
 import clsx from "clsx"
-import {useAuth} from "../../context/AuthContext";
-import Router from "next/router";
+import {useAuth} from "../../context/AuthContext"
+import Router from "next/router"
+import FormInput from "../Form/FormInput"
 
 const LoginForm = () => {
     const [formInput, setFormInput] = useState({email: '', password: ''})
@@ -36,7 +37,7 @@ const LoginForm = () => {
     return (
         <div className={styles.LoginForm}>
             <div className={styles.Tabs}>
-                <div className={styles.Tab}>
+                <div className={clsx(styles.Tab, styles.UserName)}>
                     Kasutajanimi
                 </div>
                 <div className={clsx(styles.Tab, styles.Social, styles.Facebook)}>
@@ -48,22 +49,29 @@ const LoginForm = () => {
             </div>
             <div className={styles.FormContainer}>
                 <form>
-                    <div>
+                    <div className={styles.FormInput}>
+                        <FormInput name={'username'} label={'Kasutajanimi'} />
+                    </div>
+                    <div className={styles.FormInput}>
+                        <FormInput name={'password'} label={'Parool'} type={'password'} />
+                    </div>
+
+                    {/*<div>
                         <label htmlFor="email">
                             Email
                         </label>
                         <input
                             onChange={updateFormInput}
                             id="email" name="email" type="text" placeholder="Email" autoComplete={'off'} />
-                    </div>
-                    <div>
+                    </div>*/}
+                    {/*<div>
                         <label htmlFor="password">
                             Password
                         </label>
                         <input
                             onChange={updateFormInput}
                             id="password" name="password" type="password" autoComplete={'off'} />
-                    </div>
+                    </div>*/}
                     <div>
                         <button
                             onClick={signIn}
