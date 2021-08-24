@@ -1,5 +1,5 @@
 import styles from './TravelmateFilter.module.scss'
-import FormSelect from "../../Form/Select";
+import FormSelect from '../../Form/FormSelect'
 
 const TravelmateFilter = (props: any) => {
     return (
