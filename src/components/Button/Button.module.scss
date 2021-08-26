@@ -32,7 +32,13 @@
         }
     }
 
-    &:hover {
+    &:disabled {
+        cursor: not-allowed;
+        opacity: .8;
+        background: $gray;
+    }
+
+    &:hover:not([disabled]) {
         background: $green-hover;
 
         &.Light {

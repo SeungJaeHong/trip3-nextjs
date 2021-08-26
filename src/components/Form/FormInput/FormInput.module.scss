@@ -21,5 +21,11 @@
         color: $gray-dark;
         padding: $spacer * 1.5;
         width: 100%;
+
+        &::placeholder {
+            color: $gray;
+            font-size: $font-size-normal;
+            font-weight: 400;
+        }
     }
 }

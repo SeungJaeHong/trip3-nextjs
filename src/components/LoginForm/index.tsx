@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react"
+import {Field, Form, Formik, FormikProps} from 'formik'
 import styles from "./LoginForm.module.scss"
 import clsx from "clsx"
 import {useAuth} from "../../context/AuthContext"
 import Router from "next/router"
 import FormInput from "../Form/FormInput"
-import Button from "../Button"
+import SubmitButton from "../Form/SubmitButton"
 
 const LoginForm = () => {
     const [formInput, setFormInput] = useState({email: '', password: ''})
@@ -49,17 +50,44 @@ const LoginForm = () => {
                 </div>
             </div>
             <div className={styles.FormContainer}>
-                <form>
-                    <div className={styles.FormInput}>
-                        <FormInput name={'username'} label={'Kasutajanimi'} />
-                    </div>
-                    <div className={styles.FormInput}>
-                        <FormInput name={'password'} label={'Parool'} type={'password'} />
-                    </div>
-                    <div className={styles.SubmitButton}>
-                        <Button title={'Logi sisse'} onClick={signIn} />
-                    </div>
-                </form>
+                <Formik
+                    initialValues={{ userName: '', password: '' }}
+                    onSubmit={(values, actions) => {
+                        console.log(values)
+
+                        setTimeout(() => {
+                            //alert(JSON.stringify(values, null, 2));
+                            actions.setSubmitting(false);
+                        }, 2500);
+                    }}
+                >
+                    {(props: FormikProps<any>) => (
+                        <Form>
+                            <div className={styles.FormInput}>
+                                <Field
+                                    name={'userName'}
+                                    id={'userName'}
+                                    label={'Kasutajanimi'}
+                                    disabled={props.isSubmitting}
+                                    component={FormInput} />
+                            </div>
+                            <div className={styles.FormInput}>
+                                <Field
+                                    name={'password'}
+                                    id={'password'}
+                                    label={'Parool'}
+                                    type={'password'}
+                                    disabled={props.isSubmitting}
+                                    component={FormInput} />
+                            </div>
+                            <div className={styles.SubmitButton}>
+                                <SubmitButton
+                                    title={'Logi sisse'}
+                                    submitting={props.isSubmitting} />
+                            </div>
+                        </Form>
+                    )}
+                </Formik>
             </div>
         </div>
     )
