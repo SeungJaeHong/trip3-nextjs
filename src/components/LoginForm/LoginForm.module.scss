@@ -47,11 +47,11 @@
             }
 
             &.Facebook {
-                background: $blue-dark;
+                background: #3b5998;
             }
 
             &.Google {
-                background: $red-dark;
+                background: #dd4b39;
             }
         }
     }
@@ -66,6 +66,10 @@
             .FormInput {
                 margin-bottom: $spacer * 3;
             }
+        }
+
+        .SubmitButton {
+            margin-top: $spacer * 5;
         }
     }
 }

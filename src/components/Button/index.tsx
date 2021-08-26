@@ -6,7 +6,7 @@ import clsx from "clsx"
 type Props = {
     title: string
     route?: string
-    onClick?: MouseEventHandler<HTMLDivElement> | undefined
+    onClick?: MouseEventHandler<HTMLElement> | undefined
     light?: boolean
 }
 
@@ -23,11 +23,11 @@ const Button = (props: Props) => {
         )
     } else {
         return (
-            <div className={clsx(styles.Button, {
+            <button className={clsx(styles.Button, {
                 [styles.Light]: props.light
             })} onClick={props.onClick ?? undefined}>
                 <span className={styles.Title}>{props.title}</span>
-            </div>
+            </button>
         )
     }
 }

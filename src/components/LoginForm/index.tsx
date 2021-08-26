@@ -4,6 +4,7 @@ import clsx from "clsx"
 import {useAuth} from "../../context/AuthContext"
 import Router from "next/router"
 import FormInput from "../Form/FormInput"
+import Button from "../Button"
 
 const LoginForm = () => {
     const [formInput, setFormInput] = useState({email: '', password: ''})
@@ -55,34 +56,12 @@ const LoginForm = () => {
                     <div className={styles.FormInput}>
                         <FormInput name={'password'} label={'Parool'} type={'password'} />
                     </div>
-
-                    {/*<div>
-                        <label htmlFor="email">
-                            Email
-                        </label>
-                        <input
-                            onChange={updateFormInput}
-                            id="email" name="email" type="text" placeholder="Email" autoComplete={'off'} />
-                    </div>*/}
-                    {/*<div>
-                        <label htmlFor="password">
-                            Password
-                        </label>
-                        <input
-                            onChange={updateFormInput}
-                            id="password" name="password" type="password" autoComplete={'off'} />
-                    </div>*/}
-                    <div>
-                        <button
-                            onClick={signIn}
-                            type="submit">
-                            Sign In
-                        </button>
+                    <div className={styles.SubmitButton}>
+                        <Button title={'Logi sisse'} onClick={signIn} />
                     </div>
                 </form>
             </div>
         </div>
-
     )
 }
 
