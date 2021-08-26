@@ -1,6 +1,6 @@
-import styles from "./SubmitButton.module.scss"
 import buttonStyles from "../../Button/Button.module.scss"
 import clsx from "clsx"
+import LoadingSpinner from "../../LoadingSpinner"
 
 type Props = {
     title: string
@@ -11,7 +11,7 @@ type Props = {
 const SubmitButton = (props: Props) => {
     const renderTitle = () => {
         if (props.submitting) {
-            return 'Loading'
+            return <LoadingSpinner show={true} />
         } else {
             return (
                 <span className={buttonStyles.Title}>{props.title}</span>
@@ -20,7 +20,7 @@ const SubmitButton = (props: Props) => {
     }
 
     return (
-        <button className={clsx(buttonStyles.Button, {[styles.Submitting]: props.submitting})}
+        <button className={clsx(buttonStyles.Button)}
             onClick={props.onClick ?? undefined}
             disabled={props.submitting}
             type={'submit'}

@@ -1,0 +1,37 @@
+@import "../../styles/variables";
+
+.LoadingSpinner {
+    text-align: center;
+
+    &.Show {
+        display: inline-block;
+    }
+
+    span {
+        width: 15px;
+        height: 15px;
+        background-color: $green-dark;
+        border-radius: 100%;
+        display: inline-block;
+        animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    }
+
+    .Bounce1 {
+        -webkit-animation-delay: -0.32s;
+        animation-delay: -0.32s;
+    }
+
+    .Bounce2 {
+        -webkit-animation-delay: -0.16s;
+        animation-delay: -0.16s;
+    }
+}
+
+@keyframes sk-bouncedelay {
+    0%, 80%, 100% {
+        transform: scale(0);
+    } 40% {
+          transform: scale(1.0);
+      }
+}
+
