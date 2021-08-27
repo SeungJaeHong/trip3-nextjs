@@ -10,13 +10,12 @@ type Props = {
 
 const SubmitButton = (props: Props) => {
     const renderTitle = () => {
-        if (props.submitting) {
-            return <LoadingSpinner show={true} />
-        } else {
-            return (
+        return (
+            <div className={buttonStyles.Loading}>
+                <LoadingSpinner show={props.submitting} />
                 <span className={buttonStyles.Title}>{props.title}</span>
-            )
-        }
+            </div>
+        )
     }
 
     return (

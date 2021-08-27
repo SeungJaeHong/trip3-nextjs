@@ -7,9 +7,7 @@ const LoadingSpinner = ({show}) => {
         <div className={clsx(styles.LoadingSpinner, {
             [styles.Show]: show
         })}>
-            <span className={styles.Bounce1} />
-            <span className={styles.Bounce2} />
-            <span />
+            <div className={styles.Spinner} />
         </div>
     )
 }

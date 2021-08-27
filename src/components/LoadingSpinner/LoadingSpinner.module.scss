@@ -1,37 +1,30 @@
 @import "../../styles/variables";
 
 .LoadingSpinner {
-    text-align: center;
+    position: relative;
+    display: none;
+    justify-content: center;
 
     &.Show {
-        display: inline-block;
+        display: flex;
     }
 
-    span {
-        width: 15px;
-        height: 15px;
-        background-color: $green-dark;
-        border-radius: 100%;
-        display: inline-block;
-        animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-    }
-
-    .Bounce1 {
-        -webkit-animation-delay: -0.32s;
-        animation-delay: -0.32s;
-    }
-
-    .Bounce2 {
-        -webkit-animation-delay: -0.16s;
-        animation-delay: -0.16s;
+    .Spinner {
+        border-top: 3px solid $white;
+        border-right: 3px solid transparent;
+        border-radius: 50%;
+        animation: rotation 0.8s linear infinite;
+        width: 25px;
+        height: 25px;
     }
 }
 
-@keyframes sk-bouncedelay {
-    0%, 80%, 100% {
-        transform: scale(0);
-    } 40% {
-          transform: scale(1.0);
-      }
+@keyframes rotation{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
 }
 
