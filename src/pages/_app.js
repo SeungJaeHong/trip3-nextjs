@@ -1,9 +1,9 @@
-import App from 'next/app'
-import '../styles/globals.scss'
+//import App from 'next/app'
+import { Provider } from 'react-redux'
+import { store } from '../store'
 import NextNprogress from 'nextjs-progressbar'
-import MainLayout from '../layouts/MainLayout'
-import {AuthProvider} from "../context/AuthContext"
-import ApiClient from "../lib/ApiClient"
+import '../styles/globals.scss'
+//import {AuthProvider} from "../context/AuthContext"
 
 function MyApp({ Component, pageProps }) {
 
@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
     //console.log(user, 'user app')
 
     return (
-        <AuthProvider authUser={user}>
+        <Provider store={store}>
             <NextNprogress
                 color="#37a0eb"
                 startPosition={0.3}
@@ -20,17 +20,12 @@ function MyApp({ Component, pageProps }) {
                 options={{ showSpinner: false }}
             />
             <Component {...pageProps} />
-
-            {/*<MainLayout component={Component}>
-                <Component {...pageProps} />
-            </MainLayout>*/}
-        </AuthProvider>
+        </Provider>
     )
 }
 
 // this makes every page SSR
 // not recommended approach but we always get the user first this way
-// probably changes later
 /*MyApp.getInitialProps = async appContext => {
     const appProps = await App.getInitialProps(appContext)
     let user = undefined
