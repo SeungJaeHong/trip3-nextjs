@@ -3,7 +3,6 @@ import { Provider } from 'react-redux'
 import { store } from '../store'
 import NextNprogress from 'nextjs-progressbar'
 import '../styles/globals.scss'
-//import {AuthProvider} from "../context/AuthContext"
 
 function MyApp({ Component, pageProps }) {
 

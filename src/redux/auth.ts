@@ -4,7 +4,7 @@ import {LoggedInUser} from "../types"
 import SessionClient from "../lib/SessionClient"
 
 export type AuthState = {
-    user: LoggedInUser
+    user: LoggedInUser,
     loading: boolean
 }
 
@@ -33,6 +33,17 @@ export const login = createAsyncThunk('auth/login', async (userData: {userName: 
     }
 })
 
+export const logout = createAsyncThunk('auth/logout', async () => {
+    try {
+        const res = await SessionClient.get('/logout')
+        return res.data
+
+    } catch (err: any) {
+        throw err
+        //return rejectWithValue(err.response.data)
+    }
+})
+
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -53,6 +64,16 @@ export const authSlice = createSlice({
             .addCase(login.rejected, state => {
                 state.loading = false
             })
+            .addCase(logout.pending, state => {
+                state.loading = true
+            })
+            .addCase(logout.fulfilled, (state, { payload }) => {
+                state.loading = false
+                state.user = <LoggedInUser>{}
+            })
+            .addCase(logout.rejected, state => {
+                state.loading = false
+            })
     },
 })
 
@@ -61,6 +82,7 @@ export const {
 } = authSlice.actions
 
 export const selectUser = (state: RootState) => state.auth.user
+export const selectUserIsLoggedIn = (state: RootState) => (state.auth.user?.id !== undefined)
 export const selectLoadingUser = (state: RootState) => state.auth.loading
 
 export default authSlice.reducer

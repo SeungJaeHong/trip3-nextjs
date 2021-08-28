@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import TripLogoDark from "../../icons/TripDarkLogo"
 import SearchIcon from "../../icons/SearchIcon"
-import {useAuth} from "../../context/AuthContext"
 import TripLogo from "../../icons/TripLogo"
 import styles from './Navbar.module.scss'
 import clsx from "clsx"
@@ -10,6 +9,8 @@ import {useState} from "react"
 import CloseIcon from "../../icons/CloseIcon"
 import LoginPopupMenu from "../LoginPopupMenu"
 import React from 'react'
+import {useAppDispatch, useAppSelector} from "../../hooks"
+import {logout, selectUser, selectUserIsLoggedIn} from "../../redux/auth"
 
 const links = [
     {
@@ -40,15 +41,16 @@ type Props = {
 }
 
 const Navbar = (props: Props) => {
-    const {user, logout} = useAuth()
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(selectUser)
+    const userIsLoggedIn = useAppSelector(selectUserIsLoggedIn)
     const [menuOpen, setMenuOpen] = useState(false)
     const onLogoutClick = () => {
-        logout()
-        //show notification
+        dispatch(logout())
     }
 
     const loginLink = (user: any) => {
-        if (!user) {
+        if (!userIsLoggedIn) {
             return (
                 <LoginPopupMenu darkMode={props.darkMode} />
             )
@@ -64,7 +66,7 @@ const Navbar = (props: Props) => {
     }
 
     const mobileMenuUserLinks = () => {
-        if (user) {
+        if (userIsLoggedIn) {
             return <a onClick={onLogoutClick}>Logi välja</a>
         } else {
             return (
@@ -125,7 +127,7 @@ const Navbar = (props: Props) => {
                     )
                 })}
                 {loginLink(user)}
-                {user && <a onClick={onLogoutClick}>Logi välja</a>}
+                {userIsLoggedIn && <a onClick={onLogoutClick}>Logi välja</a>}
             </div>
             <div className={styles.MenuIcon} onClick={() => setMenuOpen(true)}>
                 <MenuIcon />

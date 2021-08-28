@@ -1,6 +1,5 @@
 import React, {Fragment, useEffect, useState} from "react"
-import Router from "next/router";
-import { useAuth } from "../../context/AuthContext"
+import Router from "next/router"
 import Navbar from "../../components/Navbar"
 import styles from './Login.module.scss'
 import clsx from "clsx";

@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect} from "react"
 import {Field, Form, Formik, FormikProps} from 'formik'
 import styles from "./LoginForm.module.scss"
 import clsx from "clsx"
-//import {useAuth} from "../../context/AuthContext"
 import Router from "next/router"
 import FormInput from "../Form/FormInput"
 import SubmitButton from "../Form/SubmitButton"
