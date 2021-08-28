@@ -2,39 +2,23 @@ import React, {useEffect, useState} from "react"
 import {Field, Form, Formik, FormikProps} from 'formik'
 import styles from "./LoginForm.module.scss"
 import clsx from "clsx"
-import {useAuth} from "../../context/AuthContext"
+//import {useAuth} from "../../context/AuthContext"
 import Router from "next/router"
 import FormInput from "../Form/FormInput"
 import SubmitButton from "../Form/SubmitButton"
+import {useAppDispatch, useAppSelector} from "../../hooks"
+import {login, selectUser, selectLoadingUser} from "../../redux/auth"
 
 const LoginForm = () => {
-    const [formInput, setFormInput] = useState({email: '', password: ''})
-    const { user, login } = useAuth()
-
-    const signIn = (e: any) => {
-        e.preventDefault()
-
-        if (formInput) {
-            if (login(formInput.email, formInput.password)) {
-                //todo: show success notifocation
-            } else {
-                console.log('invalid data')
-            }
-        } else {
-            console.log('fill fields')
-        }
-    }
-
-    const updateFormInput = (e: any) => {
-        e.persist()
-        setFormInput(prevState => ({...prevState, [e.target.name]: e.target.value}))
-    }
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(selectUser)
+    const loadingUser = useAppSelector(selectLoadingUser)
 
     useEffect(() => {
-        if (user) {
-            Router.replace("/");
+        if (user && user.id) {
+            Router.replace("/")
         }
-    }, [user]);
+    }, [user])
 
     return (
         <div className={styles.LoginForm}>
@@ -53,12 +37,7 @@ const LoginForm = () => {
                 <Formik
                     initialValues={{ userName: '', password: '' }}
                     onSubmit={(values, actions) => {
-                        console.log(values)
-
-                        setTimeout(() => {
-                            //alert(JSON.stringify(values, null, 2));
-                            actions.setSubmitting(false);
-                        }, 2500);
+                        dispatch(login(values))
                     }}
                 >
                     {(props: FormikProps<any>) => (
@@ -68,7 +47,7 @@ const LoginForm = () => {
                                     name={'userName'}
                                     id={'userName'}
                                     label={'Kasutajanimi'}
-                                    disabled={props.isSubmitting}
+                                    disabled={loadingUser}
                                     component={FormInput} />
                             </div>
                             <div className={styles.FormInput}>
@@ -77,13 +56,13 @@ const LoginForm = () => {
                                     id={'password'}
                                     label={'Parool'}
                                     type={'password'}
-                                    disabled={props.isSubmitting}
+                                    disabled={loadingUser}
                                     component={FormInput} />
                             </div>
                             <div className={styles.SubmitButton}>
                                 <SubmitButton
                                     title={'Logi sisse'}
-                                    submitting={props.isSubmitting} />
+                                    submitting={loadingUser} />
                             </div>
                         </Form>
                     )}

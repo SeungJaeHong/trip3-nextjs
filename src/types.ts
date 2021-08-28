@@ -17,10 +17,27 @@ export type User = {
     notify_follow?: boolean
     role?: string
     active_at?: string
-    //company?: boolean;
-    //contents?: Content[] | null;
-    //comments?: Comment[] | null;
     images?: Image[] | []
+    avatar?: string
+}
+
+export type LoggedInUser = {
+    id: number
+    name: string
+    rank: number
+    isAdmin: boolean
+    email?: string
+    contact_facebook?: string
+    contact_twitter?: string
+    contact_instagram?: string
+    contact_homepage?: string
+    real_name?: string
+    real_name_show?: boolean
+    gender?: number
+    birthYear?: number
+    description?: string
+    notify_message?: boolean
+    notify_follow?: boolean
     avatar?: string
 }
 
