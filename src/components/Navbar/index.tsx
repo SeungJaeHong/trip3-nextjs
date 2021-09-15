@@ -11,6 +11,7 @@ import LoginPopupMenu from "../LoginPopupMenu"
 import React from 'react'
 import {useAppDispatch, useAppSelector} from "../../hooks"
 import {logout, selectUser, selectUserIsLoggedIn} from "../../redux/auth"
+import {LoggedInUser} from "../../types"
 
 const links = [
     {
@@ -49,7 +50,7 @@ const Navbar = (props: Props) => {
         dispatch(logout())
     }
 
-    const loginLink = (user: any) => {
+    const loginLink = (user: LoggedInUser) => {
         if (!userIsLoggedIn) {
             return (
                 <LoginPopupMenu darkMode={props.darkMode} />

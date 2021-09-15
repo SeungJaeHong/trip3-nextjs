@@ -2,22 +2,6 @@ export type User = {
     id: number
     name: string
     rank: number
-    email?: string
-    contact_facebook?: string
-    contact_twitter?: string
-    contact_instagram?: string
-    contact_homepage?: string
-    profile_color?: string
-    real_name?: string
-    real_name_show?: boolean
-    gender?: number
-    birthYear?: number
-    description?: string
-    notify_message?: boolean
-    notify_follow?: boolean
-    role?: string
-    active_at?: string
-    images?: Image[] | []
     avatar?: string
 }
 

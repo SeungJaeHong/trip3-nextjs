@@ -37,8 +37,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         hasMore: false,
     }
 
+    //todo: check if cookies get sent
+
     const res = await axios.get(url)
-    data.user = res.data.user
+    //data.user = res.data.user
     data.forumPosts = res.data.forumList?.items
     data.hasMore = res.data.forumList?.hasMore
 

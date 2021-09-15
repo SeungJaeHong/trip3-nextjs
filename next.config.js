@@ -17,6 +17,7 @@ module.exports = {
         domains: ['trip.ee', 'images.pexels.com'], //just for testing
     },
     env: {
+        APP_URL: process.env.APP_URL,
         API_BASE_URL: process.env.API_BASE_URL,
         SESSION_AUTH_URL: process.env.SESSION_AUTH_URL,
     },
