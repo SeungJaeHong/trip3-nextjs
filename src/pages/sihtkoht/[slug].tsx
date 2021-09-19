@@ -193,7 +193,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const url = process.env.API_BASE_URL + '/destination/' + slug
     const response = await axios.get(url)
     const data = {
-        user: response.data.user,
         destination: response.data.destination
     }
 

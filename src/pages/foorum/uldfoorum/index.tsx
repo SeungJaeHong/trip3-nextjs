@@ -1,8 +1,8 @@
 import React from 'react'
-import axios from 'axios'
 import {GetServerSideProps} from "next"
 import {ForumRowType} from "../../../types"
 import ForumIndexPage from "../../../components/Forum/ForumIndexPage"
+import ApiClientSSR from "../../../lib/ApiClientSSR"
 
 type Props = {
     forumPosts: ForumRowType[],
@@ -31,16 +31,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 
     const data = {
-        user: null,
         forumPosts: [],
         currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
         hasMore: false,
     }
 
-    //todo: check if cookies get sent
-
-    const res = await axios.get(url)
-    //data.user = res.data.user
+    const res = await ApiClientSSR(context).get(url)
     data.forumPosts = res.data.forumList?.items
     data.hasMore = res.data.forumList?.hasMore
 

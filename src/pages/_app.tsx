@@ -27,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 // this makes every page SSR
 // not recommended approach but we always get the logged in user this way
+// it also sets/renews both session variables on each request
 MyApp.getInitialProps = async (appContext: AppContext) => {
     const appProps = await App.getInitialProps(appContext)
     const context = appContext.ctx
@@ -34,15 +35,23 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     const { dispatch } = reduxStore
 
     //get logged in user
-    const cookie = context.req ? {cookie: context.req.headers.cookie} : undefined
-    await ApiClient.get('/user', {
-        headers: {
+    const cookie = context.req ? context.req.headers.cookie : undefined
+    let headers = {
+        Accept: 'application/json',
+    }
+
+    if (context.req) {
+        headers = {
             Accept: 'application/json',
+            // @ts-ignore
             Referer: process.env.APP_URL,
-            Cookie: cookie?.cookie ?? {}
+            Cookie: cookie
         }
+    }
+
+    await ApiClient.get('/user', {
+        headers: headers
     }).then((res: AxiosResponse<LoggedInUser>) => {
-        console.log(res.data, 'RES SUCCESS')
         dispatch(setUser(res.data))
         if (context.res && res?.headers['set-cookie']) {
             context.res.setHeader(
@@ -51,8 +60,10 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
             )
         }
     }).catch(err => {
-        //todo: unset user?
-        console.log(err?.response, 'ERROR')
+        if (err?.response?.status === 401) {
+            dispatch(setUser(null))
+        }
+
         if (context.res && err?.response?.headers['set-cookie']) {
             context.res.setHeader(
                 'Set-Cookie',

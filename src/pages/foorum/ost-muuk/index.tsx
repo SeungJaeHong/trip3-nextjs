@@ -31,14 +31,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 
     const data = {
-        user: null,
         forumPosts: [],
         currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
         hasMore: false,
     }
 
     const res = await axios.get(url)
-    data.user = res.data.user
     data.forumPosts = res.data.forumList?.items
     data.hasMore = res.data.forumList?.hasMore
 

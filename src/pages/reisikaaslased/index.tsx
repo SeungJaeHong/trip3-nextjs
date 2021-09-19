@@ -112,14 +112,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 
     const data = {
-        user: null,
         travelmates: [],
         currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
         hasMore: false,
     }
 
     const res = await axios.get(url)
-    data.user = res.data.user
     data.travelmates = res.data.travelmates?.items
     data.hasMore = res.data.travelmates?.hasMore
 

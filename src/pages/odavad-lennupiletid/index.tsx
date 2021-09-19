@@ -13,6 +13,7 @@ import SimplePaginator from "../../components/Paginator/SimplePaginator";
 import {objectToQueryString} from "../../helpers";
 import {useRouter} from "next/router"
 import Button from "../../components/Button";
+import ApiClientSSR from "../../lib/ApiClientSSR";
 
 type Props = {
     flightOffers: FlightOfferRowType[],
@@ -106,14 +107,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 
     const data = {
-        user: null,
         flightOffers: [],
         currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
         hasMore: false,
     }
 
-    const res = await axios.get(url)
-    data.user = res.data.user
+    const res = await ApiClientSSR(context).get(url)
     data.flightOffers = res.data.flightOffers?.items
     data.hasMore = res.data.flightOffers?.hasMore
 

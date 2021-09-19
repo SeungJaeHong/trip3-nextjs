@@ -70,7 +70,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const response = await axios.get(url)
     const data = {
-        user: response.data.user,
         news: response.data.news,
     }
 

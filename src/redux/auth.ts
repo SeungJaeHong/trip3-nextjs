@@ -6,12 +6,12 @@ import ApiClient from "../lib/ApiClient";
 import axios from "axios";
 
 export type AuthState = {
-    user: LoggedInUser,
+    user: LoggedInUser|null,
     loading: boolean
 }
 
 const initialState: AuthState = {
-    user: <LoggedInUser>{},
+    user: null,
     loading: false
 }
 
@@ -125,7 +125,7 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setUser(state, action: PayloadAction<LoggedInUser>) {
+        setUser(state, action: PayloadAction<LoggedInUser|null>) {
             state.user = action.payload
         },
     },

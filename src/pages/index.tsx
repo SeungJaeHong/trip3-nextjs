@@ -136,14 +136,12 @@ const Home = (props: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const data = {
-        user: null,
         flightOffers: [],
         forumPosts: []
     }
 
     try {
         const res = await ApiClient.get('/frontpage')
-        data.user = res.data.user
         data.flightOffers = res.data.flightOffers
         data.forumPosts = res.data.forumPosts
     } catch (error) {
