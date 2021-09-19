@@ -1,7 +1,6 @@
 import React, {Fragment} from 'react'
 import Header from "../../components/Header"
-import {GetServerSideProps} from "next";
-import axios from "axios";
+import {GetServerSideProps} from "next"
 import Footer from "../../components/Footer";
 import containerStyle from "../../styles/containers.module.scss";
 import styles from "./TravelmatePage.module.scss"
@@ -14,6 +13,7 @@ import Button from "../../components/Button"
 import TravelmateCard from "../../components/Travelmate/TravelmateCard";
 import BlockTitle from "../../components/BlockTitle";
 import TravelmateFilter from "../../components/Travelmate/TravelmateFilter";
+import ApiClientSSR from "../../lib/ApiClientSSR";
 
 type Props = {
     travelmates: TravelmateRowType[],
@@ -117,7 +117,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         hasMore: false,
     }
 
-    const res = await axios.get(url)
+    const res = await ApiClientSSR(context).get(url)
     data.travelmates = res.data.travelmates?.items
     data.hasMore = res.data.travelmates?.hasMore
 

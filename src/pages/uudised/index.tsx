@@ -1,7 +1,6 @@
 import React, {Fragment} from 'react'
 import Header from "../../components/Header"
-import {GetServerSideProps} from "next";
-import axios from "axios";
+import {GetServerSideProps} from "next"
 import containerStyle from "../../styles/containers.module.scss";
 import styles from "./NewsPage.module.scss"
 import {NewsCardType} from "../../types";
@@ -12,6 +11,7 @@ import NewsCard from "../../components/News/NewsCard"
 import {useRouter} from "next/router"
 import {objectToQueryString} from "../../helpers"
 import Footer from "../../components/Footer"
+import ApiClientSSR from "../../lib/ApiClientSSR"
 
 type Props = {
     news?: NewsCardType[],
@@ -106,7 +106,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         hasMore: false,
     }
 
-    const res = await axios.get(url)
+    const res = await ApiClientSSR(context).get(url)
     data.news = res.data?.news?.items
     data.hasMore = res.data.news?.hasMore
 

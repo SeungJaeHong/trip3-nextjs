@@ -1,7 +1,6 @@
 import React, {Fragment} from 'react'
 import Header from "../../components/Header"
-import {GetServerSideProps} from "next";
-import axios from "axios";
+import {GetServerSideProps} from "next"
 import Footer from "../../components/Footer";
 import containerStyle from "../../styles/containers.module.scss";
 import styles from "./FlightOfferPage.module.scss"

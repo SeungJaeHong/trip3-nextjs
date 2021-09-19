@@ -1,5 +1,4 @@
 import React, {Fragment, useState} from 'react'
-import axios from 'axios'
 import {GetServerSideProps} from 'next'
 import Header from "../../components/Header"
 import Footer from "../../components/Footer"
@@ -16,6 +15,7 @@ import PinIcon from "../../icons/PinIcon"
 import StarIcon from "../../icons/StarIcon"
 import ForumList from "../../components/Forum/ForumList"
 import BlockTitle from "../../components/BlockTitle"
+import ApiClientSSR from "../../lib/ApiClientSSR"
 
 type Props = {
     destination: DestinationContent
@@ -191,7 +191,7 @@ const DestinationPage = (props: Props) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const slug = context.query.slug
     const url = process.env.API_BASE_URL + '/destination/' + slug
-    const response = await axios.get(url)
+    const response = await ApiClientSSR(context).get(url)
     const data = {
         destination: response.data.destination
     }
