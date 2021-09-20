@@ -11,7 +11,7 @@ import LoginPopupMenu from "../LoginPopupMenu"
 import React from 'react'
 import {useAppDispatch, useAppSelector} from "../../hooks"
 import {logout, selectUser, selectUserIsLoggedIn} from "../../redux/auth"
-import {LoggedInUser} from "../../types"
+import UserAvatar from "../User/UserAvatar"
 
 const links = [
     {
@@ -50,14 +50,18 @@ const Navbar = (props: Props) => {
         dispatch(logout())
     }
 
-    const loginLink = (user: LoggedInUser) => {
-        if (!userIsLoggedIn) {
+    const loginLink = () => {
+        if (!userIsLoggedIn || !user) {
             return (
                 <LoginPopupMenu darkMode={props.darkMode} />
             )
+        } else {
+            return (
+                <div className={styles.UserAvatar}>
+                    <UserAvatar user={user} borderWidth={2} />
+                </div>
+            )
         }
-
-        return null
     }
 
     const getLogo = () => {
@@ -127,8 +131,14 @@ const Navbar = (props: Props) => {
                         </Link>
                     )
                 })}
-                {loginLink(user)}
-                {userIsLoggedIn && <a onClick={onLogoutClick}>Logi välja</a>}
+
+                {/* todo: rename */}
+                <div className={styles.UserAvatar}>
+                    <LoginPopupMenu darkMode={props.darkMode} />
+                </div>
+
+                {/*{loginLink()}*/}
+                {/*{userIsLoggedIn && <a onClick={onLogoutClick}>Logi välja</a>}*/}
             </div>
             <div className={styles.MenuIcon} onClick={() => setMenuOpen(true)}>
                 <MenuIcon />

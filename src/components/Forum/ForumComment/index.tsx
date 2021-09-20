@@ -18,7 +18,7 @@ const ForumComment = (item: Comment) => {
                     {item.createdAt}
                 </div>
                 <div className={styles.UserAvatar}>
-                    <UserAvatar {...item.user} />
+                    <UserAvatar user={item.user} />
                 </div>
             </div>
             <div className={styles.Body}>

@@ -26,7 +26,7 @@ const NewsShow = (props: Props) => {
                     </div>
                     <div className={styles.DateAndUser}>
                         <div className={styles.User}>
-                            <UserAvatar {...props.news.user} />
+                            <UserAvatar user={props.news.user} />
                         </div>
                         <div className={styles.HeaderDate}>
                             {props.news.createdAt}

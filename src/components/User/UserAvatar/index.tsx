@@ -1,16 +1,21 @@
 import styles from "./UserAvatar.module.scss"
-import Link from "next/link"
-import clsx from "clsx"
-import {User} from "../../../types"
+import {LoggedInUser, User} from "../../../types"
 import UserIcon from '../../../icons/UserIcon'
 import {useState, useRef, useEffect} from "react"
 
-const UserAvatar = (user: User) => {
+type Props = {
+    user:  User|LoggedInUser
+    borderWidth: number
+}
+
+const UserAvatar = (props: Props) => {
+    const user = props.user
+    const borderWidth = props.borderWidth
+
     if (!user.avatar) {
         return <UserIcon fill={'#d1d4d6'} />
     }
 
-    const borderWidth = 4
     const [height, setHeight] = useState(0)
     const ref = useRef(null)
 
@@ -55,6 +60,10 @@ const UserAvatar = (user: User) => {
             </div>
         </div>
     )
+}
+
+UserAvatar.defaultProps = {
+    borderWidth: 4
 }
 
 export default UserAvatar

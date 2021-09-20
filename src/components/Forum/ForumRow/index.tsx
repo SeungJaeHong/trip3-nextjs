@@ -9,7 +9,7 @@ const ForumRow = (item: ForumRowType) => {
     return (
         <div className={styles.ForumRow}>
             <div className={styles.UserIcon}>
-                <UserAvatar {...item.user} />
+                <UserAvatar user={item.user} />
                 <div className={clsx(styles.CommentCountContainer, {
                     [styles.CommentUnread]: item.isUnread
                 })}>

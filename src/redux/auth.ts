@@ -146,7 +146,7 @@ export const authSlice = createSlice({
             })
             .addCase(logout.fulfilled, (state, { payload }) => {
                 state.loading = false
-                state.user = <LoggedInUser>{}
+                state.user = null
             })
             .addCase(logout.rejected, state => {
                 state.loading = false
@@ -187,7 +187,7 @@ export const {
     setUser
 } = authSlice.actions
 
-export const selectUser = (state: RootState) => state.auth.user
+export const selectUser = (state: RootState) => <LoggedInUser|null>state.auth.user
 export const selectUserIsLoggedIn = (state: RootState) => (state.auth.user?.id !== undefined)
 export const selectLoadingUser = (state: RootState) => state.auth.loading
 

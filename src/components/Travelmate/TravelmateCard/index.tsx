@@ -26,7 +26,7 @@ const TravelmateCard = (item: TravelmateRowType) => {
                 })}
             </div>
             <div className={styles.UserAvatar}>
-                <UserAvatar {...item.user} />
+                <UserAvatar user={item.user} />
             </div>
         </div>
     )

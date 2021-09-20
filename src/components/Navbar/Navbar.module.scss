@@ -42,11 +42,6 @@
             }
         }
 
-        svg {
-            height: 20px;
-            width: 20px;
-        }
-
         &.LinksMobile {
             display: none;
 
@@ -61,6 +56,13 @@
                 }
             }
         }
+    }
+
+    .UserAvatar {
+        margin-left: $spacer * 1.5;
+        display: flex;
+        align-items: center;
+        position: relative;
     }
 
     .MenuIcon {
