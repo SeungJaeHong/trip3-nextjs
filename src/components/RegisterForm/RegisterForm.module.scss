@@ -1,0 +1,75 @@
+@import "../../styles/variables";
+
+.RegisterForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: $white;
+    max-width: 500px;
+    z-index: 2;
+
+    .Tabs {
+        display: flex;
+        width: 100%;
+
+        @include sm() {
+            flex-direction: column;
+        }
+
+        .Tab {
+            flex: 1;
+            display: flex;
+            color: $blue;
+            font-weight: 600;
+            font-size: $font-size-medium;
+            height: 50px;
+            justify-content: center;
+            align-items: center;
+
+            @include sm() {
+                width: 100%;
+                flex: none;
+            }
+
+            &.UserName {
+                @include sm() {
+                    display: none;
+                }
+            }
+
+            &.Social {
+                color: $white;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: .8;
+                }
+            }
+
+            &.Facebook {
+                background: #3b5998;
+            }
+
+            &.Google {
+                background: #dd4b39;
+            }
+        }
+    }
+
+    .FormContainer {
+        display: flex;
+        padding: $spacer * 5;
+
+        form {
+            width: 100%;
+
+            .FormInput {
+                margin-bottom: $spacer * 3;
+            }
+        }
+
+        .SubmitButton {
+            margin-top: $spacer * 5;
+        }
+    }
+}

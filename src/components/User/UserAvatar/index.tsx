@@ -8,19 +8,15 @@ type Props = {
     borderWidth: number
 }
 
-const UserAvatar = (props: Props) => {
-    const user = props.user
-    const borderWidth = props.borderWidth
-
+const UserAvatar = ({user, borderWidth}: Props) => {
     if (!user.avatar) {
         return <UserIcon fill={'#d1d4d6'} />
     }
 
     const [height, setHeight] = useState(0)
-    const ref = useRef(null)
+    const ref = useRef<any>()
 
     useEffect(() => {
-        // @ts-ignore
         setHeight(ref.current.clientHeight)
     }, [])
 

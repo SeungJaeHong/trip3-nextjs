@@ -10,7 +10,7 @@ import CloseIcon from "../../icons/CloseIcon"
 import UserNavBarMenu from "../UserNavbarMenu"
 import React from 'react'
 import {useAppDispatch, useAppSelector} from "../../hooks"
-import {logout, selectUser, selectUserIsLoggedIn} from "../../redux/auth"
+import {logout, selectUserIsLoggedIn} from "../../redux/auth"
 
 const links = [
     {
@@ -40,9 +40,8 @@ type Props = {
     showSearch?: boolean
 }
 
-const Navbar = (props: Props) => {
+const Navbar = ({darkMode, showSearch}: Props) => {
     const dispatch = useAppDispatch()
-    const user = useAppSelector(selectUser)
     const userIsLoggedIn = useAppSelector(selectUserIsLoggedIn)
     const [menuOpen, setMenuOpen] = useState(false)
     const onLogoutClick = () => {
@@ -50,7 +49,7 @@ const Navbar = (props: Props) => {
     }
 
     const getLogo = () => {
-        return props.darkMode
+        return darkMode
             ? <TripLogoDark width={200} heigth={150} />
             : <TripLogo width={200} heigth={150} />
     }
@@ -98,7 +97,7 @@ const Navbar = (props: Props) => {
 
     return (
         <div className={clsx(styles.Navbar, {
-            [styles.Dark]: props.darkMode
+            [styles.Dark]: darkMode
         })}>
             <div className={styles.Logo}>
                 <Link href="/">
@@ -108,7 +107,7 @@ const Navbar = (props: Props) => {
                 </Link>
             </div>
             <div className={styles.Links}>
-                {props.showSearch && <SearchIcon />}
+                {showSearch && <SearchIcon />}
                 {links.map(link => {
                     return (
                         <Link href={link.route} key={link.title}>
@@ -118,7 +117,7 @@ const Navbar = (props: Props) => {
                 })}
 
                 <div className={styles.UserAvatar}>
-                    <UserNavBarMenu darkMode={props.darkMode} />
+                    <UserNavBarMenu darkMode={darkMode} />
                 </div>
             </div>
             <div className={styles.MenuIcon} onClick={() => setMenuOpen(true)}>

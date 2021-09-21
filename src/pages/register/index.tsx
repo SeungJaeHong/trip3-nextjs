@@ -1,14 +1,13 @@
 import React, {Fragment} from "react"
 import Navbar from "../../components/Navbar"
-import styles from './Login.module.scss'
+import styles from './Register.module.scss'
 import clsx from "clsx";
 import Footer from "../../components/Footer"
 import containerStyle from "../../styles/containers.module.scss"
 import BackgroundMap from "../../components/BackgroundMap";
-import Link from "next/link";
-import LoginForm from "../../components/LoginForm";
+import RegisterForm from "../../components/RegisterForm";
 
-const LoginPage = () => {
+const RegisterPage = () => {
     return (
         <Fragment>
             <div className={styles.Container}>
@@ -18,16 +17,13 @@ const LoginPage = () => {
                         <Navbar darkMode={true} />
                     </div>
                     <div className={styles.Title}>
-                        Logi sisse
+                        Registreeri
                     </div>
                     <div className={styles.RegisterTitle}>
-                        Pole veel kasutaja?
-                        <Link href={'/register'}>
-                            <a>Registreeri siin</a>
-                        </Link>
+                        Liitu Trip.ee reisihuviliste seltskonnaga
                     </div>
                     <div className={styles.Form}>
-                        <LoginForm />
+                        <RegisterForm />
                     </div>
                 </div>
             </div>
@@ -36,4 +32,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage
+export default RegisterPage
