@@ -1,7 +1,7 @@
-import React, {useState} from "react"
+import React, {useEffect, useRef, useState} from "react"
 import { useRouter } from 'next/router'
 import clsx from "clsx"
-import styles from "./LoginPopupMenu.module.scss"
+import styles from "./UserNavBarMenu.module.scss"
 import {useAppDispatch, useAppSelector} from "../../hooks"
 import {logout, selectUser} from "../../redux/auth"
 import UserAvatar from "../User/UserAvatar"
@@ -10,20 +10,35 @@ type Props = {
     darkMode: boolean
 }
 
-const LoginPopupMenu = (props: Props) => {
+const UserNavBarMenu = ({darkMode}: Props) => {
     const router = useRouter()
     const dispatch = useAppDispatch()
     const user = useAppSelector(selectUser)
-    const [open, setOpen] = useState(false)
+    const [menuOpen, setMenuOpen] = useState(false)
+    const ref = useRef<any>()
 
     const onMenuItemClick = (href: string) => {
         router.push(href)
-        setOpen(false)
+        setMenuOpen(false)
     }
+
+    useEffect(() => {
+        const checkIfClickedOutside = (e: MouseEvent) => {
+            if (menuOpen && ref.current && !ref.current.contains(e.target)) {
+                setMenuOpen(false)
+            }
+        }
+
+        document.addEventListener('mousedown', checkIfClickedOutside)
+
+        return () => {
+            document.removeEventListener('mousedown', checkIfClickedOutside)
+        }
+    }, [menuOpen])
 
     const onLogoutClick = () => {
         dispatch(logout())
-        setOpen(false)
+        setMenuOpen(false)
     }
 
     const renderTitle = () => {
@@ -80,13 +95,14 @@ const LoginPopupMenu = (props: Props) => {
     }
 
     return (
-        <div className={clsx(styles.LoginPopupMenu, {
-            [styles.Dark]: props.darkMode
-        })} onMouseOver={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+        <div className={clsx(styles.UserNavBarMenu, {
+            [styles.Dark]: darkMode
+        })} onClick={() => setMenuOpen(!menuOpen)} ref={ref}>
             {renderTitle()}
-            <div className={clsx(styles.PopUpMenu, {
-                [styles.Open]: open
-            })} onMouseLeave={() => setOpen(false)}>
+            <div className={clsx(styles.Menu, {
+                [styles.Open]: menuOpen,
+                [styles.WithAvatar]: user !== null
+            })}>
                 <div className={styles.ArrowWrapper}>
                     <div className={styles.Arrow} />
                 </div>
@@ -110,4 +126,8 @@ const LoginPopupMenu = (props: Props) => {
     )
 }
 
-export default LoginPopupMenu
+UserNavBarMenu.defaultProps = {
+    darkMode: false
+}
+
+export default UserNavBarMenu

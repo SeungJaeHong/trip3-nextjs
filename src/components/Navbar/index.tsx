@@ -7,11 +7,10 @@ import clsx from "clsx"
 import MenuIcon from "../../icons/MenuIcon"
 import {useState} from "react"
 import CloseIcon from "../../icons/CloseIcon"
-import LoginPopupMenu from "../LoginPopupMenu"
+import UserNavBarMenu from "../UserNavbarMenu"
 import React from 'react'
 import {useAppDispatch, useAppSelector} from "../../hooks"
 import {logout, selectUser, selectUserIsLoggedIn} from "../../redux/auth"
-import UserAvatar from "../User/UserAvatar"
 
 const links = [
     {
@@ -48,20 +47,6 @@ const Navbar = (props: Props) => {
     const [menuOpen, setMenuOpen] = useState(false)
     const onLogoutClick = () => {
         dispatch(logout())
-    }
-
-    const loginLink = () => {
-        if (!userIsLoggedIn || !user) {
-            return (
-                <LoginPopupMenu darkMode={props.darkMode} />
-            )
-        } else {
-            return (
-                <div className={styles.UserAvatar}>
-                    <UserAvatar user={user} borderWidth={2} />
-                </div>
-            )
-        }
     }
 
     const getLogo = () => {
@@ -132,13 +117,9 @@ const Navbar = (props: Props) => {
                     )
                 })}
 
-                {/* todo: rename */}
                 <div className={styles.UserAvatar}>
-                    <LoginPopupMenu darkMode={props.darkMode} />
+                    <UserNavBarMenu darkMode={props.darkMode} />
                 </div>
-
-                {/*{loginLink()}*/}
-                {/*{userIsLoggedIn && <a onClick={onLogoutClick}>Logi välja</a>}*/}
             </div>
             <div className={styles.MenuIcon} onClick={() => setMenuOpen(true)}>
                 <MenuIcon />

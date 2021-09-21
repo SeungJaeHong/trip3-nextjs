@@ -1,6 +1,6 @@
 @import "../../styles/variables";
 
-.LoginPopupMenu {
+.UserNavBarMenu {
     position: relative;
     cursor: pointer;
     z-index: 10;
@@ -24,11 +24,11 @@
         }
     }
 
-    .PopUpMenu {
+    .Menu {
         width: 180px;
         position: absolute;
         right: 0;
-        top: 48px;
+        top: 40px;
         display: none;
 
         .ArrowWrapper {
@@ -69,6 +69,10 @@
 
         &.Open {
             display: block;
+        }
+
+        &.WithAvatar {
+            top: 48px;
         }
     }
 
