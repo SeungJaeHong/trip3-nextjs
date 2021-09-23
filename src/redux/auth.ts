@@ -7,12 +7,14 @@ import axios from "axios";
 
 export type AuthState = {
     user: LoggedInUser|null,
-    loading: boolean
+    loading: boolean,
+    error: boolean
 }
 
 const initialState: AuthState = {
     user: null,
-    loading: false
+    loading: false,
+    error: false
 }
 
 export const login = createAsyncThunk('auth/login', async (userData: {userName: string, password: string}, { rejectWithValue }) => {
@@ -133,13 +135,16 @@ export const authSlice = createSlice({
         builder
             .addCase(login.pending, state => {
                 state.loading = true
+                state.error = false
             })
             .addCase(login.fulfilled, (state, { payload }) => {
                 state.loading = false
+                state.error = false
                 state.user = payload
             })
             .addCase(login.rejected, state => {
                 state.loading = false
+                state.error = true
             })
             .addCase(logout.pending, state => {
                 state.loading = true
@@ -190,5 +195,6 @@ export const {
 export const selectUser = (state: RootState) => <LoggedInUser|null>state.auth.user
 export const selectUserIsLoggedIn = (state: RootState) => (state.auth.user?.id !== undefined)
 export const selectLoadingUser = (state: RootState) => state.auth.loading
+export const selectErrorUser = (state: RootState) => state.auth.error
 
 export default authSlice.reducer

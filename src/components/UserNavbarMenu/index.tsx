@@ -5,6 +5,7 @@ import styles from "./UserNavBarMenu.module.scss"
 import {useAppDispatch, useAppSelector} from "../../hooks"
 import {logout, selectUser} from "../../redux/auth"
 import UserAvatar from "../User/UserAvatar"
+import toast from "react-hot-toast"
 
 type Props = {
     darkMode: boolean
@@ -38,6 +39,7 @@ const UserNavBarMenu = ({darkMode}: Props) => {
 
     const onLogoutClick = () => {
         dispatch(logout())
+        toast.success('Väljalogimine õnnestus!')
         setMenuOpen(false)
     }
 

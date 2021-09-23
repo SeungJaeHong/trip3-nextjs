@@ -8,6 +8,7 @@ import {setUser} from "../redux/auth"
 import ApiClient from "../lib/ApiClient"
 import {LoggedInUser} from "../types"
 import {AxiosResponse} from "axios"
+import { Toaster } from 'react-hot-toast'
 
 function MyApp({ Component, pageProps }: AppProps) {
     const store = useStore(pageProps.initialReduxState)
@@ -21,6 +22,33 @@ function MyApp({ Component, pageProps }: AppProps) {
                 options={{ showSpinner: false }}
             />
             <Component {...pageProps} />
+            <Toaster
+                containerStyle={{
+                    bottom: '32px',
+                    left: '32px'
+                }}
+                toastOptions={{
+                    //duration: 4000,
+                    success: {
+                        style: {
+                            background: '#8EDD65',
+                            color: '#fff',
+                            fontWeight: 500,
+                            fontFamily: 'Sailec, sans-serif'
+                        },
+                    },
+                    error: {
+                        style: {
+                            background: '#FF5050',
+                            color: '#fff',
+                            fontWeight: 500,
+                            fontFamily: 'Sailec, sans-serif'
+                        },
+                    },
+                }}
+                position="bottom-left"
+                reverseOrder={false}
+            />
         </Provider>
     )
 }

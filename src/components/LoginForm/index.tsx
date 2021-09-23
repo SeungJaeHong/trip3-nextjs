@@ -6,18 +6,27 @@ import Router from "next/router"
 import FormInput from "../Form/FormInput"
 import SubmitButton from "../Form/SubmitButton"
 import {useAppDispatch, useAppSelector} from "../../hooks"
-import {login, selectUser, selectLoadingUser} from "../../redux/auth"
+import {login, selectUser, selectLoadingUser, selectErrorUser} from "../../redux/auth"
+import toast from 'react-hot-toast'
 
 const LoginForm = () => {
     const dispatch = useAppDispatch()
     const user = useAppSelector(selectUser)
     const loadingUser = useAppSelector(selectLoadingUser)
+    const errorUser = useAppSelector(selectErrorUser)
 
     useEffect(() => {
         if (user && user.id) {
-            Router.replace("/")
+            toast.success('Sisselogimine õnnestus!')
+            Router.replace('/')
         }
     }, [user])
+
+    useEffect(() => {
+        if (errorUser) {
+            toast.error('Valed andmed!')
+        }
+    }, [errorUser])
 
     return (
         <div className={styles.LoginForm}>
