@@ -1,13 +1,15 @@
 import React, {useEffect} from "react"
-import {Field, Form, Formik, FormikProps} from 'formik'
+import {Field, Form, Formik, FormikHelpers, FormikProps} from 'formik'
 import styles from "./LoginForm.module.scss"
 import clsx from "clsx"
 import Router from "next/router"
 import FormInput from "../Form/FormInput"
 import SubmitButton from "../Form/SubmitButton"
 import {useAppDispatch, useAppSelector} from "../../hooks"
-import {login, selectUser, selectLoadingUser, selectErrorUser} from "../../redux/auth"
+import {selectUser, selectLoadingUser, selectErrorUser, setUser} from "../../redux/auth"
 import toast from 'react-hot-toast'
+import {setFormikErrors} from "../../helpers";
+import {login} from "../../services/auth.service";
 
 const LoginForm = () => {
     const dispatch = useAppDispatch()
@@ -17,16 +19,23 @@ const LoginForm = () => {
 
     useEffect(() => {
         if (user && user.id) {
-            toast.success('Sisselogimine õnnestus!')
             Router.replace('/')
         }
     }, [user])
 
-    useEffect(() => {
-        if (errorUser) {
-            toast.error('Valed andmed!')
-        }
-    }, [errorUser])
+    const handleLogin = async (values: any, formikHelpers: FormikHelpers<any>) => {
+        const { name, password } = values
+        const resp = await login(name, password).then(res => {
+            dispatch(setUser(res.data))
+            toast.success('Sisselogimine õnnestus!')
+        }).catch(err => {
+            //console.log(err.response.data.errors, 'ERROR')
+            if (err.response?.data?.errors) {
+                setFormikErrors(err.response.data.errors, formikHelpers.setFieldError)
+            }
+            toast.error('Sisselogimine ebaõnnestus!')
+        })
+    }
 
     return (
         <div className={styles.LoginForm}>
@@ -43,19 +52,18 @@ const LoginForm = () => {
             </div>
             <div className={styles.FormContainer}>
                 <Formik
-                    initialValues={{ userName: '', password: '' }}
-                    onSubmit={(values, actions) => {
-                        dispatch(login(values))
-                    }}
+                    initialValues={{ name: '', password: '' }}
+                    onSubmit={handleLogin}
                 >
-                    {(props: FormikProps<any>) => (
+                    {({ values, handleChange, handleBlur, errors, touched }: FormikProps<any>) => (
                         <Form>
                             <div className={styles.FormInput}>
                                 <Field
-                                    name={'userName'}
-                                    id={'userName'}
+                                    name={'name'}
+                                    id={'name'}
                                     label={'Kasutajanimi'}
                                     disabled={loadingUser}
+                                    hasError={errors?.name?.length}
                                     component={FormInput} />
                             </div>
                             <div className={styles.FormInput}>
@@ -65,6 +73,7 @@ const LoginForm = () => {
                                     label={'Parool'}
                                     type={'password'}
                                     disabled={loadingUser}
+                                    hasError={errors?.password?.length}
                                     component={FormInput} />
                             </div>
                             <div className={styles.SubmitButton}>

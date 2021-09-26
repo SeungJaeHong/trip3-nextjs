@@ -2,8 +2,8 @@ import {createSlice, createAsyncThunk, PayloadAction} from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 import {LoggedInUser} from "../types"
 import SessionClient from "../lib/SessionClient"
-import ApiClient from "../lib/ApiClient";
-import axios from "axios";
+import ApiClient from "../lib/ApiClient"
+import axios from "axios"
 
 export type AuthState = {
     user: LoggedInUser|null,
