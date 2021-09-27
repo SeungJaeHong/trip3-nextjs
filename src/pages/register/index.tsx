@@ -6,6 +6,8 @@ import Footer from "../../components/Footer"
 import containerStyle from "../../styles/containers.module.scss"
 import BackgroundMap from "../../components/BackgroundMap";
 import RegisterForm from "../../components/RegisterForm";
+import {GetServerSideProps} from "next";
+import ApiClientSSR from "../../lib/ApiClientSSR";
 
 const RegisterPage = () => {
     return (
@@ -30,6 +32,22 @@ const RegisterPage = () => {
             <Footer simple={true} />
         </Fragment>
     )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const user = await ApiClientSSR(context).get('/me')
+    if (user) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
+    } else {
+        return {
+            props: {}
+        }
+    }
 }
 
 export default RegisterPage

@@ -7,8 +7,10 @@ import containerStyle from "../../styles/containers.module.scss"
 import BackgroundMap from "../../components/BackgroundMap";
 import Link from "next/link";
 import LoginForm from "../../components/LoginForm";
+import {GetServerSideProps} from "next";
+import ApiClientSSR from "../../lib/ApiClientSSR";
 
-const LoginPage = () => {
+const LoginPage = (props: any) => {
     return (
         <Fragment>
             <div className={styles.Container}>
@@ -34,6 +36,22 @@ const LoginPage = () => {
             <Footer simple={true} />
         </Fragment>
     )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const user = await ApiClientSSR(context).get('/me')
+    if (user) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
+    } else {
+        return {
+            props: {}
+        }
+    }
 }
 
 export default LoginPage
