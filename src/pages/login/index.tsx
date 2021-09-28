@@ -39,15 +39,21 @@ const LoginPage = (props: any) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const user = await ApiClientSSR(context).get('/me')
-    if (user) {
-        return {
-            redirect: {
-                destination: '/',
-                permanent: false,
-            },
+    try {
+        const user = await ApiClientSSR(context).get('/me')
+        if (user) {
+            return {
+                redirect: {
+                    destination: '/',
+                    permanent: false,
+                },
+            }
+        } else {
+            return {
+                props: {}
+            }
         }
-    } else {
+    } catch (e) {
         return {
             props: {}
         }
