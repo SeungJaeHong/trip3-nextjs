@@ -7,17 +7,17 @@ import axios from "axios"
 
 export type AuthState = {
     user: LoggedInUser|null,
-    loading: boolean,
-    error: boolean
+    //loading: boolean,
+    //error: boolean
 }
 
 const initialState: AuthState = {
     user: null,
-    loading: false,
-    error: false
+    //loading: false,
+    //error: false
 }
 
-export const login = createAsyncThunk('auth/login', async (userData: {userName: string, password: string}, { rejectWithValue }) => {
+/*export const login = createAsyncThunk('auth/login', async (userData: {userName: string, password: string}, { rejectWithValue }) => {
     try {
         const { userName, password } = userData
         const result = await SessionClient.get('/sanctum/csrf-cookie').then(async (response) => {
@@ -35,9 +35,9 @@ export const login = createAsyncThunk('auth/login', async (userData: {userName: 
         //console.log('error login', err.response)
         return rejectWithValue(err.response.data)
     }
-})
+})*/
 
-export const logout = createAsyncThunk('auth/logout', async () => {
+/*export const logout = createAsyncThunk('auth/logout', async () => {
     try {
         const res = await SessionClient.get('/logout')
         return res.data
@@ -46,7 +46,7 @@ export const logout = createAsyncThunk('auth/logout', async () => {
         throw err
         //return rejectWithValue(err.response.data)
     }
-})
+})*/
 
 /*export const getUser = createAsyncThunk('auth/getUser', async () => {
     try {
@@ -63,7 +63,7 @@ export const logout = createAsyncThunk('auth/logout', async () => {
     }
 })*/
 
-export const getUserWithCookie = createAsyncThunk(
+/*export const getUserWithCookie = createAsyncThunk(
     'auth/getUserWithCookie',
     async (cookie) => {
         try {
@@ -79,49 +79,26 @@ export const getUserWithCookie = createAsyncThunk(
             })
 
             const data = response.data
-
-            console.log(data, 'DATA')
-
-            /*const response = await fetch('http://localhost:3000/api/auth', {
-                // @ts-ignore
-                headers: {
-                    cookie: cookie
-                }
-            }).then(res => {
-                console.log('getUserWithCookie RESPONSE', res.body)
-                //return res.data
-            })*/
-
-            //console.log(response.headers['set-cookie'], 'NEW HEADERS')
-
             return response.data
 
         } catch (e: any) {
             console.log('error getUserWithCookie', e.response.data)
-            //throw e
         }
     }
-)
+)*/
 
-export const getUser = createAsyncThunk(
+/*export const getUser = createAsyncThunk(
     'auth/getUser',
     async (cookie) => {
-        //const client = ApiClient.get('/api/user')
-
-        //console.log('cookie async', cookie)
-
         try {
             const response = await ApiClient.get('/user')
-
-            //console.log('getUser', response.data)
-
             return response.data
         } catch (e: any) {
             console.log('error getUser', e.response.data)
             throw e
         }
     }
-)
+)*/
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -131,7 +108,7 @@ export const authSlice = createSlice({
             state.user = action.payload
         },
     },
-    extraReducers: builder => {
+    /*extraReducers: builder => {
         builder
             .addCase(login.pending, state => {
                 state.loading = true
@@ -174,18 +151,12 @@ export const authSlice = createSlice({
             })
             .addCase(getUserWithCookie.fulfilled, (state, { payload }) => {
                 state.loading = false
-
-                //const a = payload.headers
-                //console.log(a, 'COOKIE')
-
-                console.log('fulfilled cookie USER', payload)
-
-                //state.user = payload
+                state.user = payload
             })
             .addCase(getUserWithCookie.rejected, state => {
                 state.loading = false
             })
-    },
+    },*/
 })
 
 export const {
@@ -194,7 +165,7 @@ export const {
 
 export const selectUser = (state: RootState) => <LoggedInUser|null>state.auth.user
 export const selectUserIsLoggedIn = (state: RootState) => (state.auth.user?.id !== undefined)
-export const selectLoadingUser = (state: RootState) => state.auth.loading
-export const selectErrorUser = (state: RootState) => state.auth.error
+//export const selectLoadingUser = (state: RootState) => state.auth.loading
+//export const selectErrorUser = (state: RootState) => state.auth.error
 
 export default authSlice.reducer

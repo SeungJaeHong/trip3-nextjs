@@ -6,16 +6,14 @@ import Router from "next/router"
 import FormInput from "../Form/FormInput"
 import SubmitButton from "../Form/SubmitButton"
 import {useAppDispatch, useAppSelector} from "../../hooks"
-import {selectUser, selectLoadingUser, selectErrorUser, setUser} from "../../redux/auth"
+import {selectUser, setUser} from "../../redux/auth"
 import toast from 'react-hot-toast'
-import {setFormikErrors} from "../../helpers";
-import {login} from "../../services/auth.service";
+import {setFormikErrors} from "../../helpers"
+import {login} from "../../services/auth.service"
 
 const LoginForm = () => {
     const dispatch = useAppDispatch()
     const user = useAppSelector(selectUser)
-    const loadingUser = useAppSelector(selectLoadingUser)
-    const errorUser = useAppSelector(selectErrorUser)
 
     useEffect(() => {
         if (user && user.id) {
@@ -29,7 +27,6 @@ const LoginForm = () => {
             dispatch(setUser(res.data))
             toast.success('Sisselogimine õnnestus!')
         }).catch(err => {
-            //console.log(err.response.data.errors, 'ERROR')
             if (err.response?.data?.errors) {
                 setFormikErrors(err.response.data.errors, formikHelpers.setFieldError)
             }
@@ -55,14 +52,14 @@ const LoginForm = () => {
                     initialValues={{ name: '', password: '' }}
                     onSubmit={handleLogin}
                 >
-                    {({ values, handleChange, handleBlur, errors, touched }: FormikProps<any>) => (
+                    {({ values, isSubmitting, handleChange, handleBlur, errors, touched }: FormikProps<any>) => (
                         <Form>
                             <div className={styles.FormInput}>
                                 <Field
                                     name={'name'}
                                     id={'name'}
                                     label={'Kasutajanimi'}
-                                    disabled={loadingUser}
+                                    disabled={isSubmitting}
                                     hasError={errors?.name?.length}
                                     component={FormInput} />
                             </div>
@@ -72,14 +69,14 @@ const LoginForm = () => {
                                     id={'password'}
                                     label={'Parool'}
                                     type={'password'}
-                                    disabled={loadingUser}
+                                    disabled={isSubmitting}
                                     hasError={errors?.password?.length}
                                     component={FormInput} />
                             </div>
                             <div className={styles.SubmitButton}>
                                 <SubmitButton
                                     title={'Logi sisse'}
-                                    submitting={loadingUser} />
+                                    submitting={isSubmitting} />
                             </div>
                         </Form>
                     )}
