@@ -6,12 +6,11 @@ import Router from "next/router"
 import FormInput from "../Form/FormInput"
 import SubmitButton from "../Form/SubmitButton"
 import {useAppDispatch, useAppSelector} from "../../hooks"
-import {login, selectUser, selectLoadingUser} from "../../redux/auth"
+import {selectUser} from "../../redux/auth"
 
 const RegisterForm = () => {
     const dispatch = useAppDispatch()
     const user = useAppSelector(selectUser)
-    const loadingUser = useAppSelector(selectLoadingUser)
 
     useEffect(() => {
         if (user && user.id) {
@@ -34,20 +33,20 @@ const RegisterForm = () => {
             </div>
             <div className={styles.FormContainer}>
                 <Formik
-                    initialValues={{ userName: '', email: '', password: '', password_again: '' }}
+                    initialValues={{ userName: '', email: '', password: '', password_confirm: '' }}
                     onSubmit={(values, actions) => {
                         console.log(values, 'register form values')
                         //dispatch(login(values))
                     }}
                 >
-                    {(props: FormikProps<any>) => (
+                    {({ values, isSubmitting, handleChange, handleBlur, errors, touched }: FormikProps<any>) => (
                         <Form>
                             <div className={styles.FormInput}>
                                 <Field
                                     name={'userName'}
                                     id={'userName'}
                                     label={'Kasutajanimi'}
-                                    disabled={loadingUser}
+                                    disabled={isSubmitting}
                                     component={FormInput} />
                             </div>
                             <div className={styles.FormInput}>
@@ -56,7 +55,7 @@ const RegisterForm = () => {
                                     id={'email'}
                                     label={'E-mail'}
                                     type={'email'}
-                                    disabled={loadingUser}
+                                    disabled={isSubmitting}
                                     component={FormInput} />
                             </div>
                             <div className={styles.FormInput}>
@@ -65,22 +64,22 @@ const RegisterForm = () => {
                                     id={'password'}
                                     label={'Parool'}
                                     type={'password'}
-                                    disabled={loadingUser}
+                                    disabled={isSubmitting}
                                     component={FormInput} />
                             </div>
                             <div className={styles.FormInput}>
                                 <Field
-                                    name={'password_again'}
-                                    id={'password_again'}
+                                    name={'password_confirm'}
+                                    id={'password_confirm'}
                                     label={'Parool uuesti'}
                                     type={'password'}
-                                    disabled={loadingUser}
+                                    disabled={isSubmitting}
                                     component={FormInput} />
                             </div>
                             <div className={styles.SubmitButton}>
                                 <SubmitButton
                                     title={'Registreeri'}
-                                    submitting={loadingUser} />
+                                    submitting={isSubmitting} />
                             </div>
                         </Form>
                     )}
