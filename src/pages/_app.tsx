@@ -28,7 +28,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                     left: '32px'
                 }}
                 toastOptions={{
-                    //duration: 4000,
                     success: {
                         style: {
                             background: '#8EDD65',

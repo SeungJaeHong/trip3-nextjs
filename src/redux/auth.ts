@@ -7,14 +7,12 @@ import axios from "axios"
 
 export type AuthState = {
     user: LoggedInUser|null,
-    //loading: boolean,
-    //error: boolean
+    loading: boolean
 }
 
 const initialState: AuthState = {
     user: null,
-    //loading: false,
-    //error: false
+    loading: false
 }
 
 /*export const login = createAsyncThunk('auth/login', async (userData: {userName: string, password: string}, { rejectWithValue }) => {
@@ -37,16 +35,15 @@ const initialState: AuthState = {
     }
 })*/
 
-/*export const logout = createAsyncThunk('auth/logout', async () => {
+export const logout = createAsyncThunk('auth/logout', async () => {
     try {
         const res = await SessionClient.get('/logout')
         return res.data
-
     } catch (err: any) {
         throw err
         //return rejectWithValue(err.response.data)
     }
-})*/
+})
 
 /*export const getUser = createAsyncThunk('auth/getUser', async () => {
     try {
@@ -108,21 +105,8 @@ export const authSlice = createSlice({
             state.user = action.payload
         },
     },
-    /*extraReducers: builder => {
+    extraReducers: builder => {
         builder
-            .addCase(login.pending, state => {
-                state.loading = true
-                state.error = false
-            })
-            .addCase(login.fulfilled, (state, { payload }) => {
-                state.loading = false
-                state.error = false
-                state.user = payload
-            })
-            .addCase(login.rejected, state => {
-                state.loading = false
-                state.error = true
-            })
             .addCase(logout.pending, state => {
                 state.loading = true
             })
@@ -133,30 +117,7 @@ export const authSlice = createSlice({
             .addCase(logout.rejected, state => {
                 state.loading = false
             })
-            .addCase(getUser.pending, state => {
-                state.loading = true
-            })
-            .addCase(getUser.fulfilled, (state, { payload }) => {
-                state.loading = false
-
-                console.log('fulfilled', payload)
-
-                //state.user = payload
-            })
-            .addCase(getUser.rejected, state => {
-                state.loading = false
-            })
-            .addCase(getUserWithCookie.pending, state => {
-                state.loading = true
-            })
-            .addCase(getUserWithCookie.fulfilled, (state, { payload }) => {
-                state.loading = false
-                state.user = payload
-            })
-            .addCase(getUserWithCookie.rejected, state => {
-                state.loading = false
-            })
-    },*/
+    },
 })
 
 export const {
@@ -165,7 +126,5 @@ export const {
 
 export const selectUser = (state: RootState) => <LoggedInUser|null>state.auth.user
 export const selectUserIsLoggedIn = (state: RootState) => (state.auth.user?.id !== undefined)
-//export const selectLoadingUser = (state: RootState) => state.auth.loading
-//export const selectErrorUser = (state: RootState) => state.auth.error
 
 export default authSlice.reducer
