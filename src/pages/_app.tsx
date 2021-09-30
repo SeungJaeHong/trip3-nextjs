@@ -62,7 +62,7 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     const { dispatch } = reduxStore
 
     //get logged in user
-    const cookie = context.req ? context.req.headers.cookie : undefined
+    const cookie = context?.req?.headers.cookie ?? {}
     let headers = {
         Accept: 'application/json',
     }
