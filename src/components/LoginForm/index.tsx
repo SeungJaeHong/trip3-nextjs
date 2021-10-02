@@ -42,11 +42,11 @@ const LoginForm = () => {
             if (response.status === 'connected') {
                 const accessToken = response.authResponse.accessToken
                 console.log('logged in')
-                FB.api('/me?fields=id,email,first_name,last_name,gender,profile_pic', function(response2: any) {
+                FB.api('/me?fields=id,email,first_name,last_name,profile_pic', function(response2: any) {
                     console.log('me', response2)
                 });
                 FB.api(
-                    "/" + response.authResponse.userID + '?fields=id,email,name,picture,gender,profile_pic', {access_token : accessToken},
+                    "/" + response.authResponse.userID + '?fields=id,email,name,picture,profile_pic', {access_token : accessToken},
                     function (response3: any) {
                         console.log('USER', response3)
 
@@ -58,7 +58,7 @@ const LoginForm = () => {
             } else {
                 console.log('not logged in')
             }
-        }, {scope: 'public_profile,email,profile_pic'})
+        }, {scope: 'public_profile,email'})
 
 
         /*FB.getLoginStatus(function(response) {
