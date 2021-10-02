@@ -24,3 +24,12 @@ export const login = async (name: string, password: string): Promise<AxiosRespon
         return false
     }*/
 }
+
+export const createUserOrLogin = async (name: string, email: string): Promise<AxiosResponse> => {
+    const result = await ApiClient.post('/auth/login_or_create', {
+        name,
+        email,
+    })
+
+    return result
+}

@@ -10,7 +10,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks"
 import {selectUser, setUser} from "../../redux/auth"
 import toast from 'react-hot-toast'
 import {setFormikErrors} from "../../helpers"
-import {login} from "../../services/auth.service"
+import {createUserOrLogin, login} from "../../services/auth.service"
 
 const LoginForm = () => {
     const dispatch = useAppDispatch()
@@ -40,37 +40,17 @@ const LoginForm = () => {
         FB.login(function(response) {
             console.log('login', response)
             if (response.status === 'connected') {
-                const accessToken = response.authResponse.accessToken
-                console.log('logged in')
-                FB.api('/me?fields=id,email,first_name,last_name,picture.type(large)', function(response2: any) {
-                    console.log('me', response2)
-                });
-                FB.api(
-                    "/" + response.authResponse.userID + '?fields=id,email,name,picture.width(800).height(800),gender', {access_token : accessToken},
-                    function (response3: any) {
-                        console.log('USER', response3)
-
-                        /*if (response && !response3.error) {
-
-                        }*/
-                    }
-                );
-            } else {
-                console.log('not logged in')
+                FB.api('/me?fields=id,email,name,picture.width(800).height(800)', function(userResponse: any) {
+                    const res = createUserOrLogin(userResponse.name, userResponse.email).then(res => {
+                        dispatch(setUser(res.data))
+                        toast.success('Sisselogimine õnnestus!')
+                    }).catch(err => {
+                        console.log('err', err.data)
+                        toast.error('Sisselogimine ebaõnnestus!')
+                    })
+                })
             }
         }, {scope: 'public_profile,email'})
-
-
-        /*FB.getLoginStatus(function(response) {
-            console.log('getLoginStatus', response)
-            if (response.status === 'connected') {
-                // Logged into your webpage and Facebook.
-                console.log('logged in')
-            } else {
-                console.log('not logged in')
-                // The person is not logged into your webpage or we are unable to tell.
-            }
-        })*/
     }
 
     // @ts-ignore
@@ -135,18 +115,7 @@ const LoginForm = () => {
                             xfbml      : true,
                             version    : 'v12.0'
                         });
-
-
-                        /*FB.getLoginStatus(function(response) {
-                            console.log('siin', response)
-                            //statusChangeCallback(response);
-                        });*/
                     };
-
-                    /*console.log('loaded')
-                    FB.login(function(response) {
-                        console.log('siin', response)
-                    }, {scope: 'public_profile,email'});*/
                 }}
             />
         </Fragment>
