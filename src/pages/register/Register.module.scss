@@ -42,5 +42,24 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-bottom: $spacer * 8;
+    padding-bottom: $spacer * 4;
+}
+
+.TermsOfService {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: $font-size-small;
+    color: $gray-darker;
+    padding-bottom: $spacer * 4;
+
+    .TermsOfServiceLink {
+        color: $blue;
+        cursor: pointer;
+        margin-left: $spacer * 0.5;
+
+        &:hover {
+            color: $blue-hover;
+        }
+    }
 }

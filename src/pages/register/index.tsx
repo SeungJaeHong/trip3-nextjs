@@ -1,4 +1,5 @@
 import React, {Fragment} from "react"
+import Link from 'next/link'
 import Navbar from "../../components/Navbar"
 import styles from './Register.module.scss'
 import clsx from "clsx";
@@ -7,7 +8,7 @@ import containerStyle from "../../styles/containers.module.scss"
 import BackgroundMap from "../../components/BackgroundMap";
 import RegisterForm from "../../components/RegisterForm";
 import {GetServerSideProps} from "next";
-import ApiClientSSR from "../../lib/ApiClientSSR";
+import ApiClientSSR from "../../lib/ApiClientSSR"
 
 const RegisterPage = () => {
     return (
@@ -26,6 +27,12 @@ const RegisterPage = () => {
                     </div>
                     <div className={styles.Form}>
                         <RegisterForm />
+                    </div>
+                    <div className={styles.TermsOfService}>
+                        Trip.ee keskkonnaga liitudes nõustun ma
+                        <Link href={'/kasutustingimused'}>
+                            <a className={styles.TermsOfServiceLink}>kasutustingimustega</a>
+                        </Link>
                     </div>
                 </div>
             </div>
