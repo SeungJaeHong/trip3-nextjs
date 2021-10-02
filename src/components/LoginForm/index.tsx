@@ -58,7 +58,7 @@ const LoginForm = () => {
             } else {
                 console.log('not logged in')
             }
-        }, {scope: 'public_profile,email'})
+        }, {scope: 'public_profile,email,profile_pic'})
 
 
         /*FB.getLoginStatus(function(response) {
