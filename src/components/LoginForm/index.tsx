@@ -41,11 +41,11 @@ const LoginForm = () => {
             console.log('login', response)
             if (response.status === 'connected') {
                 console.log('logged in')
-                FB.api('/me?fields=id,email,name,picture', function(response2: any) {
+                FB.api('/me?fields=id,email,name,picture,profile_pic', function(response2: any) {
                     console.log('me', response2)
                 });
                 FB.api(
-                    "/" + response.authResponse.userID + '?fields=id,email,name,picture',
+                    "/" + response.authResponse.userID + '?fields=id,email,name,picture,profile_pic',
                     function (response3: any) {
                         console.log('USER', response3)
 
