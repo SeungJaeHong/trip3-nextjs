@@ -37,16 +37,19 @@ const LoginForm = () => {
     }
 
     const signInFB = () => {
-        if (fbLoaded) {
-            FB.login(function(response) {
-                console.log('login', response)
-                if (response.status === 'connected') {
-                    console.log('logged in')
-                } else {
-                    console.log('not logged in')
-                }
-            }, {scope: 'public_profile,email'})
-        }
+        FB.login(function(response) {
+            console.log('login', response)
+            if (response.status === 'connected') {
+                console.log('logged in')
+                FB.api('/me', function(response2: any) {
+                    console.log('Good to see you, ' + response2.name + '.');
+                    console.log('me', response2)
+                });
+            } else {
+                console.log('not logged in')
+            }
+        }, {scope: 'public_profile,email'})
+
 
         /*FB.getLoginStatus(function(response) {
             console.log('getLoginStatus', response)
@@ -115,9 +118,6 @@ const LoginForm = () => {
             <Script
                 src={"https://connect.facebook.net/en_US/sdk.js"}
                 onLoad={() => {
-                    console.log('loaded')
-                    setFbLoaded(true)
-
                     window.fbAsyncInit = function() {
                         FB.init({
                             appId      : process.env.FACEBOOK_APP_ID,
