@@ -31,6 +31,9 @@ const LoginPage = (props: any) => {
                     <div className={styles.Form}>
                         <LoginForm />
                     </div>
+                    <div className={styles.ForgotPassword}>
+                        Ei mäleta oma parooli? <span className={styles.ForgotPasswordLink}>Taasta oma parool siin</span>
+                    </div>
                 </div>
             </div>
             <Footer simple={true} />

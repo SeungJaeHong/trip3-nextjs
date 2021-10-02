@@ -1,28 +1,14 @@
 import ApiClient from "../lib/ApiClient"
 import {AxiosResponse} from "axios"
 
-export const login = async (name: string, password: string): Promise<AxiosResponse> => {
+export const login = async (name: string, password: string, remember_me: boolean): Promise<AxiosResponse> => {
     const result = await ApiClient.post('/auth/login', {
         name,
         password,
+        remember_me
     })
 
     return result
-
-    /*try {
-        const result = await ApiClient.post('/auth/login', {
-            name,
-            password,
-        })
-
-        if (result.status === 200) {
-            console.log('set user')
-        }
-    } catch (e: any) {
-        if (e.response && e.response.status === 422) return e.response;
-        console.error('Cannot login', e.message);
-        return false
-    }*/
 }
 
 export const createUserOrLogin = async (name: string, email: string): Promise<AxiosResponse> => {

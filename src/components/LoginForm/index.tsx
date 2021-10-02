@@ -11,11 +11,11 @@ import {selectUser, setUser} from "../../redux/auth"
 import toast from 'react-hot-toast'
 import {setFormikErrors} from "../../helpers"
 import {createUserOrLogin, login} from "../../services/auth.service"
+import FormCheckbox from "../Form/FormCheckbox";
 
 const LoginForm = () => {
     const dispatch = useAppDispatch()
     const user = useAppSelector(selectUser)
-    const [fbLoaded, setFbLoaded] = useState(false)
 
     useEffect(() => {
         if (user && user.id) {
@@ -24,8 +24,8 @@ const LoginForm = () => {
     }, [user])
 
     const handleLogin = async (values: any, formikHelpers: FormikHelpers<any>) => {
-        const { name, password } = values
-        const resp = await login(name, password).then(res => {
+        const { name, password, remember_me } = values
+        const resp = await login(name, password, remember_me).then(res => {
             dispatch(setUser(res.data))
             toast.success('Sisselogimine õnnestus!')
         }).catch(err => {
@@ -38,7 +38,6 @@ const LoginForm = () => {
 
     const signInFB = () => {
         FB.login(function(response) {
-            console.log('login', response)
             if (response.status === 'connected') {
                 FB.api('/me?fields=id,email,name,picture.width(800).height(800)', function(userResponse: any) {
                     const res = createUserOrLogin(userResponse.name, userResponse.email).then(res => {
@@ -70,7 +69,7 @@ const LoginForm = () => {
                 </div>
                 <div className={styles.FormContainer}>
                     <Formik
-                        initialValues={{ name: '', password: '' }}
+                        initialValues={{ name: '', password: '', remember_me: false }}
                         onSubmit={handleLogin}
                     >
                         {({ values, isSubmitting, handleChange, handleBlur, errors, touched }: FormikProps<any>) => (
@@ -93,6 +92,15 @@ const LoginForm = () => {
                                         disabled={isSubmitting}
                                         hasError={errors?.password?.length}
                                         component={FormInput} />
+                                </div>
+                                <div className={styles.FormInput}>
+                                    <Field
+                                        name={'remember_me'}
+                                        id={'remember_me'}
+                                        label={'Pea mu logimine meeles'}
+                                        disabled={isSubmitting}
+                                        checked={values.remember_me}
+                                        component={FormCheckbox} />
                                 </div>
                                 <div className={styles.SubmitButton}>
                                     <SubmitButton
