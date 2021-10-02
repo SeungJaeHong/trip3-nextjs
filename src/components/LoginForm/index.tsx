@@ -1,4 +1,5 @@
-import React, {useEffect} from "react"
+import React, {Fragment, useEffect, useState} from "react"
+import Script from 'next/script'
 import {Field, Form, Formik, FormikHelpers, FormikProps} from 'formik'
 import styles from "./LoginForm.module.scss"
 import clsx from "clsx"
@@ -14,6 +15,7 @@ import {login} from "../../services/auth.service"
 const LoginForm = () => {
     const dispatch = useAppDispatch()
     const user = useAppSelector(selectUser)
+    const [fbLoaded, setFbLoaded] = useState(false)
 
     useEffect(() => {
         if (user && user.id) {
@@ -34,55 +36,110 @@ const LoginForm = () => {
         })
     }
 
+    const signInFB = () => {
+        if (fbLoaded) {
+            FB.login(function(response) {
+                console.log('login', response)
+                if (response.status === 'connected') {
+                    console.log('logged in')
+                } else {
+                    console.log('not logged in')
+                }
+            }, {scope: 'public_profile,email'})
+        }
+
+        /*FB.getLoginStatus(function(response) {
+            console.log('getLoginStatus', response)
+            if (response.status === 'connected') {
+                // Logged into your webpage and Facebook.
+                console.log('logged in')
+            } else {
+                console.log('not logged in')
+                // The person is not logged into your webpage or we are unable to tell.
+            }
+        })*/
+    }
+
+    // @ts-ignore
     return (
-        <div className={styles.LoginForm}>
-            <div className={styles.Tabs}>
-                <div className={clsx(styles.Tab, styles.UserName)}>
-                    Kasutajanimi
+        <Fragment>
+            <div className={styles.LoginForm}>
+                <div className={styles.Tabs}>
+                    <div className={clsx(styles.Tab, styles.UserName)}>
+                        Kasutajanimi
+                    </div>
+                    <div className={clsx(styles.Tab, styles.Social, styles.Facebook)} onClick={() => signInFB()}>
+                        Facebook
+                    </div>
+                    <div className={clsx(styles.Tab, styles.Social, styles.Google)}>
+                        Google
+                    </div>
                 </div>
-                <div className={clsx(styles.Tab, styles.Social, styles.Facebook)}>
-                    Facebook
-                </div>
-                <div className={clsx(styles.Tab, styles.Social, styles.Google)}>
-                    Google
+                <div className={styles.FormContainer}>
+                    <Formik
+                        initialValues={{ name: '', password: '' }}
+                        onSubmit={handleLogin}
+                    >
+                        {({ values, isSubmitting, handleChange, handleBlur, errors, touched }: FormikProps<any>) => (
+                            <Form>
+                                <div className={styles.FormInput}>
+                                    <Field
+                                        name={'name'}
+                                        id={'name'}
+                                        label={'Kasutajanimi'}
+                                        disabled={isSubmitting}
+                                        hasError={errors?.name?.length}
+                                        component={FormInput} />
+                                </div>
+                                <div className={styles.FormInput}>
+                                    <Field
+                                        name={'password'}
+                                        id={'password'}
+                                        label={'Parool'}
+                                        type={'password'}
+                                        disabled={isSubmitting}
+                                        hasError={errors?.password?.length}
+                                        component={FormInput} />
+                                </div>
+                                <div className={styles.SubmitButton}>
+                                    <SubmitButton
+                                        title={'Logi sisse'}
+                                        submitting={isSubmitting} />
+                                </div>
+                            </Form>
+                        )}
+                    </Formik>
                 </div>
             </div>
-            <div className={styles.FormContainer}>
-                <Formik
-                    initialValues={{ name: '', password: '' }}
-                    onSubmit={handleLogin}
-                >
-                    {({ values, isSubmitting, handleChange, handleBlur, errors, touched }: FormikProps<any>) => (
-                        <Form>
-                            <div className={styles.FormInput}>
-                                <Field
-                                    name={'name'}
-                                    id={'name'}
-                                    label={'Kasutajanimi'}
-                                    disabled={isSubmitting}
-                                    hasError={errors?.name?.length}
-                                    component={FormInput} />
-                            </div>
-                            <div className={styles.FormInput}>
-                                <Field
-                                    name={'password'}
-                                    id={'password'}
-                                    label={'Parool'}
-                                    type={'password'}
-                                    disabled={isSubmitting}
-                                    hasError={errors?.password?.length}
-                                    component={FormInput} />
-                            </div>
-                            <div className={styles.SubmitButton}>
-                                <SubmitButton
-                                    title={'Logi sisse'}
-                                    submitting={isSubmitting} />
-                            </div>
-                        </Form>
-                    )}
-                </Formik>
-            </div>
-        </div>
+
+            <Script
+                src={"https://connect.facebook.net/en_US/sdk.js"}
+                onLoad={() => {
+                    console.log('loaded')
+                    setFbLoaded(true)
+
+                    window.fbAsyncInit = function() {
+                        FB.init({
+                            appId      : process.env.FACEBOOK_APP_ID,
+                            cookie     : true,
+                            xfbml      : true,
+                            version    : 'v12.0'
+                        });
+
+
+                        /*FB.getLoginStatus(function(response) {
+                            console.log('siin', response)
+                            //statusChangeCallback(response);
+                        });*/
+                    };
+
+                    /*console.log('loaded')
+                    FB.login(function(response) {
+                        console.log('siin', response)
+                    }, {scope: 'public_profile,email'});*/
+                }}
+            />
+        </Fragment>
     )
 }
 
