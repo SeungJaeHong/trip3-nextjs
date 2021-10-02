@@ -42,9 +42,18 @@ const LoginForm = () => {
             if (response.status === 'connected') {
                 console.log('logged in')
                 FB.api('/me', function(response2: any) {
-                    console.log('Good to see you, ' + response2.name + '.');
                     console.log('me', response2)
                 });
+                FB.api(
+                    "/" + response.authResponse.userID,
+                    function (response3: any) {
+                        console.log('USER', response3)
+
+                        /*if (response && !response3.error) {
+
+                        }*/
+                    }
+                );
             } else {
                 console.log('not logged in')
             }
