@@ -45,9 +45,9 @@ npm start
  - Note: It's recommended to use some sort of process manager e.g [pm2](https://pm2.keymetrics.io), supervisor etc..
  - Note: If backend and front are sitting on different domains then u need configure the cors params as well on backend side
 
-## Internal API routes (not implemented and probably not needed)
+## Internal API routes
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+[API routes](https://nextjs.org/docs/api-routes/introduction)
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
