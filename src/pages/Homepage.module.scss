@@ -57,6 +57,10 @@
     justify-content: flex-end;
     margin-bottom: $spacer * 2;
 
+    &.UserLoggedIn {
+        margin-bottom: $spacer;
+    }
+
     @include sm() {
         justify-content: center;
     }

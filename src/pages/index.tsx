@@ -18,6 +18,8 @@ import {FlightOfferCardType, ForumRowType} from '../types'
 import FrontpageNewsBlock from "../components/News/FrontpageNewsBlock"
 import FlightOffersLatest from "../components/FlightOffer/FlightOffersLatest";
 import TravelmatesLatest from "../components/Travelmate/TravelmatesLatest";
+import {useAppDispatch, useAppSelector} from "../hooks";
+import {selectUser} from "../redux/auth";
 
 type Props = {
     flightOffers: FlightOfferCardType[],
@@ -25,7 +27,8 @@ type Props = {
 }
 
 const Home = (props: Props) => {
-    //const user = useUser()
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(selectUser)
 
     return (
         <>
@@ -59,20 +62,25 @@ const Home = (props: Props) => {
                             <FlightOfferCard {...props.flightOffers[2]} color={'red'} />
                         </div>
                     </div>
-                    <div className={styles.MoreFlightsLink}>
+                    <div className={clsx(styles.MoreFlightsLink, {
+                        [styles.UserLoggedIn]: user && user?.id
+                    })}>
                         <MoreLink title={'Vaata kõiki lennupakkumisi'} route={'/odavad-lennupiletid'} />
                     </div>
-                    <div className={styles.JoinTripBlock}>
-                        <div className={styles.TripDescription}>
-                            <span className={styles.DescriptionText}>
-                                Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.
-                            </span>
-                            <MoreLink title={'Loe lähemalt Trip.ee-st'} route={'/'} />
+
+                    {!user &&
+                        <div className={styles.JoinTripBlock}>
+                            <div className={styles.TripDescription}>
+                                <span className={styles.DescriptionText}>
+                                    Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.
+                                </span>
+                                <MoreLink title={'Loe lähemalt Trip.ee-st'} route={'/'}/>
+                            </div>
+                            <div className={styles.JoinButton}>
+                                <Button title={'Liitu Trip.ee-ga'}/>
+                            </div>
                         </div>
-                        <div className={styles.JoinButton}>
-                            <Button title={'Liitu Trip.ee-ga'}/>
-                        </div>
-                    </div>
+                    }
 
                     <div className={styles.ForumContainer}>
                         <div className={styles.ForumBlockTitle}>
