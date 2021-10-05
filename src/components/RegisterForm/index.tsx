@@ -1,22 +1,59 @@
 import React, {useEffect} from "react"
-import {Field, Form, Formik, FormikProps} from 'formik'
 import styles from "./RegisterForm.module.scss"
 import clsx from "clsx"
 import Router from "next/router"
 import FormInput from "../Form/FormInput"
 import SubmitButton from "../Form/SubmitButton"
 import {useAppDispatch, useAppSelector} from "../../hooks"
-import {selectUser} from "../../redux/auth"
+import {selectUser, setUser} from "../../redux/auth"
+import {register as registerUser} from "../../services/auth.service";
+import toast from "react-hot-toast";
+import { useForm, SubmitHandler } from "react-hook-form"
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import {setFormErrors} from "../../helpers"
+
+type Inputs = {
+    name: string,
+    email: string,
+    password: string
+    password_confirmation: string
+}
 
 const RegisterForm = () => {
     const dispatch = useAppDispatch()
     const user = useAppSelector(selectUser)
+    const registerSchema = yup.object().shape({
+        name: yup.string().required('Kasutajanimi on kohustuslik'),
+        email: yup.string().email('E-post ei ole korrektne').required('E-post on kohustuslik'),
+        password: yup.string().required('Parool on kohustuslik'),
+        password_confirmation: yup.string()
+            .required('Parooli kordamine on kohustuslik')
+            .oneOf([yup.ref('password'), null], 'Paroolid ei ühti'),
+    }).required()
+
+    const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
+        resolver: yupResolver(registerSchema)
+    })
 
     useEffect(() => {
         if (user && user.id) {
             Router.replace('/')
         }
     }, [user])
+
+    const handleRegister: SubmitHandler<Inputs> = async (values: Inputs) => {
+        const { name, email, password } = values
+        const resp = await registerUser(name, email, password).then(res => {
+            dispatch(setUser(res.data))
+            toast.success('Tere tulemast, ' + name + '!')
+        }).catch(err => {
+            if (err.response?.data?.errors) {
+                setFormErrors(err.response?.data?.errors, setError)
+            }
+            toast.error('Registreerimine ebaõnnestus!')
+        })
+    }
 
     return (
         <div className={styles.RegisterForm}>
@@ -32,58 +69,56 @@ const RegisterForm = () => {
                 </div>
             </div>
             <div className={styles.FormContainer}>
-                <Formik
-                    initialValues={{ userName: '', email: '', password: '', password_confirm: '' }}
-                    onSubmit={(values, actions) => {
-                        console.log(values, 'register form values')
-                        //dispatch(login(values))
-                    }}
-                >
-                    {({ values, isSubmitting, handleChange, handleBlur, errors, touched }: FormikProps<any>) => (
-                        <Form>
-                            <div className={styles.FormInput}>
-                                <Field
-                                    name={'userName'}
-                                    id={'userName'}
-                                    label={'Kasutajanimi'}
-                                    disabled={isSubmitting}
-                                    component={FormInput} />
-                            </div>
-                            <div className={styles.FormInput}>
-                                <Field
-                                    name={'email'}
-                                    id={'email'}
-                                    label={'E-mail'}
-                                    type={'email'}
-                                    disabled={isSubmitting}
-                                    component={FormInput} />
-                            </div>
-                            <div className={styles.FormInput}>
-                                <Field
-                                    name={'password'}
-                                    id={'password'}
-                                    label={'Parool'}
-                                    type={'password'}
-                                    disabled={isSubmitting}
-                                    component={FormInput} />
-                            </div>
-                            <div className={styles.FormInput}>
-                                <Field
-                                    name={'password_confirm'}
-                                    id={'password_confirm'}
-                                    label={'Parool uuesti'}
-                                    type={'password'}
-                                    disabled={isSubmitting}
-                                    component={FormInput} />
-                            </div>
-                            <div className={styles.SubmitButton}>
-                                <SubmitButton
-                                    title={'Registreeri'}
-                                    submitting={isSubmitting} />
-                            </div>
-                        </Form>
-                    )}
-                </Formik>
+                <form onSubmit={handleSubmit(handleRegister)}>
+                    <div className={styles.FormInput}>
+                        <FormInput
+                            name={'name'}
+                            id={'name'}
+                            label={'Kasutajanimi'}
+                            disabled={isSubmitting}
+                            required={true}
+                            error={errors.name?.message}
+                            register={register} />
+                    </div>
+                    <div className={styles.FormInput}>
+                        <FormInput
+                            name={'email'}
+                            id={'email'}
+                            label={'E-mail'}
+                            type={'email'}
+                            disabled={isSubmitting}
+                            required={true}
+                            error={errors.email?.message}
+                            register={register} />
+                    </div>
+                    <div className={styles.FormInput}>
+                        <FormInput
+                            name={'password'}
+                            id={'password'}
+                            label={'Parool'}
+                            type={'password'}
+                            disabled={isSubmitting}
+                            required={true}
+                            error={errors.password?.message}
+                            register={register} />
+                    </div>
+                    <div className={styles.FormInput}>
+                        <FormInput
+                            name={'password_confirmation'}
+                            id={'password_confirmation'}
+                            label={'Parool uuesti'}
+                            type={'password'}
+                            disabled={isSubmitting}
+                            required={true}
+                            error={errors.password_confirmation?.message}
+                            register={register} />
+                    </div>
+                    <div className={styles.SubmitButton}>
+                        <SubmitButton
+                            title={'Registreeri'}
+                            submitting={isSubmitting} />
+                    </div>
+                </form>
             </div>
         </div>
     )

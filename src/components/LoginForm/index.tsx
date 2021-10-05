@@ -1,6 +1,5 @@
-import React, {Fragment, useEffect, useState} from "react"
+import React, {Fragment, useEffect} from "react"
 import Script from 'next/script'
-import {Field, Form, Formik, FormikHelpers, FormikProps} from 'formik'
 import styles from "./LoginForm.module.scss"
 import clsx from "clsx"
 import Router from "next/router"
@@ -9,13 +8,31 @@ import SubmitButton from "../Form/SubmitButton"
 import {useAppDispatch, useAppSelector} from "../../hooks"
 import {selectUser, setUser} from "../../redux/auth"
 import toast from 'react-hot-toast'
-import {setFormikErrors} from "../../helpers"
+import {setFormErrors} from "../../helpers"
 import {createUserOrLogin, login} from "../../services/auth.service"
-import FormCheckbox from "../Form/FormCheckbox";
+import FormCheckbox from "../Form/FormCheckbox"
+import {SubmitHandler, useForm} from "react-hook-form";
+import * as yup from "yup";
+import {yupResolver} from "@hookform/resolvers/yup";
+
+type Inputs = {
+    name: string,
+    password: string,
+    remember_me: boolean
+}
 
 const LoginForm = () => {
     const dispatch = useAppDispatch()
     const user = useAppSelector(selectUser)
+
+    const loginSchema = yup.object().shape({
+        name: yup.string().required('Kasutajanimi on kohustuslik'),
+        password: yup.string().required('Parool on kohustuslik'),
+    }).required()
+
+    const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
+        resolver: yupResolver(loginSchema)
+    })
 
     useEffect(() => {
         if (user && user.id) {
@@ -23,14 +40,14 @@ const LoginForm = () => {
         }
     }, [user])
 
-    const handleLogin = async (values: any, formikHelpers: FormikHelpers<any>) => {
+    const handleLogin: SubmitHandler<Inputs> = async (values: Inputs) => {
         const { name, password, remember_me } = values
         const resp = await login(name, password, remember_me).then(res => {
             dispatch(setUser(res.data))
             toast.success('Sisselogimine õnnestus!')
         }).catch(err => {
             if (err.response?.data?.errors) {
-                setFormikErrors(err.response.data.errors, formikHelpers.setFieldError)
+                setFormErrors(err.response.data.errors, setError)
             }
             toast.error('Sisselogimine ebaõnnestus!')
         })
@@ -68,48 +85,42 @@ const LoginForm = () => {
                     </div>
                 </div>
                 <div className={styles.FormContainer}>
-                    <Formik
-                        initialValues={{ name: '', password: '', remember_me: false }}
-                        onSubmit={handleLogin}
-                    >
-                        {({ values, isSubmitting, handleChange, handleBlur, errors, touched }: FormikProps<any>) => (
-                            <Form>
-                                <div className={styles.FormInput}>
-                                    <Field
-                                        name={'name'}
-                                        id={'name'}
-                                        label={'Kasutajanimi'}
-                                        disabled={isSubmitting}
-                                        hasError={errors?.name?.length}
-                                        component={FormInput} />
-                                </div>
-                                <div className={styles.FormInput}>
-                                    <Field
-                                        name={'password'}
-                                        id={'password'}
-                                        label={'Parool'}
-                                        type={'password'}
-                                        disabled={isSubmitting}
-                                        hasError={errors?.password?.length}
-                                        component={FormInput} />
-                                </div>
-                                <div className={styles.FormInput}>
-                                    <Field
-                                        name={'remember_me'}
-                                        id={'remember_me'}
-                                        label={'Pea mu logimine meeles'}
-                                        disabled={isSubmitting}
-                                        checked={values.remember_me}
-                                        component={FormCheckbox} />
-                                </div>
-                                <div className={styles.SubmitButton}>
-                                    <SubmitButton
-                                        title={'Logi sisse'}
-                                        submitting={isSubmitting} />
-                                </div>
-                            </Form>
-                        )}
-                    </Formik>
+                    <form onSubmit={handleSubmit(handleLogin)}>
+                        <div className={styles.FormInput}>
+                            <FormInput
+                                name={'name'}
+                                id={'name'}
+                                label={'Kasutajanimi'}
+                                disabled={isSubmitting}
+                                required={true}
+                                error={errors.name?.message}
+                                register={register} />
+                        </div>
+                        <div className={styles.FormInput}>
+                            <FormInput
+                                name={'password'}
+                                id={'password'}
+                                label={'Parool'}
+                                type={'password'}
+                                disabled={isSubmitting}
+                                required={true}
+                                error={errors.password?.message}
+                                register={register} />
+                        </div>
+                        <div className={styles.FormInput}>
+                            <FormCheckbox
+                                name={'remember_me'}
+                                id={'remember_me'}
+                                label={'Pea mu logimine meeles'}
+                                disabled={isSubmitting}
+                                register={register} />
+                        </div>
+                        <div className={styles.SubmitButton}>
+                            <SubmitButton
+                                title={'Logi sisse'}
+                                submitting={isSubmitting} />
+                        </div>
+                    </form>
                 </div>
             </div>
 

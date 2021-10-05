@@ -3,16 +3,13 @@ import styles from "./FormCheckbox.module.scss"
 import clsx from "clsx"
 
 // @ts-ignore
-const FormCheckbox = ({ field, form, children, label, hasError, error, ...props }) => {
+const FormCheckbox = ({name, label, error, register, ...props }: props) => {
     return (
         <div className={clsx(styles.FormCheckbox, props.className, {
-            [styles.Invalid]: hasError || error.length > 0
+            [styles.Invalid]: error.length > 0
         })}>
             <div className={styles.FormElement}>
-                <input
-                    type="checkbox"
-                    {...field}
-                    {...props} />
+                <input type="checkbox" {...register(name)} {...props} />
 
                 <label htmlFor={props.id}>
                     {label}
@@ -29,8 +26,7 @@ const FormCheckbox = ({ field, form, children, label, hasError, error, ...props 
 }
 
 FormCheckbox.defaultProps = {
-    error: '',
-    hasError: false
+    error: ''
 }
 
 export default FormCheckbox

@@ -1,3 +1,5 @@
+import {UseFormSetError} from "react-hook-form";
+
 export const objectToQueryString = (obj: any) => {
     const str = []
     for (const p in obj) {
@@ -31,9 +33,12 @@ export const getForumUrlByTypeAndSlug = (type: string, slug: string) => {
     return url + '/' + slug
 }
 
-export const setFormikErrors = (errorObject: any, setErrorFunction: any) => {
+export const setFormErrors = (errorObject: any, setError: UseFormSetError<any>) => {
     const errors = Object.keys(errorObject)
-    errors.map((item) => {
-        setErrorFunction(item, errorObject[item].join('\r\n'))
+    errors.map((field) => {
+        setError(field, {
+            type: 'manual',
+            message: errorObject[field].join('\r\n')
+        })
     })
 }
