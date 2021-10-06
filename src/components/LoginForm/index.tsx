@@ -24,7 +24,6 @@ type Inputs = {
 const LoginForm = () => {
     const dispatch = useAppDispatch()
     const user = useAppSelector(selectUser)
-
     const loginSchema = yup.object().shape({
         name: yup.string().required('Kasutajanimi on kohustuslik'),
         password: yup.string().required('Parool on kohustuslik'),
@@ -61,7 +60,6 @@ const LoginForm = () => {
                         dispatch(setUser(res.data))
                         toast.success('Sisselogimine õnnestus!')
                     }).catch(err => {
-                        console.log('err', err.data)
                         toast.error('Sisselogimine ebaõnnestus!')
                     })
                 })
@@ -69,7 +67,33 @@ const LoginForm = () => {
         }, {scope: 'public_profile,email'})
     }
 
-    // @ts-ignore
+    const handleError = (err: any) => {
+        toast.error('Sisselogimine ebaõnnestus!')
+    }
+
+    const handleSuccess = (googleUser: any) => {
+        const profile = googleUser.getBasicProfile()
+        const name = profile.getName()
+        const email = profile.getEmail()
+        const image = profile.getImageUrl() //NB! 96 is the image size there!! -> A=s96-c
+
+        const res = createUserOrLogin(name, email).then(res => {
+            dispatch(setUser(res.data))
+            toast.success('Sisselogimine õnnestus!')
+        }).catch(err => {
+            toast.error('Sisselogimine ebaõnnestus!')
+        })
+    }
+
+    const signInGoogle = () => {
+        // @ts-ignore
+        const auth2 = gapi.auth2.getAuthInstance()
+        auth2.signIn().then(
+            (res: any) => handleSuccess(res),
+            (err: any) => handleError(err)
+        )
+    }
+
     return (
         <Fragment>
             <div className={styles.LoginForm}>
@@ -80,7 +104,7 @@ const LoginForm = () => {
                     <div className={clsx(styles.Tab, styles.Social, styles.Facebook)} onClick={() => signInFB()}>
                         Facebook
                     </div>
-                    <div className={clsx(styles.Tab, styles.Social, styles.Google)}>
+                    <div className={clsx(styles.Tab, styles.Social, styles.Google)} onClick={() => signInGoogle()}>
                         Google
                     </div>
                 </div>
@@ -135,6 +159,19 @@ const LoginForm = () => {
                             version    : 'v12.0'
                         });
                     };
+                }}
+            />
+
+            <Script
+                src={"https://apis.google.com/js/api.js"}
+                onLoad={() => {
+                    // @ts-ignore
+                    gapi.load('auth2', function() {
+                        // @ts-ignore
+                        gapi.auth2.init({
+                            client_id: process.env.GOOGLE_CLIENT_ID,
+                        })
+                    })
                 }}
             />
         </Fragment>
