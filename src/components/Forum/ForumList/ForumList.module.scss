@@ -8,5 +8,9 @@
 
     .ForumRow {
         margin-bottom: $spacer * 3;
+
+        @include xs() {
+            margin-bottom: $spacer * 2;
+        }
     }
 }

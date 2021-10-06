@@ -9,4 +9,9 @@
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: .05em;
+
+    @include xs() {
+        font-size: $font-size-small;
+        line-height: 1.6rem;
+    }
 }

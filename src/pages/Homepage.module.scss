@@ -38,7 +38,7 @@
 
 .FlightOffers {
     display: flex;
-    margin: $spacer * -5.5 auto $spacer * 2 auto;
+    margin: $spacer * -5.5 auto $spacer auto;
     width: 100%;
 
     @include md() {
@@ -69,7 +69,7 @@
 .JoinTripBlock {
     display: flex;
     width: 100%;
-    padding: 0 3rem 1rem 3rem;
+    padding: 0 $spacer * 6 $spacer * 1.5 $spacer * 6;
 
     @include sm() {
         flex-direction: column;

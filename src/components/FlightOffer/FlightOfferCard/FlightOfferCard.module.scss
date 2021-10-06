@@ -11,12 +11,21 @@
         align-items: flex-start;
         padding: $spacer * 1.2 $spacer * 4;
 
+        @include xs() {
+            padding: $spacer $spacer * 4;
+        }
+
         .Destination {
             a {
                 color: $white;
                 font-size: 1.5rem;
                 line-height: 2rem;
                 font-weight: 600;
+
+                @include xs() {
+                    font-size: 1.2rem;
+                    line-height: 1.6rem;
+                }
 
                 &:hover {
                     color: $gray-light;
@@ -51,6 +60,10 @@
             text-align: center;
             padding-bottom: 50%;
             overflow: hidden;
+
+            @include xs() {
+                padding-bottom: 40%;
+            }
         }
 
         .Title {
@@ -67,6 +80,10 @@
 
             @include lg() {
                 padding: $spacer * 2;
+            }
+
+            @include xs() {
+                font-size: 1.1rem;
             }
         }
 
