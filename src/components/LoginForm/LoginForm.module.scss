@@ -36,23 +36,6 @@
                     display: none;
                 }
             }
-
-            &.Social {
-                color: $white;
-                cursor: pointer;
-
-                &:hover {
-                    opacity: .8;
-                }
-            }
-
-            &.Facebook {
-                background: #3b5998;
-            }
-
-            &.Google {
-                background: #dd4b39;
-            }
         }
     }
 

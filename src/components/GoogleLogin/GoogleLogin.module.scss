@@ -1,0 +1,19 @@
+@import "../../styles/variables";
+
+.GoogleLogin {
+    display: flex;
+    width: 100%;
+    min-height: 50px;
+    height: 100%;
+    background: #dd4b39;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.2rem;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        opacity: .8;
+    }
+}

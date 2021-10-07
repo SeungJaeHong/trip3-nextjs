@@ -1,0 +1,19 @@
+@import "../../styles/variables";
+
+.FacebookLogin {
+    display: flex;
+    width: 100%;
+    min-height: 50px;
+    height: 100%;
+    background: #3b5998;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.2rem;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        opacity: .8;
+    }
+}
