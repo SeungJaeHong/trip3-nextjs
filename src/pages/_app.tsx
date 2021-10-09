@@ -30,16 +30,17 @@ function MyApp({ Component, pageProps }: AppProps) {
                 toastOptions={{
                     success: {
                         style: {
-                            background: '#8EDD65',
-                            color: '#fff',
+                            //background: '#8EDD65',
+                            //color: '#fff',
+                            //color: '#6c747a',
                             fontWeight: 500,
                             fontFamily: 'Sailec, sans-serif'
                         },
                     },
                     error: {
                         style: {
-                            background: '#FF5050',
-                            color: '#fff',
+                            //background: '#FF5050',
+                            //color: '#fff',
                             fontWeight: 500,
                             fontFamily: 'Sailec, sans-serif'
                         },

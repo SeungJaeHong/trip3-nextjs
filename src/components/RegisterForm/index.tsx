@@ -4,8 +4,8 @@ import clsx from "clsx"
 import Router from "next/router"
 import FormInput from "../Form/FormInput"
 import SubmitButton from "../Form/SubmitButton"
-import {useAppDispatch, useAppSelector} from "../../hooks"
-import {selectUser, setUser} from "../../redux/auth"
+import {useAppSelector} from "../../hooks"
+import {selectUser} from "../../redux/auth"
 import {register as registerUser} from "../../services/auth.service";
 import toast from "react-hot-toast";
 import { useForm, SubmitHandler } from "react-hook-form"
@@ -21,7 +21,6 @@ type Inputs = {
 }
 
 const RegisterForm = () => {
-    const dispatch = useAppDispatch()
     const user = useAppSelector(selectUser)
     const registerSchema = yup.object().shape({
         name: yup.string().required('Kasutajanimi on kohustuslik'),
@@ -45,8 +44,19 @@ const RegisterForm = () => {
     const handleRegister: SubmitHandler<Inputs> = async (values: Inputs) => {
         const { name, email, password } = values
         const resp = await registerUser(name, email, password).then(res => {
-            dispatch(setUser(res.data))
-            toast.success('Tere tulemast, ' + name + '!')
+            Router.push('/login')
+            toast.success(
+                'Kasutaja loomine õnnestus!',
+                {
+                    duration: 5000
+                }
+            )
+            toast.success(
+                'Palun kontrolli oma e-posti ja vii kasutaja registeerimine lõpuni',
+                {
+                    duration: 6000
+                }
+            )
         }).catch(err => {
             if (err.response?.data?.errors) {
                 setFormErrors(err.response?.data?.errors, setError)
