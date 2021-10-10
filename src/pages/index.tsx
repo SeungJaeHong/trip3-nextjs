@@ -74,10 +74,10 @@ const Home = (props: Props) => {
                                 <span className={styles.DescriptionText}>
                                     Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.
                                 </span>
-                                <MoreLink title={'Loe lähemalt Trip.ee-st'} route={'/'}/>
+                                <MoreLink title={'Loe lähemalt Trip.ee-st'} route={'/tripist'}/>
                             </div>
                             <div className={styles.JoinButton}>
-                                <Button title={'Liitu Trip.ee-ga'}/>
+                                <Button title={'Liitu Trip.ee-ga'} route={'/register'} />
                             </div>
                         </div>
                     }

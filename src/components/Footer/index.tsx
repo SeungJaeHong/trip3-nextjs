@@ -51,7 +51,7 @@ const col2 = [
 const col3 = [
     {
         title: 'Mis on Trip',
-        route: '/'
+        route: '/tripist'
     },
     {
         title: 'Kontakt',

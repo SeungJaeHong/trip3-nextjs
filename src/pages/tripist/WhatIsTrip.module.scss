@@ -1,0 +1,36 @@
+@import "../../styles/variables";
+
+.Container {
+    position: relative;
+    background: $gray-light;
+}
+
+.Navbar {
+    padding-bottom: $spacer * 8;
+    padding-top: $spacer * 3;
+}
+
+.Title {
+    font-weight: 600;
+    font-size: 3rem;
+    color: $gray-dark;
+    display: flex;
+    justify-content: center;
+    padding-bottom: $spacer * 6;
+}
+
+.Body {
+    background: $white;
+    position: relative;
+    padding-top: $spacer * 4;
+    color: $gray-dark;
+    font-size: $font-size-medium;
+
+    p ul li {
+        margin-bottom: $spacer;
+    }
+
+    h4 {
+        margin-bottom: $spacer * 1.5;
+    }
+}

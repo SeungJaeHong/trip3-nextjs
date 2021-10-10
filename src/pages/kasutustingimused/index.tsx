@@ -6,7 +6,7 @@ import Footer from "../../components/Footer"
 import containerStyle from "../../styles/containers.module.scss"
 import BackgroundMap from "../../components/BackgroundMap";
 
-const TermsOfServicePage = (props: any) => {
+const TermsOfServicePage = () => {
     return (
         <Fragment>
             <div className={styles.Container}>
