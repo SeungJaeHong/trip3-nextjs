@@ -22,5 +22,11 @@
 .Body {
     background: $white;
     position: relative;
-    padding-top: $spacer * 5;
+    padding-top: $spacer * 4;
+    color: $gray-dark;
+    font-size: $font-size-medium;
+
+    p ul li {
+        margin-bottom: $spacer;
+    }
 }

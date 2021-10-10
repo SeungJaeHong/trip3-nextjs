@@ -59,11 +59,11 @@ const col3 = [
     },
     {
         title: 'Kasutustingimused',
-        route: '/'
+        route: '/kasutustingimused'
     },
     {
         title: 'Privaatsustingimused',
-        route: '/'
+        route: '/privaatsustingimused'
     },
     {
         title: 'Reklaam',
@@ -118,7 +118,7 @@ const Footer = (props: Props) => {
         <div className={clsx(styles.Footer, {
             [styles.Simple]: props.simple
         })} style={style}>
-            <div className={clsx([containerStyle.containerLg, styles.Content])}>
+            <div className={clsx([containerStyle.ContainerLg, styles.Content])}>
                 <div className={styles.Col}>
                     <Link href={'/'}>
                         <a>
