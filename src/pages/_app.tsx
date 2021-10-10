@@ -21,7 +21,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                 height={3}
                 options={{ showSpinner: false }}
             />
-            <Component {...pageProps} />
             <Toaster
                 containerStyle={{
                     bottom: '32px',
@@ -49,6 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 position="bottom-left"
                 reverseOrder={false}
             />
+            <Component {...pageProps} />
         </Provider>
     )
 }

@@ -1,4 +1,4 @@
-import React, {Fragment} from "react"
+import React, {Fragment, useEffect} from "react"
 import Navbar from "../../components/Navbar"
 import styles from './Login.module.scss'
 import clsx from "clsx";
@@ -9,8 +9,19 @@ import Link from "next/link";
 import LoginForm from "../../components/LoginForm";
 import {GetServerSideProps} from "next";
 import ApiClientSSR from "../../lib/ApiClientSSR";
+import {useRouter} from "next/router";
+import toast from "react-hot-toast";
 
 const LoginPage = (props: any) => {
+    const router = useRouter()
+    useEffect(() => {
+        if (router.query?.verified) {
+            toast.success('Kasutajakonto on verifitseeritud!', {
+                duration: 4000
+            })
+        }
+    }, [])
+
     return (
         <Fragment>
             <div className={styles.Container}>
@@ -32,7 +43,7 @@ const LoginPage = (props: any) => {
                         <LoginForm />
                     </div>
                     <div className={styles.ForgotPassword}>
-                        Ei mäleta oma parooli? <span className={styles.ForgotPasswordLink}>Taasta oma parool siin</span>
+                        Ei mäleta oma parooli? <Link href={'/reset_password'}><a className={styles.ForgotPasswordLink}>Taasta oma parool siin</a></Link>
                     </div>
                 </div>
             </div>
@@ -44,17 +55,11 @@ const LoginPage = (props: any) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
         const user = await ApiClientSSR(context).get('/me')
-        if (user) {
-            return {
-                redirect: {
-                    destination: '/',
-                    permanent: false,
-                },
-            }
-        } else {
-            return {
-                props: {}
-            }
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
         }
     } catch (e) {
         return {
