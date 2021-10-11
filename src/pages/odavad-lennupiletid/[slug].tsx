@@ -8,13 +8,25 @@ import containerStyle from "../../styles/containers.module.scss"
 import Tag from "../../components/Tag"
 import clsx from "clsx";
 import Button from "../../components/Button"
-import Footer from "../../components/Footer";
+import Footer from "../../components/Footer"
+import parse from 'html-react-parser'
+import FlightMap from "../../components/FlightMap"
 
 type Props = {
     flight: FlightContent
 }
 
 const FlightOfferShow = (props: Props) => {
+    const renderBody = (htmlString: string) => {
+        return parse(htmlString, {
+            replace: (domNode: any) => {
+                if (domNode.name === 'flightmap') {
+                    return <FlightMap />
+                }
+            }
+        })
+    }
+
     return (
         <Fragment>
             <Header backgroundImage={props.flight.backgroundImageUrl}>
@@ -37,7 +49,12 @@ const FlightOfferShow = (props: Props) => {
             </Header>
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.BodyContainer}>
-                    <div className={styles.Body} dangerouslySetInnerHTML={{ __html: props.flight.body }} />
+                   {/* <div className={styles.Body} dangerouslySetInnerHTML={{ __html: props.flight.body }} />*/}
+
+                    <div className={styles.Body}>
+                        {renderBody(props.flight.body)}
+                    </div>
+
                     <div className={styles.SidebarShow}>
                         <div className={styles.AddNewOffer}>
                             <Button title={'Lisa uus pakkumine'} route={'/'} />
