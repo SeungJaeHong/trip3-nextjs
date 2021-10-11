@@ -7,7 +7,6 @@ import containerStyle from "../../styles/containers.module.scss"
 import MoreLink from "../../components/MoreLink"
 import Image from 'next/image'
 import ImageGallery from "../../components/ImageGallery"
-import DottedMapIcon from "../../icons/DottedMapIcon"
 import {Destination, DestinationContent} from "../../types"
 import Link from "next/link"
 import Tag from "../../components/Tag"
@@ -16,6 +15,7 @@ import StarIcon from "../../icons/StarIcon"
 import ForumList from "../../components/Forum/ForumList"
 import BlockTitle from "../../components/BlockTitle"
 import ApiClientSSR from "../../lib/ApiClientSSR"
+import DotMap from "../../components/DotMap"
 
 type Props = {
     destination: DestinationContent
@@ -146,7 +146,7 @@ const DestinationPage = (props: Props) => {
 
                             </div>
                             <div className={styles.Map}>
-                                <DottedMapIcon />
+                                <DotMap destination={destination} />
                             </div>
                         </div>
                     </div>
