@@ -9,6 +9,8 @@ import ForumPostComments from "../ForumPostComments"
 import Footer from "../../Footer"
 import Button from "../../Button"
 import {getForumUrlByType} from "../../../helpers"
+import CommentEditor from "../../CommentEditor"
+import BlockTitle from "../../BlockTitle";
 
 type Props = {
     post: Content,
@@ -35,6 +37,10 @@ const ForumShowPage = (props: Props) => {
                             comments={props.post.comments}
                             currentPage={props.currentPage}
                             lastPage={props.lastPage} />
+                        <div className={styles.AddComment}>
+                            <BlockTitle title={'Lisa kommentaar'} />
+                            <CommentEditor />
+                        </div>
                     </div>
                     <div className={styles.Sidebar}>
                         <div className={styles.SidebarButton}>

@@ -35,6 +35,12 @@
             display: flex;
             justify-content: flex-end;
         }
+
+        .AddComment {
+            display: flex;
+            flex-direction: column;
+            gap: $spacer * 2;
+        }
     }
 
     .Sidebar {
