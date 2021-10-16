@@ -24,7 +24,7 @@ const ForumPostComments = (props: Props) => {
             </div>
             {props.comments?.map((item: Comment) => {
                 return (
-                    <div className={styles.CommentRow} key={item.id}>
+                    <div className={styles.CommentRow} key={item.id} id={'comment_' + item.id}>
                         <ForumComment {...item} />
                     </div>
                 )
