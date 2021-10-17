@@ -15,7 +15,26 @@
         padding-bottom: $spacer * 3;
 
         .ActionBar {
+            display: flex;
+            gap: $spacer;
             padding-bottom: $spacer;
+
+            .ActionButton {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                outline: 0;
+                vertical-align: bottom;
+
+                svg {
+                    height: 15px;
+                    width: 15px;
+                }
+            }
+
+            .ActionButtonSelected {
+                background-color: #F0F0F0;
+            }
         }
 
         .Content {
