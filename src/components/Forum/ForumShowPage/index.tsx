@@ -10,7 +10,7 @@ import Footer from "../../Footer"
 import Button from "../../Button"
 import {getForumUrlByType} from "../../../helpers"
 import CommentEditor from "../../CommentEditor"
-import BlockTitle from "../../BlockTitle";
+import BlockTitle from "../../BlockTitle"
 
 type Props = {
     post: Content,
@@ -19,6 +19,10 @@ type Props = {
 }
 
 const ForumShowPage = (props: Props) => {
+    const onSubmit = (value?: string) => {
+        console.log(value)
+    }
+
     return (
         <Fragment>
             <Header withBackgroundMap={true} className={styles.Header} />
@@ -39,7 +43,7 @@ const ForumShowPage = (props: Props) => {
                             lastPage={props.lastPage} />
                         <div className={styles.AddComment}>
                             <BlockTitle title={'Lisa kommentaar'} />
-                            <CommentEditor />
+                            <CommentEditor onSubmit={onSubmit} />
                         </div>
                     </div>
                     <div className={styles.Sidebar}>

@@ -1,6 +1,5 @@
-import {MouseEventHandler, useEffect, useState} from "react"
+import {useEffect, useState} from "react"
 import { init, exec } from 'pell'
-import Button from "../Button"
 import 'pell/dist/pell.css'
 import styles from "./CommentEditor.module.scss"
 import ReactDOMServer from "react-dom/server";
@@ -11,19 +10,22 @@ import OrderedListIcon from "../../icons/Editor/OrderedListIcon";
 import UnorderedListIcon from "../../icons/Editor/UnorderedListIcon";
 import LinkIcon from "../../icons/Editor/LinkIcon";
 import ImageIcon from "../../icons/Editor/ImageIcon";
+import SubmitButton from "../Form/SubmitButton";
 
 type Props = {
-    onClick?: MouseEventHandler<HTMLElement> | undefined
+    onSubmit: (value?: string) => void
+    value?: string
 }
 
-const CommentEditor = (props: Props) => {
+const CommentEditor = ({onSubmit, value}: Props) => {
     const [editor, setEditor] = useState({})
-    const [value, setValue] = useState('')
+    const [editorValue, setEditorValue] = useState(value)
+    const [submitting, setSubmitting] = useState(false)
 
     useEffect(() => {
         const editor = init({
             element: document.getElementById('comment-editor')!,
-            onChange: (html: string) => setValue(html),
+            onChange: (html: string) => setEditorValue(html),
             actions: [
                 {
                     name: 'bold',
@@ -88,10 +90,12 @@ const CommentEditor = (props: Props) => {
         <div className={styles.CommentEditor}>
             <div id={'comment-editor'} className={styles.Editor} spellCheck={false} />
             <div className={styles.SubmitButton}>
-                <Button title={'Lisa kommentaar'} />
+                <SubmitButton
+                    title={'Lisa kommentaar'}
+                    submitting={submitting}
+                    onClick={() => onSubmit(editorValue)} />
             </div>
         </div>
-
     )
 }
 

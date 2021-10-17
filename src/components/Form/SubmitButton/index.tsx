@@ -5,24 +5,25 @@ import LoadingSpinner from "../../LoadingSpinner"
 type Props = {
     title: string
     submitting: boolean
+    type: 'submit' | 'button' | undefined
     onClick?: () => void
 }
 
-const SubmitButton = (props: Props) => {
+const SubmitButton = ({title, submitting, type, onClick}: Props) => {
     const renderTitle = () => {
         return (
             <div className={buttonStyles.Loading}>
-                <LoadingSpinner show={props.submitting} />
-                <span className={buttonStyles.Title}>{props.title}</span>
+                <LoadingSpinner show={submitting} />
+                <span className={buttonStyles.Title}>{title}</span>
             </div>
         )
     }
 
     return (
         <button className={clsx(buttonStyles.Button)}
-            onClick={props.onClick ?? undefined}
-            disabled={props.submitting}
-            type={'submit'}
+            onClick={onClick ?? undefined}
+            disabled={submitting}
+            type={type}
         >
             {renderTitle()}
         </button>
@@ -30,6 +31,7 @@ const SubmitButton = (props: Props) => {
 }
 
 SubmitButton.defaultProps = {
+    type: 'submit',
     submitting: false
 }
 
