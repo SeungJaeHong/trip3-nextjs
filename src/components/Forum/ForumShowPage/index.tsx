@@ -1,5 +1,5 @@
 import {Content} from "../../../types"
-import React, {Fragment, useState} from "react"
+import React, {Fragment, useEffect, useState} from "react"
 import Router from 'next/router'
 import Header from "../../Header";
 import styles from "./ForumShowPage.module.scss"
@@ -28,6 +28,10 @@ const ForumShowPage = ({post, currentPage, lastPage}: Props) => {
     const [commentValue, setCommentValue] = useState('')
     const [comments, setComments] = useState(post.comments)
     const [submitting, setSubmitting] = useState(false)
+
+    useEffect(() => {
+        setComments(post.comments)
+    }, [post.comments])
 
     const onSubmit = async (value: string) => {
         setSubmitting(true)
