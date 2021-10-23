@@ -13,8 +13,8 @@ import ImageIcon from "../../icons/Editor/ImageIcon";
 import SubmitButton from "../Form/SubmitButton";
 
 type Props = {
-    onSubmit: (value?: string) => void
-    value?: string
+    onSubmit: (value: string) => void
+    value: string
 }
 
 const CommentEditor = ({onSubmit, value}: Props) => {
@@ -22,10 +22,19 @@ const CommentEditor = ({onSubmit, value}: Props) => {
     const [editorValue, setEditorValue] = useState(value)
     const [submitting, setSubmitting] = useState(false)
 
+    const onSubmitClick = () => {
+        //todo: check if not empty
+
+        console.log(editorValue, 'editorValue')
+
+        onSubmit(editorValue)
+    }
+
     useEffect(() => {
         const editor = init({
             element: document.getElementById('comment-editor')!,
             onChange: (html: string) => setEditorValue(html),
+            //defaultParagraphSeparator: 'p',
             actions: [
                 {
                     name: 'bold',
@@ -83,6 +92,7 @@ const CommentEditor = ({onSubmit, value}: Props) => {
                 selected: styles.ActionButtonSelected
             }
         })
+        editor.content.innerHTML = editorValue
         setEditor(editor)
     }, [])
 
@@ -93,14 +103,14 @@ const CommentEditor = ({onSubmit, value}: Props) => {
                 <SubmitButton
                     title={'Lisa kommentaar'}
                     submitting={submitting}
-                    onClick={() => onSubmit(editorValue)} />
+                    onClick={onSubmitClick} />
             </div>
         </div>
     )
 }
 
 CommentEditor.defaultProps = {
-
+    value: ''
 }
 
 export default CommentEditor
