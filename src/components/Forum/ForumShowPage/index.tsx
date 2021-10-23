@@ -63,6 +63,8 @@ const ForumShowPage = ({post, currentPage, lastPage}: Props) => {
                 toast.error('Sessioon on aegunud. Palun logi uuesti sisse')
                 const url = getForumUrlByTypeAndSlug(post.type, post.slug)
                 Router.push(url)
+            } else if(err.response?.status === 422 && err.response?.data?.errors ) {
+                toast.error('Kommentaari sisu on kohustuslik!')
             } else {
                 toast.error('Kommentaari lisamine ebaõnnestus')
             }
