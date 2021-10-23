@@ -52,16 +52,6 @@
             margin: $spacer * 1.5 0;
         }
 
-        .ForumLinks {
-            display: flex;
-            flex-direction: column;
-            margin-top: $spacer * 4;
-
-            .ForumLink {
-                margin-bottom: $spacer;
-            }
-        }
-
         @include sm() {
             padding-left: 0;
         }

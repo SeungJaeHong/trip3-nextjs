@@ -75,7 +75,6 @@ const ForumShowPage = ({post, currentPage, lastPage}: Props) => {
         <Fragment>
             <Header withBackgroundMap={true} className={styles.Header} />
             <div className={containerStyle.ContainerXl}>
-                {/*<div className={containerStyle.CenteredContainer}>*/}
                 <div className={styles.Content}>
                     <div className={styles.ForumContent}>
                         <div className={styles.ForumPost}>
@@ -106,26 +105,8 @@ const ForumShowPage = ({post, currentPage, lastPage}: Props) => {
                         <div className={styles.SidebarButton}>
                             <Button title={'Alusta uut teemat'} light={true} route={'/'} />
                         </div>
-                        {/*<div className={styles.ForumLinks}>
-                            <div className={styles.ForumLink}>
-                                <MoreLink title={'Üldfoorum'} route={'/'} large={true} />
-                            </div>
-                            <div className={styles.ForumLink}>
-                                <MoreLink title={'Ost-müük'} route={'/'} large={true} />
-                            </div>
-                            <div className={styles.ForumLink}>
-                                <MoreLink title={'Elu välismaal'} route={'/'} large={true} />
-                            </div>
-                            <div className={styles.ForumLink}>
-                                <MoreLink title={'Vaba teema'} route={'/'} large={true} />
-                            </div>
-                            <div className={styles.ForumLink}>
-                                <MoreLink title={'Minu jälgimised'} route={'/'} large={true} />
-                            </div>
-                        </div>*/}
                     </div>
                 </div>
-                {/*</div>*/}
             </div>
             <Footer />
         </Fragment>
