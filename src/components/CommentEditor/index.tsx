@@ -15,19 +15,17 @@ import SubmitButton from "../Form/SubmitButton";
 type Props = {
     onSubmit: (value: string) => void
     value: string
+    submitting: boolean
 }
 
-const CommentEditor = ({onSubmit, value}: Props) => {
-    const [editor, setEditor] = useState({})
+const CommentEditor = ({onSubmit, value, submitting}: Props) => {
+    const [editor, setEditor] = useState(undefined)
     const [editorValue, setEditorValue] = useState(value)
-    const [submitting, setSubmitting] = useState(false)
 
     const onSubmitClick = () => {
-        //todo: check if not empty
-
-        console.log(editorValue, 'editorValue')
-
-        onSubmit(editorValue)
+        if (editorValue.length) {
+            onSubmit(editorValue)
+        }
     }
 
     useEffect(() => {
@@ -92,9 +90,17 @@ const CommentEditor = ({onSubmit, value}: Props) => {
                 selected: styles.ActionButtonSelected
             }
         })
-        editor.content.innerHTML = editorValue
+        // @ts-ignore
         setEditor(editor)
     }, [])
+
+    useEffect(() => {
+        if (editor) {
+            // @ts-ignore
+            editor.content.innerHTML = value
+            setEditorValue(value)
+        }
+    }, [value])
 
     return (
         <div className={styles.CommentEditor}>
@@ -110,7 +116,8 @@ const CommentEditor = ({onSubmit, value}: Props) => {
 }
 
 CommentEditor.defaultProps = {
-    value: ''
+    value: '',
+    submitting: false
 }
 
 export default CommentEditor

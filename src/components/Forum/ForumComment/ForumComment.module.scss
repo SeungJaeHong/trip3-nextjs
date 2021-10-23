@@ -53,6 +53,10 @@
         overflow-wrap: break-word;
         word-wrap: break-word;
 
+        p {
+            //margin: $spacer * .5 0;
+        }
+
         a {
             word-break: break-all;
             color: $blue;

@@ -26,19 +26,36 @@ type Props = {
 const ForumShowPage = ({post, currentPage, lastPage}: Props) => {
     const userIsLoggedIn = useAppSelector(selectUserIsLoggedIn)
     const [commentValue, setCommentValue] = useState('')
+    const [comments, setComments] = useState(post.comments)
+    const [submitting, setSubmitting] = useState(false)
 
     const onSubmit = async (value: string) => {
+        setSubmitting(true)
         const res = await postComment(value, post.id).then((response) => {
+            setCommentValue(value)
             setCommentValue('')
-            toast.success('Kommentaar lisatud')
+            const comment = response.data.comment
+            const newLastPage = response.data.lastPage
+            const newComments = comments ? [...comments, comment] : [comment]
+            setComments(newComments)
 
-            console.log(response.data, 'data')
+            let url = getForumUrlByTypeAndSlug(post.type, post.slug)
+            if (lastPage > 1) {
+                if (lastPage !== newLastPage) {
+                    url += '?page=' + newLastPage
+                } else {
+                    url += '?page=' + lastPage
+                }
+            }
 
-            const url = getForumUrlByTypeAndSlug(post.type, post.slug)
-            Router.replace(url + '#' + response.data.commentId)
-            //Router.replace(Router.asPath)
+            Router.replace(url + '#' + comment.id)
+            toast.success('Kommentaar lisatud', {
+                duration: 4000
+            })
+            setSubmitting(false)
         }).catch(err => {
-            if (err.response.status === 401) {
+            setSubmitting(false)
+            if (err.response?.status === 401) {
                 toast.error('Sessioon on aegunud. Palun logi uuesti sisse')
                 const url = getForumUrlByTypeAndSlug(post.type, post.slug)
                 Router.push(url)
@@ -58,12 +75,12 @@ const ForumShowPage = ({post, currentPage, lastPage}: Props) => {
                         <div className={styles.ForumPost}>
                             <ForumPost {...post} />
                         </div>
-                        {post.comments?.length ? <div className={styles.LatestCommentLink}>
+                        {comments?.length ? <div className={styles.LatestCommentLink}>
                             <MoreLink route={'/'} title={'Mine uusima kommentaari juurde'} />
                         </div> : null}
                         <ForumPostComments
                             post={post}
-                            comments={post.comments}
+                            comments={comments}
                             currentPage={currentPage}
                             lastPage={lastPage} />
                         {userIsLoggedIn &&
@@ -71,7 +88,8 @@ const ForumShowPage = ({post, currentPage, lastPage}: Props) => {
                                 <BlockTitle title={'Lisa kommentaar'} />
                                 <CommentEditor
                                     onSubmit={onSubmit}
-                                    value={commentValue} />
+                                    value={commentValue}
+                                    submitting={submitting} />
                             </div>
                         }
                     </div>
