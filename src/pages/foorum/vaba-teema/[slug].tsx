@@ -1,11 +1,12 @@
-import React, {Fragment} from 'react'
-import axios from 'axios'
+import React from 'react'
 import {GetServerSideProps} from 'next'
 import {Content} from "../../../types"
 import ForumShowPage from "../../../components/Forum/ForumShowPage"
+import ApiClientSSR from "../../../lib/ApiClientSSR";
 
 type Props = {
     post: Content,
+    lastCommentId?: number
     currentPage: number,
     lastPage: number
 }
@@ -22,11 +23,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         url += '?page=' + page
     }
 
-    const response = await axios.get(url)
+    const response = await ApiClientSSR(context).get(url)
     const data = {
         post: response.data.post,
+        lastCommentId: response.data.lastCommentId,
         currentPage: response.data.currentPage,
-        lastPage: response.data.lastPage
+        lastPage: response.data.lastPage,
     }
 
     return {

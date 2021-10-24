@@ -1,6 +1,6 @@
 import {Content} from "../../../types"
 import React, {Fragment, useEffect, useState} from "react"
-import Router from 'next/router'
+import {useRouter} from 'next/router'
 import Header from "../../Header";
 import styles from "./ForumShowPage.module.scss"
 import containerStyle from "../../../styles/containers.module.scss"
@@ -19,19 +19,38 @@ import {selectUserIsLoggedIn} from "../../../redux/auth";
 
 type Props = {
     post: Content,
+    lastCommentId?: number
     currentPage: number,
     lastPage: number
 }
 
-const ForumShowPage = ({post, currentPage, lastPage}: Props) => {
+const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
     const userIsLoggedIn = useAppSelector(selectUserIsLoggedIn)
     const [commentValue, setCommentValue] = useState('')
     const [comments, setComments] = useState(post.comments)
+    const newestCommentUrl = lastCommentId ? getForumUrlByTypeAndSlug(post.type, post.slug) + '?page=' + lastPage + '&latest=1#' + lastCommentId : ''
+    const [goToNewestLink, setGoToNewestLink] = useState(newestCommentUrl)
     const [submitting, setSubmitting] = useState(false)
+    const router = useRouter()
+    const {latest} = router.query
 
     useEffect(() => {
         setComments(post.comments)
     }, [post.comments])
+
+    useEffect(() => {
+        const hashId = window.location.hash?.replace('#', '');
+        if (hashId) {
+            const element = document.getElementById(hashId);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest',
+                });
+            }
+        }
+    }, [latest, comments])
 
     const onSubmit = async (value: string) => {
         setSubmitting(true)
@@ -52,7 +71,8 @@ const ForumShowPage = ({post, currentPage, lastPage}: Props) => {
                 }
             }
 
-            Router.replace(url + '#' + comment.id)
+            setGoToNewestLink(url + '#' + comment.id)
+            router.replace(url + '#' + comment.id)
             toast.success('Kommentaar lisatud', {
                 duration: 4000
             })
@@ -62,7 +82,7 @@ const ForumShowPage = ({post, currentPage, lastPage}: Props) => {
             if (err.response?.status === 401) {
                 toast.error('Sessioon on aegunud. Palun logi uuesti sisse')
                 const url = getForumUrlByTypeAndSlug(post.type, post.slug)
-                Router.push(url)
+                router.push(url)
             } else if(err.response?.status === 422 && err.response?.data?.errors ) {
                 toast.error('Kommentaari sisu on kohustuslik!')
             } else {
@@ -80,9 +100,13 @@ const ForumShowPage = ({post, currentPage, lastPage}: Props) => {
                         <div className={styles.ForumPost}>
                             <ForumPost {...post} />
                         </div>
-                        {comments?.length ? <div className={styles.LatestCommentLink}>
-                            <MoreLink route={'/'} title={'Mine uusima kommentaari juurde'} />
-                        </div> : null}
+                        {goToNewestLink.length > 1 &&
+                            <div className={styles.LatestCommentLink}>
+                                <MoreLink
+                                    route={goToNewestLink}
+                                    title={'Mine uusima kommentaari juurde'} />
+                            </div>
+                        }
                         <ForumPostComments
                             post={post}
                             comments={comments}
