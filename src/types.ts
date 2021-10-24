@@ -43,7 +43,7 @@ export type Comment = {
     //content: Content
     user: User
     body: string
-    status: boolean
+    status: number
     likes: number
     dislikes: number
     createdAt: string

@@ -9,7 +9,9 @@ import clsx from "clsx";
 
 const ForumComment = (item: Comment) => {
     return (
-        <div className={styles.ForumComment}>
+        <div className={clsx(styles.ForumComment, {
+            [styles.Hidden]: item.status === 0
+        })}>
             <div className={styles.MetaData}>
                 <Link href={'/'}>
                     <a className={styles.User}>{item.user.name}</a>
