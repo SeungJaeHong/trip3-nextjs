@@ -7,7 +7,20 @@ import ThumbsUpIcon from "../../../icons/ThumbsUpIcon";
 import ThumbsDownIcon from "../../../icons/ThumbsDownIcon";
 import clsx from "clsx";
 
-const ForumComment = (item: Comment) => {
+type Props = {
+    item: Comment
+    onThumbsClick: (comment: Comment, type: boolean) => void
+}
+
+const ForumComment = ({item, onThumbsClick}: Props) => {
+    const onThumbsUpClick = () => {
+        onThumbsClick(item, true)
+    }
+
+    const onThumbsDownClick = () => {
+        onThumbsClick(item, false)
+    }
+
     return (
         <div className={clsx(styles.ForumComment, {
             [styles.Hidden]: item.status === 0
@@ -32,11 +45,11 @@ const ForumComment = (item: Comment) => {
                     <span className={styles.ActionButton}>Peida</span>
                 </div>
                 <div className={styles.Thumbs}>
-                    <div className={styles.Thumb}>
+                    <div className={styles.Thumb} onClick={onThumbsUpClick}>
                         <ThumbsUpIcon />
                         <span className={styles.ThumbsCount}>{item.likes}</span>
                     </div>
-                    <div className={clsx(styles.Thumb, styles.ThumbDown)}>
+                    <div className={clsx(styles.Thumb, styles.ThumbDown)} onClick={onThumbsDownClick}>
                         <ThumbsDownIcon />
                         <span className={styles.ThumbsCount}>{item.dislikes}</span>
                     </div>

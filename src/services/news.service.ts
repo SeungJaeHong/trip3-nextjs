@@ -2,7 +2,7 @@ import ApiClient from "../lib/ApiClient"
 import {AxiosResponse} from "axios"
 
 export const postComment = async (value: string, contentId: number): Promise<AxiosResponse> => {
-    const result = await ApiClient.post('/forum/' + contentId + '/comment', {
+    const result = await ApiClient.post('/news/' + contentId + '/comment', {
         body: value
     })
 
@@ -10,10 +10,9 @@ export const postComment = async (value: string, contentId: number): Promise<Axi
 }
 
 export const rateComment = async (contentId: number, commentId: number, value: boolean): Promise<AxiosResponse> => {
-    const result = await ApiClient.post('/forum/' + contentId + '/comment/' + commentId + '/flag', {
+    const result = await ApiClient.post('/news/' + contentId + '/comment/' + commentId + '/flag', {
         value: value
     })
 
     return result
 }
-

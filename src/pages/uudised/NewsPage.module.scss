@@ -182,6 +182,14 @@
             flex-direction: column;
             margin-top: $spacer * 5;
             gap: $spacer * 3;
+            padding-bottom: $spacer * 2;
+        }
+
+        .AddComment {
+            margin: $spacer * 4 0;
+            display: flex;
+            flex-direction: column;
+            gap: $spacer * 2;
         }
     }
 
