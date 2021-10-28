@@ -7,7 +7,9 @@ import {getForumUrlByTypeAndSlug} from "../../../helpers"
 import clsx from "clsx"
 import {useAppSelector} from "../../../hooks";
 import {selectUserIsLoggedIn} from "../../../redux/auth";
-import {rateComment} from "../../../services/forum.service";
+import {rateComment, toggleCommentStatus} from "../../../services/forum.service";
+import {toast} from "react-hot-toast";
+import {useRouter} from "next/router";
 
 type Props = {
     post: Content,
@@ -20,6 +22,7 @@ const ForumPostComments = (props: Props) => {
     const [comments, setComments] = useState(props.comments)
     const url = getForumUrlByTypeAndSlug(props.post.type, props.post.slug)
     const userIsLoggedIn = useAppSelector(selectUserIsLoggedIn)
+    const router = useRouter()
 
     useEffect(() => {
         setComments(props.comments)
@@ -38,6 +41,23 @@ const ForumPostComments = (props: Props) => {
         }
     }
 
+    const onToggleStatus = (item: Comment) => {
+        if (userIsLoggedIn && comments?.length) {
+            toggleCommentStatus(props.post.id, item.id, item.status !== 1).then(res => {
+                const index = comments.findIndex(x => x.id == item.id)
+                const newComments = [...comments]
+                newComments[index] = res.data
+                setComments(newComments)
+                toast.success(res.data.status === 1 ? 'Kommentaar avalikustatud' : 'Kommentaar peidetud')
+            }).catch(err => {
+                if (err.response?.status === 401) {
+                    toast.error('Sessioon on aegunud. Palun logi uuesti sisse')
+                    router.push(url)
+                }
+            })
+        }
+    }
+
     return (
         <div className={styles.ForumPostComments}>
             <div className={styles.Paginator}>
@@ -51,7 +71,8 @@ const ForumPostComments = (props: Props) => {
                     <div className={styles.CommentRow} key={item.id} id={item.id.toString()}>
                         <ForumComment
                             item={item}
-                            onThumbsClick={onThumbsClick} />
+                            onThumbsClick={onThumbsClick}
+                            onToggleStatus={onToggleStatus} />
                     </div>
                 )
             })}

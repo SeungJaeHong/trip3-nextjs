@@ -38,7 +38,7 @@ const NewsShow = ({news}: Props) => {
                 newComments[index] = res.data
                 setComments(newComments)
             }).catch(err => {
-
+                console.log(err, 'err')
             })
         }
     }
@@ -67,6 +67,10 @@ const NewsShow = ({news}: Props) => {
                 toast.error('Kommentaari lisamine ebaõnnestus')
             }
         })
+    }
+
+    const onToggleStatus = (item: Comment) => {
+
     }
 
     return (
@@ -104,7 +108,9 @@ const NewsShow = ({news}: Props) => {
                                     <ForumComment
                                         key={comment.id}
                                         item={comment}
-                                        onThumbsClick={onThumbsClick} />)
+                                        onThumbsClick={onThumbsClick}
+                                        onToggleStatus={onToggleStatus} />
+                                )
                             })}
                         </div>
                         {userIsLoggedIn &&

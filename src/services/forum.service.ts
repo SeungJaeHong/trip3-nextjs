@@ -17,3 +17,11 @@ export const rateComment = async (contentId: number, commentId: number, value: b
     return result
 }
 
+export const toggleCommentStatus = async (contentId: number, commentId: number, value: boolean): Promise<AxiosResponse> => {
+    const result = await ApiClient.post('/forum/' + contentId + '/comment/' + commentId + '/status', {
+        value: value
+    })
+
+    return result
+}
+

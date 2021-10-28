@@ -10,15 +10,20 @@ import clsx from "clsx";
 type Props = {
     item: Comment
     onThumbsClick: (comment: Comment, type: boolean) => void
+    onToggleStatus: (comment: Comment) => void
 }
 
-const ForumComment = ({item, onThumbsClick}: Props) => {
+const ForumComment = ({item, onThumbsClick, onToggleStatus}: Props) => {
     const onThumbsUpClick = () => {
         onThumbsClick(item, true)
     }
 
     const onThumbsDownClick = () => {
         onThumbsClick(item, false)
+    }
+
+    const onChangeStatus = () => {
+        onToggleStatus(item)
     }
 
     return (
@@ -42,7 +47,9 @@ const ForumComment = ({item, onThumbsClick}: Props) => {
             <div className={styles.Actions}>
                 <div className={styles.Buttons}>
                     <span className={styles.ActionButton}>Muuda</span>/
-                    <span className={styles.ActionButton}>Peida</span>
+                    <span className={styles.ActionButton} onClick={onChangeStatus}>
+                        {item.status === 1 ? 'Peida' : 'Avalikusta'}
+                    </span>
                 </div>
                 <div className={styles.Thumbs}>
                     <div className={styles.Thumb} onClick={onThumbsUpClick}>
