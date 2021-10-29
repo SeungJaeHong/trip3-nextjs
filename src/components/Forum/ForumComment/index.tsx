@@ -1,11 +1,13 @@
 import Link from 'next/link'
 import styles from './ForumComment.module.scss'
-import {Comment} from "../../../types"
+import {Comment, User} from "../../../types"
 import ReactMarkdown from "react-markdown"
 import UserAvatar from "../../User/UserAvatar"
 import ThumbsUpIcon from "../../../icons/ThumbsUpIcon";
 import ThumbsDownIcon from "../../../icons/ThumbsDownIcon";
 import clsx from "clsx";
+import {useAppSelector} from "../../../hooks";
+import {selectUser} from "../../../redux/auth";
 
 type Props = {
     item: Comment
@@ -14,6 +16,10 @@ type Props = {
 }
 
 const ForumComment = ({item, onThumbsClick, onToggleStatus}: Props) => {
+    const user = useAppSelector(selectUser)
+    const userIsAdmin = user && user.isAdmin
+    const isCommentOwner = user && user.id === item.user.id
+
     const onThumbsUpClick = () => {
         onThumbsClick(item, true)
     }
@@ -24,6 +30,27 @@ const ForumComment = ({item, onThumbsClick, onToggleStatus}: Props) => {
 
     const onChangeStatus = () => {
         onToggleStatus(item)
+    }
+
+    const renderActionButtons = () => {
+        if (!user?.id) {
+            return null
+        }
+
+        if (userIsAdmin) {
+            return (
+                <div className={styles.Buttons}>
+                    <span className={styles.ActionButton}>Muuda</span> /
+                    <span className={styles.ActionButton} onClick={onChangeStatus}>
+                        {item.status === 1 ? 'Peida' : 'Avalikusta'}
+                    </span>
+                </div>
+            )
+        } else if (item.hasTimeToEdit && isCommentOwner) {
+            return <span className={styles.ActionButton}>Muuda</span>
+        } else {
+            return null
+        }
     }
 
     return (
@@ -45,12 +72,7 @@ const ForumComment = ({item, onThumbsClick, onToggleStatus}: Props) => {
                 <ReactMarkdown linkTarget={'_blank'} children={item.body} />
             </div>
             <div className={styles.Actions}>
-                <div className={styles.Buttons}>
-                    <span className={styles.ActionButton}>Muuda</span>/
-                    <span className={styles.ActionButton} onClick={onChangeStatus}>
-                        {item.status === 1 ? 'Peida' : 'Avalikusta'}
-                    </span>
-                </div>
+                {renderActionButtons()}
                 <div className={styles.Thumbs}>
                     <div className={styles.Thumb} onClick={onThumbsUpClick}>
                         <ThumbsUpIcon />

@@ -46,6 +46,7 @@ export type Comment = {
     status: number
     likes: number
     dislikes: number
+    hasTimeToEdit: boolean
     createdAt: string
     updatedAt: string
 }
