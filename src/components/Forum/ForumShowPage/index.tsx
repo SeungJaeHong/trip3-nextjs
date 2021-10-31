@@ -12,7 +12,7 @@ import Button from "../../Button"
 import {getForumUrlByType, getForumUrlByTypeAndSlug} from "../../../helpers"
 import CommentEditor from "../../CommentEditor"
 import BlockTitle from "../../BlockTitle"
-import {postComment} from "../../../services/forum.service";
+import {postComment} from "../../../services/comment.service"
 import {toast} from "react-hot-toast";
 import {useAppSelector} from "../../../hooks";
 import {selectUserIsLoggedIn} from "../../../redux/auth";
@@ -112,12 +112,15 @@ const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
                             comments={comments}
                             currentPage={currentPage}
                             lastPage={lastPage} />
+
                         {userIsLoggedIn &&
                             <div className={styles.AddComment}>
                                 <BlockTitle title={'Lisa kommentaar'} />
                                 <CommentEditor
+                                    id={'comment-editor'}
                                     onSubmit={onSubmit}
                                     value={commentValue}
+                                    submitButtonName={'Lisa kommentaar'}
                                     submitting={submitting} />
                             </div>
                         }

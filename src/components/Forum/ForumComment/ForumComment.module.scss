@@ -27,7 +27,7 @@
         font-size: $font-size-small;
         gap: $spacer * 1.5;
         position: relative;
-        margin-bottom: $spacer * 2;
+        margin-bottom: $spacer * 2.5;
 
         .User {
             color: $blue;
@@ -78,7 +78,7 @@
     .Actions {
         display: flex;
         width: 100%;
-        justify-content: space-between;
+        justify-content: flex-end;
 
         .Buttons {
             font-size: $font-size-small;
@@ -134,6 +134,10 @@
                     }
                 }
             }
+        }
+
+        &.MoreActions {
+            justify-content: space-between;
         }
     }
 

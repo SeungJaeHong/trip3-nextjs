@@ -13,12 +13,15 @@ import ImageIcon from "../../icons/Editor/ImageIcon";
 import SubmitButton from "../Form/SubmitButton";
 
 type Props = {
+    id: string
     onSubmit: (value: string) => void
     value: string
+    submitButtonName: string
     submitting: boolean
+    onClose?: () => void
 }
 
-const CommentEditor = ({onSubmit, value, submitting}: Props) => {
+const CommentEditor = ({id, onSubmit, value, submitting, submitButtonName}: Props) => {
     const [editor, setEditor] = useState(undefined)
     const [editorValue, setEditorValue] = useState(value)
 
@@ -30,7 +33,7 @@ const CommentEditor = ({onSubmit, value, submitting}: Props) => {
 
     useEffect(() => {
         const editor = init({
-            element: document.getElementById('comment-editor')!,
+            element: document.getElementById(id)!,
             onChange: (html: string) => setEditorValue(html),
             //defaultParagraphSeparator: 'p',
             actions: [
@@ -90,6 +93,7 @@ const CommentEditor = ({onSubmit, value, submitting}: Props) => {
                 selected: styles.ActionButtonSelected
             }
         })
+
         // @ts-ignore
         setEditor(editor)
     }, [])
@@ -100,14 +104,14 @@ const CommentEditor = ({onSubmit, value, submitting}: Props) => {
             editor.content.innerHTML = value
             setEditorValue(value)
         }
-    }, [value])
+    }, [value, editor])
 
     return (
         <div className={styles.CommentEditor}>
-            <div id={'comment-editor'} className={styles.Editor} spellCheck={false} />
+            <div id={id} className={styles.Editor} spellCheck={false} />
             <div className={styles.SubmitButton}>
                 <SubmitButton
-                    title={'Lisa kommentaar'}
+                    title={submitButtonName}
                     submitting={submitting}
                     onClick={onSubmitClick} />
             </div>

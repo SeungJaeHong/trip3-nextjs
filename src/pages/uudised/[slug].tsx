@@ -11,7 +11,7 @@ import UserAvatar from "../../components/User/UserAvatar";
 import Footer from "../../components/Footer";
 import ForumComment from "../../components/Forum/ForumComment";
 import ApiClientSSR from "../../lib/ApiClientSSR";
-import {postComment, rateComment} from "../../services/news.service";
+import {postComment} from "../../services/news.service";
 import {useAppSelector} from "../../hooks";
 import {selectUserIsLoggedIn} from "../../redux/auth";
 import BlockTitle from "../../components/BlockTitle";
@@ -29,19 +29,6 @@ const NewsShow = ({news}: Props) => {
     const [commentValue, setCommentValue] = useState('')
     const [submitting, setSubmitting] = useState(false)
     const router = useRouter()
-
-    const onThumbsClick = (comment: Comment, type: boolean) => {
-        if (userIsLoggedIn && comments?.length) {
-            rateComment(news.id, comment.id, type).then(res => {
-                const index = comments.findIndex(x => x.id == comment.id)
-                const newComments = [...comments]
-                newComments[index] = res.data
-                setComments(newComments)
-            }).catch(err => {
-                console.log(err, 'err')
-            })
-        }
-    }
 
     const onSubmit = async (value: string) => {
         setSubmitting(true)
@@ -67,10 +54,6 @@ const NewsShow = ({news}: Props) => {
                 toast.error('Kommentaari lisamine ebaõnnestus')
             }
         })
-    }
-
-    const onToggleStatus = (item: Comment) => {
-
     }
 
     return (
@@ -108,8 +91,7 @@ const NewsShow = ({news}: Props) => {
                                     <ForumComment
                                         key={comment.id}
                                         item={comment}
-                                        onThumbsClick={onThumbsClick}
-                                        onToggleStatus={onToggleStatus} />
+                                        type={'news'} />
                                 )
                             })}
                         </div>
@@ -117,8 +99,10 @@ const NewsShow = ({news}: Props) => {
                             <div className={styles.AddComment}>
                                 <BlockTitle title={'Lisa kommentaar'} />
                                 <CommentEditor
+                                    id={'comment-editor'}
                                     onSubmit={onSubmit}
                                     value={commentValue}
+                                    submitButtonName={'Lisa kommentaar'}
                                     submitting={submitting} />
                             </div>
                         }
