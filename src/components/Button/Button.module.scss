@@ -39,6 +39,14 @@
         }
     }
 
+    &.Cancel {
+        background: $gray-darker;
+
+        .Title {
+            color: $white;
+        }
+    }
+
     &:disabled {
         cursor: not-allowed;
         opacity: .8;
@@ -49,6 +57,10 @@
 
         &.Light {
             background: $gray-light;
+        }
+
+        &.Cancel {
+            background: $gray-dark-hover;
         }
     }
 }

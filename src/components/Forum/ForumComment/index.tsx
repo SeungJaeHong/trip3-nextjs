@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import styles from './ForumComment.module.scss'
 import {Comment} from "../../../types"
-import ReactMarkdown from "react-markdown"
 import UserAvatar from "../../User/UserAvatar"
 import ThumbsUpIcon from "../../../icons/ThumbsUpIcon";
 import ThumbsDownIcon from "../../../icons/ThumbsDownIcon";
@@ -27,6 +26,7 @@ const ForumComment = ({item, type}: Props) => {
     const isCommentOwner = user && user.id === comment.user.id
     const canEditComment = comment.hasTimeToEdit && isCommentOwner
     const [editMode, setEditMode] = useState(false)
+    const [submitting, setSubmitting] = useState(false)
     const router = useRouter()
 
     const onThumbsClick = (value: boolean) => {
@@ -53,8 +53,10 @@ const ForumComment = ({item, type}: Props) => {
     }
 
     const onCommentEditSubmit = async (value: string) => {
+        setSubmitting(true)
         const res = await updateComment(comment, value, type).then((response) => {
             setComment(response.data)
+            setSubmitting(false)
             setEditMode(false)
             toast.success('Kommentaar muudetud', {
                 duration: 4000
@@ -67,11 +69,12 @@ const ForumComment = ({item, type}: Props) => {
             } else {
                 toast.error('Kommentaari muutmine ebaõnnestus')
             }
+            setSubmitting(false)
         })
     }
 
     const onClose = () => {
-        console.log('todo')
+        setEditMode(false)
     }
 
     const renderActionButtons = () => {
@@ -105,8 +108,9 @@ const ForumComment = ({item, type}: Props) => {
                 id={'comment-editor-' + comment.id}
                 onSubmit={onCommentEditSubmit}
                 value={comment.body}
-                submitButtonName={'Muuda kommentaari'}
-                submitting={false}
+                submitButtonName={'Salvesta'}
+                submitting={submitting}
+                onCloseButtonTitle={'Katkesta'}
                 onClose={onClose} />
         )
     }
@@ -126,9 +130,7 @@ const ForumComment = ({item, type}: Props) => {
                     <UserAvatar user={comment.user} />
                 </div>
             </div>
-            <div className={styles.Body}>
-                <ReactMarkdown linkTarget={'_blank'} children={comment.body} />
-            </div>
+            <div className={styles.Body} dangerouslySetInnerHTML={{ __html: comment.body }} />
             <div className={clsx(styles.Actions, {
                 [styles.MoreActions]: userIsAdmin || canEditComment
             })}>

@@ -8,6 +8,7 @@ type Props = {
     route?: string
     onClick?: MouseEventHandler<HTMLElement> | undefined
     light?: boolean
+    cancel?: boolean
 }
 
 const Button = (props: Props) => {
@@ -15,7 +16,8 @@ const Button = (props: Props) => {
         return (
             <Link href={props.route}>
                 <a className={clsx(styles.Button, {
-                    [styles.Light]: props.light
+                    [styles.Light]: props.light,
+                    [styles.Cancel]: props.cancel
                 })}>
                     <span className={styles.Title}>{props.title}</span>
                 </a>
@@ -24,7 +26,8 @@ const Button = (props: Props) => {
     } else {
         return (
             <button className={clsx(styles.Button, {
-                [styles.Light]: props.light
+                [styles.Light]: props.light,
+                [styles.Cancel]: props.cancel
             })} onClick={props.onClick ?? undefined}>
                 <span className={styles.Title}>{props.title}</span>
             </button>
@@ -33,7 +36,8 @@ const Button = (props: Props) => {
 }
 
 Button.defaultProps = {
-    light: false
+    light: false,
+    cancel: false
 }
 
 export default Button

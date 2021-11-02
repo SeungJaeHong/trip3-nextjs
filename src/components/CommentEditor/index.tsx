@@ -11,6 +11,7 @@ import UnorderedListIcon from "../../icons/Editor/UnorderedListIcon";
 import LinkIcon from "../../icons/Editor/LinkIcon";
 import ImageIcon from "../../icons/Editor/ImageIcon";
 import SubmitButton from "../Form/SubmitButton";
+import Button from "../Button";
 
 type Props = {
     id: string
@@ -18,10 +19,11 @@ type Props = {
     value: string
     submitButtonName: string
     submitting: boolean
+    onCloseButtonTitle?: string
     onClose?: () => void
 }
 
-const CommentEditor = ({id, onSubmit, value, submitting, submitButtonName}: Props) => {
+const CommentEditor = ({id, onSubmit, value, submitting, submitButtonName, onCloseButtonTitle, onClose}: Props) => {
     const [editor, setEditor] = useState(undefined)
     const [editorValue, setEditorValue] = useState(value)
 
@@ -35,7 +37,7 @@ const CommentEditor = ({id, onSubmit, value, submitting, submitButtonName}: Prop
         const editor = init({
             element: document.getElementById(id)!,
             onChange: (html: string) => setEditorValue(html),
-            //defaultParagraphSeparator: 'p',
+            defaultParagraphSeparator: 'p',
             actions: [
                 {
                     name: 'bold',
@@ -109,11 +111,21 @@ const CommentEditor = ({id, onSubmit, value, submitting, submitButtonName}: Prop
     return (
         <div className={styles.CommentEditor}>
             <div id={id} className={styles.Editor} spellCheck={false} />
-            <div className={styles.SubmitButton}>
-                <SubmitButton
-                    title={submitButtonName}
-                    submitting={submitting}
-                    onClick={onSubmitClick} />
+            <div className={styles.Buttons}>
+                <div className={styles.SubmitButton}>
+                    <SubmitButton
+                        title={submitButtonName}
+                        submitting={submitting}
+                        onClick={onSubmitClick} />
+                </div>
+                {onCloseButtonTitle &&
+                    <div className={styles.CloseButton}>
+                        <Button
+                            title={onCloseButtonTitle}
+                            cancel={true}
+                            onClick={onClose} />
+                    </div>
+                }
             </div>
         </div>
     )
