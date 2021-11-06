@@ -1,5 +1,4 @@
 import {GetServerSideProps} from "next"
-import Link from 'next/link'
 import Navbar from "../components/Navbar"
 import FrontPageSearch from "../components/FrontPageSearch"
 import containerStyle from '../styles/containers.module.scss'
@@ -11,14 +10,13 @@ import ForumList from "../components/Forum/ForumList";
 import Button from "../components/Button"
 import ImageGallery from "../components/ImageGallery";
 import FlightOfferCard from "../components/FlightOffer/FlightOfferCard"
-import axios from "axios";
 import Footer from "../components/Footer"
 import ApiClient from "../lib/ApiClient"
 import {FlightOfferCardType, ForumRowType} from '../types'
 import FrontpageNewsBlock from "../components/News/FrontpageNewsBlock"
 import FlightOffersLatest from "../components/FlightOffer/FlightOffersLatest";
 import TravelmatesLatest from "../components/Travelmate/TravelmatesLatest";
-import {useAppDispatch, useAppSelector} from "../hooks";
+import {useAppSelector} from "../hooks";
 import {selectUser} from "../redux/auth";
 
 type Props = {
@@ -27,9 +25,8 @@ type Props = {
 }
 
 const Home = (props: Props) => {
-    const dispatch = useAppDispatch()
     const user = useAppSelector(selectUser)
-
+    const userIsLoggedIn = user && user?.id
     return (
         <>
             <div className={styles.Header}
@@ -63,12 +60,12 @@ const Home = (props: Props) => {
                         </div>
                     </div>
                     <div className={clsx(styles.MoreFlightsLink, {
-                        [styles.UserLoggedIn]: user && user?.id
+                        [styles.UserLoggedIn]: userIsLoggedIn
                     })}>
                         <MoreLink title={'Vaata kõiki lennupakkumisi'} route={'/odavad-lennupiletid'} />
                     </div>
 
-                    {!user &&
+                    {!userIsLoggedIn &&
                         <div className={styles.JoinTripBlock}>
                             <div className={styles.TripDescription}>
                                 <span className={styles.DescriptionText}>
@@ -104,6 +101,11 @@ const Home = (props: Props) => {
                                         <MoreLink title={'Elu välismaal'} route={'/foorum/elu-valismaal'} large={true} />
                                         <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
                                     </div>
+                                </div>
+                                <div className={styles.AddNewTopic}>
+                                    <Button
+                                        title={'Alusta uut teemat'}
+                                        route={'/foorum/lisa-uus'} />
                                 </div>
                             </div>
                         </div>

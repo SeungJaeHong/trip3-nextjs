@@ -1,0 +1,81 @@
+@import "../../../styles/variables";
+
+.FormRichTextEditor {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: $spacer * 3;
+
+    label {
+        color: $gray-darker;
+        margin-bottom: $spacer * 2;
+        font-size: $font-size-normal;
+        font-weight: 500;
+        line-height: 1.2rem;
+    }
+
+    .ActionBar {
+        display: flex;
+        gap: $spacer;
+        padding-bottom: $spacer;
+
+        .ActionButton {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            outline: 0;
+            vertical-align: bottom;
+
+            svg {
+                height: 15px;
+                width: 15px;
+            }
+
+            &:hover {
+                background-color: #F0F0F0;
+            }
+        }
+
+        .ActionButtonSelected {
+            background-color: #F0F0F0;
+        }
+    }
+
+    .Content {
+        box-sizing: border-box;
+        height: 360px;
+        overflow-y: scroll;
+        padding: $spacer * 3;
+        font-family: $font-family-sailec;
+        outline: none;
+        border: 2px solid $gray;
+        width: 100%;
+        border-radius: 3px;
+        color: $gray-dark;
+
+        a {
+            color: $blue;
+        }
+
+        pre {
+            white-space: pre-wrap;
+        }
+
+        p {
+            margin-top: 0;
+            padding-top: 0;
+            margin-bottom: $spacer * 1.5;
+        }
+    }
+
+    .ErrorText {
+        color: $red;
+        font-size: $font-size-small;
+    }
+
+    &.Invalid {
+        .Content {
+            border: 2px solid $red;
+        }
+    }
+}

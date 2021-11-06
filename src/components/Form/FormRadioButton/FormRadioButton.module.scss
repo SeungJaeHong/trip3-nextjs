@@ -1,6 +1,6 @@
 @import "../../../styles/variables";
 
-.FormCheckbox {
+.FormRadioButton {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -11,17 +11,17 @@
 
         label {
             color: $gray-darker;
-            margin-bottom: $spacer;
             font-size: $font-size-normal;
             font-weight: 500;
             line-height: 1.2rem;
-            margin-left: $spacer;
-        }
-    }
+            cursor: pointer;
+            display: flex;
+            gap: $spacer;
 
-    .ErrorText {
-        color: $red;
-        font-size: $font-size-small;
+            input {
+                cursor: pointer;
+            }
+        }
     }
 
     &.Invalid {

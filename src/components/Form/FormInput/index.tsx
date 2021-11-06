@@ -9,7 +9,7 @@ const FormInput = ({ id, name, label, type, error, register, ...props }: props) 
             [styles.Invalid]: error.length > 0
         })}>
             {label !== undefined &&
-                <label htmlFor={props.id}>
+                <label htmlFor={props.id ?? props.name}>
                     {label}
                 </label>
             }
