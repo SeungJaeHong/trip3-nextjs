@@ -1,24 +1,22 @@
-import React, {Fragment, useEffect} from "react"
+import React, {Fragment} from "react"
 import Navbar from "../../../components/Navbar"
 import styles from './NewForumTopic.module.scss'
 import clsx from "clsx";
 import Footer from "../../../components/Footer"
 import containerStyle from "../../../styles/containers.module.scss"
 import BackgroundMap from "../../../components/BackgroundMap";
-import Link from "next/link";
 import {GetServerSideProps} from "next";
 import ApiClientSSR from "../../../lib/ApiClientSSR";
-import {useRouter} from "next/router";
-import toast from "react-hot-toast";
 import MoreLink from "../../../components/MoreLink";
 import ForumPostForm from "../../../components/Forum/ForumPostForm";
+import {Destination, Topic} from "../../../types";
 
-const CreateNewForumTopicPage = (props: any) => {
-    const router = useRouter()
-    useEffect(() => {
+type Props = {
+    destinations: Destination[]
+    topics: Topic[]
+}
 
-    }, [])
-
+const CreateNewForumTopicPage = ({destinations, topics}: Props) => {
     return (
         <Fragment>
             <div className={styles.Container}>
@@ -39,7 +37,9 @@ const CreateNewForumTopicPage = (props: any) => {
                                     Alusta uut teemat
                                 </div>
                                 <div className={styles.Form}>
-                                    <ForumPostForm />
+                                    <ForumPostForm
+                                        destinations={destinations}
+                                        topics={topics} />
                                 </div>
                             </div>
                             <div className={styles.Sidebar}>
@@ -66,16 +66,19 @@ const CreateNewForumTopicPage = (props: any) => {
                     </div>
                 </div>
             </div>
-            <Footer simple={true} />
+            <Footer simple={false} />
         </Fragment>
     )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
-        const user = await ApiClientSSR(context).get('/me')
+        const response: any = await ApiClientSSR(context).get('/forum/create')
         return {
-            props: {}
+            props: {
+                destinations: response.data.destinations || [],
+                topics: response.data.topics || []
+            }
         }
     } catch (e) {
         return {

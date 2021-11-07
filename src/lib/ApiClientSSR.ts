@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axios, {AxiosInstance, AxiosResponse} from 'axios'
 import {GetServerSidePropsContext} from "next"
 
-const ApiClientSSR = (context: GetServerSidePropsContext) => {
+const ApiClientSSR = (context: GetServerSidePropsContext): AxiosInstance => {
     const cookie = context.req.headers.cookie
     return axios.create({
         withCredentials: true,

@@ -1,0 +1,53 @@
+@import "../../../styles/variables";
+
+.FormMultiSelect {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    label {
+        color: $gray-darker;
+        margin-bottom: $spacer;
+        font-size: $font-size-normal;
+        font-weight: 500;
+        line-height: 1.2rem
+    }
+
+    .FormSelect {
+        width: 100%;
+        border: 2px solid $gray;
+
+        :global(.FormMultiSelect__control) {
+            border: 0;
+        }
+
+        :global(.FormMultiSelect__value-container) {
+            padding: 6px $spacer;
+        }
+
+        :global(.FormMultiSelect__placeholder) {
+            font-family: $font-family-sailec;
+            font-size: $font-size-normal;
+            opacity: .7;
+        }
+
+        :global(.FormMultiSelect__input) {
+            font-family: $font-family-sailec;
+        }
+
+        :global(.FormMultiSelect__multi-value) {
+            font-weight: 500;
+            font-family: $font-family-sailec;
+            margin-right: 8px;
+        }
+
+        :global(.FormMultiSelect__multi-value__label) {
+            padding: 4px 4px 4px 8px;
+            color: $gray-dark;
+        }
+
+        :global(.FormMultiSelect__multi-value__remove) {
+            cursor: pointer;
+        }
+    }
+}
