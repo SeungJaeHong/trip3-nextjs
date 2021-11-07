@@ -2,7 +2,6 @@ import Link from 'next/link'
 import styles from './ForumPost.module.scss'
 import {Content, Destination, Topic} from "../../../types"
 import UserAvatar from "../../User/UserAvatar"
-import ReactMarkdown from 'react-markdown'
 import ThumbsUpIcon from "../../../icons/ThumbsUpIcon";
 import clsx from "clsx";
 import ThumbsDownIcon from "../../../icons/ThumbsDownIcon";
@@ -25,9 +24,7 @@ const ForumPost = (item: Content) => {
                     <UserAvatar user={item.user} />
                 </div>
             </div>
-            <div className={styles.Body}>
-                <ReactMarkdown linkTarget={'_blank'} children={item.body} />
-            </div>
+            <div className={styles.Body} dangerouslySetInnerHTML={{ __html: item.body }} />
             <div className={styles.Actions}>
                 <div className={styles.Buttons}>
                     <span className={styles.ActionButton}>Muuda</span>/

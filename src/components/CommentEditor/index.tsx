@@ -28,12 +28,14 @@ const CommentEditor = ({id, onSubmit, value, submitting, submitButtonName, onClo
 
     return (
         <div className={styles.CommentEditor}>
-            <FormRichTextEditor
-                id={id}
-                value={value}
-                onChange={onTextChange}
-                disabled={submitting}
-            />
+            <div className={styles.Editor}>
+                <FormRichTextEditor
+                    id={id}
+                    value={value}
+                    onChange={onTextChange}
+                    disabled={submitting}
+                />
+            </div>
             <div className={styles.Buttons}>
                 <div className={styles.SubmitButton}>
                     <SubmitButton
