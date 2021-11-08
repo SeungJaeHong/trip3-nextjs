@@ -38,7 +38,7 @@ const ForumComment = ({item, type}: Props) => {
     }
 
     const onToggleStatus = () => {
-        if (userIsLoggedIn) {
+        if (userIsAdmin) {
             const status = !!comment.status
             toggleCommentStatus(comment, status, type).then(res => {
                 setComment(res.data)

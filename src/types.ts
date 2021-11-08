@@ -58,7 +58,7 @@ export type Content = {
     type: string
     slug: string
     url?: string
-    status?: boolean
+    status: number
     createdAt: string
     updatedAt?: string
     //start_at?: string
