@@ -4,7 +4,7 @@ import clsx from "clsx"
 import FormInput from "../../Form/FormInput"
 import SubmitButton from "../../Form/SubmitButton"
 import toast from 'react-hot-toast'
-import {setFormErrors} from "../../../helpers"
+import {getForumUrlByType, getForumUrlByTypeAndSlug, setFormErrors} from "../../../helpers"
 import {SubmitHandler, useForm, Controller} from "react-hook-form";
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
@@ -12,7 +12,7 @@ import FormRadioButton from "../../Form/FormRadioButton";
 import FormRichTextEditor from "../../Form/FormRichTextEditor";
 import {Content, Destination, Topic} from "../../../types";
 import FormMultiSelect from "../../Form/FormMultiSelect";
-import {addPost} from "../../../services/forum.service";
+import {addPost, updatePost} from "../../../services/forum.service";
 import {useRouter} from 'next/router'
 
 type Inputs = {
@@ -41,29 +41,42 @@ const ForumPostForm = ({post, destinations, topics}: Props) => {
 
     const { watch, register, handleSubmit, control, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
         resolver: yupResolver(forumPostSchema),
-        /*defaultValues: {
-            category: 'forum',
-            title: 'ASD',
-            body: '<p>ASDF123</p>',
-            destinations: [
-                {value: 'strawberry', label: 'Strawberry'}
-            ]
-        },*/
         defaultValues: {
-            category: 'forum',
-            title: '',
-            body: '',
-            destinations: [],
-            topics: []
+            category: post ? post.type : 'forum',
+            title: post ? post.title : '',
+            body: post ? post.body : '',
+            destinations: post ? post.destinations?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
+            topics: post ? post.topics?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
         }
     })
 
+    const savePost = async (values: Inputs): Promise<any> => {
+        if (post) {
+            return await updatePost(post, values).then(res => {
+                if (res.data.type === 'forum') {
+                    router.push('/')
+                } else {
+                    const url = getForumUrlByTypeAndSlug(res.data.type, res.data.slug)
+                    router.push(url)
+                }
+                toast.success('Postitus muudetud!')
+            })
+        } else {
+            return await addPost(values).then(res => {
+                if (res.data.type === 'forum') {
+                    router.push('/')
+                } else {
+                    const url = getForumUrlByType(res.data.type)
+                    router.push(url)
+                }
+                toast.success('Uus postitus loodud!')
+            })
+        }
+    }
+
     const categoryValue = watch('category')
     const onSubmit: SubmitHandler<Inputs> = async (values: Inputs) => {
-        const resp = await addPost(values).then(res => {
-            router.back() //todo: redirect according to type
-            toast.success('Uus postitus loodud!')
-        }).catch(err => {
+        const resp = await savePost(values).catch(err => {
             if (err.response?.data?.errors) {
                 setFormErrors(err.response.data.errors, setError)
             }
@@ -134,7 +147,7 @@ const ForumPostForm = ({post, destinations, topics}: Props) => {
                                     <FormRichTextEditor
                                         id={'body'}
                                         label={'Sisu'}
-                                        value={''}
+                                        value={post ? post.body : ''}
                                         onChange={field.onChange}
                                         error={fieldState.error?.message}
                                         disabled={isSubmitting}

@@ -169,6 +169,12 @@
 
             .AddNewTopic {
                 margin-top: $spacer;
+                max-width: 250px;
+                width: 100%;
+
+                @include sm() {
+                    max-width: none;
+                }
             }
         }
     }

@@ -9,14 +9,15 @@ import {GetServerSideProps} from "next";
 import ApiClientSSR from "../../../../lib/ApiClientSSR";
 import MoreLink from "../../../../components/MoreLink";
 import ForumPostForm from "../../../../components/Forum/ForumPostForm";
-import {Destination, Topic} from "../../../../types";
+import {Content, Destination, Topic} from "../../../../types";
 
 type Props = {
+    post: Content
     destinations: Destination[]
     topics: Topic[]
 }
 
-const EditForumTopicPage = ({destinations, topics}: Props) => {
+const EditForumTopicPage = ({destinations, topics, post}: Props) => {
     return (
         <Fragment>
             <div className={styles.Container}>
@@ -38,6 +39,7 @@ const EditForumTopicPage = ({destinations, topics}: Props) => {
                                 </div>
                                 <div className={styles.Form}>
                                     <ForumPostForm
+                                        post={post}
                                         destinations={destinations}
                                         topics={topics} />
                                 </div>
@@ -73,9 +75,11 @@ const EditForumTopicPage = ({destinations, topics}: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
-        const response: any = await ApiClientSSR(context).get('/forum/create')
+        const postId = context.query.id
+        const response: any = await ApiClientSSR(context).get('/forum/' + postId + '/editForm')
         return {
             props: {
+                post: response.data.post,
                 destinations: response.data.destinations || [],
                 topics: response.data.topics || []
             }
