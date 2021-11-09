@@ -10,15 +10,24 @@ import {useAppSelector} from "../../../hooks";
 import {selectUser} from "../../../redux/auth";
 import React, {useState} from "react";
 import { useRouter } from 'next/router'
-import {togglePostStatus} from "../../../services/forum.service"
+import {togglePostStatus, ratePost} from "../../../services/forum.service"
 import {toast} from "react-hot-toast"
 
 const ForumPost = (item: Content) => {
     const [post, setPost] = useState<Content>(item)
     const user = useAppSelector(selectUser)
+    const userIsLoggedIn = user && user?.id
     const userIsAdmin = user && user.isAdmin
     const isPostOwner = user && user.id === item.user.id
     const router = useRouter()
+
+    const onThumbsClick = (value: boolean) => {
+        if (userIsLoggedIn) {
+            ratePost(post, value).then(res => {
+                setPost(res.data)
+            }).catch(err => {})
+        }
+    }
 
     const onToggleStatus = () => {
         if (userIsAdmin) {
@@ -91,11 +100,11 @@ const ForumPost = (item: Content) => {
                     })}
                 </div>
                 <div className={styles.Thumbs}>
-                    <div className={styles.Thumb}>
+                    <div className={styles.Thumb} onClick={() => onThumbsClick(true)}>
                         <ThumbsUpIcon />
                         <span className={styles.ThumbsCount}>{post.likes}</span>
                     </div>
-                    <div className={clsx(styles.Thumb, styles.ThumbDown)}>
+                    <div className={clsx(styles.Thumb, styles.ThumbDown)} onClick={() => onThumbsClick(false)}>
                         <ThumbsDownIcon />
                         <span className={styles.ThumbsCount}>{post.dislikes}</span>
                     </div>
