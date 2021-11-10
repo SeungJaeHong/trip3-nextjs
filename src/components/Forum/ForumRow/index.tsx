@@ -28,9 +28,11 @@ const ForumRow = (item: ForumRowType) => {
                     <span className={styles.MetaItem}>
                         {item.updatedAt}
                     </span>
-                    <span className={clsx(styles.MetaItem, styles.ReadCount)}>
-                        Loetud {item.viewsCount} korda
-                    </span>
+                    {item.viewsCount >= 25 &&
+                        <span className={clsx(styles.MetaItem, styles.ReadCount)}>
+                            Loetud {item.viewsCount} korda
+                        </span>
+                    }
                     <span className={clsx(styles.MetaItem, styles.Creator)}>
                         <Link href={'/'} >
                             <a>{item.user.name}</a>
