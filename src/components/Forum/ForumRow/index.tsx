@@ -6,6 +6,25 @@ import Tag from "../../Tag";
 import UserAvatar from "../../User/UserAvatar"
 
 const ForumRow = (item: ForumRowType) => {
+    const renderUnreadContentTags = () => {
+        if (item.isNew) {
+            return (
+                <span className={styles.MetaItem}>
+                    <Tag title={'Uus teema'} route={item.url} red={true} />
+                </span>
+            )
+        } else if (item.unreadCommentsCount && item.unreadCommentsCount > 0) {
+            const suffix = item.unreadCommentsCount === 1 ? 'uus' : 'uut'
+            return (
+                <span className={styles.MetaItem}>
+                    <Tag title={item.unreadCommentsCount + ' ' + suffix} route={'/'} red={true} />
+                </span>
+            )
+        }
+
+        return null
+    }
+
     return (
         <div className={styles.ForumRow}>
             <div className={styles.UserIcon}>
@@ -23,11 +42,7 @@ const ForumRow = (item: ForumRowType) => {
                     </a>
                 </Link>
                 <div className={styles.Meta}>
-                    {item.isNew &&
-                        <span className={styles.MetaItem}>
-                            <Tag title={'Uus teema'} route={'/'} red={true} />
-                        </span>
-                    }
+                    {renderUnreadContentTags()}
                     <span className={styles.MetaItem}>
                         {item.updatedAt}
                     </span>
