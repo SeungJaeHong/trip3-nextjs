@@ -44,14 +44,6 @@
         }
     }
 
-    &.Large {
-        padding: 4px 10px;
-
-        .Title {
-            font-size: $font-size-normal;
-        }
-    }
-
     &.White {
         border: 1px solid $white;
 
@@ -66,6 +58,32 @@
             .Title {
                 color: $white;
             }
+        }
+    }
+
+    &.Red {
+        border: 1px solid rgba(237, 100, 100, .9);
+        //background: $red-light;
+        //opacity: .9;
+        background: rgba(237, 100, 100, .9);
+
+        .Title {
+            color: $white;
+            font-weight: 500;
+            line-height: 120%;
+        }
+
+        &:hover {
+            border: 1px solid $red;
+            background: $red;
+        }
+    }
+
+    &.Large {
+        padding: 4px 10px;
+
+        .Title {
+            font-size: $font-size-normal;
         }
     }
 }

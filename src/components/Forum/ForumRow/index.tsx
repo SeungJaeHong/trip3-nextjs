@@ -10,21 +10,24 @@ const ForumRow = (item: ForumRowType) => {
         <div className={styles.ForumRow}>
             <div className={styles.UserIcon}>
                 <UserAvatar user={item.user} />
-                <div className={clsx(styles.CommentCountContainer, {
-                    [styles.CommentUnread]: item.isUnread
-                })}>
+                <div className={styles.CommentCountContainer}>
                     <span className={styles.CommentCount}>{item.commentsCount}</span>
                 </div>
             </div>
             <div className={styles.Content}>
                 <Link href={item.url}>
                     <a>
-                        <div className={styles.Title}>
+                        <span className={styles.Title}>
                             {item.title}
-                        </div>
+                        </span>
                     </a>
                 </Link>
                 <div className={styles.Meta}>
+                    {item.isNew &&
+                        <span className={styles.MetaItem}>
+                            <Tag title={'Uus teema'} route={'/'} red={true} />
+                        </span>
+                    }
                     <span className={styles.MetaItem}>
                         {item.updatedAt}
                     </span>

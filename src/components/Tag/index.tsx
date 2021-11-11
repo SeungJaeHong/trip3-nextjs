@@ -9,6 +9,7 @@ type Props = {
     large?: boolean
     route?: string
     white?: boolean
+    red?: boolean
     onClick?: MouseEventHandler<HTMLDivElement> | undefined
 }
 
@@ -19,7 +20,8 @@ const Tag = (props: Props) => {
                 <a className={clsx(styles.Tag, {
                     [styles.Destination]: props.type === 'destination',
                     [styles.Large]: props.large,
-                    [styles.White]: props.white
+                    [styles.White]: props.white,
+                    [styles.Red]: props.red
                 })}>
                     <span className={styles.Title}>{props.title}</span>
                 </a>
@@ -30,7 +32,8 @@ const Tag = (props: Props) => {
             <div className={clsx(styles.Tag, {
                 [styles.Destination]: props.type === 'destination',
                 [styles.Large]: props.large,
-                [styles.White]: props.white
+                [styles.White]: props.white,
+                [styles.Red]: props.red
             })} onClick={props.onClick ?? undefined}>
                 <span className={styles.Title}>{props.title}</span>
             </div>
@@ -40,7 +43,8 @@ const Tag = (props: Props) => {
 
 Tag.defaultProps = {
     large: false,
-    white: false
+    white: false,
+    red: false
 }
 
 export default Tag
