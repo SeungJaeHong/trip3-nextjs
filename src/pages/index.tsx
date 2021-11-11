@@ -11,20 +11,20 @@ import Button from "../components/Button"
 import ImageGallery from "../components/ImageGallery";
 import FlightOfferCard from "../components/FlightOffer/FlightOfferCard"
 import Footer from "../components/Footer"
-import ApiClient from "../lib/ApiClient"
 import {FlightOfferCardType, ForumRowType} from '../types'
 import FrontpageNewsBlock from "../components/News/FrontpageNewsBlock"
 import FlightOffersLatest from "../components/FlightOffer/FlightOffersLatest";
 import TravelmatesLatest from "../components/Travelmate/TravelmatesLatest";
 import {useAppSelector} from "../hooks";
 import {selectUser} from "../redux/auth";
+import ApiClientSSR from "../lib/ApiClientSSR";
 
 type Props = {
     flightOffers: FlightOfferCardType[],
     forumPosts: ForumRowType[],
 }
 
-const Home = (props: Props) => {
+const Home = ({flightOffers, forumPosts}: Props) => {
     const user = useAppSelector(selectUser)
     const userIsLoggedIn = user && user?.id
     return (
@@ -50,13 +50,13 @@ const Home = (props: Props) => {
                 <div className={styles.CenteredContainer}>
                     <div className={styles.FlightOffers}>
                         <div className={styles.FlightOfferCard}>
-                            <FlightOfferCard {...props.flightOffers[0]} color={'purple'} />
+                            <FlightOfferCard {...flightOffers[0]} color={'purple'} />
                         </div>
                         <div className={styles.FlightOfferCard}>
-                            <FlightOfferCard {...props.flightOffers[1]} color={'yellow'} />
+                            <FlightOfferCard {...flightOffers[1]} color={'yellow'} />
                         </div>
                         <div className={styles.FlightOfferCard}>
-                            <FlightOfferCard {...props.flightOffers[2]} color={'red'} />
+                            <FlightOfferCard {...flightOffers[2]} color={'red'} />
                         </div>
                     </div>
                     <div className={clsx(styles.MoreFlightsLink, {
@@ -85,7 +85,7 @@ const Home = (props: Props) => {
                         </div>
                         <div className={styles.ForumBlock}>
                             <div className={styles.ForumList}>
-                                <ForumList items={props.forumPosts} />
+                                <ForumList items={forumPosts} />
                             </div>
                             <div className={styles.SidebarContent}>
                                 <div className={styles.ForumLinks}>
@@ -102,11 +102,13 @@ const Home = (props: Props) => {
                                         <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
                                     </div>
                                 </div>
-                                <div className={styles.AddNewTopic}>
-                                    <Button
-                                        title={'Alusta uut teemat'}
-                                        route={'/foorum/lisa-uus'} />
-                                </div>
+                                {userIsLoggedIn &&
+                                    <div className={styles.AddNewTopic}>
+                                        <Button
+                                            title={'Alusta uut teemat'}
+                                            route={'/foorum/lisa-uus'} />
+                                    </div>
+                                }
                             </div>
                         </div>
                         <div className={styles.ViewMoreForumPosts}>
@@ -151,7 +153,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 
     try {
-        const res = await ApiClient.get('/frontpage')
+        const res = await ApiClientSSR(context).get('/frontpage')
         data.flightOffers = res.data.flightOffers
         data.forumPosts = res.data.forumPosts
     } catch (error) {
