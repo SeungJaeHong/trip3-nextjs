@@ -38,8 +38,8 @@ const ForumTabs = () => {
         },
         {
             title: 'Toimetus',
-            route: '/foorum/toimetus',
-            active: router.pathname === '/foorum/toimetus'
+            route: '/admin/forum',
+            active: false
         },
     ]
 
