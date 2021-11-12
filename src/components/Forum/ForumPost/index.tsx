@@ -12,6 +12,7 @@ import React, {useState} from "react";
 import { useRouter } from 'next/router'
 import {togglePostStatus, ratePost} from "../../../services/forum.service"
 import {toast} from "react-hot-toast"
+import Alert from "../../Alert";
 
 const ForumPost = (item: Content) => {
     const [post, setPost] = useState<Content>(item)
@@ -72,6 +73,13 @@ const ForumPost = (item: Content) => {
 
     return (
         <div className={styles.ForumPost}>
+            {post.status === 0 &&
+                <div className={styles.Alert}>
+                    <Alert
+                        title={'Postitus ei ole avalikustatud!'}
+                        type={'warning'} />
+                </div>
+            }
             <div className={styles.Title}>
                 {post.title}
             </div>

@@ -11,6 +11,10 @@
     padding-bottom: $spacer * 4;
     box-shadow: 0 1px 10px 0 $gray;
 
+    .Alert {
+        margin-bottom: $spacer * 3;
+    }
+
     .Title {
         font-size: $font-size-xlarge;
         font-weight: 600;
