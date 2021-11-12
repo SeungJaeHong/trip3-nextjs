@@ -1,0 +1,59 @@
+@import "../../../styles/variables";
+
+.SidebarMenu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: #242e42;
+    font-family: $font-family-sailec;
+
+    .Logo {
+        display: flex;
+        justify-content: center;
+        padding: $spacer * 2 0;
+    }
+
+    .Menu {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        margin: 40px 0 0 0;
+        list-style: none;
+
+        .MenuItem {
+            width: 100%;
+
+            a {
+                display: flex;
+                align-items: center;
+                font-size: 1.2rem;
+                font-weight: 500;
+                width: 100%;
+                padding: 12px 20px;
+                text-decoration: none;
+                color: #dde9f8;
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                    fill: #dde9f8;
+                }
+
+                .Title {
+                    margin-left: $spacer * 1.5;
+                }
+
+                &:hover {
+                    background: #1d2636;
+                    color: #00b9eb;
+                    outline: none;
+
+                    svg {
+                        fill: #00b9eb;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,12 +1,15 @@
 import React from 'react'
 import {GetServerSideProps} from "next"
 import ApiClientSSR from "../../../lib/ApiClientSSR"
+import AdminLayout from "../../../layouts/AdminLayout";
 
 const AdminDashboard = (props: any) => {
     return (
-        <div>
-            Dashboard
-        </div>
+        <AdminLayout>
+            <div>
+                Dashboard Component
+            </div>
+        </AdminLayout>
     )
 }
 

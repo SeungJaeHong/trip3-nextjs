@@ -50,7 +50,7 @@ const ForumTabs = () => {
                     return null
                 }
 
-                if (tab.route === '/foorum/toimetus' && !userIsAdmin) {
+                if (tab.route === '/admin/forum' && !userIsAdmin) {
                     return null
                 }
 

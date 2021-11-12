@@ -1,0 +1,18 @@
+@import "../../styles/variables";
+
+.AdminLayout {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+
+    .SidebarMenu {
+        width: 400px;
+        height: 100%;
+    }
+
+    .Content {
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
+}
