@@ -138,7 +138,7 @@ const ForumIndexPage = (props: Props) => {
                                 {props.description}
                             </div>
                             <div className={styles.AddNewTopic}>
-                                <Button title={'Alusta uut teemat'} route={'/'} />
+                                <Button title={'Alusta uut teemat'} route={'/foorum/lisa-uus'} />
                             </div>
                         </div>
                     </div>

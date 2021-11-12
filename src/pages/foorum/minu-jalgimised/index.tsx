@@ -25,23 +25,39 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const page = context.query?.page
     const destination = context.query?.destination
     const topic = context.query?.topic
-    let url = process.env.API_BASE_URL + '/forum/follows'
-    if (page) {
-        url += '?page=' + page
-    }
 
-    const data = {
-        forumPosts: [],
-        currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
-        hasMore: false,
-    }
+    try {
+        let url = process.env.API_BASE_URL + '/forum/follows'
+        if (page) {
+            url += '?page=' + page
+        }
 
-    const res = await ApiClientSSR(context).get(url)
-    data.forumPosts = res.data.forumList?.items
-    data.hasMore = res.data.forumList?.hasMore
+        const data = {
+            forumPosts: [],
+            currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
+            hasMore: false,
+        }
 
-    return {
-        props: data
+        const res = await ApiClientSSR(context).get(url)
+        data.forumPosts = res.data.forumList?.items
+        data.hasMore = res.data.forumList?.hasMore
+
+        return {
+            props: data
+        }
+    } catch (e: any) {
+        if (e.response?.status === 401 || e.response?.status === 419) {
+            return {
+                redirect: {
+                    destination: '/login',
+                    permanent: false,
+                },
+            }
+        } else {
+            return {
+                notFound: true
+            }
+        }
     }
 }
 

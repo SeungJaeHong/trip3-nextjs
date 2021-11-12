@@ -2,9 +2,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styles from './ForumTabs.module.scss'
 import clsx from "clsx"
+import {useAppSelector} from "../../../hooks";
+import {selectUser} from "../../../redux/auth";
 
 const ForumTabs = () => {
     const router = useRouter()
+    const user = useAppSelector(selectUser)
+    const userIsLoggedIn = user && user?.id
+    const userIsAdmin = user && user.isAdmin
     const tabs = [
         {
             title: 'Üldfoorum',
@@ -41,6 +46,14 @@ const ForumTabs = () => {
     return (
         <div className={styles.ForumTabs}>
             {tabs.map(tab => {
+                if (tab.route === '/foorum/minu-jalgimised' && !userIsLoggedIn) {
+                    return null
+                }
+
+                if (tab.route === '/foorum/toimetus' && !userIsAdmin) {
+                    return null
+                }
+
                 return (
                     <Link href={tab.route} key={tab.route}>
                         <a className={clsx(styles.Tab, {

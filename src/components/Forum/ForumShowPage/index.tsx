@@ -130,7 +130,7 @@ const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
                             <Button title={'Otsi foorumist'} light={true} route={getForumUrlByType(post.type)} />
                         </div>
                         <div className={styles.SidebarButton}>
-                            <Button title={'Alusta uut teemat'} light={true} route={'/'} />
+                            <Button title={'Alusta uut teemat'} light={true} route={'/foorum/lisa-uus'} />
                         </div>
                     </div>
                 </div>
