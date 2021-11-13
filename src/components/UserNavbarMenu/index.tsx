@@ -15,6 +15,7 @@ const UserNavBarMenu = ({darkMode}: Props) => {
     const router = useRouter()
     const dispatch = useAppDispatch()
     const user = useAppSelector(selectUser)
+    const userIsAdmin = user && user.isAdmin
     const [menuOpen, setMenuOpen] = useState(false)
     const ref = useRef<any>()
 
@@ -74,12 +75,17 @@ const UserNavBarMenu = ({darkMode}: Props) => {
                 {
                     title: 'Sõnumid',
                     route: '/user/messages'
-                },
-                {
-                    title: 'Toimetus',
-                    route: '/internal'
-                },
+                }
             )
+
+            if (userIsAdmin) {
+                links.push(
+                    {
+                        title: 'Toimetus',
+                        route: '/admin/dashboard'
+                    }
+                )
+            }
         } else {
             links.push(
                 {
