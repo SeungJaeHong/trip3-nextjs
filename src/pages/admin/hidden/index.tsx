@@ -1,13 +1,14 @@
 import React from 'react'
 import {GetServerSideProps} from "next"
 import ApiClientSSR from "../../../lib/ApiClientSSR"
-import AdminLayout from "../../../layouts/AdminLayout";
-import AdminDashboard from "../../../components/Admin/Dashboard";
+import AdminLayout from "../../../layouts/AdminLayout"
 
-const AdminDashboardPage = (props: any) => {
+const AdminHiddenContentPage = (props: any) => {
     return (
         <AdminLayout>
-            <AdminDashboard />
+            <div>
+                Hidden content
+            </div>
         </AdminLayout>
     )
 }
@@ -28,4 +29,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-export default AdminDashboardPage
+export default AdminHiddenContentPage

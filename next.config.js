@@ -8,6 +8,11 @@ module.exports = {
                 destination: '/foorum/uldfoorum',
                 permanent: false,
             },
+            {
+                source: '/admin',
+                destination: '/admin/dashboard',
+                permanent: false,
+            },
         ]
     },
     sassOptions: {

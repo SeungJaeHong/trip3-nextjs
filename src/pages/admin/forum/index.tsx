@@ -1,12 +1,15 @@
 import React from 'react'
 import {GetServerSideProps} from "next"
 import ApiClientSSR from "../../../lib/ApiClientSSR"
+import AdminLayout from "../../../layouts/AdminLayout"
 
-const AdminForum = (props: any) => {
+const AdminForumPage = (props: any) => {
     return (
-        <div>
-            Foorum
-        </div>
+        <AdminLayout>
+            <div>
+                Foorum content
+            </div>
+        </AdminLayout>
     )
 }
 
@@ -26,4 +29,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-export default AdminForum
+export default AdminForumPage
