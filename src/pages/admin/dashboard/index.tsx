@@ -6,7 +6,7 @@ import AdminDashboard from "../../../components/Admin/Dashboard";
 
 const AdminDashboardPage = (props: any) => {
     return (
-        <AdminLayout>
+        <AdminLayout title={'Statistika'}>
             <AdminDashboard />
         </AdminLayout>
     )

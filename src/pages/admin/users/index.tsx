@@ -5,7 +5,7 @@ import AdminLayout from "../../../layouts/AdminLayout"
 
 const AdminUsersPage = (props: any) => {
     return (
-        <AdminLayout>
+        <AdminLayout title={'Kasutajad'}>
             <div>
                 Users
             </div>

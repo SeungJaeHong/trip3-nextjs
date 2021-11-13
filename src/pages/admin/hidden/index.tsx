@@ -5,7 +5,7 @@ import AdminLayout from "../../../layouts/AdminLayout"
 
 const AdminHiddenContentPage = (props: any) => {
     return (
-        <AdminLayout>
+        <AdminLayout title={'Peidetud sisu'}>
             <div>
                 Hidden content
             </div>

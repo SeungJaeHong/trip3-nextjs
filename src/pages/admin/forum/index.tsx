@@ -5,7 +5,7 @@ import AdminLayout from "../../../layouts/AdminLayout"
 
 const AdminForumPage = (props: any) => {
     return (
-        <AdminLayout>
+        <AdminLayout title={'Foorum'}>
             <div>
                 Foorum content
             </div>

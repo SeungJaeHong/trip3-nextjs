@@ -38,9 +38,10 @@ const links = [
 type Props = {
     darkMode: boolean
     showSearch?: boolean
+    showLogo?: boolean
 }
 
-const Navbar = ({darkMode, showSearch}: Props) => {
+const Navbar = ({darkMode, showSearch, showLogo}: Props) => {
     const dispatch = useAppDispatch()
     const userIsLoggedIn = useAppSelector(selectUserIsLoggedIn)
     const [menuOpen, setMenuOpen] = useState(false)
@@ -99,13 +100,15 @@ const Navbar = ({darkMode, showSearch}: Props) => {
         <div className={clsx(styles.Navbar, {
             [styles.Dark]: darkMode
         })}>
-            <div className={styles.Logo}>
-                <Link href="/">
-                    <a>
-                        {getLogo()}
-                    </a>
-                </Link>
-            </div>
+            {showLogo &&
+                <div className={styles.Logo}>
+                    <Link href="/">
+                        <a>
+                            {getLogo()}
+                        </a>
+                    </Link>
+                </div>
+            }
             <div className={styles.Links}>
                 {showSearch && <SearchIcon />}
                 {links.map(link => {
@@ -130,7 +133,8 @@ const Navbar = ({darkMode, showSearch}: Props) => {
 
 Navbar.defaultProps = {
     darkMode: false,
-    showSearch: false
+    showSearch: false,
+    showLogo: true
 }
 
 export default Navbar
