@@ -1,6 +1,6 @@
 import ApiClient from "../lib/ApiClient"
 import {AxiosResponse} from "axios"
-import {Comment, Content} from "../types"
+import {Content} from "../types"
 
 export const addPost = async (formValues: any): Promise<AxiosResponse> => {
     const result = await ApiClient.post('/forum/create', formValues)

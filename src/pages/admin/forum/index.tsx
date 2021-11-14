@@ -2,13 +2,12 @@ import React from 'react'
 import {GetServerSideProps} from "next"
 import ApiClientSSR from "../../../lib/ApiClientSSR"
 import AdminLayout from "../../../layouts/AdminLayout"
+import AdminForum from "../../../components/Admin/Forum"
 
 const AdminForumPage = (props: any) => {
     return (
         <AdminLayout title={'Foorum'}>
-            <div>
-                Foorum content
-            </div>
+            <AdminForum />
         </AdminLayout>
     )
 }
