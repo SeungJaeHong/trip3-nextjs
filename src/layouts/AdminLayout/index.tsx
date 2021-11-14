@@ -30,7 +30,9 @@ const AdminLayout = ({title, children}: Props) => {
                     </div>
                 </div>
             </div>
-            <Footer simple={true} />
+            <div className={styles.Footer}>
+                <Footer simple={true} />
+            </div>
         </>
     )
 }
