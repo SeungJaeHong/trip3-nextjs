@@ -21,6 +21,10 @@
 
         @include sm() {
             flex-direction: column;
+
+            .ForumList {
+                flex: 1;
+            }
         }
     }
 }

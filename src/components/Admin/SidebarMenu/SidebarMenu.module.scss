@@ -72,4 +72,24 @@
             }
         }
     }
+
+    @include sm() {
+        .Logo {
+            display: none;
+        }
+
+        .Menu {
+            margin-top: 100px;
+            gap: 20px;
+
+            .MenuItem a {
+                padding: 20px 15px;
+                justify-content: center;
+
+                .Title {
+                    display: none;
+                }
+            }
+        }
+    }
 }

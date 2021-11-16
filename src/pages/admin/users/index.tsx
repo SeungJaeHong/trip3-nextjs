@@ -1,9 +1,7 @@
 import React from 'react'
-import {GetServerSideProps} from "next"
-import ApiClientSSR from "../../../lib/ApiClientSSR"
 import AdminLayout from "../../../layouts/AdminLayout"
 
-const AdminUsersPage = (props: any) => {
+const AdminUsersPage = () => {
     return (
         <AdminLayout title={'Kasutajad'}>
             <div>
