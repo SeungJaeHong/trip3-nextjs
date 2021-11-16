@@ -4,6 +4,8 @@ import Footer from "../../components/Footer"
 import SidebarMenu from "../../components/Admin/SidebarMenu"
 import Navbar from "../../components/Navbar"
 import containerStyle from "../../styles/containers.module.scss"
+import {GetServerSideProps} from "next";
+import ApiClientSSR from "../../lib/ApiClientSSR";
 
 type Props = {
     title: string
@@ -36,6 +38,22 @@ const AdminLayout = ({title, children}: Props) => {
             </div>
         </div>
     )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    try {
+        const access = await ApiClientSSR(context).get('/admin')
+        return {
+            props: {}
+        }
+    } catch (e) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
+    }
 }
 
 export default AdminLayout

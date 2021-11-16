@@ -13,20 +13,4 @@ const AdminUsersPage = (props: any) => {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    try {
-        const access = await ApiClientSSR(context).get('/admin')
-        return {
-            props: {}
-        }
-    } catch (e) {
-        return {
-            redirect: {
-                destination: '/',
-                permanent: false,
-            },
-        }
-    }
-}
-
 export default AdminUsersPage

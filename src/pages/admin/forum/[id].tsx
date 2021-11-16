@@ -1,13 +1,12 @@
 import React from 'react'
 import AdminLayout from "../../../layouts/AdminLayout"
-import AdminForum from "../../../components/Admin/Forum"
 
-const AdminForumPage = () => {
+const AdminForumPostPage = () => {
     return (
         <AdminLayout title={'Foorum'}>
-            <AdminForum />
+            Admin Forum post
         </AdminLayout>
     )
 }
 
-export default AdminForumPage
+export default AdminForumPostPage
