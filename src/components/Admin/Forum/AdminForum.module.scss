@@ -2,7 +2,32 @@
 
 .AdminForum {
     display: flex;
+    flex-direction: column;
+    gap: $spacer * 5;
     width: 100%;
     height: 100%;
 
+    .Content {
+        display: flex;
+        width: 100%;
+
+        .ForumList {
+            flex: 3;
+        }
+
+        .NewButton {
+            flex: 1;
+        }
+
+        @include sm() {
+            flex-direction: column;
+        }
+    }
+}
+
+.Loading {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    margin: 0 auto;
 }
