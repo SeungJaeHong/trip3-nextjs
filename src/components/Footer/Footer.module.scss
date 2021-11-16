@@ -11,7 +11,7 @@
     .Content {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-        gap: $spacer * 8;
+        gap: $spacer * 6;
         padding-bottom: $spacer * 10;
         margin: 0 auto;
 
