@@ -6,3 +6,8 @@ export const getForumPosts = async (page?: number): Promise<AxiosResponse> => {
     return result
 }
 
+export const getForumPostById = async (id: number): Promise<AxiosResponse> => {
+    const result = await ApiClient.get('/admin/forum/' + id)
+    return result
+}
+

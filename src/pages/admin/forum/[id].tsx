@@ -1,12 +1,15 @@
 import React from 'react'
 import AdminLayout from "../../../layouts/AdminLayout"
+import AdminForumPost from "../../../components/Admin/Forum/Post";
+import {withAdminAuth} from "../../../hoc/withAdminAuth"
 
 const AdminForumPostPage = () => {
     return (
-        <AdminLayout title={'Foorum'}>
-            Admin Forum post
+        <AdminLayout >
+            <AdminForumPost />
         </AdminLayout>
     )
 }
 
+export const getServerSideProps = withAdminAuth()
 export default AdminForumPostPage

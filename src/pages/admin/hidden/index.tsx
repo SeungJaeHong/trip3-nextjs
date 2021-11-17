@@ -1,5 +1,6 @@
 import React from 'react'
 import AdminLayout from "../../../layouts/AdminLayout"
+import {withAdminAuth} from "../../../hoc/withAdminAuth"
 
 const AdminHiddenContentPage = () => {
     return (
@@ -11,4 +12,5 @@ const AdminHiddenContentPage = () => {
     )
 }
 
+export const getServerSideProps = withAdminAuth()
 export default AdminHiddenContentPage

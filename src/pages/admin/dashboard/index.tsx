@@ -1,6 +1,7 @@
 import React from 'react'
 import AdminLayout from "../../../layouts/AdminLayout";
 import AdminDashboard from "../../../components/Admin/Dashboard";
+import {withAdminAuth} from "../../../hoc/withAdminAuth";
 
 const AdminDashboardPage = () => {
     return (
@@ -10,4 +11,5 @@ const AdminDashboardPage = () => {
     )
 }
 
+export const getServerSideProps = withAdminAuth()
 export default AdminDashboardPage

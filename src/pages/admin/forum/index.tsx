@@ -1,6 +1,7 @@
 import React from 'react'
 import AdminLayout from "../../../layouts/AdminLayout"
 import AdminForum from "../../../components/Admin/Forum"
+import {withAdminAuth} from "../../../hoc/withAdminAuth"
 
 const AdminForumPage = () => {
     return (
@@ -10,4 +11,5 @@ const AdminForumPage = () => {
     )
 }
 
+export const getServerSideProps = withAdminAuth()
 export default AdminForumPage
