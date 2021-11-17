@@ -15,7 +15,12 @@ type Props = {
 
 const ForumPostComments = (props: Props) => {
     const [comments, setComments] = useState(props.comments)
-    const url = getForumUrlByTypeAndSlug(props.post.type, props.post.slug)
+    let url = ''
+    if (props.post.type === 'internal') {
+        url = '/admin/forum/' + props.post.id
+    } else {
+        url = getForumUrlByTypeAndSlug(props.post.type, props.post.slug)
+    }
 
     useEffect(() => {
         setComments(props.comments)

@@ -2,5 +2,10 @@
 
 .AdminForumPost {
     display: flex;
+    flex-direction: column;
     width: 100%;
+
+    .ForumPost {
+        margin: $spacer * 4 0 $spacer * 3 0;
+    }
 }
