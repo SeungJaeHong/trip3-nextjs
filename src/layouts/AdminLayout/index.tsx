@@ -4,6 +4,7 @@ import Footer from "../../components/Footer"
 import SidebarMenu from "../../components/Admin/SidebarMenu"
 import Navbar from "../../components/Navbar"
 import containerStyle from "../../styles/containers.module.scss"
+import clsx from "clsx";
 
 type Props = {
     title?: string
@@ -12,7 +13,7 @@ type Props = {
 
 const AdminLayout = ({title, children}: Props) => {
     return (
-        <div className={containerStyle.ContainerXl}>
+        <div className={clsx(containerStyle.ContainerXl, styles.Container)}>
             <div className={styles.AdminLayout}>
                 <div className={styles.SidebarMenu}>
                     <SidebarMenu />

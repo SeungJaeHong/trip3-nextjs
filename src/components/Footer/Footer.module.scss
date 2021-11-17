@@ -12,7 +12,7 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
         gap: $spacer * 6;
-        padding-bottom: $spacer * 10;
+        padding-bottom: $spacer * 8;
         margin: 0 auto;
 
         @include sm() {
@@ -52,7 +52,7 @@
         a {
             color: $white;
             font-size: 1rem;
-            padding: $spacer * 4;
+            padding: $spacer * 2;
 
             &:hover {
                 opacity: .8;

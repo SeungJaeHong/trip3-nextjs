@@ -1,5 +1,13 @@
 @import "../../styles/variables";
 
+.Container {
+    width: 100%;
+
+    @include md() {
+        padding-left: 0!important;
+    }
+}
+
 .AdminLayout {
     display: flex;
     width: 100%;
@@ -7,7 +15,7 @@
     margin-bottom: $spacer * 2;
 
     .SidebarMenu {
-        max-width: 280px;
+        max-width: 250px;
         width: 100%;
         height: 100%;
         position: fixed;
@@ -18,7 +26,7 @@
         flex-direction: column;
         width: 100%;
         height: 100%;
-        padding-left: 280px;
+        padding-left: 250px;
 
         .NavBar {
             width: 100%;
@@ -39,14 +47,14 @@
         }
     }
 
-    @include sm() {
+    @include md() {
         .SidebarMenu {
-            max-width: 80px;
+            max-width: 60px;
             width: 100%;
         }
 
         .ContentContainer {
-            padding-left: 80px;
+            padding-left: 60px;
 
             .Content {
                 padding: 0 0 0 $spacer * 2;
@@ -56,9 +64,9 @@
 }
 
 .Footer {
-    margin-left: 300px;
+    margin-left: 250px;
 
-    @include sm() {
-        margin-left: 80px;
+    @include md() {
+        margin-left: 60px;
     }
 }
