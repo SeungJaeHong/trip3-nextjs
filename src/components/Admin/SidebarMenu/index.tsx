@@ -20,6 +20,11 @@ const SidebarMenu = () => {
                     </a>
                 </Link>
             </div>
+            <div className={styles.Favicon}>
+                <a href={'/'}>
+                    <img src={'/favicons/favicon-96x96.png'} alt={'Trip.ee'} />
+                </a>
+            </div>
             <div className={styles.Menu}>
                 <div className={clsx(styles.MenuItem, {
                     [styles.Active]: router.route === "/admin/dashboard"

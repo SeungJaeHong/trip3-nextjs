@@ -5,6 +5,7 @@
 
     @include md() {
         padding-left: 0!important;
+        padding-right: 16px!important;
     }
 }
 
@@ -55,6 +56,10 @@
 
         .ContentContainer {
             padding-left: 60px;
+
+            .NavBar {
+                padding: 6px;
+            }
 
             .Content {
                 padding: 0 0 0 $spacer * 2;

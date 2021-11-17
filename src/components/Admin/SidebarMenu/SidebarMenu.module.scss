@@ -7,11 +7,28 @@
     height: 100%;
     background: #242e42;
     font-family: $font-family-sailec;
+    position: relative;
 
     .Logo {
         display: flex;
         justify-content: center;
         padding: $spacer * 2 0;
+    }
+
+    .Favicon {
+        display: none;
+
+        a {
+            display: flex;
+        }
+
+        @include md() {
+            display: flex;
+            position: absolute;
+            top: 0;
+            width: 60px;
+            height: 60px;
+        }
     }
 
     .Menu {
