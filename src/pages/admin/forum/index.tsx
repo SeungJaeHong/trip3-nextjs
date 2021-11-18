@@ -5,7 +5,7 @@ import {withAdminAuth} from "../../../hoc/withAdminAuth"
 
 const AdminForumPage = () => {
     return (
-        <AdminLayout title={'Foorum'}>
+        <AdminLayout title={'Toimetuse foorum'}>
             <AdminForum />
         </AdminLayout>
     )

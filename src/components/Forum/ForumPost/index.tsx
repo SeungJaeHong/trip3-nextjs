@@ -50,8 +50,11 @@ const ForumPost = (item: Content) => {
             return null
         }
 
-        const editUrl = '/foorum/' + post.id + '/muuda'
+        let editUrl = '/foorum/' + post.id + '/muuda'
         if (userIsAdmin) {
+            if (post.type === 'internal') {
+                editUrl = '/admin/forum/' + post.id + '/edit'
+            }
             return (
                 <div className={styles.Buttons}>
                     <span className={styles.ActionButton} onClick={() => router.push(editUrl)}>Muuda</span> /

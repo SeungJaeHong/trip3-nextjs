@@ -9,3 +9,9 @@
         margin: $spacer * 4 0 $spacer * 3 0;
     }
 }
+
+.Loading {
+    display: flex;
+    justify-content: center;
+    padding-top: $spacer * 4;
+}
