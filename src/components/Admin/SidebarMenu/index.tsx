@@ -11,6 +11,13 @@ import {useRouter} from "next/router";
 
 const SidebarMenu = () => {
     const router = useRouter()
+    const isForumPage = () => {
+        return router.route === '/admin/forum'
+            || router.route === '/admin/forum/add'
+            || router.route === '/admin/forum/[id]'
+            || router.route === '/admin/forum/[id]/edit'
+    }
+
     return (
         <div className={styles.SidebarMenu}>
             <div className={styles.Logo}>
@@ -37,7 +44,7 @@ const SidebarMenu = () => {
                     </Link>
                 </div>
                 <div className={clsx(styles.MenuItem, {
-                    [styles.Active]: router.route === "/admin/forum"
+                    [styles.Active]: isForumPage()
                 })}>
                     <Link href="/admin/forum">
                         <a>
