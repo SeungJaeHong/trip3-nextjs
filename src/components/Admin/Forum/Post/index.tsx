@@ -1,6 +1,6 @@
 import styles from "./AdminForumPost.module.scss"
 import React, {useEffect, useState} from "react";
-import {getForumPostById} from "../../../../services/admin.service";
+import {getForumPostData} from "../../../../services/admin.service";
 import {Content} from "../../../../types";
 import {useRouter} from "next/router"
 import LoadingSpinner2 from "../../../LoadingSpinner2"
@@ -25,7 +25,7 @@ const AdminForumPost = () => {
     useEffect(() => {
         try {
             setLoading(true)
-            const res = getForumPostById(Number(id), page).then((response: AxiosResponse<ForumResponse>) => {
+            const res = getForumPostData(Number(id), page).then((response: AxiosResponse<ForumResponse>) => {
                 setPost(response.data.post)
                 setLastPage(response.data.lastPage)
                 setLoading(false)

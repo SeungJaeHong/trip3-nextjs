@@ -1,0 +1,48 @@
+@import "../../../../styles/variables";
+
+.AdminForumForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: $white;
+    z-index: 2;
+
+    .FormContainer {
+        display: flex;
+
+        form {
+            width: 100%;
+
+            .FormInput {
+                margin-bottom: $spacer * 3.5;
+            }
+
+            .FormRadioGroup {
+                margin-bottom: $spacer * 4;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+
+                @include xs() {
+                    grid-template-columns: 1fr;
+                }
+
+                .RadioButton {
+                    height: 50px;
+                    display: flex;
+                    align-items: center;
+                    padding: 0 $spacer;
+
+                    &.RadioButtonChecked {
+                        background: $gray-light;
+                    }
+                }
+            }
+        }
+
+        .SubmitButton {
+            margin-top: $spacer * 5;
+            max-width: 200px;
+            width: 100%;
+        }
+    }
+}
