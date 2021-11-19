@@ -26,11 +26,11 @@ type Props = {
 
 const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
     const userIsLoggedIn = useAppSelector(selectUserIsLoggedIn)
-    const [commentValue, setCommentValue] = useState('')
+    const [commentValue, setCommentValue] = useState<string>('')
     const [comments, setComments] = useState(post.comments)
     const newestCommentUrl = lastCommentId ? getForumUrlByTypeAndSlug(post.type, post.slug) + '?page=' + lastPage + '&latest=1#' + lastCommentId : ''
     const [goToNewestLink, setGoToNewestLink] = useState(newestCommentUrl)
-    const [submitting, setSubmitting] = useState(false)
+    const [submitting, setSubmitting] = useState<boolean>(false)
     const router = useRouter()
     const {latest} = router.query
 

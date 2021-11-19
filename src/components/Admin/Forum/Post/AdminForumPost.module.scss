@@ -6,7 +6,27 @@
     width: 100%;
 
     .ForumPost {
-        margin: $spacer * 4 0 $spacer * 3 0;
+        margin: $spacer * 4 0 $spacer 0;
+    }
+
+    .LatestCommentLink {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: $spacer;
+    }
+
+    .PostComments {
+        width: 100%;
+    }
+
+    .AddComment {
+        display: flex;
+        flex-direction: column;
+        gap: $spacer * 2;
+
+        &.NoComments {
+            margin-top: $spacer * 4;
+        }
     }
 }
 

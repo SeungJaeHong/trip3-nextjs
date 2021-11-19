@@ -26,6 +26,10 @@ const ForumPostComments = (props: Props) => {
         setComments(props.comments)
     }, [props.comments])
 
+    if (!props.comments) {
+        return null
+    }
+
     return (
         <div className={styles.ForumPostComments}>
             <div className={styles.Paginator}>
