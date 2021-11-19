@@ -39,7 +39,7 @@ const ForumComment = ({item, type}: Props) => {
 
     const onToggleStatus = () => {
         if (userIsAdmin) {
-            const status = !!comment.status
+            const status = !comment.status
             toggleCommentStatus(comment, status, type).then(res => {
                 setComment(res.data)
                 toast.success(res.data.status === 1 ? 'Kommentaar avalikustatud' : 'Kommentaar peidetud')
