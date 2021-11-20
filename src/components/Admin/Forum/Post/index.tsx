@@ -1,7 +1,7 @@
 import styles from "./AdminForumPost.module.scss"
 import React, {useEffect, useState} from "react";
 import {getForumPostData} from "../../../../services/admin.service";
-import {Content} from "../../../../types";
+import {Comment, Content} from "../../../../types";
 import {useRouter} from "next/router"
 import LoadingSpinner2 from "../../../LoadingSpinner2"
 import ForumPost from "../../../Forum/ForumPost";
@@ -23,6 +23,7 @@ type ForumResponse = {
 const AdminForumPost = () => {
     const router = useRouter()
     const [post, setPost] = useState<Content>()
+    const [comments, setComments] = useState<Comment[]>([])
     const [loading, setLoading] = useState<boolean>(false)
     const [lastPage, setLastPage] = useState<number>(1)
     const page = Number(router.query?.page) || 1
@@ -31,17 +32,33 @@ const AdminForumPost = () => {
     const [submitting, setSubmitting] = useState<boolean>(false)
     const [latestCommentLink, setLatestCommentLink] = useState('')
 
+    const scrollToHash = () => {
+        const hashId = window.location.hash?.replace('#', '');
+        if (hashId) {
+            const element = document.getElementById(hashId);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest',
+                });
+            }
+        }
+    }
+
     useEffect(() => {
         try {
             setLoading(true)
             const res = getForumPostData(Number(id), page).then((response: AxiosResponse<ForumResponse>) => {
                 const forumPost = response.data.post
                 setPost(forumPost)
+                setComments(forumPost?.comments || [])
                 setLastPage(response.data.lastPage)
-                if (forumPost.comments && forumPost.comments?.length > 0) {
+                if (comments && comments.length > 0) {
                     setLatestCommentLink('/admin/forum/' + forumPost.id + '?page=' + response.data.lastPage + '#' + forumPost.id)
                 }
                 setLoading(false)
+                scrollToHash()
             })
         } catch (e: any) {
             setLoading(false)
@@ -64,8 +81,11 @@ const AdminForumPost = () => {
             const comment = response.data.comment
             const lastPage = response.data.lastPage
             let url = '/admin/forum/' + post.id
-            if (lastPage > 1) {
+            if (Number(lastPage) !== page) {
                 url += '?page=' + lastPage
+            } else {
+                const newComments = comments ? [...comments, comment] : [comment]
+                setComments(newComments)
             }
 
             url = url + '#' + comment.id
@@ -99,17 +119,17 @@ const AdminForumPost = () => {
                         title={'Mine uusima kommentaari juurde'} />
                 </div>
             }
-            {post.comments !== undefined && post.comments.length > 0 &&
+            {comments.length > 0 &&
                 <div className={styles.PostComments}>
                     <ForumPostComments
                         post={post}
-                        comments={post.comments}
+                        comments={comments}
                         currentPage={page}
                         lastPage={lastPage} />
                 </div>
             }
             <div className={clsx(styles.AddComment, {
-                [styles.NoComments]: post.comments?.length === 0
+                [styles.NoComments]: comments.length === 0
             })}>
                 <BlockTitle title={'Lisa kommentaar'} />
                 <CommentEditor
