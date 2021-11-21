@@ -13,6 +13,7 @@ import {postComment} from "../../../../services/comment.service";
 import {toast} from "react-hot-toast";
 import clsx from "clsx";
 import MoreLink from "../../../MoreLink";
+import {scrollToHash} from "../../../../helpers";
 
 type ForumResponse = {
     post: Content
@@ -30,32 +31,20 @@ const AdminForumPost = () => {
     const {id} = router.query
     const [commentValue, setCommentValue] = useState<string>('')
     const [submitting, setSubmitting] = useState<boolean>(false)
-    const [latestCommentLink, setLatestCommentLink] = useState('')
-
-    const scrollToHash = () => {
-        const hashId = window.location.hash?.replace('#', '');
-        if (hashId) {
-            const element = document.getElementById(hashId);
-            if (element) {
-                element.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start',
-                    inline: 'nearest',
-                });
-            }
-        }
-    }
+    const [latestCommentLink, setLatestCommentLink] = useState<string>('')
 
     useEffect(() => {
         try {
             setLoading(true)
             const res = getForumPostData(Number(id), page).then((response: AxiosResponse<ForumResponse>) => {
                 const forumPost = response.data.post
+                const lastCommentId = response.data.lastCommentId
                 setPost(forumPost)
-                setComments(forumPost?.comments || [])
+                const forumComments = forumPost?.comments || []
+                setComments(forumComments)
                 setLastPage(response.data.lastPage)
-                if (comments && comments.length > 0) {
-                    setLatestCommentLink('/admin/forum/' + forumPost.id + '?page=' + response.data.lastPage + '#' + forumPost.id)
+                if (forumComments && forumComments.length > 0) {
+                    setLatestCommentLink('/admin/forum/' + forumPost.id + '?page=' + response.data.lastPage + '#' + lastCommentId)
                 }
                 setLoading(false)
                 scrollToHash()
@@ -112,7 +101,7 @@ const AdminForumPost = () => {
             <div className={styles.ForumPost}>
                 <ForumPost {...post} />
             </div>
-            {latestCommentLink &&
+            {latestCommentLink.length > 0 &&
                 <div className={styles.LatestCommentLink}>
                     <MoreLink
                         route={latestCommentLink}

@@ -9,7 +9,7 @@ import MoreLink from "../../MoreLink"
 import ForumPostComments from "../ForumPostComments"
 import Footer from "../../Footer"
 import Button from "../../Button"
-import {getForumUrlByType, getForumUrlByTypeAndSlug} from "../../../helpers"
+import {getForumUrlByType, getForumUrlByTypeAndSlug, scrollToHash} from "../../../helpers"
 import CommentEditor from "../../CommentEditor"
 import BlockTitle from "../../BlockTitle"
 import {postComment} from "../../../services/comment.service"
@@ -39,17 +39,7 @@ const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
     }, [post.comments])
 
     useEffect(() => {
-        const hashId = window.location.hash?.replace('#', '');
-        if (hashId) {
-            const element = document.getElementById(hashId);
-            if (element) {
-                element.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start',
-                    inline: 'nearest',
-                });
-            }
-        }
+        scrollToHash()
     }, [latest, comments])
 
     const onSubmit = async (value: string) => {
