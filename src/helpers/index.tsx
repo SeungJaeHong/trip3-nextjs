@@ -46,14 +46,8 @@ export const setFormErrors = (errorObject: any, setError: UseFormSetError<any>) 
 export const scrollToHash = () => {
     const hashId = window.location.hash?.replace('#', '');
     if (hashId) {
-
-        console.log('hashId', hashId)
-
         const element = document.getElementById(hashId);
         if (element) {
-
-            console.log('element', element)
-
             element.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start',

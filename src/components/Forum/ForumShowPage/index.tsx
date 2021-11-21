@@ -28,19 +28,21 @@ const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
     const userIsLoggedIn = useAppSelector(selectUserIsLoggedIn)
     const [commentValue, setCommentValue] = useState<string>('')
     const [comments, setComments] = useState(post.comments)
-    const newestCommentUrl = lastCommentId ? getForumUrlByTypeAndSlug(post.type, post.slug) + '?page=' + lastPage + '&latest=1#' + lastCommentId : ''
+    const newestCommentUrl = lastCommentId ? getForumUrlByTypeAndSlug(post.type, post.slug) + '?page=' + lastPage + '#' + lastCommentId : ''
     const [goToNewestLink, setGoToNewestLink] = useState(newestCommentUrl)
     const [submitting, setSubmitting] = useState<boolean>(false)
     const router = useRouter()
-    const {latest} = router.query
 
     useEffect(() => {
         setComments(post.comments)
     }, [post.comments])
 
     useEffect(() => {
-        scrollToHash()
-    }, [latest, comments])
+        setTimeout(
+            function() {
+                scrollToHash()
+            }, 0);
+    }, [comments])
 
     const onSubmit = async (value: string) => {
         setSubmitting(true)
@@ -62,7 +64,7 @@ const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
             }
 
             setGoToNewestLink(url + '#' + comment.id)
-            router.replace(url + '#' + comment.id)
+            router.push(url + '#' + comment.id)
             toast.success('Kommentaar lisatud', {
                 duration: 4000
             })
