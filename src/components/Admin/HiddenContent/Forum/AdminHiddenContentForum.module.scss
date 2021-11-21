@@ -1,0 +1,18 @@
+@import "../../../../styles/variables";
+
+.AdminHiddenContentForum {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: $spacer * 2;
+
+    .ForumRow {
+        display: flex;
+    }
+}
+
+.Loading {
+    display: flex;
+    justify-content: center;
+    padding-top: $spacer * 4;
+}

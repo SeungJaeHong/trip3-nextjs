@@ -27,3 +27,7 @@ export const updatePost = async (post: Content, formValues: any): Promise<AxiosR
     return result
 }
 
+export const getHiddenForumPosts = async (page?: number): Promise<AxiosResponse> => {
+    const result = await ApiClient.get('/admin/hidden/forum?page=' + page)
+    return result
+}

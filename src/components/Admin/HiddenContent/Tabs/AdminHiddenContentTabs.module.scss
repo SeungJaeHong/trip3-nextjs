@@ -1,0 +1,30 @@
+@import "../../../../styles/variables";
+
+.AdminHiddenContentTabs {
+    display: flex;
+    width: 100%;
+    gap: $spacer * 2;
+    overflow-x: auto;
+    padding-bottom: $spacer * 2;
+
+    .Tab {
+        display: flex;
+        background: $gray-light;
+        color: $gray-darker;
+        padding: $spacer $spacer * 3;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-family: $font-family-sailec;
+
+        &.Active {
+            color: $blue;
+            background: $gray;
+        }
+
+        &:hover {
+            color: $blue;
+            background: $gray;
+        }
+    }
+}

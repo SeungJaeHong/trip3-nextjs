@@ -146,6 +146,14 @@ export type ForumRowType = {
     topics?: Topic[] | null
 }
 
+export type ForumRowHiddenType = {
+    id: number
+    title: string
+    type: string
+    url: string
+    updatedAt: string
+}
+
 /*export type ForumFullType = {
     id: number
     title: string

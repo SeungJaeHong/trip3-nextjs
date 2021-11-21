@@ -6,7 +6,7 @@ const AdminUsersPage = () => {
     return (
         <AdminLayout title={'Kasutajad'}>
             <div>
-                Users
+                Tulekul...
             </div>
         </AdminLayout>
     )
