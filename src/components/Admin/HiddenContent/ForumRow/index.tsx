@@ -4,6 +4,22 @@ import clsx from "clsx"
 import {ForumRowHiddenType} from "../../../../types";
 
 const AdminHiddenContentForumRow = (item: ForumRowHiddenType) => {
+    const getForumTypeName = (type: string) => {
+        switch(type) {
+            case 'buysell':
+                return 'Ost-müük'
+            case 'expat':
+                return 'Elu välismaal'
+            case 'misc':
+                return 'Vaba teema'
+            case 'internal':
+                return 'Toimetuse foorum'
+            case 'forum':
+                return 'Üldfoorum'
+            default: return ''
+        }
+    }
+
     return (
         <div className={styles.ForumRow}>
             <div className={styles.Content}>
@@ -16,11 +32,14 @@ const AdminHiddenContentForumRow = (item: ForumRowHiddenType) => {
                 </Link>
                 <div className={styles.Meta}>
                     <span className={styles.MetaItem}>
-                        {item.updatedAt}
+                        {item.createdAt}
+                    </span>
+                    <span className={clsx(styles.MetaItem, styles.ForumType)}>
+                        {getForumTypeName(item.type)}
                     </span>
                     <span className={clsx(styles.MetaItem, styles.Creator)}>
-                        <Link href={'/'} >
-                            <a>user name</a>
+                        <Link href={'/user/' + item.userId} >
+                            <a>{item.userName}</a>
                         </Link>
                     </span>
                 </div>

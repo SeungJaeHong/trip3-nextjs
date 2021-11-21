@@ -151,20 +151,10 @@ export type ForumRowHiddenType = {
     title: string
     type: string
     url: string
-    updatedAt: string
-}
-
-/*export type ForumFullType = {
-    id: number
-    title: string
-    slug: string
     createdAt: string
-    updatedAt: string
-    user: User
-    destinations?: Destination[] | null
-    topics?: Topic[] | null
-    comments?: Comment[]
-}*/
+    userId: number
+    userName: string
+}
 
 export type NewsCardType = {
     id: number

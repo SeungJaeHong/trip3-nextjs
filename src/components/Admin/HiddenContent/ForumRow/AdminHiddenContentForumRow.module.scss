@@ -5,64 +5,6 @@
     width: 100%;
     justify-content: flex-start;
 
-    .UserIcon {
-        margin-right: $spacer * 3;
-        position: relative;
-        height: 60px;
-        width: 60px;
-
-        svg {
-            height: 60px;
-            width: 60px;
-            fill: #d1d4d6;
-        }
-
-        .CommentCountContainer {
-            position: absolute;
-            bottom: -3px;
-            right: -10px;
-            width: 28px;
-            height: 28px;
-            border-radius: 16px;
-            background: $white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 5px #d1d4d6;
-
-            .CommentCount {
-                font-size: $font-size-small;
-                line-height: 100%;
-                font-weight: 500;
-                color: $red;
-                letter-spacing: .5px;
-            }
-        }
-
-        @include sm() {
-            margin-right: $spacer * 2.5;
-            height: 48px;
-            width: 48px;
-
-            svg {
-                height: 48px;
-                width: 48px;
-                fill: #d1d4d6;
-            }
-
-            .CommentCountContainer {
-                width: 22px;
-                height: 22px;
-                bottom: -3px;
-                right: -6px;
-
-                .CommentCount {
-                    font-size: $font-size-xsmall;
-                }
-            }
-        }
-    }
-
     .Content {
         display: flex;
         flex-direction: column;
@@ -87,16 +29,12 @@
             width: 100%;
             align-items: center;
             flex-wrap: wrap;
+            gap: $spacer * 2;
 
             .MetaItem {
-                margin-right: $spacer * 2;
                 font-size: $font-size-small;
                 color: $gray-darker;
                 margin-bottom: $spacer * 0.5;
-
-                &.ReadCount {
-                    color: $orange;
-                }
 
                 &.Creator {
                     a {
@@ -108,8 +46,8 @@
                     }
                 }
 
-                &.Tag {
-                    margin-right: $spacer;
+                &.ForumType {
+                    font-style: italic;
                 }
             }
         }
