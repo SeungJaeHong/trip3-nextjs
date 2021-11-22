@@ -1,5 +1,4 @@
 import React, {Fragment} from 'react'
-import axios from 'axios'
 import {GetServerSideProps} from 'next'
 import {Destination, FlightContent, Topic} from "../../types"
 import Header from "../../components/Header"
@@ -11,6 +10,7 @@ import Button from "../../components/Button"
 import Footer from "../../components/Footer"
 import parse from 'html-react-parser'
 import FlightMap from "../../components/FlightMap"
+import ApiClientSSR from "../../lib/ApiClientSSR"
 
 type Props = {
     flight: FlightContent
@@ -71,7 +71,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const slug = context.query.slug
     let url = process.env.API_BASE_URL + '/flight/' + slug
 
-    const response = await axios.get(url)
+    const response = await ApiClientSSR(context).get(url)
     const data = {
         flight: response.data.flight
     }
