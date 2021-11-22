@@ -5,6 +5,7 @@ import AdminHiddenContentTabs from "../../../components/Admin/HiddenContent/Tabs
 import {useRouter} from "next/router"
 import styles from "./AdminHiddenContentPage.module.scss"
 import AdminHiddenContentForum from "../../../components/Admin/HiddenContent/Forum"
+import AdminHiddenContentFlights from "../../../components/Admin/HiddenContent/Flights"
 
 const AdminHiddenContentPage = () => {
     const router = useRouter()
@@ -13,7 +14,7 @@ const AdminHiddenContentPage = () => {
     const renderComponent = () => {
         switch(type) {
             case 'forum': return <AdminHiddenContentForum />
-            case 'flights': return <div>Flights</div>
+            case 'flights': return <AdminHiddenContentFlights />
             case 'news': return <div>News</div>
             case 'travelmates': return <div>Travelmates</div>
             default: return null

@@ -1,0 +1,18 @@
+@import "../../../../styles/variables";
+
+.AdminHiddenContentFlights {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: $spacer * 2;
+
+    .Paginator {
+        margin-top: $spacer * 3;
+    }
+}
+
+.Loading {
+    display: flex;
+    justify-content: center;
+    padding-top: $spacer * 4;
+}
