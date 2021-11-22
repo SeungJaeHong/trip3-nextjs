@@ -44,6 +44,11 @@
             .Title {
                 color: $gray-dark;
                 padding-bottom: $spacer * 2;
+
+                @include sm() {
+                    padding-bottom: $spacer;
+                    font-size: $font-size-large;
+                }
             }
         }
     }

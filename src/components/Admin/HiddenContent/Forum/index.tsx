@@ -5,6 +5,7 @@ import {ForumRowHiddenType} from "../../../../types"
 import {getHiddenForumPosts} from "../../../../services/admin.service"
 import LoadingSpinner2 from "../../../LoadingSpinner2"
 import AdminHiddenContentForumRow from "../ForumRow";
+import SimplePaginator from "../../../Paginator/SimplePaginator";
 
 const AdminHiddenContentForum = () => {
     const router = useRouter()
@@ -20,13 +21,27 @@ const AdminHiddenContentForum = () => {
                 setPosts(response.data.items)
                 setHasMore(response.data.hasMore)
                 setLoading(false)
-
-                //console.log(response.data)
             })
         } catch (e: any) {
             setLoading(false)
         }
     }, [page])
+
+    const getNextPageUrl = () => {
+        if (hasMore) {
+            return '/admin/hidden?page=' + (Number(page) + 1)
+        }
+
+        return undefined
+    }
+
+    const getPreviousPageUrl = () => {
+        if (Number(page) > 1) {
+            return '/admin/hidden?page=' + (Number(page) - 1)
+        }
+
+        return undefined
+    }
 
     if (loading) {
         return (
@@ -45,6 +60,12 @@ const AdminHiddenContentForum = () => {
                     </div>
                 )
             })}
+            <div className={styles.Paginator}>
+                <SimplePaginator
+                    nextPageUrl={getNextPageUrl()}
+                    previousPageUrl={getPreviousPageUrl()}
+                />
+            </div>
         </div>
     )
 }

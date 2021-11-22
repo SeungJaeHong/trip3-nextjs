@@ -11,6 +11,10 @@
         padding-bottom: $spacer * 2;
         border-bottom: 1px solid $gray-light;
     }
+
+    .Paginator {
+        margin-top: $spacer * 4;
+    }
 }
 
 .Loading {
