@@ -11,6 +11,7 @@ import Footer from "../../components/Footer"
 import parse from 'html-react-parser'
 import FlightMap from "../../components/FlightMap"
 import ApiClientSSR from "../../lib/ApiClientSSR"
+import Alert from "../../components/Alert"
 
 type Props = {
     flight: FlightContent
@@ -52,6 +53,14 @@ const FlightOfferShow = (props: Props) => {
                    {/* <div className={styles.Body} dangerouslySetInnerHTML={{ __html: props.flight.body }} />*/}
 
                     <div className={styles.Body}>
+                        {props.flight.status === 0 &&
+                            <div className={styles.NotPublished}>
+                                <Alert
+                                    title={'Lennupakkumine ei ole avalikustatud!'}
+                                    type={'warning'} />
+                            </div>
+                        }
+
                         {renderBody(props.flight.body)}
                     </div>
 

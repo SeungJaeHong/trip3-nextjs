@@ -88,6 +88,7 @@ export type FlightContent = {
     title: string
     body: string
     slug: string
+    status: number
     createdAt: string
     backgroundImageUrl: string
     destinations?: Destination[]
