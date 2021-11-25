@@ -27,6 +27,10 @@
         &:hover {
             color: $blue-hover;
         }
+
+        @include sm() {
+            font-size: $font-size-normal;
+        }
     }
 
     .Tags {

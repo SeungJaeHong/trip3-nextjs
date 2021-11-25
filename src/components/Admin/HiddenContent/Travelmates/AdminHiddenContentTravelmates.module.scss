@@ -1,0 +1,40 @@
+@import "../../../../styles/variables";
+
+.AdminHiddenContentTravelmates {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: $spacer * 2;
+
+    .Grid {
+        padding-right: $spacer * 8;
+        padding-left: $spacer * 4;
+        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $spacer * 5 $spacer * 8;
+
+        @include lg() {
+            flex: 1;
+            padding-left: $spacer * 5;
+            padding-right: $spacer * 6;
+            grid-template-columns: 1fr;
+            gap: $spacer * 4;
+        }
+
+        @include md() {
+            padding-right: 0;
+            padding-left: $spacer * 3;
+        }
+    }
+
+    .Paginator {
+        margin-top: $spacer * 4;
+    }
+}
+
+.Loading {
+    display: flex;
+    justify-content: center;
+    padding-top: $spacer * 4;
+}

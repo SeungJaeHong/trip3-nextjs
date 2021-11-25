@@ -7,6 +7,7 @@ import styles from "./AdminHiddenContentPage.module.scss"
 import AdminHiddenContentForum from "../../../components/Admin/HiddenContent/Forum"
 import AdminHiddenContentFlights from "../../../components/Admin/HiddenContent/Flights"
 import AdminHiddenContentNews from "../../../components/Admin/HiddenContent/News"
+import AdminHiddenContentTravelmates from "../../../components/Admin/HiddenContent/Travelmates"
 
 const AdminHiddenContentPage = () => {
     const router = useRouter()
@@ -17,7 +18,7 @@ const AdminHiddenContentPage = () => {
             case 'forum': return <AdminHiddenContentForum />
             case 'flights': return <AdminHiddenContentFlights />
             case 'news': return <AdminHiddenContentNews />
-            case 'travelmates': return <div>Travelmates</div>
+            case 'travelmates': return <AdminHiddenContentTravelmates />
             default: return null
         }
     }

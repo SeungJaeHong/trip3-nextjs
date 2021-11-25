@@ -41,3 +41,8 @@ export const getHiddenNews = async (page?: number): Promise<AxiosResponse> => {
     const result = await ApiClient.get('/admin/hidden/news?page=' + page)
     return result
 }
+
+export const getHiddenTravelmates = async (page?: number): Promise<AxiosResponse> => {
+    const result = await ApiClient.get('/admin/hidden/travelmates?page=' + page)
+    return result
+}
