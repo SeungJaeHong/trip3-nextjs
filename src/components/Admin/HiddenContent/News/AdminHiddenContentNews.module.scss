@@ -1,0 +1,23 @@
+@import "../../../../styles/variables";
+
+.AdminHiddenContentNews {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: $spacer * 2;
+
+    .NewsRow {
+        border-bottom: 1px solid $gray-light;
+        padding-bottom: $spacer * 2;
+    }
+
+    .Paginator {
+        margin-top: $spacer * 4;
+    }
+}
+
+.Loading {
+    display: flex;
+    justify-content: center;
+    padding-top: $spacer * 4;
+}

@@ -143,8 +143,8 @@ export type ForumRowType = {
     viewsCount: number
     commentsCount: number
     user: User
-    destinations?: Destination[] | null
-    topics?: Topic[] | null
+    destinations?: Destination[]
+    topics?: Topic[]
 }
 
 export type ForumRowHiddenType = {
@@ -166,6 +166,16 @@ export type NewsCardType = {
     commentsCount: number
 }
 
+export type NewsRowType = {
+    id: number
+    title: string
+    slug: string
+    imageUrl: string
+    createdAt: string
+    destinations?: Destination[]
+    topics?: Topic[]
+}
+
 export type ShortNewsListItemType = {
     id: number;
     title: string;
@@ -174,11 +184,11 @@ export type ShortNewsListItemType = {
 }
 
 export type FlightOfferRowType = {
-    id: number;
-    title: string;
-    slug: string;
-    createdAt: string;
-    destinations?: Destination[] | null;
+    id: number
+    title: string
+    slug: string
+    createdAt: string
+    destinations?: Destination[]
 }
 
 export type FlightOfferCardType = {
@@ -191,11 +201,11 @@ export type FlightOfferCardType = {
 }
 
 export type TravelmateRowType = {
-    id: number;
-    title: string;
-    slug: string;
-    createdAt: string;
-    user: User;
-    destinations?: Destination[] | null;
-    topics?: Topic[] | null;
+    id: number
+    title: string
+    slug: string
+    createdAt: string
+    user: User
+    destinations?: Destination[]
+    topics?: Topic[]
 }

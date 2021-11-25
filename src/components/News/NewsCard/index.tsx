@@ -10,8 +10,8 @@ const NewsCard = (item: NewsCardType) => {
                 <a>
                     <div className={styles.Background}>
                         <Image
-                            src={item.imageUrl}
-                            alt=""
+                            src={item.imageUrl ?? '/images/no_image.jpeg'}
+                            alt={item.title}
                             layout="fill"
                             objectFit="cover"
                         />
