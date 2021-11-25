@@ -59,7 +59,7 @@ const UserAvatar = ({user, borderWidth}: Props) => {
 }
 
 UserAvatar.defaultProps = {
-    borderWidth: 4
+    borderWidth: 3
 }
 
 export default UserAvatar

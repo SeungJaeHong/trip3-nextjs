@@ -7,7 +7,6 @@
     gap: $spacer * 2;
 
     .Grid {
-        padding-right: $spacer * 8;
         padding-left: $spacer * 4;
         flex-wrap: wrap;
         display: grid;
@@ -17,7 +16,6 @@
         @include lg() {
             flex: 1;
             padding-left: $spacer * 5;
-            padding-right: $spacer * 6;
             grid-template-columns: 1fr;
             gap: $spacer * 4;
         }
