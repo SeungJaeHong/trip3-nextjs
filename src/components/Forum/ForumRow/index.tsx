@@ -52,7 +52,7 @@ const ForumRow = (item: ForumRowType) => {
                         </span>
                     }
                     <span className={clsx(styles.MetaItem, styles.Creator)}>
-                        <Link href={'/'} >
+                        <Link href={'/user/' + item.user.id}>
                             <a>{item.user.name}</a>
                         </Link>
                     </span>

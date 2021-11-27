@@ -1,8 +1,15 @@
-export type User = {
+export interface User {
     id: number
     name: string
     rank: number
     avatar?: string
+}
+
+export interface UserProfile extends User {
+    joinedDate: string
+    description?: string
+    likes: number
+    placesVisited: number
 }
 
 export type LoggedInUser = {
