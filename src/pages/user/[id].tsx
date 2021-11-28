@@ -6,6 +6,7 @@ import Footer from "../../components/Footer"
 import {UserProfile} from "../../types"
 import ApiClientSSR from "../../lib/ApiClientSSR"
 import containerStyle from "../../styles/containers.module.scss"
+import UserProfileAvatar from "../../components/User/UserProfileAvatar"
 
 type Props = {
     user: UserProfile
@@ -25,9 +26,7 @@ const UserPage = (props: Props) => {
                 <div className={containerStyle.ContainerLg}>
                     <div className={styles.Body}>
                         <div className={styles.Avatar}>
-                            <div className={styles.Image}>
-                                <img src={props.user.avatar} alt={props.user.name} />
-                            </div>
+                            <UserProfileAvatar {...props.user} />
                         </div>
                     </div>
                 </div>

@@ -6,6 +6,7 @@ export interface User {
 }
 
 export interface UserProfile extends User {
+    rankName: string
     joinedDate: string
     description?: string
     likes: number
