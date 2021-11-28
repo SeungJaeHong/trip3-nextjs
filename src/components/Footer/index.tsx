@@ -4,7 +4,8 @@ import RssIcon from "../../icons/RssIcon"
 import styles from './Footer.module.scss'
 import clsx from "clsx"
 import containerStyle from "../../styles/containers.module.scss"
-import Navbar from "../Navbar";
+import FacebookIcon from "../../icons/FacebookIcon"
+import TwitterIcon from "../../icons/TwitterIcon"
 
 const col1 = [
     {
@@ -82,19 +83,23 @@ const col3 = [
 const social = [
     {
         title: 'Facebook',
-        route: '/'
+        route: '/',
+        icon: FacebookIcon
     },
     {
         title: 'Twitter',
-        route: '/'
+        route: '/',
+        icon: TwitterIcon
     },
     {
         title: 'Lennupakkumiste RSS',
-        route: '/'
+        route: '/',
+        icon: RssIcon
     },
     {
         title: 'Uudiste RSS',
-        route: '/'
+        route: '/',
+        icon: RssIcon
     },
 ];
 
@@ -162,10 +167,11 @@ const Footer = (props: Props) => {
             </div>
             <div className={styles.SocialLinks}>
                 {social.map(item => {
+                    const Icon = item.icon
                     return (
                         <Link href={item.route} key={item.title}>
                             <a>
-                                <RssIcon />
+                                <Icon />
                                 {item.title}
                             </a>
                         </Link>
