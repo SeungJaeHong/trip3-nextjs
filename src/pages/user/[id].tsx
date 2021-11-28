@@ -7,14 +7,19 @@ import {UserProfile} from "../../types"
 import ApiClientSSR from "../../lib/ApiClientSSR"
 import containerStyle from "../../styles/containers.module.scss"
 import UserProfileAvatar from "../../components/User/UserProfileAvatar"
+import DottedMapIcon from "../../icons/DottedMapIcon"
+import ThumbsUpIcon from "../../icons/ThumbsUpIcon"
+import PostIcon from "../../icons/Admin/PostIcon"
+import CommentIcon from "../../icons/CommentIcon"
+import ThumbsDownIcon from "../../icons/ThumbsDownIcon"
 
 type Props = {
     user: UserProfile
 }
 
-const UserPage = (props: Props) => {
+const UserPage = ({user}: Props) => {
 
-    //console.log(props)
+    //console.log(user)
 
     return (
         <Fragment>
@@ -25,8 +30,48 @@ const UserPage = (props: Props) => {
             <div className={styles.BodyContainer}>
                 <div className={containerStyle.ContainerLg}>
                     <div className={styles.Body}>
+                        <div className={styles.BackGroundMap}>
+                            <DottedMapIcon />
+                        </div>
                         <div className={styles.Avatar}>
-                            <UserProfileAvatar {...props.user} />
+                            <UserProfileAvatar {...user} />
+                        </div>
+                        <div className={styles.UserNameContainer}>
+                            <div className={styles.UserName}>
+                                {user.name}
+                            </div>
+                            <div className={styles.MessageButton}>
+                                Saada sõnum
+                            </div>
+                        </div>
+                        <div className={styles.Joined}>
+                            Liitus Tripiga {user.joinedDate}
+                        </div>
+                        <div className={styles.Statistics}>
+                            <div className={styles.StatisticsItem}>
+                                <ThumbsUpIcon />
+                                <span className={styles.StatisticsLabel}>
+                                    38 meeldimist
+                                </span>
+                            </div>
+                            <div className={styles.StatisticsItem}>
+                                <ThumbsDownIcon />
+                                <span className={styles.StatisticsLabel}>
+                                    18 mittemeeldimist
+                                </span>
+                            </div>
+                            <div className={styles.StatisticsItem}>
+                                <PostIcon />
+                                <span className={styles.StatisticsLabel}>
+                                    18 postitust
+                                </span>
+                            </div>
+                            <div className={styles.StatisticsItem}>
+                                <CommentIcon />
+                                <span className={styles.StatisticsLabel}>
+                                    32 kommentaari
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>

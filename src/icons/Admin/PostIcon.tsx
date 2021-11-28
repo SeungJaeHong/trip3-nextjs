@@ -1,4 +1,4 @@
-const CommentIcon = (props: any) => {
+const PostIcon = (props: any) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" {...props}>
             <path d="M0,16.13V2H15V13H5.24ZM1,3V14.37L5,12h9V3Z" />
@@ -9,4 +9,4 @@ const CommentIcon = (props: any) => {
     )
 }
 
-export default CommentIcon
+export default PostIcon

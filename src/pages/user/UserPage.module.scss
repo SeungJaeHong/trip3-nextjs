@@ -21,10 +21,98 @@
         display: flex;
         flex-direction: column;
 
+        .BackGroundMap {
+            position: absolute;
+            right: -100px;
+            height: 500px;
+            width: 700px;
+            top: -200px;
+
+            svg {
+                fill: $green-dark;
+            }
+
+            @include lg() {
+                right: 0;
+            }
+
+            @include md() {
+                height: 400px;
+                width: 500px;
+                right: 0;
+                top: -100px;
+            }
+
+            @include sm() {
+                display: none;
+            }
+        }
+
         .Avatar {
             margin-top: -100px;
             width: 200px;
             height: 200px;
+        }
+
+        .UserNameContainer {
+            display: flex;
+            padding-top: $spacer * 4;
+            gap: $spacer * 4;
+            z-index: 1;
+            align-items: center;
+
+            .UserName {
+                font-size: 3rem;
+                color: $white;
+                font-weight: 600;
+            }
+
+            .MessageButton {
+                background: $white;
+                color: $green-dark;
+                padding: $spacer $spacer * 3;
+                font-weight: 600;
+                height: 40px;
+                border-radius: 5px;
+                box-shadow: 0 0 3px $green-dark;
+                cursor: pointer;
+
+                &:hover {
+                    background: $green-dark;
+                    color: $white;
+                }
+            }
+        }
+
+        .Joined {
+            color: $green-dark;
+            font-weight: 500;
+            margin-bottom: $spacer * 3;
+        }
+
+        .Statistics {
+            display: flex;
+            width: 100%;
+            z-index: 1;
+            gap: $spacer * 4;
+
+            .StatisticsItem {
+                display: flex;
+                gap: $spacer;
+                align-items: center;
+
+                svg {
+                    width: 36px;
+                    height: 36px;
+                    fill: $white;
+                }
+
+                .StatisticsLabel {
+                    color: $white;
+                    font-weight: 500;
+                    font-size: $font-size-medium;
+                }
+            }
         }
 
         @include md() {
@@ -36,12 +124,24 @@
         }
 
         @include sm() {
-            align-items: center;
-
             .Avatar {
+                align-self: center;
                 margin-top: -60px;
                 width: 120px;
                 height: 120px;
+            }
+
+            .UserNameContainer {
+                margin-bottom: $spacer;
+
+                .UserName {
+                    font-size: 2rem;
+                }
+            }
+
+            .Statistics {
+                flex-direction: column;
+                gap: $spacer * 2;
             }
         }
     }

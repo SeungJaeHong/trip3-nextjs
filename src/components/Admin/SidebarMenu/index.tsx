@@ -3,11 +3,11 @@ import styles from "./SidebarMenu.module.scss"
 import clsx from "clsx"
 import TripLogo from "../../../icons/TripLogo"
 import Link from "next/link"
-import UsersIcon from "../../../icons/Admin/UsersIcon";
-import CommentIcon from "../../../icons/Admin/CommentIcon";
-import HomeIcon from "../../../icons/Admin/HomeIcon";
-import HiddenContentIcon from "../../../icons/Admin/HiddenContentIcon";
-import {useRouter} from "next/router";
+import UsersIcon from "../../../icons/Admin/UsersIcon"
+import PostIcon from "../../../icons/Admin/PostIcon"
+import HomeIcon from "../../../icons/Admin/HomeIcon"
+import HiddenContentIcon from "../../../icons/Admin/HiddenContentIcon"
+import {useRouter} from "next/router"
 
 const SidebarMenu = () => {
     const router = useRouter()
@@ -48,7 +48,7 @@ const SidebarMenu = () => {
                 })}>
                     <Link href="/admin/forum">
                         <a>
-                            <CommentIcon />
+                            <PostIcon />
                             <span className={styles.Title}>Foorum</span>
                         </a>
                     </Link>
