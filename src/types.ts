@@ -9,7 +9,10 @@ export interface UserProfile extends User {
     rankName: string
     joinedDate: string
     description?: string
-    likes: number
+    liked: number
+    disliked: number
+    postCount: number
+    commentCount: number
     placesVisited: number
 }
 

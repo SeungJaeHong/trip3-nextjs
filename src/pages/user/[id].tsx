@@ -51,25 +51,25 @@ const UserPage = ({user}: Props) => {
                             <div className={styles.StatisticsItem}>
                                 <ThumbsUpIcon />
                                 <span className={styles.StatisticsLabel}>
-                                    38 meeldimist
+                                    {user.liked} meeldimist
                                 </span>
                             </div>
                             <div className={styles.StatisticsItem}>
                                 <ThumbsDownIcon />
                                 <span className={styles.StatisticsLabel}>
-                                    18 mittemeeldimist
+                                    {user.disliked} mittemeeldimist
                                 </span>
                             </div>
                             <div className={styles.StatisticsItem}>
                                 <PostIcon />
                                 <span className={styles.StatisticsLabel}>
-                                    18 postitust
+                                    {user.postCount} postitust
                                 </span>
                             </div>
                             <div className={styles.StatisticsItem}>
                                 <CommentIcon />
                                 <span className={styles.StatisticsLabel}>
-                                    32 kommentaari
+                                    {user.commentCount} kommentaari
                                 </span>
                             </div>
                         </div>
