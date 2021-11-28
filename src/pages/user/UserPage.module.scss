@@ -142,6 +142,17 @@
             .Statistics {
                 flex-direction: column;
                 gap: $spacer * 2;
+
+                .StatisticsItem {
+                    svg {
+                        width: 24px;
+                        height: 24px;
+                    }
+
+                    .StatisticsLabel {
+                        font-size: $font-size-normal;
+                    }
+                }
             }
         }
     }

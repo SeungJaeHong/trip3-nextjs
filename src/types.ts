@@ -6,6 +6,7 @@ export interface User {
 }
 
 export interface UserProfile extends User {
+    isAdmin: boolean
     rankName: string
     joinedDate: string
     description?: string

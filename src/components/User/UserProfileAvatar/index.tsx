@@ -2,6 +2,7 @@ import React from "react"
 import styles from "./UserProfileAvatar.module.scss"
 import {UserProfile} from "../../../types"
 import clsx from "clsx"
+import StarIconFilled from "../../../icons/StarIconFilled"
 
 const UserProfileAvatar = (user: UserProfile) => {
     const imgSrc = user.avatar ?? '/images/noUser.png'
@@ -27,6 +28,12 @@ const UserProfileAvatar = (user: UserProfile) => {
             {user.rank === 3 &&
                 <div className={clsx(styles.Corner, styles.Left)} />
             }
+            {user.isAdmin &&
+                <div className={styles.AdminIcon}>
+                    <StarIconFilled />
+                </div>
+            }
+
         </div>
     )
 }
