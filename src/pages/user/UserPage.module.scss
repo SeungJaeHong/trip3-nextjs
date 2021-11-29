@@ -95,6 +95,7 @@
             width: 100%;
             z-index: 1;
             gap: $spacer * 4;
+            margin-bottom: $spacer * 4;
 
             .StatisticsItem {
                 display: flex;
@@ -112,6 +113,45 @@
                     font-weight: 500;
                     font-size: $font-size-medium;
                 }
+            }
+        }
+
+        .VisitedHeader {
+            color: $green-dark;
+            font-weight: 500;
+            margin-bottom: $spacer * 2;
+        }
+
+        .DestinationInfo {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: $spacer * 2;
+            gap: $spacer;
+
+            .Info {
+                display: flex;
+                gap: $spacer;
+
+                svg {
+                    width: 36px;
+                    height: 36px;
+                    fill: $white;
+                }
+
+                .InfoTitle {
+                    font-size: $font-size-medium;
+                    color: $white;
+                    font-weight: 500;
+                }
+            }
+
+            .Tags {
+                display: flex;
+                width: 100%;
+                gap: $spacer;
+                flex-wrap: wrap;
+                padding-left: 40px;
             }
         }
 

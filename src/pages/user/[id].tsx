@@ -13,6 +13,9 @@ import PostIcon from "../../icons/Admin/PostIcon"
 import CommentIcon from "../../icons/CommentIcon"
 import ThumbsDownIcon from "../../icons/ThumbsDownIcon"
 import ImageGallery from "../../components/ImageGallery"
+import PinIcon from "../../icons/PinIcon"
+import StarIcon from "../../icons/StarIcon"
+import Tag from "../../components/Tag"
 
 type Props = {
     user: UserProfile
@@ -74,9 +77,48 @@ const UserPage = ({user}: Props) => {
                                 </span>
                             </div>
                         </div>
-                        {/*<div>
-                            Continents
-                        </div>*/}
+                        <div className={styles.VisitedHeader}>
+                            On külastanud:
+                        </div>
+                        <div className={styles.DestinationInfo}>
+                            <div className={styles.Info}>
+                                <PinIcon />
+                                <div className={styles.InfoTitle}>
+                                    2 kontinenti
+                                </div>
+                            </div>
+                            <div className={styles.Tags}>
+                                <Tag title={'Aafrika'} large={true} white={true} route={'/'} />
+                                <Tag title={'Ameerika'} large={true} white={true} route={'/'} />
+                            </div>
+                        </div>
+                        <div className={styles.DestinationInfo}>
+                            <div className={styles.Info}>
+                                <PinIcon />
+                                <div className={styles.InfoTitle}>
+                                    10 riiki (5%)
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.DestinationInfo}>
+                            <div className={styles.Info}>
+                                <PinIcon />
+                                <div className={styles.InfoTitle}>
+                                    8 linna või piirkonda
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.VisitedHeader}>
+                            Tahab minna:
+                        </div>
+                        <div className={styles.DestinationInfo}>
+                            <div className={styles.Info}>
+                                <StarIcon />
+                                <div className={styles.InfoTitle}>
+                                    8 sihtkohta
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
