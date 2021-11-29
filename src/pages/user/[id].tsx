@@ -12,6 +12,7 @@ import ThumbsUpIcon from "../../icons/ThumbsUpIcon"
 import PostIcon from "../../icons/Admin/PostIcon"
 import CommentIcon from "../../icons/CommentIcon"
 import ThumbsDownIcon from "../../icons/ThumbsDownIcon"
+import ImageGallery from "../../components/ImageGallery"
 
 type Props = {
     user: UserProfile
@@ -73,8 +74,14 @@ const UserPage = ({user}: Props) => {
                                 </span>
                             </div>
                         </div>
+                        {/*<div>
+                            Continents
+                        </div>*/}
                     </div>
                 </div>
+            </div>
+            <div className={styles.ImageGallery}>
+                <ImageGallery images={[]} />
             </div>
             <Footer />
         </Fragment>
