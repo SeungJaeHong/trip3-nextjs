@@ -134,21 +134,27 @@ const UserPage = ({user}: Props) => {
                             </div>
                         }
 
-                        <div className={styles.VisitedHeader}>
-                            Tahab minna:
-                        </div>
-                        <div className={styles.DestinationInfo}>
-                            <div className={styles.Info}>
-                                <StarIcon />
-                                <div className={styles.InfoTitle}>
-                                    8 sihtkohta
+                        {(user.wantsToGo && user.wantsToGo?.length > 0) &&
+                            <>
+                                <div className={styles.VisitedHeader}>
+                                    Tahab minna:
                                 </div>
-                            </div>
-                            <div className={styles.Tags}>
-                                <Tag title={'Aafrika'} large={true} white={true} route={'/'} />
-                                <Tag title={'Ameerika'} large={true} white={true} route={'/'} />
-                            </div>
-                        </div>
+                                <div className={styles.DestinationInfo}>
+                                    <div className={styles.Info}>
+                                        <StarIcon />
+                                        <div className={styles.InfoTitle}>
+                                            {user.wantsToGo.length} sihtkohta
+                                        </div>
+                                    </div>
+                                    <div className={styles.Tags}>
+                                        {user.wantsToGo.map(destination => {
+                                            return <Tag title={destination.name} large={true} white={true} route={'/sihtkoht/' + destination.slug} key={destination.id} />
+                                        })}
+                                    </div>
+                                </div>
+                            </>
+                        }
+
                     </div>
                 </div>
             </div>
