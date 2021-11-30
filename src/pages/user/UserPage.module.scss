@@ -76,6 +76,7 @@
                 border-radius: 5px;
                 box-shadow: 0 0 3px $green-dark;
                 cursor: pointer;
+                display: flex;
 
                 &:hover {
                     background: $green-dark;
@@ -86,8 +87,8 @@
 
         .Joined {
             color: $green-dark;
-            font-weight: 500;
-            margin-bottom: $spacer * 3;
+            font-weight: 600;
+            margin-bottom: $spacer * 4;
         }
 
         .Statistics {
@@ -116,9 +117,13 @@
             }
         }
 
+        .VisitedBlock {
+            margin-bottom: $spacer * 2;
+        }
+
         .VisitedHeader {
             color: $green-dark;
-            font-weight: 500;
+            font-weight: 600;
             margin-bottom: $spacer * 2;
         }
 
@@ -172,11 +177,17 @@
             }
 
             .UserNameContainer {
-                margin-bottom: $spacer;
+                margin-bottom: $spacer * 3;
+                flex-direction: column;
+                gap: $spacer;
 
                 .UserName {
                     font-size: 2rem;
                 }
+            }
+
+            .Joined {
+                margin-bottom: $spacer * 2;
             }
 
             .Statistics {
@@ -192,6 +203,26 @@
                     .StatisticsLabel {
                         font-size: $font-size-normal;
                     }
+                }
+            }
+
+            .DestinationInfo {
+                .Info {
+                    margin-bottom: $spacer;
+
+                    svg {
+                        width: 24px;
+                        height: 24px;
+                        fill: $white;
+                    }
+
+                    .InfoTitle {
+                        font-size: $font-size-normal;
+                    }
+                }
+
+                .Tags {
+                    padding-left: 0;
                 }
             }
         }

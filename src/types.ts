@@ -15,6 +15,11 @@ export interface UserProfile extends User {
     postCount: number
     commentCount: number
     placesVisited: number
+    //continentsVisited?: Destination[]
+    countriesVisited?: Destination[]
+    citiesVisited?: Destination[]
+    wantsToGo?: Destination[]
+    countryPercentage: number
 }
 
 export type LoggedInUser = {

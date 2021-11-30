@@ -25,6 +25,9 @@ const UserPage = ({user}: Props) => {
 
     //console.log(user)
 
+    const showVisitedBlock = (user.countriesVisited && user.countriesVisited?.length > 0)
+        || (user.citiesVisited && user.citiesVisited?.length > 0)
+
     return (
         <Fragment>
             <Header
@@ -45,7 +48,7 @@ const UserPage = ({user}: Props) => {
                                 {user.name}
                             </div>
                             <div className={styles.MessageButton}>
-                                Saada sõnum
+                                <span>Saada sõnum</span>
                             </div>
                         </div>
                         <div className={styles.Joined}>
@@ -77,37 +80,60 @@ const UserPage = ({user}: Props) => {
                                 </span>
                             </div>
                         </div>
-                        <div className={styles.VisitedHeader}>
-                            On külastanud:
-                        </div>
-                        <div className={styles.DestinationInfo}>
-                            <div className={styles.Info}>
-                                <PinIcon />
-                                <div className={styles.InfoTitle}>
-                                    2 kontinenti
+
+                        {showVisitedBlock &&
+                            <div className={styles.VisitedBlock}>
+                                <div className={styles.VisitedHeader}>
+                                    On külastanud:
                                 </div>
+                                {/*{(user.continentsVisited && user.continentsVisited?.length > 0) &&
+                                    <div className={styles.DestinationInfo}>
+                                        <div className={styles.Info}>
+                                            <PinIcon />
+                                            <div className={styles.InfoTitle}>
+                                                {user.continentsVisited.length} kontinenti
+                                            </div>
+                                        </div>
+                                        <div className={styles.Tags}>
+                                            {user.continentsVisited.map(destination => {
+                                                return <Tag title={destination.name} large={true} white={true} route={'/sihtkoht/' + destination.slug} key={destination.id} />
+                                            })}
+                                        </div>
+                                    </div>
+                                }*/}
+                                {(user.countriesVisited && user.countriesVisited?.length > 0) &&
+                                    <div className={styles.DestinationInfo}>
+                                        <div className={styles.Info}>
+                                            <PinIcon />
+                                            <div className={styles.InfoTitle}>
+                                                {user.countriesVisited.length} riiki ({user.countryPercentage}%)
+                                            </div>
+                                        </div>
+                                        <div className={styles.Tags}>
+                                            {user.countriesVisited.map(destination => {
+                                                return <Tag title={destination.name} large={true} white={true} route={'/sihtkoht/' + destination.slug} key={destination.id} />
+                                            })}
+                                        </div>
+                                    </div>
+                                }
+                                {(user.citiesVisited && user.citiesVisited?.length > 0) &&
+                                    <div className={styles.DestinationInfo}>
+                                        <div className={styles.Info}>
+                                            <PinIcon />
+                                            <div className={styles.InfoTitle}>
+                                                {user.citiesVisited.length} linna või piirkonda
+                                            </div>
+                                        </div>
+                                        <div className={styles.Tags}>
+                                            {user.citiesVisited.map(destination => {
+                                                return <Tag title={destination.name} large={true} white={true} route={'/sihtkoht/' + destination.slug} key={destination.id} />
+                                            })}
+                                        </div>
+                                    </div>
+                                }
                             </div>
-                            <div className={styles.Tags}>
-                                <Tag title={'Aafrika'} large={true} white={true} route={'/'} />
-                                <Tag title={'Ameerika'} large={true} white={true} route={'/'} />
-                            </div>
-                        </div>
-                        <div className={styles.DestinationInfo}>
-                            <div className={styles.Info}>
-                                <PinIcon />
-                                <div className={styles.InfoTitle}>
-                                    10 riiki (5%)
-                                </div>
-                            </div>
-                        </div>
-                        <div className={styles.DestinationInfo}>
-                            <div className={styles.Info}>
-                                <PinIcon />
-                                <div className={styles.InfoTitle}>
-                                    8 linna või piirkonda
-                                </div>
-                            </div>
-                        </div>
+                        }
+
                         <div className={styles.VisitedHeader}>
                             Tahab minna:
                         </div>
@@ -117,6 +143,10 @@ const UserPage = ({user}: Props) => {
                                 <div className={styles.InfoTitle}>
                                     8 sihtkohta
                                 </div>
+                            </div>
+                            <div className={styles.Tags}>
+                                <Tag title={'Aafrika'} large={true} white={true} route={'/'} />
+                                <Tag title={'Ameerika'} large={true} white={true} route={'/'} />
                             </div>
                         </div>
                     </div>
