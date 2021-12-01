@@ -120,7 +120,7 @@ const ForumComment = ({item, type}: Props) => {
             [styles.Hidden]: comment.status === 0
         })} id={comment.id.toString()}>
             <div className={styles.MetaData}>
-                <Link href={'/'}>
+                <Link href={'/user/' + comment.user.id}>
                     <a className={styles.User}>{comment.user.name}</a>
                 </Link>
                 <div className={styles.CreatedDate}>

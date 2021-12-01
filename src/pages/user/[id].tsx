@@ -16,6 +16,8 @@ import ImageGallery from "../../components/ImageGallery"
 import PinIcon from "../../icons/PinIcon"
 import StarIcon from "../../icons/StarIcon"
 import Tag from "../../components/Tag"
+import BlockTitle from "../../components/BlockTitle"
+import UserLastComments from "../../components/User/UserLastComments"
 
 type Props = {
     user: UserProfile
@@ -160,6 +162,23 @@ const UserPage = ({user}: Props) => {
             </div>
             <div className={styles.ImageGallery}>
                 <ImageGallery images={[]} />
+            </div>
+            <div className={styles.ForumPosts}>
+                <div className={containerStyle.ContainerXl}>
+                    <div className={styles.ContainerBody}>
+                        <div className={styles.ForumList}>
+                            <div className={styles.ForumListTitle}>
+                                <BlockTitle title={'Viimased kommentaarid'} />
+                            </div>
+                            <div className={styles.UserLastComments}>
+                                <UserLastComments {...user} />
+                            </div>
+                        </div>
+                        <div className={styles.Sidebar}>
+                            Sidebar
+                        </div>
+                    </div>
+                </div>
             </div>
             <Footer />
         </Fragment>

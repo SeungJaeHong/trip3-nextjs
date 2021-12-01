@@ -14,7 +14,7 @@
 
 .BodyContainer {
     background: $green-darker;
-    padding-bottom: $spacer * 6;
+    padding-bottom: $spacer * 4;
 
     .Body {
         position: relative;
@@ -231,4 +231,47 @@
 
 .ImageGallery {
     width: 100%;
+}
+
+.ForumPosts {
+    background: $gray-light;
+    width: 100%;
+
+    .ContainerBody {
+        display: flex;
+        width: 100%;
+        padding: $spacer * 4 0;
+
+        .ForumList {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+
+            .ForumListTitle {
+                margin-bottom: $spacer * 4;
+            }
+
+            .UserLastComments {
+                margin-bottom: $spacer * 2;
+            }
+        }
+
+        .Sidebar {
+            flex: 1;
+            padding-left: $spacer * 8;
+        }
+
+        @include sm() {
+            flex-direction: column;
+
+            .ForumList {
+                flex: 1;
+            }
+
+            .Sidebar {
+                flex: 1;
+                padding-left: 0;
+            }
+        }
+    }
 }

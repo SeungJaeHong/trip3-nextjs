@@ -22,10 +22,7 @@ export interface UserProfile extends User {
     countryPercentage: number
 }
 
-export type LoggedInUser = {
-    id: number
-    name: string
-    rank: number
+export interface LoggedInUser extends User {
     isAdmin: boolean
     email?: string
     contact_facebook?: string
@@ -39,25 +36,23 @@ export type LoggedInUser = {
     description?: string
     notify_message?: boolean
     notify_follow?: boolean
-    avatar?: string
 }
 
-export type Destination = {
+export interface Destination {
     id: number
     name: string
     slug: string
     parentDestination?: Destination
 }
 
-export type Topic = {
+export interface Topic {
     id: number
     name: string
 }
 
-export type Comment = {
+export interface Comment {
     id: number
     contentId: number
-    //content: Content
     user: User
     body: string
     status: number
@@ -66,6 +61,14 @@ export type Comment = {
     hasTimeToEdit: boolean
     createdAt: string
     updatedAt: string
+}
+
+export interface UserComment extends Comment {
+    forumPost: {
+        title: string
+        type: string
+        url: string
+    }
 }
 
 export type Content = {

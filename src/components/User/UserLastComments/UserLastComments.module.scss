@@ -1,0 +1,31 @@
+@import "../../../styles/variables";
+
+.UserLastComments {
+    position: relative;
+    width: 100%;
+
+    .ForumRow {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: $spacer * 3.5;
+
+        .PostTitle {
+            margin-bottom: $spacer * 1.5;
+
+            a {
+                font-weight: 600;
+                font-size: $font-size-medium;
+                color: $gray-dark;
+
+                &:hover {
+                    color: $gray-dark-hover;
+                }
+            }
+        }
+    }
+}
+
+.Loading {
+    display: flex;
+    justify-content: center;
+}
