@@ -24,6 +24,7 @@ export interface UserProfile extends User {
 
 export interface LoggedInUser extends User {
     isAdmin: boolean
+    unReadMessageCount?: number
     email?: string
     contact_facebook?: string
     contact_twitter?: string

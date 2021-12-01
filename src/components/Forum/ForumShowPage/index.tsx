@@ -13,9 +13,8 @@ import {getForumUrlByType, getForumUrlByTypeAndSlug, scrollToHash} from "../../.
 import CommentEditor from "../../CommentEditor"
 import BlockTitle from "../../BlockTitle"
 import {postComment} from "../../../services/comment.service"
-import {toast} from "react-hot-toast";
-import {useAppSelector} from "../../../hooks";
-import {selectUserIsLoggedIn} from "../../../redux/auth";
+import {toast} from "react-hot-toast"
+import useUser from "../../../hooks"
 
 type Props = {
     post: Content,
@@ -25,7 +24,7 @@ type Props = {
 }
 
 const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
-    const userIsLoggedIn = useAppSelector(selectUserIsLoggedIn)
+    const { loggedIn, user } = useUser()
     const [commentValue, setCommentValue] = useState<string>('')
     const [comments, setComments] = useState(post.comments)
     const newestCommentUrl = lastCommentId ? getForumUrlByTypeAndSlug(post.type, post.slug) + '?page=' + lastPage + '#' + lastCommentId : ''
@@ -105,7 +104,7 @@ const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
                             currentPage={currentPage}
                             lastPage={lastPage} />
 
-                        {userIsLoggedIn &&
+                        {loggedIn &&
                             <div className={styles.AddComment}>
                                 <BlockTitle title={'Lisa kommentaar'} />
                                 <CommentEditor

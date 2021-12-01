@@ -4,8 +4,7 @@ import clsx from "clsx"
 import Router from "next/router"
 import FormInput from "../Form/FormInput"
 import SubmitButton from "../Form/SubmitButton"
-import {useAppSelector} from "../../hooks"
-import {selectUser} from "../../redux/auth"
+import useUser from "../../hooks"
 import {register as registerUser} from "../../services/auth.service";
 import toast from "react-hot-toast";
 import { useForm, SubmitHandler } from "react-hook-form"
@@ -21,7 +20,7 @@ type Inputs = {
 }
 
 const RegisterForm = () => {
-    const user = useAppSelector(selectUser)
+    const { loggedIn, user, mutate } = useUser()
     const registerSchema = yup.object().shape({
         name: yup.string().required('Kasutajanimi on kohustuslik'),
         email: yup.string().email('E-post ei ole korrektne').required('E-post on kohustuslik'),
@@ -36,10 +35,10 @@ const RegisterForm = () => {
     })
 
     useEffect(() => {
-        if (user && user.id) {
+        if (loggedIn) {
             Router.replace('/')
         }
-    }, [user])
+    }, [loggedIn])
 
     const handleRegister: SubmitHandler<Inputs> = async (values: Inputs) => {
         const { name, email, password } = values

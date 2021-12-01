@@ -9,8 +9,9 @@ import {useState} from "react"
 import CloseIcon from "../../icons/CloseIcon"
 import UserNavBarMenu from "../UserNavbarMenu"
 import React from 'react'
-import {useAppDispatch, useAppSelector} from "../../hooks"
-import {logout, selectUserIsLoggedIn} from "../../redux/auth"
+import useUser from "../../hooks"
+import {logout} from "../../services/auth.service"
+import {toast} from "react-hot-toast"
 
 const links = [
     {
@@ -42,11 +43,16 @@ type Props = {
 }
 
 const Navbar = ({darkMode, showSearch, showLogo}: Props) => {
-    const dispatch = useAppDispatch()
-    const userIsLoggedIn = useAppSelector(selectUserIsLoggedIn)
+    const { loading, loggedIn, user, mutate } = useUser()
     const [menuOpen, setMenuOpen] = useState(false)
-    const onLogoutClick = () => {
-        dispatch(logout())
+    const onLogoutClick = async () => {
+        try {
+            const res = await logout().then((response) => {
+                mutate(undefined)
+            })
+        } catch (e: any) {
+            toast.error('Väljalogimine ebaõnnestus')
+        }
     }
 
     const getLogo = () => {
@@ -56,7 +62,7 @@ const Navbar = ({darkMode, showSearch, showLogo}: Props) => {
     }
 
     const mobileMenuUserLinks = () => {
-        if (userIsLoggedIn) {
+        if (loggedIn) {
             return <a onClick={onLogoutClick}>Logi välja</a>
         } else {
             return (

@@ -1,19 +1,18 @@
 import React, {Fragment} from "react"
 import Script from 'next/script'
 import styles from "./FacebookLogin.module.scss"
-import {useAppDispatch} from "../../hooks"
-import {setUser} from "../../redux/auth"
 import toast from 'react-hot-toast'
 import {createUserOrLogin} from "../../services/auth.service"
+import useUser from "../../hooks"
 
 const FacebookLogin = () => {
-    const dispatch = useAppDispatch()
+    const { loggedIn, user, mutate } = useUser()
     const signInFB = () => {
         FB.login(function(response) {
             if (response.status === 'connected') {
                 FB.api('/me?fields=id,email,name,picture.width(800).height(800)', function(userResponse: any) {
                     const res = createUserOrLogin(userResponse.name, userResponse.email).then(res => {
-                        dispatch(setUser(res.data))
+                        mutate(res.data)
                         toast.success('Sisselogimine õnnestus!')
                     }).catch(err => {
                         toast.error('Sisselogimine ebaõnnestus!')

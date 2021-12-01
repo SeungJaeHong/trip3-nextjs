@@ -12,8 +12,7 @@ import Footer from "../../components/Footer";
 import ForumComment from "../../components/Forum/ForumComment";
 import ApiClientSSR from "../../lib/ApiClientSSR";
 import {postComment} from "../../services/news.service";
-import {useAppSelector} from "../../hooks";
-import {selectUserIsLoggedIn} from "../../redux/auth";
+import useUser from "../../hooks";
 import BlockTitle from "../../components/BlockTitle";
 import CommentEditor from "../../components/CommentEditor";
 import {toast} from "react-hot-toast";
@@ -25,7 +24,7 @@ type Props = {
 
 const NewsShow = ({news}: Props) => {
     const [comments, setComments] = useState(news.comments)
-    const userIsLoggedIn = useAppSelector(selectUserIsLoggedIn)
+    const { loggedIn, user } = useUser()
     const [commentValue, setCommentValue] = useState('')
     const [submitting, setSubmitting] = useState(false)
     const router = useRouter()
@@ -95,7 +94,7 @@ const NewsShow = ({news}: Props) => {
                                 )
                             })}
                         </div>
-                        {userIsLoggedIn &&
+                        {loggedIn &&
                             <div className={styles.AddComment}>
                                 <BlockTitle title={'Lisa kommentaar'} />
                                 <CommentEditor

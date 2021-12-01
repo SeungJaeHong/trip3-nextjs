@@ -2,10 +2,10 @@ import React, {useEffect, useRef, useState} from "react"
 import { useRouter } from 'next/router'
 import clsx from "clsx"
 import styles from "./UserNavBarMenu.module.scss"
-import {useAppDispatch, useAppSelector} from "../../hooks"
-import {logout, selectUser} from "../../redux/auth"
 import UserAvatar from "../User/UserAvatar"
 import toast from "react-hot-toast"
+import useUser from "../../hooks";
+import {logout} from "../../services/auth.service";
 
 type Props = {
     darkMode: boolean
@@ -13,9 +13,8 @@ type Props = {
 
 const UserNavBarMenu = ({darkMode}: Props) => {
     const router = useRouter()
-    const dispatch = useAppDispatch()
-    const user = useAppSelector(selectUser)
-    const userIsAdmin = user && user.isAdmin
+    const { loading, loggedIn, user, mutate } = useUser()
+    const userIsAdmin = loggedIn && user?.isAdmin
     const [menuOpen, setMenuOpen] = useState(false)
     const ref = useRef<any>()
 
@@ -38,14 +37,21 @@ const UserNavBarMenu = ({darkMode}: Props) => {
         }
     }, [menuOpen])
 
-    const onLogoutClick = () => {
-        dispatch(logout())
-        toast.success('Väljalogimine õnnestus!')
-        setMenuOpen(false)
+    const onLogoutClick = async () => {
+        try {
+            setMenuOpen(false)
+            const res = await logout().then((response) => {
+                mutate(undefined)
+                toast.success('Väljalogimine õnnestus!')
+            })
+        } catch (e: any) {
+            setMenuOpen(false)
+            toast.error('Väljalogimine ebaõnnestus')
+        }
     }
 
     const renderTitle = () => {
-        if (user && user?.id) {
+        if (loggedIn && user !== undefined) {
             return (
                 <div className={styles.UserAvatar}>
                     <UserAvatar user={user} borderWidth={2} />
@@ -123,7 +129,7 @@ const UserNavBarMenu = ({darkMode}: Props) => {
                         )
                     })}
 
-                    {user &&
+                    {loggedIn &&
                         <div className={styles.LinkWrapper} onClick={onLogoutClick}>
                             <span className={styles.Link}>Logi välja</span>
                         </div>

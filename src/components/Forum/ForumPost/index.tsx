@@ -6,24 +6,22 @@ import ThumbsUpIcon from "../../../icons/ThumbsUpIcon";
 import clsx from "clsx";
 import ThumbsDownIcon from "../../../icons/ThumbsDownIcon";
 import Tag from "../../Tag";
-import {useAppSelector} from "../../../hooks";
-import {selectUser} from "../../../redux/auth";
 import React, {useState} from "react";
 import { useRouter } from 'next/router'
 import {togglePostStatus, ratePost} from "../../../services/forum.service"
 import {toast} from "react-hot-toast"
-import Alert from "../../Alert";
+import Alert from "../../Alert"
+import useUser from "../../../hooks"
 
 const ForumPost = (item: Content) => {
     const [post, setPost] = useState<Content>(item)
-    const user = useAppSelector(selectUser)
-    const userIsLoggedIn = user && user?.id
-    const userIsAdmin = user && user.isAdmin
-    const isPostOwner = user && user.id === item.user.id
+    const { loggedIn, user } = useUser()
+    const userIsAdmin = loggedIn && user?.isAdmin
+    const isPostOwner = item.user.id === user?.id
     const router = useRouter()
 
     const onThumbsClick = (value: boolean) => {
-        if (userIsLoggedIn) {
+        if (loggedIn) {
             ratePost(post, value).then(res => {
                 setPost(res.data)
             }).catch(err => {})
@@ -46,7 +44,7 @@ const ForumPost = (item: Content) => {
     }
 
     const renderActionButtons = () => {
-        if (!user?.id) {
+        if (!user) {
             return null
         }
 
@@ -87,7 +85,7 @@ const ForumPost = (item: Content) => {
                 {post.title}
             </div>
             <div className={styles.MetaData}>
-                <Link href={'/'}>
+                <Link href={'/user/' + post.user.id}>
                     <a className={styles.User}>{post.user.name}</a>
                 </Link>
                 <div className={styles.CreatedDate}>

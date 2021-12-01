@@ -2,14 +2,12 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styles from './ForumTabs.module.scss'
 import clsx from "clsx"
-import {useAppSelector} from "../../../hooks";
-import {selectUser} from "../../../redux/auth";
+import useUser from "../../../hooks"
 
 const ForumTabs = () => {
     const router = useRouter()
-    const user = useAppSelector(selectUser)
-    const userIsLoggedIn = user && user?.id
-    const userIsAdmin = user && user.isAdmin
+    const { loggedIn, user } = useUser()
+    const userIsAdmin = loggedIn && user?.isAdmin
     const tabs = [
         {
             title: 'Üldfoorum',
@@ -46,7 +44,7 @@ const ForumTabs = () => {
     return (
         <div className={styles.ForumTabs}>
             {tabs.map(tab => {
-                if (tab.route === '/foorum/minu-jalgimised' && !userIsLoggedIn) {
+                if (tab.route === '/foorum/minu-jalgimised' && !loggedIn) {
                     return null
                 }
 

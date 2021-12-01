@@ -4,15 +4,14 @@ import clsx from "clsx"
 import Router from "next/router"
 import FormInput from "../Form/FormInput"
 import SubmitButton from "../Form/SubmitButton"
-import {useAppDispatch, useAppSelector} from "../../hooks"
-import {selectUser, setUser} from "../../redux/auth"
+import useUser from "../../hooks"
 import toast from 'react-hot-toast'
 import {setFormErrors} from "../../helpers"
 import {login} from "../../services/auth.service"
 import FormCheckbox from "../Form/FormCheckbox"
-import {SubmitHandler, useForm} from "react-hook-form";
-import * as yup from "yup";
-import {yupResolver} from "@hookform/resolvers/yup";
+import {SubmitHandler, useForm} from "react-hook-form"
+import * as yup from "yup"
+import {yupResolver} from "@hookform/resolvers/yup"
 import FacebookLogin from "../FacebookLogin"
 import GoogleLogin from "../GoogleLogin"
 
@@ -23,8 +22,7 @@ type Inputs = {
 }
 
 const LoginForm = () => {
-    const dispatch = useAppDispatch()
-    const user = useAppSelector(selectUser)
+    const { loggedIn, user, mutate } = useUser()
     const loginSchema = yup.object().shape({
         name: yup.string().required('Kasutajanimi on kohustuslik'),
         password: yup.string().required('Parool on kohustuslik'),
@@ -35,7 +33,7 @@ const LoginForm = () => {
     })
 
     useEffect(() => {
-        if (user && user.id) {
+        if (loggedIn) {
             Router.replace('/')
         }
     }, [user])
@@ -43,7 +41,7 @@ const LoginForm = () => {
     const handleLogin: SubmitHandler<Inputs> = async (values: Inputs) => {
         const { name, password, remember_me } = values
         const resp = await login(name, password, remember_me).then(res => {
-            dispatch(setUser(res.data))
+            mutate(res.data)
             toast.success('Sisselogimine õnnestus!')
         }).catch(err => {
             if (err.response?.data?.errors) {

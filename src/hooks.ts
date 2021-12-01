@@ -1,5 +1,15 @@
-import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux'
-import type {AppDispatch, RootState} from './store'
+import useSWR from "swr"
+import {getUser} from "./services/auth.service"
 
-export const useAppDispatch = () => useDispatch<AppDispatch>()
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+export default function useUser() {
+    const { data, mutate, error } = useSWR('get_user', getUser)
+    const loading = !data && !error
+    const loggedIn = !error && data && data?.id > 0
+
+    return {
+        loading,
+        loggedIn,
+        user: data,
+        mutate
+    }
+}

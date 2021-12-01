@@ -15,9 +15,8 @@ import {FlightOfferCardType, ForumRowType} from '../types'
 import FrontpageNewsBlock from "../components/News/FrontpageNewsBlock"
 import FlightOffersLatest from "../components/FlightOffer/FlightOffersLatest";
 import TravelmatesLatest from "../components/Travelmate/TravelmatesLatest";
-import {useAppSelector} from "../hooks";
-import {selectUser} from "../redux/auth";
 import ApiClientSSR from "../lib/ApiClientSSR";
+import useUser from "../hooks";
 
 type Props = {
     flightOffers: FlightOfferCardType[],
@@ -25,8 +24,7 @@ type Props = {
 }
 
 const Home = ({flightOffers, forumPosts}: Props) => {
-    const user = useAppSelector(selectUser)
-    const userIsLoggedIn = user && user?.id
+    const { loggedIn, user } = useUser()
     return (
         <>
             <div className={styles.Header}
@@ -60,12 +58,12 @@ const Home = ({flightOffers, forumPosts}: Props) => {
                         </div>
                     </div>
                     <div className={clsx(styles.MoreFlightsLink, {
-                        [styles.UserLoggedIn]: userIsLoggedIn
+                        [styles.UserLoggedIn]: loggedIn
                     })}>
                         <MoreLink title={'Vaata kõiki lennupakkumisi'} route={'/odavad-lennupiletid'} />
                     </div>
 
-                    {!userIsLoggedIn &&
+                    {!loggedIn &&
                         <div className={styles.JoinTripBlock}>
                             <div className={styles.TripDescription}>
                                 <span className={styles.DescriptionText}>
@@ -102,7 +100,7 @@ const Home = ({flightOffers, forumPosts}: Props) => {
                                         <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
                                     </div>
                                 </div>
-                                {userIsLoggedIn &&
+                                {loggedIn &&
                                     <div className={styles.AddNewTopic}>
                                         <Button
                                             title={'Alusta uut teemat'}

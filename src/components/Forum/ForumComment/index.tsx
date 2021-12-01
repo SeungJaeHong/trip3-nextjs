@@ -5,13 +5,12 @@ import UserAvatar from "../../User/UserAvatar"
 import ThumbsUpIcon from "../../../icons/ThumbsUpIcon";
 import ThumbsDownIcon from "../../../icons/ThumbsDownIcon";
 import clsx from "clsx";
-import {useAppSelector} from "../../../hooks";
-import {selectUser} from "../../../redux/auth";
 import React, {useState} from "react";
 import CommentEditor from "../../CommentEditor";
 import {updateComment, rateComment, toggleCommentStatus} from "../../../services/comment.service";
 import {toast} from "react-hot-toast";
 import {useRouter} from "next/router";
+import useUser from "../../../hooks";
 
 type Props = {
     item: Comment
@@ -19,18 +18,17 @@ type Props = {
 }
 
 const ForumComment = ({item, type}: Props) => {
-    const user = useAppSelector(selectUser)
+    const { loggedIn, user } = useUser()
+    const userIsAdmin = loggedIn && user?.isAdmin
+    const isCommentOwner = item.user.id === user?.id
     const [comment, setComment] = useState(item)
-    const userIsLoggedIn = user && user?.id
-    const userIsAdmin = user && user.isAdmin
-    const isCommentOwner = user && user.id === comment.user.id
     const canEditComment = comment.hasTimeToEdit && isCommentOwner
     const [editMode, setEditMode] = useState(false)
     const [submitting, setSubmitting] = useState(false)
     const router = useRouter()
 
     const onThumbsClick = (value: boolean) => {
-        if (userIsLoggedIn) {
+        if (loggedIn) {
             rateComment(comment, value, type).then(res => {
                 setComment(res.data)
             }).catch(err => {})
@@ -78,7 +76,7 @@ const ForumComment = ({item, type}: Props) => {
     }
 
     const renderActionButtons = () => {
-        if (!user?.id) {
+        if (!user) {
             return null
         }
 
