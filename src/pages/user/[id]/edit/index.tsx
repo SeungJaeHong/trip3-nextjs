@@ -1,22 +1,22 @@
 import React, {Fragment} from 'react'
 import {GetServerSideProps} from 'next'
 import styles from "./UserEditPage.module.scss"
-import Header from "../../../../components/Header";
-import {UserPublicProfile} from "../../../../types";
-import Footer from "../../../../components/Footer";
-import ApiClientSSR from "../../../../lib/ApiClientSSR";
-import BackgroundMap from "../../../../components/BackgroundMap";
-import containerStyle from "../../../../styles/containers.module.scss";
-import clsx from "clsx";
-import Navbar from "../../../../components/Navbar";
-import Link from "next/link";
-
+import {UserPublicProfile} from "../../../../types"
+import Footer from "../../../../components/Footer"
+import ApiClientSSR from "../../../../lib/ApiClientSSR"
+import BackgroundMap from "../../../../components/BackgroundMap"
+import containerStyle from "../../../../styles/containers.module.scss"
+import clsx from "clsx"
+import Navbar from "../../../../components/Navbar"
+import UserEditForm from "../../../../components/User/UserEditForm"
+import useUser from "../../../../hooks"
 
 type Props = {
     user: UserPublicProfile
 }
 
 const UserEditPage = ({user}: Props) => {
+    const { userIsLoggedIn } = useUser()
     return (
         <Fragment>
             <div className={styles.Container}>
@@ -29,7 +29,7 @@ const UserEditPage = ({user}: Props) => {
                         Muuda profiili
                     </div>
                     <div className={styles.Form}>
-                       Form
+                       <UserEditForm {...user} />
                     </div>
                 </div>
             </div>
@@ -39,19 +39,34 @@ const UserEditPage = ({user}: Props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const id = context.query.id
-    const url = process.env.API_BASE_URL + '/user/' + id
-    const response = await ApiClientSSR(context).get(url)
+    try {
+        const id = context.query.id
+        const url = process.env.API_BASE_URL + '/user/' + id + '/edit'
+        const response = await ApiClientSSR(context).get(url)
 
-    if (!response.data) {
-        return {
-            notFound: true
+        if (!response.data) {
+            return {
+                notFound: true
+            }
         }
-    }
 
-    return {
-        props: {
-            user: response.data
+        return {
+            props: {
+                user: response.data
+            }
+        }
+    } catch (e: any) {
+        if (e.response?.status === 401 || e.response?.status === 403) {
+            return {
+                redirect: {
+                    destination: '/login',
+                    permanent: false,
+                },
+            }
+        } else {
+            return {
+                notFound: true
+            }
         }
     }
 }

@@ -42,6 +42,7 @@ const UserNavBarMenu = ({darkMode}: Props) => {
             setMenuOpen(false)
             const res = await logout().then((response) => {
                 mutate(undefined)
+                router.push('/')
                 toast.success('Väljalogimine õnnestus!')
             })
         } catch (e: any) {

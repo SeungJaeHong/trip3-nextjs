@@ -12,6 +12,7 @@ import React from 'react'
 import useUser from "../../hooks"
 import {logout} from "../../services/auth.service"
 import {toast} from "react-hot-toast"
+import {useRouter} from "next/router"
 
 const links = [
     {
@@ -45,10 +46,13 @@ type Props = {
 const Navbar = ({darkMode, showSearch, showLogo}: Props) => {
     const { loading, userIsLoggedIn, user, mutate } = useUser()
     const [menuOpen, setMenuOpen] = useState(false)
+    const router = useRouter()
+
     const onLogoutClick = async () => {
         try {
             const res = await logout().then((response) => {
                 mutate(undefined)
+                router.push('/')
             })
         } catch (e: any) {
             toast.error('Väljalogimine ebaõnnestus')

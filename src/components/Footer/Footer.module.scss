@@ -19,6 +19,8 @@
             text-align: center;
             padding-bottom: $spacer * 5;
             gap: $spacer * 4;
+            display: flex;
+            flex-direction: column;
         }
     }
 
