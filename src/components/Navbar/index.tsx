@@ -43,7 +43,7 @@ type Props = {
 }
 
 const Navbar = ({darkMode, showSearch, showLogo}: Props) => {
-    const { loading, loggedIn, user, mutate } = useUser()
+    const { loading, userIsLoggedIn, user, mutate } = useUser()
     const [menuOpen, setMenuOpen] = useState(false)
     const onLogoutClick = async () => {
         try {
@@ -62,7 +62,7 @@ const Navbar = ({darkMode, showSearch, showLogo}: Props) => {
     }
 
     const mobileMenuUserLinks = () => {
-        if (loggedIn) {
+        if (userIsLoggedIn) {
             return <a onClick={onLogoutClick}>Logi välja</a>
         } else {
             return (

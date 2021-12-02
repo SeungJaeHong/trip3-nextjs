@@ -24,7 +24,7 @@ type Props = {
 }
 
 const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
-    const { loggedIn, user } = useUser()
+    const { userIsLoggedIn, user } = useUser()
     const [commentValue, setCommentValue] = useState<string>('')
     const [comments, setComments] = useState(post.comments)
     const newestCommentUrl = lastCommentId ? getForumUrlByTypeAndSlug(post.type, post.slug) + '?page=' + lastPage + '#' + lastCommentId : ''
@@ -104,7 +104,7 @@ const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
                             currentPage={currentPage}
                             lastPage={lastPage} />
 
-                        {loggedIn &&
+                        {userIsLoggedIn &&
                             <div className={styles.AddComment}>
                                 <BlockTitle title={'Lisa kommentaar'} />
                                 <CommentEditor

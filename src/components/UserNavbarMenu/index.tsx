@@ -13,8 +13,8 @@ type Props = {
 
 const UserNavBarMenu = ({darkMode}: Props) => {
     const router = useRouter()
-    const { loading, loggedIn, user, mutate } = useUser()
-    const userIsAdmin = loggedIn && user?.isAdmin
+    const { loading, userIsLoggedIn, user, mutate } = useUser()
+    const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const [menuOpen, setMenuOpen] = useState(false)
     const ref = useRef<any>()
 
@@ -51,7 +51,7 @@ const UserNavBarMenu = ({darkMode}: Props) => {
     }
 
     const renderTitle = () => {
-        if (loggedIn && user !== undefined) {
+        if (userIsLoggedIn && user !== undefined) {
             return (
                 <div className={styles.UserAvatar}>
                     <UserAvatar user={user} borderWidth={2} />
@@ -129,7 +129,7 @@ const UserNavBarMenu = ({darkMode}: Props) => {
                         )
                     })}
 
-                    {loggedIn &&
+                    {userIsLoggedIn &&
                         <div className={styles.LinkWrapper} onClick={onLogoutClick}>
                             <span className={styles.Link}>Logi välja</span>
                         </div>

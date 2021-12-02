@@ -6,7 +6,7 @@ import {createUserOrLogin} from "../../services/auth.service"
 import useUser from "../../hooks"
 
 const GoogleLogin = () => {
-    const { loggedIn, user, mutate } = useUser()
+    const { userIsLoggedIn, user, mutate } = useUser()
 
     const handleError = (err: any) => {
         toast.error('Sisselogimine ebaõnnestus!')

@@ -22,7 +22,7 @@ type Inputs = {
 }
 
 const LoginForm = () => {
-    const { loggedIn, user, mutate } = useUser()
+    const { userIsLoggedIn, user, mutate } = useUser()
     const loginSchema = yup.object().shape({
         name: yup.string().required('Kasutajanimi on kohustuslik'),
         password: yup.string().required('Parool on kohustuslik'),
@@ -33,7 +33,7 @@ const LoginForm = () => {
     })
 
     useEffect(() => {
-        if (loggedIn) {
+        if (userIsLoggedIn) {
             Router.replace('/')
         }
     }, [user])

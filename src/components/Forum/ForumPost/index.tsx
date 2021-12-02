@@ -15,13 +15,13 @@ import useUser from "../../../hooks"
 
 const ForumPost = (item: Content) => {
     const [post, setPost] = useState<Content>(item)
-    const { loggedIn, user } = useUser()
-    const userIsAdmin = loggedIn && user?.isAdmin
+    const { userIsLoggedIn, user } = useUser()
+    const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const isPostOwner = item.user.id === user?.id
     const router = useRouter()
 
     const onThumbsClick = (value: boolean) => {
-        if (loggedIn) {
+        if (userIsLoggedIn) {
             ratePost(post, value).then(res => {
                 setPost(res.data)
             }).catch(err => {})

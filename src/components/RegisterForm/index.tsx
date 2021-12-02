@@ -20,7 +20,7 @@ type Inputs = {
 }
 
 const RegisterForm = () => {
-    const { loggedIn, user, mutate } = useUser()
+    const { userIsLoggedIn, user, mutate } = useUser()
     const registerSchema = yup.object().shape({
         name: yup.string().required('Kasutajanimi on kohustuslik'),
         email: yup.string().email('E-post ei ole korrektne').required('E-post on kohustuslik'),
@@ -35,10 +35,10 @@ const RegisterForm = () => {
     })
 
     useEffect(() => {
-        if (loggedIn) {
+        if (userIsLoggedIn) {
             Router.replace('/')
         }
-    }, [loggedIn])
+    }, [userIsLoggedIn])
 
     const handleRegister: SubmitHandler<Inputs> = async (values: Inputs) => {
         const { name, email, password } = values

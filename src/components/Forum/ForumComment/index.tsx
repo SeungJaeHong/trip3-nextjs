@@ -18,8 +18,8 @@ type Props = {
 }
 
 const ForumComment = ({item, type}: Props) => {
-    const { loggedIn, user } = useUser()
-    const userIsAdmin = loggedIn && user?.isAdmin
+    const { userIsLoggedIn, user } = useUser()
+    const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const isCommentOwner = item.user.id === user?.id
     const [comment, setComment] = useState(item)
     const canEditComment = comment.hasTimeToEdit && isCommentOwner
@@ -28,7 +28,7 @@ const ForumComment = ({item, type}: Props) => {
     const router = useRouter()
 
     const onThumbsClick = (value: boolean) => {
-        if (loggedIn) {
+        if (userIsLoggedIn) {
             rateComment(comment, value, type).then(res => {
                 setComment(res.data)
             }).catch(err => {})

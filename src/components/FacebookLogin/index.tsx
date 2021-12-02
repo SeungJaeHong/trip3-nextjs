@@ -6,7 +6,7 @@ import {createUserOrLogin} from "../../services/auth.service"
 import useUser from "../../hooks"
 
 const FacebookLogin = () => {
-    const { loggedIn, user, mutate } = useUser()
+    const { userIsLoggedIn, user, mutate } = useUser()
     const signInFB = () => {
         FB.login(function(response) {
             if (response.status === 'connected') {

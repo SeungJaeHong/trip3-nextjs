@@ -24,7 +24,7 @@ type Props = {
 }
 
 const Home = ({flightOffers, forumPosts}: Props) => {
-    const { loggedIn, user } = useUser()
+    const { userIsLoggedIn, user } = useUser()
     return (
         <>
             <div className={styles.Header}
@@ -58,12 +58,12 @@ const Home = ({flightOffers, forumPosts}: Props) => {
                         </div>
                     </div>
                     <div className={clsx(styles.MoreFlightsLink, {
-                        [styles.UserLoggedIn]: loggedIn
+                        [styles.UserLoggedIn]: userIsLoggedIn
                     })}>
                         <MoreLink title={'Vaata kõiki lennupakkumisi'} route={'/odavad-lennupiletid'} />
                     </div>
 
-                    {!loggedIn &&
+                    {!userIsLoggedIn &&
                         <div className={styles.JoinTripBlock}>
                             <div className={styles.TripDescription}>
                                 <span className={styles.DescriptionText}>
@@ -100,7 +100,7 @@ const Home = ({flightOffers, forumPosts}: Props) => {
                                         <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
                                     </div>
                                 </div>
-                                {loggedIn &&
+                                {userIsLoggedIn &&
                                     <div className={styles.AddNewTopic}>
                                         <Button
                                             title={'Alusta uut teemat'}

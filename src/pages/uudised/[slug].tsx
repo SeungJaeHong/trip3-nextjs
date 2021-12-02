@@ -24,7 +24,7 @@ type Props = {
 
 const NewsShow = ({news}: Props) => {
     const [comments, setComments] = useState(news.comments)
-    const { loggedIn, user } = useUser()
+    const { userIsLoggedIn, user } = useUser()
     const [commentValue, setCommentValue] = useState('')
     const [submitting, setSubmitting] = useState(false)
     const router = useRouter()
@@ -94,7 +94,7 @@ const NewsShow = ({news}: Props) => {
                                 )
                             })}
                         </div>
-                        {loggedIn &&
+                        {userIsLoggedIn &&
                             <div className={styles.AddComment}>
                                 <BlockTitle title={'Lisa kommentaar'} />
                                 <CommentEditor

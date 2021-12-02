@@ -6,8 +6,8 @@ import useUser from "../../../hooks"
 
 const ForumTabs = () => {
     const router = useRouter()
-    const { loggedIn, user } = useUser()
-    const userIsAdmin = loggedIn && user?.isAdmin
+    const { userIsLoggedIn, user } = useUser()
+    const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const tabs = [
         {
             title: 'Üldfoorum',
@@ -44,7 +44,7 @@ const ForumTabs = () => {
     return (
         <div className={styles.ForumTabs}>
             {tabs.map(tab => {
-                if (tab.route === '/foorum/minu-jalgimised' && !loggedIn) {
+                if (tab.route === '/foorum/minu-jalgimised' && !userIsLoggedIn) {
                     return null
                 }
 
