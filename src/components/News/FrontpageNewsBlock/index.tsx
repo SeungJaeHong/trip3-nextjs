@@ -2,17 +2,17 @@ import styles from './FrontpageNewsBlock.module.scss'
 import BlockTitle from "../../BlockTitle"
 import NewsCard from "../NewsCard"
 import {useEffect, useState} from "react"
-import {getNewsData} from "../../../api/frontpage"
 import {NewsCardType} from "../../../types"
-import MoreLink from "../../MoreLink";
+import MoreLink from "../../MoreLink"
+import {getLatestNews} from "../../../services/news.service"
 
 const FrontpageNewsBlock = () => {
     const [news, setNews] = useState([]);
 
     useEffect(() => {
         const getNews = async () => {
-            const result = await getNewsData()
-            setNews(result.data.news);
+            const result = await getLatestNews()
+            setNews(result.data);
         }
 
         getNews();

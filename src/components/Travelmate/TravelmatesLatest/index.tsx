@@ -1,17 +1,18 @@
 import styles from './TravelmatesLatest.module.scss'
 import BlockTitle from "../../BlockTitle"
 import {useEffect, useState} from "react"
-import {getLatestTravelmates} from "../../../api/travelmates"
 import MoreLink from "../../MoreLink"
-import TravelmateList from "../TravelmateList";
+import TravelmateList from "../TravelmateList"
+import {getLatestTravelmates} from "../../../services/travelmate.service"
+import {TravelmateRowType} from "../../../types"
 
 const TravelmatesLatest = () => {
-    const [travelmates, setTravelmates] = useState([]);
+    const [travelmates, setTravelmates] = useState<TravelmateRowType[]>([])
 
     useEffect(() => {
         const getTravelmates = async () => {
             const result = await getLatestTravelmates()
-            setTravelmates(result.data.travelmates);
+            setTravelmates(result.data)
         }
 
         getTravelmates()

@@ -5,8 +5,8 @@ import Router from "next/router"
 import FormInput from "../Form/FormInput"
 import SubmitButton from "../Form/SubmitButton"
 import useUser from "../../hooks"
-import {register as registerUser} from "../../services/auth.service";
-import toast from "react-hot-toast";
+import {register as registerUser} from "../../services/auth.service"
+import toast from "react-hot-toast"
 import { useForm, SubmitHandler } from "react-hook-form"
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
