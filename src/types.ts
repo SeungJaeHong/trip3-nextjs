@@ -2,11 +2,12 @@ export interface User {
     id: number
     name: string
     rank: number
+    isAdmin: boolean
     avatar?: string
+    unReadMessageCount?: number
 }
 
-export interface UserProfile extends User {
-    isAdmin: boolean
+export interface UserPublicProfile extends User {
     rankName: string
     joinedDate: string
     description?: string
@@ -15,23 +16,18 @@ export interface UserProfile extends User {
     postCount: number
     commentCount: number
     placesVisited: number
-    //continentsVisited?: Destination[]
     countriesVisited?: Destination[]
     citiesVisited?: Destination[]
     wantsToGo?: Destination[]
     countryPercentage: number
 }
 
-export interface LoggedInUser extends User {
-    isAdmin: boolean
-    unReadMessageCount?: number
+export interface UserProfile extends User {
     email?: string
     contact_facebook?: string
     contact_twitter?: string
     contact_instagram?: string
     contact_homepage?: string
-    real_name?: string
-    real_name_show?: boolean
     gender?: number
     birthYear?: number
     description?: string

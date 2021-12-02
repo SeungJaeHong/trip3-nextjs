@@ -1,32 +1,29 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment} from 'react'
 import {GetServerSideProps} from 'next'
 import styles from "./UserPage.module.scss"
-import Header from "../../components/Header"
-import Footer from "../../components/Footer"
-import {UserProfile} from "../../types"
-import ApiClientSSR from "../../lib/ApiClientSSR"
-import containerStyle from "../../styles/containers.module.scss"
-import UserProfileAvatar from "../../components/User/UserProfileAvatar"
-import DottedMapIcon from "../../icons/DottedMapIcon"
-import ThumbsUpIcon from "../../icons/ThumbsUpIcon"
-import PostIcon from "../../icons/Admin/PostIcon"
-import CommentIcon from "../../icons/CommentIcon"
-import ThumbsDownIcon from "../../icons/ThumbsDownIcon"
-import ImageGallery from "../../components/ImageGallery"
-import PinIcon from "../../icons/PinIcon"
-import StarIcon from "../../icons/StarIcon"
-import Tag from "../../components/Tag"
-import BlockTitle from "../../components/BlockTitle"
-import UserLastComments from "../../components/User/UserLastComments"
+import Header from "../../../components/Header"
+import Footer from "../../../components/Footer"
+import {UserPublicProfile} from "../../../types"
+import ApiClientSSR from "../../../lib/ApiClientSSR"
+import containerStyle from "../../../styles/containers.module.scss"
+import UserProfileAvatar from "../../../components/User/UserProfileAvatar"
+import DottedMapIcon from "../../../icons/DottedMapIcon"
+import ThumbsUpIcon from "../../../icons/ThumbsUpIcon"
+import PostIcon from "../../../icons/Admin/PostIcon"
+import CommentIcon from "../../../icons/CommentIcon"
+import ThumbsDownIcon from "../../../icons/ThumbsDownIcon"
+import ImageGallery from "../../../components/ImageGallery"
+import PinIcon from "../../../icons/PinIcon"
+import StarIcon from "../../../icons/StarIcon"
+import Tag from "../../../components/Tag"
+import BlockTitle from "../../../components/BlockTitle"
+import UserLastComments from "../../../components/User/UserLastComments"
 
 type Props = {
-    user: UserProfile
+    user: UserPublicProfile
 }
 
 const UserPage = ({user}: Props) => {
-
-    //console.log(user)
-
     const showVisitedBlock = (user.countriesVisited && user.countriesVisited?.length > 0)
         || (user.citiesVisited && user.citiesVisited?.length > 0)
 

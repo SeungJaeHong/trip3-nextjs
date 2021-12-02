@@ -1,8 +1,8 @@
 import ApiClient from "../lib/ApiClient"
 import {AxiosResponse} from "axios"
-import {LoggedInUser} from "../types"
+import {User} from "../types"
 
-export const getUser = async (): Promise<LoggedInUser> => {
+export const getUser = async (): Promise<User> => {
 
     console.log('getUser')
 

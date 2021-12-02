@@ -1,12 +1,12 @@
 import styles from "./UserLastComments.module.scss"
 import {useEffect, useState} from "react";
 import {getLastComments} from "../../../services/user.service";
-import {UserComment, UserProfile} from "../../../types";
+import {UserComment, UserPublicProfile} from "../../../types";
 import LoadingSpinner2 from "../../LoadingSpinner2"
 import ForumComment from "../../Forum/ForumComment";
 import Link from 'next/link'
 
-const UserLastComments = (user: UserProfile) => {
+const UserLastComments = (user: UserPublicProfile) => {
     const [comments, setComments] = useState<UserComment[]>([])
     const [loading, setLoading] = useState<boolean>(false)
 

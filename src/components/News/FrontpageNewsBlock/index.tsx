@@ -7,15 +7,15 @@ import MoreLink from "../../MoreLink"
 import {getLatestNews} from "../../../services/news.service"
 
 const FrontpageNewsBlock = () => {
-    const [news, setNews] = useState([]);
+    const [news, setNews] = useState([])
 
     useEffect(() => {
         const getNews = async () => {
             const result = await getLatestNews()
-            setNews(result.data);
+            setNews(result.data)
         }
 
-        getNews();
+        getNews()
     }, [])
 
     return (

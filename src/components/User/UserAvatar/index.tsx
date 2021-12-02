@@ -1,10 +1,10 @@
 import styles from "./UserAvatar.module.scss"
-import {LoggedInUser, User} from "../../../types"
+import {User} from "../../../types"
 import UserIcon from '../../../icons/UserIcon'
 import {useState, useRef, useEffect} from "react"
 
 type Props = {
-    user:  User|LoggedInUser
+    user:  User
     borderWidth: number
 }
 

@@ -1,10 +1,10 @@
 import React from "react"
 import styles from "./UserProfileAvatar.module.scss"
-import {UserProfile} from "../../../types"
+import {UserPublicProfile} from "../../../types"
 import clsx from "clsx"
 import StarIconFilled from "../../../icons/StarIconFilled"
 
-const UserProfileAvatar = (user: UserProfile) => {
+const UserProfileAvatar = (user: UserPublicProfile) => {
     const imgSrc = user.avatar ?? '/images/noUser.png'
     return (
         <div className={clsx(styles.UserProfileAvatar, {
