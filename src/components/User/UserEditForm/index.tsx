@@ -20,7 +20,7 @@ type Inputs = {
     password: string
     password_confirmation: string
     description: string
-    gender: number
+    gender: string
     birthyear: number
     facebook: string
     instagram: string
@@ -36,12 +36,15 @@ const UserEditForm = (userProfile: UserProfile) => {
         password: yup.string(),
         password_confirmation: yup.string()
             .oneOf([yup.ref('password'), null], 'Paroolid ei ühti'),
-        birthyear: yup.number().max(new Date().getFullYear(), 'Valesti sisestatud aasta').min(1900, 'Valesti sisestatud aasta'),
-        facebook: yup.string().url('Ei ole korrektne url'),
-        instagram: yup.string().url('Ei ole korrektne url'),
-        twitter: yup.string().url('Ei ole korrektne url'),
-        homepage: yup.string().url('Ei ole korrektne url')
+        birthyear: yup.number().max(new Date().getFullYear(), 'Valesti sisestatud aasta').min(1900, 'Valesti sisestatud aasta').nullable(),
+        gender: yup.string().nullable(),
+        facebook: yup.string().url('Ei ole korrektne url').nullable(),
+        instagram: yup.string().url('Ei ole korrektne url').nullable(),
+        twitter: yup.string().url('Ei ole korrektne url').nullable(),
+        homepage: yup.string().url('Ei ole korrektne url').nullable()
     }).required()
+
+    //console.log(userProfile)
 
     const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
         resolver: yupResolver(registerSchema),
@@ -49,15 +52,15 @@ const UserEditForm = (userProfile: UserProfile) => {
             name:userProfile.name,
             email: userProfile.email,
             description: userProfile.description,
-            gender: userProfile.gender ? userProfile.gender : undefined,
+            gender: userProfile.gender ? String(userProfile.gender) : undefined,
             birthyear: userProfile.birthYear,
             facebook: userProfile.contact_facebook,
             instagram: userProfile.contact_instagram,
             twitter: userProfile.contact_twitter,
             homepage: userProfile.contact_homepage,
         },
-        criteriaMode: "all",
-        shouldFocusError: true
+        //criteriaMode: "all",
+        //shouldFocusError: true
     })
 
     const handleUpdate: SubmitHandler<Inputs> = async (values: Inputs) => {
@@ -65,7 +68,7 @@ const UserEditForm = (userProfile: UserProfile) => {
         console.log(values)
 
         const resp = await updateUserProfile(userProfile.id, values).then(res => {
-            //Router.push('/user/' + userProfile.id)
+            Router.push('/user/' + userProfile.id)
             toast.success(
                 'Profiili uuendamine õnnestus!',
                 {
