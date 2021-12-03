@@ -24,6 +24,43 @@
 
             .FormInput {
                 margin-bottom: $spacer * 3;
+
+                .TwoColField {
+                    display: flex;
+                    width: 100%;
+
+                    .GenderField {
+                        display: flex;
+                        flex-direction: column;
+                        gap: $spacer * 1.5;
+                        flex: 1;
+
+                        .GenderLabel {
+                            color: $gray-darker;
+                            margin-bottom: $spacer;
+                            font-size: $font-size-normal;
+                            font-weight: 500;
+                            line-height: 1.2rem
+                        }
+
+                        .GenderInputs {
+                            display: flex;
+                        }
+
+                        @include sm() {
+                            gap: $spacer;
+
+                            .GenderInputs {
+                                flex-direction: column;
+                                gap: $spacer;
+                            }
+                        }
+                    }
+
+                    .BirthYearField {
+                        flex: 1;
+                    }
+                }
             }
         }
 
