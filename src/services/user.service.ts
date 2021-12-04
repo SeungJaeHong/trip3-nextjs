@@ -8,3 +8,7 @@ export const getLastComments = async (id: number): Promise<AxiosResponse> => {
 export const updateUserProfile = async (userId: number, values: any): Promise<AxiosResponse> => {
     return await ApiClient.post('/user/' + userId + '/update', values)
 }
+
+export const getMyDestinationsData = async (): Promise<AxiosResponse> => {
+    return await ApiClient.get('/profile/destinations')
+}

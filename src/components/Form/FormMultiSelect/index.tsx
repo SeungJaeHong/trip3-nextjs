@@ -5,10 +5,10 @@ import clsx from "clsx";
 
 type Props = {
     id: string
-    options: { value: string, label: string }[]
+    options: { value: string, label: string }[] | []
     values?: { value: string, label: string }[]
-    label: string | undefined
-    placeholder: string | undefined
+    label?: string
+    placeholder?: string
     className?: string
     classNamePrefix?: string
     isClearable: boolean

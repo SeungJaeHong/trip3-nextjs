@@ -1,0 +1,34 @@
+@import "../../../styles/variables";
+
+.UserProfileDestinationForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: $white;
+    max-width: 500px;
+    z-index: 2;
+
+    .FormContainer {
+        display: flex;
+        padding: $spacer $spacer * 5 $spacer * 5 $spacer * 5;
+
+        form {
+            width: 100%;
+
+            .SubHeading {
+                color: $blue;
+                font-size: $font-size-medium;
+                font-weight: 500;
+                margin: $spacer * 4 0 $spacer * 2 0;
+            }
+
+            .FormInput {
+                margin-bottom: $spacer * 3;
+            }
+        }
+
+        .SubmitButton {
+            margin-top: $spacer * 5;
+        }
+    }
+}
