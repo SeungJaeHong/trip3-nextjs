@@ -18,14 +18,31 @@ import StarIcon from "../../../icons/StarIcon"
 import Tag from "../../../components/Tag"
 import BlockTitle from "../../../components/BlockTitle"
 import UserLastComments from "../../../components/User/UserLastComments"
+import useUser from "../../../hooks"
+import {useRouter} from "next/router"
 
 type Props = {
-    user: UserPublicProfile
+    userProfile: UserPublicProfile
 }
 
-const UserPage = ({user}: Props) => {
-    const showVisitedBlock = (user.countriesVisited && user.countriesVisited?.length > 0)
-        || (user.citiesVisited && user.citiesVisited?.length > 0)
+const UserPage = ({userProfile}: Props) => {
+    const { userIsLoggedIn, user } = useUser()
+    const isUserOwner = userProfile.id === user?.id
+    const router = useRouter()
+    const showVisitedBlock = (userProfile.countriesVisited && userProfile.countriesVisited?.length > 0)
+        || (userProfile.citiesVisited && userProfile.citiesVisited?.length > 0)
+
+    const renderMessageBtn = () => {
+        if (!userIsLoggedIn || isUserOwner) {
+            return null
+        }
+
+        return (
+            <div className={styles.ActionButton} onClick={() => router.push('/profile/messages/' + userProfile.id)}>
+                <span>{'Saada sõnum'}</span>
+            </div>
+        )
+    }
 
     return (
         <Fragment>
@@ -40,42 +57,40 @@ const UserPage = ({user}: Props) => {
                             <DottedMapIcon />
                         </div>
                         <div className={styles.Avatar}>
-                            <UserProfileAvatar {...user} />
+                            <UserProfileAvatar {...userProfile} />
                         </div>
                         <div className={styles.UserNameContainer}>
                             <div className={styles.UserName}>
-                                {user.name}
+                                {userProfile.name}
                             </div>
-                            <div className={styles.MessageButton}>
-                                <span>Saada sõnum</span>
-                            </div>
+                            {renderMessageBtn()}
                         </div>
                         <div className={styles.Joined}>
-                            Liitus Tripiga {user.joinedDate}
+                            Liitus Tripiga {userProfile.joinedDate}
                         </div>
                         <div className={styles.Statistics}>
                             <div className={styles.StatisticsItem}>
                                 <ThumbsUpIcon />
                                 <span className={styles.StatisticsLabel}>
-                                    {user.liked} meeldimist
+                                    {userProfile.liked} meeldimist
                                 </span>
                             </div>
                             <div className={styles.StatisticsItem}>
                                 <ThumbsDownIcon />
                                 <span className={styles.StatisticsLabel}>
-                                    {user.disliked} mittemeeldimist
+                                    {userProfile.disliked} mittemeeldimist
                                 </span>
                             </div>
                             <div className={styles.StatisticsItem}>
                                 <PostIcon />
                                 <span className={styles.StatisticsLabel}>
-                                    {user.postCount} postitust
+                                    {userProfile.postCount} postitust
                                 </span>
                             </div>
                             <div className={styles.StatisticsItem}>
                                 <CommentIcon />
                                 <span className={styles.StatisticsLabel}>
-                                    {user.commentCount} kommentaari
+                                    {userProfile.commentCount} kommentaari
                                 </span>
                             </div>
                         </div>
@@ -85,46 +100,31 @@ const UserPage = ({user}: Props) => {
                                 <div className={styles.VisitedHeader}>
                                     On külastanud:
                                 </div>
-                                {/*{(user.continentsVisited && user.continentsVisited?.length > 0) &&
+                                {(userProfile.countriesVisited && userProfile.countriesVisited?.length > 0) &&
                                     <div className={styles.DestinationInfo}>
                                         <div className={styles.Info}>
                                             <PinIcon />
                                             <div className={styles.InfoTitle}>
-                                                {user.continentsVisited.length} kontinenti
+                                                {userProfile.countriesVisited.length} riiki ({userProfile.countryPercentage}%)
                                             </div>
                                         </div>
                                         <div className={styles.Tags}>
-                                            {user.continentsVisited.map(destination => {
-                                                return <Tag title={destination.name} large={true} white={true} route={'/sihtkoht/' + destination.slug} key={destination.id} />
-                                            })}
-                                        </div>
-                                    </div>
-                                }*/}
-                                {(user.countriesVisited && user.countriesVisited?.length > 0) &&
-                                    <div className={styles.DestinationInfo}>
-                                        <div className={styles.Info}>
-                                            <PinIcon />
-                                            <div className={styles.InfoTitle}>
-                                                {user.countriesVisited.length} riiki ({user.countryPercentage}%)
-                                            </div>
-                                        </div>
-                                        <div className={styles.Tags}>
-                                            {user.countriesVisited.map(destination => {
+                                            {userProfile.countriesVisited.map(destination => {
                                                 return <Tag title={destination.name} large={true} white={true} route={'/sihtkoht/' + destination.slug} key={destination.id} />
                                             })}
                                         </div>
                                     </div>
                                 }
-                                {(user.citiesVisited && user.citiesVisited?.length > 0) &&
+                                {(userProfile.citiesVisited && userProfile.citiesVisited?.length > 0) &&
                                     <div className={styles.DestinationInfo}>
                                         <div className={styles.Info}>
                                             <PinIcon />
                                             <div className={styles.InfoTitle}>
-                                                {user.citiesVisited.length} linna või piirkonda
+                                                {userProfile.citiesVisited.length} linna või piirkonda
                                             </div>
                                         </div>
                                         <div className={styles.Tags}>
-                                            {user.citiesVisited.map(destination => {
+                                            {userProfile.citiesVisited.map(destination => {
                                                 return <Tag title={destination.name} large={true} white={true} route={'/sihtkoht/' + destination.slug} key={destination.id} />
                                             })}
                                         </div>
@@ -133,7 +133,7 @@ const UserPage = ({user}: Props) => {
                             </div>
                         }
 
-                        {(user.wantsToGo && user.wantsToGo?.length > 0) &&
+                        {(userProfile.wantsToGo && userProfile.wantsToGo?.length > 0) &&
                             <>
                                 <div className={styles.VisitedHeader}>
                                     Tahab minna:
@@ -142,11 +142,11 @@ const UserPage = ({user}: Props) => {
                                     <div className={styles.Info}>
                                         <StarIcon />
                                         <div className={styles.InfoTitle}>
-                                            {user.wantsToGo.length} sihtkohta
+                                            {userProfile.wantsToGo.length} sihtkohta
                                         </div>
                                     </div>
                                     <div className={styles.Tags}>
-                                        {user.wantsToGo.map(destination => {
+                                        {userProfile.wantsToGo.map(destination => {
                                             return <Tag title={destination.name} large={true} white={true} route={'/sihtkoht/' + destination.slug} key={destination.id} />
                                         })}
                                     </div>
@@ -154,6 +154,19 @@ const UserPage = ({user}: Props) => {
                             </>
                         }
 
+                        {isUserOwner &&
+                            <div className={styles.ActionButtons}>
+                                <div className={styles.ActionButton} onClick={() => router.push('/user/' + userProfile.id + '/edit')}>
+                                    <span>{'Muuda profiili'}</span>
+                                </div>
+                                <div className={styles.ActionButton} onClick={() => router.push('/profile/messages')}>
+                                    <span>{'Sõnumid'}</span>
+                                </div>
+                                <div className={styles.ActionButton} onClick={() => router.push('/profile/destinations')}>
+                                    <span>{'Minu sihtkohad'}</span>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -168,7 +181,7 @@ const UserPage = ({user}: Props) => {
                                 <BlockTitle title={'Viimased kommentaarid'} />
                             </div>
                             <div className={styles.UserLastComments}>
-                                <UserLastComments {...user} />
+                                <UserLastComments {...userProfile} />
                             </div>
                         </div>
                         <div className={styles.Sidebar}>
@@ -195,7 +208,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     return {
         props: {
-            user: response.data
+            userProfile: response.data
         }
     }
 }

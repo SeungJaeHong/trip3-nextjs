@@ -5,7 +5,6 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import toast from "react-hot-toast"
 import { useForm, SubmitHandler } from "react-hook-form"
-import useUser from "../../../hooks"
 import FormInput from "../../Form/FormInput"
 import SubmitButton from "../../Form/SubmitButton"
 import {UserProfile} from "../../../types"
@@ -29,7 +28,6 @@ type Inputs = {
 }
 
 const UserEditForm = (userProfile: UserProfile) => {
-    const { user, mutate } = useUser()
     const registerSchema = yup.object().shape({
         name: yup.string().required('Kasutajanimi on kohustuslik'),
         email: yup.string().email('E-post ei ole korrektne').required('E-post on kohustuslik'),
@@ -43,8 +41,6 @@ const UserEditForm = (userProfile: UserProfile) => {
         twitter: yup.string().url('Ei ole korrektne url').nullable(),
         homepage: yup.string().url('Ei ole korrektne url').nullable()
     }).required()
-
-    //console.log(userProfile)
 
     const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
         resolver: yupResolver(registerSchema),

@@ -66,22 +66,22 @@
                 color: $white;
                 font-weight: 600;
             }
+        }
 
-            .MessageButton {
-                background: $white;
-                color: $green-dark;
-                padding: $spacer $spacer * 3;
-                font-weight: 600;
-                height: 40px;
-                border-radius: 5px;
-                box-shadow: 0 0 3px $green-dark;
-                cursor: pointer;
-                display: flex;
+        .ActionButton {
+            background: $white;
+            color: $green-dark;
+            padding: $spacer $spacer * 3;
+            font-weight: 600;
+            height: 40px;
+            border-radius: 5px;
+            box-shadow: 0 0 3px $green-dark;
+            cursor: pointer;
+            display: flex;
 
-                &:hover {
-                    background: $green-dark;
-                    color: $white;
-                }
+            &:hover {
+                background: $green-dark;
+                color: $white;
             }
         }
 
@@ -131,7 +131,7 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            margin-bottom: $spacer * 2;
+            margin-bottom: $spacer * 3;
             gap: $spacer;
 
             .Info {
@@ -158,6 +158,14 @@
                 flex-wrap: wrap;
                 padding-left: 40px;
             }
+        }
+
+        .ActionButtons {
+            display: flex;
+            margin: $spacer * 2 0;
+            gap: $spacer * 1.5;
+            justify-content: flex-end;
+            flex-wrap: wrap;
         }
 
         @include md() {
@@ -224,6 +232,10 @@
                 .Tags {
                     padding-left: 0;
                 }
+            }
+
+            .ActionButtons {
+                justify-content: center;
             }
         }
     }

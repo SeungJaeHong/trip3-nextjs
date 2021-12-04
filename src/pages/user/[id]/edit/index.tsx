@@ -9,14 +9,12 @@ import containerStyle from "../../../../styles/containers.module.scss"
 import clsx from "clsx"
 import Navbar from "../../../../components/Navbar"
 import UserEditForm from "../../../../components/User/UserEditForm"
-import useUser from "../../../../hooks"
 
 type Props = {
     user: UserPublicProfile
 }
 
 const UserEditPage = ({user}: Props) => {
-    const { userIsLoggedIn } = useUser()
     return (
         <Fragment>
             <div className={styles.Container}>

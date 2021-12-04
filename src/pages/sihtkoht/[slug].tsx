@@ -179,7 +179,7 @@ const DestinationPage = (props: Props) => {
                         </div>
                     </div>
                     <div className={styles.AdsContent}>
-                        Ads
+                        Sidebar
                     </div>
                 </div>
             </div>
