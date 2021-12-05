@@ -7,6 +7,8 @@ import SubmitButton from "../../Form/SubmitButton"
 import {Destination} from "../../../types"
 import {setFormErrors} from "../../../helpers"
 import FormMultiSelect from "../../Form/FormMultiSelect"
+import {updateMyDestinations} from "../../../services/user.service"
+import useUser from "../../../hooks"
 
 type Inputs = {
     visited: { value: string, label: string }[]
@@ -14,12 +16,14 @@ type Inputs = {
 }
 
 type Props = {
+    options: Destination[] | []
     visited?: Destination[]
     wantsToGo?: Destination[]
 }
 
-const UserProfileDestinationForm = ({visited, wantsToGo}: Props) => {
-    const { watch, register, handleSubmit, control, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
+const UserProfileDestinationForm = ({visited, wantsToGo, options}: Props) => {
+    const { user } = useUser()
+    const { handleSubmit, control, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
         defaultValues: {
             visited: visited ? visited?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
             wantsToGo: wantsToGo ? wantsToGo?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
@@ -27,13 +31,19 @@ const UserProfileDestinationForm = ({visited, wantsToGo}: Props) => {
     })
 
     const handleUpdate: SubmitHandler<Inputs> = async (values: Inputs) => {
+        const visitedIds = values?.visited.map(value => {
+            return Number(value.value)
+        })
 
-        console.log(values)
+        const wantsToGoIds = values?.wantsToGo.map(value => {
+            return Number(value.value)
+        })
 
-        /*await updateUserProfile(userProfile.id, values).then(res => {
-            Router.push('/user/' + userProfile.id)
+        await updateMyDestinations(visitedIds, wantsToGoIds).then(res => {
+            // @ts-ignore
+            Router.push('/user/' + user.id)
             toast.success(
-                'Profiili uuendamine õnnestus!',
+                'Sihtkohtade uuendamine õnnestus!',
                 {
                     duration: 3000
                 }
@@ -42,18 +52,11 @@ const UserProfileDestinationForm = ({visited, wantsToGo}: Props) => {
             if (err.response?.data?.errors) {
                 setFormErrors(err.response?.data?.errors, setError)
             }
-            toast.error('Profiili uuendamine ebaõnnestus!')
-        })*/
+            toast.error('Sihtkohtade uuendamine ebaõnnestus!')
+        })
     }
 
-    const visitedOptions: { value: string, label: string }[] = (visited && visited?.length > 0)
-        ? visited.map(destination => ({ label: destination.name, value: destination.id.toString() }))
-        : []
-
-    const wantsToGoOptions: { value: string, label: string }[] = (wantsToGo && wantsToGo?.length > 0)
-        ? wantsToGo.map(destination => ({ label: destination.name, value: destination.id.toString() }))
-        : []
-
+    const allOptions: { label: string; value: string }[] = options.map(destination => ({ label: destination.name, value: destination.id.toString() }))
     return (
         <div className={styles.UserProfileDestinationForm}>
             <div className={styles.FormContainer}>
@@ -69,7 +72,7 @@ const UserProfileDestinationForm = ({visited, wantsToGo}: Props) => {
                                 return (
                                     <FormMultiSelect
                                         id={'visited'}
-                                        options={visitedOptions}
+                                        options={allOptions}
                                         placeholder={'Vali sihtkohad'}
                                         values={field.value}
                                         onChange={field.onChange}
@@ -91,7 +94,7 @@ const UserProfileDestinationForm = ({visited, wantsToGo}: Props) => {
                                 return (
                                     <FormMultiSelect
                                         id={'wantsToGo'}
-                                        options={wantsToGoOptions}
+                                        options={allOptions}
                                         placeholder={'Vali sihtkohad'}
                                         values={field.value}
                                         onChange={field.onChange}

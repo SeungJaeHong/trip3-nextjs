@@ -10,18 +10,20 @@ import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import LoadingSpinner2 from "../../../components/LoadingSpinner2"
 import {getMyDestinationsData} from "../../../services/user.service"
-import UserProfileDestinationForm from "../../../components/User/UserProfileDestinationForm";
+import UserProfileDestinationForm from "../../../components/User/UserProfileDestinationForm"
 
 const UserProfileDestinationPage = () => {
-    const { userIsLoggedIn, user } = useUser()
-    const [visited, setVisited] = useState<Destination[]>()
-    const [wantsToGo, setWantsToGo] = useState<Destination[]>()
+    const { userIsLoggedIn } = useUser()
+    const [allDestinations, setAllDestinations] = useState<Destination[]>([])
+    const [visited, setVisited] = useState<Destination[]>([])
+    const [wantsToGo, setWantsToGo] = useState<Destination[]>([])
     const [loading, setLoading] = useState<boolean>(false)
     const router = useRouter()
 
     useEffect(() => {
         setLoading(true)
         getMyDestinationsData().then((response) => {
+            setAllDestinations(response.data.options)
             setVisited(response.data.visited)
             setWantsToGo(response.data.wantsToGo)
             setLoading(false)
@@ -32,6 +34,10 @@ const UserProfileDestinationPage = () => {
             }
         })
     }, [])
+
+    if (userIsLoggedIn === false) {
+        router.push('/')
+    }
 
     if (loading) {
         return (
@@ -53,7 +59,10 @@ const UserProfileDestinationPage = () => {
                         Minu sihtkohad
                     </div>
                     <div className={styles.Form}>
-                        <UserProfileDestinationForm />
+                        <UserProfileDestinationForm
+                            options={allDestinations}
+                            visited={visited}
+                            wantsToGo={wantsToGo} />
                     </div>
                 </div>
             </div>

@@ -12,3 +12,11 @@ export const updateUserProfile = async (userId: number, values: any): Promise<Ax
 export const getMyDestinationsData = async (): Promise<AxiosResponse> => {
     return await ApiClient.get('/profile/destinations')
 }
+
+export const updateMyDestinations = async (visitedIds: number[], wantsToGoIds: number[]): Promise<AxiosResponse> => {
+    return await ApiClient.post('/profile/update_destinations', {
+        'visited': visitedIds,
+        'wantsToGo': wantsToGoIds
+    })
+}
+

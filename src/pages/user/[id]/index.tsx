@@ -154,7 +154,7 @@ const UserPage = ({userProfile}: Props) => {
                             </>
                         }
 
-                        {isUserOwner &&
+                        {isUserOwner && userIsLoggedIn &&
                             <div className={styles.ActionButtons}>
                                 <div className={styles.ActionButton} onClick={() => router.push('/user/' + userProfile.id + '/edit')}>
                                     <span>{'Muuda profiili'}</span>
