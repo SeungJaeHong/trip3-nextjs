@@ -69,7 +69,7 @@ const UserNavBarMenu = ({darkMode}: Props) => {
 
     const getLinks = () => {
         let links = []
-        if (user) {
+        if (userIsLoggedIn && user) {
             links.push(
                 {
                     title: 'Profiil',
@@ -81,7 +81,7 @@ const UserNavBarMenu = ({darkMode}: Props) => {
                 },
                 {
                     title: 'Sõnumid',
-                    route: '/user/messages'
+                    route: '/profile/messages'
                 }
             )
 

@@ -8,7 +8,8 @@ import clsx from "clsx"
 import Navbar from "../../../components/Navbar"
 import Footer from "../../../components/Footer"
 import LoadingSpinner2 from "../../../components/LoadingSpinner2"
-import UserMessages from "../../../components/User/UserMessages";
+import UserMessages from "../../../components/User/UserMessages"
+import {getMyMessages} from "../../../services/user.service"
 
 const UserProfileMessagesPage = () => {
     const { userIsLoggedIn } = useUser()
@@ -18,14 +19,14 @@ const UserProfileMessagesPage = () => {
 
     useEffect(() => {
         setLoading(false)
-        /*getMyDestinationsData().then((response) => {
+        getMyMessages().then((response) => {
             setLoading(false)
         }).catch(err => {
             setLoading(false)
             if (err.response.status === 401) {
                 router.push('/')
             }
-        })*/
+        })
     }, [])
 
     if (userIsLoggedIn === false) {
@@ -49,7 +50,7 @@ const UserProfileMessagesPage = () => {
                         <Navbar darkMode={true} />
                     </div>
                     <div className={styles.Title}>
-                        Messages
+                        Sõnumid
                     </div>
                     <div className={containerStyle.ContainerLg}>
                         <div className={styles.Body}>

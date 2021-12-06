@@ -20,3 +20,7 @@ export const updateMyDestinations = async (visitedIds: number[], wantsToGoIds: n
     })
 }
 
+export const getMyMessages = async (): Promise<AxiosResponse> => {
+    return await ApiClient.get('/profile/messages')
+}
+
