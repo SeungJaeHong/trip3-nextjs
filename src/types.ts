@@ -35,6 +35,14 @@ export interface UserProfile extends User {
     notify_follow?: boolean
 }
 
+export interface UserMessage {
+    id: number
+    user: User
+    message: string
+    createdAt: string
+    unreadCount: number
+}
+
 export interface Destination {
     id: number
     name: string

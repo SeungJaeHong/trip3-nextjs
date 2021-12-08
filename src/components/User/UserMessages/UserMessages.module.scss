@@ -5,7 +5,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 500px;
     gap: $spacer * 3;
     max-width: 500px;
     margin: 0 auto;
@@ -13,9 +12,59 @@
     .MessageItem {
         display: flex;
         width: 100%;
-        padding: $spacer $spacer * 2;
+        padding: $spacer * 2;
         background: $white;
-        box-shadow: 0 0 25px 10px rgba(209,212,214,0.75);
+        box-shadow: 0 0 10px 5px rgba(209,212,214,0.75);
+        cursor: pointer;
+        gap: $spacer * 2;
 
+        &:hover {
+            box-shadow: 0 0 15px 10px rgba(209,212,214);
+        }
+
+        .Avatar {
+            height: 60px;
+            width: 60px;
+
+            @include sm() {
+                height: 50px;
+                width: 50px;
+            }
+        }
+
+        .Content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: $spacer;
+
+            .UserNameContainer {
+                display: flex;
+                gap: $spacer * 2;
+                align-items: center;
+
+                .UserName {
+                    width: 100%;
+                    color: $gray-dark;
+                    font-size: $font-size-medium;
+                    font-weight: 500;
+                    display: flex;
+                }
+
+                .CreatedAt {
+                    color: $gray-dark;
+                    font-size: $font-size-small;
+                    display: flex;
+                    gap: $spacer;
+                }
+            }
+
+            .Message {
+                color: $gray;
+                font-size: $font-size-small;
+                font-weight: 500;
+                width: 100%;
+            }
+        }
     }
 }

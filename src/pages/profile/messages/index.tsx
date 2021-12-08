@@ -10,16 +10,18 @@ import Footer from "../../../components/Footer"
 import LoadingSpinner2 from "../../../components/LoadingSpinner2"
 import UserMessages from "../../../components/User/UserMessages"
 import {getMyMessages} from "../../../services/user.service"
+import {UserMessage} from "../../../types"
 
 const UserProfileMessagesPage = () => {
     const { userIsLoggedIn } = useUser()
-    const [messages, setMessages] = useState([])
+    const [messages, setMessages] = useState<UserMessage[]>([])
     const [loading, setLoading] = useState<boolean>(false)
     const router = useRouter()
 
     useEffect(() => {
-        setLoading(false)
+        setLoading(true)
         getMyMessages().then((response) => {
+            setMessages(response.data)
             setLoading(false)
         }).catch(err => {
             setLoading(false)
@@ -52,9 +54,9 @@ const UserProfileMessagesPage = () => {
                     <div className={styles.Title}>
                         Sõnumid
                     </div>
-                    <div className={containerStyle.ContainerLg}>
+                    <div className={clsx(containerStyle.ContainerLg, styles.UserMessagesContainer)}>
                         <div className={styles.Body}>
-                            <UserMessages />
+                            <UserMessages messages={messages} />
                         </div>
                     </div>
                 </div>
