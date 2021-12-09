@@ -5,8 +5,17 @@ import clsx from "clsx"
 import Navbar from "../../../../components/Navbar"
 import BackgroundMap from "../../../../components/BackgroundMap"
 import UserChat from "../../../../components/User/UserChat"
+import {useRouter} from "next/router"
+import useUser from "../../../../hooks"
 
 const UserProfileChatPage = () => {
+    const { userIsLoggedIn } = useUser()
+    const router = useRouter()
+
+    if (userIsLoggedIn === false) {
+        router.push('/')
+    }
+
     return (
         <div className={styles.Container}>
             <BackgroundMap />

@@ -9,11 +9,10 @@ import {useRouter} from "next/router";
 
 const UserMessages = () => {
     const [messages, setMessages] = useState<UserMessage[]>([])
-    const [loading, setLoading] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(true)
     const router = useRouter()
 
     useEffect(() => {
-        setLoading(true)
         getMyMessages().then((response) => {
             setMessages(response.data)
             setLoading(false)

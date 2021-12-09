@@ -4,12 +4,22 @@ import {UserMessage} from "../../../types"
 import UserAvatar from "../UserAvatar"
 import {getMyMessages} from "../../../services/user.service"
 import LoadingSpinner2 from "../../LoadingSpinner2"
+import {useRouter} from "next/router"
+import useUser from "../../../hooks"
 
 const UserChat = () => {
     const [messages, setMessages] = useState<UserMessage[]>([])
-    const [loading, setLoading] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(true)
+    const router = useRouter()
+    const {id} = router.query
+    const { user } = useUser()
 
     useEffect(() => {
+        if (id && user) {
+            setLoading(false)
+            //console.log(id, user)
+        }
+
         /*setLoading(true)
         getMyMessages().then((response) => {
             setMessages(response.data)
@@ -17,7 +27,7 @@ const UserChat = () => {
         }).catch(err => {
             setLoading(false)
         })*/
-    }, [])
+    }, [id, user])
 
     if (loading) {
         return (
@@ -30,7 +40,7 @@ const UserChat = () => {
     return (
         <div className={styles.UserChat}>
             <div className={styles.Header}>
-                Header
+
             </div>
             <div className={styles.Body}>
                 <div className={styles.List}>
