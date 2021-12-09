@@ -1,0 +1,78 @@
+@import "../../../styles/variables";
+
+.UserChat {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: $white;
+
+    .Header {
+        position: static;
+        width: 100%;
+        height: 60px;
+        top: 0;
+        box-shadow: 0 5px 15px 0 $gray;
+        z-index: 2;
+    }
+
+    .Body {
+        height: 100%;
+        overflow: auto;
+        padding: $spacer * 2 0;
+
+        .List {
+            display: flex;
+            flex-direction: column;
+            gap: $spacer * 2;
+            padding: 0 $spacer * 2;
+            margin-bottom: $spacer * 5;
+        }
+
+        .Item {
+            background: $gray-light;
+            height: 100px;
+            width: 100%;
+        }
+    }
+
+    .Footer {
+        position: static;
+        width: 100%;
+        height: 200px;
+        background: $white;
+        bottom: 0;
+        box-shadow: 0 -3px 15px $gray;
+        z-index: 2;
+        padding: $spacer * 2 0 $spacer * 2 $spacer * 2;
+
+        textarea {
+            border: 0;
+            height: 100%;
+            width: 100%;
+            outline: none;
+            color: $gray-dark;
+            resize: none;
+            font-size: $font-size-normal;
+            font-family: $font-family-sailec;
+
+            &::placeholder {
+                color: $gray;
+            }
+        }
+    }
+
+    @include sm() {
+        .Footer {
+            height: 150px;
+        }
+    }
+}
+
+.Loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}

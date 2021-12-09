@@ -8,11 +8,15 @@
     align-items: center;
 
     .Logo {
-        margin-top: $spacer * 6;
+        margin-top: $spacer * 2;
         margin-left: $spacer * 2;
 
         @include sm() {
             margin-left: 0;
+
+            svg {
+                width: 150px;
+            }
         }
 
         a {

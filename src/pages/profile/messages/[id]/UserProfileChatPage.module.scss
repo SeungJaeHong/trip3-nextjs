@@ -1,0 +1,24 @@
+@import "../../../../styles/variables";
+
+.Container {
+    position: relative;
+    background: $gray-light;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.Navbar {
+    padding: $spacer * 3 0;
+}
+
+.Content {
+    height: calc(100vh - 96px);
+    max-width: 800px;
+    width: 100%;
+    margin: $spacer * 7 auto 0 auto;
+
+    @include sm() {
+        margin-top: $spacer * 3;
+    }
+}

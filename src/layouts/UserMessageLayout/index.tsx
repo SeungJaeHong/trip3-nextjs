@@ -20,8 +20,6 @@ const UserMessageLayout = ({children}: Props) => {
         router.push('/')
     }
 
-    console.log('render layout')
-
     return (
         <Fragment>
             <div className={styles.Container}>
