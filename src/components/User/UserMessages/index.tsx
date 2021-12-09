@@ -5,10 +5,12 @@ import UserAvatar from "../UserAvatar"
 import Tag from "../../Tag"
 import {getMyMessages} from "../../../services/user.service"
 import LoadingSpinner2 from "../../LoadingSpinner2"
+import {useRouter} from "next/router";
 
 const UserMessages = () => {
     const [messages, setMessages] = useState<UserMessage[]>([])
     const [loading, setLoading] = useState<boolean>(false)
+    const router = useRouter()
 
     useEffect(() => {
         setLoading(true)
@@ -32,7 +34,7 @@ const UserMessages = () => {
         <div className={styles.UserMessages}>
             {messages.map(message => {
                 return (
-                    <div className={styles.MessageItem} key={message.id}>
+                    <div className={styles.MessageItem} key={message.id} onClick={() => router.push('/profile/messages/' + message.user.id)}>
                         <div className={styles.Avatar}>
                             <UserAvatar user={message.user} />
                         </div>
