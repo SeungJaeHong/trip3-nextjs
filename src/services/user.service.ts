@@ -1,6 +1,6 @@
 import ApiClient from "../lib/ApiClient"
 import {AxiosResponse} from "axios"
-import {UserMessage} from "../types";
+import {User, UserMessage} from "../types"
 
 export const getLastComments = async (id: number): Promise<AxiosResponse> => {
     return await ApiClient.get('/user/' + id + '/comments')
@@ -23,5 +23,9 @@ export const updateMyDestinations = async (visitedIds: number[], wantsToGoIds: n
 
 export const getMyMessages = async (): Promise<AxiosResponse<UserMessage[]>> => {
     return await ApiClient.get('/profile/messages')
+}
+
+export const getChatWithUser = async (userId: number): Promise<AxiosResponse> => {
+    return await ApiClient.get('/profile/messages/' + userId)
 }
 

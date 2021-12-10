@@ -43,6 +43,14 @@ export interface UserMessage {
     unreadCount: number
 }
 
+export interface UserChatMessage {
+    id: number
+    userFromId: number
+    userToId: number
+    message: string
+    createdAt: string
+}
+
 export interface Destination {
     id: number
     name: string

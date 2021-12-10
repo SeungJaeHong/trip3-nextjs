@@ -1,32 +1,32 @@
 import React, {useEffect, useState} from "react"
 import styles from "./UserChat.module.scss"
-import {UserMessage} from "../../../types"
-import UserAvatar from "../UserAvatar"
-import {getMyMessages} from "../../../services/user.service"
+import {User, UserChatMessage} from "../../../types"
+import {getChatWithUser} from "../../../services/user.service"
 import LoadingSpinner2 from "../../LoadingSpinner2"
 import {useRouter} from "next/router"
 import useUser from "../../../hooks"
+import clsx from "clsx"
+import ChatMessage from "./ChatMessage"
 
 const UserChat = () => {
-    const [messages, setMessages] = useState<UserMessage[]>([])
+    const [messages, setMessages] = useState<UserChatMessage[]>([])
+    const [chatWithUser, setChatWithUser] = useState<User>()
     const [loading, setLoading] = useState<boolean>(true)
     const router = useRouter()
-    const {id} = router.query
+    const id = Number(router.query?.id)
     const { user } = useUser()
 
     useEffect(() => {
         if (id && user) {
             setLoading(false)
-            //console.log(id, user)
+            getChatWithUser(id).then((response) => {
+                setMessages(response.data.messages)
+                setChatWithUser(response.data.user)
+                setLoading(false)
+            }).catch(err => {
+                setLoading(false)
+            })
         }
-
-        /*setLoading(true)
-        getMyMessages().then((response) => {
-            setMessages(response.data)
-            setLoading(false)
-        }).catch(err => {
-            setLoading(false)
-        })*/
     }, [id, user])
 
     if (loading) {
@@ -37,6 +37,10 @@ const UserChat = () => {
         )
     }
 
+    if (!user || !chatWithUser) {
+        return null
+    }
+
     return (
         <div className={styles.UserChat}>
             <div className={styles.Header}>
@@ -44,10 +48,17 @@ const UserChat = () => {
             </div>
             <div className={styles.Body}>
                 <div className={styles.List}>
-                    {Array.from(Array(10).keys()).map(item => {
+                    {messages.map(message => {
                         return (
-                            <div className={styles.Item} key={item}>
-                                Message
+                            <div className={clsx(styles.MessageContainer, {
+                                [styles.MyMessage]: message.userFromId === user?.id
+                            })} key={message.id}>
+                                <div className={styles.Message}>
+                                    <ChatMessage
+                                        message={message}
+                                        me={user}
+                                        userWith={chatWithUser} />
+                                </div>
                             </div>
                         )
                     })}
