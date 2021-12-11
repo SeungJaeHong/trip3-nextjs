@@ -7,6 +7,8 @@ import {useRouter} from "next/router"
 import useUser from "../../../hooks"
 import clsx from "clsx"
 import ChatMessage from "./ChatMessage"
+import ArrowLeftIcon from "../../../icons/ArrowLeftIcon"
+import UserAvatar from "../UserAvatar"
 
 const UserChat = () => {
     const [messages, setMessages] = useState<UserChatMessage[]>([])
@@ -44,7 +46,18 @@ const UserChat = () => {
     return (
         <div className={styles.UserChat}>
             <div className={styles.Header}>
-
+                <div className={styles.Back} onClick={() => router.push('/profile/messages')}>
+                    <ArrowLeftIcon />
+                    <span className={styles.BackText}>Tagasi</span>
+                </div>
+                <div className={styles.WithUser}>
+                    <div className={styles.Avatar}>
+                        <UserAvatar user={chatWithUser} />
+                    </div>
+                    <div className={styles.UserName}>
+                        {chatWithUser.name}
+                    </div>
+                </div>
             </div>
             <div className={styles.Body}>
                 <div className={styles.List}>

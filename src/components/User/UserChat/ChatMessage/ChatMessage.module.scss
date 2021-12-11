@@ -2,18 +2,51 @@
 
 .ChatMessage {
     display: flex;
+    flex-direction: column;
     width: 100%;
-    border: 1px solid;
-    padding: $spacer * 2;
-    gap: $spacer * 2;
-    border-radius: 10px;
+    gap: $spacer;
 
-    .UserImage {
-        width: 50px;
-        height: 50px;
+    .CreatedAt {
+        font-size: $font-size-xsmall;
+        color: $gray;
+        display: flex;
+        font-weight: 500;
     }
 
-    .Message {
+    .MessageContainer {
+        display: flex;
+        gap: $spacer * 2;
 
+        .UserImage {
+            width: 50px;
+            height: 50px;
+        }
+
+        .Message {
+            display: flex;
+            padding: $spacer $spacer * 2.5;
+            border: 1px solid $gray-light;
+            border-radius: 6px;
+            align-items: center;
+            color: $gray-dark;
+            font-family: $font-family-sailec;
+            background: $gray-light;
+            font-weight: 500;
+        }
+    }
+
+    &.MyMessage {
+        .CreatedAt {
+            justify-content: flex-end;
+        }
+
+        .MessageContainer {
+            flex-direction: row-reverse;
+
+            .Message {
+                color: $white;
+                background: $purple;
+            }
+        }
     }
 }
