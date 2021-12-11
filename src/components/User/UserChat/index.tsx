@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect, useRef, useState} from "react"
 import styles from "./UserChat.module.scss"
 import {User, UserChatMessage} from "../../../types"
 import {getChatWithUser} from "../../../services/user.service"
@@ -17,6 +17,7 @@ const UserChat = () => {
     const router = useRouter()
     const id = Number(router.query?.id)
     const { user } = useUser()
+    //const messagesEndRef = useRef<null | HTMLDivElement>(null)
 
     useEffect(() => {
         if (id && user) {
@@ -75,6 +76,7 @@ const UserChat = () => {
                             </div>
                         )
                     })}
+                    {/*<div id='last' ref={messagesEndRef} />*/}
                 </div>
             </div>
             <div className={styles.Footer}>
