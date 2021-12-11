@@ -84,6 +84,10 @@
                     display: flex;
                     max-width: 75%;
                     width: 100%;
+
+                    @include sm() {
+                        max-width: 100%;
+                    }
                 }
 
                 &.MyMessage {

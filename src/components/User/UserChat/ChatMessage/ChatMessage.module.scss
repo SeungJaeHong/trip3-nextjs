@@ -32,6 +32,26 @@
             font-family: $font-family-sailec;
             background: $gray-light;
             font-weight: 500;
+            position: relative;
+            border-top-left-radius: 0;
+
+            &:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 22px;
+                width: 0;
+                height: 0;
+                border: 6px solid transparent;
+                border-right-color: $gray-light;
+                border-left: 0;
+                margin-top: -5px;
+                margin-left: -6px;
+            }
+
+            @include sm() {
+                overflow-wrap: anywhere;
+            }
         }
     }
 
@@ -46,6 +66,26 @@
             .Message {
                 color: $white;
                 background: $purple;
+                border-top-right-radius: 0;
+                border-top-left-radius: 6px;
+
+                &:before {
+                    content: none;
+                }
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    right: 0;
+                    top: 22px;
+                    width: 0;
+                    height: 0;
+                    border: 6px solid transparent;
+                    border-left-color: $purple;
+                    border-right: 0;
+                    margin-top: -5px;
+                    margin-right: -6px;
+                }
             }
         }
     }
