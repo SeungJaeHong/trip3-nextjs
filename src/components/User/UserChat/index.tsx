@@ -17,7 +17,7 @@ const UserChat = () => {
     const router = useRouter()
     const id = Number(router.query?.id)
     const { user } = useUser()
-    //const messagesEndRef = useRef<null | HTMLDivElement>(null)
+    const bodyRef = useRef<null | HTMLDivElement>(null)
 
     useEffect(() => {
         if (id && user) {
@@ -26,6 +26,7 @@ const UserChat = () => {
                 setMessages(response.data.messages)
                 setChatWithUser(response.data.user)
                 setLoading(false)
+                bodyRef.current?.scrollBy({top: bodyRef.current?.scrollHeight})
             }).catch(err => {
                 setLoading(false)
             })
@@ -60,7 +61,7 @@ const UserChat = () => {
                     </div>
                 </div>
             </div>
-            <div className={styles.Body}>
+            <div className={styles.Body} ref={bodyRef}>
                 <div className={styles.List}>
                     {messages.map(message => {
                         return (
@@ -76,7 +77,6 @@ const UserChat = () => {
                             </div>
                         )
                     })}
-                    {/*<div id='last' ref={messagesEndRef} />*/}
                 </div>
             </div>
             <div className={styles.Footer}>
