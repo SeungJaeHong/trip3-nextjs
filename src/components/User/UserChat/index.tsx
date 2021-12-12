@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react"
 import styles from "./UserChat.module.scss"
 import {User, UserChatMessage} from "../../../types"
-import {getChatWithUser} from "../../../services/user.service"
+import {getChatWithUser, sendMessageToUser} from "../../../services/user.service"
 import LoadingSpinner2 from "../../LoadingSpinner2"
 import {useRouter} from "next/router"
 import useUser from "../../../hooks"
@@ -10,15 +10,19 @@ import ChatMessage from "./ChatMessage"
 import ArrowLeftIcon from "../../../icons/ArrowLeftIcon"
 import UserAvatar from "../UserAvatar"
 import SendIcon from "../../../icons/SendIcon"
+import {toast} from "react-hot-toast"
 
 const UserChat = () => {
     const [messages, setMessages] = useState<UserChatMessage[]>([])
+    const [message, setMessage] = useState<string>('')
     const [chatWithUser, setChatWithUser] = useState<User>()
     const [loading, setLoading] = useState<boolean>(true)
+    const [sending, setSending] = useState<boolean>(false)
     const router = useRouter()
     const id = Number(router.query?.id)
     const { user } = useUser()
     const bodyRef = useRef<null | HTMLDivElement>(null)
+    const textareaRef = useRef<HTMLTextAreaElement>(null)
 
     useEffect(() => {
         if (id && user) {
@@ -33,6 +37,26 @@ const UserChat = () => {
             })
         }
     }, [id, user])
+
+    const onChangeMessage = () => {
+        setMessage(textareaRef.current?.value ?? '')
+    }
+
+    const onSendMessage = () => {
+        if (!sending && chatWithUser && message.length) {
+            setSending(true)
+            sendMessageToUser(chatWithUser.id, message).then(res => {
+                const newMessages = [...messages, res.data]
+                setMessages(newMessages)
+                setMessage('')
+                bodyRef.current?.scrollBy({top: bodyRef.current?.scrollHeight})
+                setSending(false)
+            }).catch(err => {
+                toast.error('Sõnumi saatmine ebaõnnestus')
+                setSending(false)
+            })
+        }
+    }
 
     if (loading) {
         return (
@@ -81,8 +105,13 @@ const UserChat = () => {
                 </div>
             </div>
             <div className={styles.Footer}>
-                <textarea spellCheck={false} placeholder={'Kirjuta sõnum...'} />
-                <div className={styles.SendButton}>
+                <textarea
+                    spellCheck={false}
+                    placeholder={'Kirjuta sõnum...'}
+                    ref={textareaRef}
+                    onChange={onChangeMessage}
+                    value={message} />
+                <div className={styles.SendButton} onClick={onSendMessage}>
                     <SendIcon />
                 </div>
             </div>

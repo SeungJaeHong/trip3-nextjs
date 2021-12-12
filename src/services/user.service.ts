@@ -29,3 +29,9 @@ export const getChatWithUser = async (userId: number): Promise<AxiosResponse> =>
     return await ApiClient.get('/profile/messages/' + userId)
 }
 
+export const sendMessageToUser= async (userId: number, message: string): Promise<AxiosResponse> => {
+    return await ApiClient.post('/profile/messages/' + userId + '/send', {
+        message: message
+    })
+}
+
