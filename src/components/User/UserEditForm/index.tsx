@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useRef} from "react"
 import styles from "./UserEditForm.module.scss"
 import Router from "next/router"
 import * as yup from 'yup'
@@ -12,6 +12,7 @@ import FormTextarea from "../../Form/FormTextarea"
 import FormRadioButton from "../../Form/FormRadioButton"
 import {updateUserProfile} from "../../../services/user.service"
 import {setFormErrors} from "../../../helpers"
+import FormCheckbox from "../../Form/FormCheckbox"
 
 type Inputs = {
     name: string,
@@ -25,15 +26,17 @@ type Inputs = {
     instagram: string
     twitter: string
     homepage: string
+    notify_message: boolean
+    notify_follow: boolean
 }
 
 const UserEditForm = (userProfile: UserProfile) => {
+    const formRef = useRef<HTMLFormElement>(null)
     const registerSchema = yup.object().shape({
         name: yup.string().required('Kasutajanimi on kohustuslik'),
         email: yup.string().email('E-post ei ole korrektne').required('E-post on kohustuslik'),
         password: yup.string(),
-        password_confirmation: yup.string()
-            .oneOf([yup.ref('password'), null], 'Paroolid ei ühti'),
+        password_confirmation: yup.string().oneOf([yup.ref('password'), null], 'Paroolid ei ühti'),
         birthyear: yup.number().max(new Date().getFullYear(), 'Valesti sisestatud aasta').min(1900, 'Valesti sisestatud aasta').nullable(),
         gender: yup.string().nullable(),
         facebook: yup.string().url('Ei ole korrektne url').nullable(),
@@ -54,16 +57,15 @@ const UserEditForm = (userProfile: UserProfile) => {
             instagram: userProfile.contact_instagram,
             twitter: userProfile.contact_twitter,
             homepage: userProfile.contact_homepage,
+            notify_message: userProfile.notify_message,
+            notify_follow: userProfile.notify_follow,
         },
-        //criteriaMode: "all",
-        //shouldFocusError: true
+        criteriaMode: 'firstError',
+        shouldFocusError: true
     })
 
     const handleUpdate: SubmitHandler<Inputs> = async (values: Inputs) => {
-
-        console.log(values)
-
-        const resp = await updateUserProfile(userProfile.id, values).then(res => {
+        await updateUserProfile(userProfile.id, values).then(res => {
             Router.push('/user/' + userProfile.id)
             toast.success(
                 'Profiili uuendamine õnnestus!',
@@ -75,6 +77,7 @@ const UserEditForm = (userProfile: UserProfile) => {
             if (err.response?.data?.errors) {
                 setFormErrors(err.response?.data?.errors, setError)
             }
+            formRef.current?.scrollIntoView()
             toast.error('Profiili uuendamine ebaõnnestus!')
         })
     }
@@ -82,7 +85,7 @@ const UserEditForm = (userProfile: UserProfile) => {
     return (
         <div className={styles.UserEditForm}>
             <div className={styles.FormContainer}>
-                <form onSubmit={handleSubmit(handleUpdate)}>
+                <form onSubmit={handleSubmit(handleUpdate)} ref={formRef}>
                     <div className={styles.SubHeading}>
                         Profiilipilt
                     </div>
@@ -183,6 +186,27 @@ const UserEditForm = (userProfile: UserProfile) => {
                             label={'Lühikirjeldus'}
                             disabled={isSubmitting}
                             error={errors.description?.message}
+                            register={register} />
+                    </div>
+                    <div className={styles.SubHeading}>
+                        E-posti teavitused
+                    </div>
+                    <div className={styles.FormInput}>
+                        <FormCheckbox
+                            name={'notify_message'}
+                            id={'notify_message'}
+                            label={'Teavita mind, kui keegi on saatnud mulle sõnumi'}
+                            disabled={isSubmitting}
+                            error={errors.notify_message?.message}
+                            register={register} />
+                    </div>
+                    <div className={styles.FormInput}>
+                        <FormCheckbox
+                            name={'notify_follow'}
+                            id={'notify_follow'}
+                            label={'Teavita mind, kui keegi on kirjutanud kommentaari postitusele, mida ma jälgin'}
+                            disabled={isSubmitting}
+                            error={errors.notify_follow?.message}
                             register={register} />
                     </div>
                     <div className={styles.SubHeading}>
