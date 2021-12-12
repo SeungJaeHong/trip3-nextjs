@@ -9,6 +9,7 @@ import clsx from "clsx"
 import ChatMessage from "./ChatMessage"
 import ArrowLeftIcon from "../../../icons/ArrowLeftIcon"
 import UserAvatar from "../UserAvatar"
+import SendIcon from "../../../icons/SendIcon"
 
 const UserChat = () => {
     const [messages, setMessages] = useState<UserChatMessage[]>([])
@@ -81,6 +82,9 @@ const UserChat = () => {
             </div>
             <div className={styles.Footer}>
                 <textarea spellCheck={false} placeholder={'Kirjuta sõnum...'} />
+                <div className={styles.SendButton}>
+                    <SendIcon />
+                </div>
             </div>
         </div>
     )
