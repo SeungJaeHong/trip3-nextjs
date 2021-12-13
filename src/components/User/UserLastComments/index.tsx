@@ -13,14 +13,14 @@ const UserLastComments = (user: UserPublicProfile) => {
     useEffect(() => {
         try {
             setLoading(true)
-            const res = getLastComments(user.id).then((response) => {
+            getLastComments(user.id).then((response) => {
                 setComments(response.data)
                 setLoading(false)
             })
         } catch (e: any) {
             setLoading(false)
         }
-    }, [])
+    }, [user.id])
 
     if (loading) {
         return (

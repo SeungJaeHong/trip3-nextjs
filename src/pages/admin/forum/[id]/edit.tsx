@@ -16,14 +16,14 @@ const AdminForumPostEditPage = () => {
     useEffect(() => {
         try {
             setLoading(true)
-            const res = getForumPostById(Number(id)).then((response) => {
+            getForumPostById(Number(id)).then((response) => {
                 setPost(response.data)
                 setLoading(false)
             })
         } catch (e: any) {
             setLoading(false)
         }
-    }, [])
+    }, [id])
 
     if (!post || loading) {
         return (

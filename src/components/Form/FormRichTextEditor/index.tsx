@@ -95,7 +95,8 @@ const FormRichTextEditor = ({id, value, label, error, onChange, disabled, ...oth
 
         // @ts-ignore
         setEditor(editor)
-    }, [])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id])
 
     useEffect(() => {
         if (editor) {

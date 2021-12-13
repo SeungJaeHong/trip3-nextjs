@@ -9,16 +9,18 @@ type Props = {
 }
 
 const UserAvatar = ({user, borderWidth}: Props) => {
+    const [height, setHeight] = useState(0)
+    const ref = useRef<HTMLImageElement>(null)
+
+    useEffect(() => {
+        if (user.avatar && ref.current) {
+            setHeight(ref?.current.clientHeight)
+        }
+    }, [user.avatar])
+
     if (!user.avatar) {
         return <UserIcon fill={'#d1d4d6'} />
     }
-
-    const [height, setHeight] = useState(0)
-    const ref = useRef<any>()
-
-    useEffect(() => {
-        setHeight(ref.current.clientHeight)
-    }, [])
 
     const polarToCartesian = (centerX: number, centerY: number, radius: number, angleInDegrees: number) => {
         const angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0

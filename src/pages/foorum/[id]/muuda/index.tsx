@@ -58,7 +58,7 @@ const EditForumTopicPage = ({destinations, topics, post}: Props) => {
                                             Ma ei avalda reklaamisisuga teateid, selleks kasutan Trip.ee <a href={'/reklaam'}>reklaamivõimalust.</a>
                                         </p>
                                         <p>
-                                            Tean ja nõustun, et kasutustingimuste rikkumisel võidakse minu kasutajakonto ilma hoiatamata sulgeda ja/või minu ligipääs Trip.ee'le blokeerida.
+                                            Tean ja nõustun, et kasutustingimuste rikkumisel võidakse minu kasutajakonto ilma hoiatamata sulgeda ja/või minu ligipääs Trip.ee&apos;le blokeerida.
                                         </p>
                                         <MoreLink route={'/kasutustingimused'} title={'Kasutustingimused'} medium={true}/>
                                     </div>

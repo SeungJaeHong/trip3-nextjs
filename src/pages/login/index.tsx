@@ -20,7 +20,7 @@ const LoginPage = (props: any) => {
                 duration: 4000
             })
         }
-    }, [])
+    }, [router.query?.verified])
 
     return (
         <Fragment>

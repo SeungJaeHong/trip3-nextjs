@@ -36,7 +36,7 @@ const LoginForm = () => {
         if (userIsLoggedIn) {
             Router.replace('/')
         }
-    }, [user])
+    }, [userIsLoggedIn])
 
     const handleLogin: SubmitHandler<Inputs> = async (values: Inputs) => {
         const { name, password, remember_me } = values

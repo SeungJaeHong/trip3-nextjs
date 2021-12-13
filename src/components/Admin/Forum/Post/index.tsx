@@ -36,7 +36,7 @@ const AdminForumPost = () => {
     useEffect(() => {
         try {
             setLoading(true)
-            const res = getForumPostData(Number(id), page).then((response: AxiosResponse<ForumResponse>) => {
+            getForumPostData(Number(id), page).then((response: AxiosResponse<ForumResponse>) => {
                 const forumPost = response.data.post
                 const lastCommentId = response.data.lastCommentId
                 setPost(forumPost)
@@ -52,7 +52,7 @@ const AdminForumPost = () => {
         } catch (e: any) {
             setLoading(false)
         }
-    }, [page])
+    }, [page, id])
 
     if (loading || !post) {
         return (
