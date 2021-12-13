@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import {setFormErrors} from "../../../../helpers"
 import {SubmitHandler, useForm, Controller} from "react-hook-form";
 import * as yup from "yup";
-import {yupResolver} from '@hookform/resolvers/yup/dist/yup';
+import { yupResolver } from '@hookform/resolvers/yup'
 import FormRichTextEditor from "../../../Form/FormRichTextEditor";
 import {Content} from "../../../../types";
 import {addPost, updatePost} from "../../../../services/admin.service"

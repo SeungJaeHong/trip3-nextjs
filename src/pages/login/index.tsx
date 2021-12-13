@@ -54,7 +54,7 @@ const LoginPage = (props: any) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
-        const user = await ApiClientSSR(context).get('/me')
+        await ApiClientSSR(context).get('/me')
         return {
             redirect: {
                 destination: '/',

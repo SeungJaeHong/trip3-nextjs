@@ -9,7 +9,7 @@ import {register as registerUser} from "../../services/auth.service"
 import toast from "react-hot-toast"
 import { useForm, SubmitHandler } from "react-hook-form"
 import * as yup from 'yup'
-import {yupResolver} from '@hookform/resolvers/yup/dist/yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import {setFormErrors} from "../../helpers"
 
 type Inputs = {

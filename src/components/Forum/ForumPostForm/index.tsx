@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 import {getForumUrlByType, getForumUrlByTypeAndSlug, setFormErrors} from "../../../helpers"
 import {SubmitHandler, useForm, Controller} from "react-hook-form";
 import * as yup from "yup";
-import {yupResolver} from '@hookform/resolvers/yup/dist/yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import FormRadioButton from "../../Form/FormRadioButton";
 import FormRichTextEditor from "../../Form/FormRichTextEditor";
 import {Content, Destination, Topic} from "../../../types";

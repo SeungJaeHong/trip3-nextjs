@@ -11,7 +11,7 @@ import {login} from "../../services/auth.service"
 import FormCheckbox from "../Form/FormCheckbox"
 import {SubmitHandler, useForm} from "react-hook-form"
 import * as yup from "yup"
-import {yupResolver} from '@hookform/resolvers/yup/dist/yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import FacebookLogin from "../FacebookLogin"
 import GoogleLogin from "../GoogleLogin"
 
