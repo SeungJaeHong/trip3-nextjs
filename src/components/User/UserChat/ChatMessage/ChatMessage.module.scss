@@ -24,10 +24,10 @@
 
         .Message {
             display: flex;
+            flex-direction: column;
             padding: $spacer $spacer * 2.5;
             border: 1px solid $gray-light;
             border-radius: 6px;
-            align-items: center;
             color: $gray-dark;
             font-family: $font-family-sailec;
             background: $gray-light;
@@ -47,6 +47,15 @@
                 border-left: 0;
                 margin-top: -5px;
                 margin-left: -6px;
+            }
+
+            a {
+                color: $blue;
+                word-break: break-word;
+
+                &:hover {
+                    color: $blue-hover;
+                }
             }
 
             @include sm() {
@@ -85,6 +94,14 @@
                     border-right: 0;
                     margin-top: -5px;
                     margin-right: -6px;
+                }
+
+                a {
+                    color: #035e9e;
+
+                    &:hover {
+                        color: #04416c;
+                    }
                 }
             }
         }

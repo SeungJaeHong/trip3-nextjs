@@ -22,9 +22,7 @@ const ChatMessage = ({message, me, userWith}: Props) => {
                 <div className={styles.UserImage}>
                     <UserAvatar user={message.userFromId === me.id ? me : userWith} />
                 </div>
-                <div className={styles.Message}>
-                    {message.message}
-                </div>
+                <div className={styles.Message} dangerouslySetInnerHTML={{__html: message.message}} />
             </div>
         </div>
     )
