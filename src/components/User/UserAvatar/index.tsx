@@ -13,14 +13,10 @@ const UserAvatar = ({user, borderWidth}: Props) => {
     const ref = useRef<HTMLImageElement>(null)
 
     useEffect(() => {
-        if (user.avatar && ref.current) {
+        if (ref.current) {
             setHeight(ref?.current.clientHeight)
         }
-    }, [user.avatar])
-
-    if (!user.avatar) {
-        return <UserIcon fill={'#d1d4d6'} />
-    }
+    }, [])
 
     const polarToCartesian = (centerX: number, centerY: number, radius: number, angleInDegrees: number) => {
         const angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0
@@ -43,9 +39,21 @@ const UserAvatar = ({user, borderWidth}: Props) => {
         return calculateArc(height / 2, height / 2, height / 2 - borderWidth / 2, startAngle, endAngle)
     }
 
+    const renderImage = () => {
+        if (user.avatar) {
+            return <img src={user.avatar} alt={user.name} className={styles.Image} ref={ref} />
+        } else {
+            return (
+                <div className={styles.Image} ref={ref}>
+                    <UserIcon fill={'#d1d4d6'} />
+                </div>
+            )
+        }
+    }
+
     return (
         <div className={styles.UserAvatar}>
-            <img src={user.avatar} alt={user.name} className={styles.Image} ref={ref} />
+            {renderImage()}
             <div className={styles.ArcRank}>
                 <svg>
                     <path fill="none" strokeWidth={borderWidth} d={generateArc(0, user.rank * 90)} />
