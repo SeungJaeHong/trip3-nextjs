@@ -19,7 +19,11 @@ module.exports = {
         includePaths: [path.join(__dirname, 'styles')],
     },
     images: {
-        domains: ['trip.ee', 'images.pexels.com'], //just for testing
+        domains: [
+            'trip3spaces.fra1.cdn.digitaloceanspaces.com',
+            'trip.ee',
+            'images.pexels.com'
+        ],
     },
     env: {
         APP_URL: process.env.APP_URL,
