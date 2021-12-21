@@ -24,14 +24,14 @@ type Props = {
 
 const NewsShow = ({news}: Props) => {
     const [comments, setComments] = useState(news.comments)
-    const { userIsLoggedIn, user } = useUser()
+    const { userIsLoggedIn } = useUser()
     const [commentValue, setCommentValue] = useState('')
     const [submitting, setSubmitting] = useState(false)
     const router = useRouter()
 
     const onSubmit = async (value: string) => {
         setSubmitting(true)
-        const res = await postComment(value, news.id).then((response) => {
+        await postComment(value, news.id).then((response) => {
             setCommentValue(value)
             setCommentValue('')
             const comment = response.data

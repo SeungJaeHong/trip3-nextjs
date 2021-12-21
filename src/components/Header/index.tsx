@@ -18,7 +18,7 @@ const Header = (props: Props) => {
     let style = undefined
     if (props.backgroundImage && !props.withBackgroundMap) {
         style = {
-            backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(" + props.backgroundImage + ")",
+            backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(" + props.backgroundImage + ")",
             width: "100%",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",

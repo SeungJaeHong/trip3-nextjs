@@ -20,9 +20,7 @@ module.exports = {
     },
     images: {
         domains: [
-            'trip3spaces.fra1.cdn.digitaloceanspaces.com',
-            'trip.ee',
-            'images.pexels.com'
+            'trip3spaces.fra1.cdn.digitaloceanspaces.com'
         ],
     },
     env: {
@@ -30,6 +28,7 @@ module.exports = {
         API_BASE_URL: process.env.API_BASE_URL,
         FACEBOOK_APP_ID: process.env.FACEBOOK_APP_ID,
         GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+        IMAGE_URL: process.env.IMAGE_URL,
     },
     experimental: {
         scrollRestoration: true,
