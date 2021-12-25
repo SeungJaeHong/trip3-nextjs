@@ -12,7 +12,6 @@ import ThumbsUpIcon from "../../../icons/ThumbsUpIcon"
 import PostIcon from "../../../icons/Admin/PostIcon"
 import CommentIcon from "../../../icons/CommentIcon"
 import ThumbsDownIcon from "../../../icons/ThumbsDownIcon"
-import ImageGallery from "../../../components/ImageGallery"
 import PinIcon from "../../../icons/PinIcon"
 import StarIcon from "../../../icons/StarIcon"
 import Tag from "../../../components/Tag"
@@ -20,6 +19,7 @@ import BlockTitle from "../../../components/BlockTitle"
 import UserLastComments from "../../../components/User/UserLastComments"
 import useUser from "../../../hooks"
 import {useRouter} from "next/router"
+import UserImageGallery from "../../../components/User/UserImageGallery"
 
 type Props = {
     userProfile: UserPublicProfile
@@ -171,7 +171,9 @@ const UserPage = ({userProfile}: Props) => {
                 </div>
             </div>
             <div className={styles.ImageGallery}>
-                <ImageGallery images={[]} />
+                <div className={styles.ImagesContainer}>
+                    <UserImageGallery />
+                </div>
             </div>
             <div className={styles.ForumPosts}>
                 <div className={containerStyle.ContainerXl}>
