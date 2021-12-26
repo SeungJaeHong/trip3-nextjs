@@ -4,7 +4,7 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    z-index: 101;
+    z-index: 1;
     left: 0;
     top: 0;
     visibility: hidden;
@@ -17,6 +17,7 @@
         top: 0;
         left: 0;
         background: rgba(27, 31, 59, 0);
+        //background: #9128a1;
         transition: background ease-in-out 200ms;
     }
 
@@ -34,6 +35,7 @@
         opacity: 0;
         transition: opacity linear 200ms,
         transform ease-in-out 200ms;
+        //background: #8EDD65;
 
         @media (max-width: 500px) {
             padding: 25px;
@@ -47,13 +49,15 @@
             border-radius: 11px;
             box-shadow: 0 0 10px 0 rgba(117, 104, 252, 0.65);
             background-color: #f8f7ff;
-            max-height: 100%;
-            max-width: 100%;
-            overflow: auto;
-            -webkit-overflow-scrolling: touch;
             position: relative;
             transition: width linear 200ms, height linear 200ms;
-            min-height: 100px;
+            z-index: 2;
+        }
+    }
+
+    &.Darker {
+        .Background {
+            background: rgba(0, 0, 0, 0);
         }
     }
 
@@ -68,6 +72,12 @@
         .Container {
             transform: translate3d(0, 0, 0);
             opacity: 1;
+        }
+
+        &.Darker {
+            .Background {
+                background: rgba(0, 0, 0, .8);
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 import type {AppProps} from 'next/app'
 import NextNprogress from 'nextjs-progressbar'
 import 'swiper/scss'
+import 'swiper/scss/navigation'
 import '../styles/globals.scss'
 import { Toaster } from 'react-hot-toast'
 
