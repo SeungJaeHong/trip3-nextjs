@@ -118,7 +118,10 @@ const ImageGallery = (props: Props) => {
                     </div>
                 </div>
             </div>
-            <Modal show={showModal} onHide={() => setShowModal(false)}>
+            <Modal
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                className={styles.ImageGalleryModal}>
                 <div className={styles.ModalImagesContainer}>
                     <Swiper
                         spaceBetween={0}

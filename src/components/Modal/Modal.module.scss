@@ -10,18 +10,17 @@
     visibility: hidden;
     opacity: 0;
 
-    .Background {
+    :global(.modal-background) {
         position: fixed;
         width: 100vw;
         height: 100vh;
         top: 0;
         left: 0;
         background: rgba(27, 31, 59, 0);
-        //background: #9128a1;
         transition: background ease-in-out 200ms;
     }
 
-    .Container {
+    :global(.modal-container) {
         width: 100%;
         height: 100%;
         position: absolute;
@@ -35,7 +34,6 @@
         opacity: 0;
         transition: opacity linear 200ms,
         transform ease-in-out 200ms;
-        //background: #8EDD65;
 
         @media (max-width: 500px) {
             padding: 25px;
@@ -44,40 +42,28 @@
         @media (max-width: 400px) {
             padding: 15px;
         }
-
-        .Content {
-            border-radius: 11px;
-            box-shadow: 0 0 10px 0 rgba(117, 104, 252, 0.65);
-            background-color: #f8f7ff;
-            position: relative;
-            transition: width linear 200ms, height linear 200ms;
-            z-index: 2;
-        }
     }
 
-    &.Darker {
-        .Background {
-            background: rgba(0, 0, 0, 0);
-        }
+    :global(.modal-content) {
+        border-radius: 11px;
+        box-shadow: 0 0 10px 0 rgba(117, 104, 252, 0.65);
+        background-color: #f8f7ff;
+        position: relative;
+        transition: width linear 200ms, height linear 200ms;
+        z-index: 2;
     }
 
-    &.Show {
+    &:global(.modal-visible) {
         visibility: visible;
         opacity: 1;
 
-        .Background {
+        :global(.modal-background) {
             background: rgba(27, 31, 59, .5);
         }
 
-        .Container {
+        :global(.modal-container) {
             transform: translate3d(0, 0, 0);
             opacity: 1;
-        }
-
-        &.Darker {
-            .Background {
-                background: rgba(0, 0, 0, .8);
-            }
         }
     }
 }

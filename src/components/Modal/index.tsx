@@ -10,7 +10,6 @@ type Props = {
 }
 
 const Modal = ({show, className, children, onHide}: Props) => {
-
     if (!show) {
         return null
     }
@@ -39,15 +38,17 @@ const Modal = ({show, className, children, onHide}: Props) => {
 
     return (
         <div className={clsx(styles.Modal, {
-            [styles.Show]: show,
+            ['modal-visible']: show,
             [className]: true
         })}>
-            <div className={styles.Background} />
-            <div className={styles.Container} onClick={onHideModal}>
-                <div className={styles.Content} ref={modalRef}>
-                    {children}
+            <div className={'modal-background'} onClick={onHideModal}>
+                <div className={'modal-container'}>
+                    <div className={'modal-content'} ref={modalRef} tabIndex={-1}>
+                        {children}
+                    </div>
                 </div>
             </div>
+
         </div>
     )
 }
