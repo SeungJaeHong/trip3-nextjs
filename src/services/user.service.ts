@@ -1,6 +1,6 @@
 import ApiClient from "../lib/ApiClient"
 import {AxiosResponse} from "axios"
-import {User, UserMessage} from "../types"
+import {Image, UserMessage} from "../types"
 
 export const getLastComments = async (id: number): Promise<AxiosResponse> => {
     return await ApiClient.get('/user/' + id + '/comments')
@@ -33,5 +33,9 @@ export const sendMessageToUser= async (userId: number, message: string): Promise
     return await ApiClient.post('/profile/messages/' + userId + '/send', {
         message: message
     })
+}
+
+export const getUserImages = async (userId: number): Promise<AxiosResponse<Image[]>> => {
+    return await ApiClient.get('/user/' + userId + '/images')
 }
 

@@ -172,7 +172,7 @@ const UserPage = ({userProfile}: Props) => {
             </div>
             <div className={styles.ImageGallery}>
                 <div className={styles.ImagesContainer}>
-                    <UserImageGallery />
+                    <UserImageGallery {...userProfile} />
                 </div>
             </div>
             <div className={styles.ForumPosts}>

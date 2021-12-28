@@ -33,7 +33,9 @@ const Modal = ({show, className, children, onHide}: Props) => {
 
     const onHideModal = (e: SyntheticEvent) => {
         e.stopPropagation();
-        console.log(modalRef.current, e.target)
+        if ((e.target as HTMLDivElement).id === 'modal-container') {
+            onHide();
+        }
     }
 
     return (
@@ -42,13 +44,12 @@ const Modal = ({show, className, children, onHide}: Props) => {
             [className]: true
         })}>
             <div className={'modal-background'} onClick={onHideModal}>
-                <div className={'modal-container'}>
-                    <div className={'modal-content'} ref={modalRef} tabIndex={-1}>
+                <div className={'modal-container'} id={'modal-container'}>
+                    <div className={'modal-content'} ref={modalRef}>
                         {children}
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

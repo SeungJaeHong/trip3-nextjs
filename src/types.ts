@@ -84,6 +84,16 @@ export interface UserComment extends Comment {
     }
 }
 
+export type Image = {
+    id: number
+    title: string
+    description?: string
+    urlSmall: string
+    urlLarge: string
+    createdAt: string
+    user?: User
+}
+
 export type Content = {
     id: number
     title: string
@@ -102,18 +112,8 @@ export type Content = {
     price?: number
     user: User
     comments?: Comment[]
-    images?: Image[]
     destinations?: Destination[]
     topics?: Topic[]
-}
-
-export type Image = {
-    id: number
-    filename: string
-    created_at: string | null
-    updated_at: string | null
-    content?: Content[] | null
-    user?: User | null
 }
 
 export type FlightContent = {

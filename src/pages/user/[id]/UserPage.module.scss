@@ -97,6 +97,7 @@
             z-index: 1;
             gap: $spacer * 4;
             margin-bottom: $spacer * 4;
+            flex-wrap: wrap;
 
             .StatisticsItem {
                 display: flex;
@@ -243,10 +244,11 @@
 
 .ImageGallery {
     width: 100%;
-    background: $gray-light;
+    //background: $gray-light;
+    background: $gray-dark;
     display: flex;
     justify-content: center;
-    padding: 0 $spacer * 5;
+    //padding: 0 $spacer * 5;
 
     @include md() {
         padding: 0;

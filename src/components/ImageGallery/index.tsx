@@ -5,118 +5,34 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Navigation} from 'swiper'
 SwiperCore.use([Navigation])
 import Modal from "../Modal"
+import {Image as ImageType} from "../../types"
 
 type Props = {
-    images: []
+    images: Array<ImageType>
 }
 
-const ImageGallery = (props: Props) => {
+const ImageGallery = ({images}: Props) => {
     const [showModal, setShowModal] = useState<boolean>(false)
-
     return (
         <Fragment>
             <div className={styles.ImageGallery}>
-                <div className={styles.Image} onClick={() => setShowModal(true)}>
-                    <Image
-                        src={process.env.IMAGE_URL+ '/content/small/A0B87817-1D6E-45F5-8D8A-5FA6820F28A3_3q94.jpeg'}
-                        alt="Picture of the author"
-                        width={220}
-                        height={160}
-                    />
-                </div>
-                <div className={styles.Image} onClick={() => setShowModal(true)}>
-                    <Image
-                        src={process.env.IMAGE_URL + "/content/small/2019-Austria-119_dqkk.jpeg"}
-                        alt="Picture of the author"
-                        width={220}
-                        height={160}
-                    />
-                </div>
-                <div className={styles.Image}>
-                    <Image
-                        src={process.env.IMAGE_URL + "/content/small/2019-Austria-021_ujvk.jpeg"}
-                        alt="Picture of the author"
-                        width={220}
-                        height={160}
-                    />
-                </div>
-                <div className={styles.Image}>
-                    <Image
-                        src={process.env.IMAGE_URL+ '/content/small/A0B87817-1D6E-45F5-8D8A-5FA6820F28A3_3q94.jpeg'}
-                        alt="Picture of the author"
-                        width={220}
-                        height={160}
-                    />
-                </div>
-                <div className={styles.Image}>
-                    <Image
-                        src={process.env.IMAGE_URL + "/content/small/2019-Austria-119_dqkk.jpeg"}
-                        alt="Picture of the author"
-                        width={220}
-                        height={160}
-                    />
-                </div>
-                <div className={styles.Image}>
-                    <Image
-                        src={process.env.IMAGE_URL + "/content/small/2019-Austria-021_ujvk.jpeg"}
-                        alt="Picture of the author"
-                        width={220}
-                        height={160}
-                    />
-                </div>
-                <div className={styles.Image}>
-                    <Image
-                        src={process.env.IMAGE_URL+ '/content/small/A0B87817-1D6E-45F5-8D8A-5FA6820F28A3_3q94.jpeg'}
-                        alt="Picture of the author"
-                        width={220}
-                        height={160}
-                    />
-                </div>
-                <div className={styles.Image}>
-                    <Image
-                        src={process.env.IMAGE_URL + "/content/small/2019-Austria-119_dqkk.jpeg"}
-                        alt="Picture of the author"
-                        width={220}
-                        height={160}
-                    />
-                </div>
-                <div className={styles.Image}>
-                    <Image
-                        src={process.env.IMAGE_URL + "/content/small/2019-Austria-021_ujvk.jpeg"}
-                        alt="Picture of the author"
-                        width={220}
-                        height={160}
-                    />
-                </div>
-                <div className={styles.Image}>
-                    <Image
-                        src={process.env.IMAGE_URL+ '/content/small/A0B87817-1D6E-45F5-8D8A-5FA6820F28A3_3q94.jpeg'}
-                        alt="Picture of the author"
-                        width={220}
-                        height={160}
-                    />
-                </div>
-                <div className={styles.Image}>
-                    <Image
-                        src={process.env.IMAGE_URL + "/content/small/2019-Austria-119_dqkk.jpeg"}
-                        alt="Picture of the author"
-                        width={220}
-                        height={160}
-                    />
-                </div>
-                <div className={styles.Image}>
-                    <Image
-                        src={process.env.IMAGE_URL + "/content/small/2019-Austria-021_ujvk.jpeg"}
-                        alt="Picture of the author"
-                        width={220}
-                        height={150}
-                    />
-                </div>
-                <div className={styles.MoreImages}>
+                {images.map(image => {
+                    return (
+                        <div className={styles.Image} onClick={() => setShowModal(true)} key={image.id}>
+                            <Image
+                                src={image.urlSmall}
+                                alt={image.title}
+                                width={220}
+                                height={160}
+                            />
+                        </div>
+                    )
+                })}
+                {/*<div className={styles.MoreImages}>
                     <div className={styles.MoreTitle}>
                         +199
                     </div>
-                </div>
+                </div>*/}
             </div>
             <Modal
                 show={showModal}
@@ -127,20 +43,20 @@ const ImageGallery = (props: Props) => {
                         spaceBetween={0}
                         slidesPerView={'auto'}
                         navigation={true}
+                        keyboard={true}
                     >
-                        <SwiperSlide>
-                            <Image
-                                src={process.env.IMAGE_URL + "/content/large/2019-Austria-021_ujvk.jpeg"}
-                                alt="Picture of the author"
-                                //width={700}
-                               /* height={450}*/
-                                layout={'fill'}
-                                objectFit={'contain'}
-                            />
-                        </SwiperSlide>
-                        <SwiperSlide>Slide 2</SwiperSlide>
-                        <SwiperSlide>Slide 3</SwiperSlide>
-                        <SwiperSlide>Slide 4</SwiperSlide>
+                        {images.map(image => {
+                            return (
+                                <SwiperSlide key={image.id}>
+                                    <Image
+                                        src={image.urlLarge}
+                                        alt={image.title}
+                                        layout={'fill'}
+                                        objectFit={'contain'}
+                                    />
+                                </SwiperSlide>
+                            )
+                        })}
                     </Swiper>
                 </div>
             </Modal>
