@@ -1,4 +1,5 @@
 import ImageGallery from "../../ImageGallery"
+import styles from './UserImageGallery.module.scss'
 import {Image, UserPublicProfile} from "../../../types"
 import {useEffect, useState} from "react"
 import {getUserImages} from "../../../services/user.service"
@@ -17,7 +18,11 @@ const UserImageGallery = (user: UserPublicProfile) => {
         return null
     }
 
-    return <ImageGallery images={images} />
+    return (
+        <div className={styles.UserImageGallery}>
+            <ImageGallery images={images} />
+        </div>
+    )
 }
 
 export default UserImageGallery

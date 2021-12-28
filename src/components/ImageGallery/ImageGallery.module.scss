@@ -10,8 +10,8 @@
     .Image {
         position: relative;
         display: flex;
-        min-width: 220px;
-        height: 160px;
+        min-width: 180px;
+        height: 180px;
     }
 
     .MoreImages {
@@ -76,7 +76,6 @@
     :global(.swiper-slide) {
         text-align: center;
         font-size: 18px;
-        //background: #fff;
         display: flex;
         justify-content: center;
         align-items: center;

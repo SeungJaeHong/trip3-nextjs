@@ -244,11 +244,10 @@
 
 .ImageGallery {
     width: 100%;
-    //background: $gray-light;
-    background: $gray-dark;
+    background: $gray-light;
     display: flex;
     justify-content: center;
-    //padding: 0 $spacer * 5;
+    align-items: center;
 
     @include md() {
         padding: 0;

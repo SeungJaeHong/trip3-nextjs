@@ -22,8 +22,8 @@ const ImageGallery = ({images}: Props) => {
                             <Image
                                 src={image.urlSmall}
                                 alt={image.title}
-                                width={220}
-                                height={160}
+                                layout={'fill'}
+                                objectFit={'cover'}
                             />
                         </div>
                     )
@@ -52,7 +52,7 @@ const ImageGallery = ({images}: Props) => {
                                         src={image.urlLarge}
                                         alt={image.title}
                                         layout={'fill'}
-                                        objectFit={'contain'}
+                                        objectFit={'cover'}
                                     />
                                 </SwiperSlide>
                             )
