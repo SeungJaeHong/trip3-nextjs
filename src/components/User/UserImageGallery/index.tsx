@@ -12,7 +12,7 @@ const UserImageGallery = (user: UserPublicProfile) => {
         }).catch(err => {
 
         })
-    }, [])
+    }, [user.id])
 
     if (images.length === 0) {
         return null

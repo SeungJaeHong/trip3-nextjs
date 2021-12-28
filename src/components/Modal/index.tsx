@@ -10,12 +10,7 @@ type Props = {
 }
 
 const Modal = ({show, className, children, onHide}: Props) => {
-    if (!show) {
-        return null
-    }
-
     const modalRef = useRef(null)
-
     useEffect(() => {
         const handleEsc = (event: KeyboardEvent) => {
             if (event.code === 'Escape')
@@ -29,7 +24,7 @@ const Modal = ({show, className, children, onHide}: Props) => {
         return () => {
             window.removeEventListener('keydown', handleEsc)
         }
-    }, [show])
+    }, [show, onHide])
 
     const onHideModal = (e: SyntheticEvent) => {
         e.stopPropagation();
