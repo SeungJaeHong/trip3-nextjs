@@ -17,6 +17,7 @@ const ImageGallery = ({images}: Props) => {
                 licenseKey={process.env.LIGHTGALLERY_KEY}
                 download={false}
                 elementClassNames={styles.ImageGallery}
+                addClass={styles.ImageGalleryWrapper}
             >
                 {images.map(image => {
                     return (

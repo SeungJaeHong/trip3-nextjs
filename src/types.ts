@@ -87,7 +87,6 @@ export interface UserComment extends Comment {
 export type Image = {
     id: number
     title: string
-    description?: string
     urlSmall: string
     urlLarge: string
     createdAt: string
