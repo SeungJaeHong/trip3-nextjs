@@ -115,11 +115,9 @@ const Home = ({flightOffers, forumPosts}: Props) => {
                         </div>
                     </div>
                 </div>
-
                 <div className={styles.NewsContainer}>
                     <FrontpageNewsBlock />
                 </div>
-
                 <BlockTitle title={'Viimati lisatud pildid'} />
             </div>
 

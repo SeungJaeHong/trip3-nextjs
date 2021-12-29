@@ -6,10 +6,6 @@ export interface User {
     avatar?: string
 }
 
-export interface MyUser extends User {
-    unReadMessageCount?: number
-}
-
 export interface UserPublicProfile extends User {
     rankName: string
     joinedDate: string
