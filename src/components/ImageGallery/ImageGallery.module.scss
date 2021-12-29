@@ -22,5 +22,39 @@
 .ImageGalleryWrapper {
     :global(.lg-sub-html) {
         padding-bottom: 20px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: $spacer * 2;
+        align-items: center;
+        padding-top: 20px;
+    }
+
+    .UserContainer {
+        display: flex;
+        cursor: pointer;
+        gap: $spacer;
+        align-items: center;
+
+        .UserAvatar {
+            img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+            }
+        }
+
+        .UserName {
+            color: $blue;
+            text-decoration: none;
+            outline: none;
+        }
+
+        &:hover {
+            .UserName {
+                color: $blue-hover;
+                text-decoration: none;
+            }
+        }
     }
 }
