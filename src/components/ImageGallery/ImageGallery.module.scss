@@ -10,8 +10,12 @@
     .Image {
         position: relative;
         display: flex;
-        min-width: 180px;
-        height: 180px;
+
+        img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+        }
     }
 
     .MoreImages {

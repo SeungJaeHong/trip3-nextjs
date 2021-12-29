@@ -13,6 +13,7 @@
     "axios": "^0.24.0",
     "clsx": "^1.1.1",
     "html-react-parser": "^1.4.2",
+    "lightgallery": "^2.3.0",
     "next": "^12.0.7",
     "nextjs-progressbar": "^0.0.13",
     "pell": "^1.0.6",
@@ -22,7 +23,6 @@
     "react-hot-toast": "^2.1.1",
     "react-select": "^5.2.1",
     "sass": "^1.45.0",
-    "swiper": "^7.3.4",
     "swr": "^1.1.1",
     "yup": "^0.32.11"
   },
