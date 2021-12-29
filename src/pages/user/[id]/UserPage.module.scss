@@ -248,13 +248,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: $spacer * 1.5;
 
     @include md() {
         padding: 0;
     }
 
     .ImagesContainer {
+        display: flex;
+        background: $green-dark;
+        max-width: 1700px;
         width: 100%;
+        margin: 0 auto;
     }
 }
 

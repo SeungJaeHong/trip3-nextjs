@@ -4,6 +4,9 @@ export interface User {
     rank: number
     isAdmin: boolean
     avatar?: string
+}
+
+export interface MyUser extends User {
     unReadMessageCount?: number
 }
 

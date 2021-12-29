@@ -199,8 +199,14 @@
 .ImageGalleryContainer {
     display: flex;
     flex-direction: column;
-    width: 100%;
     margin-top: $spacer * 3;
+    background: $gray-dark;
+    justify-content: center;
+    align-items: center;
+
+    .ImageGallery {
+        max-width: 100%;
+    }
 }
 
 .BottomContainer {

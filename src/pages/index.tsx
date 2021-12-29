@@ -17,6 +17,7 @@ import FlightOffersLatest from "../components/FlightOffer/FlightOffersLatest";
 import TravelmatesLatest from "../components/Travelmate/TravelmatesLatest";
 import ApiClientSSR from "../lib/ApiClientSSR";
 import useUser from "../hooks";
+import FrontPageImageGallery from "../components/FrontPageImageGallery";
 
 type Props = {
     flightOffers: FlightOfferCardType[],
@@ -24,7 +25,7 @@ type Props = {
 }
 
 const Home = ({flightOffers, forumPosts}: Props) => {
-    const { userIsLoggedIn, user } = useUser()
+    const { userIsLoggedIn } = useUser()
     return (
         <>
             <div className={styles.Header}
@@ -123,7 +124,9 @@ const Home = ({flightOffers, forumPosts}: Props) => {
             </div>
 
             <div className={styles.ImageGalleryContainer}>
-                <ImageGallery images={[]} />
+                <div className={styles.ImageGallery}>
+                    <FrontPageImageGallery />
+                </div>
             </div>
 
             <div className={styles.BottomContainer}>
