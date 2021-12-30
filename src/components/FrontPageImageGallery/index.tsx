@@ -17,7 +17,13 @@ const FrontPageImageGallery = () => {
         return null
     }
 
-    return <ImageGallery images={images} />
+    const hideImage = (contentId: number) => {
+        console.log('delete', contentId)
+    }
+
+    return <ImageGallery
+        images={images}
+        hideImage={hideImage} />
 }
 
 export default FrontPageImageGallery

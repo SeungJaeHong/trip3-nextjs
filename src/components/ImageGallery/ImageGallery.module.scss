@@ -57,4 +57,21 @@
             }
         }
     }
+
+    :global(.HideImageButton) {
+        color: $red-light;
+        margin-left: $spacer * 4;
+        cursor: pointer;
+        border-radius: 4px;
+        font-family: $font-family-sailec;
+        font-weight: 500;
+        border: 1px solid $red-light;
+        background: transparent;
+        padding: 2px 8px;
+
+        &:hover {
+            border: 1px solid $red;
+            color: $red;
+        }
+    }
 }
