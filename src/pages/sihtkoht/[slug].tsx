@@ -62,6 +62,10 @@ const DestinationPage = (props: Props) => {
         return null
     }
 
+    const hideImage = async (contentId: number) => {
+        console.log('hide image')
+    }
+
     return (
         <Fragment>
             <Header backgroundImage={'https://trip.ee/images/large/Ateena-acropolis-px_kfwx.jpeg'}>
@@ -167,7 +171,9 @@ const DestinationPage = (props: Props) => {
                 </div>
             </div>
             <div>
-                <ImageGallery images={[]} />
+                <ImageGallery
+                    images={[]}
+                    hideImage={hideImage} />
             </div>
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.RelatedContent}>
