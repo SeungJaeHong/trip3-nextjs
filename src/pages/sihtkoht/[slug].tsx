@@ -6,7 +6,6 @@ import styles from "./DestinationPage.module.scss"
 import containerStyle from "../../styles/containers.module.scss"
 import MoreLink from "../../components/MoreLink"
 import Image from 'next/image'
-import ImageGallery from "../../components/ImageGallery"
 import {Destination, DestinationContent} from "../../types"
 import Link from "next/link"
 import Tag from "../../components/Tag"
@@ -16,6 +15,7 @@ import ForumList from "../../components/Forum/ForumList"
 import BlockTitle from "../../components/BlockTitle"
 import ApiClientSSR from "../../lib/ApiClientSSR"
 import DotMap from "../../components/DotMap"
+import DestinationImageGallery from "../../components/Destination/DestinationImageGallery"
 
 type Props = {
     destination: DestinationContent
@@ -60,10 +60,6 @@ const DestinationPage = (props: Props) => {
         }
 
         return null
-    }
-
-    const hideImage = async (contentId: number) => {
-        console.log('hide image')
     }
 
     return (
@@ -171,9 +167,7 @@ const DestinationPage = (props: Props) => {
                 </div>
             </div>
             <div>
-                <ImageGallery
-                    images={[]}
-                    hideImage={hideImage} />
+                <DestinationImageGallery {...destination} />
             </div>
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.RelatedContent}>
