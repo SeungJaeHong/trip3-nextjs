@@ -35,7 +35,9 @@ const ImageGallery = ({images, hideImage}: Props) => {
                 <button type={'button'} onClick={() => onClickHideImage()}>Peida</button>
             )
 
-            //ReactDOM.render(element, document.getElementById('lg-hide-photo'))
+            if (document.getElementById('lg-hide-photo')) {
+                ReactDOM.render(element, document.getElementById('lg-hide-photo'))
+            }
         }
     }
 
