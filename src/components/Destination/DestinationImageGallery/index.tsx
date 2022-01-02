@@ -13,7 +13,7 @@ const DestinationImageGallery = (destination: Destination) => {
         }).catch(err => {
 
         })
-    }, [destination.id])
+    }, [destination])
 
     const hideImage = async (contentId: number) => {
         await hidePhoto(contentId).then(res => {
