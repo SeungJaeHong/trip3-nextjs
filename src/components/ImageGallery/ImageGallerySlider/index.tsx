@@ -7,28 +7,47 @@ import clsx from "clsx"
 
 type Props = {
     images: Array<ImageType>
-    selectedImage: ImageType | undefined
+    selectedImage: ImageType
 }
 
-const ImageGallerySlider = ({images}: Props) => {
+type ArrowProps = {
+    onClick: (e: any) => void
+    disabled: boolean
+    isLeft: boolean
+}
+
+const ImageGallerySlider = ({images, selectedImage}: Props) => {
+    const getImageByIndex = (imageIndex: number) => {
+        return images.find((image, index) => imageIndex === index)
+    }
+
+    const getIndexByImage = (selectedImage: ImageType) => {
+        return images.findIndex((image) => selectedImage.id === image.id)
+    }
+
+    const selectedImageIndex = getIndexByImage(selectedImage)
     const [loaded, setLoaded] = useState<boolean>(false)
-    const [currentSlide, setCurrentSlide] = useState(0)
+    // @ts-ignore
+    const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(selectedImageIndex)
+    const [currentSlideImage, setCurrentSlideImage] = useState<ImageType>(selectedImage)
+
     const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
-        initial: 0,
+        initial: currentSlideIndex,
         slideChanged(slider) {
+            const index = slider.track.details.rel
+            const image = getImageByIndex(index)
+            // @ts-ignore
+            setCurrentSlideImage(image)
+            setCurrentSlideIndex(index)
+
             console.log(slider, 'slider slideChanged')
-            setCurrentSlide(slider.track.details.rel)
         },
-        created() {
+        created(slider) {
             setLoaded(true)
+
+            console.log(currentSlideIndex, currentSlideImage, 'slider created selectedImage')
         },
     })
-
-    type ArrowProps = {
-        onClick: () => void
-        disabled: boolean
-        isLeft: boolean
-    }
 
     const Arrow = ({onClick, disabled, isLeft}: ArrowProps) => {
         return (
@@ -37,9 +56,7 @@ const ImageGallerySlider = ({images}: Props) => {
                 [styles.Right]: !isLeft,
             })} onClick={onClick}>
                 <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                >
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     {isLeft && (
                         <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
                     )}
@@ -56,16 +73,16 @@ const ImageGallerySlider = ({images}: Props) => {
             if (isLeft) {
                 return (
                     <Arrow
-                        onClick={() => instanceRef.current?.prev()}
-                        disabled={currentSlide === 0}
+                        onClick={(e: any) => e.stopPropagation() || instanceRef.current?.prev()}
+                        disabled={currentSlideIndex === 0}
                         isLeft={true}
                     />
                 )
             } else {
                 return (
                     <Arrow
-                        onClick={() => instanceRef.current?.next()}
-                        disabled={currentSlide === instanceRef.current.track.details.slides.length - 1}
+                        onClick={(e: any) => e.stopPropagation() || instanceRef.current?.next()}
+                        disabled={currentSlideIndex === instanceRef.current.track.details.slides.length - 1}
                         isLeft={false}
                     />
                 )
@@ -77,39 +94,28 @@ const ImageGallerySlider = ({images}: Props) => {
 
     return (
         <div className={styles.ImageGallerySlider}>
-            {renderNavigation(true)}
-            <div ref={sliderRef} className={clsx('keen-slider', styles.Slider)}>
-                {images.map(image => {
-                    return (
-                        <div className={clsx('keen-slider__slide', styles.Image)} key={image.id}>
-                            <Image
-                                src={image.urlLarge}
-                                alt={image.title}
-                                width={950}
-                                height={650}
-                                objectFit={'contain'}
-                            />
-                        </div>
-                    )
-                })}
+            <div className={styles.SliderContainer}>
+                {renderNavigation(true)}
+                <div ref={sliderRef} className={clsx('keen-slider', styles.Slider)}>
+                    {images.map(image => {
+                        return (
+                            <div className={clsx('keen-slider__slide', styles.Image)} key={image.id}>
+                                <Image
+                                    src={image.urlLarge}
+                                    alt={image.title}
+                                    width={950}
+                                    height={650}
+                                    objectFit={'contain'}
+                                />
+                            </div>
+                        )
+                    })}
+                </div>
+                {renderNavigation(false)}
             </div>
-            {renderNavigation(false)}
-
-            {/*{loaded && instanceRef.current && (
-                <>
-                    <Arrow
-                        onClick={() => instanceRef.current?.prev()}
-                        disabled={currentSlide === 0}
-                        isLeft={true}
-                    />
-
-                    <Arrow
-                        onClick={() => instanceRef.current?.next()}
-                        disabled={currentSlide === instanceRef.current.track.details.slides.length - 1}
-                        isLeft={false}
-                    />
-                </>
-            )}*/}
+            <div className={styles.ImageInfo}>
+                {currentSlideImage.title}
+            </div>
         </div>
     )
 }

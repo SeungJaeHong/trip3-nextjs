@@ -38,11 +38,13 @@ const ImageGallery = ({images, hideImage}: Props) => {
                 })}
             </div>
 
-            <ImageGalleryModal
-                show={showModal}
-                images={images}
-                selectedImage={selectedImage}
-                onHide={() => setShowModal(false)} />
+            {selectedImage !== undefined &&
+                <ImageGalleryModal
+                    show={showModal}
+                    images={images}
+                    selectedImage={selectedImage}
+                    onHide={() => setShowModal(false)} />
+            }
         </>
     )
 }

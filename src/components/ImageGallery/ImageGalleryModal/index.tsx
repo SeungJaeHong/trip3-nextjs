@@ -8,7 +8,7 @@ import CloseIcon from "../../../icons/CloseIcon"
 type Props = {
     show: boolean
     images: Array<ImageType>
-    selectedImage: ImageType | undefined
+    selectedImage: ImageType
     onHide: () => void
 }
 
@@ -47,9 +47,11 @@ const ImageGalleryModal = ({show, images, selectedImage, onHide}: Props) => {
                         <CloseIcon />
                     </div>
                     <div className={styles.ModalContent} ref={modalRef}>
-                        <ImageGallerySlider
-                            images={images}
-                            selectedImage={selectedImage} />
+                        {show && selectedImage !== undefined &&
+                            <ImageGallerySlider
+                                images={images}
+                                selectedImage={selectedImage} />
+                        }
                     </div>
                 </div>
             </div>
