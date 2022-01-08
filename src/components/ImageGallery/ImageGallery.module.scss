@@ -16,65 +16,11 @@
             height: 180px;
             object-fit: cover;
         }
-    }
-}
 
-.ImageGalleryWrapper {
-    :global(.lg-sub-html) {
-        padding-bottom: 20px;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        gap: $spacer * 2;
-        align-items: center;
-        padding-top: 20px;
-    }
-
-    .UserContainer {
-        display: flex;
-        cursor: pointer;
-        gap: $spacer;
-        align-items: center;
-
-        .UserAvatar {
+        @include sm() {
             img {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-            }
-        }
-
-        .UserName {
-            color: $blue;
-            text-decoration: none;
-            outline: none;
-        }
-
-        &:hover {
-            .UserName {
-                color: $blue-hover;
-                text-decoration: none;
-            }
-        }
-    }
-
-    :global(.HideImageButtonContainer) {
-        margin-left: $spacer * 4;
-        display: inline-block;
-
-        button {
-            color: $red-light;
-            cursor: pointer;
-            border-radius: 4px;
-            font-family: $font-family-sailec;
-            font-weight: 500;
-            border: 1px solid $red-light;
-            background: transparent;
-            padding: 2px 8px;
-
-            &:hover {
-                border: 1px solid $red;
-                color: $red;
+                width: 160px;
+                height: 160px;
             }
         }
     }

@@ -1,8 +1,7 @@
 import type {AppProps} from 'next/app'
 import NextNprogress from 'nextjs-progressbar'
 import '../styles/globals.scss'
-import 'lightgallery/css/lightgallery.css'
-import 'lightgallery/css/lg-thumbnail.css'
+import 'keen-slider/keen-slider.min.css'
 import { Toaster } from 'react-hot-toast'
 
 function MyApp({ Component, pageProps }: AppProps) {
