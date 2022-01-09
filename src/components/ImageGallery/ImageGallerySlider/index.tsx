@@ -4,6 +4,7 @@ import {useKeenSlider} from 'keen-slider/react'
 import styles from './ImageGallerySlider.module.scss'
 import Image from 'next/image'
 import clsx from "clsx"
+import UserAvatar from "../../User/UserAvatar"
 
 type Props = {
     images: Array<ImageType>
@@ -39,13 +40,9 @@ const ImageGallerySlider = ({images, selectedImage}: Props) => {
             // @ts-ignore
             setCurrentSlideImage(image)
             setCurrentSlideIndex(index)
-
-            console.log(slider, 'slider slideChanged')
         },
         created(slider) {
             setLoaded(true)
-
-            console.log(currentSlideIndex, currentSlideImage, 'slider created selectedImage')
         },
     })
 
@@ -115,6 +112,9 @@ const ImageGallerySlider = ({images, selectedImage}: Props) => {
             </div>
             <div className={styles.ImageInfo}>
                 {currentSlideImage.title}
+                {currentSlideImage.user !== undefined &&
+                    <UserAvatar user={currentSlideImage.user} />
+                }
             </div>
         </div>
     )

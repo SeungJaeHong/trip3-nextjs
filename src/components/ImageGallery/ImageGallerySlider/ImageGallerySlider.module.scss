@@ -80,8 +80,11 @@
         font-family: $font-family-sailec;
         margin: 0 70px;
         display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
         padding: $spacer * 3;
+        gap: $spacer * 2;
 
         @include sm() {
             margin: 0;
