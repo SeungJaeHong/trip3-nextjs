@@ -1,4 +1,4 @@
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import {Image as ImageType} from "../../../types"
 import {useKeenSlider} from 'keen-slider/react'
 import styles from './ImageGallerySlider.module.scss'
@@ -47,6 +47,24 @@ const ImageGallerySlider = ({images, selectedImage}: Props) => {
             setLoaded(true)
         },
     })
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.code === 'ArrowRight') {
+            instanceRef.current?.next()
+        } else if (event.code === 'ArrowLeft') {
+            instanceRef.current?.prev()
+        }
+    }
+
+    useEffect(() => {
+        if (loaded) {
+            window.addEventListener('keydown', handleKeyDown)
+        }
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [loaded])
 
     const Arrow = ({onClick, disabled, isLeft}: ArrowProps) => {
         return (
