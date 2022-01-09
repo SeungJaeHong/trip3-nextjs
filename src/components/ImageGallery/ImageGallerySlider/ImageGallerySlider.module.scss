@@ -118,3 +118,19 @@
         }
     }
 }
+
+.ImageCount {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, .8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: $spacer $spacer * 3;
+
+    .Count {
+        color: $white;
+    }
+}

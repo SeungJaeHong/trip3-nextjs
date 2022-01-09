@@ -110,42 +110,52 @@ const ImageGallerySlider = ({images, selectedImage}: Props) => {
     }
 
     return (
-        <div className={styles.ImageGallerySlider}>
-            <div className={styles.SliderContainer}>
-                {renderNavigation(true)}
-                <div ref={sliderRef} className={clsx('keen-slider', styles.Slider)}>
-                    {images.map(image => {
-                        return (
-                            <div className={clsx('keen-slider__slide', styles.Image)} key={image.id}>
-                                <Image
-                                    src={image.urlLarge}
-                                    alt={image.title}
-                                    width={950}
-                                    height={650}
-                                    objectFit={'contain'}
-                                />
-                            </div>
-                        )
-                    })}
-                </div>
-                {renderNavigation(false)}
-            </div>
-            <div className={styles.ImageInfo}>
-                <div className={styles.ImageTitle}>
-                    {currentSlideImage.title}
-                </div>
-                {currentSlideImage.user !== undefined &&
-                    <div className={styles.UserInfo} onClick={() => router.push('/user/' + currentSlideImage.user?.id)}>
-                        <div className={styles.UserAvatar}>
-                            <UserAvatar user={currentSlideImage.user} />
-                        </div>
-                        <div className={styles.UserName}>
-                            {currentSlideImage.user.name}
-                        </div>
+        <>
+            {instanceRef.current !== undefined &&
+                <div className={styles.ImageCount}>
+                    <div className={styles.Count}>
+                        {/*@ts-ignore*/}
+                        {instanceRef.current?.track.details.rel + 1} / {instanceRef.current?.track.details.slides.length}
                     </div>
-                }
+                </div>
+            }
+            <div className={styles.ImageGallerySlider}>
+                <div className={styles.SliderContainer}>
+                    {renderNavigation(true)}
+                    <div ref={sliderRef} className={clsx('keen-slider', styles.Slider)}>
+                        {images.map(image => {
+                            return (
+                                <div className={clsx('keen-slider__slide', styles.Image)} key={image.id}>
+                                    <Image
+                                        src={image.urlLarge}
+                                        alt={image.title}
+                                        width={950}
+                                        height={650}
+                                        objectFit={'contain'}
+                                    />
+                                </div>
+                            )
+                        })}
+                    </div>
+                    {renderNavigation(false)}
+                </div>
+                <div className={styles.ImageInfo}>
+                    <div className={styles.ImageTitle}>
+                        {currentSlideImage.title}
+                    </div>
+                    {currentSlideImage.user !== undefined &&
+                        <div className={styles.UserInfo} onClick={() => router.push('/user/' + currentSlideImage.user?.id)}>
+                            <div className={styles.UserAvatar}>
+                                <UserAvatar user={currentSlideImage.user} />
+                            </div>
+                            <div className={styles.UserName}>
+                                {currentSlideImage.user.name}
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
