@@ -64,6 +64,7 @@ const ImageGallerySlider = ({images, selectedImage}: Props) => {
         return () => {
             window.removeEventListener('keydown', handleKeyDown)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loaded])
 
     const Arrow = ({onClick, disabled, isLeft}: ArrowProps) => {
