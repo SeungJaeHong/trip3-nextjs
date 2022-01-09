@@ -5,6 +5,7 @@ import styles from './ImageGallerySlider.module.scss'
 import Image from 'next/image'
 import clsx from "clsx"
 import UserAvatar from "../../User/UserAvatar"
+import {useRouter} from "next/router"
 
 type Props = {
     images: Array<ImageType>
@@ -18,6 +19,7 @@ type ArrowProps = {
 }
 
 const ImageGallerySlider = ({images, selectedImage}: Props) => {
+    const router = useRouter()
     const getImageByIndex = (imageIndex: number) => {
         return images.find((image, index) => imageIndex === index)
     }
@@ -111,9 +113,18 @@ const ImageGallerySlider = ({images, selectedImage}: Props) => {
                 {renderNavigation(false)}
             </div>
             <div className={styles.ImageInfo}>
-                {currentSlideImage.title}
+                <div className={styles.ImageTitle}>
+                    {currentSlideImage.title}
+                </div>
                 {currentSlideImage.user !== undefined &&
-                    <UserAvatar user={currentSlideImage.user} />
+                    <div className={styles.UserInfo} onClick={() => router.push('/user/' + currentSlideImage.user?.id)}>
+                        <div className={styles.UserAvatar}>
+                            <UserAvatar user={currentSlideImage.user} />
+                        </div>
+                        <div className={styles.UserName}>
+                            {currentSlideImage.user.name}
+                        </div>
+                    </div>
                 }
             </div>
         </div>

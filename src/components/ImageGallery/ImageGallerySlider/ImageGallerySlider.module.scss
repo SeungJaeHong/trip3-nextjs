@@ -3,7 +3,7 @@
 .ImageGallerySlider {
     display: flex;
     flex-direction: column;
-    gap: 0;
+    gap: $spacer * 2;
 
     .SliderContainer {
         width: 100%;
@@ -76,15 +76,42 @@
     }
 
     .ImageInfo {
-        color: $white;
-        font-family: $font-family-sailec;
         margin: 0 70px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: $spacer * 3;
         gap: $spacer * 2;
+
+        .ImageTitle {
+            color: $white;
+            font-family: $font-family-sailec;
+            text-align: center;
+        }
+
+        .UserInfo {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            gap: $spacer;
+            cursor: pointer;
+
+            .UserAvatar {
+                width: 40px;
+                height: 40px;
+            }
+
+            .UserName {
+                color: $blue;
+            }
+
+            &:hover {
+                .UserName {
+                    color: $blue-hover;
+                }
+            }
+        }
 
         @include sm() {
             margin: 0;
