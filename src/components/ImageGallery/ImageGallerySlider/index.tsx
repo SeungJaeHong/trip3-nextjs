@@ -130,6 +130,7 @@ const ImageGallerySlider = ({images, selectedImage}: Props) => {
                                     <Image
                                         src={image.urlLarge}
                                         alt={image.title}
+                                        layout={'fixed'}
                                         width={950}
                                         height={650}
                                         objectFit={'contain'}

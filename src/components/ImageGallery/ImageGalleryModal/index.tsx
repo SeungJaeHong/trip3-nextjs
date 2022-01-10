@@ -46,6 +46,9 @@ const ImageGalleryModal = ({show, images, selectedImage, onHide}: Props) => {
                     <div className={styles.ModalClose} onClick={onHide}>
                         <CloseIcon />
                     </div>
+                    <div className={styles.HideButton}>
+                        <div className={styles.ButtonTitle}>Peida</div>
+                    </div>
                     <div className={styles.ModalContent} ref={modalRef}>
                         {show && selectedImage !== undefined &&
                             <ImageGallerySlider

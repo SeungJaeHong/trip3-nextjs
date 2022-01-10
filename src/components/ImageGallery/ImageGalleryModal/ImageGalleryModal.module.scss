@@ -70,6 +70,31 @@
         }
     }
 
+    .HideButton {
+        position: absolute;
+        top: 25px;
+        left: 120px;
+        cursor: pointer;
+        border: 1px solid $red-light;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 $spacer * 2;
+
+        .ButtonTitle {
+            color: $red-light;
+        }
+
+        &:hover {
+            border: 1px solid $red;
+
+            .ButtonTitle {
+                color: $red;
+            }
+        }
+    }
+
     .ModalContent {
         border-radius: 12px;
         position: relative;
