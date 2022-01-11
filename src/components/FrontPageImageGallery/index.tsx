@@ -17,8 +17,8 @@ const FrontPageImageGallery = () => {
         return null
     }
 
-    const hideImage = (contentId: number) => {
-        console.log('delete', contentId)
+    const hideImage = (image: Image) => {
+        console.log('delete image', image)
     }
 
     return <ImageGallery

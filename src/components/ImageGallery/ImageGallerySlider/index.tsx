@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react"
+import React, {useEffect, useState} from "react"
 import {Image as ImageType} from "../../../types"
 import {useKeenSlider} from 'keen-slider/react'
 import styles from './ImageGallerySlider.module.scss'
@@ -10,6 +10,7 @@ import {useRouter} from "next/router"
 type Props = {
     images: Array<ImageType>
     selectedImage: ImageType
+    onImageHide: (image: ImageType) => void
 }
 
 type ArrowProps = {
@@ -18,7 +19,7 @@ type ArrowProps = {
     isLeft: boolean
 }
 
-const ImageGallerySlider = ({images, selectedImage}: Props) => {
+const ImageGallerySlider = ({images, selectedImage, onImageHide}: Props) => {
     const router = useRouter()
     const getImageByIndex = (imageIndex: number) => {
         return images.find((image, index) => imageIndex === index)
@@ -54,6 +55,10 @@ const ImageGallerySlider = ({images, selectedImage}: Props) => {
         } else if (event.code === 'ArrowLeft') {
             instanceRef.current?.prev()
         }
+    }
+
+    const onHideImage = () => {
+        onImageHide(currentSlideImage)
     }
 
     useEffect(() => {
@@ -118,6 +123,11 @@ const ImageGallerySlider = ({images, selectedImage}: Props) => {
                         {/*@ts-ignore*/}
                         {instanceRef.current?.track.details.rel + 1} / {instanceRef.current?.track.details.slides.length}
                     </div>
+                </div>
+            }
+            {instanceRef.current !== undefined && onImageHide !== undefined &&
+                <div className={styles.HideButton} onClick={onHideImage}>
+                    <div className={styles.ButtonTitle}>Peida</div>
                 </div>
             }
             <div className={styles.ImageGallerySlider}>

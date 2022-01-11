@@ -10,9 +10,10 @@ type Props = {
     images: Array<ImageType>
     selectedImage: ImageType
     onHide: () => void
+    onImageHide: (image: ImageType) => void
 }
 
-const ImageGalleryModal = ({show, images, selectedImage, onHide}: Props) => {
+const ImageGalleryModal = ({show, images, selectedImage, onHide, onImageHide}: Props) => {
     const modalRef = useRef(null)
 
     useEffect(() => {
@@ -46,14 +47,12 @@ const ImageGalleryModal = ({show, images, selectedImage, onHide}: Props) => {
                     <div className={styles.ModalClose} onClick={onHide}>
                         <CloseIcon />
                     </div>
-                    <div className={styles.HideButton}>
-                        <div className={styles.ButtonTitle}>Peida</div>
-                    </div>
                     <div className={styles.ModalContent} ref={modalRef}>
                         {show && selectedImage !== undefined &&
                             <ImageGallerySlider
                                 images={images}
-                                selectedImage={selectedImage} />
+                                selectedImage={selectedImage}
+                                onImageHide={onImageHide} />
                         }
                     </div>
                 </div>

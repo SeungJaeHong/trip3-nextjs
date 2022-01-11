@@ -55,6 +55,10 @@
         }
 
         @include sm() {
+            .Slider {
+                max-height: 350px;
+            }
+
             .Arrow {
                 position: absolute;
                 padding: 10px;
@@ -132,5 +136,31 @@
 
     .Count {
         color: $white;
+    }
+}
+
+.HideButton {
+    position: fixed;
+    top: 25px;
+    left: 120px;
+    cursor: pointer;
+    border: 1px solid $red-light;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 $spacer * 2;
+    z-index: 3;
+
+    .ButtonTitle {
+        color: $red-light;
+    }
+
+    &:hover {
+        border: 1px solid $red;
+
+        .ButtonTitle {
+            color: $red;
+        }
     }
 }

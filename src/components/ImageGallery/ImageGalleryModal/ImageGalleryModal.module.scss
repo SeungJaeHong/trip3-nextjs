@@ -49,6 +49,7 @@
         top: 20px;
         right: 20px;
         cursor: pointer;
+        z-index: 3;
 
         svg {
             width: 40px;
@@ -66,31 +67,6 @@
             svg {
                 width: 30px;
                 height: 30px;
-            }
-        }
-    }
-
-    .HideButton {
-        position: absolute;
-        top: 25px;
-        left: 120px;
-        cursor: pointer;
-        border: 1px solid $red-light;
-        border-radius: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0 $spacer * 2;
-
-        .ButtonTitle {
-            color: $red-light;
-        }
-
-        &:hover {
-            border: 1px solid $red;
-
-            .ButtonTitle {
-                color: $red;
             }
         }
     }

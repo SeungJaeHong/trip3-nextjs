@@ -7,7 +7,7 @@ import ImageGalleryModal from "./ImageGalleryModal"
 
 type Props = {
     images: Array<ImageType>
-    hideImage: (contentId: number) => void
+    hideImage: (image: ImageType) => void
 }
 
 const ImageGallery = ({images, hideImage}: Props) => {
@@ -43,7 +43,8 @@ const ImageGallery = ({images, hideImage}: Props) => {
                     show={showModal}
                     images={images}
                     selectedImage={selectedImage}
-                    onHide={() => setShowModal(false)} />
+                    onHide={() => setShowModal(false)}
+                    onImageHide={hideImage} />
             }
         </>
     )
