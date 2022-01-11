@@ -15,14 +15,14 @@ const DestinationImageGallery = (destination: Destination) => {
         })
     }, [destination])
 
-    const hideImage = async (contentId: number) => {
-        await hidePhoto(contentId).then(res => {
+    const hideImage = async (image: Image) => {
+        /*await hidePhoto(contentId).then(res => {
             const newImages = images.filter(image => image.id !== Number(contentId))
             setImages(newImages)
             toast.success('Pilt peidetud')
         }).catch(e => {
             toast.error('Pildi peitmine ebaõnnestus')
-        })
+        })*/
     }
 
     if (images.length === 0) {
