@@ -52,7 +52,8 @@ const ImageGalleryModal = ({show, images, selectedImage, onHide, onImageHide}: P
                             <ImageGallerySlider
                                 images={images}
                                 selectedImage={selectedImage}
-                                onImageHide={onImageHide} />
+                                onImageHide={onImageHide}
+                            />
                         }
                     </div>
                 </div>

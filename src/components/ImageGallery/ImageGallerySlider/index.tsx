@@ -21,12 +21,13 @@ type ArrowProps = {
 
 const ImageGallerySlider = ({images, selectedImage, onImageHide}: Props) => {
     const router = useRouter()
+    const [imageItems, setImagesItems] = useState<ImageType[]>(images)
     const getImageByIndex = (imageIndex: number) => {
-        return images.find((image, index) => imageIndex === index)
+        return imageItems.find((image, index) => imageIndex === index)
     }
 
     const getIndexByImage = (selectedImage: ImageType) => {
-        return images.findIndex((image) => selectedImage.id === image.id)
+        return imageItems.findIndex((image) => selectedImage.id === image.id)
     }
 
     const selectedImageIndex = getIndexByImage(selectedImage)
@@ -49,18 +50,6 @@ const ImageGallerySlider = ({images, selectedImage, onImageHide}: Props) => {
         },
     })
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.code === 'ArrowRight') {
-            instanceRef.current?.next()
-        } else if (event.code === 'ArrowLeft') {
-            instanceRef.current?.prev()
-        }
-    }
-
-    const onHideImage = () => {
-        onImageHide(currentSlideImage)
-    }
-
     useEffect(() => {
         if (loaded) {
             window.addEventListener('keydown', handleKeyDown)
@@ -71,6 +60,30 @@ const ImageGallerySlider = ({images, selectedImage, onImageHide}: Props) => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loaded])
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.code === 'ArrowRight') {
+            instanceRef.current?.next()
+        } else if (event.code === 'ArrowLeft') {
+            instanceRef.current?.prev()
+        }
+    }
+
+    const onHideImage = () => {
+        onImageHide(currentSlideImage)
+        const newImages = imageItems.filter((item, i) => i !== currentSlideIndex)
+        setImagesItems(newImages)
+
+        const newIndex = newImages.length <= currentSlideIndex ? 0 : currentSlideIndex
+        if (newIndex !== currentSlideIndex) {
+            setCurrentSlideIndex(newIndex)
+        }
+
+        const activeImage = newImages.find((image, index) => newIndex === index)
+        if (activeImage) {
+            setCurrentSlideImage(activeImage)
+        }
+    }
 
     const Arrow = ({onClick, disabled, isLeft}: ArrowProps) => {
         return (
@@ -121,7 +134,7 @@ const ImageGallerySlider = ({images, selectedImage, onImageHide}: Props) => {
                 <div className={styles.ImageCount}>
                     <div className={styles.Count}>
                         {/*@ts-ignore*/}
-                        {instanceRef.current?.track.details.rel + 1} / {instanceRef.current?.track.details.slides.length}
+                        {currentSlideIndex + 1} / {imageItems.length}
                     </div>
                 </div>
             }
@@ -134,7 +147,7 @@ const ImageGallerySlider = ({images, selectedImage, onImageHide}: Props) => {
                 <div className={styles.SliderContainer}>
                     {renderNavigation(true)}
                     <div ref={sliderRef} className={clsx('keen-slider', styles.Slider)}>
-                        {images.map(image => {
+                        {imageItems.map(image => {
                             return (
                                 <div className={clsx('keen-slider__slide', styles.Image)} key={image.id}>
                                     <Image

@@ -1,7 +1,8 @@
 import ImageGallery from "../ImageGallery"
 import {Image} from "../../types"
 import {useEffect, useState} from "react"
-import {getLatestImages} from "../../services/general.service"
+import {getLatestImages, hidePhoto} from "../../services/general.service"
+import {toast} from "react-hot-toast"
 
 const FrontPageImageGallery = () => {
     const [images, setImages] = useState<Image[]>([])
@@ -17,8 +18,14 @@ const FrontPageImageGallery = () => {
         return null
     }
 
-    const hideImage = (image: Image) => {
-        console.log('delete image', image)
+    const hideImage = async (image: Image) => {
+        await hidePhoto(image.id).then(res => {
+            const newImages = images.filter(img => img.id !== image.id)
+            setImages(newImages)
+            toast.success('Pilt peidetud')
+        }).catch(e => {
+            toast.error('Pildi peitmine ebaõnnestus')
+        })
     }
 
     return <ImageGallery

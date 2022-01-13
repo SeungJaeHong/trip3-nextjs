@@ -16,13 +16,13 @@ const UserImageGallery = (user: UserPublicProfile) => {
     }, [user.id])
 
     const hideImage = async (image: Image) => {
-        /*await hidePhoto(contentId).then(res => {
-            const newImages = images.filter(image => image.id !== Number(contentId))
+        await hidePhoto(image.id).then(res => {
+            const newImages = images.filter(img => img.id !== image.id)
             setImages(newImages)
             toast.success('Pilt peidetud')
         }).catch(e => {
             toast.error('Pildi peitmine ebaõnnestus')
-        })*/
+        })
     }
 
     if (images.length === 0) {
