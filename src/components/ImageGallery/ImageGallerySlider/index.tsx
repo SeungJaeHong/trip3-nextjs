@@ -6,6 +6,7 @@ import Image from 'next/image'
 import clsx from "clsx"
 import UserAvatar from "../../User/UserAvatar"
 import {useRouter} from "next/router"
+import useUser from "../../../hooks"
 
 type Props = {
     images: Array<ImageType>
@@ -21,7 +22,10 @@ type ArrowProps = {
 
 const ImageGallerySlider = ({images, selectedImage, onImageHide}: Props) => {
     const router = useRouter()
+    const { userIsLoggedIn, user } = useUser()
+    const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const [imageItems, setImagesItems] = useState<ImageType[]>(images)
+
     const getImageByIndex = (imageIndex: number) => {
         return imageItems.find((image, index) => imageIndex === index)
     }
@@ -138,7 +142,7 @@ const ImageGallerySlider = ({images, selectedImage, onImageHide}: Props) => {
                     </div>
                 </div>
             }
-            {instanceRef.current !== undefined && onImageHide !== undefined &&
+            {userIsAdmin && instanceRef.current !== undefined && onImageHide !== undefined &&
                 <div className={styles.HideButton} onClick={onHideImage}>
                     <div className={styles.ButtonTitle}>Peida</div>
                 </div>

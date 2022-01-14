@@ -1,8 +1,6 @@
 import styles from './ImageGallery.module.scss'
 import {useState} from "react"
 import {Image as ImageType} from "../../types"
-import {useRouter} from "next/router"
-import useUser from "../../hooks"
 import ImageGalleryModal from "./ImageGalleryModal"
 
 type Props = {
@@ -11,9 +9,6 @@ type Props = {
 }
 
 const ImageGallery = ({images, hideImage}: Props) => {
-    //const router = useRouter()
-    //const { userIsLoggedIn, user } = useUser()
-    //const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const [showModal, setShowModal] = useState<boolean>(false)
     const [selectedImage, setSelectedImage] = useState<ImageType | undefined>(undefined)
 
