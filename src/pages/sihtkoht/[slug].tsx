@@ -166,8 +166,10 @@ const DestinationPage = (props: Props) => {
 
                 </div>
             </div>
-            <div>
-                <DestinationImageGallery {...destination} />
+            <div className={styles.ImageGallery}>
+                <div className={styles.ImagesContainer}>
+                    <DestinationImageGallery {...destination} />
+                </div>
             </div>
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.RelatedContent}>
