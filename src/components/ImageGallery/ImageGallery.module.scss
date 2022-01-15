@@ -23,6 +23,26 @@
                 height: 160px;
             }
         }
+
+        .MoreImages {
+            background: rgba(0, 0, 0, .5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1;
+
+            .MoreImagesCount {
+                color: $white;
+                font-weight: 600;
+                font-size: $font-size-large;
+            }
+        }
     }
 
     .Arrow {
@@ -34,7 +54,8 @@
         display: flex;
         border-radius: 50%;
         padding: 10px;
-        background: rgba(84, 90, 95, .5);
+        background: rgba(84, 90, 95, .6);
+        z-index: 2;
 
         &:hover {
             background: rgba(84, 90, 95, .7);

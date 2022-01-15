@@ -7,9 +7,14 @@ import {hidePhoto} from "../../../services/general.service"
 
 const UserImageGallery = (user: UserPublicProfile) => {
     const [images, setImages] = useState<Image[]>([])
+    const [lastImage, setLastImage] = useState<Image|undefined>(undefined)
+    const [imageCount, setImageCount] = useState<number>(0)
+
     useEffect(() => {
         getUserImages(user.id).then((response) => {
-            setImages(response.data)
+            setImages(response.data.images)
+            setImageCount(response.data.imageCount)
+            setLastImage(response.data.lastImage)
         }).catch(err => {
 
         })
@@ -31,7 +36,9 @@ const UserImageGallery = (user: UserPublicProfile) => {
 
     return <ImageGallery
         images={images}
-        hideImage={hideImage} />
+        hideImage={hideImage}
+        imageCount={imageCount}
+        lastImage={lastImage} />
 }
 
 export default UserImageGallery

@@ -35,7 +35,7 @@ export const sendMessageToUser= async (userId: number, message: string): Promise
     })
 }
 
-export const getUserImages = async (userId: number): Promise<AxiosResponse<Image[]>> => {
+export const getUserImages = async (userId: number): Promise<AxiosResponse<{images: Image[], imageCount: number, lastImage?: Image}>> => {
     return await ApiClient.get('/user/' + userId + '/images')
 }
 

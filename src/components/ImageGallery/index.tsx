@@ -10,9 +10,11 @@ import ArrowRight2Icon from "../../icons/ArrowRight2Icon"
 type Props = {
     images: Array<ImageType>
     hideImage: (image: ImageType) => void
+    imageCount: number
+    lastImage?: ImageType
 }
 
-const ImageGallery = ({images, hideImage}: Props) => {
+const ImageGallery = ({images, hideImage, imageCount, lastImage}: Props) => {
     const [showModal, setShowModal] = useState<boolean>(false)
     const [selectedImage, setSelectedImage] = useState<ImageType | undefined>(undefined)
 
@@ -29,6 +31,26 @@ const ImageGallery = ({images, hideImage}: Props) => {
     const scrollLeft = () => {
         // @ts-ignore
         document.getElementById('image-gallery-container').scrollLeft -= 300;
+    }
+
+    const renderMoreImageInfo = () => {
+        if (lastImage) {
+            const count = imageCount - images.length
+            return (
+                <div className={styles.Image}>
+                    <div className={styles.MoreImages}>
+                        <span className={styles.MoreImagesCount}>+{count}</span>
+                    </div>
+                    <Image
+                        src={lastImage.urlSmall}
+                        alt={lastImage.title}
+                        layout={'fill'}
+                        objectFit={'cover'} />
+                </div>
+            )
+        }
+
+        return null
     }
 
     if (images.length === 0) {
@@ -50,6 +72,7 @@ const ImageGallery = ({images, hideImage}: Props) => {
                             </div>
                         )
                     })}
+                    {renderMoreImageInfo()}
                 </div>
                 <div className={clsx(styles.Arrow, styles.ArrowLeft)} onClick={scrollLeft}>
                     <ArrowLeft2Icon />
@@ -69,6 +92,11 @@ const ImageGallery = ({images, hideImage}: Props) => {
             }
         </>
     )
+}
+
+ImageGallery.defaultProps = {
+    imageCount: 0,
+    lastImage: undefined
 }
 
 export default ImageGallery
