@@ -1,7 +1,11 @@
 import styles from './ImageGallery.module.scss'
-import {useState} from "react"
+import React, {useState} from "react"
 import {Image as ImageType} from "../../types"
 import ImageGalleryModal from "./ImageGalleryModal"
+import Image from 'next/image'
+import ArrowLeft2Icon from "../../icons/ArrowLeft2Icon"
+import clsx from "clsx"
+import ArrowRight2Icon from "../../icons/ArrowRight2Icon"
 
 type Props = {
     images: Array<ImageType>
@@ -17,6 +21,16 @@ const ImageGallery = ({images, hideImage}: Props) => {
         setShowModal(true)
     }
 
+    const scrollRight = () => {
+        // @ts-ignore
+        document.getElementById('image-gallery-container').scrollLeft += 300;
+    }
+
+    const scrollLeft = () => {
+        // @ts-ignore
+        document.getElementById('image-gallery-container').scrollLeft -= 300;
+    }
+
     if (images.length === 0) {
         return null
     }
@@ -24,13 +38,25 @@ const ImageGallery = ({images, hideImage}: Props) => {
     return (
         <>
             <div className={styles.ImageGallery}>
-                {images.map(image => {
-                    return (
-                        <div className={styles.Image} key={image.id} onClick={() => openGallery(image)}>
-                            <img alt={image.title} src={image.urlSmall} />
-                        </div>
-                    )
-                })}
+                <div className={styles.Wrapper} id={'image-gallery-container'}>
+                    {images.map(image => {
+                        return (
+                            <div className={styles.Image} key={image.id} onClick={() => openGallery(image)}>
+                                <Image
+                                    src={image.urlSmall}
+                                    alt={image.title}
+                                    layout={'fill'}
+                                    objectFit={'cover'} />
+                            </div>
+                        )
+                    })}
+                </div>
+                <div className={clsx(styles.Arrow, styles.ArrowLeft)} onClick={scrollLeft}>
+                    <ArrowLeft2Icon />
+                </div>
+                <div className={styles.Arrow} onClick={scrollRight}>
+                    <ArrowRight2Icon />
+                </div>
             </div>
 
             {selectedImage !== undefined &&

@@ -1,27 +1,54 @@
 @import "../../styles/variables";
 
 .ImageGallery {
-    display: flex;
     width: 100%;
     position: relative;
-    overflow: auto;
-    align-items: flex-start;
 
-    .Image {
-        position: relative;
+    .Wrapper {
         display: flex;
+        width: 100%;
+        position: relative;
+        overflow: auto;
+        align-items: flex-start;
+        scroll-behavior: smooth;
 
-        img {
-            width: 180px;
+        .Image {
+            position: relative;
+            display: flex;
+            min-width: 180px;
             height: 180px;
-            object-fit: cover;
-        }
 
-        @include sm() {
-            img {
-                width: 160px;
+            @include sm() {
+                min-width: 160px;
                 height: 160px;
             }
+        }
+    }
+
+    .Arrow {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        display: flex;
+        border-radius: 50%;
+        padding: 10px;
+        background: rgba(84, 90, 95, .5);
+
+        &:hover {
+            background: rgba(84, 90, 95, .7);
+        }
+
+        svg {
+            fill: $white;
+            width: 30px;
+            height: 30px;
+        }
+
+        &.ArrowLeft {
+            right: unset;
+            left: 10px;
         }
     }
 }
