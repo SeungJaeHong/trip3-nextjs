@@ -1,4 +1,4 @@
-import React, {Fragment} from "react"
+import React, {Fragment, useEffect, useState} from "react"
 import Navbar from "../../components/Navbar"
 import styles from './ImagesPage.module.scss'
 import clsx from "clsx"
@@ -12,6 +12,9 @@ import {objectToQueryString} from "../../helpers"
 import {Image as ImageType} from "../../types"
 import Image from 'next/image'
 import SimplePaginator from "../../components/Paginator/SimplePaginator"
+import ImageGalleryModal from "../../components/ImageGallery/ImageGalleryModal"
+import {hidePhoto} from "../../services/general.service"
+import {toast} from "react-hot-toast"
 
 type Props = {
     images?: ImageType[]
@@ -21,6 +24,19 @@ type Props = {
 
 const ImagesPage = ({images, currentPage, hasMore}: Props) => {
     const router = useRouter()
+    const [imageItems, setImagesItems] = useState<ImageType[]|undefined>(images)
+    const [showModal, setShowModal] = useState<boolean>(false)
+    const [selectedImage, setSelectedImage] = useState<ImageType | undefined>(undefined)
+
+    useEffect(() => {
+        setImagesItems(images)
+    }, [images])
+
+    const openGallery = (image: ImageType) => {
+        setSelectedImage(image)
+        setShowModal(true)
+    }
+
     const getNextPageUrl = () => {
         if (!hasMore) {
             return undefined
@@ -47,6 +63,16 @@ const ImagesPage = ({images, currentPage, hasMore}: Props) => {
         }
     }
 
+    const hideImage = async (image: ImageType) => {
+        await hidePhoto(image.id).then(res => {
+            const newImages = imageItems?.filter(img => img.id !== image.id)
+            setImagesItems(newImages)
+            toast.success('Pilt peidetud')
+        }).catch(e => {
+            toast.error('Pildi peitmine ebaõnnestus')
+        })
+    }
+
     return (
         <Fragment>
             <div className={styles.Container}>
@@ -60,15 +86,14 @@ const ImagesPage = ({images, currentPage, hasMore}: Props) => {
                     </div>
                     <div className={styles.ImagesContainer}>
                         <div className={styles.ImagesGrid}>
-                            {images?.map(image => {
+                            {imageItems?.map(image => {
                                 return (
-                                    <div className={styles.Image} key={image.id}>
+                                    <div className={styles.Image} key={image.id} onClick={() => openGallery(image)}>
                                         <Image
                                             src={image.urlSmall}
                                             alt={image.title}
                                             layout={'fill'}
-                                            objectFit={'cover'}
-                                            priority={true} />
+                                            objectFit={'cover'} />
                                     </div>
                                 )
                             })}
@@ -81,6 +106,14 @@ const ImagesPage = ({images, currentPage, hasMore}: Props) => {
                     </div>
                 </div>
             </div>
+            {imageItems && selectedImage !== undefined &&
+                <ImageGalleryModal
+                    show={showModal}
+                    images={imageItems}
+                    selectedImage={selectedImage}
+                    onHide={() => setShowModal(false)}
+                    onImageHide={hideImage} />
+            }
             <Footer simple={true} />
         </Fragment>
     )
