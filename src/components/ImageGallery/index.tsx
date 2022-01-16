@@ -76,12 +76,16 @@ const ImageGallery = ({images, hideImage, imageCount, lastImage, lastImageTitle,
                     })}
                     {renderMoreImageInfo()}
                 </div>
-                <div className={clsx(styles.Arrow, styles.ArrowLeft)} onClick={scrollLeft}>
-                    <ArrowLeft2Icon />
-                </div>
-                <div className={styles.Arrow} onClick={scrollRight}>
-                    <ArrowRight2Icon />
-                </div>
+                {images.length >= 10 &&
+                    <>
+                        <div className={clsx(styles.Arrow, styles.ArrowLeft)} onClick={scrollLeft}>
+                            <ArrowLeft2Icon />
+                        </div>
+                        <div className={styles.Arrow} onClick={scrollRight}>
+                            <ArrowRight2Icon />
+                        </div>
+                    </>
+                }
             </div>
 
             {selectedImage !== undefined &&
