@@ -8,6 +8,10 @@
 .Navbar {
     padding-bottom: $spacer * 8;
     padding-top: $spacer * 3;
+
+    @include sm() {
+        padding-bottom: $spacer * 6;
+    }
 }
 
 .Title {
@@ -17,6 +21,49 @@
     display: flex;
     justify-content: center;
     margin-bottom: $spacer * 6;
+    gap: $spacer * 2;
+
+    .UserAvatarContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: $spacer;
+        cursor: pointer;
+
+        .UserAvatar {
+            height: 60px;
+            width: 60px;
+            display: flex;
+        }
+
+        .UserName {
+            color: $blue;
+            font-weight: 500;
+            font-size: $font-size-large;
+        }
+
+        &:hover {
+            .UserName {
+                color: $blue-hover;
+            }
+        }
+    }
+
+    @include sm() {
+        font-size: 2rem;
+        margin-bottom: $spacer * 4;
+
+        .UserAvatarContainer {
+            .UserAvatar {
+                height: 40px;
+                width: 40px;
+            }
+
+            .UserName {
+                font-size: $font-size-medium;
+            }
+        }
+    }
 }
 
 .ImagesContainer {

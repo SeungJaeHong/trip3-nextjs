@@ -4,11 +4,13 @@ import {useEffect, useState} from "react"
 import {getUserImages} from "../../../services/user.service"
 import {toast} from "react-hot-toast"
 import {hidePhoto} from "../../../services/general.service"
+import {useRouter} from "next/router"
 
 const UserImageGallery = (user: UserPublicProfile) => {
     const [images, setImages] = useState<Image[]>([])
     const [lastImage, setLastImage] = useState<Image|undefined>(undefined)
     const [imageCount, setImageCount] = useState<number>(0)
+    const router = useRouter()
 
     useEffect(() => {
         getUserImages(user.id).then((response) => {
@@ -38,7 +40,8 @@ const UserImageGallery = (user: UserPublicProfile) => {
         images={images}
         hideImage={hideImage}
         imageCount={imageCount}
-        lastImage={lastImage} />
+        lastImage={lastImage}
+        lastImageOnClick={() => router.push('/user/' + user.id + '/images')} />
 }
 
 export default UserImageGallery

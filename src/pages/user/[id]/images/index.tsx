@@ -1,28 +1,30 @@
 import React, {Fragment, useEffect, useState} from "react"
-import Navbar from "../../components/Navbar"
-import styles from './ImagesPage.module.scss'
+import Navbar from "../../../../components/Navbar"
+import styles from '../../../reisipildid/ImagesPage.module.scss'
 import clsx from "clsx"
-import Footer from "../../components/Footer"
-import containerStyle from "../../styles/containers.module.scss"
-import BackgroundMap from "../../components/BackgroundMap"
+import Footer from "../../../../components/Footer"
+import containerStyle from "../../../../styles/containers.module.scss"
+import BackgroundMap from "../../../../components/BackgroundMap"
 import {GetServerSideProps} from "next"
-import ApiClientSSR from "../../lib/ApiClientSSR"
+import ApiClientSSR from "../../../../lib/ApiClientSSR"
 import {useRouter} from "next/router"
-import {objectToQueryString} from "../../helpers"
-import {Image as ImageType} from "../../types"
+import {objectToQueryString} from "../../../../helpers"
+import {Image as ImageType, User} from "../../../../types"
 import Image from 'next/image'
-import SimplePaginator from "../../components/Paginator/SimplePaginator"
-import ImageGalleryModal from "../../components/ImageGallery/ImageGalleryModal"
-import {hidePhoto} from "../../services/general.service"
+import SimplePaginator from "../../../../components/Paginator/SimplePaginator"
+import ImageGalleryModal from "../../../../components/ImageGallery/ImageGalleryModal"
+import {hidePhoto} from "../../../../services/general.service"
 import {toast} from "react-hot-toast"
+import UserAvatar from "../../../../components/User/UserAvatar"
 
 type Props = {
+    user: User
     images?: ImageType[]
     currentPage: number
     hasMore: boolean
 }
 
-const ImagesPage = ({images, currentPage, hasMore}: Props) => {
+const UserImagesPage = ({user, images, currentPage, hasMore}: Props) => {
     const router = useRouter()
     const [imageItems, setImagesItems] = useState<ImageType[]|undefined>(images)
     const [showModal, setShowModal] = useState<boolean>(false)
@@ -43,6 +45,7 @@ const ImagesPage = ({images, currentPage, hasMore}: Props) => {
         }
 
         const urlParams = {
+            id: user.id,
             page: currentPage + 1
         }
 
@@ -53,6 +56,7 @@ const ImagesPage = ({images, currentPage, hasMore}: Props) => {
     const getPreviousPageUrl = () => {
         if (currentPage > 1) {
             const urlParams = {
+                id: user.id,
                 page: currentPage - 1
             }
 
@@ -82,7 +86,15 @@ const ImagesPage = ({images, currentPage, hasMore}: Props) => {
                         <Navbar darkMode={true} />
                     </div>
                     <div className={styles.Title}>
-                        Reisipildid
+                        <div>Reisipildid:</div>
+                        <div className={styles.UserAvatarContainer} onClick={() => router.push('/user/' + user.id)}>
+                            <div className={styles.UserAvatar}>
+                                <UserAvatar user={user} />
+                            </div>
+                            <div className={styles.UserName}>
+                                {user.name}
+                            </div>
+                        </div>
                     </div>
                     <div className={styles.ImagesContainer}>
                         <div className={styles.ImagesGrid}>
@@ -107,12 +119,12 @@ const ImagesPage = ({images, currentPage, hasMore}: Props) => {
                 </div>
             </div>
             {imageItems && selectedImage !== undefined &&
-                <ImageGalleryModal
-                    show={showModal}
-                    images={imageItems}
-                    selectedImage={selectedImage}
-                    onHide={() => setShowModal(false)}
-                    onImageHide={hideImage} />
+            <ImageGalleryModal
+                show={showModal}
+                images={imageItems}
+                selectedImage={selectedImage}
+                onHide={() => setShowModal(false)}
+                onImageHide={hideImage} />
             }
             <Footer simple={true} />
         </Fragment>
@@ -121,24 +133,23 @@ const ImagesPage = ({images, currentPage, hasMore}: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const page = context.query?.page
-    let url = process.env.API_BASE_URL + '/images'
+    const id = context.query?.id
+    let url = process.env.API_BASE_URL + '/images/user/' + id
     if (page) {
         url += '?page=' + page
     }
 
-    const data = {
-        images: [],
-        currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
-        hasMore: false,
-    }
-
     const res = await ApiClientSSR(context).get(url)
-    data.images = res.data?.images
-    data.hasMore = res.data?.hasMore
+    const data = {
+        user: res.data?.user,
+        images: res.data?.imageData.images,
+        currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
+        hasMore: res.data?.imageData.hasMore,
+    }
 
     return {
         props: data
     }
 }
 
-export default ImagesPage
+export default UserImagesPage
