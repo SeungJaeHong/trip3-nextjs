@@ -1,0 +1,59 @@
+@import "../../styles/variables";
+
+.Container {
+    position: relative;
+    background: $gray-light;
+}
+
+.Navbar {
+    padding-bottom: $spacer * 8;
+    padding-top: $spacer * 3;
+}
+
+.Title {
+    font-weight: 600;
+    font-size: 3rem;
+    color: $gray-dark;
+    display: flex;
+    justify-content: center;
+    margin-bottom: $spacer * 6;
+}
+
+.ImagesContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+
+    .ImagesGrid {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        padding-bottom: $spacer * 5;
+
+        .Image {
+            width: 100%;
+            height: 180px;
+            display: flex;
+            position: relative;
+        }
+
+        @include md() {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include sm() {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include xs() {
+            .Image {
+                height: 160px;
+            }
+        }
+    }
+
+    .Paginator {
+        margin-bottom: $spacer * 5;
+    }
+}

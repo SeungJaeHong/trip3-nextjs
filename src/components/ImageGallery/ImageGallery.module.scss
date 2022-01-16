@@ -37,6 +37,10 @@
             cursor: pointer;
             z-index: 1;
 
+            &:hover {
+                background: rgba(0, 0, 0, .6);
+            }
+
             .MoreImagesCount {
                 color: $white;
                 font-weight: 600;

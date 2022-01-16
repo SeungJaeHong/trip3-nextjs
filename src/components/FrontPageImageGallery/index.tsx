@@ -3,10 +3,13 @@ import {Image} from "../../types"
 import {useEffect, useState} from "react"
 import {getLatestImages, hidePhoto} from "../../services/general.service"
 import {toast} from "react-hot-toast"
+import {useRouter} from "next/router";
 
 const FrontPageImageGallery = () => {
     const [images, setImages] = useState<Image[]>([])
     const [lastImage, setLastImage] = useState<Image>()
+    const router = useRouter()
+
     useEffect(() => {
         getLatestImages().then((response) => {
             setImages(response.data.images)
@@ -34,7 +37,8 @@ const FrontPageImageGallery = () => {
         images={images}
         hideImage={hideImage}
         lastImage={lastImage}
-        lastImageTitle={'Kõik pildid'} />
+        lastImageTitle={'Kõik pildid'}
+        lastImageOnClick={() => router.push('/reisipildid')} />
 }
 
 export default FrontPageImageGallery
