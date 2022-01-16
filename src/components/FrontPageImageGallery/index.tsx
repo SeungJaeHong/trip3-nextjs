@@ -6,9 +6,11 @@ import {toast} from "react-hot-toast"
 
 const FrontPageImageGallery = () => {
     const [images, setImages] = useState<Image[]>([])
+    const [lastImage, setLastImage] = useState<Image>()
     useEffect(() => {
         getLatestImages().then((response) => {
-            setImages(response.data)
+            setImages(response.data.images)
+            setLastImage(response.data.lastImage)
         }).catch(err => {
 
         })
@@ -30,7 +32,9 @@ const FrontPageImageGallery = () => {
 
     return <ImageGallery
         images={images}
-        hideImage={hideImage} />
+        hideImage={hideImage}
+        lastImage={lastImage}
+        lastImageTitle={'Kõik pildid'} />
 }
 
 export default FrontPageImageGallery

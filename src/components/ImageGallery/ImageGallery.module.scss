@@ -71,5 +71,13 @@
             right: unset;
             left: 10px;
         }
+
+        @include sm() {
+            svg {
+                fill: $white;
+                width: 20px;
+                height: 20px;
+            }
+        }
     }
 }
