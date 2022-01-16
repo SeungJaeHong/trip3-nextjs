@@ -12,9 +12,11 @@ type Props = {
     hideImage: (image: ImageType) => void
     imageCount: number
     lastImage?: ImageType
+    lastImageTitle?: string
+    lastImageOnClick?: () => void
 }
 
-const ImageGallery = ({images, hideImage, imageCount, lastImage}: Props) => {
+const ImageGallery = ({images, hideImage, imageCount, lastImage, lastImageTitle, lastImageOnClick}: Props) => {
     const [showModal, setShowModal] = useState<boolean>(false)
     const [selectedImage, setSelectedImage] = useState<ImageType | undefined>(undefined)
 
@@ -35,11 +37,11 @@ const ImageGallery = ({images, hideImage, imageCount, lastImage}: Props) => {
 
     const renderMoreImageInfo = () => {
         if (lastImage) {
-            const count = imageCount - images.length
+            const title = lastImageTitle ? lastImageTitle : '+' + (imageCount - images.length)
             return (
-                <div className={styles.Image}>
+                <div className={styles.Image} onClick={lastImageOnClick}>
                     <div className={styles.MoreImages}>
-                        <span className={styles.MoreImagesCount}>+{count}</span>
+                        <span className={styles.MoreImagesCount}>{title}</span>
                     </div>
                     <Image
                         src={lastImage.urlSmall}
@@ -96,7 +98,9 @@ const ImageGallery = ({images, hideImage, imageCount, lastImage}: Props) => {
 
 ImageGallery.defaultProps = {
     imageCount: 0,
-    lastImage: undefined
+    lastImage: undefined,
+    lastImageTitle: undefined,
+    lastImageOnClick: undefined
 }
 
 export default ImageGallery
