@@ -15,7 +15,7 @@ import SimplePaginator from "../../components/Paginator/SimplePaginator"
 import ImageGalleryModal from "../../components/ImageGallery/ImageGalleryModal"
 import {hidePhoto} from "../../services/general.service"
 import {toast} from "react-hot-toast"
-import FormSelect from "../../components/Form/FormSelect";
+import FormSelect from "../../components/Form/FormSelect"
 
 type Props = {
     images?: ImageType[]
@@ -30,10 +30,15 @@ const ImagesPage = ({images, currentPage, hasMore, destinationId, destinationOpt
     const [imageItems, setImagesItems] = useState<ImageType[]|undefined>(images)
     const [showModal, setShowModal] = useState<boolean>(false)
     const [selectedImage, setSelectedImage] = useState<ImageType | undefined>(undefined)
+    const [selectedDestinationId, setSelectedDestinationId] = useState<number|undefined>(destinationId)
 
     useEffect(() => {
         setImagesItems(images)
     }, [images])
+
+    useEffect(() => {
+        setSelectedDestinationId(destinationId)
+    }, [destinationId])
 
     const openGallery = (image: ImageType) => {
         setSelectedImage(image)
@@ -46,7 +51,7 @@ const ImagesPage = ({images, currentPage, hasMore, destinationId, destinationOpt
         }
 
         const urlParams = {
-            destination: destinationId,
+            destination: selectedDestinationId,
             page: currentPage + 1
         }
 
@@ -57,7 +62,7 @@ const ImagesPage = ({images, currentPage, hasMore, destinationId, destinationOpt
     const getPreviousPageUrl = () => {
         if (currentPage > 1) {
             const urlParams = {
-                destination: destinationId,
+                destination: selectedDestinationId,
                 page: currentPage - 1
             }
 
@@ -78,6 +83,17 @@ const ImagesPage = ({images, currentPage, hasMore, destinationId, destinationOpt
         })
     }
 
+    const onSelectDestination = (props: {label: string, value: string}) => {
+        const destinationId = parseInt(props?.value)
+        const urlParams = {
+            destination: destinationId,
+            page: currentPage
+        }
+
+        const queryString = objectToQueryString(urlParams)
+        router.push('/reisipildid?' + queryString)
+    }
+
     return (
         <Fragment>
             <div className={styles.Container}>
@@ -95,8 +111,8 @@ const ImagesPage = ({images, currentPage, hasMore, destinationId, destinationOpt
                                 id={'destination-select'}
                                 options={destinationOptions}
                                 placeholder={'Kõik sihtkohad'}
-                                className={'ASDF'}
-                                selectedValue={destinationId?.toString()}/>
+                                selectedValue={selectedDestinationId?.toString()}
+                                onChange={onSelectDestination} />
                         </div>
                     </div>
                     <div className={styles.ImagesContainer}>
@@ -151,7 +167,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         images: res.data?.imageData.images,
         currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
         hasMore: res.data?.imageData.hasMore,
-        destinationId: destination,
+        destinationId: destination ?? null,
         destinationOptions: destinationOptions
     }
 

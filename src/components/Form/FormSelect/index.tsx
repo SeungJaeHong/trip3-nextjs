@@ -11,6 +11,7 @@ type Props = {
     className?: string
     classNamePrefix?: string
     isClearable: boolean
+    onChange: (value: any) => void
 }
 
 const FormSelect = (props: Props) => {
@@ -24,7 +25,8 @@ const FormSelect = (props: Props) => {
                 classNamePrefix={props.classNamePrefix}
                 isClearable={props.isClearable}
                 noOptionsMessage={() => 'Valikud puuduvad'}
-                placeholder={props.placeholder} />
+                placeholder={props.placeholder}
+                onChange = {value => props.onChange(value)} />
         </div>
     )
 }
