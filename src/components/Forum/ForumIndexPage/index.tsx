@@ -84,7 +84,8 @@ const ForumIndexPage = (props: Props) => {
                             options={options}
                             placeholder={'Sihtkoht'}
                             className={styles.Select}
-                            classNamePrefix={'ForumFilter'} />
+                            classNamePrefix={'ForumFilter'}
+                            onChange={(value: any) => console.log(value)} />
                     </div>
                     <div className={styles.Select}>
                         <FormSelect
@@ -92,7 +93,8 @@ const ForumIndexPage = (props: Props) => {
                             options={options}
                             placeholder={'Valdkond'}
                             className={styles.Select}
-                            classNamePrefix={'ForumFilter'} />
+                            classNamePrefix={'ForumFilter'}
+                            onChange={(value: any) => console.log(value)} />
                     </div>
                 </div>
             </Fragment>
