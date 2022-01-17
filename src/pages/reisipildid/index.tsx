@@ -20,9 +20,10 @@ type Props = {
     images?: ImageType[]
     currentPage: number
     hasMore: boolean
+    destinationId?: number
 }
 
-const ImagesPage = ({images, currentPage, hasMore}: Props) => {
+const ImagesPage = ({images, currentPage, hasMore, destinationId}: Props) => {
     const router = useRouter()
     const [imageItems, setImagesItems] = useState<ImageType[]|undefined>(images)
     const [showModal, setShowModal] = useState<boolean>(false)
@@ -43,6 +44,7 @@ const ImagesPage = ({images, currentPage, hasMore}: Props) => {
         }
 
         const urlParams = {
+            destination: destinationId,
             page: currentPage + 1
         }
 
@@ -53,6 +55,7 @@ const ImagesPage = ({images, currentPage, hasMore}: Props) => {
     const getPreviousPageUrl = () => {
         if (currentPage > 1) {
             const urlParams = {
+                destination: destinationId,
                 page: currentPage - 1
             }
 
@@ -134,6 +137,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         images: [],
         currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
         hasMore: false,
+        destinationId: destination
     }
 
     const res = await ApiClientSSR(context).get(url)
