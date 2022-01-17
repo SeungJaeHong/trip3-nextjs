@@ -5,6 +5,7 @@ import clsx from "clsx";
 
 type Props = {
     id: string,
+    selectedValue?: string
     options: { value: string, label: string }[],
     placeholder?: string,
     className?: string
@@ -13,27 +14,18 @@ type Props = {
 }
 
 const FormSelect = (props: Props) => {
-
-    /*const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' },
-        { value: 'value1', label: 'Value1' },
-        { value: 'value2', label: 'Value2' }
-    ]*/
-
     return (
         <div className={styles.FormSelectContainer}>
             <Select
                 instanceId={props.id}
                 options={props.options}
+                value = {props.options.filter(option => option.value === props.selectedValue)}
                 className={clsx(styles.FormSelect, props.className)}
                 classNamePrefix={props.classNamePrefix}
                 isClearable={props.isClearable}
                 noOptionsMessage={() => 'Valikud puuduvad'}
                 placeholder={props.placeholder} />
         </div>
-
     )
 }
 

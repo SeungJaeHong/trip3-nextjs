@@ -20,7 +20,7 @@
     color: $gray-dark;
     display: flex;
     justify-content: center;
-    margin-bottom: $spacer * 6;
+    margin-bottom: $spacer * 3;
     gap: $spacer * 2;
 
     .UserAvatarContainer {
@@ -63,6 +63,17 @@
                 font-size: $font-size-medium;
             }
         }
+    }
+}
+
+.DestinationSelection {
+    padding-bottom: $spacer * 4;
+    display: flex;
+    justify-content: center;
+
+    .Select {
+        max-width: 300px;
+        width: 100%;
     }
 }
 

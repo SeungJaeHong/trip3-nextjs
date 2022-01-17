@@ -15,15 +15,17 @@ import SimplePaginator from "../../components/Paginator/SimplePaginator"
 import ImageGalleryModal from "../../components/ImageGallery/ImageGalleryModal"
 import {hidePhoto} from "../../services/general.service"
 import {toast} from "react-hot-toast"
+import FormSelect from "../../components/Form/FormSelect";
 
 type Props = {
     images?: ImageType[]
     currentPage: number
     hasMore: boolean
     destinationId?: number
+    destinationOptions: [{ label: string, value: string }]
 }
 
-const ImagesPage = ({images, currentPage, hasMore, destinationId}: Props) => {
+const ImagesPage = ({images, currentPage, hasMore, destinationId, destinationOptions}: Props) => {
     const router = useRouter()
     const [imageItems, setImagesItems] = useState<ImageType[]|undefined>(images)
     const [showModal, setShowModal] = useState<boolean>(false)
@@ -87,6 +89,16 @@ const ImagesPage = ({images, currentPage, hasMore, destinationId}: Props) => {
                     <div className={styles.Title}>
                         Reisipildid
                     </div>
+                    <div className={styles.DestinationSelection}>
+                        <div className={styles.Select}>
+                            <FormSelect
+                                id={'destination-select'}
+                                options={destinationOptions}
+                                placeholder={'Kõik sihtkohad'}
+                                className={'ASDF'}
+                                selectedValue={destinationId?.toString()}/>
+                        </div>
+                    </div>
                     <div className={styles.ImagesContainer}>
                         <div className={styles.ImagesGrid}>
                             {imageItems?.map(image => {
@@ -132,17 +144,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         page: page
     }
 
-    url += '?page=' + objectToQueryString(urlParams)
-    const data = {
-        images: [],
-        currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
-        hasMore: false,
-        destinationId: destination
-    }
-
+    url += '?' + objectToQueryString(urlParams)
     const res = await ApiClientSSR(context).get(url)
-    data.images = res.data?.images
-    data.hasMore = res.data?.hasMore
+    const destinationOptions: { value: string, label: string }[] = res.data.destinations.map((destination: any) => ({ label: destination.name, value: destination.id.toString() }))
+    const data = {
+        images: res.data?.imageData.images,
+        currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
+        hasMore: res.data?.imageData.hasMore,
+        destinationId: destination,
+        destinationOptions: destinationOptions
+    }
 
     return {
         props: data
