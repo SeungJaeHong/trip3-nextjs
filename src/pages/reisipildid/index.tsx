@@ -121,11 +121,15 @@ const ImagesPage = ({images, currentPage, hasMore}: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const page = context.query?.page
+    const destination = context.query?.destination
     let url = process.env.API_BASE_URL + '/images'
-    if (page) {
-        url += '?page=' + page
+
+    const urlParams = {
+        destination: destination,
+        page: page
     }
 
+    url += '?page=' + objectToQueryString(urlParams)
     const data = {
         images: [],
         currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
