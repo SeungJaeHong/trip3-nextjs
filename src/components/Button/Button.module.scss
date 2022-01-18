@@ -15,7 +15,8 @@
     box-shadow: 0 0 2px 0 $gray;
     outline: none;
     border: 0;
-    height: 50px;
+    max-height: 50px;
+    height: 100%;
 
     .Loading {
         display: flex;

@@ -10,7 +10,7 @@
     padding-top: $spacer * 3;
 
     @include sm() {
-        padding-bottom: $spacer * 6;
+        padding-bottom: $spacer * 5;
     }
 }
 
@@ -20,15 +20,64 @@
     color: $gray-dark;
     display: flex;
     justify-content: center;
-    margin-bottom: $spacer * 3;
+    margin-bottom: $spacer;
     gap: $spacer * 2;
+    position: relative;
 
-    .UserAvatarContainer {
-        display: flex;
+    .AddNewButton {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        max-width: 120px;
+        height: 40px;
+        width: 100%;
+    }
+
+    .AddNewButtonMobile {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
+        background: $green-darker;
         justify-content: center;
         align-items: center;
-        gap: $spacer;
+        border-radius: 50%;
+        display: none;
+
+        span {
+            color: $white;
+        }
+    }
+
+    @include sm() {
+        font-size: 2rem;
+        margin-bottom: $spacer;
+
+        .AddNewButton {
+            display: none;
+        }
+
+        .AddNewButtonMobile {
+            display: flex;
+        }
+    }
+}
+
+.UserContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: $spacer * 4;
+
+    .User {
+        display: flex;
+        gap: $spacer * 1.5;
         cursor: pointer;
+        align-items: center;
 
         .UserAvatar {
             height: 60px;
@@ -39,7 +88,7 @@
         .UserName {
             color: $blue;
             font-weight: 500;
-            font-size: $font-size-large;
+            font-size: $font-size-xlarge;
         }
 
         &:hover {
@@ -47,16 +96,11 @@
                 color: $blue-hover;
             }
         }
-    }
 
-    @include sm() {
-        font-size: 2rem;
-        margin-bottom: $spacer * 4;
-
-        .UserAvatarContainer {
+        @include sm() {
             .UserAvatar {
-                height: 40px;
-                width: 40px;
+                height: 48px;
+                width: 48px;
             }
 
             .UserName {
@@ -67,7 +111,7 @@
 }
 
 .DestinationSelection {
-    padding-bottom: $spacer * 4;
+    margin: $spacer * 3 0 $spacer * 5 0;
     display: flex;
     justify-content: center;
 

@@ -16,6 +16,7 @@ import ImageGalleryModal from "../../components/ImageGallery/ImageGalleryModal"
 import {hidePhoto} from "../../services/general.service"
 import {toast} from "react-hot-toast"
 import FormSelect from "../../components/Form/FormSelect"
+import Button from "../../components/Button"
 
 type Props = {
     images?: ImageType[]
@@ -103,7 +104,13 @@ const ImagesPage = ({images, currentPage, hasMore, destinationId, destinationOpt
                         <Navbar darkMode={true} />
                     </div>
                     <div className={styles.Title}>
-                        Reisipildid
+                        <div>Reisipildid</div>
+                        <div className={styles.AddNewButton}>
+                            <Button title={'Lisa uus'} />
+                        </div>
+                        <div className={styles.AddNewButtonMobile}>
+                            <span>+</span>
+                        </div>
                     </div>
                     <div className={styles.DestinationSelection}>
                         <div className={styles.Select}>

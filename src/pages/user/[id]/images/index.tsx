@@ -16,6 +16,7 @@ import ImageGalleryModal from "../../../../components/ImageGallery/ImageGalleryM
 import {hidePhoto} from "../../../../services/general.service"
 import {toast} from "react-hot-toast"
 import UserAvatar from "../../../../components/User/UserAvatar"
+import Button from "../../../../components/Button"
 
 type Props = {
     user: User
@@ -86,8 +87,16 @@ const UserImagesPage = ({user, images, currentPage, hasMore}: Props) => {
                         <Navbar darkMode={true} />
                     </div>
                     <div className={styles.Title}>
-                        <div>Reisipildid:</div>
-                        <div className={styles.UserAvatarContainer} onClick={() => router.push('/user/' + user.id)}>
+                        <div>Reisipildid</div>
+                        <div className={styles.AddNewButton}>
+                            <Button title={'Lisa uus'} />
+                        </div>
+                        <div className={styles.AddNewButtonMobile}>
+                            <span>+</span>
+                        </div>
+                    </div>
+                    <div className={styles.UserContainer}>
+                        <div className={styles.User} onClick={() => router.push('/user/' + user.id)}>
                             <div className={styles.UserAvatar}>
                                 <UserAvatar user={user} />
                             </div>
@@ -119,12 +128,12 @@ const UserImagesPage = ({user, images, currentPage, hasMore}: Props) => {
                 </div>
             </div>
             {imageItems && selectedImage !== undefined &&
-            <ImageGalleryModal
-                show={showModal}
-                images={imageItems}
-                selectedImage={selectedImage}
-                onHide={() => setShowModal(false)}
-                onImageHide={hideImage} />
+                <ImageGalleryModal
+                    show={showModal}
+                    images={imageItems}
+                    selectedImage={selectedImage}
+                    onHide={() => setShowModal(false)}
+                    onImageHide={hideImage} />
             }
             <Footer simple={true} />
         </Fragment>
