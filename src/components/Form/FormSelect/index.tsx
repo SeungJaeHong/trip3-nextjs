@@ -5,7 +5,7 @@ import clsx from "clsx";
 
 type Props = {
     id: string,
-    selectedValue?: string
+    value?: string
     options: { value: string, label: string }[],
     placeholder?: string,
     className?: string
@@ -20,7 +20,7 @@ const FormSelect = (props: Props) => {
             <Select
                 instanceId={props.id}
                 options={props.options}
-                value = {props.options.filter(option => option.value === props.selectedValue)}
+                value={props.options.filter(option => option.value === props.value)}
                 className={clsx(styles.FormSelect, props.className)}
                 classNamePrefix={props.classNamePrefix}
                 isClearable={props.isClearable}
