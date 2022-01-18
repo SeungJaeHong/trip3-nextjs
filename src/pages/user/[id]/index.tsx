@@ -165,6 +165,9 @@ const UserPage = ({userProfile}: Props) => {
                                 <div className={styles.ActionButton} onClick={() => router.push('/profile/destinations')}>
                                     <span>{'Minu sihtkohad'}</span>
                                 </div>
+                                <div className={styles.ActionButton} onClick={() => router.push('/user/' + userProfile.id + '/images')}>
+                                    <span>{'Minu pildid'}</span>
+                                </div>
                             </div>
                         }
                     </div>
