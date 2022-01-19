@@ -89,7 +89,7 @@ const UserImagesPage = ({user, images, currentPage, hasMore}: Props) => {
                     <div className={styles.Title}>
                         <div>Reisipildid</div>
                         <div className={styles.AddNewButton}>
-                            <Button title={'Lisa uus'} />
+                            <Button title={'Lisa uus'} route={'/user/' + user.id + '/add_image'} />
                         </div>
                         <div className={styles.AddNewButtonMobile}>
                             <span>+</span>

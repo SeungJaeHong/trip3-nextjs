@@ -20,7 +20,7 @@
     color: $gray-dark;
     display: flex;
     justify-content: center;
-    margin-bottom: $spacer;
+    margin-bottom: $spacer * 2;
     gap: $spacer * 2;
     position: relative;
 
@@ -71,7 +71,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: $spacer * 4;
+    margin-bottom: $spacer * 5;
 
     .User {
         display: flex;
@@ -131,7 +131,7 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 10px;
-        padding-bottom: $spacer * 5;
+        padding-bottom: $spacer * 6;
 
         .Image {
             width: 100%;
@@ -156,6 +156,6 @@
     }
 
     .Paginator {
-        margin-bottom: $spacer * 5;
+        margin-bottom: $spacer * 6;
     }
 }

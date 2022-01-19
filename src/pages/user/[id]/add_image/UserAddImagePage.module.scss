@@ -1,0 +1,90 @@
+@import "../../../../styles/variables";
+
+.Container {
+    position: relative;
+    background: $gray-light;
+}
+
+.Navbar {
+    padding-bottom: $spacer * 8;
+    padding-top: $spacer * 3;
+}
+
+.Title {
+    font-weight: 600;
+    font-size: 3rem;
+    color: $gray-dark;
+    display: flex;
+    justify-content: center;
+    margin-bottom: $spacer * 6;
+}
+
+.Content {
+    width: 100%;
+    background: $white;
+    position: relative;
+    margin-bottom: $spacer * 4;
+
+    .Body {
+        display: flex;
+        width: 100%;
+        padding-top: $spacer * 5;
+        position: relative;
+
+        .FormContainer {
+            display: flex;
+            flex-direction: column;
+            flex: 2;
+
+            .Header {
+                color: $blue-hover;
+                font-size: $font-size-xxlarge;
+                font-weight: 500;
+                margin-bottom: $spacer * 5;
+            }
+
+            .Form {
+                margin-bottom: $spacer * 4;
+            }
+        }
+
+        .Sidebar {
+            flex: 1;
+            margin-left: $spacer * 10;
+            margin-top: $spacer * 2;
+
+            .ImageRules {
+                padding: $spacer * 3;
+                background: $gray-light;
+                font-family: $font-family-sailec;
+
+                h3 {
+                    color: $red;
+                    margin-top: 0;
+                }
+
+                .ImageRulesBody {
+                    font-weight: 500;
+                    color: $gray-darker;
+
+                    a {
+                        color: $blue;
+
+                        &:hover {
+                            color: $blue-hover;
+                        }
+                    }
+                }
+            }
+        }
+
+        @include md() {
+            flex-direction: column;
+            padding: $spacer * 2 0;
+
+            .Sidebar {
+                margin-left: 0;
+            }
+        }
+    }
+}

@@ -4,12 +4,12 @@ import styles from './NewForumTopic.module.scss'
 import clsx from "clsx";
 import Footer from "../../../components/Footer"
 import containerStyle from "../../../styles/containers.module.scss"
-import BackgroundMap from "../../../components/BackgroundMap";
-import {GetServerSideProps} from "next";
-import ApiClientSSR from "../../../lib/ApiClientSSR";
-import MoreLink from "../../../components/MoreLink";
-import ForumPostForm from "../../../components/Forum/ForumPostForm";
-import {Destination, Topic} from "../../../types";
+import BackgroundMap from "../../../components/BackgroundMap"
+import {GetServerSideProps} from "next"
+import ApiClientSSR from "../../../lib/ApiClientSSR"
+import MoreLink from "../../../components/MoreLink"
+import ForumPostForm from "../../../components/Forum/ForumPostForm"
+import {Destination, Topic} from "../../../types"
 
 type Props = {
     destinations: Destination[]
