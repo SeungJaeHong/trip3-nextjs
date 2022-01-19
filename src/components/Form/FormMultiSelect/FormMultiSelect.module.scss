@@ -50,4 +50,15 @@
             cursor: pointer;
         }
     }
+
+    .ErrorText {
+        color: $red;
+        font-size: $font-size-small;
+    }
+
+    &.Invalid {
+        .FormSelect {
+            border: 2px solid $red;
+        }
+    }
 }

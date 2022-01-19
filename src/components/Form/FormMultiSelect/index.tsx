@@ -19,7 +19,9 @@ type Props = {
 
 const FormMultiSelect = (props: Props) => {
     return (
-        <div className={styles.FormMultiSelect}>
+        <div className={clsx(styles.FormMultiSelect, {
+            [styles.Invalid]: props.error.length > 0
+        })}>
             <label>{props.label}</label>
             <Select
                 isMulti
@@ -33,6 +35,12 @@ const FormMultiSelect = (props: Props) => {
                 isClearable={props.isClearable}
                 noOptionsMessage={() => 'Valikud puuduvad'}
                 placeholder={props.placeholder} />
+
+            {props.error?.length > 0 &&
+                <div className={styles.ErrorText}>
+                    {props.error}
+                </div>
+            }
         </div>
     )
 }

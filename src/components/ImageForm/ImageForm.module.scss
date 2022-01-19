@@ -1,0 +1,26 @@
+@import "../../styles/variables";
+
+.ImageForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: $white;
+    z-index: 2;
+
+    .FormContainer {
+        display: flex;
+
+        form {
+            width: 100%;
+
+            .FormInput {
+                margin-bottom: $spacer * 3;
+            }
+        }
+
+        .SubmitButton {
+            width: 200px;
+            margin-top: $spacer * 5;
+        }
+    }
+}

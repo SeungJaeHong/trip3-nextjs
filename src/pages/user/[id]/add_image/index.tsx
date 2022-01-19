@@ -9,6 +9,7 @@ import {GetServerSideProps} from "next"
 import ApiClientSSR from "../../../../lib/ApiClientSSR"
 import MoreLink from "../../../../components/MoreLink"
 import {Destination} from "../../../../types"
+import ImageForm from "../../../../components/ImageForm"
 
 type Props = {
     destinations: Destination[]
@@ -35,7 +36,7 @@ const UserAddImagePage = ({destinations}: Props) => {
                                     Lisa uus reisipilt
                                 </div>
                                 <div className={styles.Form}>
-                                    Form
+                                    <ImageForm destinations={destinations} />
                                 </div>
                             </div>
                             <div className={styles.Sidebar}>

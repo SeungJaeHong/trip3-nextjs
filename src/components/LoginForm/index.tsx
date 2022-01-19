@@ -40,7 +40,7 @@ const LoginForm = () => {
 
     const handleLogin: SubmitHandler<Inputs> = async (values: Inputs) => {
         const { name, password, remember_me } = values
-        const resp = await login(name, password, remember_me).then(res => {
+        await login(name, password, remember_me).then(res => {
             mutate(res.data)
             toast.success('Sisselogimine õnnestus!')
         }).catch(err => {
