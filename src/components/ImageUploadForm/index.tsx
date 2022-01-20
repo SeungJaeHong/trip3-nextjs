@@ -7,7 +7,7 @@ import * as yup from "yup"
 import { yupResolver } from '@hookform/resolvers/yup'
 import {Destination} from "../../types"
 import FormMultiSelect from "../Form/FormMultiSelect"
-import FormFileUpload from "../Form/FormFileUpload"
+import FormImageUpload from "../Form/FormImageUpload"
 
 type Inputs = {
     image: any
@@ -50,7 +50,7 @@ const ImageUploadForm = ({destinations}: Props) => {
                                 //console.log(field, 'field')
 
                                 return (
-                                    <FormFileUpload
+                                    <FormImageUpload
                                         id={'image'}
                                         label={'Pilt'}
                                         value={field.value}

@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from "react"
-import styles from "./FormFileUpload.module.scss"
+import styles from "./FormImageUpload.module.scss"
 import {useDropzone} from 'react-dropzone'
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
     mimeTypes: Array<string>
 }
 
-const FormFileUpload = (props: Props) => {
+const FormImageUpload = (props: Props) => {
     const [error, setError] = useState<string|undefined>(undefined)
     const [files, setFiles] = useState<File[]>([])
 
@@ -59,7 +59,7 @@ const FormFileUpload = (props: Props) => {
     }
 
     return (
-        <div className={styles.FormFileUpload}>
+        <div className={styles.FormImageUpload}>
             {props.label && <label>{props.label}</label>}
             <div className={styles.DropzoneContainer} {...getRootProps()}>
                 <input {...getInputProps()} />
@@ -75,13 +75,13 @@ const FormFileUpload = (props: Props) => {
     )
 }
 
-FormFileUpload.defaultProps = {
+FormImageUpload.defaultProps = {
     maxFiles: 1,
     placeholder: 'Lohista pilt siia või kliki',
     error: '',
     disabled: false,
-    mimeTypes: ['image/jpeg', 'image/png', 'image/jpg']
+    mimeTypes: ['image/jpeg', 'image/png']
 }
 
-export default FormFileUpload
+export default FormImageUpload
 
