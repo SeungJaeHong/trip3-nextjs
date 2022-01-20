@@ -6,6 +6,7 @@ import clsx from "clsx";
 type Props = {
     id: string,
     value?: string
+    label?: string
     options: { value: string, label: string }[],
     placeholder?: string,
     className?: string
@@ -17,6 +18,7 @@ type Props = {
 const FormSelect = (props: Props) => {
     return (
         <div className={styles.FormSelectContainer}>
+            {props.label && <label>{props.label}</label>}
             <Select
                 instanceId={props.id}
                 options={props.options}

@@ -1,6 +1,6 @@
 @import "../../styles/variables";
 
-.ImageForm {
+.ImageUploadForm {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -19,7 +19,7 @@
         }
 
         .SubmitButton {
-            width: 200px;
+            width: 180px;
             margin-top: $spacer * 5;
         }
     }
