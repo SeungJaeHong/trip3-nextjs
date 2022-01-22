@@ -8,14 +8,28 @@ import BackgroundMap from "../../../../components/BackgroundMap"
 import {GetServerSideProps} from "next"
 import ApiClientSSR from "../../../../lib/ApiClientSSR"
 import MoreLink from "../../../../components/MoreLink"
-import {Destination} from "../../../../types"
+import {Destination, User} from "../../../../types"
 import ImageUploadForm from "../../../../components/ImageUploadForm"
+import {uploadImage} from "../../../../services/user.service"
+import {toast} from "react-hot-toast"
 
 type Props = {
+    user: User
     destinations: Destination[]
 }
 
-const UserAddImagePage = ({destinations}: Props) => {
+const UserAddImagePage = ({user, destinations}: Props) => {
+    const onSubmit = (image: File, title: string, destinations: Destination[]) => {
+
+        console.log('onSubmit', image, title, destinations)
+
+        uploadImage(user.id, image, title, destinations).then(res => {
+            toast.success('Pildi salvestamine õnnestus')
+        }).catch(e => {
+            toast.error('Pildi salvestamine ebaõnnestus')
+        })
+    }
+
     return (
         <Fragment>
             <div className={styles.Container}>
@@ -36,7 +50,9 @@ const UserAddImagePage = ({destinations}: Props) => {
                                     Lisa uus reisipilt
                                 </div>
                                 <div className={styles.Form}>
-                                    <ImageUploadForm destinations={destinations} />
+                                    <ImageUploadForm
+                                        destinations={destinations}
+                                        onSubmit={onSubmit} />
                                 </div>
                             </div>
                             <div className={styles.Sidebar}>
@@ -70,6 +86,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
         return {
             props: {
+                user: response.data.user,
                 destinations: response.data.destinations || []
             }
         }

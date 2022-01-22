@@ -4,7 +4,7 @@ import FormInput from "../Form/FormInput"
 import SubmitButton from "../Form/SubmitButton"
 import {Controller, SubmitHandler, useForm} from "react-hook-form"
 import * as yup from "yup"
-import { yupResolver } from '@hookform/resolvers/yup'
+import {yupResolver} from '@hookform/resolvers/yup'
 import {Destination} from "../../types"
 import FormMultiSelect from "../Form/FormMultiSelect"
 import FormImageUpload from "../Form/FormImageUpload"
@@ -17,26 +17,32 @@ type Inputs = {
 
 type Props = {
     destinations: Destination[]
+    onSubmit: (image: File, title: string, destination: Destination[]) => void
 }
 
-const ImageUploadForm = ({destinations}: Props) => {
+const ImageUploadForm = ({destinations, onSubmit}: Props) => {
     const loginSchema = yup.object().shape({
-        image: yup.mixed().required('Pilt on kohustuslik'),
+        image: yup.array().required('Pilt on kohustuslik').length(1, 'Lubatud failide arv on 1'),
         title: yup.string().required('Pealkiri on kohustuslik'),
         destinations: yup.array().required('Sihtkoht on kohustuslik').min(1, 'Sihtkoht on kohustuslik'),
     }).required()
 
-    const { register, control, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
+    const { register, control, handleSubmit, formState: { errors, isSubmitting } } = useForm<Inputs>({
         resolver: yupResolver(loginSchema)
     })
 
-    const handleSave: SubmitHandler<Inputs> = async (values: Inputs) => {
-        const { image, title, destinations } = values
-
-        console.log(values, 'values')
+    const valuesToDestination = (values: { value: string, label: string }[]): Destination[] => {
+        const ids: Number[] = values.map(value => parseInt(value.value))
+        return destinations.filter(destination => ids.indexOf(destination.id) !== -1)
     }
 
-    const allOptions: { label: string; value: string }[] = destinations?.map(destination => ({ label: destination.name, value: destination.id.toString() }))
+    const handleSave: SubmitHandler<Inputs> = async (values: Inputs) => {
+        const { image, title, destinations } = values
+        const destinationValues = valuesToDestination(destinations)
+        onSubmit(image[0], title, destinationValues)
+    }
+
+    const allOptions: { label: string; value: string }[] = destinations.map(destination => ({ label: destination.name, value: destination.id.toString() }))
     return (
         <div className={styles.ImageUploadForm}>
             <div className={styles.FormContainer}>
@@ -45,10 +51,7 @@ const ImageUploadForm = ({destinations}: Props) => {
                         <Controller
                             name={'image'}
                             control={control}
-                            render={({ field, fieldState, formState }) => {
-
-                                //console.log(field, 'field')
-
+                            render={({ field, fieldState }) => {
                                 return (
                                     <FormImageUpload
                                         id={'image'}
@@ -75,7 +78,7 @@ const ImageUploadForm = ({destinations}: Props) => {
                         <Controller
                             name={'destinations'}
                             control={control}
-                            render={({ field, fieldState, formState }) => {
+                            render={({ field, fieldState }) => {
                                 return (
                                     <FormMultiSelect
                                         id={'destinations'}

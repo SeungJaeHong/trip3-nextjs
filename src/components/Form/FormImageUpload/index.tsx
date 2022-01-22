@@ -12,6 +12,7 @@ type Props = {
     error: string
     disabled: boolean
     mimeTypes: Array<string>
+    maxSize: number
 }
 
 const FormImageUpload = (props: Props) => {
@@ -21,8 +22,13 @@ const FormImageUpload = (props: Props) => {
     const onDrop = useCallback((acceptedFiles, fileRejections) => {
         setError(undefined)
         setFiles([])
-        if (fileRejections && fileRejections.length > props.maxFiles) {
-            setError('Lubatud failide arv on ' + props.maxFiles)
+
+        if (fileRejections.length > 0) {
+            if (fileRejections.length > props.maxFiles) {
+                setError('Lubatud failide arv on ' + props.maxFiles)
+            } else if (fileRejections[0].errors[0].code === 'file-too-large') {
+                setError('Fail on liiga suur')
+            }
         } else {
             setFiles(acceptedFiles.map((file: File) => Object.assign(file, {
                 preview: URL.createObjectURL(file)
@@ -35,7 +41,8 @@ const FormImageUpload = (props: Props) => {
     const {getRootProps, getInputProps} = useDropzone({
         onDrop,
         maxFiles: props.maxFiles,
-        accept: props.mimeTypes.toString()
+        accept: props.mimeTypes.toString(),
+        maxSize: props.maxSize * 1024 * 1024 //mb to bytes
     })
 
     const renderPreviewImages = () => {
@@ -80,7 +87,8 @@ FormImageUpload.defaultProps = {
     placeholder: 'Lohista pilt siia või kliki',
     error: '',
     disabled: false,
-    mimeTypes: ['image/jpeg', 'image/png']
+    mimeTypes: ['image/jpeg', 'image/png'],
+    maxSize: 5
 }
 
 export default FormImageUpload
