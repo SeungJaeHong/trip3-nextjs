@@ -17,19 +17,22 @@ import {hidePhoto} from "../../../../services/general.service"
 import {toast} from "react-hot-toast"
 import UserAvatar from "../../../../components/User/UserAvatar"
 import Button from "../../../../components/Button"
+import useUser from "../../../../hooks"
 
 type Props = {
-    user: User
+    targetUser: User
     images?: ImageType[]
     currentPage: number
     hasMore: boolean
 }
 
-const UserImagesPage = ({user, images, currentPage, hasMore}: Props) => {
+const UserImagesPage = ({targetUser, images, currentPage, hasMore}: Props) => {
     const router = useRouter()
     const [imageItems, setImagesItems] = useState<ImageType[]|undefined>(images)
     const [showModal, setShowModal] = useState<boolean>(false)
     const [selectedImage, setSelectedImage] = useState<ImageType | undefined>(undefined)
+    const { user } = useUser()
+    const isUserOwner = targetUser.id === user?.id
 
     useEffect(() => {
         setImagesItems(images)
@@ -46,7 +49,7 @@ const UserImagesPage = ({user, images, currentPage, hasMore}: Props) => {
         }
 
         const urlParams = {
-            id: user.id,
+            id: targetUser.id,
             page: currentPage + 1
         }
 
@@ -57,7 +60,7 @@ const UserImagesPage = ({user, images, currentPage, hasMore}: Props) => {
     const getPreviousPageUrl = () => {
         if (currentPage > 1) {
             const urlParams = {
-                id: user.id,
+                id: targetUser.id,
                 page: currentPage - 1
             }
 
@@ -88,20 +91,22 @@ const UserImagesPage = ({user, images, currentPage, hasMore}: Props) => {
                     </div>
                     <div className={styles.Title}>
                         <div>Reisipildid</div>
-                        <div className={styles.AddNewButton}>
-                            <Button title={'Lisa uus'} route={'/image/add'} />
-                        </div>
+                        {isUserOwner &&
+                            <div className={styles.AddNewButton}>
+                                <Button title={'Lisa uus'} route={'/image/add'} />
+                            </div>
+                        }
                         <div className={styles.AddNewButtonMobile}>
                             <span>+</span>
                         </div>
                     </div>
                     <div className={styles.UserContainer}>
-                        <div className={styles.User} onClick={() => router.push('/user/' + user.id)}>
+                        <div className={styles.User} onClick={() => router.push('/user/' + targetUser.id)}>
                             <div className={styles.UserAvatar}>
-                                <UserAvatar user={user} />
+                                <UserAvatar user={targetUser} />
                             </div>
                             <div className={styles.UserName}>
-                                {user.name}
+                                {targetUser.name}
                             </div>
                         </div>
                     </div>
@@ -150,7 +155,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const res = await ApiClientSSR(context).get(url)
     const data = {
-        user: res.data?.user,
+        targetUser: res.data?.user,
         images: res.data?.imageData.images,
         currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
         hasMore: res.data?.imageData.hasMore,

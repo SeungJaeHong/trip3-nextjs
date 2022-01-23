@@ -1,10 +1,10 @@
-import React, {useRef} from "react"
+import React, {useEffect, useRef} from "react"
 import styles from "./UserEditForm.module.scss"
 import Router from "next/router"
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import toast from "react-hot-toast"
-import { useForm, SubmitHandler } from "react-hook-form"
+import {useForm, SubmitHandler, Controller} from "react-hook-form"
 import FormInput from "../../Form/FormInput"
 import SubmitButton from "../../Form/SubmitButton"
 import {UserProfile} from "../../../types"
@@ -13,10 +13,12 @@ import FormRadioButton from "../../Form/FormRadioButton"
 import {updateUserProfile} from "../../../services/user.service"
 import {setFormErrors} from "../../../helpers"
 import FormCheckbox from "../../Form/FormCheckbox"
+import FormImageUpload from "../../Form/FormImageUpload";
 
 type Inputs = {
-    name: string,
-    email: string,
+    image: any
+    name: string
+    email: string
     password: string
     password_confirmation: string
     description: string
@@ -33,6 +35,7 @@ type Inputs = {
 const UserEditForm = (userProfile: UserProfile) => {
     const formRef = useRef<HTMLFormElement>(null)
     const registerSchema = yup.object().shape({
+        image: yup.array().required('Pilt on kohustuslik').length(1, 'Lubatud failide arv on 1'),
         name: yup.string().required('Kasutajanimi on kohustuslik'),
         email: yup.string().email('E-post ei ole korrektne').required('E-post on kohustuslik'),
         password: yup.string(),
@@ -45,10 +48,10 @@ const UserEditForm = (userProfile: UserProfile) => {
         homepage: yup.string().url('Ei ole korrektne url').nullable()
     }).required()
 
-    const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
+    const { register, control, handleSubmit, setError, setFocus, formState: { errors, isSubmitting } } = useForm<Inputs>({
         resolver: yupResolver(registerSchema),
         defaultValues: {
-            name:userProfile.name,
+            name: userProfile.name,
             email: userProfile.email,
             description: userProfile.description,
             gender: userProfile.gender ? String(userProfile.gender) : undefined,
@@ -63,6 +66,14 @@ const UserEditForm = (userProfile: UserProfile) => {
         criteriaMode: 'firstError',
         shouldFocusError: true
     })
+
+    useEffect(() => {
+        if (Object.keys(errors).length > 0) {
+            const firstError = Object.keys(errors)[0]
+            // @ts-ignore
+            setFocus(firstError)
+        }
+    }, [errors, setFocus])
 
     const handleUpdate: SubmitHandler<Inputs> = async (values: Inputs) => {
         await updateUserProfile(userProfile.id, values).then(res => {
@@ -90,7 +101,20 @@ const UserEditForm = (userProfile: UserProfile) => {
                         Profiilipilt
                     </div>
                     <div className={styles.FormInput}>
-                        Imageupload
+                        <Controller
+                            name={'image'}
+                            control={control}
+                            render={({ field, fieldState }) => {
+                                return (
+                                    <FormImageUpload
+                                        id={'image'}
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        error={fieldState.error?.message}
+                                        disabled={isSubmitting} />
+                                )
+                            }}
+                        />
                     </div>
                     <div className={styles.SubHeading}>
                         Kasutaja andmed
