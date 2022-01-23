@@ -27,11 +27,29 @@ const ImageAddPage = ({user, destinations}: Props) => {
     const onSubmit = (image: File, title: string, destinations: Destination[]) => {
         setSubmitting(true)
         uploadImage(image, title, destinations).then(res => {
+            const destinationId = router.query?.destination
+            if (parseInt(String(destinationId))) {
+                router.push('/reisipildid?destination=' + destinationId)
+            } else {
+                router.push('/user/' + user.id + '/images')
+            }
+
             toast.success('Pildi salvestamine õnnestus')
-            router.push('/user/' + user.id + '/images')
         }).catch(e => {
             toast.error('Pildi salvestamine ebaõnnestus')
         }).finally(() => setSubmitting(false))
+    }
+
+    const getSelectedDestination = () => {
+        const destinationId = router.query?.destination
+        if (destinationId && String(destinationId)) {
+            const value = destinations.filter(dest => dest.id === parseInt(String(destinationId)))
+            if (value && value.length === 1) {
+                return value[0]
+            }
+        }
+
+        return undefined
     }
 
     return (
@@ -55,13 +73,14 @@ const ImageAddPage = ({user, destinations}: Props) => {
                                 </div>
                                 <div className={styles.Form}>
                                     {submitting &&
-                                    <div className={styles.FormSubmitOverLay}>
-                                        <LoadingSpinner2 />
-                                    </div>
+                                        <div className={styles.FormSubmitOverLay}>
+                                            <LoadingSpinner2 />
+                                        </div>
                                     }
                                     <ImageUploadForm
                                         destinations={destinations}
-                                        onSubmit={onSubmit} />
+                                        onSubmit={onSubmit}
+                                        selectedDestination={getSelectedDestination()} />
                                 </div>
                             </div>
                             <div className={styles.Sidebar}>
