@@ -39,19 +39,3 @@ export const getUserImages = async (userId: number): Promise<AxiosResponse<{imag
     return await ApiClient.get('/user/' + userId + '/images')
 }
 
-export const uploadImage = async (userId: number, image: File, title: string, destinations: Destination[]): Promise<AxiosResponse> => {
-    let formData = new FormData()
-    formData.append('image', image)
-    formData.append('title', title)
-
-    destinations.map(destination => {
-        formData.append('destinations[]', destination.id.toString())
-    })
-
-    return await ApiClient.post('/user/' + userId + '/uploadImage', formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    })
-}
-

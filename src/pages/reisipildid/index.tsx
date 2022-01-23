@@ -105,7 +105,7 @@ const ImagesPage = ({images, currentPage, hasMore, destinationId, destinationOpt
                     </div>
                     <div className={styles.Title}>
                         <div>Reisipildid</div>
-                        <div className={styles.AddNewButton}>
+                        <div className={styles.AddNewButton} onClick={() => router.push(selectedDestinationId ? '/image/add?destination=' + selectedDestinationId : '/image/add')}>
                             <Button title={'Lisa uus'} />
                         </div>
                         <div className={styles.AddNewButtonMobile}>
