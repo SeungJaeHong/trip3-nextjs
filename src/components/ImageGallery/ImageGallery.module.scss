@@ -83,5 +83,9 @@
                 height: 20px;
             }
         }
+
+        @media only screen and (min-width : 2160px) {
+            display: none;
+        }
     }
 }
