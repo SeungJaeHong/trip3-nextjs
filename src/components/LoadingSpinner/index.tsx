@@ -1,19 +1,11 @@
 import styles from "./LoadingSpinner.module.scss"
-import clsx from "clsx"
 
-// @ts-ignore
-const LoadingSpinner = ({show}) => {
+const LoadingSpinner = () => {
     return (
-        <div className={clsx(styles.LoadingSpinner, {
-            [styles.Show]: show
-        })}>
+        <div className={styles.LoadingSpinner}>
             <div className={styles.Spinner} />
         </div>
     )
-}
-
-LoadingSpinner.defaultProps = {
-    show: false
 }
 
 export default LoadingSpinner

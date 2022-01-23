@@ -13,7 +13,7 @@ const SubmitButton = ({title, submitting, type, onClick}: Props) => {
     const renderTitle = () => {
         return (
             <div className={buttonStyles.Loading}>
-                <LoadingSpinner show={submitting} />
+                {submitting && <LoadingSpinner />}
                 <span className={buttonStyles.Title}>{title}</span>
             </div>
         )

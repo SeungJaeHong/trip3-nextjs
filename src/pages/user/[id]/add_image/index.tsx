@@ -1,4 +1,4 @@
-import React, {Fragment} from "react"
+import React, {Fragment, useState} from "react"
 import Navbar from "../../../../components/Navbar"
 import styles from './UserAddImagePage.module.scss'
 import clsx from "clsx"
@@ -12,6 +12,8 @@ import {Destination, User} from "../../../../types"
 import ImageUploadForm from "../../../../components/ImageUploadForm"
 import {uploadImage} from "../../../../services/user.service"
 import {toast} from "react-hot-toast"
+import {useRouter} from "next/router"
+import LoadingSpinner2 from "../../../../components/LoadingSpinner2"
 
 type Props = {
     user: User
@@ -19,15 +21,17 @@ type Props = {
 }
 
 const UserAddImagePage = ({user, destinations}: Props) => {
+    const router = useRouter()
+    const [submitting, setSubmitting] = useState<boolean>(false)
+
     const onSubmit = (image: File, title: string, destinations: Destination[]) => {
-
-        console.log('onSubmit', image, title, destinations)
-
+        setSubmitting(true)
         uploadImage(user.id, image, title, destinations).then(res => {
             toast.success('Pildi salvestamine õnnestus')
+            router.push('/user/' + user.id + '/images')
         }).catch(e => {
             toast.error('Pildi salvestamine ebaõnnestus')
-        })
+        }).finally(() => console.log('finally'))
     }
 
     return (
@@ -50,6 +54,11 @@ const UserAddImagePage = ({user, destinations}: Props) => {
                                     Lisa uus reisipilt
                                 </div>
                                 <div className={styles.Form}>
+                                    {submitting &&
+                                        <div className={styles.FormSubmitOverLay}>
+                                            <LoadingSpinner2 />
+                                        </div>
+                                    }
                                     <ImageUploadForm
                                         destinations={destinations}
                                         onSubmit={onSubmit} />

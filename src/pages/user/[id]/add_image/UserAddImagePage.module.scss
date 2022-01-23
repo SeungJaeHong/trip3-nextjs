@@ -45,6 +45,19 @@
 
             .Form {
                 margin-bottom: $spacer * 4;
+                position: relative;
+
+                .FormSubmitOverLay {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    background: rgba(255, 255, 255, .6);
+                    display: flex;
+                    justify-content: center;
+                    z-index: 2;
+                }
             }
         }
 

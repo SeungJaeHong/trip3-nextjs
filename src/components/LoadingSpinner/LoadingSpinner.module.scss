@@ -2,12 +2,8 @@
 
 .LoadingSpinner {
     position: relative;
-    display: none;
+    display: flex;
     justify-content: center;
-
-    &.Show {
-        display: flex;
-    }
 
     .Spinner {
         border-top: 3px solid $white;

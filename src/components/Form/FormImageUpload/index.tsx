@@ -42,7 +42,8 @@ const FormImageUpload = (props: Props) => {
         onDrop,
         maxFiles: props.maxFiles,
         accept: props.mimeTypes.toString(),
-        maxSize: props.maxSize * 1024 * 1024 //mb to bytes
+        maxSize: props.maxSize * 1024 * 1024, //mb to bytes
+        disabled: props.disabled
     })
 
     const renderPreviewImages = () => {
