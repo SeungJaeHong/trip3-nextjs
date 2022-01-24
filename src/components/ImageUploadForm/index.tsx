@@ -60,7 +60,6 @@ const ImageUploadForm = ({destinations, onSubmit, selectedDestination}: Props) =
                                     <FormImageUpload
                                         id={'image'}
                                         label={'Pilt'}
-                                        value={field.value}
                                         onChange={field.onChange}
                                         error={fieldState.error?.message}
                                         disabled={isSubmitting}/>

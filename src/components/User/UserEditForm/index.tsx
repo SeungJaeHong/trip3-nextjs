@@ -13,7 +13,7 @@ import FormRadioButton from "../../Form/FormRadioButton"
 import {updateUserProfile} from "../../../services/user.service"
 import {setFormErrors} from "../../../helpers"
 import FormCheckbox from "../../Form/FormCheckbox"
-import FormImageUpload from "../../Form/FormImageUpload";
+import FormImageUpload from "../../Form/FormImageUpload"
 
 type Inputs = {
     image: any
@@ -35,7 +35,7 @@ type Inputs = {
 const UserEditForm = (userProfile: UserProfile) => {
     const formRef = useRef<HTMLFormElement>(null)
     const registerSchema = yup.object().shape({
-        image: yup.array().required('Pilt on kohustuslik').length(1, 'Lubatud failide arv on 1'),
+        image: yup.array().length(1, 'Lubatud failide arv on 1').nullable(),
         name: yup.string().required('Kasutajanimi on kohustuslik'),
         email: yup.string().email('E-post ei ole korrektne').required('E-post on kohustuslik'),
         password: yup.string(),
@@ -67,13 +67,14 @@ const UserEditForm = (userProfile: UserProfile) => {
         shouldFocusError: true
     })
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (Object.keys(errors).length > 0) {
             const firstError = Object.keys(errors)[0]
+
             // @ts-ignore
             setFocus(firstError)
         }
-    }, [errors, setFocus])
+    }, [errors, setFocus])*/
 
     const handleUpdate: SubmitHandler<Inputs> = async (values: Inputs) => {
         await updateUserProfile(userProfile.id, values).then(res => {
@@ -108,7 +109,7 @@ const UserEditForm = (userProfile: UserProfile) => {
                                 return (
                                     <FormImageUpload
                                         id={'image'}
-                                        value={field.value}
+                                        files={userProfile?.avatar ? [userProfile?.avatar] : []}
                                         onChange={field.onChange}
                                         error={fieldState.error?.message}
                                         disabled={isSubmitting} />

@@ -4,9 +4,9 @@ import {useDropzone} from 'react-dropzone'
 
 type Props = {
     id: string,
-    value?: string
     label?: string
     placeholder?: string
+    files?: Array<string>
     onChange: (value: any) => void
     maxFiles: number
     error: string
@@ -17,7 +17,7 @@ type Props = {
 
 const FormImageUpload = (props: Props) => {
     const [error, setError] = useState<string|undefined>(undefined)
-    const [files, setFiles] = useState<File[]>([])
+    const [files, setFiles] = useState<string[]>(props.files || [])
 
     const onDrop = useCallback((acceptedFiles, fileRejections) => {
         setError(undefined)
@@ -30,9 +30,7 @@ const FormImageUpload = (props: Props) => {
                 setError('Fail on liiga suur')
             }
         } else {
-            setFiles(acceptedFiles.map((file: File) => Object.assign(file, {
-                preview: URL.createObjectURL(file)
-            })))
+            setFiles(acceptedFiles.map((file: File) => URL.createObjectURL(file)))
         }
 
         props.onChange(acceptedFiles)
@@ -49,14 +47,14 @@ const FormImageUpload = (props: Props) => {
     const renderPreviewImages = () => {
         return (
             <div className={styles.Preview}>
-                {files.map(file => {
+                {files.map((url, i) => {
                     return (
-                        <div className={styles.Thumb} key={file.name}>
+                        <div className={styles.Thumb} key={'image_' + i}>
                             <div className={styles.ThumbInner}>
                                 <img
                                     // @ts-ignore
-                                    src={file.preview}
-                                    alt={file.name}
+                                    src={url}
+                                    alt={''}
                                 />
                             </div>
                         </div>
@@ -89,7 +87,8 @@ FormImageUpload.defaultProps = {
     error: '',
     disabled: false,
     mimeTypes: ['image/jpeg', 'image/png'],
-    maxSize: 5
+    maxSize: 5,
+    files: []
 }
 
 export default FormImageUpload
