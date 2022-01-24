@@ -27,13 +27,14 @@ type Props = {
 
 const UserPage = ({userProfile}: Props) => {
     const { userIsLoggedIn, user } = useUser()
-    const isUserOwner = userProfile.id === user?.id
+    const userIsOwner = userProfile.id === user?.id
+    const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const router = useRouter()
     const showVisitedBlock = (userProfile.countriesVisited && userProfile.countriesVisited?.length > 0)
         || (userProfile.citiesVisited && userProfile.citiesVisited?.length > 0)
 
     const renderMessageBtn = () => {
-        if (!userIsLoggedIn || isUserOwner) {
+        if (!userIsLoggedIn || userIsOwner) {
             return null
         }
 
@@ -154,20 +155,26 @@ const UserPage = ({userProfile}: Props) => {
                             </>
                         }
 
-                        {isUserOwner && userIsLoggedIn &&
+                        {userIsLoggedIn &&
                             <div className={styles.ActionButtons}>
-                                <div className={styles.ActionButton} onClick={() => router.push('/user/' + userProfile.id + '/edit')}>
-                                    <span>{'Muuda profiili'}</span>
-                                </div>
-                                <div className={styles.ActionButton} onClick={() => router.push('/profile/messages')}>
-                                    <span>{'Sõnumid'}</span>
-                                </div>
-                                <div className={styles.ActionButton} onClick={() => router.push('/profile/destinations')}>
-                                    <span>{'Minu sihtkohad'}</span>
-                                </div>
-                                <div className={styles.ActionButton} onClick={() => router.push('/user/' + userProfile.id + '/images')}>
-                                    <span>{'Minu pildid'}</span>
-                                </div>
+                                {(userIsOwner || userIsAdmin) &&
+                                    <div className={styles.ActionButton} onClick={() => router.push('/user/' + userProfile.id + '/edit')}>
+                                        <span>{'Muuda profiili'}</span>
+                                    </div>
+                                }
+                                {userIsOwner &&
+                                    <>
+                                        <div className={styles.ActionButton} onClick={() => router.push('/profile/messages')}>
+                                            <span>{'Sõnumid'}</span>
+                                        </div>
+                                        <div className={styles.ActionButton} onClick={() => router.push('/profile/destinations')}>
+                                            <span>{'Minu sihtkohad'}</span>
+                                        </div>
+                                        <div className={styles.ActionButton} onClick={() => router.push('/user/' + userProfile.id + '/images')}>
+                                            <span>{'Minu pildid'}</span>
+                                        </div>
+                                    </>
+                                }
                             </div>
                         }
                     </div>
