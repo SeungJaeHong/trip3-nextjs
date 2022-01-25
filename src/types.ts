@@ -86,10 +86,12 @@ export interface UserComment extends Comment {
 export type Image = {
     id: number
     title: string
+    slug: string
     urlSmall: string
     urlLarge: string
     createdAt: string
     user?: User
+    destinations?: Destination[]
 }
 
 export type Content = {

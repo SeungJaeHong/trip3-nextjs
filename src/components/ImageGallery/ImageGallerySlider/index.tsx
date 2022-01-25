@@ -7,6 +7,7 @@ import clsx from "clsx"
 import UserAvatar from "../../User/UserAvatar"
 import {useRouter} from "next/router"
 import useUser from "../../../hooks"
+import Tag from "../../Tag"
 
 type Props = {
     images: Array<ImageType>
@@ -132,6 +133,25 @@ const ImageGallerySlider = ({images, selectedImage, onImageHide}: Props) => {
         }
     }
 
+    const renderDestinations = () => {
+        if (currentSlideImage.destinations && currentSlideImage.destinations?.length > 0) {
+            return (
+                <div className={styles.Destinations}>
+                    {currentSlideImage.destinations?.map(destination => {
+                        return <Tag
+                            title={destination.name}
+                            type={'destination'}
+                            key={destination.id}
+                            route={'/sihtkoht/' + destination.slug}
+                            large={true} />
+                    })}
+                </div>
+            )
+        }
+
+        return null
+    }
+
     return (
         <>
             {instanceRef.current !== undefined &&
@@ -173,15 +193,18 @@ const ImageGallerySlider = ({images, selectedImage, onImageHide}: Props) => {
                         {currentSlideImage.title}
                     </div>
                     {currentSlideImage.user !== undefined &&
-                        <div className={styles.UserInfo} onClick={() => router.push('/user/' + currentSlideImage.user?.id)}>
-                            <div className={styles.UserAvatar}>
-                                <UserAvatar user={currentSlideImage.user} />
-                            </div>
-                            <div className={styles.UserName}>
-                                {currentSlideImage.user.name}
+                        <div className={styles.UserInfoContainer}>
+                            <div className={styles.UserInfo} onClick={() => router.push('/user/' + currentSlideImage.user?.id)}>
+                                <div className={styles.UserAvatar}>
+                                    <UserAvatar user={currentSlideImage.user} />
+                                </div>
+                                <div className={styles.UserName}>
+                                    {currentSlideImage.user.name}
+                                </div>
                             </div>
                         </div>
                     }
+                    {renderDestinations()}
                 </div>
             </div>
         </>

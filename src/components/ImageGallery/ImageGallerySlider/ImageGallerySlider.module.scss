@@ -86,7 +86,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: $spacer * 2;
+        gap: $spacer * 2.5;
 
         .ImageTitle {
             color: $white;
@@ -94,28 +94,39 @@
             text-align: center;
         }
 
-        .UserInfo {
+        .UserInfoContainer {
             display: flex;
             width: 100%;
             justify-content: center;
             align-items: center;
-            gap: $spacer;
-            cursor: pointer;
 
-            .UserAvatar {
-                width: 40px;
-                height: 40px;
-            }
+            .UserInfo {
+                display: flex;
+                gap: $spacer * 1.5;
+                cursor: pointer;
+                align-items: center;
 
-            .UserName {
-                color: $blue;
-            }
+                .UserAvatar {
+                    width: 40px;
+                    height: 40px;
+                }
 
-            &:hover {
                 .UserName {
-                    color: $blue-hover;
+                    color: $blue;
+                }
+
+                &:hover {
+                    .UserName {
+                        color: $blue-hover;
+                    }
                 }
             }
+        }
+
+        .Destinations {
+            display: flex;
+            gap: $spacer;
+            margin-top: $spacer;
         }
 
         @include sm() {

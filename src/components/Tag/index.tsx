@@ -5,8 +5,8 @@ import clsx from "clsx"
 
 type Props = {
     title: string
-    type?: string
-    large?: boolean
+    type?: 'destination'
+    large: boolean
     route?: string
     white?: boolean
     red?: boolean
