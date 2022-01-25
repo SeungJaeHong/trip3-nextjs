@@ -191,15 +191,21 @@ const DestinationPage = (props: Props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const slug = context.query.slug
-    const url = process.env.API_BASE_URL + '/destination/' + slug
-    const response = await ApiClientSSR(context).get(url)
-    const data = {
-        destination: response.data.destination
-    }
+    try {
+        const slug = context.query.slug
+        const url = process.env.API_BASE_URL + '/destination/' + slug
+        const response = await ApiClientSSR(context).get(url)
+        const data = {
+            destination: response.data.destination
+        }
 
-    return {
-        props: data
+        return {
+            props: data
+        }
+    } catch (e) {
+        return {
+            notFound: true
+        }
     }
 }
 

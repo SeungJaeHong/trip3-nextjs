@@ -16,23 +16,29 @@ const ForeignShow = (props: Props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const slug = context.query.slug
-    const page = context.query?.page
-    let url = process.env.API_BASE_URL + '/forum/expat/' + slug
-    if (page) {
-        url += '?page=' + page
-    }
+    try {
+        const slug = context.query.slug
+        const page = context.query?.page
+        let url = process.env.API_BASE_URL + '/forum/expat/' + slug
+        if (page) {
+            url += '?page=' + page
+        }
 
-    const response = await ApiClientSSR(context).get(url)
-    const data = {
-        post: response.data.post,
-        currentPage: response.data.currentPage,
-        lastPage: response.data.lastPage,
-        lastCommentId: response.data.lastCommentId,
-    }
+        const response = await ApiClientSSR(context).get(url)
+        const data = {
+            post: response.data.post,
+            currentPage: response.data.currentPage,
+            lastPage: response.data.lastPage,
+            lastCommentId: response.data.lastCommentId,
+        }
 
-    return {
-        props: data
+        return {
+            props: data
+        }
+    } catch (e) {
+        return {
+            notFound: true
+        }
     }
 }
 

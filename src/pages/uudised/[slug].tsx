@@ -119,16 +119,22 @@ const NewsShow = ({news}: Props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const slug = context.query.slug
-    let url = process.env.API_BASE_URL + '/news/' + slug
+    try {
+        const slug = context.query.slug
+        let url = process.env.API_BASE_URL + '/news/' + slug
 
-    const response = await ApiClientSSR(context).get(url)
-    const data = {
-        news: response.data.news,
-    }
+        const response = await ApiClientSSR(context).get(url)
+        const data = {
+            news: response.data.news,
+        }
 
-    return {
-        props: data
+        return {
+            props: data
+        }
+    } catch (e) {
+        return {
+            notFound: true
+        }
     }
 }
 

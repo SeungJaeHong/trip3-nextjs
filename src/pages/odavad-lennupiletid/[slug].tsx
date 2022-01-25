@@ -77,16 +77,21 @@ const FlightOfferShow = (props: Props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const slug = context.query.slug
-    let url = process.env.API_BASE_URL + '/flight/' + slug
+    try {
+        const slug = context.query.slug
+        let url = process.env.API_BASE_URL + '/flight/' + slug
+        const response = await ApiClientSSR(context).get(url)
+        const data = {
+            flight: response.data.flight
+        }
 
-    const response = await ApiClientSSR(context).get(url)
-    const data = {
-        flight: response.data.flight
-    }
-
-    return {
-        props: data
+        return {
+            props: data
+        }
+    } catch (e) {
+        return {
+            notFound: true
+        }
     }
 }
 

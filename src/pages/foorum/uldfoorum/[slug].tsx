@@ -16,23 +16,29 @@ const ForumShow = (props: Props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const slug = context.query.slug
-    const page = context.query?.page
-    let url = process.env.API_BASE_URL + '/forum/general/' + slug
-    if (page) {
-        url += '?page=' + page
-    }
+    try {
+        const slug = context.query.slug
+        const page = context.query?.page
+        let url = process.env.API_BASE_URL + '/forum/general/' + slug
+        if (page) {
+            url += '?page=' + page
+        }
 
-    const response = await ApiClientSSR(context).get(url)
-    const data = {
-        post: response.data.post,
-        lastCommentId: response.data.lastCommentId,
-        currentPage: response.data.currentPage,
-        lastPage: response.data.lastPage
-    }
+        const response = await ApiClientSSR(context).get(url)
+        const data = {
+            post: response.data.post,
+            lastCommentId: response.data.lastCommentId,
+            currentPage: response.data.currentPage,
+            lastPage: response.data.lastPage
+        }
 
-    return {
-        props: data
+        return {
+            props: data
+        }
+    } catch (e) {
+        return {
+            notFound: true
+        }
     }
 }
 

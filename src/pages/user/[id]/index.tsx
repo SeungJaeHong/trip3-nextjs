@@ -208,19 +208,25 @@ const UserPage = ({userProfile}: Props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const id = context.query.id
-    const url = process.env.API_BASE_URL + '/user/' + id
-    const response = await ApiClientSSR(context).get(url)
+    try {
+        const id = context.query.id
+        const url = process.env.API_BASE_URL + '/user/' + id
+        const response = await ApiClientSSR(context).get(url)
 
-    if (!response.data) {
+        if (!response.data) {
+            return {
+                notFound: true
+            }
+        }
+
+        return {
+            props: {
+                userProfile: response.data
+            }
+        }
+    } catch (e) {
         return {
             notFound: true
-        }
-    }
-
-    return {
-        props: {
-            userProfile: response.data
         }
     }
 }

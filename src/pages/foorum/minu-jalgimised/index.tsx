@@ -23,9 +23,6 @@ const FollowsForumIndex = (props: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const page = context.query?.page
-    const destination = context.query?.destination
-    const topic = context.query?.topic
-
     try {
         let url = process.env.API_BASE_URL + '/forum/follows'
         if (page) {
