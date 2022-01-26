@@ -2,6 +2,8 @@ import ApiClient from "../lib/ApiClient"
 import {AxiosResponse} from "axios"
 import {Image} from "../types"
 
+//todo: move to image service?
+
 export const getLatestImages = async (): Promise<AxiosResponse<{images: Image[], lastImage: Image}>> => {
     return await ApiClient.get('/frontpage/images')
 }

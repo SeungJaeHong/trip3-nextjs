@@ -12,17 +12,21 @@ import {useRouter} from "next/router"
 import {objectToQueryString} from "../../helpers"
 import Footer from "../../components/Footer"
 import ApiClientSSR from "../../lib/ApiClientSSR"
+import useUser from "../../hooks"
 
 type Props = {
-    news?: NewsCardType[],
-    currentPage: number,
-    destination?: number,
-    topic?: number,
-    hasMore: boolean,
+    news?: NewsCardType[]
+    currentPage: number
+    destination?: number
+    topic?: number
+    hasMore: boolean
 }
 
 const NewsIndex = (props: Props) => {
     const router = useRouter()
+    const { userIsLoggedIn, user } = useUser()
+    const userIsAdmin = userIsLoggedIn && user?.isAdmin
+
     const getNextPageUrl = () => {
         if (!props.hasMore) {
             return undefined
@@ -79,9 +83,11 @@ const NewsIndex = (props: Props) => {
                             <div className={styles.Description}>
                                 Uudised reisimisest, reisi- ja lennufirmadest, viisadest ja muust parasjagu aktuaalsest.
                             </div>
-                            <div className={styles.AddNewButton}>
-                                <Button title={'Lisa uudis'} route={'/'} />
-                            </div>
+                            {userIsAdmin &&
+                                <div className={styles.AddNewButton}>
+                                    <Button title={'Lisa uudis'} route={'/uudised/lisa-uus'} />
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,7 @@ import {User} from "../types"
 
 export const getUser = async (): Promise<User> => {
 
-    console.log('getUser')
+    //console.log('getUser')
 
     try {
         const res = await ApiClient.get('/user')
