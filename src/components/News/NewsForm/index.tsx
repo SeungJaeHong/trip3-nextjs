@@ -7,10 +7,10 @@ import toast from "react-hot-toast"
 import {useForm, SubmitHandler, Controller} from "react-hook-form"
 import FormInput from "../../Form/FormInput"
 import SubmitButton from "../../Form/SubmitButton"
-import FormTextarea from "../../Form/FormTextarea"
 import FormImageUpload from "../../Form/FormImageUpload"
 import FormMultiSelect from "../../Form/FormMultiSelect";
 import {Destination} from "../../../types";
+import FormCodeMirrorEditor from "../../Form/FormCodeMirrorEditor"
 
 type Inputs = {
     title: string
@@ -84,13 +84,21 @@ const NewsForm = ({destinations, onSubmit}: Props) => {
                         />
                     </div>
                     <div className={styles.FormInput}>
-                        <FormTextarea
+                        <Controller
                             name={'body'}
-                            id={'body'}
-                            label={'Sisu'}
-                            disabled={isSubmitting}
-                            error={errors.body?.message}
-                            register={register} />
+                            control={control}
+                            render={({ field, fieldState }) => {
+                                return (
+                                    <FormCodeMirrorEditor
+                                        id={'body'}
+                                        name={'body'}
+                                        label={'Sisu'}
+                                        onChange={field.onChange}
+                                        error={fieldState.error?.message}
+                                        disabled={isSubmitting} />
+                                )
+                            }}
+                        />
                     </div>
                     <div className={styles.FormInput}>
                         <Controller

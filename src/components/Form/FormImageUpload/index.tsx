@@ -3,7 +3,7 @@ import styles from "./FormImageUpload.module.scss"
 import {useDropzone} from 'react-dropzone'
 
 type Props = {
-    id: string,
+    id: string
     label?: string
     placeholder?: string
     files?: Array<string>
