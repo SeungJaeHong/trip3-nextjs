@@ -20,3 +20,84 @@
         }
     }
 }
+
+.Editor {
+    position: fixed;
+    //height: 100vh;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 10000;
+    overflow: scroll;
+    background: $white;
+    display: flex;
+    flex-direction: column;
+
+    .Toolbar {
+        width: 100%;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        padding: 16px 36px;
+        box-shadow: 0 0 24px 0 rgb(0 0 0 / 10%);
+        align-items: center;
+
+        .ActionButtons {
+            display: flex;
+            gap: $spacer;
+
+            .Button {
+                border: 1px solid $gray-light;
+                padding: $spacer * .5 $spacer * 2;
+                cursor: pointer;
+            }
+        }
+
+        .SaveButton {
+            display: flex;
+            border: 1px solid $green;
+            padding: $spacer * .5 $spacer * 2;
+            cursor: pointer;
+        }
+    }
+
+    .EditorContainer {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        gap: $spacer * 4;
+        padding-top: 50px;
+
+        .Code {
+            flex: 1;
+        }
+
+        .Result {
+            flex: 1;
+        }
+    }
+
+    :global(.editor-toolbar) {
+        border: 1px solid red;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+    }
+
+    :global(.EasyMDEContainer .CodeMirror) {
+        border: 1px solid blue;
+    }
+
+    :global(.editor-statusbar) {
+        display: none;
+    }
+
+    @include lg() {
+        .EditorContainer {
+            flex-direction: column;
+        }
+    }
+}

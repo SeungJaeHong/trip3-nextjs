@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^2.8.5",
-    "@uiw/react-codemirror": "^4.3.3",
     "axios": "^0.24.0",
     "clsx": "^1.1.1",
+    "easymde": "^2.16.1",
     "html-react-parser": "^1.4.2",
     "keen-slider": "^6.6.3",
     "next": "^12.0.7",
@@ -24,6 +24,7 @@
     "react-hook-form": "^7.24.0",
     "react-hot-toast": "^2.1.1",
     "react-select": "^5.2.1",
+    "react-simplemde-editor": "^5.0.2",
     "sass": "^1.45.0",
     "swr": "^1.1.1",
     "yup": "^0.32.11"
