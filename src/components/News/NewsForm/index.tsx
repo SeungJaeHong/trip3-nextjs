@@ -93,6 +93,7 @@ const NewsForm = ({destinations, onSubmit}: Props) => {
                                         id={'body'}
                                         name={'body'}
                                         label={'Sisu'}
+                                        type={'news'}
                                         onChange={field.onChange}
                                         error={fieldState.error?.message}
                                         disabled={isSubmitting} />

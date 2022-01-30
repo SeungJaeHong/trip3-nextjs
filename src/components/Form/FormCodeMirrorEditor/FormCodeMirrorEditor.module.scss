@@ -23,7 +23,6 @@
 
 .Editor {
     position: fixed;
-    //height: 100vh;
     top: 0;
     left: 0;
     bottom: 0;
@@ -34,31 +33,30 @@
     display: flex;
     flex-direction: column;
 
-    .Toolbar {
-        width: 100%;
-        position: relative;
+    .SaveButton {
+        position: fixed;
+        top: 6px;
+        right: 15px;
         display: flex;
-        justify-content: space-between;
-        padding: 16px 36px;
-        box-shadow: 0 0 24px 0 rgb(0 0 0 / 10%);
-        align-items: center;
+        border: 1px solid $green-dark;
+        padding: $spacer * .5;
+        cursor: pointer;
+        z-index: 11;
+        justify-content: center;
+        border-radius: 50%;
 
-        .ActionButtons {
-            display: flex;
-            gap: $spacer;
-
-            .Button {
-                border: 1px solid $gray-light;
-                padding: $spacer * .5 $spacer * 2;
-                cursor: pointer;
-            }
+        svg {
+            width: 25px;
+            height: 25px;
+            stroke: $green-dark;
         }
 
-        .SaveButton {
-            display: flex;
-            border: 1px solid $green;
-            padding: $spacer * .5 $spacer * 2;
-            cursor: pointer;
+        &:hover {
+            border: 1px solid $green-darker;
+
+            svg {
+                stroke: $green-darker;
+            }
         }
     }
 
@@ -74,21 +72,26 @@
             flex: 1;
         }
 
-        .Result {
+        .Preview {
             flex: 1;
         }
     }
 
     :global(.editor-toolbar) {
-        border: 1px solid red;
         position: fixed;
         top: 0;
         left: 0;
         z-index: 10;
+        background: $white;
+        width: 100%;
+        box-shadow: 0 0 24px 0 rgb(0 0 0 / 10%);
+        align-items: center;
+        display: flex;
+        border: 0;
     }
 
     :global(.EasyMDEContainer .CodeMirror) {
-        border: 1px solid blue;
+        border: 0;
     }
 
     :global(.editor-statusbar) {
