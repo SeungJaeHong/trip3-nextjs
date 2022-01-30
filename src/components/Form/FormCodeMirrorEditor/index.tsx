@@ -15,6 +15,7 @@ const SimpleMdeReact = dynamic(() => import("react-simplemde-editor"), { ssr: fa
 type Props = {
     id: string
     name: string
+    value: string
     label?: string
     placeholder?: string
     type: 'flight' | 'news'
@@ -24,18 +25,15 @@ type Props = {
     className?: string
 }
 
-const FormCodeMirrorEditor = ({ id, name, label, type, error, onChange, className }: Props) => {
-    const [value, setValue] = React.useState<string>('')
+const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, className }: Props) => {
+    const [editorValue, setEditorValue] = React.useState<string>(value)
     const editorRef = useRef(null)
     const [showEditor, setShowEditor] = useState<boolean>(false)
-    const [debouncedValue] = useDebounce(value, 1000)
+    const [debouncedValue] = useDebounce(editorValue, 500)
     const [previewValue, setPreviewValue] = React.useState<string>('')
 
     const onEditorChange = useCallback((value: string) => {
-
-        //console.log(value)
-
-        setValue(value)
+        setEditorValue(value)
     }, [])
 
     useEffect(() => {
@@ -53,7 +51,7 @@ const FormCodeMirrorEditor = ({ id, name, label, type, error, onChange, classNam
     }, [debouncedValue])
 
     const saveChanges = () => {
-        onChange(value)
+        onChange(editorValue)
         setShowEditor(false)
     }
 
@@ -182,7 +180,13 @@ const FormCodeMirrorEditor = ({ id, name, label, type, error, onChange, classNam
                     </label>
                 }
 
-                <textarea spellCheck={false} rows={8} name={name} onClick={() => setShowEditor(true)} />
+                <textarea
+                    value={value}
+                    name={name}
+                    spellCheck={false}
+                    rows={8}
+                    onClick={() => setShowEditor(true)}
+                    readOnly={true} />
 
                 {error?.length > 0 &&
                     <div className={stylesInput.ErrorText}>
@@ -200,7 +204,7 @@ const FormCodeMirrorEditor = ({ id, name, label, type, error, onChange, classNam
                             <SimpleMdeReact
                                 // @ts-ignore
                                 options={autofocusNoSpellcheckerOptions}
-                                value={value}
+                                value={editorValue}
                                 onChange={onEditorChange} />
                         </div>
                         <div className={styles.Preview} dangerouslySetInnerHTML={{ __html: previewValue }} />
@@ -212,6 +216,7 @@ const FormCodeMirrorEditor = ({ id, name, label, type, error, onChange, classNam
 }
 
 FormCodeMirrorEditor.defaultProps = {
+    value: '',
     label: undefined,
     spellCheck: false,
     error: '',

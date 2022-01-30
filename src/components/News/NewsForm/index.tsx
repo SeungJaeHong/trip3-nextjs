@@ -92,6 +92,7 @@ const NewsForm = ({destinations, onSubmit}: Props) => {
                                     <FormCodeMirrorEditor
                                         id={'body'}
                                         name={'body'}
+                                        value={field.value}
                                         label={'Sisu'}
                                         type={'news'}
                                         onChange={field.onChange}
