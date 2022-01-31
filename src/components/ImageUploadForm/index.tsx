@@ -22,14 +22,14 @@ type Props = {
 }
 
 const ImageUploadForm = ({destinations, onSubmit, selectedDestination}: Props) => {
-    const loginSchema = yup.object().shape({
+    const imageSchema = yup.object().shape({
         image: yup.array().required('Pilt on kohustuslik').length(1, 'Lubatud failide arv on 1'),
         title: yup.string().required('Pealkiri on kohustuslik'),
         destinations: yup.array().required('Sihtkoht on kohustuslik').min(1, 'Sihtkoht on kohustuslik'),
     }).required()
 
     const { register, control, handleSubmit, formState: { errors, isSubmitting } } = useForm<Inputs>({
-        resolver: yupResolver(loginSchema),
+        resolver: yupResolver(imageSchema),
         defaultValues: {
             destinations: selectedDestination !== undefined ? [{label: selectedDestination.name, value: selectedDestination.id.toString()}] : []
         }

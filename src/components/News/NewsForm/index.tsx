@@ -8,8 +8,8 @@ import {useForm, SubmitHandler, Controller} from "react-hook-form"
 import FormInput from "../../Form/FormInput"
 import SubmitButton from "../../Form/SubmitButton"
 import FormImageUpload from "../../Form/FormImageUpload"
-import FormMultiSelect from "../../Form/FormMultiSelect";
-import {Destination} from "../../../types";
+import FormMultiSelect from "../../Form/FormMultiSelect"
+import {Destination, NewsContent} from "../../../types"
 import FormCodeMirrorEditor from "../../Form/FormCodeMirrorEditor"
 
 type Inputs = {
@@ -21,22 +21,23 @@ type Inputs = {
 }
 
 type Props = {
+    news?: NewsContent
     destinations: Destination[]
-    onSubmit: (values: any) => void
+    onSubmit: (title: string, image: File, body: string, destination: Destination[]) => void
 }
 
-const NewsForm = ({destinations, onSubmit}: Props) => {
+const NewsForm = ({news, destinations, onSubmit}: Props) => {
     const formRef = useRef<HTMLFormElement>(null)
-    const registerSchema = yup.object().shape({
+    const newsSchema = yup.object().shape({
         title: yup.string().required('Pealkiri on kohustuslik'),
-        image: yup.array().length(1, 'Lubatud failide arv on 1').nullable(),
+        image: (news && news.id) ? yup.array().length(1, 'Lubatud failide arv on 1').nullable() : yup.array().length(1, 'Lubatud failide arv on 1').required('Pilt on kohustuslik'),
         body: yup.string().required('Sisu on kohustuslik'),
-        destinations: yup.array().nullable(),
+        destinations: yup.array().required('Sihtkoht on kohustuslik').min(1, 'Sihtkoht on kohustuslik'),
         topics: yup.array().nullable()
     }).required()
 
-    const { register, control, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
-        resolver: yupResolver(registerSchema),
+    const { register, control, handleSubmit, formState: { errors, isSubmitting } } = useForm<Inputs>({
+        resolver: yupResolver(newsSchema),
         defaultValues: {
             title: '',
             body: '',
@@ -47,8 +48,15 @@ const NewsForm = ({destinations, onSubmit}: Props) => {
         shouldFocusError: true
     })
 
+    const valuesToDestination = (values: { value: string, label: string }[]): Destination[] => {
+        const ids: Number[] = values.map(value => parseInt(value.value))
+        return destinations.filter(destination => ids.indexOf(destination.id) !== -1)
+    }
+
     const handleSave: SubmitHandler<Inputs> = async (values: Inputs) => {
-        onSubmit(values)
+        const { image, title, body, destinations } = values
+        const destinationValues = valuesToDestination(destinations)
+        onSubmit(title, image[0], body, destinationValues)
     }
 
     const allOptions: { label: string; value: string }[] = destinations.map(destination => ({ label: destination.name, value: destination.id.toString() }))
