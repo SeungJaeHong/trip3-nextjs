@@ -133,6 +133,7 @@ export type NewsContent = {
     title: string
     body: string
     slug: string
+    status: number
     createdAt: string
     backgroundImageUrl: string
     user: User

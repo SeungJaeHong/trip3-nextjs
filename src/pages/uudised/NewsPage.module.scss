@@ -151,6 +151,28 @@
         flex-direction: column;
         flex: 3;
 
+        .NotPublishedContainer {
+            padding-bottom: $spacer * 4;
+            display: flex;
+
+            .NotPublished {
+                width: 100%;
+            }
+
+            .PublishButton {
+                background: $warning-color;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-right: $spacer * 2;
+
+                button {
+                    height: 30px;
+                    width: 100px;
+                }
+            }
+        }
+
         .Body {
             color: $gray-dark;
             font-family: $font-family-sailec;
@@ -199,10 +221,6 @@
 
         @include lg() {
             padding-left: 0;
-        }
-
-        .AddNewNews {
-            margin-top: $spacer * 2.5;
         }
     }
 }

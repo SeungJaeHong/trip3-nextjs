@@ -7,16 +7,17 @@ import containerStyle from "../../styles/containers.module.scss"
 import Tag from "../../components/Tag"
 import clsx from "clsx"
 import Button from "../../components/Button"
-import UserAvatar from "../../components/User/UserAvatar";
-import Footer from "../../components/Footer";
-import ForumComment from "../../components/Forum/ForumComment";
-import ApiClientSSR from "../../lib/ApiClientSSR";
-import {postComment} from "../../services/news.service";
-import useUser from "../../hooks";
-import BlockTitle from "../../components/BlockTitle";
-import CommentEditor from "../../components/CommentEditor";
-import {toast} from "react-hot-toast";
+import UserAvatar from "../../components/User/UserAvatar"
+import Footer from "../../components/Footer"
+import ForumComment from "../../components/Forum/ForumComment"
+import ApiClientSSR from "../../lib/ApiClientSSR"
+import {postComment} from "../../services/news.service"
+import useUser from "../../hooks"
+import BlockTitle from "../../components/BlockTitle"
+import CommentEditor from "../../components/CommentEditor"
+import {toast} from "react-hot-toast"
 import {useRouter} from 'next/router'
+import Alert from "../../components/Alert"
 
 type Props = {
     news: NewsContent
@@ -83,6 +84,18 @@ const NewsShow = ({news}: Props) => {
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.BodyContainer}>
                     <div className={styles.BodyWithComments}>
+                        {news.status === 0 &&
+                            <div className={styles.NotPublishedContainer}>
+                                <div className={styles.NotPublished}>
+                                    <Alert
+                                        title={'Uudis ei ole avalikustatud!'}
+                                        type={'warning'} />
+                                </div>
+                                <div className={styles.PublishButton}>
+                                    <Button title={'Avalikusta'} onClick={() => console.log('avalikusta')} />
+                                </div>
+                            </div>
+                        }
                         <div className={styles.Body} dangerouslySetInnerHTML={{ __html: news.body }} />
                         <div className={styles.Comments}>
                             {comments?.map((comment: Comment) => {
@@ -107,9 +120,7 @@ const NewsShow = ({news}: Props) => {
                         }
                     </div>
                     <div className={styles.SidebarShow}>
-                        <div className={styles.AddNewNews}>
-                            <Button title={'Lisa uus uudis'} route={'/'} />
-                        </div>
+                        Sidebar
                     </div>
                 </div>
             </div>
@@ -122,14 +133,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
         const slug = context.query.slug
         let url = process.env.API_BASE_URL + '/news/' + slug
-
         const response = await ApiClientSSR(context).get(url)
-        const data = {
-            news: response.data.news,
-        }
 
         return {
-            props: data
+            props: {
+                news: response.data,
+            }
         }
     } catch (e) {
         return {
