@@ -1,22 +1,22 @@
 import React, {Fragment, useState} from 'react'
 import {GetServerSideProps} from 'next'
-import {Comment, Destination, NewsContent, Topic} from "../../types"
-import Header from "../../components/Header"
+import {Comment, Destination, NewsContent, Topic} from "../../../types"
+import Header from "../../../components/Header"
 import styles from "./NewsPage.module.scss"
-import containerStyle from "../../styles/containers.module.scss"
-import Tag from "../../components/Tag"
+import containerStyle from "../../../styles/containers.module.scss"
+import Tag from "../../../components/Tag"
 import clsx from "clsx"
-import UserAvatar from "../../components/User/UserAvatar"
-import Footer from "../../components/Footer"
-import ForumComment from "../../components/Forum/ForumComment"
-import ApiClientSSR from "../../lib/ApiClientSSR"
-import {postComment, publishNews} from "../../services/news.service"
-import useUser from "../../hooks"
-import BlockTitle from "../../components/BlockTitle"
-import CommentEditor from "../../components/CommentEditor"
+import UserAvatar from "../../../components/User/UserAvatar"
+import Footer from "../../../components/Footer"
+import ForumComment from "../../../components/Forum/ForumComment"
+import ApiClientSSR from "../../../lib/ApiClientSSR"
+import {postComment, publishNews} from "../../../services/news.service"
+import useUser from "../../../hooks"
+import BlockTitle from "../../../components/BlockTitle"
+import CommentEditor from "../../../components/CommentEditor"
 import {toast} from "react-hot-toast"
 import {useRouter} from 'next/router'
-import Alert from "../../components/Alert"
+import Alert from "../../../components/Alert"
 
 type Props = {
     news: NewsContent
@@ -92,12 +92,12 @@ const NewsShow = ({news}: Props) => {
                         })}
                     </div>
                     {userIsAdmin &&
-                        <div className={styles.ActionButtons}>
-                            <div className={styles.ActionButton}>Muuda</div>
-                            <div className={clsx(styles.ActionButton, styles.Hide)} onClick={() => publish(!Boolean(news.status))}>
-                                {news.status === 0 ? 'Avalikusta' : 'Peida'}
-                            </div>
+                    <div className={styles.ActionButtons}>
+                        <div className={styles.ActionButton} onClick={() => router.push('/uudised/' + news.id + '/muuda')}>Muuda</div>
+                        <div className={clsx(styles.ActionButton, styles.Hide)} onClick={() => publish(!Boolean(news.status))}>
+                            {news.status === 0 ? 'Avalikusta' : 'Peida'}
                         </div>
+                    </div>
                     }
                 </div>
             </Header>
@@ -105,11 +105,11 @@ const NewsShow = ({news}: Props) => {
                 <div className={styles.BodyContainer}>
                     <div className={styles.BodyWithComments}>
                         {news.status === 0 &&
-                            <div className={styles.NotPublished}>
-                                <Alert
-                                    title={'Uudis ei ole avalikustatud!'}
-                                    type={'warning'} />
-                            </div>
+                        <div className={styles.NotPublished}>
+                            <Alert
+                                title={'Uudis ei ole avalikustatud!'}
+                                type={'warning'} />
+                        </div>
                         }
                         <div className={styles.Body} dangerouslySetInnerHTML={{ __html: news.body }} />
                         <div className={styles.Comments}>
@@ -123,15 +123,15 @@ const NewsShow = ({news}: Props) => {
                             })}
                         </div>
                         {userIsLoggedIn &&
-                            <div className={styles.AddComment}>
-                                <BlockTitle title={'Lisa kommentaar'} />
-                                <CommentEditor
-                                    id={'comment-editor'}
-                                    onSubmit={onSubmit}
-                                    value={commentValue}
-                                    submitButtonName={'Lisa kommentaar'}
-                                    submitting={submitting} />
-                            </div>
+                        <div className={styles.AddComment}>
+                            <BlockTitle title={'Lisa kommentaar'} />
+                            <CommentEditor
+                                id={'comment-editor'}
+                                onSubmit={onSubmit}
+                                value={commentValue}
+                                submitButtonName={'Lisa kommentaar'}
+                                submitting={submitting} />
+                        </div>
                         }
                     </div>
                     <div className={styles.SidebarShow}>
@@ -146,7 +146,7 @@ const NewsShow = ({news}: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
-        const slug = context.query.slug
+        const slug = context.query.id
         let url = process.env.API_BASE_URL + '/news/' + slug
         const response = await ApiClientSSR(context).get(url)
 

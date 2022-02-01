@@ -132,6 +132,7 @@ export type NewsContent = {
     id: number
     title: string
     body: string
+    bodyRaw: string
     slug: string
     status: number
     createdAt: string
