@@ -11,7 +11,7 @@ import UserAvatar from "../../components/User/UserAvatar"
 import Footer from "../../components/Footer"
 import ForumComment from "../../components/Forum/ForumComment"
 import ApiClientSSR from "../../lib/ApiClientSSR"
-import {postComment} from "../../services/news.service"
+import {postComment, publishNews} from "../../services/news.service"
 import useUser from "../../hooks"
 import BlockTitle from "../../components/BlockTitle"
 import CommentEditor from "../../components/CommentEditor"
@@ -56,6 +56,13 @@ const NewsShow = ({news}: Props) => {
         })
     }
 
+    const publish = () => {
+        publishNews(news.id).then(res => {
+            router.reload()
+            toast.success('Uudis avalikustatud')
+        }).catch(e => {})
+    }
+
     return (
         <Fragment>
             <Header backgroundImage={news.backgroundImageUrl}>
@@ -92,7 +99,7 @@ const NewsShow = ({news}: Props) => {
                                         type={'warning'} />
                                 </div>
                                 <div className={styles.PublishButton}>
-                                    <Button title={'Avalikusta'} onClick={() => console.log('avalikusta')} />
+                                    <Button title={'Avalikusta'} onClick={publish} />
                                 </div>
                             </div>
                         }

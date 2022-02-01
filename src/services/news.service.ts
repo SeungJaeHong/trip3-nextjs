@@ -40,3 +40,10 @@ export const addNews = async (title: string, image: File, body: string, destinat
         }
     })
 }
+
+export const publishNews = async (newsId: number, status = true) => {
+    return await ApiClient.post('/content/' + newsId + '/publish', {
+        status: status
+    })
+}
+
