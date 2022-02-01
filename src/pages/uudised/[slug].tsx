@@ -6,7 +6,6 @@ import styles from "./NewsPage.module.scss"
 import containerStyle from "../../styles/containers.module.scss"
 import Tag from "../../components/Tag"
 import clsx from "clsx"
-import Button from "../../components/Button"
 import UserAvatar from "../../components/User/UserAvatar"
 import Footer from "../../components/Footer"
 import ForumComment from "../../components/Forum/ForumComment"
@@ -25,7 +24,8 @@ type Props = {
 
 const NewsShow = ({news}: Props) => {
     const [comments, setComments] = useState(news.comments)
-    const { userIsLoggedIn } = useUser()
+    const {userIsLoggedIn, user} = useUser()
+    const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const [commentValue, setCommentValue] = useState('')
     const [submitting, setSubmitting] = useState(false)
     const router = useRouter()
@@ -56,10 +56,10 @@ const NewsShow = ({news}: Props) => {
         })
     }
 
-    const publish = () => {
-        publishNews(news.id).then(res => {
+    const publish = (status: boolean) => {
+        publishNews(news.id, status).then(res => {
             router.reload()
-            toast.success('Uudis avalikustatud')
+            toast.success(status ? 'Uudis avalikustatud' : 'Uudis peidetud')
         }).catch(e => {})
     }
 
@@ -71,10 +71,15 @@ const NewsShow = ({news}: Props) => {
                         {news.title}
                     </div>
                     <div className={styles.DateAndUser}>
-                        <div className={styles.User}>
-                            <UserAvatar user={news.user} />
-                        </div>
-                        <div className={styles.HeaderDate}>
+                        <a href={'/user/' + news.user.id} className={styles.Author}>
+                            <div className={styles.User}>
+                                <UserAvatar user={news.user} />
+                            </div>
+                            <div className={styles.UserName}>
+                                {news.user.name}
+                            </div>
+                        </a>
+                        <div className={styles.DateInfo}>
                             {news.createdAt}
                         </div>
                     </div>
@@ -86,21 +91,24 @@ const NewsShow = ({news}: Props) => {
                             return <Tag title={topic.name} large={true} white={true} key={topic.id} />
                         })}
                     </div>
+                    {userIsAdmin &&
+                        <div className={styles.ActionButtons}>
+                            <div className={styles.ActionButton}>Muuda</div>
+                            <div className={clsx(styles.ActionButton, styles.Hide)} onClick={() => publish(!Boolean(news.status))}>
+                                {news.status === 0 ? 'Avalikusta' : 'Peida'}
+                            </div>
+                        </div>
+                    }
                 </div>
             </Header>
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.BodyContainer}>
                     <div className={styles.BodyWithComments}>
                         {news.status === 0 &&
-                            <div className={styles.NotPublishedContainer}>
-                                <div className={styles.NotPublished}>
-                                    <Alert
-                                        title={'Uudis ei ole avalikustatud!'}
-                                        type={'warning'} />
-                                </div>
-                                <div className={styles.PublishButton}>
-                                    <Button title={'Avalikusta'} onClick={publish} />
-                                </div>
+                            <div className={styles.NotPublished}>
+                                <Alert
+                                    title={'Uudis ei ole avalikustatud!'}
+                                    type={'warning'} />
                             </div>
                         }
                         <div className={styles.Body} dangerouslySetInnerHTML={{ __html: news.body }} />
