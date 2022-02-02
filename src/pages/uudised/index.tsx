@@ -1,10 +1,10 @@
 import React, {Fragment} from 'react'
 import Header from "../../components/Header"
 import {GetServerSideProps} from "next"
-import containerStyle from "../../styles/containers.module.scss";
+import containerStyle from "../../styles/containers.module.scss"
 import styles from "./NewsPage.module.scss"
 import {NewsCardType} from "../../types";
-import SimplePaginator from "../../components/Paginator/SimplePaginator";
+import SimplePaginator from "../../components/Paginator/SimplePaginator"
 import Button from "../../components/Button";
 import MainSearchInput from "../../components/MainSearchInput"
 import NewsCard from "../../components/News/NewsCard"

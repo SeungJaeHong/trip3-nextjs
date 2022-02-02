@@ -2,7 +2,7 @@ import React, {Fragment, useState} from 'react'
 import {GetServerSideProps} from 'next'
 import {Comment, Destination, NewsContent, Topic} from "../../../types"
 import Header from "../../../components/Header"
-import styles from "./NewsPage.module.scss"
+import styles from "../NewsPage.module.scss"
 import containerStyle from "../../../styles/containers.module.scss"
 import Tag from "../../../components/Tag"
 import clsx from "clsx"

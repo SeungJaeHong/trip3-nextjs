@@ -7,18 +7,23 @@ import containerStyle from "../../../styles/containers.module.scss"
 import BackgroundMap from "../../../components/BackgroundMap"
 import {useRouter} from "next/router"
 import useUser from "../../../hooks"
-import {Destination} from "../../../types"
+import {Destination, Topic} from "../../../types"
 import LoadingSpinner2 from "../../../components/LoadingSpinner2"
-import {getDestinations} from "../../../services/destination.service"
 import NewsForm from "../../../components/News/NewsForm"
 import {addNews} from "../../../services/news.service"
 import {toast} from "react-hot-toast"
+import {GetServerSideProps} from "next"
+import ApiClientSSR from "../../../lib/ApiClientSSR"
 
-const NewsAddPage = () => {
+type Props = {
+    destinations: Destination[]
+    topics: Topic[]
+}
+
+const NewsAddPage = ({destinations, topics}: Props) => {
     const router = useRouter()
     const { loading, userIsLoggedIn, user } = useUser()
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
-    const [destinations, setDestinations] = useState<Destination[]>([])
     const [submitting, setSubmitting] = useState<boolean>(false)
 
     const onSubmit = (title: string, image: File, body: string, destinations: Destination[]) => {
@@ -38,12 +43,6 @@ const NewsAddPage = () => {
             }
         }
     }, [user, loading])
-
-    useEffect(() => {
-        getDestinations().then(res => {
-            setDestinations(res.data)
-        })
-    }, [])
 
     const renderContent = () => {
         if (loading) {
@@ -93,6 +92,27 @@ const NewsAddPage = () => {
             <Footer simple={false} />
         </Fragment>
     )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    try {
+        const url = process.env.API_BASE_URL + '/news/add'
+        const response: any = await ApiClientSSR(context).get(url)
+
+        return {
+            props: {
+                destinations: response.data.destinations || [],
+                topics: response.data.topics || []
+            }
+        }
+    } catch (e) {
+        return {
+            redirect: {
+                destination: '/uudised',
+                permanent: false,
+            },
+        }
+    }
 }
 
 export default NewsAddPage
