@@ -11,9 +11,9 @@ const FacebookLogin = () => {
         FB.login(function(response) {
             if (response.status === 'connected') {
                 FB.api('/me?fields=id,email,name,picture.width(800).height(800)', function(userResponse: any) {
-                    const res = createUserOrLogin(userResponse.name, userResponse.email).then(res => {
+                    createUserOrLogin(userResponse.name, userResponse.email).then(res => {
                         mutate(res.data)
-                        toast.success('Sisselogimine õnnestus!')
+                        toast.success('Tere, ' + res.data.name + '!')
                     }).catch(err => {
                         toast.error('Sisselogimine ebaõnnestus!')
                     })

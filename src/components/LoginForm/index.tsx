@@ -42,7 +42,7 @@ const LoginForm = () => {
         const { name, password, remember_me } = values
         await login(name, password, remember_me).then(res => {
             mutate(res.data)
-            toast.success('Sisselogimine õnnestus!')
+            toast.success('Tere, ' + res.data.name + '!')
         }).catch(err => {
             if (err.response?.data?.errors) {
                 setFormErrors(err.response.data.errors, setError)

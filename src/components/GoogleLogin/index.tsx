@@ -20,7 +20,7 @@ const GoogleLogin = () => {
 
         await createUserOrLogin(name, email).then(res => {
             mutate(res.data)
-            toast.success('Sisselogimine õnnestus!')
+            toast.success('Tere, ' + res.data.name + '!')
         }).catch(err => {
             toast.error('Sisselogimine ebaõnnestus!')
         })
