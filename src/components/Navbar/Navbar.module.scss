@@ -45,6 +45,10 @@
             }
         }
 
+        .ActiveLink {
+            color: $gray;
+        }
+
         &.LinksMobile {
             display: none;
 
@@ -115,6 +119,10 @@
                 &:hover {
                     color: $gray-dark;
                 }
+            }
+
+            .ActiveLink {
+                color: $gray-dark-hover;
             }
         }
 

@@ -21,7 +21,7 @@
     display: flex;
     margin: 0 auto;
     width: 50%;
-    gap: $spacer * 4;
+    gap: $spacer * 3;
 
     @include lg() {
         width: 75%;

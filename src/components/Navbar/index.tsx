@@ -106,6 +106,31 @@ const Navbar = ({darkMode, showSearch, showLogo}: Props) => {
         return null;
     }
 
+    const linkIsActive = (route: string) => {
+        if (route === '/foorum/uldfoorum') {
+            const prefix = router.route.substring(0, 7)
+            if (prefix === '/foorum') {
+                return true
+            }
+        }
+
+        if (route === '/odavad-lennupiletid') {
+            const prefix = router.route.substring(0, 20)
+            if (prefix === '/odavad-lennupiletid') {
+                return true
+            }
+        }
+
+        if (route === '/uudised') {
+            const prefix = router.route.substring(0, 8)
+            if (prefix === '/uudised') {
+                return true
+            }
+        }
+
+        return router.route === route
+    }
+
     return (
         <div className={clsx(styles.Navbar, {
             [styles.Dark]: darkMode
@@ -124,7 +149,9 @@ const Navbar = ({darkMode, showSearch, showLogo}: Props) => {
                 {links.map(link => {
                     return (
                         <Link href={link.route} key={link.title}>
-                            <a>{link.title}</a>
+                            <a className={clsx({
+                                [styles.ActiveLink]: linkIsActive(link.route)
+                            })}>{link.title}</a>
                         </Link>
                     )
                 })}

@@ -90,13 +90,14 @@
     align-items: center;
     text-align: center;
     padding-top: $spacer * 8;
+    padding-bottom: $spacer;
 
     .HeaderTitle {
         font-size: $font-size-xxlarge;
         line-height: 2.75rem;
         color: $white;
         font-weight: 600;
-        padding-bottom: $spacer * 3;
+        padding-bottom: $spacer * 4;
         max-width: 720px;
 
         @include md() {
