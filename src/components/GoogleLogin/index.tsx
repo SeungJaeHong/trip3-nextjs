@@ -1,12 +1,12 @@
 import React, {Fragment} from "react"
 import Script from 'next/script'
 import styles from "./GoogleLogin.module.scss"
-import toast from 'react-hot-toast'
+import {toast} from 'react-toastify'
 import {createUserOrLogin} from "../../services/auth.service"
 import useUser from "../../hooks"
 
 const GoogleLogin = () => {
-    const { userIsLoggedIn, user, mutate } = useUser()
+    const {mutate } = useUser()
 
     const handleError = (err: any) => {
         toast.error('Sisselogimine ebaõnnestus!')
@@ -18,7 +18,7 @@ const GoogleLogin = () => {
         const email = profile.getEmail()
         const image = profile.getImageUrl() //NB! 96 is the image size there!! -> A=s96-c
 
-        const res = await createUserOrLogin(name, email).then(res => {
+        await createUserOrLogin(name, email).then(res => {
             mutate(res.data)
             toast.success('Sisselogimine õnnestus!')
         }).catch(err => {

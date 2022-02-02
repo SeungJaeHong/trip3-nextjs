@@ -1,7 +1,7 @@
 import React from "react"
 import styles from "./UserProfileDestinationForm.module.scss"
 import Router from "next/router"
-import toast from "react-hot-toast"
+import {toast} from 'react-toastify'
 import {useForm, SubmitHandler, Controller} from "react-hook-form"
 import SubmitButton from "../../Form/SubmitButton"
 import {Destination} from "../../../types"
@@ -42,12 +42,7 @@ const UserProfileDestinationForm = ({visited, wantsToGo, options}: Props) => {
         await updateMyDestinations(visitedIds, wantsToGoIds).then(res => {
             // @ts-ignore
             Router.push('/user/' + user.id)
-            toast.success(
-                'Sihtkohtade uuendamine õnnestus!',
-                {
-                    duration: 3000
-                }
-            )
+            toast.success('Sihtkohtade uuendamine õnnestus!')
         }).catch(err => {
             if (err.response?.data?.errors) {
                 setFormErrors(err.response?.data?.errors, setError)

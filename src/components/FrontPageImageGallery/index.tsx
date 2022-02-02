@@ -2,8 +2,8 @@ import ImageGallery from "../ImageGallery"
 import {Image} from "../../types"
 import {useEffect, useState} from "react"
 import {getLatestImages, hidePhoto} from "../../services/general.service"
-import {toast} from "react-hot-toast"
-import {useRouter} from "next/router";
+import {toast} from 'react-toastify'
+import {useRouter} from "next/router"
 
 const FrontPageImageGallery = () => {
     const [images, setImages] = useState<Image[]>([])

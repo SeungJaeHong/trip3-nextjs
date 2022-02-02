@@ -10,7 +10,7 @@ import ChatMessage from "./ChatMessage"
 import ArrowLeftIcon from "../../../icons/ArrowLeftIcon"
 import UserAvatar from "../UserAvatar"
 import SendIcon from "../../../icons/SendIcon"
-import {toast} from "react-hot-toast"
+import {toast} from 'react-toastify'
 
 const UserChat = () => {
     const [messages, setMessages] = useState<UserChatMessage[]>([])

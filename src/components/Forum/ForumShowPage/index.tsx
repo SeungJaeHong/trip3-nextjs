@@ -1,7 +1,7 @@
 import {Content} from "../../../types"
 import React, {Fragment, useEffect, useState} from "react"
 import {useRouter} from 'next/router'
-import Header from "../../Header";
+import Header from "../../Header"
 import styles from "./ForumShowPage.module.scss"
 import containerStyle from "../../../styles/containers.module.scss"
 import ForumPost from "../ForumPost"
@@ -13,7 +13,7 @@ import {getForumUrlByType, getForumUrlByTypeAndSlug, scrollToHash} from "../../.
 import CommentEditor from "../../CommentEditor"
 import BlockTitle from "../../BlockTitle"
 import {postComment} from "../../../services/comment.service"
-import {toast} from "react-hot-toast"
+import {toast} from 'react-toastify'
 import useUser from "../../../hooks"
 
 type Props = {
@@ -24,7 +24,7 @@ type Props = {
 }
 
 const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
-    const { userIsLoggedIn, user } = useUser()
+    const { userIsLoggedIn } = useUser()
     const [commentValue, setCommentValue] = useState<string>('')
     const [comments, setComments] = useState(post.comments)
     const newestCommentUrl = lastCommentId ? getForumUrlByTypeAndSlug(post.type, post.slug) + '?page=' + lastPage + '#' + lastCommentId : ''
@@ -45,7 +45,7 @@ const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
 
     const onSubmit = async (value: string) => {
         setSubmitting(true)
-        const res = await postComment(value, post.id).then((response) => {
+        await postComment(value, post.id).then((response) => {
             setCommentValue(value)
             setCommentValue('')
             const comment = response.data.comment
@@ -64,9 +64,7 @@ const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
 
             setGoToNewestLink(url + '#' + comment.id)
             router.push(url + '#' + comment.id)
-            toast.success('Kommentaar lisatud', {
-                duration: 4000
-            })
+            toast.success('Kommentaar lisatud')
             setSubmitting(false)
         }).catch(err => {
             setSubmitting(false)

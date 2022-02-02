@@ -11,7 +11,7 @@ import {Destination, NewsContent, Topic} from "../../../../types"
 import LoadingSpinner2 from "../../../../components/LoadingSpinner2"
 import NewsForm from "../../../../components/News/NewsForm"
 import {updateNews} from "../../../../services/news.service"
-import {toast} from "react-hot-toast"
+import {toast} from 'react-toastify'
 import {GetServerSideProps} from "next"
 import ApiClientSSR from "../../../../lib/ApiClientSSR"
 

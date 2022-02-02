@@ -1,9 +1,9 @@
-import React, {useEffect, useRef} from "react"
+import React, {useRef} from "react"
 import styles from "./UserEditForm.module.scss"
 import Router from "next/router"
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import toast from "react-hot-toast"
+import {toast} from 'react-toastify'
 import {useForm, SubmitHandler, Controller} from "react-hook-form"
 import FormInput from "../../Form/FormInput"
 import SubmitButton from "../../Form/SubmitButton"
@@ -79,12 +79,7 @@ const UserEditForm = (userProfile: UserProfile) => {
     const handleUpdate: SubmitHandler<Inputs> = async (values: Inputs) => {
         await updateUserProfile(userProfile.id, values).then(res => {
             Router.push('/user/' + userProfile.id)
-            toast.success(
-                'Profiili uuendamine õnnestus!',
-                {
-                    duration: 3000
-                }
-            )
+            toast.success('Profiili uuendamine õnnestus!')
         }).catch(err => {
             if (err.response?.data?.errors) {
                 setFormErrors(err.response?.data?.errors, setError)

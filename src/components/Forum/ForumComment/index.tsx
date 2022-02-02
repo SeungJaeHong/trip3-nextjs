@@ -2,15 +2,15 @@ import Link from 'next/link'
 import styles from './ForumComment.module.scss'
 import {Comment} from "../../../types"
 import UserAvatar from "../../User/UserAvatar"
-import ThumbsUpIcon from "../../../icons/ThumbsUpIcon";
-import ThumbsDownIcon from "../../../icons/ThumbsDownIcon";
-import clsx from "clsx";
-import React, {useState} from "react";
-import CommentEditor from "../../CommentEditor";
-import {updateComment, rateComment, toggleCommentStatus} from "../../../services/comment.service";
-import {toast} from "react-hot-toast";
-import {useRouter} from "next/router";
-import useUser from "../../../hooks";
+import ThumbsUpIcon from "../../../icons/ThumbsUpIcon"
+import ThumbsDownIcon from "../../../icons/ThumbsDownIcon"
+import clsx from "clsx"
+import React, {useState} from "react"
+import CommentEditor from "../../CommentEditor"
+import {updateComment, rateComment, toggleCommentStatus} from "../../../services/comment.service"
+import {toast} from 'react-toastify'
+import {useRouter} from "next/router"
+import useUser from "../../../hooks"
 
 type Props = {
     item: Comment
@@ -52,13 +52,11 @@ const ForumComment = ({item, type}: Props) => {
 
     const onCommentEditSubmit = async (value: string) => {
         setSubmitting(true)
-        const res = await updateComment(comment, value, type).then((response) => {
+        await updateComment(comment, value, type).then((response) => {
             setComment(response.data)
             setSubmitting(false)
             setEditMode(false)
-            toast.success('Kommentaar muudetud', {
-                duration: 4000
-            })
+            toast.success('Kommentaar muudetud')
         }).catch(err => {
             if (err.response?.status === 401 || err.response?.status === 419) {
                 toast.error('Sessioon on aegunud. Palun logi uuesti sisse')

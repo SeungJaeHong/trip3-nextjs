@@ -6,7 +6,7 @@ import FormInput from "../Form/FormInput"
 import SubmitButton from "../Form/SubmitButton"
 import useUser from "../../hooks"
 import {register as registerUser} from "../../services/auth.service"
-import toast from "react-hot-toast"
+import {toast} from 'react-toastify'
 import { useForm, SubmitHandler } from "react-hook-form"
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -20,7 +20,7 @@ type Inputs = {
 }
 
 const RegisterForm = () => {
-    const { userIsLoggedIn, user, mutate } = useUser()
+    const { userIsLoggedIn } = useUser()
     const registerSchema = yup.object().shape({
         name: yup.string().required('Kasutajanimi on kohustuslik'),
         email: yup.string().email('E-post ei ole korrektne').required('E-post on kohustuslik'),
@@ -42,20 +42,14 @@ const RegisterForm = () => {
 
     const handleRegister: SubmitHandler<Inputs> = async (values: Inputs) => {
         const { name, email, password } = values
-        const resp = await registerUser(name, email, password).then(res => {
+        await registerUser(name, email, password).then(res => {
             Router.push('/login')
-            toast.success(
-                'Kasutaja loomine õnnestus!',
-                {
-                    duration: 5000
-                }
-            )
-            toast.success(
-                'Palun kontrolli oma e-posti ja vii kasutaja registeerimine lõpuni',
-                {
-                    duration: 6000
-                }
-            )
+            toast.success('Kasutaja loomine õnnestus!', {
+                autoClose: 5000
+            })
+            toast.success('Palun kontrolli oma e-posti ja vii kasutaja registeerimine lõpuni', {
+                autoClose: 5000
+            })
         }).catch(err => {
             if (err.response?.data?.errors) {
                 setFormErrors(err.response?.data?.errors, setError)

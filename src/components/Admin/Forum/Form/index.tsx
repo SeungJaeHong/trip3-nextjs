@@ -2,13 +2,13 @@ import React from "react"
 import styles from "./AdminForumForm.module.scss"
 import FormInput from "../../../Form/FormInput"
 import SubmitButton from "../../../Form/SubmitButton"
-import toast from 'react-hot-toast'
+import {toast} from 'react-toastify'
 import {setFormErrors} from "../../../../helpers"
-import {SubmitHandler, useForm, Controller} from "react-hook-form";
-import * as yup from "yup";
+import {SubmitHandler, useForm, Controller} from "react-hook-form"
+import * as yup from "yup"
 import { yupResolver } from '@hookform/resolvers/yup'
-import FormRichTextEditor from "../../../Form/FormRichTextEditor";
-import {Content} from "../../../../types";
+import FormRichTextEditor from "../../../Form/FormRichTextEditor"
+import {Content} from "../../../../types"
 import {addPost, updatePost} from "../../../../services/admin.service"
 import {useRouter} from 'next/router'
 
@@ -51,7 +51,7 @@ const AdminForumForm = ({post}: Props) => {
     }
 
     const onSubmit: SubmitHandler<Inputs> = async (values: Inputs) => {
-        const resp = await savePost(values).catch(err => {
+        await savePost(values).catch(err => {
             if (err.response?.data?.errors) {
                 setFormErrors(err.response.data.errors, setError)
             }

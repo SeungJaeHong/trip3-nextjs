@@ -9,7 +9,7 @@ import Tag from "../../Tag";
 import React, {useState} from "react";
 import { useRouter } from 'next/router'
 import {togglePostStatus, ratePost} from "../../../services/forum.service"
-import {toast} from "react-hot-toast"
+import {toast} from 'react-toastify'
 import Alert from "../../Alert"
 import useUser from "../../../hooks"
 

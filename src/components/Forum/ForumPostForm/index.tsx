@@ -3,16 +3,16 @@ import styles from "./ForumPostForm.module.scss"
 import clsx from "clsx"
 import FormInput from "../../Form/FormInput"
 import SubmitButton from "../../Form/SubmitButton"
-import toast from 'react-hot-toast'
+import {toast} from 'react-toastify'
 import {getForumUrlByType, getForumUrlByTypeAndSlug, setFormErrors} from "../../../helpers"
-import {SubmitHandler, useForm, Controller} from "react-hook-form";
-import * as yup from "yup";
+import {SubmitHandler, useForm, Controller} from "react-hook-form"
+import * as yup from "yup"
 import { yupResolver } from '@hookform/resolvers/yup'
-import FormRadioButton from "../../Form/FormRadioButton";
-import FormRichTextEditor from "../../Form/FormRichTextEditor";
-import {Content, Destination, Topic} from "../../../types";
-import FormMultiSelect from "../../Form/FormMultiSelect";
-import {addPost, updatePost} from "../../../services/forum.service";
+import FormRadioButton from "../../Form/FormRadioButton"
+import FormRichTextEditor from "../../Form/FormRichTextEditor"
+import {Content, Destination, Topic} from "../../../types"
+import FormMultiSelect from "../../Form/FormMultiSelect"
+import {addPost, updatePost} from "../../../services/forum.service"
 import {useRouter} from 'next/router'
 
 type Inputs = {
@@ -76,7 +76,7 @@ const ForumPostForm = ({post, destinations, topics}: Props) => {
 
     const categoryValue = watch('category')
     const onSubmit: SubmitHandler<Inputs> = async (values: Inputs) => {
-        const resp = await savePost(values).catch(err => {
+        await savePost(values).catch(err => {
             if (err.response?.data?.errors) {
                 setFormErrors(err.response.data.errors, setError)
             }

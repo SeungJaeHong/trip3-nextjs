@@ -11,7 +11,7 @@ import MoreLink from "../../../components/MoreLink"
 import {Destination, User} from "../../../types"
 import ImageUploadForm from "../../../components/ImageUploadForm"
 import {uploadImage} from "../../../services/image.service"
-import {toast} from "react-hot-toast"
+import {toast} from 'react-toastify'
 import {useRouter} from "next/router"
 import LoadingSpinner2 from "../../../components/LoadingSpinner2"
 

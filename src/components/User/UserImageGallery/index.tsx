@@ -2,7 +2,7 @@ import ImageGallery from "../../ImageGallery"
 import {Image, UserPublicProfile} from "../../../types"
 import {useEffect, useState} from "react"
 import {getUserImages} from "../../../services/user.service"
-import {toast} from "react-hot-toast"
+import {toast} from 'react-toastify'
 import {hidePhoto} from "../../../services/general.service"
 import {useRouter} from "next/router"
 

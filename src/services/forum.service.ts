@@ -3,28 +3,22 @@ import {AxiosResponse} from "axios"
 import {Content} from "../types"
 
 export const addPost = async (formValues: any): Promise<AxiosResponse> => {
-    const result = await ApiClient.post('/forum/create', formValues)
-    return result
+    return await ApiClient.post('/forum/create', formValues)
 }
 
 export const updatePost = async (post: Content, formValues: any): Promise<AxiosResponse> => {
-    const result = await ApiClient.post('/forum/' + post.id + '/updatePost', formValues)
-    return result
+    return await ApiClient.post('/forum/' + post.id + '/updatePost', formValues)
 }
 
 export const togglePostStatus = async (content: Content, value: boolean): Promise<AxiosResponse> => {
-    const result = await ApiClient.post('/forum/' + content.id + '/status', {
+    return await ApiClient.post('/forum/' + content.id + '/status', {
         value: value
     })
-
-    return result
 }
 
 export const ratePost = async (content: Content, value: boolean): Promise<AxiosResponse> => {
-    const result = await ApiClient.post( '/forum/' + content.id + '/flag', {
+    return await ApiClient.post('/forum/' + content.id + '/flag', {
         value: value
     })
-
-    return result
 }
 

@@ -1,7 +1,7 @@
 import ImageGallery from "../../ImageGallery"
 import {Destination, Image} from "../../../types"
 import {useEffect, useState} from "react"
-import {toast} from "react-hot-toast"
+import {toast} from 'react-toastify'
 import {hidePhoto} from "../../../services/general.service"
 import {getDestinationImages} from "../../../services/destination.service"
 import {useRouter} from "next/router"

@@ -3,9 +3,9 @@ import { useRouter } from 'next/router'
 import clsx from "clsx"
 import styles from "./UserNavBarMenu.module.scss"
 import UserAvatar from "../User/UserAvatar"
-import toast from "react-hot-toast"
-import useUser from "../../hooks";
-import {logout} from "../../services/auth.service";
+import {toast} from 'react-toastify'
+import useUser from "../../hooks"
+import {logout} from "../../services/auth.service"
 
 type Props = {
     darkMode: boolean
@@ -13,7 +13,7 @@ type Props = {
 
 const UserNavBarMenu = ({darkMode}: Props) => {
     const router = useRouter()
-    const { loading, userIsLoggedIn, user, mutate } = useUser()
+    const {userIsLoggedIn, user, mutate } = useUser()
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const [menuOpen, setMenuOpen] = useState(false)
     const ref = useRef<any>()

@@ -1,19 +1,19 @@
 import styles from "./AdminForumPost.module.scss"
-import React, {useEffect, useState} from "react";
-import {getForumPostData} from "../../../../services/admin.service";
-import {Comment, Content} from "../../../../types";
+import React, {useEffect, useState} from "react"
+import {getForumPostData} from "../../../../services/admin.service"
+import {Comment, Content} from "../../../../types"
 import {useRouter} from "next/router"
 import LoadingSpinner2 from "../../../LoadingSpinner2"
-import ForumPost from "../../../Forum/ForumPost";
-import {AxiosResponse} from "axios";
-import ForumPostComments from "../../../Forum/ForumPostComments";
-import BlockTitle from "../../../BlockTitle";
-import CommentEditor from "../../../CommentEditor";
-import {postComment} from "../../../../services/comment.service";
-import {toast} from "react-hot-toast";
-import clsx from "clsx";
-import MoreLink from "../../../MoreLink";
-import {scrollToHash} from "../../../../helpers";
+import ForumPost from "../../../Forum/ForumPost"
+import {AxiosResponse} from "axios"
+import ForumPostComments from "../../../Forum/ForumPostComments"
+import BlockTitle from "../../../BlockTitle"
+import CommentEditor from "../../../CommentEditor"
+import {postComment} from "../../../../services/comment.service"
+import {toast} from 'react-toastify'
+import clsx from "clsx"
+import MoreLink from "../../../MoreLink"
+import {scrollToHash} from "../../../../helpers"
 
 type ForumResponse = {
     post: Content
@@ -64,7 +64,7 @@ const AdminForumPost = () => {
 
     const onSubmitComment = async (value: string) => {
         setSubmitting(true)
-        const res = await postComment(value, post.id).then((response) => {
+        await postComment(value, post.id).then((response) => {
             setCommentValue(value)
             setCommentValue('')
             const comment = response.data.comment
@@ -79,9 +79,7 @@ const AdminForumPost = () => {
 
             url = url + '#' + comment.id
             router.push(url)
-            toast.success('Kommentaar lisatud', {
-                duration: 4000
-            })
+            toast.success('Kommentaar lisatud')
             setSubmitting(false)
         }).catch(err => {
             setSubmitting(false)

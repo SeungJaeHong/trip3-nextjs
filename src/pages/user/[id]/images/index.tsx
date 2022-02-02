@@ -14,7 +14,7 @@ import Image from 'next/image'
 import SimplePaginator from "../../../../components/Paginator/SimplePaginator"
 import ImageGalleryModal from "../../../../components/ImageGallery/ImageGalleryModal"
 import {hidePhoto} from "../../../../services/general.service"
-import {toast} from "react-hot-toast"
+import {toast} from 'react-toastify'
 import UserAvatar from "../../../../components/User/UserAvatar"
 import Button from "../../../../components/Button"
 import useUser from "../../../../hooks"

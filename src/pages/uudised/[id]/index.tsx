@@ -14,7 +14,7 @@ import {postComment, publishNews} from "../../../services/news.service"
 import useUser from "../../../hooks"
 import BlockTitle from "../../../components/BlockTitle"
 import CommentEditor from "../../../components/CommentEditor"
-import {toast} from "react-hot-toast"
+import {toast} from 'react-toastify'
 import {useRouter} from 'next/router'
 import Alert from "../../../components/Alert"
 
@@ -40,9 +40,7 @@ const NewsShow = ({newsObj}: Props) => {
             const newComments = comments ? [...comments, comment] : [comment]
             setComments(newComments)
             router.replace('/uudised/' + news.slug + '#' + comment.id)
-            toast.success('Kommentaar lisatud', {
-                duration: 4000
-            })
+            toast.success('Kommentaar lisatud')
             setSubmitting(false)
         }).catch(err => {
             setSubmitting(false)

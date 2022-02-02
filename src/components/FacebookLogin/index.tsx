@@ -1,12 +1,12 @@
 import React, {Fragment} from "react"
 import Script from 'next/script'
 import styles from "./FacebookLogin.module.scss"
-import toast from 'react-hot-toast'
+import {toast} from 'react-toastify'
 import {createUserOrLogin} from "../../services/auth.service"
 import useUser from "../../hooks"
 
 const FacebookLogin = () => {
-    const { userIsLoggedIn, user, mutate } = useUser()
+    const {mutate } = useUser()
     const signInFB = () => {
         FB.login(function(response) {
             if (response.status === 'connected') {

@@ -1,24 +1,22 @@
 import React, {Fragment, useEffect} from "react"
 import Navbar from "../../components/Navbar"
 import styles from './Login.module.scss'
-import clsx from "clsx";
+import clsx from "clsx"
 import Footer from "../../components/Footer"
 import containerStyle from "../../styles/containers.module.scss"
-import BackgroundMap from "../../components/BackgroundMap";
-import Link from "next/link";
-import LoginForm from "../../components/LoginForm";
-import {GetServerSideProps} from "next";
-import ApiClientSSR from "../../lib/ApiClientSSR";
-import {useRouter} from "next/router";
-import toast from "react-hot-toast";
+import BackgroundMap from "../../components/BackgroundMap"
+import Link from "next/link"
+import LoginForm from "../../components/LoginForm"
+import {GetServerSideProps} from "next"
+import ApiClientSSR from "../../lib/ApiClientSSR"
+import {useRouter} from "next/router"
+import {toast} from 'react-toastify'
 
 const LoginPage = (props: any) => {
     const router = useRouter()
     useEffect(() => {
         if (router.query?.verified) {
-            toast.success('Kasutajakonto on verifitseeritud!', {
-                duration: 4000
-            })
+            toast.success('Kasutajakonto on verifitseeritud!')
         }
     }, [router.query?.verified])
 

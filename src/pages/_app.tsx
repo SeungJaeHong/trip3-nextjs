@@ -2,7 +2,8 @@ import type {AppProps} from 'next/app'
 import NextNprogress from 'nextjs-progressbar'
 import '../styles/globals.scss'
 import 'keen-slider/keen-slider.min.css'
-import { Toaster } from 'react-hot-toast'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
@@ -14,32 +15,17 @@ function MyApp({ Component, pageProps }: AppProps) {
                 height={3}
                 options={{ showSpinner: false }}
             />
-            <Toaster
-                containerStyle={{
-                    bottom: '32px',
-                    left: '32px'
-                }}
-                toastOptions={{
-                    success: {
-                        style: {
-                            //background: '#8EDD65',
-                            //color: '#fff',
-                            //color: '#6c747a',
-                            fontWeight: 500,
-                            fontFamily: 'Sailec, sans-serif'
-                        },
-                    },
-                    error: {
-                        style: {
-                            //background: '#FF5050',
-                            //color: '#fff',
-                            fontWeight: 500,
-                            fontFamily: 'Sailec, sans-serif'
-                        },
-                    },
-                }}
+            <ToastContainer
                 position="bottom-left"
-                reverseOrder={false}
+                autoClose={3000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable
+                pauseOnHover={false}
+                theme={'colored'}
             />
             <Component {...pageProps} />
         </>
