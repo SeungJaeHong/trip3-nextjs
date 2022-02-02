@@ -26,9 +26,9 @@ const NewsAddPage = ({destinations, topics}: Props) => {
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const [submitting, setSubmitting] = useState<boolean>(false)
 
-    const onSubmit = (title: string, body: string, destinations: Destination[], image: File) => {
+    const onSubmit = (title: string, body: string, destinations: Destination[], image: File, topics?: Topic[]) => {
         setSubmitting(true)
-        addNews(title, image, body, destinations).then(res => {
+        addNews(title, image, body, destinations, topics).then(res => {
             toast.success('Uudis lisatud')
             router.push('/uudised/' + res.data.slug)
         }).catch(e => {
@@ -61,6 +61,7 @@ const NewsAddPage = ({destinations, topics}: Props) => {
                     }
                     <NewsForm
                         destinations={destinations}
+                        topics={topics}
                         // @ts-ignore
                         onSubmit={onSubmit} />
                 </div>

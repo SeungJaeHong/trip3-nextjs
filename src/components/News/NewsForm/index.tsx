@@ -7,7 +7,7 @@ import FormInput from "../../Form/FormInput"
 import SubmitButton from "../../Form/SubmitButton"
 import FormImageUpload from "../../Form/FormImageUpload"
 import FormMultiSelect from "../../Form/FormMultiSelect"
-import {Destination, NewsContent} from "../../../types"
+import {Destination, NewsContent, Topic} from "../../../types"
 import FormCodeMirrorEditor from "../../Form/FormCodeMirrorEditor"
 
 type Inputs = {
@@ -21,10 +21,11 @@ type Inputs = {
 type Props = {
     news?: NewsContent
     destinations: Destination[]
-    onSubmit: (title: string, body: string, destination: Destination[], image?: File) => void
+    topics: Topic[]
+    onSubmit: (title: string, body: string, destination: Destination[], image?: File, topics?: Topic[]) => void
 }
 
-const NewsForm = ({news, destinations, onSubmit}: Props) => {
+const NewsForm = ({news, destinations, topics, onSubmit}: Props) => {
     const formRef = useRef<HTMLFormElement>(null)
     const newsSchema = yup.object().shape({
         title: yup.string().required('Pealkiri on kohustuslik'),
@@ -40,7 +41,7 @@ const NewsForm = ({news, destinations, onSubmit}: Props) => {
             title: news?.title,
             body: news?.bodyRaw,
             destinations: news ? news.destinations?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
-            topics: []
+            topics: news ? news.topics?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
         },
         criteriaMode: 'firstError',
         shouldFocusError: true
@@ -51,13 +52,24 @@ const NewsForm = ({news, destinations, onSubmit}: Props) => {
         return destinations.filter(destination => ids.indexOf(destination.id) !== -1)
     }
 
-    const handleSave: SubmitHandler<Inputs> = async (values: Inputs) => {
-        const {title, body, destinations, image} = values
-        const destinationValues = valuesToDestination(destinations)
-        onSubmit(title, body, destinationValues, image ? image[0] : undefined)
+    const valuesToTopics = (values: { value: string, label: string }[]): Topic[] => {
+        const ids: Number[] = values.map(value => parseInt(value.value))
+        return topics.filter(topic => ids.indexOf(topic.id) !== -1)
     }
 
-    const allOptions: { label: string; value: string }[] = destinations.map(destination => ({ label: destination.name, value: destination.id.toString() }))
+    const handleSave: SubmitHandler<Inputs> = async (values: Inputs) => {
+        const {title, body, destinations, topics, image} = values
+        const destinationValues = valuesToDestination(destinations)
+        let topicValues = undefined
+        if (topics) {
+            topicValues = valuesToTopics(topics)
+        }
+
+        onSubmit(title, body, destinationValues, image ? image[0] : undefined, topicValues)
+    }
+
+    const allDestinationOptions: { label: string; value: string }[] = destinations.map(destination => ({ label: destination.name, value: destination.id.toString() }))
+    const allTopicOptions: { label: string; value: string }[] = topics?.map(topic => ({ label: topic.name, value: topic.id.toString() }))
     return (
         <div className={styles.NewsForm}>
             <div className={styles.FormContainer}>
@@ -117,8 +129,28 @@ const NewsForm = ({news, destinations, onSubmit}: Props) => {
                                     <FormMultiSelect
                                         id={'destinations'}
                                         label={'Sihtkohad'}
-                                        options={allOptions}
+                                        options={allDestinationOptions}
                                         placeholder={'Vali sihtkoht'}
+                                        values={field.value}
+                                        onChange={field.onChange}
+                                        error={fieldState.error?.message}
+                                        disabled={isSubmitting}
+                                    />
+                                )
+                            }}
+                        />
+                    </div>
+                    <div className={styles.FormInput}>
+                        <Controller
+                            name={'topics'}
+                            control={control}
+                            render={({ field, fieldState }) => {
+                                return (
+                                    <FormMultiSelect
+                                        id={'topics'}
+                                        label={'Valdkonnad'}
+                                        options={allTopicOptions}
+                                        placeholder={'Vali valdkond'}
                                         values={field.value}
                                         onChange={field.onChange}
                                         error={fieldState.error?.message}

@@ -27,9 +27,9 @@ const NewsEditPage = ({news, destinations, topics}: Props) => {
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const [submitting, setSubmitting] = useState<boolean>(false)
 
-    const onSubmit = (title: string, body: string, destinations: Destination[], image?: File) => {
+    const onSubmit = (title: string, body: string, destinations: Destination[], image?: File, topics?: Topic[]) => {
         setSubmitting(true)
-        updateNews(news.id, title, body, destinations, image).then(res => {
+        updateNews(news.id, title, body, destinations, image, topics).then(res => {
             toast.success('Uudis lisatud')
             router.push('/uudised/' + res.data.slug)
         }).catch(e => {
@@ -63,6 +63,7 @@ const NewsEditPage = ({news, destinations, topics}: Props) => {
                     <NewsForm
                         news={news}
                         destinations={destinations}
+                        topics={topics}
                         onSubmit={onSubmit} />
                 </div>
             )

@@ -213,6 +213,7 @@
             overflow-wrap: break-word;
             word-wrap: break-word;
             padding-right: $spacer * 2;
+            margin-bottom: $spacer * 6;
 
             @include md() {
                 font-size: $font-size-normal;
@@ -235,13 +236,12 @@
         .Comments {
             display: flex;
             flex-direction: column;
-            margin-top: $spacer * 5;
             gap: $spacer * 3;
-            padding-bottom: $spacer * 2;
+            margin-bottom: $spacer * 5;
         }
 
         .AddComment {
-            margin: $spacer * 4 0;
+            margin-bottom: $spacer * 4;
             display: flex;
             flex-direction: column;
             gap: $spacer * 2;
