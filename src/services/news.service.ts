@@ -41,6 +41,26 @@ export const addNews = async (title: string, image: File, body: string, destinat
     })
 }
 
+export const updateNews = async (newsId: number, title: string, body: string, destinations: Destination[], image?: File): Promise<AxiosResponse> => {
+    let formData = new FormData()
+    formData.append('title', title)
+    formData.append('body', body)
+
+    if (image) {
+        formData.append('image', image)
+    }
+
+    destinations.map(destination => {
+        formData.append('destinations[]', destination.id.toString())
+    })
+
+    return await ApiClient.post('/news/' + newsId + '/update', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+}
+
 export const publishNews = async (newsId: number, status = true) => {
     return await ApiClient.post('/content/' + newsId + '/publish', {
         status: status

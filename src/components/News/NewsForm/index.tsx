@@ -12,7 +12,7 @@ import FormCodeMirrorEditor from "../../Form/FormCodeMirrorEditor"
 
 type Inputs = {
     title: string
-    image: any
+    image: File[]
     body: string
     destinations: { value: string, label: string }[]
     topics: { value: string, label: string }[]
@@ -21,7 +21,7 @@ type Inputs = {
 type Props = {
     news?: NewsContent
     destinations: Destination[]
-    onSubmit: (title: string, image: File, body: string, destination: Destination[]) => void
+    onSubmit: (title: string, body: string, destination: Destination[], image?: File) => void
 }
 
 const NewsForm = ({news, destinations, onSubmit}: Props) => {
@@ -39,7 +39,7 @@ const NewsForm = ({news, destinations, onSubmit}: Props) => {
         defaultValues: {
             title: news?.title,
             body: news?.bodyRaw,
-            destinations: [],
+            destinations: news ? news.destinations?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
             topics: []
         },
         criteriaMode: 'firstError',
@@ -52,9 +52,9 @@ const NewsForm = ({news, destinations, onSubmit}: Props) => {
     }
 
     const handleSave: SubmitHandler<Inputs> = async (values: Inputs) => {
-        const { image, title, body, destinations } = values
+        const {title, body, destinations, image} = values
         const destinationValues = valuesToDestination(destinations)
-        onSubmit(title, image[0], body, destinationValues)
+        onSubmit(title, body, destinationValues, image ? image[0] : undefined)
     }
 
     const allOptions: { label: string; value: string }[] = destinations.map(destination => ({ label: destination.name, value: destination.id.toString() }))
@@ -81,7 +81,7 @@ const NewsForm = ({news, destinations, onSubmit}: Props) => {
                                     <FormImageUpload
                                         id={'image'}
                                         label={'Taustapilt'}
-                                        files={[]}
+                                        files={news?.backgroundImageUrl ? [news.backgroundImageUrl] : []}
                                         onChange={field.onChange}
                                         error={fieldState.error?.message}
                                         disabled={isSubmitting} />

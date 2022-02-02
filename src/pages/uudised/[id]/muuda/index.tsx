@@ -10,7 +10,7 @@ import useUser from "../../../../hooks"
 import {Destination, NewsContent, Topic} from "../../../../types"
 import LoadingSpinner2 from "../../../../components/LoadingSpinner2"
 import NewsForm from "../../../../components/News/NewsForm"
-import {addNews} from "../../../../services/news.service"
+import {updateNews} from "../../../../services/news.service"
 import {toast} from "react-hot-toast"
 import {GetServerSideProps} from "next"
 import ApiClientSSR from "../../../../lib/ApiClientSSR"
@@ -27,14 +27,14 @@ const NewsEditPage = ({news, destinations, topics}: Props) => {
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const [submitting, setSubmitting] = useState<boolean>(false)
 
-    const onSubmit = (title: string, image: File, body: string, destinations: Destination[]) => {
+    const onSubmit = (title: string, body: string, destinations: Destination[], image?: File) => {
         setSubmitting(true)
-        /*addNews(title, image, body, destinations).then(res => {
+        updateNews(news.id, title, body, destinations, image).then(res => {
             toast.success('Uudis lisatud')
             router.push('/uudised/' + res.data.slug)
         }).catch(e => {
             toast.success('Uudise lisamine ebaõnnestus')
-        }).finally(() => setSubmitting(false))*/
+        }).finally(() => setSubmitting(false))
     }
 
     useEffect(() => {

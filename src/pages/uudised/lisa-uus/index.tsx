@@ -26,7 +26,7 @@ const NewsAddPage = ({destinations, topics}: Props) => {
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const [submitting, setSubmitting] = useState<boolean>(false)
 
-    const onSubmit = (title: string, image: File, body: string, destinations: Destination[]) => {
+    const onSubmit = (title: string, body: string, destinations: Destination[], image: File) => {
         setSubmitting(true)
         addNews(title, image, body, destinations).then(res => {
             toast.success('Uudis lisatud')
@@ -61,6 +61,7 @@ const NewsAddPage = ({destinations, topics}: Props) => {
                     }
                     <NewsForm
                         destinations={destinations}
+                        // @ts-ignore
                         onSubmit={onSubmit} />
                 </div>
             )
