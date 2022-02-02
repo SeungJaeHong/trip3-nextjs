@@ -19,15 +19,16 @@ import {useRouter} from 'next/router'
 import Alert from "../../../components/Alert"
 
 type Props = {
-    news: NewsContent
+    newsObj: NewsContent
 }
 
-const NewsShow = ({news}: Props) => {
-    const [comments, setComments] = useState(news.comments)
+const NewsShow = ({newsObj}: Props) => {
+    const [news, setNews] = useState<NewsContent>(newsObj)
+    const [comments, setComments] = useState<Comment[]|undefined>(newsObj.comments)
     const {userIsLoggedIn, user} = useUser()
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
-    const [commentValue, setCommentValue] = useState('')
-    const [submitting, setSubmitting] = useState(false)
+    const [commentValue, setCommentValue] = useState<string>('')
+    const [submitting, setSubmitting] = useState<boolean>(false)
     const router = useRouter()
 
     const onSubmit = async (value: string) => {
@@ -58,7 +59,7 @@ const NewsShow = ({news}: Props) => {
 
     const publish = (status: boolean) => {
         publishNews(news.id, status).then(res => {
-            router.reload()
+            setNews({...news, status: status ? 1 : 0})
             toast.success(status ? 'Uudis avalikustatud' : 'Uudis peidetud')
         }).catch(e => {})
     }
@@ -152,7 +153,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
         return {
             props: {
-                news: response.data,
+                newsObj: response.data,
             }
         }
     } catch (e) {
