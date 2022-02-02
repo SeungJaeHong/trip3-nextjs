@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 options={{ showSpinner: false }}
             />
             <ToastContainer
-                position="bottom-left"
+                position="top-right"
                 autoClose={3000}
                 hideProgressBar
                 newestOnTop={false}

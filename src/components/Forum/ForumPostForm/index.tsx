@@ -35,8 +35,8 @@ const ForumPostForm = ({post, destinations, topics}: Props) => {
         category: yup.string().required('Kategooria on kohustuslik'),
         title: yup.string().required('Pealkiri on kohustuslik'),
         body: yup.string().required('Sisu on kohustuslik'),
-        //destinations: yup.array(),
-        //topics: yup.array()
+        destinations: yup.array().nullable(),
+        topics: yup.array().nullable()
     }).required()
 
     const { watch, register, handleSubmit, control, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
