@@ -17,3 +17,7 @@ export const uploadImage = async (image: File, title: string, destinations: Dest
         }
     })
 }
+
+export const getInternalImages = async () => {
+    return await ApiClient.get('/admin/internal_images')
+}

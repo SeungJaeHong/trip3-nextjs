@@ -28,7 +28,7 @@
     left: 0;
     bottom: 0;
     right: 0;
-    z-index: 10000;
+    z-index: 10;
     overflow: scroll;
     background: $white;
     display: flex;
@@ -66,7 +66,7 @@
         height: 100%;
         width: 100%;
         display: flex;
-        gap: $spacer * 4;
+        gap: $spacer * 3;
         padding: 50px 24px 24px 8px;
 
         .Code {
@@ -76,6 +76,7 @@
 
         .Preview {
             flex: 1;
+            padding-left: 8px;
 
             img {
                 width: 100%;
@@ -94,6 +95,7 @@
         align-items: center;
         display: flex;
         border: 0;
+        padding-right: 60px;
     }
 
     :global(.EasyMDEContainer .CodeMirror) {
@@ -107,6 +109,11 @@
     @include lg() {
         .EditorContainer {
             flex-direction: column;
+
+            .Code {
+                border-right: 0;
+                border-bottom: 1px solid $gray-light;
+            }
         }
     }
 }

@@ -1,0 +1,89 @@
+@import "../../styles/variables";
+
+.ImageSelectSidebar {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    z-index: 50;
+    height: 100%;
+    max-width: 400px;
+    width: 100%;
+    top: 0;
+    right: 0;
+    background-color: $white;
+    overflow-x: hidden;
+    padding: 10px 12px;
+    transition : all .3s;
+    transform: translateX(100%);
+
+    &.Open {
+        transform: translateX(0);
+        box-shadow: 10px 10px 8px 10px $gray;
+    }
+
+    .CloseIcon {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: $spacer * 2;
+
+        svg {
+            width: 35px;
+            height: 35px;
+            fill: $gray-dark;
+            cursor: pointer;
+        }
+    }
+
+    .Content {
+        display: flex;
+        flex-direction: column;
+
+        .Dropzone {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-width: 2px;
+            border-radius: 2px;
+            border-style: dashed;
+            background-color: $white;
+            color: #bdbdbd;
+            outline: none;
+            transition: border .24s ease-in-out;
+            height: 120px;
+            cursor: pointer;
+            margin-bottom: $spacer * 3;
+        }
+
+        .Images {
+            display: grid;
+            grid-template-columns: repeat( auto-fit, minmax(180px, 1fr) );
+            grid-gap: $spacer * 1.5;
+
+            .Image {
+                width: 180px;
+                height: 180px;
+                position: relative;
+                border: 1px solid $gray;
+                cursor: pointer;
+
+                &:hover {
+                    border: 1px solid $gray-dark;
+                }
+            }
+
+            @include sm() {
+                grid-template-columns: repeat( auto-fit, minmax(170px, 1fr) );
+                grid-gap: $spacer;
+
+                .Image {
+                    width: 170px;
+                    height: 170px;
+                }
+            }
+        }
+    }
+}
+

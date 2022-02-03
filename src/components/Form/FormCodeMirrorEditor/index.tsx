@@ -9,6 +9,8 @@ import { useDebounce } from 'use-debounce'
 import {parseFlightBody} from "../../../services/flight.service"
 import {parseNewsBody} from "../../../services/news.service"
 import CheckIcon from "../../../icons/CheckIcon"
+import ImageSelectSidebar from "../../ImageSelectSidebar"
+import {Position} from "codemirror"
 
 const SimpleMdeReact = dynamic(() => import("react-simplemde-editor"), { ssr: false })
 
@@ -31,6 +33,8 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
     const [showEditor, setShowEditor] = useState<boolean>(false)
     const [debouncedValue] = useDebounce(editorValue, 500)
     const [previewValue, setPreviewValue] = React.useState<string>('')
+    const [showSidebar, setShowSidebar] = useState<boolean>(false)
+    const [cursorPosition, setCursorPosition] = useState<Position|undefined>(undefined)
 
     const onEditorChange = useCallback((value: string) => {
         setEditorValue(value)
@@ -136,14 +140,18 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
                     const doc = cm.getDoc()
                     const cursor = doc.getCursor()
 
-                    const imageId = '[[34245]]'
+                    setCursorPosition(cursor)
+
+                    setShowSidebar(true)
+
+                    /*const imageId = '[[34245]]'
 
                     doc.replaceRange('\n\n' + imageId + '\n', cursor)
                     doc.setCursor({
                         line: cursor.line + 3,
                         ch: 0
                     })
-                    editor.codemirror.focus()
+                    editor.codemirror.focus()*/
                 },
                 className: "fa fa-image",
                 title: 'Image'
@@ -195,21 +203,27 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
                 }
             </div>
             {showEditor &&
-                <div className={styles.Editor}>
-                    <div className={styles.SaveButton} onClick={saveChanges}>
-                        <CheckIcon />
-                    </div>
-                    <div className={styles.EditorContainer}>
-                        <div className={styles.Code} ref={editorRef}>
-                            <SimpleMdeReact
-                                // @ts-ignore
-                                options={autofocusNoSpellcheckerOptions}
-                                value={editorValue}
-                                onChange={onEditorChange} />
+                <>
+                    <div className={styles.Editor}>
+                        <div className={styles.SaveButton} onClick={saveChanges}>
+                            <CheckIcon />
                         </div>
-                        <div className={styles.Preview} dangerouslySetInnerHTML={{ __html: previewValue }} />
+                        <div className={styles.EditorContainer}>
+                            <div className={styles.Code} ref={editorRef}>
+                                <SimpleMdeReact
+                                    // @ts-ignore
+                                    options={autofocusNoSpellcheckerOptions}
+                                    value={editorValue}
+                                    onChange={onEditorChange} />
+                            </div>
+                            <div className={styles.Preview} dangerouslySetInnerHTML={{ __html: previewValue }} />
+                        </div>
                     </div>
-                </div>
+                    <ImageSelectSidebar
+                        open={showSidebar}
+                        onClose={() => setShowSidebar(false)}
+                        onImageSelect={() => console.log('select')} />
+                </>
             }
         </>
     )
