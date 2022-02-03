@@ -30,10 +30,10 @@ const NewsEditPage = ({news, destinations, topics}: Props) => {
     const onSubmit = (title: string, body: string, destinations: Destination[], image?: File, topics?: Topic[]) => {
         setSubmitting(true)
         updateNews(news.id, title, body, destinations, image, topics).then(res => {
-            toast.success('Uudis lisatud')
+            toast.success('Uudis muudetud')
             router.push('/uudised/' + res.data.slug)
         }).catch(e => {
-            toast.success('Uudise lisamine ebaõnnestus')
+            toast.success('Uudise muutmine ebaõnnestus')
         }).finally(() => setSubmitting(false))
     }
 

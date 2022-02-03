@@ -45,6 +45,10 @@ const FormImageUpload = (props: Props) => {
     })
 
     const renderPreviewImages = () => {
+        if (files.length === 0) {
+            return null
+        }
+
         return (
             <div className={styles.Preview}>
                 {files.map((url, i) => {
@@ -67,16 +71,20 @@ const FormImageUpload = (props: Props) => {
     return (
         <div className={styles.FormImageUpload}>
             {props.label && <label>{props.label}</label>}
-            <div className={styles.DropzoneContainer} {...getRootProps()}>
-                <input {...getInputProps()} />
-                <p>{props.placeholder}</p>
-            </div>
-            {(props.error?.length > 0 || error) &&
-                <div className={styles.Error}>
-                    {props.error || error}
+            <div className={styles.DropzoneContainer}>
+                <div className={styles.DropzoneContent}>
+                    {renderPreviewImages()}
+                    <div className={styles.Dropzone} {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        <p>{props.placeholder}</p>
+                    </div>
                 </div>
-            }
-            {renderPreviewImages()}
+                {(props.error?.length > 0 || error) &&
+                    <div className={styles.Error}>
+                        {props.error || error}
+                    </div>
+                }
+            </div>
         </div>
     )
 }

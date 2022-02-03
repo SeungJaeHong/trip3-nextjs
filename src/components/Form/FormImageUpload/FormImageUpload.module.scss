@@ -14,53 +14,64 @@
     }
 
     .DropzoneContainer {
-        flex: 1;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        border-width: 2px;
-        border-radius: 2px;
-        border-color: #eeeeee;
-        border-style: dashed;
-        background-color: #fafafa;
-        color: #bdbdbd;
-        outline: none;
-        transition: border .24s ease-in-out;
 
-        p {
-            cursor: pointer;
-        }
-    }
-
-    .Error {
-        color: $red;
-        font-size: $font-size-small;
-        margin-top: $spacer;
-    }
-
-    .Preview {
-        margin-top: $spacer;
-
-        .Thumb {
+        .DropzoneContent {
             display: flex;
-            border-radius: 2px;
-            border: 1px solid #eaeaea;
-            width: 120px;
-            height: 120px;
-            padding: 4px;
-            box-sizing: border-box;
+            gap: $spacer;
+            align-items: center;
 
-            .ThumbInner {
+            .Dropzone {
+                flex: 1;
                 display: flex;
-                overflow: hidden;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                border-width: 2px;
+                border-radius: 2px;
+                border-color: #eeeeee;
+                border-style: dashed;
+                background-color: #fafafa;
+                color: #bdbdbd;
+                outline: none;
+                transition: border .24s ease-in-out;
+                height: 120px;
 
-                img {
-                    display: block;
-                    width: auto;
-                    height: 100%;
+                p {
+                    cursor: pointer;
                 }
             }
+
+            .Preview {
+                .Thumb {
+                    display: flex;
+                    border-radius: 2px;
+                    border: 1px solid #eaeaea;
+                    width: 120px;
+                    height: 120px;
+                    padding: 4px;
+                    box-sizing: border-box;
+
+                    .ThumbInner {
+                        display: flex;
+                        overflow: hidden;
+
+                        img {
+                            display: block;
+                            width: auto;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+        }
+
+        .Error {
+            color: $red;
+            font-size: $font-size-small;
+            margin-top: $spacer;
         }
     }
 }

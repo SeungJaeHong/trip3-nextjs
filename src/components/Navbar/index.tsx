@@ -106,7 +106,7 @@ const Navbar = ({darkMode, showSearch, showLogo}: Props) => {
         return null;
     }
 
-    const linkIsActive = (route: string) => {
+    const linkIsActive = (route: string): boolean => {
         if (route === '/foorum/uldfoorum') {
             const prefix = router.route.substring(0, 7)
             if (prefix === '/foorum') {

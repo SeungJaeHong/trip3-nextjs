@@ -9,9 +9,10 @@
         font-weight: 400;
         border-radius: 3px;
         border: 2px solid $gray;
-        color: $gray-dark;
         padding: $spacer * 1.5;
         width: 100%;
+        cursor: pointer;
+        color: $gray-dark;
 
         &::placeholder {
             color: $gray;
