@@ -21,3 +21,16 @@ export const uploadImage = async (image: File, title: string, destinations: Dest
 export const getInternalImages = async () => {
     return await ApiClient.get('/admin/internal_images')
 }
+
+export const uploadInternalImages = async (files: File[]) => {
+    let formData = new FormData()
+    files.map(file => {
+        formData.append('images[]', file)
+    })
+
+    return await ApiClient.post('/admin/upload_images', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+}
