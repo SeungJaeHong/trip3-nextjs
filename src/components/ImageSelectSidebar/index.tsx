@@ -9,7 +9,7 @@ import Image from 'next/image'
 type Props = {
     open: boolean
     onClose: () => void
-    onImageSelect: () => void
+    onImageSelect: (imageId: number) => void
 }
 
 const ImageSelectSidebar = ({open, onClose, onImageSelect}: Props) => {
@@ -44,13 +44,13 @@ const ImageSelectSidebar = ({open, onClose, onImageSelect}: Props) => {
                 <div className={styles.Images}>
                     {images.map(image => {
                         return (
-                            <div className={styles.Image} key={image.id}>
+                            <div className={styles.Image} key={image.id} onClick={() => onImageSelect(image.id)}>
                                 <Image
                                     key={image.id}
                                     src={image.imageUrl}
                                     alt={''}
-                                    layout={'fill'}
-                                    objectFit={'cover'}
+                                    width={180}
+                                    height={180}
                                 />
                             </div>
                         )

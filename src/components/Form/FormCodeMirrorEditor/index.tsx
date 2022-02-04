@@ -10,7 +10,7 @@ import {parseFlightBody} from "../../../services/flight.service"
 import {parseNewsBody} from "../../../services/news.service"
 import CheckIcon from "../../../icons/CheckIcon"
 import ImageSelectSidebar from "../../ImageSelectSidebar"
-import {Position} from "codemirror"
+import {Editor} from "codemirror"
 
 const SimpleMdeReact = dynamic(() => import("react-simplemde-editor"), { ssr: false })
 
@@ -29,12 +29,12 @@ type Props = {
 
 const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, className }: Props) => {
     const [editorValue, setEditorValue] = React.useState<string>(value)
+    const [editor, setEditor] = React.useState<Editor|undefined>(undefined)
     const editorRef = useRef(null)
     const [showEditor, setShowEditor] = useState<boolean>(false)
     const [debouncedValue] = useDebounce(editorValue, 500)
     const [previewValue, setPreviewValue] = React.useState<string>('')
     const [showSidebar, setShowSidebar] = useState<boolean>(false)
-    const [cursorPosition, setCursorPosition] = useState<Position|undefined>(undefined)
 
     const onEditorChange = useCallback((value: string) => {
         setEditorValue(value)
@@ -62,6 +62,21 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [showEditor])
+
+    const onImageSelect = (imageId: number) => {
+        if (editor) {
+            const doc = editor.getDoc()
+            const cursor = doc.getCursor()
+
+            doc.replaceRange('\n\n' + '[[' + imageId + ']]' + '\n', cursor)
+            doc.setCursor({
+                line: cursor.line + 3,
+                ch: 0
+            })
+            editor.focus()
+            setShowSidebar(false)
+        }
+    }
 
     const getToolbar = () => {
         let toolbar =  [
@@ -136,22 +151,7 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
             {
                 name: 'image',
                 action: (editor: EasyMDE) => {
-                    const cm = editor.codemirror
-                    const doc = cm.getDoc()
-                    const cursor = doc.getCursor()
-
-                    setCursorPosition(cursor)
-
                     setShowSidebar(true)
-
-                    /*const imageId = '[[34245]]'
-
-                    doc.replaceRange('\n\n' + imageId + '\n', cursor)
-                    doc.setCursor({
-                        line: cursor.line + 3,
-                        ch: 0
-                    })
-                    editor.codemirror.focus()*/
                 },
                 className: "fa fa-image",
                 title: 'Image'
@@ -212,6 +212,8 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
                             <div className={styles.Code} ref={editorRef}>
                                 <SimpleMdeReact
                                     // @ts-ignore
+                                    getCodemirrorInstance={(editorInst) => setEditor(editorInst)}
+                                    // @ts-ignore
                                     options={autofocusNoSpellcheckerOptions}
                                     value={editorValue}
                                     onChange={onEditorChange} />
@@ -222,7 +224,7 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
                     <ImageSelectSidebar
                         open={showSidebar}
                         onClose={() => setShowSidebar(false)}
-                        onImageSelect={() => console.log('select')} />
+                        onImageSelect={onImageSelect} />
                 </>
             }
         </>

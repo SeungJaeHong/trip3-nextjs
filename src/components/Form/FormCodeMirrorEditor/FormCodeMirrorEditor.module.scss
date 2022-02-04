@@ -72,11 +72,24 @@
         .Code {
             flex: 1;
             border-right: 1px solid $gray-light;
+            font-family: Cousine, monospace;
+            font-size: 15px;
+            line-height: 20px;
+
+            :global(.cm-link) {
+                color: #6c747a;
+                text-decoration: none;
+            }
+
+            :global(.cm-string) {
+                color: #b35e14;
+            }
         }
 
         .Preview {
             flex: 1;
             padding-left: 8px;
+            font-family: $font-family-sailec;
 
             img {
                 width: 100%;
