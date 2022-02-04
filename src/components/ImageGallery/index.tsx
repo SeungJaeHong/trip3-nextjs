@@ -44,7 +44,7 @@ const ImageGallery = ({images, hideImage, imageCount, lastImage, lastImageTitle,
                         <span className={styles.MoreImagesCount}>{title}</span>
                     </div>
                     <Image
-                        src={lastImage.urlSmall}
+                        src={lastImage.urlSmallSquare}
                         alt={lastImage.title}
                         layout={'fill'}
                         objectFit={'cover'} />
@@ -67,7 +67,7 @@ const ImageGallery = ({images, hideImage, imageCount, lastImage, lastImageTitle,
                         return (
                             <div className={styles.Image} key={image.id} onClick={() => openGallery(image)}>
                                 <Image
-                                    src={image.urlSmall}
+                                    src={image.urlSmallSquare}
                                     alt={image.title}
                                     layout={'fill'}
                                     objectFit={'cover'} />

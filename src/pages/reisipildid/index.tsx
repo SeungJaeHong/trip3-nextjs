@@ -128,7 +128,7 @@ const ImagesPage = ({images, currentPage, hasMore, destinationId, destinationOpt
                                 return (
                                     <div className={styles.Image} key={image.id} onClick={() => openGallery(image)}>
                                         <Image
-                                            src={image.urlSmall}
+                                            src={image.urlSmallSquare}
                                             alt={image.title}
                                             layout={'fill'}
                                             objectFit={'cover'} />

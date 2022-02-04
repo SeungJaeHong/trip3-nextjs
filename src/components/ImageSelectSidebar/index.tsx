@@ -44,7 +44,7 @@ const ImageSelectSidebar = ({open, onClose, onImageSelect}: Props) => {
                 <div className={styles.Images}>
                     {images.map(image => {
                         return (
-                            <div className={styles.Image}>
+                            <div className={styles.Image} key={image.id}>
                                 <Image
                                     key={image.id}
                                     src={image.imageUrl}

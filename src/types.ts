@@ -88,6 +88,7 @@ export type Image = {
     title: string
     slug: string
     urlSmall: string
+    urlSmallSquare: string
     urlLarge: string
     createdAt: string
     user?: User
