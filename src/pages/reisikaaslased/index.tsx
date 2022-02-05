@@ -1,26 +1,26 @@
-import React, {Fragment} from 'react'
-import Header from "../../components/Header"
-import {GetServerSideProps} from "next"
-import Footer from "../../components/Footer";
-import containerStyle from "../../styles/containers.module.scss";
-import styles from "./TravelmatePage.module.scss"
-import {TravelmateRowType} from "../../types";
-import MoreLink from "../../components/MoreLink";
-import SimplePaginator from "../../components/Paginator/SimplePaginator";
-import {objectToQueryString} from "../../helpers";
-import {useRouter} from "next/router"
-import Button from "../../components/Button"
-import TravelmateCard from "../../components/Travelmate/TravelmateCard";
-import BlockTitle from "../../components/BlockTitle";
-import TravelmateFilter from "../../components/Travelmate/TravelmateFilter";
-import ApiClientSSR from "../../lib/ApiClientSSR";
+import React, { Fragment } from 'react'
+import Header from '../../components/Header'
+import { GetServerSideProps } from 'next'
+import Footer from '../../components/Footer'
+import containerStyle from '../../styles/containers.module.scss'
+import styles from './TravelmatePage.module.scss'
+import { TravelmateRowType } from '../../types'
+import MoreLink from '../../components/MoreLink'
+import SimplePaginator from '../../components/Paginator/SimplePaginator'
+import { objectToQueryString } from '../../helpers'
+import { useRouter } from 'next/router'
+import Button from '../../components/Button'
+import TravelmateCard from '../../components/Travelmate/TravelmateCard'
+import BlockTitle from '../../components/BlockTitle'
+import TravelmateFilter from '../../components/Travelmate/TravelmateFilter'
+import ApiClientSSR from '../../lib/ApiClientSSR'
 
 type Props = {
-    travelmates: TravelmateRowType[],
-    currentPage: number,
-    destination?: number,
-    topic?: number,
-    hasMore: boolean,
+    travelmates: TravelmateRowType[]
+    currentPage: number
+    destination?: number
+    topic?: number
+    hasMore: boolean
 }
 
 const TravelmatesIndex = (props: Props) => {
@@ -33,7 +33,7 @@ const TravelmatesIndex = (props: Props) => {
         const urlParams = {
             destination: props.destination,
             topic: props.topic,
-            page: props.currentPage + 1
+            page: props.currentPage + 1,
         }
 
         const queryString = objectToQueryString(urlParams)
@@ -45,7 +45,7 @@ const TravelmatesIndex = (props: Props) => {
             const urlParams = {
                 destination: props.destination,
                 topic: props.topic,
-                page: props.currentPage - 1
+                page: props.currentPage - 1,
             }
 
             const queryString = objectToQueryString(urlParams)
@@ -62,26 +62,41 @@ const TravelmatesIndex = (props: Props) => {
                 <div className={styles.Content}>
                     <div className={styles.TravelmateGridContainer}>
                         <div className={styles.TravelmateGrid}>
-                            {props.travelmates.map((travelmate: TravelmateRowType) => {
-                                return <TravelmateCard {...travelmate} key={travelmate.id} />
-                            })}
+                            {props.travelmates.map(
+                                (travelmate: TravelmateRowType) => {
+                                    return (
+                                        <TravelmateCard
+                                            {...travelmate}
+                                            key={travelmate.id}
+                                        />
+                                    )
+                                }
+                            )}
                         </div>
                         <div className={styles.Paginator}>
                             <SimplePaginator
                                 nextPageUrl={getNextPageUrl()}
-                                previousPageUrl={getPreviousPageUrl()} />
+                                previousPageUrl={getPreviousPageUrl()}
+                            />
                         </div>
                     </div>
                     <div className={styles.Sidebar}>
                         <div className={styles.DescriptionBlock}>
                             <div className={styles.DescriptionFirstPart}>
-                                Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?
+                                Soovid kaaslaseks eksperti oma esimesele
+                                matkareisile? Lihtsalt seltsilist palmi alla?
                             </div>
                             <div className={styles.DescriptionSecondPart}>
-                                Siit leiad omale sobiva reisikaaslase. Kasuta ka allpool olevat filtrit soovitud tulemuse saamiseks.
+                                Siit leiad omale sobiva reisikaaslase. Kasuta ka
+                                allpool olevat filtrit soovitud tulemuse
+                                saamiseks.
                             </div>
                             <div className={styles.MoreLink}>
-                                <MoreLink route={'/'} title={'Kasutustingimused'} medium={true} />
+                                <MoreLink
+                                    route={'/'}
+                                    title={'Kasutustingimused'}
+                                    medium={true}
+                                />
                             </div>
                             <div className={styles.AddNewButton}>
                                 <Button title={'Lisa kuulutus'} route={'/'} />
@@ -90,7 +105,8 @@ const TravelmatesIndex = (props: Props) => {
                         <div className={styles.FilterBlock}>
                             <BlockTitle title={'Filter'} />
                             <div className={styles.Intro}>
-                                Kui ei leia sobivat kaaslast, siis ehk aitab Sind filter.
+                                Kui ei leia sobivat kaaslast, siis ehk aitab
+                                Sind filter.
                             </div>
                             <TravelmateFilter />
                         </div>
@@ -122,7 +138,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     data.hasMore = res.data.travelmates?.hasMore
 
     return {
-        props: data
+        props: data,
     }
 }
 
