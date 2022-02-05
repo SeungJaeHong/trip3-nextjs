@@ -3,7 +3,7 @@ import Header from '../../components/Header'
 import { GetServerSideProps } from 'next'
 import Footer from '../../components/Footer'
 import containerStyle from '../../styles/containers.module.scss'
-import styles from './TravelmatePage.module.scss'
+import styles from './TravelmateIndex.module.scss'
 import { TravelmateRowType } from '../../types'
 import MoreLink from '../../components/MoreLink'
 import SimplePaginator from '../../components/Paginator/SimplePaginator'
@@ -57,7 +57,7 @@ const TravelmatesIndex = (props: Props) => {
 
     return (
         <Fragment>
-            <Header title={'Reisikaaslased'} />
+            <Header title={'Reisikaaslased'} className={styles.TravelmatesHeader}/>
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.Content}>
                     <div className={styles.TravelmateGridContainer}>
@@ -134,8 +134,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 
     const res = await ApiClientSSR(context).get(url)
-    data.travelmates = res.data.travelmates?.items
-    data.hasMore = res.data.travelmates?.hasMore
+    data.travelmates = res.data.items
+    data.hasMore = res.data.hasMore
 
     return {
         props: data,

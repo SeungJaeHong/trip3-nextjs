@@ -1,5 +1,9 @@
 @import "../../styles/variables";
 
+.TravelmatesHeader {
+    padding-bottom: $spacer * 4;
+}
+
 .Content {
     display: flex;
     width: 100%;
@@ -21,14 +25,14 @@
             flex-wrap: wrap;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: $spacer * 5 $spacer * 8;
+            gap: $spacer * 4 $spacer * 7;
 
             @include lg() {
                 flex: 1;
                 padding-left: $spacer * 5;
                 padding-right: $spacer * 6;
                 grid-template-columns: 1fr;
-                gap: $spacer * 4;
+                gap: $spacer * 3;
             }
 
             @include md() {

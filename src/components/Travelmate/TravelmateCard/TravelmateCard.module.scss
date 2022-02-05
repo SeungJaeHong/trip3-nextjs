@@ -6,21 +6,32 @@
     width: 100%;
     background: $gray-light;
     position: relative;
-    padding: $spacer * 3 $spacer * 7;
+    padding: $spacer * 3 $spacer * 4 $spacer * 3 $spacer * 7;
 
-    .UserName {
-        color: $gray-darker;
-        font-size: $font-size-small;
+    .UserAndDate {
+        display: flex;
+        justify-content: space-between;
         margin-bottom: $spacer;
 
-        &:hover {
-            color: $gray-dark-hover;
+        .UserName {
+            color: $gray-darker;
+            font-size: $font-size-small;
+
+            &:hover {
+                color: $gray-dark-hover;
+            }
+        }
+
+        .CreatedAt {
+            font-size: $font-size-xsmall;
+            color: $gray;
+            font-weight: 600;
         }
     }
 
     .Title {
         color: $blue;
-        font-size: $font-size-medium;
+        font-size: $font-size-normal;
         font-weight: 500;
         margin-bottom: $spacer * 2;
 
@@ -41,11 +52,12 @@
     }
 
     .UserAvatar {
-        height: 74px;
-        width: 74px;
+        height: 65px;
+        width: 65px;
         position: absolute;
         top: 20px;
-        left: -37px;
+        left: -31px;
+        cursor: pointer;
 
         @include sm() {
             height: 60px;

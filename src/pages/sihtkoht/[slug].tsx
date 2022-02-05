@@ -70,7 +70,7 @@ const DestinationPage = (props: Props) => {
                         destination.previousDestination ?
                             <Link href={'/sihtkoht/' + destination.previousDestination.slug}>
                                 <a className={styles.NextDestination}>‹ {destination.previousDestination.name}</a>
-                            </Link> : <span className={styles.NextDestination}></span>
+                            </Link> : <span className={styles.NextDestination} />
                     }
                     <div className={styles.DestinationName}>
                         {destination.name}
@@ -86,7 +86,7 @@ const DestinationPage = (props: Props) => {
                         destination.nextDestination ?
                             <Link href={'/sihtkoht/' + destination.nextDestination.slug}>
                                 <a className={styles.NextDestination}>{destination.nextDestination.name} ›</a>
-                            </Link> : <span className={styles.NextDestination}></span>
+                            </Link> : <span className={styles.NextDestination} />
                     }
                 </div>
             </Header>

@@ -1,0 +1,183 @@
+@import "../../../styles/variables";
+
+.PageTitleContainer {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-bottom: $spacer * 9;
+    align-items: center;
+
+    .PageTitle {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        align-items: center;
+        color: white;
+        font-size: 3rem;
+        font-weight: 600;
+
+        .MoreLink {
+            display: flex;
+            justify-content: flex-end;
+            color: $white;
+            font-size: $font-size-small;
+            font-weight: 600;
+            position: absolute;
+            bottom: -18px;
+            right: 0;
+            cursor: pointer;
+            white-space: nowrap;
+
+            &:hover {
+                color: $gray;
+            }
+        }
+    }
+}
+
+.PageContentContainer {
+    display: flex;
+    width: 100%;
+    font-family: $font-family-sailec;
+
+    @include md() {
+        flex-direction: column;
+    }
+
+    .PageContent {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        margin: $spacer * 3 0;
+        padding-right: $spacer * 8;
+
+        .TravelmateTitle {
+            color: $gray-dark;
+            font-size: $font-size-xxlarge;
+            margin-bottom: $spacer;
+            font-weight: 600;
+        }
+
+        .ActionButtons {
+            display: flex;
+        }
+
+        .MetaData {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+
+            .CreatedAt {
+                font-size: $font-size-small;
+                color: $gray;
+                font-weight: 600;
+            }
+
+            .Tags {
+                display: flex;
+                gap: $spacer;
+            }
+        }
+
+        .Body {
+            color: $gray-dark;
+            margin: $spacer * 4 0;
+            font-size: $font-size-medium;
+        }
+    }
+
+    .Sidebar {
+        flex: 1;
+        flex-direction: column;
+
+        .UserCard {
+            background: $green;
+            display: flex;
+            flex-direction: column;
+            padding: $spacer * 4;
+            max-width: 350px;
+            width: 100%;
+            gap: $spacer * 4;
+
+            .UserInfo {
+                display: flex;
+                gap: $spacer * 2;
+                align-items: center;
+
+                .UserAvatar {
+                    width: 80px;
+                    height: 80px;
+                    cursor: pointer;
+                }
+
+                .UserNameContainer {
+                    display: flex;
+                    gap: $spacer;
+                    align-items: center;
+
+                    .UserName {
+                        color: $white;
+                        font-weight: 600;
+                        font-size: $font-size-medium;
+                    }
+
+                    .UserAge {
+                        color: $green-dark;
+                        font-weight: 600;
+                        font-size: $font-size-small;
+                    }
+
+                    @include lg() {
+                        flex-direction: column;
+                    }
+
+                    @include sm() {
+                        flex-direction: row;
+                    }
+                }
+            }
+
+            .SendButton {
+                background: $white;
+                border-radius: 4px;
+                display: flex;
+                padding: $spacer $spacer * 3;
+                color: $green-dark;
+                cursor: pointer;
+                align-items: center;
+                justify-content: center;
+                font-weight: 600;
+
+                &:hover {
+                    background: $green-dark;
+                    color: $white;
+                }
+            }
+        }
+
+        .InfoCard {
+            background: $gray-light;
+            display: flex;
+            flex-direction: column;
+            max-width: 350px;
+            width: 100%;
+            margin-bottom: $spacer * 4;
+            padding: $spacer * 3 $spacer * 4;
+            gap: $spacer * 2;
+
+            .InfoBlock {
+                display: flex;
+                flex-direction: column;
+
+                .InfoQuestion {
+                    color: $gray-dark;
+                    font-weight: bold;
+                }
+
+                .InfoAnswer {
+                    color: $gray-dark;
+                }
+            }
+        }
+    }
+}

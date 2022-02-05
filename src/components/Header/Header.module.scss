@@ -6,12 +6,15 @@
 
     &.Light {
         background-color: $gray-light;
-        //overflow-y: hidden;
     }
 }
 
 .Navbar {
-    margin: $spacer * 3 0 $spacer * 6 0;
+    margin: $spacer * 3 0 $spacer * 7 0;
+
+    @include sm() {
+        margin: $spacer * 3 0 $spacer * 6 0;
+    }
 }
 
 .Title {

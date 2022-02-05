@@ -168,6 +168,19 @@ export type DestinationContent = {
     }
 }
 
+export type TravelmateContent = {
+    id: number
+    title: string
+    body: string
+    slug: string
+    status: number
+    createdAt: string
+    user: User
+    destinations?: Destination[]
+    topics?: Topic[]
+    comments?: Comment[]
+}
+
 export type ForumRowType = {
     id: number
     title: string
