@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import Header from '../../components/Header'
 import { GetServerSideProps } from 'next'
 import Footer from '../../components/Footer'
 import containerStyle from '../../styles/containers.module.scss'
 import styles from './TravelmateIndex.module.scss'
-import { TravelmateRowType } from '../../types'
+import { Destination, Topic, TravelmateRowType } from '../../types'
 import MoreLink from '../../components/MoreLink'
 import SimplePaginator from '../../components/Paginator/SimplePaginator'
 import { objectToQueryString } from '../../helpers'
@@ -16,23 +16,47 @@ import ApiClientSSR from '../../lib/ApiClientSSR'
 
 type Props = {
     travelmates: TravelmateRowType[]
+    destinations: Destination[]
+    topics: Topic[]
+    selectedDestination?: number
+    selectedTopic?: number
+    selectedStart?: string
+    selectedAge?: string
+    selectedGender?: string
     currentPage: number
-    destination?: number
-    topic?: number
     hasMore: boolean
 }
 
-const TravelmatesIndex = (props: Props) => {
+const TravelmatesIndex = ({
+    travelmates,
+    destinations,
+    topics,
+    selectedDestination,
+    selectedTopic,
+    selectedStart,
+    selectedAge,
+    selectedGender,
+    currentPage,
+    hasMore,
+}: Props) => {
+    const [destination, setDestination] = useState<number | undefined>(selectedDestination)
+    const [topic, setTopic] = useState<number | undefined>(selectedTopic)
+    const [age, setAge] = useState<string | undefined>(selectedAge)
+    const [gender, setGender] = useState<string | undefined>(selectedGender)
+    const [start, setStart] = useState<string | undefined>(selectedStart)
+
     const router = useRouter()
     const getNextPageUrl = () => {
-        if (!props.hasMore) {
+        if (!hasMore) {
             return undefined
         }
 
         const urlParams = {
-            destination: props.destination,
-            topic: props.topic,
-            page: props.currentPage + 1,
+            destination: selectedDestination,
+            topic: selectedTopic,
+            age: age,
+            gender: gender,
+            page: currentPage + 1,
         }
 
         const queryString = objectToQueryString(urlParams)
@@ -40,11 +64,13 @@ const TravelmatesIndex = (props: Props) => {
     }
 
     const getPreviousPageUrl = () => {
-        if (props.currentPage > 1) {
+        if (currentPage > 1) {
             const urlParams = {
-                destination: props.destination,
-                topic: props.topic,
-                page: props.currentPage - 1,
+                destination: selectedDestination,
+                topic: selectedTopic,
+                age: age,
+                gender: gender,
+                page: currentPage - 1,
             }
 
             const queryString = objectToQueryString(urlParams)
@@ -58,48 +84,45 @@ const TravelmatesIndex = (props: Props) => {
         <Fragment>
             <Header title={'Reisikaaslased'} className={styles.TravelmatesHeader}>
                 <div className={styles.FilterContainer}>
-                    <TravelmateFilter />
+                    <TravelmateFilter
+                        destinations={destinations}
+                        topics={topics}
+                        selectedDestination={destination}
+                        onChangeDestination={setDestination}
+                        selectedTopic={topic}
+                        onChangeTopic={setTopic}
+                        selectedAge={age}
+                        onChangeAge={setAge}
+                        selectedGender={gender}
+                        onChangeGender={setGender}
+                        selectedStart={start}
+                        onChangeStart={setStart}
+                    />
                 </div>
             </Header>
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.Content}>
                     <div className={styles.TravelmateGridContainer}>
                         <div className={styles.TravelmateGrid}>
-                            {props.travelmates.map(
-                                (travelmate: TravelmateRowType) => {
-                                    return (
-                                        <TravelmateCard
-                                            {...travelmate}
-                                            key={travelmate.id}
-                                        />
-                                    )
-                                }
-                            )}
+                            {travelmates.map((travelmate: TravelmateRowType) => {
+                                return <TravelmateCard {...travelmate} key={travelmate.id} />
+                            })}
                         </div>
                         <div className={styles.Paginator}>
-                            <SimplePaginator
-                                nextPageUrl={getNextPageUrl()}
-                                previousPageUrl={getPreviousPageUrl()}
-                            />
+                            <SimplePaginator nextPageUrl={getNextPageUrl()} previousPageUrl={getPreviousPageUrl()} />
                         </div>
                     </div>
                     <div className={styles.Sidebar}>
                         <div className={styles.DescriptionBlock}>
                             <div className={styles.DescriptionFirstPart}>
-                                Soovid kaaslaseks eksperti oma esimesele
-                                matkareisile? Lihtsalt seltsilist palmi alla?
+                                Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?
                             </div>
                             <div className={styles.DescriptionSecondPart}>
-                                Siit leiad omale sobiva reisikaaslase. Kasuta ka
-                                allpool olevat filtrit soovitud tulemuse
-                                saamiseks.
+                                Siit leiad omale sobiva reisikaaslase. Kasuta ka allpool olevat filtrit soovitud
+                                tulemuse saamiseks.
                             </div>
                             <div className={styles.MoreLink}>
-                                <MoreLink
-                                    route={'/kasutustingimused'}
-                                    title={'Kasutustingimused'}
-                                    medium={true}
-                                />
+                                <MoreLink route={'/kasutustingimused'} title={'Kasutustingimused'} medium={true} />
                             </div>
                             <div className={styles.AddNewButton}>
                                 <Button title={'Lisa kuulutus'} route={'/'} />
@@ -122,18 +145,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         url += '?page=' + page
     }
 
-    const data = {
-        travelmates: [],
-        currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
-        hasMore: false,
-    }
-
     const res = await ApiClientSSR(context).get(url)
-    data.travelmates = res.data.items
-    data.hasMore = res.data.hasMore
-
     return {
-        props: data,
+        props: {
+            travelmates: res.data.items,
+            currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
+            hasMore: res.data.hasMore,
+            destinations: res.data.destinations,
+            topics: res.data.topics,
+        },
     }
 }
 
