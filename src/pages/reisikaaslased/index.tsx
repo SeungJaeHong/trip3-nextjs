@@ -11,7 +11,6 @@ import { objectToQueryString } from '../../helpers'
 import { useRouter } from 'next/router'
 import Button from '../../components/Button'
 import TravelmateCard from '../../components/Travelmate/TravelmateCard'
-import BlockTitle from '../../components/BlockTitle'
 import TravelmateFilter from '../../components/Travelmate/TravelmateFilter'
 import ApiClientSSR from '../../lib/ApiClientSSR'
 
@@ -57,7 +56,11 @@ const TravelmatesIndex = (props: Props) => {
 
     return (
         <Fragment>
-            <Header title={'Reisikaaslased'} className={styles.TravelmatesHeader}/>
+            <Header title={'Reisikaaslased'} className={styles.TravelmatesHeader}>
+                <div className={styles.FilterContainer}>
+                    <TravelmateFilter />
+                </div>
+            </Header>
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.Content}>
                     <div className={styles.TravelmateGridContainer}>
@@ -93,7 +96,7 @@ const TravelmatesIndex = (props: Props) => {
                             </div>
                             <div className={styles.MoreLink}>
                                 <MoreLink
-                                    route={'/'}
+                                    route={'/kasutustingimused'}
                                     title={'Kasutustingimused'}
                                     medium={true}
                                 />
@@ -101,14 +104,6 @@ const TravelmatesIndex = (props: Props) => {
                             <div className={styles.AddNewButton}>
                                 <Button title={'Lisa kuulutus'} route={'/'} />
                             </div>
-                        </div>
-                        <div className={styles.FilterBlock}>
-                            <BlockTitle title={'Filter'} />
-                            <div className={styles.Intro}>
-                                Kui ei leia sobivat kaaslast, siis ehk aitab
-                                Sind filter.
-                            </div>
-                            <TravelmateFilter />
                         </div>
                     </div>
                 </div>

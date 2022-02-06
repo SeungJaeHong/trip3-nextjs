@@ -2,11 +2,21 @@
 
 .TravelmateFilter {
     display: flex;
-    flex-direction: column;
     width: 100%;
+    gap: $spacer * 1.5;
+    flex-wrap: wrap;
+    justify-content: center;
 
     .Field {
         width: 100%;
-        margin-bottom: $spacer;
+        max-width: 220px;
+    }
+
+    @include sm() {
+        flex-direction: column;
+
+        .Field {
+            max-width: unset;
+        }
     }
 }

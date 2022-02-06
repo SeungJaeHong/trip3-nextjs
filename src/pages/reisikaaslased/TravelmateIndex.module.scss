@@ -2,6 +2,26 @@
 
 .TravelmatesHeader {
     padding-bottom: $spacer * 4;
+
+    @include sm() {
+        padding-bottom: $spacer * 2;
+    }
+
+    .FilterContainer {
+        background: rgba(0, 0, 0, .2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: $spacer * 2;
+        max-width: 750px;
+        width: 100%;
+        margin: 0 auto $spacer * 2 auto;
+        padding: $spacer * 2.5;
+
+        @include md() {
+            max-width: 500px;
+        }
+    }
 }
 
 .Content {
@@ -76,17 +96,6 @@
 
             .AddNewButton {
                 margin-top: $spacer * 3;
-            }
-        }
-
-        .FilterBlock {
-            background: $gray-light;
-            padding: $spacer * 2 $spacer * 3 $spacer * 3 $spacer * 3;
-
-            .Intro {
-                color: $gray-dark;
-                font-weight: 500;
-                margin: $spacer 0 $spacer * 2 0;
             }
         }
     }
