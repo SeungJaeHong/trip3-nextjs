@@ -3,6 +3,8 @@ export interface User {
     name: string
     rank: number
     isAdmin: boolean
+    age?: number
+    gender?: number
     avatar?: string
 }
 

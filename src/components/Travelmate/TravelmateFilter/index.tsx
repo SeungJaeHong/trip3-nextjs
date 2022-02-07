@@ -18,6 +18,7 @@ type Props = {
     onChangeGender: (id?: string) => void
     selectedStart?: string
     onChangeStart: (id?: string) => void
+    onSearch: () => void
 }
 
 const TravelmateFilter = ({
@@ -33,6 +34,7 @@ const TravelmateFilter = ({
     onChangeGender,
     selectedStart,
     onChangeStart,
+    onSearch,
 }: Props) => {
     const destinationOptions: { value: string; label: string }[] = destinations.map((destination: Destination) => ({
         label: destination.name,
@@ -47,7 +49,7 @@ const TravelmateFilter = ({
         { value: '18_29', label: '18 - 29' },
         { value: '30_39', label: '30 - 39' },
         { value: '40_49', label: '40 - 49' },
-        { value: '50 - 59', label: '50 - 59' },
+        { value: '50_59', label: '50 - 59' },
         { value: '60', label: '60+' },
         { value: '', label: 'Pole oluline' },
     ]
@@ -118,7 +120,7 @@ const TravelmateFilter = ({
                 />
             </div>
             <div className={styles.Field}>
-                <SubmitButton title={'Otsi'} />
+                <SubmitButton title={'Otsi'} onClick={onSearch} />
             </div>
         </div>
     )

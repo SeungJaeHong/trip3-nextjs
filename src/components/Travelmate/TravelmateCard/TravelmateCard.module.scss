@@ -16,9 +16,23 @@
         .UserName {
             color: $gray-darker;
             font-size: $font-size-small;
+            display: flex;
 
             &:hover {
                 color: $gray-dark-hover;
+            }
+
+            .UserNameContainer {
+                display: flex;
+                gap: $spacer;
+                flex-wrap: wrap;
+                align-items: center;
+
+                .GenderAge {
+                    color: $gray-darker;
+                    font-size: $font-size-xsmall;
+                    font-weight: 500;
+                }
             }
         }
 

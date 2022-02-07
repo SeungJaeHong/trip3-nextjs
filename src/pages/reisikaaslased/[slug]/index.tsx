@@ -20,6 +20,26 @@ const TravelmatePage = ({ content }: Props) => {
     const { userIsLoggedIn, user } = useUser()
     const router = useRouter()
 
+    const renderAgeAndGender = () => {
+        let value = undefined
+        const gender = content.user.gender ? (content.user.gender === 1 ? 'M' : 'N') : undefined
+        if (content.user.age && gender) {
+            value = gender + ', ' + content.user.age
+        } else if (content.user.age) {
+            value = content.user.age
+        } else if (gender) {
+            value = gender
+        }
+
+        if (!value) {
+            return null
+        }
+
+        return (
+            <div className={styles.UserAge}>({value})</div>
+        )
+    }
+
     return (
         <Fragment>
             <Header>
@@ -69,7 +89,7 @@ const TravelmatePage = ({ content }: Props) => {
                                     <Link href={'/user/' + content.user.id}>
                                         <a className={styles.UserName}>{content.user.name}</a>
                                     </Link>
-                                    <div className={styles.UserAge}>(N, 31)</div>
+                                    {renderAgeAndGender()}
                                 </div>
                             </div>
                             {userIsLoggedIn && content.user.id !== user?.id && (

@@ -16,6 +16,10 @@
         font-size: 3rem;
         font-weight: 600;
 
+        @include sm() {
+            font-size: $font-size-xxlarge;
+        }
+
         .MoreLink {
             display: flex;
             justify-content: flex-end;
@@ -51,11 +55,22 @@
         margin: $spacer * 3 0;
         padding-right: $spacer * 8;
 
+        @include sm() {
+            flex: 1;
+            padding-right: 0;
+        }
+
         .TravelmateTitle {
             color: $gray-dark;
             font-size: $font-size-xxlarge;
-            margin-bottom: $spacer;
+            margin-bottom: $spacer * 2;
             font-weight: 600;
+            line-height: 2.6rem;
+
+            @include sm() {
+                font-size: $font-size-large;
+                line-height: 2rem;
+            }
         }
 
         .ActionButtons {
@@ -66,16 +81,23 @@
             display: flex;
             width: 100%;
             justify-content: space-between;
+            gap: $spacer * 2;
 
             .CreatedAt {
                 font-size: $font-size-small;
                 color: $gray;
                 font-weight: 600;
+                white-space: nowrap;
             }
 
             .Tags {
                 display: flex;
                 gap: $spacer;
+                flex-wrap: wrap;
+            }
+
+            @include sm() {
+                flex-direction: column;
             }
         }
 
@@ -83,6 +105,10 @@
             color: $gray-dark;
             margin: $spacer * 4 0;
             font-size: $font-size-medium;
+
+            @include sm() {
+                font-size: $font-size-normal;
+            }
         }
     }
 
@@ -114,6 +140,7 @@
                     display: flex;
                     gap: $spacer;
                     align-items: center;
+                    flex-wrap: wrap;
 
                     .UserName {
                         color: $white;

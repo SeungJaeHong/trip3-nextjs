@@ -44,16 +44,17 @@ const TravelmatesIndex = ({
     const [age, setAge] = useState<string | undefined>(selectedAge)
     const [gender, setGender] = useState<string | undefined>(selectedGender)
     const [start, setStart] = useState<string | undefined>(selectedStart)
-
     const router = useRouter()
+
     const getNextPageUrl = () => {
         if (!hasMore) {
             return undefined
         }
 
         const urlParams = {
-            destination: selectedDestination,
-            topic: selectedTopic,
+            destination: destination,
+            topic: topic,
+            start: start,
             age: age,
             gender: gender,
             page: currentPage + 1,
@@ -66,8 +67,9 @@ const TravelmatesIndex = ({
     const getPreviousPageUrl = () => {
         if (currentPage > 1) {
             const urlParams = {
-                destination: selectedDestination,
-                topic: selectedTopic,
+                destination: destination,
+                topic: topic,
+                start: start,
                 age: age,
                 gender: gender,
                 page: currentPage - 1,
@@ -78,6 +80,19 @@ const TravelmatesIndex = ({
         } else {
             return undefined
         }
+    }
+
+    const onSearch = () => {
+        const urlParams = {
+            destination: destination,
+            topic: topic,
+            start: start,
+            age: age,
+            gender: gender,
+        }
+
+        const queryString = objectToQueryString(urlParams)
+        router.push('/reisikaaslased?' + queryString)
     }
 
     return (
@@ -97,6 +112,7 @@ const TravelmatesIndex = ({
                         onChangeGender={setGender}
                         selectedStart={start}
                         onChangeStart={setStart}
+                        onSearch={onSearch}
                     />
                 </div>
             </Header>
@@ -140,11 +156,22 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const page = context.query?.page
     const destination = context.query?.destination
     const topic = context.query?.topic
+    const start = context.query?.start
+    const age = context.query?.age
+    const gender = context.query?.gender
     let url = process.env.API_BASE_URL + '/travelmates'
-    if (page) {
-        url += '?page=' + page
+
+    const urlParams = {
+        destination: destination,
+        topic: topic,
+        start: start,
+        age: age,
+        gender: gender,
+        page: page
     }
 
+    const queryString = objectToQueryString(urlParams)
+    url += '?' + queryString
     const res = await ApiClientSSR(context).get(url)
     return {
         props: {
@@ -153,6 +180,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             hasMore: res.data.hasMore,
             destinations: res.data.destinations,
             topics: res.data.topics,
+            selectedDestination: destination ? destination : null,
+            selectedTopic: topic ? topic : null,
+            selectedStart: start ? start : null,
+            selectedAge: age ? age : null,
+            selectedGender: gender ? gender : null,
         },
     }
 }
