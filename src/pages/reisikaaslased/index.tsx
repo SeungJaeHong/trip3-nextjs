@@ -120,6 +120,9 @@ const TravelmatesIndex = ({
                 <div className={styles.Content}>
                     <div className={styles.TravelmateGridContainer}>
                         <div className={styles.TravelmateGrid}>
+                            {travelmates.length === 0 &&
+                                <div>Tulemusi ei leitud</div>
+                            }
                             {travelmates.map((travelmate: TravelmateRowType) => {
                                 return <TravelmateCard {...travelmate} key={travelmate.id} />
                             })}
