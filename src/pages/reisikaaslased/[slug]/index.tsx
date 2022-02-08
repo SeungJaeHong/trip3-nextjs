@@ -126,7 +126,7 @@ const TravelmatePage = ({ content }: Props) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
         const slug = context.query.slug
-        const url = process.env.API_BASE_URL + '/travelmates/' + slug
+        const url = process.env.API_BASE_URL + '/travelmate/' + slug
         const response = await ApiClientSSR(context).get(url)
         return {
             props: {

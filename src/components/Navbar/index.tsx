@@ -128,6 +128,13 @@ const Navbar = ({darkMode, showSearch, showLogo}: Props) => {
             }
         }
 
+        if (route === '/reisikaaslased') {
+            const prefix = router.route.substring(0, 15)
+            if (prefix === '/reisikaaslased') {
+                return true
+            }
+        }
+
         return router.route === route
     }
 

@@ -1,0 +1,74 @@
+@import "../../../styles/variables";
+
+.TravelmateForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: $white;
+    z-index: 2;
+
+    .FormContainer {
+        display: flex;
+
+        form {
+            width: 100%;
+
+            .FormInput {
+                margin-bottom: $spacer * 3.5;
+            }
+
+            .FormRadioGroup {
+                margin-bottom: $spacer * 4;
+                display: grid;
+                grid-template-columns: repeat(3, 220px);
+
+                @include xs() {
+                    grid-template-columns: 1fr;
+                }
+
+                .RadioButton {
+                    height: 50px;
+                    display: flex;
+                    align-items: center;
+                    padding: 0 $spacer;
+
+                    &.RadioButtonChecked {
+                        background: $gray-light;
+                    }
+                }
+            }
+
+            .GenderSelection {
+                display: flex;
+                flex-direction: column;
+                gap: $spacer * 1.5;
+
+                label {
+                    color: $gray-darker;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    line-height: 1.2rem;
+                }
+            }
+
+            .DateSelection {
+                display: flex;
+                flex-direction: column;
+                gap: $spacer * 1.5;
+
+                label {
+                    color: $gray-darker;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    line-height: 1.2rem;
+                }
+            }
+        }
+
+        .SubmitButton {
+            margin-top: $spacer * 5;
+            max-width: 200px;
+            width: 100%;
+        }
+    }
+}

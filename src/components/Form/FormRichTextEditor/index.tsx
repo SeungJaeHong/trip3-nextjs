@@ -14,7 +14,7 @@ import 'pell/dist/pell.css'
 
 type Props = {
     id: string
-    label?: undefined | string
+    label?: string
     value: string
     error: string
     onChange: (html: string) => void

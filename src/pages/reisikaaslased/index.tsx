@@ -144,7 +144,7 @@ const TravelmatesIndex = ({
                                 <MoreLink route={'/kasutustingimused'} title={'Kasutustingimused'} medium={true} />
                             </div>
                             <div className={styles.AddNewButton}>
-                                <Button title={'Lisa kuulutus'} route={'/'} />
+                                <Button title={'Lisa kuulutus'} onClick={() => router.push('/reisikaaslased/lisa-uus')} />
                             </div>
                         </div>
                     </div>

@@ -52,7 +52,7 @@ const ForumPostForm = ({post, destinations, topics}: Props) => {
 
     const savePost = async (values: Inputs): Promise<any> => {
         if (post) {
-            return await updatePost(post, values).then(res => {
+            await updatePost(post, values).then(res => {
                 if (res.data.type === 'forum') {
                     router.push('/')
                 } else {
@@ -60,9 +60,11 @@ const ForumPostForm = ({post, destinations, topics}: Props) => {
                     router.push(url)
                 }
                 toast.success('Postitus muudetud!')
+            }).catch(e => {
+                toast.success('Postituse muutmine ebaõnnestus!')
             })
         } else {
-            return await addPost(values).then(res => {
+            await addPost(values).then(res => {
                 if (res.data.type === 'forum') {
                     router.push('/')
                 } else {
@@ -70,6 +72,8 @@ const ForumPostForm = ({post, destinations, topics}: Props) => {
                     router.push(url)
                 }
                 toast.success('Uus postitus loodud!')
+            }).catch(e => {
+                toast.success('Postituse loomine ebaõnnestus!')
             })
         }
     }
