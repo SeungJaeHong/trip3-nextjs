@@ -1,0 +1,25 @@
+@import "../../../styles/variables";
+
+.SelectionContainer {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: $spacer;
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(160px, 1fr) );
+
+    .Selection {
+        padding: $spacer * 2;
+        background: $gray;
+        color: $white;
+        cursor: pointer;
+        font-weight: 600;
+
+        &.Selected {
+            background: $gray-darker;
+        }
+
+        &:hover {
+            background: $gray-darker;
+        }
+    }
+}

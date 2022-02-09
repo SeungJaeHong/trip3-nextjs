@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import styles from "./TravelmateForm.module.scss"
 import clsx from "clsx"
 import FormInput from "../../Form/FormInput"
@@ -11,12 +11,16 @@ import FormRichTextEditor from "../../Form/FormRichTextEditor"
 import {Destination, Topic, TravelmateContent} from "../../../types"
 import FormMultiSelect from "../../Form/FormMultiSelect"
 import {useRouter} from 'next/router'
+import TravelmateStartDateSelection from "../TravelmateStartDateSelection"
 
 type Inputs = {
     title: string
     body: string
     gender: string
     start: string
+    startMonth: string
+    startDate: string
+    endDate: string
     destinations: { value: string, label: string }[]
     topics: { value: string, label: string }[]
 }
@@ -28,12 +32,14 @@ type Props = {
 }
 
 const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
+    const [showDateRange, setShowDateRange] = useState<boolean>(false)
     const router = useRouter()
     const forumPostSchema = yup.object().shape({
         title: yup.string().required('Pealkiri on kohustuslik'),
         body: yup.string().required('Sisu on kohustuslik'),
         gender: yup.string(),
         start: yup.string(),
+        startMonth: yup.string().nullable(),
         destinations: yup.array().required(),
         topics: yup.array().nullable()
     }).required()
@@ -45,27 +51,15 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
             body: travelmate ? travelmate.body : '',
             gender: '',
             start: 'start',
+            startMonth: '3_2022',
             destinations: travelmate ? travelmate.destinations?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
             topics: travelmate ? travelmate.topics?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
         }
     })
 
-    const savePost = async (values: Inputs): Promise<any> => {
-        console.log(values, 'values')
-
-        if (travelmate) {
-
-        } else {
-
-        }
-    }
-
     const genderValue = watch('gender')
     const startDateValue = watch('start')
-    const onSubmit: SubmitHandler<Inputs> = async (values: Inputs) => {
-        console.log('onSubmit', values)
-    }
-
+    const startMonth = watch('startMonth')
     const genderValues = [
         {
             value: '',
@@ -83,18 +77,18 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
 
     const dateValues = [
         {
-            value: '',
-            label: 'Pole veel kindlat aega'
+            value: 'start',
+            label: 'Umbkaudne alguse aeg'
         },
         {
             value: 'start_and_end',
             label: 'Kindlad kuupäevad'
         },
-        {
-            value: 'start',
-            label: 'Umbkaudne aeg teada'
-        },
     ]
+
+    const onSubmit: SubmitHandler<Inputs> = async (values: Inputs) => {
+        console.log('onSubmit', values)
+    }
 
     const destinationOptions: { value: string, label: string }[] = destinations.map(destination => ({ label: destination.name, value: destination.id.toString() }))
     const topicOptions: { value: string, label: string }[] = topics.map(topic => ({ label: topic.name, value: topic.id.toString() }))
@@ -175,26 +169,51 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
                         </div>
                     </div>
                     <div className={styles.DateSelection}>
-                        <label>Planeeritud aeg</label>
-                        <div className={styles.FormRadioGroup}>
-                            {dateValues.map(startValue => {
-                                return (
-                                    <div className={clsx(styles.RadioButton, {
-                                        [styles.RadioButtonChecked]: startDateValue === startValue.value
-                                    })} key={startValue.value}>
-                                        <FormRadioButton
-                                            id={startValue.value}
-                                            name={'start'}
-                                            label={startValue.label}
-                                            type={'radio'}
-                                            value={startValue.value}
-                                            error={errors.start?.message}
-                                            disabled={isSubmitting}
-                                            register={register} />
-                                    </div>
-                                )
-                            })}
+                        <div className={styles.SelectionContainer}>
+                            <label>Planeeritud aeg</label>
+                            <div className={styles.DateSelectionRadioGroup}>
+                                {dateValues.map(startValue => {
+                                    return (
+                                        <div className={clsx(styles.RadioButton, {
+                                            [styles.RadioButtonChecked]: startDateValue === startValue.value
+                                        })} key={startValue.value}>
+                                            <FormRadioButton
+                                                id={startValue.value}
+                                                name={'start'}
+                                                label={startValue.label}
+                                                type={'radio'}
+                                                value={startValue.value}
+                                                error={errors.start?.message}
+                                                disabled={isSubmitting}
+                                                register={register} />
+                                        </div>
+                                    )
+                                })}
+                            </div>
                         </div>
+                        {startDateValue === 'start' &&
+                            <div className={styles.SelectionInfo}>
+                                <Controller
+                                    name={'startMonth'}
+                                    control={control}
+                                    render={({ field, fieldState, formState }) => {
+                                        return (
+                                            <TravelmateStartDateSelection
+                                                id={'startMonth'}
+                                                value={startMonth}
+                                                onChange={field.onChange}
+                                                disabled={isSubmitting}
+                                            />
+                                        )
+                                    }}
+                                />
+                            </div>
+                        }
+                        {startDateValue === 'start_and_end' &&
+                            <div className={styles.SelectionInfo}>
+                                DateRange
+                            </div>
+                        }
                     </div>
                     <div className={styles.FormInput}>
                         <Controller

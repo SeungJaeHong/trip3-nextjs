@@ -20,6 +20,10 @@
         flex: 2.5;
         padding-right: $spacer * 8;
 
+        @include sm() {
+            padding-right: 0;
+        }
+
         .FormTitle {
             font-size: $font-size-xlarge;
             font-weight: 600;

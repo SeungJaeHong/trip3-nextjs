@@ -43,24 +43,58 @@
                 flex-direction: column;
                 gap: $spacer * 1.5;
 
-                label {
+                > label {
                     color: $gray-darker;
                     font-size: 1rem;
                     font-weight: 500;
-                    line-height: 1.2rem;
+                    line-height: 1.8rem;
+                    border-bottom: 1px solid #d1d4d6;
                 }
             }
 
             .DateSelection {
                 display: flex;
                 flex-direction: column;
-                gap: $spacer * 1.5;
+                margin-bottom: $spacer * 4;
 
-                label {
-                    color: $gray-darker;
-                    font-size: 1rem;
-                    font-weight: 500;
-                    line-height: 1.2rem;
+                .SelectionContainer {
+                    display: flex;
+                    flex-direction: column;
+                    gap: $spacer * 1.5;
+
+                    .DateSelectionRadioGroup {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+
+                        .RadioButton {
+                            height: 50px;
+                            display: flex;
+                            align-items: center;
+                            padding: 0 $spacer;
+                            max-width: 300px;
+
+                            @include sm() {
+                                max-width: unset;
+                            }
+
+                            &.RadioButtonChecked {
+                                background: $gray-light;
+                            }
+                        }
+                    }
+
+                    > label {
+                        color: $gray-darker;
+                        font-size: 1rem;
+                        font-weight: 500;
+                        line-height: 1.8rem;
+                        border-bottom: 1px solid #d1d4d6;
+                    }
+                }
+
+                .SelectionInfo {
+                    display: flex;
+                    margin: $spacer * 3 0 $spacer * 2 0;
                 }
             }
         }
