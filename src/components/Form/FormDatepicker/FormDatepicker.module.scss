@@ -1,0 +1,42 @@
+@import "../../../styles/variables";
+
+.FormDatepicker {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    label {
+        color: $gray-darker;
+        margin-bottom: $spacer;
+        font-size: $font-size-normal;
+        font-weight: 500;
+        line-height: 1.2rem
+    }
+
+    input {
+        font-size: $font-size-medium;
+        font-weight: 600;
+        //border-radius: 3px;
+        border: 1px solid $gray;
+        color: $gray-dark;
+        padding: $spacer;
+        width: 100%;
+
+        &::placeholder {
+            color: $gray;
+            font-size: $font-size-normal;
+            font-weight: 400;
+        }
+    }
+
+    .ErrorText {
+        color: $red;
+        font-size: $font-size-small;
+    }
+
+    &.Invalid {
+        textarea {
+            border: 2px solid $red;
+        }
+    }
+}

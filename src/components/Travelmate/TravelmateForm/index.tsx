@@ -12,6 +12,7 @@ import {Destination, Topic, TravelmateContent} from "../../../types"
 import FormMultiSelect from "../../Form/FormMultiSelect"
 import {useRouter} from 'next/router'
 import TravelmateStartDateSelection from "../TravelmateStartDateSelection"
+import FormDatepicker from "../../Form/FormDatepicker"
 
 type Inputs = {
     title: string
@@ -105,6 +106,25 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
                             required={true}
                             error={errors.title?.message}
                             register={register} />
+                    </div>
+                    <div className={styles.FormInput}>
+                        <Controller
+                            name={'startDate'}
+                            control={control}
+                            render={({ field, fieldState, formState }) => {
+                                return (
+                                    <FormDatepicker
+                                        id={'startDate'}
+                                        label={'Algus'}
+                                        placeholder={'Algus'}
+                                        onChange={field.onChange}
+                                        error={fieldState.error?.message}
+                                        disabled={isSubmitting}
+                                        register={register}
+                                    />
+                                )
+                            }}
+                        />
                     </div>
                     <div className={styles.FormInput}>
                         <Controller
