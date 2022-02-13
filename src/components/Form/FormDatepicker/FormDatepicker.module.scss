@@ -16,7 +16,7 @@
     input {
         font-size: $font-size-medium;
         font-weight: 600;
-        //border-radius: 3px;
+        border-radius: 3px;
         border: 1px solid $gray;
         color: $gray-dark;
         padding: $spacer;
@@ -37,6 +37,19 @@
     &.Invalid {
         textarea {
             border: 2px solid $red;
+        }
+    }
+
+    .RangePicker {
+        border: 1px solid $gray;
+
+        :global(.rdrDefinedRangesWrapper) {
+            display: none;
+        }
+
+        :global(.rdrMonthAndYearWrapper) {
+            padding-top: 0;
+            border-bottom: 1px solid $gray;
         }
     }
 }
