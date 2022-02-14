@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import styles from './FormDatepicker.module.scss'
+import styles from './FormDateRangePicker.module.scss'
 import clsx from 'clsx'
 import {addYears, format} from 'date-fns'
 import { et } from 'date-fns/locale'
@@ -10,7 +10,7 @@ import { DateRangePicker } from 'react-date-range'
 import Button from "../../Button"
 
 // @ts-ignore
-const FormDatepicker = ({ id, name, value, label, type, error, onChange, register, ...props }: props) => {
+const FormDateRangePicker = ({ id, name, value, label, type, error, onChange, register, ...props }: props) => {
     //console.log(value)
 
     const [selectedRange, setSelectedRange] = useState({
@@ -36,7 +36,7 @@ const FormDatepicker = ({ id, name, value, label, type, error, onChange, registe
 
     return (
         <div
-            className={clsx(styles.FormDatepicker, props.className, {
+            className={clsx(styles.FormDateRangePicker, props.className, {
                 [styles.Invalid]: error.length > 0,
             })}
         >
@@ -74,10 +74,10 @@ const FormDatepicker = ({ id, name, value, label, type, error, onChange, registe
     )
 }
 
-FormDatepicker.defaultProps = {
+FormDateRangePicker.defaultProps = {
     label: undefined,
     error: '',
     disabled: false,
 }
 
-export default FormDatepicker
+export default FormDateRangePicker
