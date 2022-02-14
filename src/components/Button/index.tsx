@@ -28,7 +28,7 @@ const Button = (props: Props) => {
             <button className={clsx(styles.Button, {
                 [styles.Light]: props.light,
                 [styles.Cancel]: props.cancel
-            })} onClick={props.onClick ?? undefined}>
+            })} onClick={props.onClick ?? undefined} type={'button'}>
                 <span className={styles.Title}>{props.title}</span>
             </button>
         )

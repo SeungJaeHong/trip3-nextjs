@@ -22,6 +22,7 @@ type Inputs = {
     startMonth: string
     startDate: string
     endDate: string
+    dateRange: { startDate: string, endDate: string }
     destinations: { value: string, label: string }[]
     topics: { value: string, label: string }[]
 }
@@ -53,6 +54,7 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
             gender: '',
             start: 'start',
             startMonth: '3_2022',
+            dateRange: { startDate: '2022-02-15', endDate: '2022-02-25' },
             destinations: travelmate ? travelmate.destinations?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
             topics: travelmate ? travelmate.topics?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
         }
@@ -109,14 +111,15 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
                     </div>
                     <div className={styles.FormInput}>
                         <Controller
-                            name={'startDate'}
+                            name={'dateRange'}
                             control={control}
                             render={({ field, fieldState, formState }) => {
                                 return (
                                     <FormDatepicker
-                                        id={'startDate'}
-                                        label={'Algus'}
-                                        placeholder={'Algus'}
+                                        id={'dateRange'}
+                                        value={field.value}
+                                        label={'Ajavahemik'}
+                                        //placeholder={'Algus'}
                                         onChange={field.onChange}
                                         error={fieldState.error?.message}
                                         disabled={isSubmitting}
