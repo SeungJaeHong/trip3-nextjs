@@ -42,6 +42,8 @@ const FormDateRangePicker = ({ id, name, value, label, type, error, onChange, re
         >
             {label !== undefined && <label htmlFor={props.id ?? props.name}>{label}</label>}
 
+            <input className={styles.Input} placeholder={'Algus - Lõpp'} />
+
             <DateRangePicker
                 onChange={onValueChange}
                 showSelectionPreview={true}

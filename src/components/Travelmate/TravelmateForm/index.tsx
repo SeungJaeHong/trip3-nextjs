@@ -111,26 +111,6 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
                     </div>
                     <div className={styles.FormInput}>
                         <Controller
-                            name={'dateRange'}
-                            control={control}
-                            render={({ field, fieldState, formState }) => {
-                                return (
-                                    <FormDateRangePicker
-                                        id={'dateRange'}
-                                        value={field.value}
-                                        label={'Ajavahemik'}
-                                        //placeholder={'Algus'}
-                                        onChange={field.onChange}
-                                        error={fieldState.error?.message}
-                                        disabled={isSubmitting}
-                                        register={register}
-                                    />
-                                )
-                            }}
-                        />
-                    </div>
-                    <div className={styles.FormInput}>
-                        <Controller
                             name={'destinations'}
                             control={control}
                             render={({ field, fieldState, formState }) => {
@@ -234,7 +214,26 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
                         }
                         {startDateValue === 'start_and_end' &&
                             <div className={styles.SelectionInfo}>
-                                DateRange
+                                <div className={styles.FormInput}>
+                                    <Controller
+                                        name={'dateRange'}
+                                        control={control}
+                                        render={({ field, fieldState, formState }) => {
+                                            return (
+                                                <FormDateRangePicker
+                                                    id={'dateRange'}
+                                                    value={field.value}
+                                                    //label={'Ajavahemik'}
+                                                    //placeholder={'Algus'}
+                                                    onChange={field.onChange}
+                                                    error={fieldState.error?.message}
+                                                    disabled={isSubmitting}
+                                                    register={register}
+                                                />
+                                            )
+                                        }}
+                                    />
+                                </div>
                             </div>
                         }
                     </div>
