@@ -52,7 +52,7 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
             title: travelmate ? travelmate.title : '',
             body: travelmate ? travelmate.body : '',
             gender: '',
-            start: 'start',
+            start: 'start_and_end',
             startMonth: '3_2022',
             dateRange: { startDate: '2022-02-15', endDate: '2022-02-25' },
             destinations: travelmate ? travelmate.destinations?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
@@ -80,12 +80,12 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
 
     const dateValues = [
         {
-            value: 'start',
-            label: 'Umbkaudne alguse aeg'
-        },
-        {
             value: 'start_and_end',
             label: 'Kindlad kuupäevad'
+        },
+        {
+            value: 'start',
+            label: 'Umbkaudne alguse aeg'
         },
     ]
 
@@ -214,26 +214,21 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
                         }
                         {startDateValue === 'start_and_end' &&
                             <div className={styles.SelectionInfo}>
-                                <div className={styles.FormInput}>
-                                    <Controller
-                                        name={'dateRange'}
-                                        control={control}
-                                        render={({ field, fieldState, formState }) => {
-                                            return (
-                                                <FormDateRangePicker
-                                                    id={'dateRange'}
-                                                    value={field.value}
-                                                    //label={'Ajavahemik'}
-                                                    //placeholder={'Algus'}
-                                                    onChange={field.onChange}
-                                                    error={fieldState.error?.message}
-                                                    disabled={isSubmitting}
-                                                    register={register}
-                                                />
-                                            )
-                                        }}
-                                    />
-                                </div>
+                                <Controller
+                                    name={'dateRange'}
+                                    control={control}
+                                    render={({ field, fieldState, formState }) => {
+                                        return (
+                                            <FormDateRangePicker
+                                                id={'dateRange'}
+                                                value={field.value}
+                                                onChange={field.onChange}
+                                                error={fieldState.error?.message}
+                                                disabled={isSubmitting}
+                                            />
+                                        )
+                                    }}
+                                />
                             </div>
                         }
                     </div>

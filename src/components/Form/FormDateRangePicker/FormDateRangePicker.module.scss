@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    position: relative;
 
     label {
         color: $gray-darker;
@@ -20,9 +21,7 @@
         border: 2px solid #d1d4d6;
         color: #545a5f;
         padding: 12px;
-        margin-bottom: $spacer * 1.5;
-        position: relative;
-        max-width: 250px;
+        max-width: 300px;
         width: 100%;
 
         &::placeholder {
@@ -43,31 +42,39 @@
         }
     }
 
-    .RangePicker {
-        border: 1px solid $gray;
-        border-bottom: 0;
-
-        :global(.rdrDefinedRangesWrapper) {
-            display: none;
-        }
-
-        :global(.rdrMonthAndYearWrapper) {
-            padding-top: 0;
-            border-bottom: 1px solid $gray-light;
-        }
-    }
-
-    .SelectButton {
+    .Container {
         display: flex;
-        justify-content: flex-end;
-        padding: 12px;
+        flex-direction: column;
+        position: absolute;
+        background: $white;
+        top: 49px;
+        left: 0;
         border: 1px solid $gray;
-        border-top: 1px solid $gray-light;
 
-        button {
-            max-width: 100px;
-            width: 100%;
-            height: 40px;
+        .RangePicker {
+            border-bottom: 0;
+
+            :global(.rdrDefinedRangesWrapper) {
+                display: none;
+            }
+
+            :global(.rdrMonthAndYearWrapper) {
+                padding-top: 0;
+                border-bottom: 1px solid $gray-light;
+            }
+        }
+
+        .SelectButton {
+            display: flex;
+            justify-content: flex-end;
+            padding: 12px;
+            border-top: 1px solid $gray-light;
+
+            button {
+                max-width: 100px;
+                width: 100%;
+                height: 40px;
+            }
         }
     }
 }

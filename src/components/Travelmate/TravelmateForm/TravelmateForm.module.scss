@@ -55,7 +55,7 @@
             .DateSelection {
                 display: flex;
                 flex-direction: column;
-                margin-bottom: $spacer * 4;
+                margin-bottom: $spacer * 5;
 
                 .SelectionContainer {
                     display: flex;
@@ -71,7 +71,6 @@
                             display: flex;
                             align-items: center;
                             padding: 0 $spacer;
-                            max-width: 300px;
 
                             @include sm() {
                                 max-width: unset;
@@ -95,7 +94,7 @@
                 .SelectionInfo {
                     display: flex;
                     flex-direction: column;
-                    margin: $spacer * 3 0 $spacer * 2 0;
+                    margin-top: $spacer * 2;
                 }
             }
         }
