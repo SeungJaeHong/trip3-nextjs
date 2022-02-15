@@ -34,9 +34,8 @@ type Props = {
 }
 
 const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
-    const [showDateRange, setShowDateRange] = useState<boolean>(false)
     const router = useRouter()
-    const forumPostSchema = yup.object().shape({
+    const travelmateSchema = yup.object().shape({
         title: yup.string().required('Pealkiri on kohustuslik'),
         body: yup.string().required('Sisu on kohustuslik'),
         gender: yup.string(),
@@ -47,7 +46,7 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
     }).required()
 
     const { watch, register, handleSubmit, control, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
-        resolver: yupResolver(forumPostSchema),
+        resolver: yupResolver(travelmateSchema),
         defaultValues: {
             title: travelmate ? travelmate.title : '',
             body: travelmate ? travelmate.body : '',
@@ -85,7 +84,7 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
         },
         {
             value: 'start',
-            label: 'Umbkaudne alguse aeg'
+            label: 'Umbkaudne aeg'
         },
     ]
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './FormDateRangePicker.module.scss'
 import clsx from 'clsx'
-import { addYears, format } from 'date-fns'
+import {addYears, format, parseISO} from 'date-fns'
 import { et } from 'date-fns/locale'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
@@ -13,12 +13,10 @@ import Button from '../../Button'
 const FormDateRangePicker = ({ id, value, label, error, onChange, ...props }: props) => {
     const [show, setShow] = useState<boolean>(false)
     const [selectedRange, setSelectedRange] = useState({
-        startDate: null,
-        endDate: new Date(''),
+        startDate: value.startDate ? parseISO(value.startDate) : null,
+        endDate: value.endDate ? parseISO(value.endDate) : new Date(''),
         key: 'selection',
     })
-
-    console.log(value)
 
     const onValueChange = (value: any) => {
         const selection = value.selection
