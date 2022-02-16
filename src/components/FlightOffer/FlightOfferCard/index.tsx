@@ -33,7 +33,7 @@ const FlightOfferCard = (item: FlightOfferCardType) => {
                 <a className={styles.Content}>
                     <div className={styles.Background} style={
                         {
-                            backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(" + item.imageUrl + ")",
+                            backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(" + item.imageUrl + ")",
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover",
                             backgroundPosition: "50% 50%"

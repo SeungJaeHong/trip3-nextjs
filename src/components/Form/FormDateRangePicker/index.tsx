@@ -38,6 +38,7 @@ const FormDateRangePicker = ({ id, value, label, error, onChange, ...props }: pr
                 classNames={{
                     input: styles.Input,
                     label: styles.Label,
+                    calendarBase: styles.CalendarBase
                 }}
             />
 

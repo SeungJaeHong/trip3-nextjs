@@ -43,3 +43,11 @@
         }
     }
 }
+
+.CalendarBase {
+    display: flex;
+
+    @include sm() {
+        flex-direction: column;
+    }
+}
