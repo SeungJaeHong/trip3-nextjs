@@ -1,45 +1,22 @@
 import React, { useState } from 'react'
 import styles from './FormDateRangePicker.module.scss'
 import clsx from 'clsx'
-import {addYears, format, parseISO} from 'date-fns'
-import { et } from 'date-fns/locale'
-import 'react-date-range/dist/styles.css'
-import 'react-date-range/dist/theme/default.css'
-// @ts-ignore
-import { DateRangePicker } from 'react-date-range'
-import Button from '../../Button'
+import dayjs from 'dayjs'
+import 'dayjs/locale/et'
+import { DateRangePicker } from '@mantine/dates'
 
 // @ts-ignore
 const FormDateRangePicker = ({ id, value, label, error, onChange, ...props }: props) => {
-    const [show, setShow] = useState<boolean>(false)
-    const [selectedRange, setSelectedRange] = useState({
-        startDate: value.startDate ? parseISO(value.startDate) : null,
-        endDate: value.endDate ? parseISO(value.endDate) : new Date(''),
-        key: 'selection',
-    })
+    const start = dayjs(value.startDate).toDate()
+    const end = dayjs(value.endDate).toDate()
+    const [dateValue, setDateValue] = useState<[Date | null, Date | null]>([start, end])
 
-    const onValueChange = (value: any) => {
-        const selection = value.selection
-        if (selection) {
-            //console.log(value.selection, 'value')
-            setSelectedRange(selection)
-        }
-    }
-
-    const onValueSubmit = () => {
+    const onValueChange = (value: [Date | null, Date | null]) => {
+        setDateValue(value)
         onChange({
-            startDate: selectedRange.startDate ? format(selectedRange.startDate, 'yyyy-MM-dd') : undefined,
-            endDate: selectedRange.endDate ? format(selectedRange.endDate, 'yyyy-MM-dd') : undefined,
+            startDate: dayjs(value[0]).format('YYYY-MM-DD'),
+            endDate: dayjs(value[1]).format('YYYY-MM-DD'),
         })
-        setShow(false)
-    }
-
-    const renderValue = () => {
-        if (selectedRange && selectedRange.startDate && selectedRange.endDate) {
-            return format(selectedRange.startDate, 'dd.MM.yyyy') + ' - ' + format(selectedRange.endDate, 'dd.MM.yyyy')
-        }
-
-        return undefined
     }
 
     return (
@@ -50,44 +27,19 @@ const FormDateRangePicker = ({ id, value, label, error, onChange, ...props }: pr
         >
             {label !== undefined && <label htmlFor={props.id ?? props.name}>{label}</label>}
 
-            <input
-                className={styles.Input}
+            <DateRangePicker
+                label={'Vali kuupäeva vahemik'}
                 placeholder={'Algus - Lõpp'}
+                value={dateValue}
+                onChange={onValueChange}
                 readOnly={true}
-                value={renderValue()}
-                onClick={() => setShow(true)}
+                amountOfMonths={2}
+                locale={'et'}
+                classNames={{
+                    input: styles.Input,
+                    label: styles.Label,
+                }}
             />
-
-            {show && (
-                <div className={styles.Container}>
-                    <DateRangePicker
-                        onChange={onValueChange}
-                        showSelectionPreview={true}
-                        moveRangeOnFirstSelection={false}
-                        months={2}
-                        ranges={[selectedRange]}
-                        direction={'horizontal'}
-                        showDateDisplay={false}
-                        showPreview={true}
-                        locale={et}
-                        staticRanges={[]}
-                        inputRanges={[]}
-                        preventSnapRefocus={true}
-                        dateDisplayFormat={'dd.MM.yyyy'}
-                        monthDisplayFormat={'MMM yyyy'}
-                        weekdayDisplayFormat={'EEEEE'}
-                        dayDisplayFormat={'d'}
-                        maxDate={addYears(new Date(), 10)}
-                        minDate={addYears(new Date(), -1)}
-                        className={styles.RangePicker}
-                        startDatePlaceholder={'Algus'}
-                        endDatePlaceholder={'Lõpp'}
-                    />
-                    <div className={styles.SelectButton}>
-                        <Button title={'Vali'} onClick={onValueSubmit} />
-                    </div>
-                </div>
-            )}
 
             {error?.length > 0 && <div className={styles.ErrorText}>{error}</div>}
         </div>

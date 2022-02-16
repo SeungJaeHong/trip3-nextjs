@@ -6,23 +6,24 @@
     width: 100%;
     position: relative;
 
-    label {
+    .Label {
         color: $gray-darker;
         margin-bottom: $spacer;
         font-size: $font-size-normal;
         font-weight: 500;
-        line-height: 1.2rem
+        line-height: 1.2rem;
+        font-family: $font-family-sailec;
     }
 
     .Input {
-        font-size: 1.2rem;
-        font-weight: 600;
+        font-size: 1rem;
+        font-weight: 500;
         border-radius: 3px;
         border: 2px solid #d1d4d6;
         color: #545a5f;
-        padding: 12px;
-        max-width: 300px;
         width: 100%;
+        height: 45px;
+        font-family: $font-family-sailec;
 
         &::placeholder {
             color: $gray;
@@ -39,42 +40,6 @@
     &.Invalid {
         .Input {
             border: 2px solid $red;
-        }
-    }
-
-    .Container {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        background: $white;
-        top: 49px;
-        left: 0;
-        border: 1px solid $gray;
-
-        .RangePicker {
-            border-bottom: 0;
-
-            :global(.rdrDefinedRangesWrapper) {
-                display: none;
-            }
-
-            :global(.rdrMonthAndYearWrapper) {
-                padding-top: 0;
-                border-bottom: 1px solid $gray-light;
-            }
-        }
-
-        .SelectButton {
-            display: flex;
-            justify-content: flex-end;
-            padding: 12px;
-            border-top: 1px solid $gray-light;
-
-            button {
-                max-width: 100px;
-                width: 100%;
-                height: 40px;
-            }
         }
     }
 }
