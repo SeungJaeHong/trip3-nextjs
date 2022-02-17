@@ -69,7 +69,7 @@ const TravelmateFilter = ({
                     id={'country'}
                     options={destinationOptions}
                     placeholder={'Sihtkoht'}
-                    value={selectedDestination?.toString()}
+                    //value={selectedDestination?.toString()}
                     onChange={(value?: { label: string; value: string }) =>
                         onChangeDestination(value?.value ? parseInt(value.value) : undefined)
                     }
@@ -80,7 +80,7 @@ const TravelmateFilter = ({
                     id={'topic'}
                     options={topicOptions}
                     placeholder={'Reisistiil'}
-                    value={selectedTopic?.toString()}
+                    //value={selectedTopic?.toString()}
                     onChange={(value?: { label: string; value: string }) =>
                         onChangeTopic(value?.value ? parseInt(value.value) : undefined)
                     }
@@ -91,7 +91,7 @@ const TravelmateFilter = ({
                     id={'Algus'}
                     options={startOptions}
                     placeholder={'Algus'}
-                    value={selectedStart}
+                    //value={selectedStart}
                     onChange={(value?: { label: string; value: string }) =>
                         onChangeStart(value?.value ? value.value : undefined)
                     }
@@ -102,7 +102,7 @@ const TravelmateFilter = ({
                     id={'age'}
                     options={ageOptions}
                     placeholder={'Vanus'}
-                    value={selectedAge}
+                    //value={selectedAge}
                     onChange={(value?: { label: string; value: string }) =>
                         onChangeAge(value?.value ? value.value : undefined)
                     }
@@ -113,7 +113,7 @@ const TravelmateFilter = ({
                     id={'gender'}
                     options={genderOptions}
                     placeholder={'Sugu'}
-                    value={selectedGender}
+                    //value={selectedGender}
                     onChange={(value?: { label: string; value: string }) =>
                         onChangeGender(value?.value ? value.value : undefined)
                     }

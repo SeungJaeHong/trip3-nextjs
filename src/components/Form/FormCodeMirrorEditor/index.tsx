@@ -52,7 +52,7 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
                 })
             }
         }
-    }, [debouncedValue])
+    }, [debouncedValue, type])
 
     const saveChanges = () => {
         onChange(editorValue)
@@ -175,6 +175,7 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
             theme: 'neo',
             toolbar: getToolbar()
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
