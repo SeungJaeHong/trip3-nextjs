@@ -56,7 +56,7 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
             gender: '',
             start: 'start_and_end',
             startMonth: '3_2022',
-            dateRange: { startDate: '2022-02-15', endDate: '2022-02-25' },
+            //dateRange: { startDate: '2022-02-15', endDate: '2022-02-25' },
             //duration: { value: '2022-02-15', label: '2022-02-25' },
             destinations: travelmate ? travelmate.destinations?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
             topics: travelmate ? travelmate.topics?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],

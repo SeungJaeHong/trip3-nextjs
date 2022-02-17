@@ -8,6 +8,7 @@
     display: flex;
     width: 100%;
     margin: $spacer * 5 0;
+    gap: $spacer * 8;
 
     @include md() {
         flex-direction: column;
@@ -18,10 +19,13 @@
         display: flex;
         flex-direction: column;
         flex: 2.5;
-        padding-right: $spacer * 8;
+
+        @include lg() {
+            flex: 2;
+        }
 
         @include sm() {
-            padding-right: 0;
+            flex: 1;
         }
 
         .FormTitle {
@@ -38,6 +42,7 @@
 
     .Sidebar {
         flex: 1;
+        display: flex;
         flex-direction: column;
 
         .Rules {

@@ -7,15 +7,15 @@ import { DateRangePicker } from '@mantine/dates'
 
 // @ts-ignore
 const FormDateRangePicker = ({ id, value, required, label, error, onChange, ...props }: props) => {
-    const start = dayjs(value.startDate).toDate()
-    const end = dayjs(value.endDate).toDate()
+    const start = value?.startDate ? dayjs(value.startDate).toDate() : null
+    const end = value?.endDate ? dayjs(value?.endDate).toDate() : null
     const [dateValue, setDateValue] = useState<[Date | null, Date | null]>([start, end])
 
     const onValueChange = (value: [Date | null, Date | null]) => {
         setDateValue(value)
         onChange({
-            startDate: dayjs(value[0]).format('YYYY-MM-DD'),
-            endDate: dayjs(value[1]).format('YYYY-MM-DD'),
+            startDate: value[0] ? dayjs(value[0]).format('YYYY-MM-DD') : null,
+            endDate: value[1] ? dayjs(value[1]).format('YYYY-MM-DD') : null,
         })
     }
 
