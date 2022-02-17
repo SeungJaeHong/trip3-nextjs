@@ -3,7 +3,7 @@ import styles from "./FormInput.module.scss"
 import clsx from "clsx"
 
 // @ts-ignore
-const FormInput = ({ id, name, label, type, error, register, ...props }: props) => {
+const FormInput = ({ id, name, label, required, type, error, register, ...props }: props) => {
     return (
         <div className={clsx(styles.FormInput, props.className, {
             [styles.Invalid]: error.length > 0
@@ -11,6 +11,7 @@ const FormInput = ({ id, name, label, type, error, register, ...props }: props) 
             {label !== undefined &&
                 <label htmlFor={props.id ?? props.name}>
                     {label}
+                    {required ? <span>*</span> : null}
                 </label>
             }
 
@@ -30,7 +31,8 @@ FormInput.defaultProps = {
     label: undefined,
     spellCheck: false,
     autoComplete: 'off',
-    error: ''
+    error: '',
+    required: false
 }
 
 export default FormInput

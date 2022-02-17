@@ -10,12 +10,17 @@
         margin-bottom: $spacer;
         font-size: $font-size-normal;
         font-weight: 500;
-        line-height: 1.2rem
+        line-height: 1.2rem;
+
+        span {
+            color: $red;
+        }
     }
 
     .FormSelect {
         width: 100%;
         border: 2px solid $gray;
+        border-radius: 3px;
 
         :global(.FormMultiSelect__control) {
             border: 0;

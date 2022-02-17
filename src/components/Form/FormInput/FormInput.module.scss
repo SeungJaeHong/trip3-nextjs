@@ -10,7 +10,11 @@
         margin-bottom: $spacer;
         font-size: $font-size-normal;
         font-weight: 500;
-        line-height: 1.2rem
+        line-height: 1.2rem;
+
+        span {
+            color: $red;
+        }
     }
 
     input {

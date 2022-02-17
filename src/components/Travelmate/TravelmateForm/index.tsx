@@ -13,6 +13,7 @@ import FormMultiSelect from "../../Form/FormMultiSelect"
 import {useRouter} from 'next/router'
 import TravelmateStartDateSelection from "../TravelmateStartDateSelection"
 import FormDateRangePicker from "../../Form/FormDateRangePicker"
+import FormSelect from "../../Form/FormSelect"
 
 type Inputs = {
     title: string
@@ -25,6 +26,7 @@ type Inputs = {
     dateRange: { startDate: string, endDate: string }
     destinations: { value: string, label: string }[]
     topics: { value: string, label: string }[]
+    duration: { value: string, label: string }
 }
 
 type Props = {
@@ -42,7 +44,8 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
         start: yup.string(),
         startMonth: yup.string().nullable(),
         destinations: yup.array().required(),
-        topics: yup.array().nullable()
+        topics: yup.array().nullable(),
+        duration: yup.string()
     }).required()
 
     const { watch, register, handleSubmit, control, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
@@ -54,6 +57,7 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
             start: 'start_and_end',
             startMonth: '3_2022',
             dateRange: { startDate: '2022-02-15', endDate: '2022-02-25' },
+            //duration: { value: '2022-02-15', label: '2022-02-25' },
             destinations: travelmate ? travelmate.destinations?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
             topics: travelmate ? travelmate.topics?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
         }
@@ -88,6 +92,49 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
         },
     ]
 
+    const durationOptions = [
+        {
+            value: '1_3_days',
+            label: '1 - 3 päeva'
+        },
+        {
+            value: '4_7_days',
+            label: '4 - 7 päeva'
+        },
+        {
+            value: '7_10_days',
+            label: '7 - 10 päeva'
+        },
+        {
+            value: '1_weeks',
+            label: '1 nädal'
+        },
+        {
+            value: '2_weeks',
+            label: '2 nädalat'
+        },
+        {
+            value: '3_weeks',
+            label: '3 nädalat'
+        },
+        {
+            value: '1_months',
+            label: '1 kuu'
+        },
+        {
+            value: '2_months',
+            label: '2 kuud'
+        },
+        {
+            value: '3_months',
+            label: '3 kuud'
+        },
+        {
+            value: 'more_than_6_months',
+            label: 'rohkem kui 6 kuud'
+        },
+    ]
+
     const onSubmit: SubmitHandler<Inputs> = async (values: Inputs) => {
         console.log('onSubmit', values)
     }
@@ -102,7 +149,7 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
                         <FormInput
                             name={'title'}
                             id={'title'}
-                            label={'Pealkiri*'}
+                            label={'Pealkiri'}
                             disabled={isSubmitting}
                             required={true}
                             error={errors.title?.message}
@@ -117,7 +164,8 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
                                     <FormMultiSelect
                                         id={'destinations'}
                                         options={destinationOptions}
-                                        label={'Sihtkohad*'}
+                                        label={'Sihtkohad'}
+                                        required={true}
                                         placeholder={'Vali sihtkoht'}
                                         values={field.value}
                                         onChange={field.onChange}
@@ -194,22 +242,44 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
                             </div>
                         </div>
                         {startDateValue === 'start' &&
-                            <div className={styles.SelectionInfo}>
-                                <Controller
-                                    name={'startMonth'}
-                                    control={control}
-                                    render={({ field, fieldState, formState }) => {
-                                        return (
-                                            <TravelmateStartDateSelection
-                                                id={'startMonth'}
-                                                value={startMonth}
-                                                onChange={field.onChange}
-                                                disabled={isSubmitting}
-                                            />
-                                        )
-                                    }}
-                                />
-                            </div>
+                            <>
+                                <div className={styles.SelectionInfo}>
+                                    <Controller
+                                        name={'startMonth'}
+                                        control={control}
+                                        render={({ field, fieldState, formState }) => {
+                                            return (
+                                                <TravelmateStartDateSelection
+                                                    id={'startMonth'}
+                                                    value={startMonth}
+                                                    onChange={field.onChange}
+                                                    disabled={isSubmitting}
+                                                />
+                                            )
+                                        }}
+                                    />
+                                </div>
+                                <div className={styles.DurationOptions}>
+                                    <Controller
+                                        name={'duration'}
+                                        control={control}
+                                        render={({ field, fieldState, formState }) => {
+                                            return (
+                                                <FormSelect
+                                                    id={'duration'}
+                                                    options={durationOptions}
+                                                    label={'Kestvus'}
+                                                    value={field.value}
+                                                    placeholder={'Vali kestvus'}
+                                                    onChange={field.onChange}
+                                                    error={fieldState.error?.message}
+                                                    disabled={isSubmitting}
+                                                />
+                                            )
+                                        }}
+                                    />
+                                </div>
+                            </>
                         }
                         {startDateValue === 'start_and_end' &&
                             <div className={styles.SelectionInfo}>
@@ -239,7 +309,8 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
                                 return (
                                     <FormRichTextEditor
                                         id={'body'}
-                                        label={'Sisu*'}
+                                        label={'Sisu'}
+                                        required={true}
                                         value={travelmate ? travelmate.body : ''}
                                         onChange={field.onChange}
                                         error={fieldState.error?.message}

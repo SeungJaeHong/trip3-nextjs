@@ -2,6 +2,7 @@
 
 .FormSelectContainer {
     display: flex;
+    flex-direction: column;
     width: 100%;
 
     label {
@@ -9,14 +10,24 @@
         margin-bottom: $spacer;
         font-size: $font-size-normal;
         font-weight: 500;
-        line-height: 1.2rem
+        line-height: 1.2rem;
+
+        span {
+            color: $red;
+        }
     }
 
     .FormSelect {
         width: 100%;
+        border: 2px solid $gray;
+        border-radius: 3px;
 
         :global(.FormSelect__value-container) {
-            padding: $spacer;
+            padding: 6px $spacer;
+        }
+
+        :global(.FormSelect__control) {
+            border: 0;
         }
 
         :global(.FormSelect__placeholder) {

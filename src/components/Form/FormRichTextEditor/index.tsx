@@ -19,10 +19,11 @@ type Props = {
     error: string
     onChange: (html: string) => void
     disabled: boolean
+    required: boolean
 }
 
 // @ts-ignore
-const FormRichTextEditor = ({id, value, label, error, onChange, disabled, ...otherProps}: Props) => {
+const FormRichTextEditor = ({id, value, label, required, error, onChange, disabled, ...otherProps}: Props) => {
     const [editor, setEditor] = useState(undefined)
     const onEditorChange = (html: string) => {
         if (!disabled) {
@@ -109,7 +110,7 @@ const FormRichTextEditor = ({id, value, label, error, onChange, disabled, ...oth
         <div className={clsx(styles.FormRichTextEditor, {
             [styles.Invalid]: error?.length > 0
         })}>
-            {label && <label>{label}</label>}
+            {label && <label>{label}{required ? <span>*</span> : null}</label>}
             <div
                 id={id}
                 className={styles.Editor}
@@ -128,7 +129,8 @@ const FormRichTextEditor = ({id, value, label, error, onChange, disabled, ...oth
 FormRichTextEditor.defaultProps = {
     error: '',
     value: '',
-    disabled: false
+    disabled: false,
+    required: false
 }
 
 export default FormRichTextEditor

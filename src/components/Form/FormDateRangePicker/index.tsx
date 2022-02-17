@@ -6,7 +6,7 @@ import 'dayjs/locale/et'
 import { DateRangePicker } from '@mantine/dates'
 
 // @ts-ignore
-const FormDateRangePicker = ({ id, value, label, error, onChange, ...props }: props) => {
+const FormDateRangePicker = ({ id, value, required, label, error, onChange, ...props }: props) => {
     const start = dayjs(value.startDate).toDate()
     const end = dayjs(value.endDate).toDate()
     const [dateValue, setDateValue] = useState<[Date | null, Date | null]>([start, end])
@@ -25,7 +25,7 @@ const FormDateRangePicker = ({ id, value, label, error, onChange, ...props }: pr
                 [styles.Invalid]: error.length > 0,
             })}
         >
-            {label !== undefined && <label htmlFor={props.id ?? props.name}>{label}</label>}
+            {label !== undefined && <label htmlFor={props.id ?? props.name}>{label}{required ? <span>*</span> : null}</label>}
 
             <DateRangePicker
                 label={'Vali kuupäeva vahemik'}
@@ -51,6 +51,7 @@ FormDateRangePicker.defaultProps = {
     label: undefined,
     error: '',
     disabled: false,
+    required: false
 }
 
 export default FormDateRangePicker

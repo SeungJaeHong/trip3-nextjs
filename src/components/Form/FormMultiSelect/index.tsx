@@ -15,6 +15,7 @@ type Props = {
     onChange: (option: any) => void
     error: string
     disabled: boolean
+    required: boolean
 }
 
 const FormMultiSelect = (props: Props) => {
@@ -22,7 +23,7 @@ const FormMultiSelect = (props: Props) => {
         <div className={clsx(styles.FormMultiSelect, {
             [styles.Invalid]: props.error.length > 0
         })}>
-            <label>{props.label}</label>
+            <label>{props.label}{props.required ? <span>*</span> : null}</label>
             <Select
                 isMulti
                 defaultValue={props.values}
@@ -50,7 +51,8 @@ FormMultiSelect.defaultProps = {
     isClearable: true,
     placeholder: undefined,
     error: '',
-    disabled: false
+    disabled: false,
+    required: false
 }
 
 export default FormMultiSelect
