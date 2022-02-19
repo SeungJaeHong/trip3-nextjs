@@ -44,5 +44,14 @@
             font-weight: 500;
             font-family: $font-family-sailec;
         }
+
+        &.Invalid {
+            border: 2px solid $red;
+        }
+    }
+
+    .ErrorText {
+        color: $red;
+        font-size: $font-size-small;
     }
 }

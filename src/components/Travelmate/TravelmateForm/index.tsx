@@ -19,14 +19,14 @@ type Inputs = {
     title: string
     body: string
     gender: string
-    start: string
+    startType: 'start_and_end' | 'start'
     startMonth: string
     startDate: string
     endDate: string
     dateRange: { startDate: string, endDate: string }
     destinations: { value: string, label: string }[]
     topics: { value: string, label: string }[]
-    duration: { value: string, label: string }
+    duration: string
 }
 
 type Props = {
@@ -41,11 +41,27 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
         title: yup.string().required('Pealkiri on kohustuslik'),
         body: yup.string().required('Sisu on kohustuslik'),
         gender: yup.string(),
-        start: yup.string(),
+        startType: yup.string(),
         startMonth: yup.string().nullable(),
-        destinations: yup.array().required(),
+        destinations: yup.array().required('Sihtkoht on kohustuslik').min(1, 'Sihtkoht on kohustuslik'),
         topics: yup.array().nullable(),
-        duration: yup.string()
+        duration: yup.string().nullable().when('startType', {
+            is: 'start',
+            then: yup.string().required('Kestvus on valimata'),
+        }),
+        dateRange: yup.object().shape({
+            startDate: yup.string().nullable(),
+            endDate: yup.string().nullable()
+        }).nullable().when('startType', {
+            is: 'start_and_end',
+            then: yup.object().test(
+                'dateRangeCheck',
+                'Kuupäeva vahemik on valimata',
+                (value, context) => {
+                    return value.startDate && value?.endDate
+                },
+            )
+        })
     }).required()
 
     const { watch, register, handleSubmit, control, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
@@ -54,7 +70,7 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
             title: travelmate ? travelmate.title : '',
             body: travelmate ? travelmate.body : '',
             gender: '',
-            start: 'start_and_end',
+            startType: 'start_and_end',
             startMonth: '3_2022',
             //dateRange: { startDate: '2022-02-15', endDate: '2022-02-25' },
             //duration: { value: '2022-02-15', label: '2022-02-25' },
@@ -63,8 +79,10 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
         }
     })
 
+    //console.log(errors, 'errors')
+
     const genderValue = watch('gender')
-    const startDateValue = watch('start')
+    const startTypeValue = watch('startType')
     const startMonth = watch('startMonth')
     const genderValues = [
         {
@@ -225,15 +243,15 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
                                 {dateValues.map(startValue => {
                                     return (
                                         <div className={clsx(styles.RadioButton, {
-                                            [styles.RadioButtonChecked]: startDateValue === startValue.value
+                                            [styles.RadioButtonChecked]: startTypeValue === startValue.value
                                         })} key={startValue.value}>
                                             <FormRadioButton
                                                 id={startValue.value}
-                                                name={'start'}
+                                                name={'startType'}
                                                 label={startValue.label}
                                                 type={'radio'}
                                                 value={startValue.value}
-                                                error={errors.start?.message}
+                                                error={errors.startType?.message}
                                                 disabled={isSubmitting}
                                                 register={register} />
                                         </div>
@@ -241,7 +259,7 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
                                 })}
                             </div>
                         </div>
-                        {startDateValue === 'start' &&
+                        {startTypeValue === 'start' &&
                             <>
                                 <div className={styles.SelectionInfo}>
                                     <Controller
@@ -269,7 +287,7 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
                                                     id={'duration'}
                                                     options={durationOptions}
                                                     label={'Kestvus'}
-                                                    value={field.value}
+                                                    value={durationOptions.find(obj => obj.value === field.value)}
                                                     placeholder={'Vali kestvus'}
                                                     onChange={field.onChange}
                                                     error={fieldState.error?.message}
@@ -281,7 +299,7 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
                                 </div>
                             </>
                         }
-                        {startDateValue === 'start_and_end' &&
+                        {startTypeValue === 'start_and_end' &&
                             <div className={styles.SelectionInfo}>
                                 <Controller
                                     name={'dateRange'}

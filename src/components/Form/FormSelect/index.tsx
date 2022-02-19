@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './FormSelect.module.scss'
-import Select from 'react-select'
+import Select, {SingleValue} from 'react-select'
 import clsx from 'clsx'
 
 type Props = {
@@ -19,6 +19,10 @@ type Props = {
 }
 
 const FormSelect = (props: Props) => {
+    const onChangeValue = (value: SingleValue<{ value: string; label: string }>) => {
+        props.onChange(value?.value)
+    }
+
     return (
         <div className={styles.FormSelectContainer}>
             {props.label && <label>{props.label}{props.required ? <span>*</span> : null}</label>}
@@ -27,13 +31,21 @@ const FormSelect = (props: Props) => {
                 options={props.options}
                 isDisabled={props.disabled}
                 value={props.value}
-                className={clsx(styles.FormSelect, props.className)}
+                className={clsx(styles.FormSelect, props.className, {
+                    [styles.Invalid]: props.error.length > 0
+                })}
                 classNamePrefix={props.classNamePrefix}
                 isClearable={props.isClearable}
                 noOptionsMessage={() => 'Valikud puuduvad'}
                 placeholder={props.placeholder}
-                onChange={(value) => props.onChange(value)}
+                onChange={onChangeValue}
             />
+
+            {props.error?.length > 0 &&
+                <div className={styles.ErrorText}>
+                    {props.error}
+                </div>
+            }
         </div>
     )
 }
