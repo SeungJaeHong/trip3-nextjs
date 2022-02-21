@@ -1,24 +1,34 @@
-import React, { Fragment } from 'react'
+import React, {Fragment, useState} from 'react'
 import Header from '../../../components/Header'
 import { GetServerSideProps } from 'next'
 import Footer from '../../../components/Footer'
 import containerStyle from '../../../styles/containers.module.scss'
 import styles from './TravelmatePage.module.scss'
-import { Destination, Topic, TravelmateContent } from '../../../types'
+import {Comment, Destination, Topic, TravelmateContent} from '../../../types'
 import { useRouter } from 'next/router'
 import ApiClientSSR from '../../../lib/ApiClientSSR'
 import Link from 'next/link'
 import Tag from '../../../components/Tag'
 import UserAvatar from '../../../components/User/UserAvatar'
 import useUser from '../../../hooks'
+import ForumComment from "../../../components/Forum/ForumComment";
+import BlockTitle from "../../../components/BlockTitle";
+import CommentEditor from "../../../components/CommentEditor";
 
 type Props = {
     content: TravelmateContent
 }
 
 const TravelmatePage = ({ content }: Props) => {
+    const [commentValue, setCommentValue] = useState<string>('')
+    const [submitting, setSubmitting] = useState<boolean>(false)
+    const [comments, setComments] = useState<Comment[]|undefined>(content.comments)
     const { userIsLoggedIn, user } = useUser()
     const router = useRouter()
+
+    const onSubmit = async (value: string) => {
+        console.log(value)
+    }
 
     const renderAgeAndGender = () => {
         let value = undefined
@@ -75,6 +85,31 @@ const TravelmatePage = ({ content }: Props) => {
                             </div>
                         </div>
                         <div className={styles.Body}>{content.body}</div>
+
+                        {(comments && comments?.length > 0) &&
+                            <div className={styles.Comments}>
+                                {comments.map((comment: Comment) => {
+                                    return (
+                                        <ForumComment
+                                            key={comment.id}
+                                            item={comment}
+                                            type={'travelmate'} />
+                                    )
+                                })}
+                            </div>
+                        }
+
+                        {userIsLoggedIn &&
+                            <div className={styles.AddComment}>
+                                <BlockTitle title={'Lisa kommentaar'} />
+                                <CommentEditor
+                                    id={'comment-editor'}
+                                    onSubmit={onSubmit}
+                                    value={commentValue}
+                                    submitButtonName={'Lisa kommentaar'}
+                                    submitting={submitting} />
+                            </div>
+                        }
                     </div>
                     <div className={styles.Sidebar}>
                         <div className={styles.UserCard}>

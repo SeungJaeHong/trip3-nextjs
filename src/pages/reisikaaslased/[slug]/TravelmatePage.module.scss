@@ -103,12 +103,25 @@
 
         .Body {
             color: $gray-dark;
-            margin: $spacer * 4 0;
+            margin: $spacer * 4 0 $spacer * 7 0;
             font-size: $font-size-medium;
 
             @include sm() {
                 font-size: $font-size-normal;
             }
+        }
+
+        .Comments {
+            display: flex;
+            flex-direction: column;
+            gap: $spacer * 3;
+            margin-bottom: $spacer * 5;
+        }
+
+        .AddComment {
+            display: flex;
+            flex-direction: column;
+            gap: $spacer * .5;
         }
     }
 
