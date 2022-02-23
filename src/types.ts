@@ -68,7 +68,6 @@ export interface Comment {
     id: number
     commentableId: number
     commentableType: string
-    //contentId: number
     user: User
     body: string
     status: number

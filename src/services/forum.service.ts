@@ -16,8 +16,8 @@ export const togglePostStatus = async (content: Content, value: boolean): Promis
     })
 }
 
-export const ratePost = async (content: Content, value: boolean): Promise<AxiosResponse> => {
-    return await ApiClient.post('/forum/' + content.id + '/flag', {
+export const likePost = async (content: Content, value: boolean): Promise<AxiosResponse> => {
+    return await ApiClient.post('/forum/' + content.id + '/like', {
         value: value
     })
 }

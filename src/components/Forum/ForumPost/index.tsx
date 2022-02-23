@@ -1,17 +1,17 @@
 import Link from 'next/link'
 import styles from './ForumPost.module.scss'
-import {Content, Destination, Topic} from "../../../types"
-import UserAvatar from "../../User/UserAvatar"
-import ThumbsUpIcon from "../../../icons/ThumbsUpIcon";
-import clsx from "clsx";
-import ThumbsDownIcon from "../../../icons/ThumbsDownIcon";
-import Tag from "../../Tag";
-import React, {useState} from "react";
+import { Content, Destination, Topic } from '../../../types'
+import UserAvatar from '../../User/UserAvatar'
+import ThumbsUpIcon from '../../../icons/ThumbsUpIcon'
+import clsx from 'clsx'
+import ThumbsDownIcon from '../../../icons/ThumbsDownIcon'
+import Tag from '../../Tag'
+import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import {togglePostStatus, ratePost} from "../../../services/forum.service"
-import {toast} from 'react-toastify'
-import Alert from "../../Alert"
-import useUser from "../../../hooks"
+import { togglePostStatus, likePost } from '../../../services/forum.service'
+import { toast } from 'react-toastify'
+import Alert from '../../Alert'
+import useUser from '../../../hooks'
 
 const ForumPost = (item: Content) => {
     const [post, setPost] = useState<Content>(item)
@@ -22,24 +22,28 @@ const ForumPost = (item: Content) => {
 
     const onThumbsClick = (value: boolean) => {
         if (userIsLoggedIn) {
-            ratePost(post, value).then(res => {
-                setPost(res.data)
-            }).catch(err => {})
+            likePost(post, value)
+                .then((res) => {
+                    setPost(res.data)
+                })
+                .catch((err) => {})
         }
     }
 
     const onToggleStatus = () => {
         if (userIsAdmin) {
             const status = !post.status
-            togglePostStatus(post, status).then(res => {
-                setPost(res.data)
-                toast.success(res.data.status === 1 ? 'Postitus avalikustatud' : 'Postitus peidetud')
-            }).catch(err => {
-                if (err.response?.status === 401 || err.response?.status === 419) {
-                    toast.error('Sessioon on aegunud. Palun logi uuesti sisse')
-                    router.reload()
-                }
-            })
+            togglePostStatus(post, status)
+                .then((res) => {
+                    setPost(res.data)
+                    toast.success(res.data.status === 1 ? 'Postitus avalikustatud' : 'Postitus peidetud')
+                })
+                .catch((err) => {
+                    if (err.response?.status === 401 || err.response?.status === 419) {
+                        toast.error('Sessioon on aegunud. Palun logi uuesti sisse')
+                        router.reload()
+                    }
+                })
         }
     }
 
@@ -55,7 +59,10 @@ const ForumPost = (item: Content) => {
             }
             return (
                 <div className={styles.Buttons}>
-                    <span className={styles.ActionButton} onClick={() => router.push(editUrl)}>Muuda</span> /
+                    <span className={styles.ActionButton} onClick={() => router.push(editUrl)}>
+                        Muuda
+                    </span>{' '}
+                    /
                     <span className={styles.ActionButton} onClick={onToggleStatus}>
                         {post.status === 1 ? 'Peida' : 'Avalikusta'}
                     </span>
@@ -64,7 +71,9 @@ const ForumPost = (item: Content) => {
         } else if (isPostOwner) {
             return (
                 <div className={styles.Buttons}>
-                    <span className={styles.ActionButton} onClick={() => router.push(editUrl)}>Muuda</span>
+                    <span className={styles.ActionButton} onClick={() => router.push(editUrl)}>
+                        Muuda
+                    </span>
                 </div>
             )
         } else {
@@ -74,35 +83,34 @@ const ForumPost = (item: Content) => {
 
     return (
         <div className={styles.ForumPost}>
-            {post.status === 0 &&
+            {post.status === 0 && (
                 <div className={styles.Alert}>
-                    <Alert
-                        title={'Postitus ei ole avalikustatud!'}
-                        type={'warning'} />
+                    <Alert title={'Postitus ei ole avalikustatud!'} type={'warning'} />
                 </div>
-            }
-            <div className={styles.Title}>
-                {post.title}
-            </div>
+            )}
+            <div className={styles.Title}>{post.title}</div>
             <div className={styles.MetaData}>
                 <Link href={'/user/' + post.user.id}>
                     <a className={styles.User}>{post.user.name}</a>
                 </Link>
-                <div className={styles.CreatedDate}>
-                    {post.createdAt}
-                </div>
+                <div className={styles.CreatedDate}>{post.createdAt}</div>
                 <div className={styles.UserAvatar}>
                     <UserAvatar user={post.user} />
                 </div>
             </div>
             <div className={styles.Body} dangerouslySetInnerHTML={{ __html: post.body }} />
-            <div className={styles.Actions}>
-                {renderActionButtons()}
-            </div>
+            <div className={styles.Actions}>{renderActionButtons()}</div>
             <div className={styles.BottomData}>
                 <div className={styles.Tags}>
                     {post.destinations?.map((destination: Destination) => {
-                        return <Tag title={destination.name} type={'destination'} route={'/sihtkoht/' + destination.slug} key={destination.id} />
+                        return (
+                            <Tag
+                                title={destination.name}
+                                type={'destination'}
+                                route={'/sihtkoht/' + destination.slug}
+                                key={destination.id}
+                            />
+                        )
                     })}
                     {post.topics?.map((topic: Topic) => {
                         return <Tag title={topic.name} route={'/'} key={topic.id} />

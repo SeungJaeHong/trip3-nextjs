@@ -1,26 +1,26 @@
-import React from "react"
-import styles from "./ForumPostForm.module.scss"
-import clsx from "clsx"
-import FormInput from "../../Form/FormInput"
-import SubmitButton from "../../Form/SubmitButton"
-import {toast} from 'react-toastify'
-import {getForumUrlByType, getForumUrlByTypeAndSlug, setFormErrors} from "../../../helpers"
-import {SubmitHandler, useForm, Controller} from "react-hook-form"
-import * as yup from "yup"
+import React from 'react'
+import styles from './ForumPostForm.module.scss'
+import clsx from 'clsx'
+import FormInput from '../../Form/FormInput'
+import SubmitButton from '../../Form/SubmitButton'
+import { toast } from 'react-toastify'
+import { getForumUrlByType, getForumUrlByTypeAndSlug, setFormErrors } from '../../../helpers'
+import { SubmitHandler, useForm, Controller } from 'react-hook-form'
+import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import FormRadioButton from "../../Form/FormRadioButton"
-import FormRichTextEditor from "../../Form/FormRichTextEditor"
-import {Content, Destination, Topic} from "../../../types"
-import FormMultiSelect from "../../Form/FormMultiSelect"
-import {addPost, updatePost} from "../../../services/forum.service"
-import {useRouter} from 'next/router'
+import FormRadioButton from '../../Form/FormRadioButton'
+import FormRichTextEditor from '../../Form/FormRichTextEditor'
+import { Content, Destination, Topic } from '../../../types'
+import FormMultiSelect from '../../Form/FormMultiSelect'
+import { addPost, updatePost } from '../../../services/forum.service'
+import { useRouter } from 'next/router'
 
 type Inputs = {
     category: string
     title: string
     body: string
-    destinations: { value: string, label: string }[]
-    topics: { value: string, label: string }[]
+    destinations: { value: string; label: string }[]
+    topics: { value: string; label: string }[]
 }
 
 type Props = {
@@ -29,30 +29,54 @@ type Props = {
     topics: Topic[]
 }
 
-const ForumPostForm = ({post, destinations, topics}: Props) => {
+const ForumPostForm = ({ post, destinations, topics }: Props) => {
     const router = useRouter()
-    const forumPostSchema = yup.object().shape({
-        category: yup.string().required('Kategooria on kohustuslik'),
-        title: yup.string().required('Pealkiri on kohustuslik'),
-        body: yup.string().required('Sisu on kohustuslik'),
-        destinations: yup.array().nullable(),
-        topics: yup.array().nullable()
-    }).required()
+    const forumPostSchema = yup
+        .object()
+        .shape({
+            category: yup.string().required('Kategooria on kohustuslik'),
+            title: yup.string().required('Pealkiri on kohustuslik'),
+            body: yup.string().required('Sisu on kohustuslik'),
+            destinations: yup.array().nullable(),
+            topics: yup.array().nullable(),
+        })
+        .required()
 
-    const { watch, register, handleSubmit, control, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
+    const {
+        watch,
+        register,
+        handleSubmit,
+        control,
+        setError,
+        formState: { errors, isSubmitting },
+    } = useForm<Inputs>({
         resolver: yupResolver(forumPostSchema),
         defaultValues: {
             category: post ? post.type : 'forum',
             title: post ? post.title : '',
             body: post ? post.body : '',
-            destinations: post ? post.destinations?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
-            topics: post ? post.topics?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
-        }
+            destinations: post
+                ? post.destinations?.map((d) => {
+                      return { label: d.name, value: d.id.toString() }
+                  })
+                : [],
+            topics: post
+                ? post.topics?.map((d) => {
+                      return { label: d.name, value: d.id.toString() }
+                  })
+                : [],
+        },
     })
 
     const savePost = async (values: Inputs): Promise<any> => {
+        const formData = {
+            ...values,
+            destinations: values.destinations.map((d) => parseInt(d.value)),
+            topics: values.topics.map((t) => parseInt(t.value)),
+        }
+
         if (post) {
-            await updatePost(post, values).then(res => {
+            await updatePost(post, formData).then(res => {
                 if (res.data.type === 'forum') {
                     router.push('/')
                 } else {
@@ -64,7 +88,7 @@ const ForumPostForm = ({post, destinations, topics}: Props) => {
                 toast.success('Postituse muutmine ebaõnnestus!')
             })
         } else {
-            await addPost(values).then(res => {
+            await addPost(formData).then(res => {
                 if (res.data.type === 'forum') {
                     router.push('/')
                 } else {
@@ -80,7 +104,7 @@ const ForumPostForm = ({post, destinations, topics}: Props) => {
 
     const categoryValue = watch('category')
     const onSubmit: SubmitHandler<Inputs> = async (values: Inputs) => {
-        await savePost(values).catch(err => {
+        await savePost(values).catch((err) => {
             if (err.response?.data?.errors) {
                 setFormErrors(err.response.data.errors, setError)
             }
@@ -91,34 +115,43 @@ const ForumPostForm = ({post, destinations, topics}: Props) => {
     const categories = [
         {
             value: 'forum',
-            label: 'Üldfoorum'
+            label: 'Üldfoorum',
         },
         {
             value: 'buysell',
-            label: 'Ost-müük'
+            label: 'Ost-müük',
         },
         {
             value: 'expat',
-            label: 'Elu välismaal'
+            label: 'Elu välismaal',
         },
         {
             value: 'misc',
-            label: 'Vaba teema'
+            label: 'Vaba teema',
         },
     ]
 
-    const destinationOptions: { value: string, label: string }[] = destinations.map(destination => ({ label: destination.name, value: destination.id.toString() }))
-    const topicOptions: { value: string, label: string }[] = topics.map(topic => ({ label: topic.name, value: topic.id.toString() }))
+    const destinationOptions: { value: string; label: string }[] = destinations.map((destination) => ({
+        label: destination.name,
+        value: destination.id.toString(),
+    }))
+    const topicOptions: { value: string; label: string }[] = topics.map((topic) => ({
+        label: topic.name,
+        value: topic.id.toString(),
+    }))
     return (
         <div className={styles.ForumPostForm}>
             <div className={styles.FormContainer}>
                 <form>
                     <div className={styles.FormRadioGroup}>
-                        {categories.map(category => {
+                        {categories.map((category) => {
                             return (
-                                <div className={clsx(styles.RadioButton, {
-                                    [styles.RadioButtonChecked]: categoryValue === category.value
-                                })} key={category.value}>
+                                <div
+                                    className={clsx(styles.RadioButton, {
+                                        [styles.RadioButtonChecked]: categoryValue === category.value,
+                                    })}
+                                    key={category.value}
+                                >
                                     <FormRadioButton
                                         id={category.value}
                                         name={'category'}
@@ -127,7 +160,8 @@ const ForumPostForm = ({post, destinations, topics}: Props) => {
                                         value={category.value}
                                         error={errors.category?.message}
                                         disabled={isSubmitting}
-                                        register={register} />
+                                        register={register}
+                                    />
                                 </div>
                             )
                         })}
@@ -140,7 +174,8 @@ const ForumPostForm = ({post, destinations, topics}: Props) => {
                             disabled={isSubmitting}
                             required={true}
                             error={errors.title?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
                     <div className={styles.FormInput}>
                         <Controller
@@ -152,6 +187,7 @@ const ForumPostForm = ({post, destinations, topics}: Props) => {
                                         id={'body'}
                                         label={'Sisu'}
                                         value={post ? post.body : ''}
+                                        required={true}
                                         onChange={field.onChange}
                                         error={fieldState.error?.message}
                                         disabled={isSubmitting}
@@ -205,7 +241,8 @@ const ForumPostForm = ({post, destinations, topics}: Props) => {
                             onClick={handleSubmit(onSubmit)}
                             type={'button'}
                             title={'Salvesta'}
-                            submitting={isSubmitting} />
+                            submitting={isSubmitting}
+                        />
                     </div>
                 </form>
             </div>
