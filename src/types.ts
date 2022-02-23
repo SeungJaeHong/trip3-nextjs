@@ -66,7 +66,9 @@ export interface Topic {
 
 export interface Comment {
     id: number
-    contentId: number
+    commentableId: number
+    commentableType: string
+    //contentId: number
     user: User
     body: string
     status: number

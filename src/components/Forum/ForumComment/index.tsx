@@ -7,7 +7,7 @@ import ThumbsDownIcon from "../../../icons/ThumbsDownIcon"
 import clsx from "clsx"
 import React, {useState} from "react"
 import CommentEditor from "../../CommentEditor"
-import {updateComment, rateComment, toggleCommentStatus} from "../../../services/comment.service"
+import {updateComment, likeComment, toggleCommentStatus} from "../../../services/comment.service"
 import {toast} from 'react-toastify'
 import {useRouter} from "next/router"
 import useUser from "../../../hooks"
@@ -29,7 +29,7 @@ const ForumComment = ({item, type}: Props) => {
 
     const onThumbsClick = (value: boolean) => {
         if (userIsLoggedIn) {
-            rateComment(comment, value, type).then(res => {
+            likeComment(comment, value, type).then(res => {
                 setComment(res.data)
             }).catch(err => {})
         }
@@ -54,7 +54,6 @@ const ForumComment = ({item, type}: Props) => {
         setSubmitting(true)
         await updateComment(comment, value, type).then((response) => {
             setComment(response.data)
-            setSubmitting(false)
             setEditMode(false)
             toast.success('Kommentaar muudetud')
         }).catch(err => {
@@ -65,8 +64,7 @@ const ForumComment = ({item, type}: Props) => {
             } else {
                 toast.error('Kommentaari muutmine ebaõnnestus')
             }
-            setSubmitting(false)
-        })
+        }).finally(() => setSubmitting(false))
     }
 
     const onClose = () => {

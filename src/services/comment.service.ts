@@ -9,19 +9,19 @@ export const postComment = async (value: string, contentId: number, type = 'foru
 }
 
 export const updateComment = async (comment: Comment, value: string, type = 'forum'): Promise<AxiosResponse> => {
-    return await ApiClient.post('/' + type + '/' + comment.contentId + '/comment/' + comment.id, {
+    return await ApiClient.post('/' + type + '/' + comment.commentableId + '/comment/' + comment.id, {
         body: value
     })
 }
 
-export const rateComment = async (comment: Comment, value: boolean, type = 'forum'): Promise<AxiosResponse> => {
-    return await ApiClient.post('/' + type + '/' + comment.contentId + '/comment/' + comment.id + '/flag', {
+export const likeComment = async (comment: Comment, value: boolean, type = 'forum'): Promise<AxiosResponse> => {
+    return await ApiClient.post('/' + type + '/' + comment.commentableId + '/comment/' + comment.id + '/like', {
         value: value
     })
 }
 
 export const toggleCommentStatus = async (comment: Comment, value: boolean, type = 'forum'): Promise<AxiosResponse> => {
-    return await ApiClient.post('/' + type + '/' + comment.contentId + '/comment/' + comment.id + '/status', {
+    return await ApiClient.post('/' + type + '/' + comment.commentableId + '/comment/' + comment.id + '/status', {
         value: value
     })
 }

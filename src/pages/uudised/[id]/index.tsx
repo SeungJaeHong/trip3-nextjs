@@ -10,13 +10,14 @@ import UserAvatar from "../../../components/User/UserAvatar"
 import Footer from "../../../components/Footer"
 import ForumComment from "../../../components/Forum/ForumComment"
 import ApiClientSSR from "../../../lib/ApiClientSSR"
-import {postComment, publishNews} from "../../../services/news.service"
+import {publishNews} from "../../../services/news.service"
 import useUser from "../../../hooks"
 import BlockTitle from "../../../components/BlockTitle"
 import CommentEditor from "../../../components/CommentEditor"
 import {toast} from 'react-toastify'
 import {useRouter} from 'next/router'
 import Alert from "../../../components/Alert"
+import {postComment} from "../../../services/comment.service"
 
 type Props = {
     newsObj: NewsContent
@@ -33,7 +34,7 @@ const NewsShow = ({newsObj}: Props) => {
 
     const onSubmit = async (value: string) => {
         setSubmitting(true)
-        await postComment(value, news.id).then((response) => {
+        await postComment(value, news.id, 'news').then((response) => {
             setCommentValue(value)
             setCommentValue('')
             const comment = response.data
@@ -41,9 +42,7 @@ const NewsShow = ({newsObj}: Props) => {
             setComments(newComments)
             router.replace('/uudised/' + news.slug + '#' + comment.id)
             toast.success('Kommentaar lisatud')
-            setSubmitting(false)
         }).catch(err => {
-            setSubmitting(false)
             if (err.response?.status === 401) {
                 toast.error('Sessioon on aegunud. Palun logi uuesti sisse')
                 router.push('/uudised/' + news.slug)
@@ -52,7 +51,7 @@ const NewsShow = ({newsObj}: Props) => {
             } else {
                 toast.error('Kommentaari lisamine ebaõnnestus')
             }
-        })
+        }).finally(() => setSubmitting(false))
     }
 
     const publish = (status: boolean) => {
