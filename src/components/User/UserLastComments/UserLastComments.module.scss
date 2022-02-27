@@ -11,6 +11,9 @@
 
         .PostTitle {
             margin-bottom: $spacer * 1.5;
+            display: flex;
+            gap: $spacer;
+            align-items: center;
 
             a {
                 font-weight: 600;
@@ -20,6 +23,12 @@
                 &:hover {
                     color: $gray-dark-hover;
                 }
+            }
+
+            .ContentType {
+                font-size: $font-size-small;
+                color: $gray-dark;
+                font-weight: 500;
             }
         }
     }

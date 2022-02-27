@@ -10,6 +10,22 @@ const UserLastComments = (user: UserPublicProfile) => {
     const [comments, setComments] = useState<UserComment[]>([])
     const [loading, setLoading] = useState<boolean>(false)
 
+    const getContentTypeName = (type: string) => {
+        switch(type) {
+            case 'travelmate':
+                return 'Reisikaaslased'
+            case 'buysell':
+                return 'Ost-müük'
+            case 'expat':
+                return 'Elu välismaal'
+            case 'misc':
+                return 'Vaba teema'
+            case 'forum':
+                return 'Üldfoorum'
+            default: return ''
+        }
+    }
+
     useEffect(() => {
         try {
             setLoading(true)
@@ -36,11 +52,14 @@ const UserLastComments = (user: UserPublicProfile) => {
                 return (
                     <div className={styles.ForumRow} key={comment.id}>
                         <div className={styles.PostTitle}>
-                            <Link href={comment.forumPost.url}>
+                            <Link href={comment.content.url}>
                                 <a>
-                                    {comment.forumPost.title}
+                                    {comment.content.title}
                                 </a>
                             </Link>
+                            <span className={styles.ContentType}>
+                                ({getContentTypeName(comment.content.type)})
+                            </span>
                         </div>
                         <ForumComment item={comment} />
                     </div>

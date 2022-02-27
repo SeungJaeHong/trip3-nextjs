@@ -79,7 +79,7 @@ export interface Comment {
 }
 
 export interface UserComment extends Comment {
-    forumPost: {
+    content: {
         title: string
         type: string
         url: string
