@@ -14,6 +14,9 @@ import {useRouter} from 'next/router'
 import TravelmateStartDateSelection from "../TravelmateStartDateSelection"
 import FormDateRangePicker from "../../Form/FormDateRangePicker"
 import FormSelect from "../../Form/FormSelect"
+import {setFormErrors} from "../../../helpers";
+import {toast} from "react-toastify";
+import {storeTravelmate} from "../../../services/travelmate.service"
 
 type Inputs = {
     title: string
@@ -154,7 +157,23 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
     ]
 
     const onSubmit: SubmitHandler<Inputs> = async (values: Inputs) => {
-        console.log('onSubmit', values)
+        const formData = {
+            ...values,
+            destinations: values.destinations.map((d) => parseInt(d.value)),
+            topics: values?.topics.map((t) => parseInt(t.value)),
+        }
+
+        console.log('onSubmit', formData)
+
+        await storeTravelmate(formData).then(res => {
+            toast.success('Kuulutus lisatud!')
+        }).catch(err => {
+            if (err.response?.data?.errors) {
+                setFormErrors(err.response.data.errors, setError)
+            }
+
+            toast.error('Kuulutuse lisamine ebaõnnestus!')
+        })
     }
 
     const destinationOptions: { value: string, label: string }[] = destinations.map(destination => ({ label: destination.name, value: destination.id.toString() }))

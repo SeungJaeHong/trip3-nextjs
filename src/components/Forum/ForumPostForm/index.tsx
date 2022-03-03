@@ -85,7 +85,7 @@ const ForumPostForm = ({ post, destinations, topics }: Props) => {
                 }
                 toast.success('Postitus muudetud!')
             }).catch(e => {
-                toast.success('Postituse muutmine ebaõnnestus!')
+                toast.error('Postituse muutmine ebaõnnestus!')
             })
         } else {
             await addPost(formData).then(res => {
@@ -97,7 +97,7 @@ const ForumPostForm = ({ post, destinations, topics }: Props) => {
                 }
                 toast.success('Uus postitus loodud!')
             }).catch(e => {
-                toast.success('Postituse loomine ebaõnnestus!')
+                toast.error('Postituse loomine ebaõnnestus!')
             })
         }
     }
