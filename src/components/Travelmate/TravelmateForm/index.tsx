@@ -36,9 +36,10 @@ type Props = {
     travelmate?: TravelmateContent
     destinations: Destination[]
     topics: Topic[]
+    durationOptions: {value: string, label: string}[]
 }
 
-const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
+const TravelmateForm = ({travelmate, destinations, topics, durationOptions}: Props) => {
     const router = useRouter()
     const travelmateSchema = yup.object().shape({
         title: yup.string().required('Pealkiri on kohustuslik'),
@@ -110,49 +111,6 @@ const TravelmateForm = ({travelmate, destinations, topics}: Props) => {
         {
             value: 'start',
             label: 'Umbkaudne aeg'
-        },
-    ]
-
-    const durationOptions = [
-        {
-            value: '1_3_days',
-            label: '1 - 3 päeva'
-        },
-        {
-            value: '4_7_days',
-            label: '4 - 7 päeva'
-        },
-        {
-            value: '7_10_days',
-            label: '7 - 10 päeva'
-        },
-        {
-            value: '1_weeks',
-            label: '1 nädal'
-        },
-        {
-            value: '2_weeks',
-            label: '2 nädalat'
-        },
-        {
-            value: '3_weeks',
-            label: '3 nädalat'
-        },
-        {
-            value: '1_months',
-            label: '1 kuu'
-        },
-        {
-            value: '2_months',
-            label: '2 kuud'
-        },
-        {
-            value: '3_months',
-            label: '3 kuud'
-        },
-        {
-            value: 'more_than_6_months',
-            label: 'rohkem kui 6 kuud'
         },
     ]
 

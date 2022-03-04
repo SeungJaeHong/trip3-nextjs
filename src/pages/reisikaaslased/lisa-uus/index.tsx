@@ -8,16 +8,16 @@ import { useRouter } from 'next/router'
 import ApiClientSSR from '../../../lib/ApiClientSSR'
 import Footer from '../../../components/Footer'
 import MoreLink from '../../../components/MoreLink'
-import TravelmateForm from "../../../components/Travelmate/TravelmateForm";
+import TravelmateForm from '../../../components/Travelmate/TravelmateForm'
 
 type Props = {
     destinations: Destination[]
     topics: Topic[]
+    durationOptions: { value: string; label: string }[]
 }
 
-const TravelmateAddPage = ({ destinations, topics }: Props) => {
+const TravelmateAddPage = ({ destinations, topics, durationOptions }: Props) => {
     const router = useRouter()
-
     return (
         <Fragment>
             <Header title={'Reisikaaslased'} className={styles.Header} />
@@ -26,7 +26,11 @@ const TravelmateAddPage = ({ destinations, topics }: Props) => {
                     <div className={styles.Content}>
                         <div className={styles.FormTitle}>Lisa uus kuulutus</div>
                         <div className={styles.Form}>
-                            <TravelmateForm destinations={destinations} topics={topics} />
+                            <TravelmateForm
+                                destinations={destinations}
+                                topics={topics}
+                                durationOptions={durationOptions}
+                            />
                         </div>
                     </div>
                     <div className={styles.Sidebar}>
@@ -65,6 +69,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             props: {
                 destinations: response.data.destinations || [],
                 topics: response.data.topics || [],
+                durationOptions: response.data.durationOptions,
             },
         }
     } catch (e) {
