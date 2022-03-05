@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React from "react"
 import styles from "./TravelmateForm.module.scss"
 import clsx from "clsx"
 import FormInput from "../../Form/FormInput"
@@ -14,9 +14,9 @@ import {useRouter} from 'next/router'
 import TravelmateStartDateSelection from "../TravelmateStartDateSelection"
 import FormDateRangePicker from "../../Form/FormDateRangePicker"
 import FormSelect from "../../Form/FormSelect"
-import {setFormErrors} from "../../../helpers";
-import {toast} from "react-toastify";
-import {storeTravelmate} from "../../../services/travelmate.service"
+import {setFormErrors} from "../../../helpers"
+import {toast} from "react-toastify"
+import {storeTravelmate, updateTravelmate} from "../../../services/travelmate.service"
 
 type Inputs = {
     title: string
@@ -71,19 +71,17 @@ const TravelmateForm = ({travelmate, destinations, topics, durationOptions}: Pro
     const { watch, register, handleSubmit, control, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
         resolver: yupResolver(travelmateSchema),
         defaultValues: {
-            title: travelmate ? travelmate.title : '',
-            body: travelmate ? travelmate.body : '',
-            gender: '',
-            startType: 'start_and_end',
-            startMonth: '3_2022',
-            //dateRange: { startDate: '2022-02-15', endDate: '2022-02-25' },
-            //duration: { value: '2022-02-15', label: '2022-02-25' },
+            title: travelmate?.title ?? '',
+            body: travelmate?.body ?? '',
+            gender: travelmate?.gender,
+            startType: travelmate?.startType ?? 'start_and_end',
+            startMonth: travelmate?.startMonth,
+            dateRange: { startDate: travelmate?.startDate, endDate: travelmate?.endDate },
+            duration: travelmate?.duration,
             destinations: travelmate ? travelmate.destinations?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
             topics: travelmate ? travelmate.topics?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
         }
     })
-
-    //console.log(errors, 'errors')
 
     const genderValue = watch('gender')
     const startTypeValue = watch('startType')
@@ -121,17 +119,29 @@ const TravelmateForm = ({travelmate, destinations, topics, durationOptions}: Pro
             topics: values?.topics.map((t) => parseInt(t.value)),
         }
 
-        console.log('onSubmit', formData)
+        if (travelmate) {
+            await updateTravelmate(travelmate, formData).then(res => {
+                toast.success('Kuulutus muudetud!')
+                router.push('/reisikaaslased/' + travelmate.slug)
+            }).catch(err => {
+                if (err.response?.data?.errors) {
+                    setFormErrors(err.response.data.errors, setError)
+                }
 
-        await storeTravelmate(formData).then(res => {
-            toast.success('Kuulutus lisatud!')
-        }).catch(err => {
-            if (err.response?.data?.errors) {
-                setFormErrors(err.response.data.errors, setError)
-            }
+                toast.error('Kuulutuse muutmine ebaõnnestus!')
+            })
+        } else {
+            await storeTravelmate(formData).then(res => {
+                toast.success('Kuulutus lisatud!')
+                router.push('/reisikaaslased')
+            }).catch(err => {
+                if (err.response?.data?.errors) {
+                    setFormErrors(err.response.data.errors, setError)
+                }
 
-            toast.error('Kuulutuse lisamine ebaõnnestus!')
-        })
+                toast.error('Kuulutuse lisamine ebaõnnestus!')
+            })
+        }
     }
 
     const destinationOptions: { value: string, label: string }[] = destinations.map(destination => ({ label: destination.name, value: destination.id.toString() }))

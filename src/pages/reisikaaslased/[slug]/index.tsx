@@ -16,6 +16,7 @@ import BlockTitle from '../../../components/BlockTitle'
 import CommentEditor from '../../../components/CommentEditor'
 import { postComment } from '../../../services/comment.service'
 import { toast } from 'react-toastify'
+import clsx from "clsx";
 
 type Props = {
     content: TravelmateContent
@@ -26,6 +27,8 @@ const TravelmatePage = ({ content }: Props) => {
     const [submitting, setSubmitting] = useState<boolean>(false)
     const [comments, setComments] = useState<Comment[] | undefined>(content.comments)
     const { userIsLoggedIn, user } = useUser()
+    const userIsOwner = content.user.id === user?.id
+    const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const router = useRouter()
 
     const onCommentSubmit = async (value: string) => {
@@ -51,6 +54,10 @@ const TravelmatePage = ({ content }: Props) => {
             .finally(() => setSubmitting(false))
     }
 
+    const hideTravelmate = () => {
+        console.log('hide')
+    }
+
     const renderAgeAndGender = () => {
         let value = undefined
         const gender = content.user.gender ? (content.user.gender === 1 ? 'M' : 'N') : undefined
@@ -67,6 +74,26 @@ const TravelmatePage = ({ content }: Props) => {
         }
 
         return <div className={styles.UserAge}>({value})</div>
+    }
+
+    const renderActionButtons = () => {
+        if (userIsAdmin) {
+            return (
+                <div className={styles.ActionButtons}>
+                    <span className={styles.ActionButton} onClick={() => router.push('/reisikaaslased/' + content.id + '/muuda')}>Muuda</span>{' '}
+                    /
+                    <span className={styles.ActionButton} onClick={hideTravelmate}>Peida</span>
+                </div>
+            )
+        } else if (userIsOwner) {
+            return (
+                <div className={styles.ActionButtons}>
+                    <span className={styles.ActionButton} onClick={() => router.push('/reisikaaslased/' + content.id + '/muuda')}>Muuda</span>
+                </div>
+            )
+        }
+
+        return null
     }
 
     return (
@@ -103,7 +130,11 @@ const TravelmatePage = ({ content }: Props) => {
                                 })}
                             </div>
                         </div>
-                        <div className={styles.Body}>{content.body}</div>
+                        <div className={clsx(styles.Body, {
+                            [styles.WithBodyMargin]: !(userIsOwner || userIsAdmin)
+                        })} dangerouslySetInnerHTML={{ __html: content.body }} />
+
+                        {renderActionButtons()}
 
                         {comments && comments?.length > 0 && (
                             <div className={styles.Comments}>

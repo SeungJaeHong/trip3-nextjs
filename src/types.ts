@@ -177,6 +177,12 @@ export type TravelmateContent = {
     body: string
     slug: string
     status: number
+    startType: 'start' | 'start_and_end'
+    gender?: 'M' | 'N'
+    startDate?: string
+    endDate?: string
+    startMonth?: string
+    duration?: string
     createdAt: string
     user: User
     destinations?: Destination[]
