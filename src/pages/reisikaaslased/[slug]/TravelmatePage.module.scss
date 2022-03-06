@@ -79,7 +79,7 @@
             color: $gray;
             gap: $spacer;
             align-items: flex-end;
-            margin-bottom: $spacer * 3;
+            margin-bottom: $spacer * 4;
 
             .ActionButton {
                 font-weight: 400;
@@ -101,8 +101,8 @@
 
             .CreatedAt {
                 font-size: $font-size-small;
-                color: $gray;
-                font-weight: 600;
+                color: $gray-darker;
+                font-weight: 400;
                 white-space: nowrap;
             }
 
@@ -119,11 +119,15 @@
 
         .Body {
             color: $gray-dark;
-            margin: $spacer * 4 0 $spacer * 2 0;
+            margin-top: $spacer * 5;
             font-size: $font-size-medium;
 
             &.WithBodyMargin {
                 margin-bottom: $spacer * 4;
+            }
+
+            > p {
+                margin: 0 0 $spacer * 1.5 0;
             }
 
             @include sm() {

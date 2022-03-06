@@ -14,9 +14,10 @@ type Props = {
     destinations: Destination[]
     topics: Topic[]
     durationOptions: { value: string; label: string }[]
+    monthOptions: { value: string; label: string }[]
 }
 
-const TravelmateAddPage = ({ destinations, topics, durationOptions }: Props) => {
+const TravelmateAddPage = ({ destinations, topics, durationOptions, monthOptions}: Props) => {
     const router = useRouter()
     return (
         <Fragment>
@@ -30,6 +31,7 @@ const TravelmateAddPage = ({ destinations, topics, durationOptions }: Props) => 
                                 destinations={destinations}
                                 topics={topics}
                                 durationOptions={durationOptions}
+                                monthOptions={monthOptions}
                             />
                         </div>
                     </div>
@@ -70,6 +72,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                 destinations: response.data.destinations || [],
                 topics: response.data.topics || [],
                 durationOptions: response.data.durationOptions,
+                monthOptions: response.data.monthOptions,
             },
         }
     } catch (e) {

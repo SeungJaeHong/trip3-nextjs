@@ -1,20 +1,19 @@
 import styles from './TravelmateStartDateSelection.module.scss'
 import React from 'react'
-import { getNext12MonthNamesWithYear } from '../../../helpers'
 import clsx from 'clsx'
 
 type Props = {
     id: string
     value?: string
+    options: {value: string, label: string}[]
     onChange: (option: string) => void
     disabled: boolean
 }
 
-const TravelmateStartDateSelection = ({ value, onChange }: Props) => {
-    const startOptions = getNext12MonthNamesWithYear()
+const TravelmateStartDateSelection = ({ value, onChange, options }: Props) => {
     return (
         <div className={styles.SelectionContainer}>
-            {startOptions.map((option) => {
+            {options.map((option) => {
                 return (
                     <div
                         className={clsx(styles.Selection, {

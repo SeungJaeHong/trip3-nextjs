@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 import Header from '../../../../components/Header'
 import { GetServerSideProps } from 'next'
 import containerStyle from '../../../../styles/containers.module.scss'
@@ -15,9 +15,10 @@ type Props = {
     destinations: Destination[]
     topics: Topic[]
     durationOptions: { value: string; label: string }[]
+    monthOptions: { value: string; label: string }[]
 }
 
-const TravelmateEditPage = ({ travelmate, destinations, topics, durationOptions }: Props) => {
+const TravelmateEditPage = ({ travelmate, destinations, topics, durationOptions, monthOptions }: Props) => {
     const router = useRouter()
     return (
         <Fragment>
@@ -32,6 +33,7 @@ const TravelmateEditPage = ({ travelmate, destinations, topics, durationOptions 
                                 destinations={destinations}
                                 topics={topics}
                                 durationOptions={durationOptions}
+                                monthOptions={monthOptions}
                             />
                         </div>
                     </div>
@@ -74,6 +76,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                 destinations: response.data.destinations || [],
                 topics: response.data.topics || [],
                 durationOptions: response.data.durationOptions,
+                monthOptions: response.data.monthOptions
             },
         }
     } catch (e) {

@@ -37,9 +37,10 @@ type Props = {
     destinations: Destination[]
     topics: Topic[]
     durationOptions: {value: string, label: string}[]
+    monthOptions: {value: string, label: string}[]
 }
 
-const TravelmateForm = ({travelmate, destinations, topics, durationOptions}: Props) => {
+const TravelmateForm = ({travelmate, destinations, topics, durationOptions, monthOptions}: Props) => {
     const router = useRouter()
     const travelmateSchema = yup.object().shape({
         title: yup.string().required('Pealkiri on kohustuslik'),
@@ -256,6 +257,7 @@ const TravelmateForm = ({travelmate, destinations, topics, durationOptions}: Pro
                                             return (
                                                 <TravelmateStartDateSelection
                                                     id={'startMonth'}
+                                                    options={monthOptions}
                                                     value={startMonth}
                                                     onChange={field.onChange}
                                                     disabled={isSubmitting}

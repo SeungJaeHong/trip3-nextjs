@@ -29,6 +29,7 @@
 
         :global(.FormSelect__control) {
             border: 0;
+            border-radius: unset;
         }
 
         :global(.FormSelect__placeholder) {
