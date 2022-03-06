@@ -74,9 +74,9 @@ const TravelmateForm = ({travelmate, destinations, topics, durationOptions, mont
         defaultValues: {
             title: travelmate?.title ?? '',
             body: travelmate?.body ?? '',
-            gender: travelmate?.gender,
+            gender: travelmate?.gender ?? '',
             startType: travelmate?.startType ?? 'start_and_end',
-            startMonth: travelmate?.startMonth,
+            startMonth: travelmate?.startMonth ?? monthOptions[5]['value'],
             dateRange: { startDate: travelmate?.startDate, endDate: travelmate?.endDate },
             duration: travelmate?.duration,
             destinations: travelmate ? travelmate.destinations?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],

@@ -2,10 +2,23 @@
 
 .SelectionContainer {
     width: 100%;
-    flex-wrap: wrap;
-    gap: $spacer;
-    display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(160px, 1fr) );
+    display: flex;
+    flex-direction: column;
+
+    .Options {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: $spacer;
+        display: grid;
+        grid-template-columns: repeat( auto-fit, minmax(160px, 1fr) );
+    }
+
+    .Separator {
+        width: 100%;
+        border: 1px solid $gray-light;
+        margin: $spacer 0;
+        height: 2px;
+    }
 
     .Selection {
         padding: $spacer * 2;
