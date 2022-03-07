@@ -61,7 +61,6 @@ const TravelmateFilter = ({
     ]
 
     const startOptions = getNext12MonthNamesWithYear()
-
     return (
         <div className={styles.TravelmateFilter}>
             <div className={styles.Field}>
@@ -97,7 +96,7 @@ const TravelmateFilter = ({
                     }
                 />
             </div>
-            <div className={styles.Field}>
+            {/*<div className={styles.Field}>
                 <FormSelect
                     id={'age'}
                     options={ageOptions}
@@ -118,8 +117,8 @@ const TravelmateFilter = ({
                         onChangeGender(value?.value ? value.value : undefined)
                     }
                 />
-            </div>
-            <div className={styles.Field}>
+            </div>*/}
+            <div className={styles.Button}>
                 <SubmitButton title={'Otsi'} onClick={onSearch} />
             </div>
         </div>
