@@ -21,8 +21,6 @@ type Props = {
     selectedDestination?: number
     selectedTopic?: number
     selectedStart?: string
-    selectedAge?: string
-    selectedGender?: string
     currentPage: number
     hasMore: boolean
 }
@@ -34,15 +32,11 @@ const TravelmatesIndex = ({
     selectedDestination,
     selectedTopic,
     selectedStart,
-    selectedAge,
-    selectedGender,
     currentPage,
     hasMore,
 }: Props) => {
     const [destination, setDestination] = useState<number | undefined>(selectedDestination)
     const [topic, setTopic] = useState<number | undefined>(selectedTopic)
-    const [age, setAge] = useState<string | undefined>(selectedAge)
-    const [gender, setGender] = useState<string | undefined>(selectedGender)
     const [start, setStart] = useState<string | undefined>(selectedStart)
     const router = useRouter()
 
@@ -55,8 +49,6 @@ const TravelmatesIndex = ({
             destination: destination,
             topic: topic,
             start: start,
-            age: age,
-            gender: gender,
             page: currentPage + 1,
         }
 
@@ -70,8 +62,6 @@ const TravelmatesIndex = ({
                 destination: destination,
                 topic: topic,
                 start: start,
-                age: age,
-                gender: gender,
                 page: currentPage - 1,
             }
 
@@ -86,9 +76,7 @@ const TravelmatesIndex = ({
         const urlParams = {
             destination: destination,
             topic: topic,
-            start: start,
-            age: age,
-            gender: gender,
+            start: start
         }
 
         const queryString = objectToQueryString(urlParams)
@@ -106,10 +94,6 @@ const TravelmatesIndex = ({
                         onChangeDestination={setDestination}
                         selectedTopic={topic}
                         onChangeTopic={setTopic}
-                        selectedAge={age}
-                        onChangeAge={setAge}
-                        selectedGender={gender}
-                        onChangeGender={setGender}
                         selectedStart={start}
                         onChangeStart={setStart}
                         onSearch={onSearch}
@@ -160,16 +144,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const destination = context.query?.destination
     const topic = context.query?.topic
     const start = context.query?.start
-    const age = context.query?.age
-    const gender = context.query?.gender
     let url = process.env.API_BASE_URL + '/travelmates'
 
     const urlParams = {
         destination: destination,
         topic: topic,
         start: start,
-        age: age,
-        gender: gender,
         page: page
     }
 
@@ -186,8 +166,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             selectedDestination: destination ? destination : null,
             selectedTopic: topic ? topic : null,
             selectedStart: start ? start : null,
-            selectedAge: age ? age : null,
-            selectedGender: gender ? gender : null,
         },
     }
 }
