@@ -3,11 +3,11 @@ import FormSelect from '../../Form/FormSelect'
 import SubmitButton from '../../Form/SubmitButton'
 import React from 'react'
 import { Destination, Topic } from '../../../types'
-import { getNext12MonthNamesWithYear } from '../../../helpers'
 
 type Props = {
     destinations: Destination[]
     topics: Topic[]
+    startOptions: {value: string, label: string}[]
     selectedDestination?: number
     selectedTopic?: number
     onChangeDestination: (id?: number) => void
@@ -20,6 +20,7 @@ type Props = {
 const TravelmateFilter = ({
     destinations,
     topics,
+    startOptions,
     selectedDestination,
     selectedTopic,
     onChangeDestination,
@@ -37,7 +38,6 @@ const TravelmateFilter = ({
         value: topic.id.toString(),
     }))
 
-    const startOptions = getNext12MonthNamesWithYear()
     return (
         <div className={styles.TravelmateFilter}>
             <div className={styles.Field}>
@@ -45,7 +45,7 @@ const TravelmateFilter = ({
                     id={'destination'}
                     options={destinationOptions}
                     placeholder={'Sihtkoht'}
-                    //value={selectedDestination?.toString()}
+                    value={selectedDestination?.toString()}
                     onChange={value => {
                         onChangeDestination(value? parseInt(value) : undefined)
                     }}
@@ -56,7 +56,7 @@ const TravelmateFilter = ({
                     id={'topic'}
                     options={topicOptions}
                     placeholder={'Reisistiil'}
-                    //value={selectedTopic?.toString()}
+                    value={selectedTopic?.toString()}
                     onChange={value =>
                         onChangeTopic(value ? parseInt(value) : undefined)
                     }
@@ -64,13 +64,13 @@ const TravelmateFilter = ({
             </div>
             <div className={styles.Field}>
                 <FormSelect
-                    id={'Algus'}
+                    id={'start'}
                     options={startOptions}
                     placeholder={'Algus'}
-                    //value={selectedStart}
-                    onChange={(value?: { label: string; value: string }) =>
-                        onChangeStart(value?.value ? value.value : undefined)
-                    }
+                    value={selectedStart}
+                    onChange={(value?: string) => {
+                        onChangeStart(value ?? undefined)
+                    }}
                 />
             </div>
             <div className={styles.Button}>

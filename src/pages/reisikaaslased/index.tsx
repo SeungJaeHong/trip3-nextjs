@@ -18,6 +18,7 @@ type Props = {
     travelmates: TravelmateRowType[]
     destinations: Destination[]
     topics: Topic[]
+    startOptions: {value: string, label: string}[]
     selectedDestination?: number
     selectedTopic?: number
     selectedStart?: string
@@ -29,6 +30,7 @@ const TravelmatesIndex = ({
     travelmates,
     destinations,
     topics,
+    startOptions,
     selectedDestination,
     selectedTopic,
     selectedStart,
@@ -90,6 +92,7 @@ const TravelmatesIndex = ({
                     <TravelmateFilter
                         destinations={destinations}
                         topics={topics}
+                        startOptions={startOptions}
                         selectedDestination={destination}
                         onChangeDestination={setDestination}
                         selectedTopic={topic}
@@ -163,6 +166,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             hasMore: res.data.hasMore,
             destinations: res.data.destinations,
             topics: res.data.topics,
+            startOptions: res.data.startOptions,
             selectedDestination: destination ? destination : null,
             selectedTopic: topic ? topic : null,
             selectedStart: start ? start : null,

@@ -5,7 +5,7 @@ import clsx from 'clsx'
 
 type Props = {
     id: string
-    value?: { value: string; label: string }
+    value?: string
     label?: string
     options: { value: string; label: string }[]
     placeholder?: string
@@ -19,7 +19,7 @@ type Props = {
 }
 
 const FormSelect = (props: Props) => {
-    const onChangeValue = (value: SingleValue<{ value: string; label: string }>) => {
+    const onChangeValue = (value?: SingleValue<{ value: string; label: string }>) => {
         props.onChange(value?.value)
     }
 
@@ -30,7 +30,7 @@ const FormSelect = (props: Props) => {
                 instanceId={props.id}
                 options={props.options}
                 isDisabled={props.disabled}
-                value={props.value}
+                defaultValue={props.options.find(o => o.value === props.value)}
                 className={clsx(styles.FormSelect, props.className, {
                     [styles.Invalid]: props.error.length > 0
                 })}
