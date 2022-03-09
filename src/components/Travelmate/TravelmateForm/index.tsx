@@ -276,7 +276,7 @@ const TravelmateForm = ({travelmate, destinations, topics, durationOptions, mont
                                                     id={'duration'}
                                                     options={durationOptions}
                                                     label={'Kestvus'}
-                                                    value={durationOptions.find(obj => obj.value === field.value)}
+                                                    value={field.value}
                                                     placeholder={'Vali kestvus'}
                                                     onChange={field.onChange}
                                                     error={fieldState.error?.message}
