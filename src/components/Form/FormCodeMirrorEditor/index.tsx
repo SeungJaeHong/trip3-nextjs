@@ -4,7 +4,6 @@ import styles from "./FormCodeMirrorEditor.module.scss"
 import clsx from "clsx"
 import dynamic from "next/dynamic"
 import "easymde/dist/easymde.min.css"
-import EasyMDE from "easymde"
 import { useDebounce } from 'use-debounce'
 import {parseFlightBody} from "../../../services/flight.service"
 import {parseNewsBody} from "../../../services/news.service"
@@ -12,6 +11,8 @@ import CheckIcon from "../../../icons/CheckIcon"
 import ImageSelectSidebar from "../../ImageSelectSidebar"
 import {Editor} from "codemirror"
 
+// @ts-ignore
+const EasyMDE = dynamic(() => import("easymde"), { ssr: false })
 const SimpleMdeReact = dynamic(() => import("react-simplemde-editor"), { ssr: false })
 
 type Props = {
@@ -82,12 +83,14 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
         let toolbar =  [
             {
                 name: 'bold',
+                // @ts-ignore
                 action: EasyMDE.toggleBold,
                 className: "fa fa-bold",
                 title: 'Bold',
             },
             {
                 name: 'italics',
+                // @ts-ignore
                 action: EasyMDE.toggleItalic,
                 className: "fa fa-italic",
                 title: 'italic',
