@@ -16,13 +16,16 @@ import BlockTitle from '../../../components/BlockTitle'
 import CommentEditor from '../../../components/CommentEditor'
 import { postComment } from '../../../services/comment.service'
 import { toast } from 'react-toastify'
-import clsx from "clsx"
+import clsx from 'clsx'
+import { toggleTravelmateStatus } from '../../../services/travelmate.service'
+import Alert from '../../../components/Alert'
 
 type Props = {
     content: TravelmateContent
 }
 
 const TravelmatePage = ({ content }: Props) => {
+    const [travelmate, setTravelmate] = useState<TravelmateContent>(content)
     const [commentValue, setCommentValue] = useState<string>('')
     const [submitting, setSubmitting] = useState<boolean>(false)
     const [comments, setComments] = useState<Comment[] | undefined>(content.comments)
@@ -33,7 +36,7 @@ const TravelmatePage = ({ content }: Props) => {
 
     const onCommentSubmit = async (value: string) => {
         setSubmitting(true)
-        await postComment(value, content.id, 'travelmate')
+        await postComment(value, travelmate.id, 'travelmate')
             .then((response) => {
                 setCommentValue(value)
                 setCommentValue('')
@@ -54,17 +57,28 @@ const TravelmatePage = ({ content }: Props) => {
             .finally(() => setSubmitting(false))
     }
 
-    const hideTravelmate = () => {
-        console.log('hide')
+    const onToggleStatus = () => {
+        if (userIsAdmin) {
+            const status = !travelmate.status
+            toggleTravelmateStatus(travelmate, status)
+                .then((res) => {
+                    const newTravelmate = {...travelmate, status: res.data}
+                    setTravelmate(newTravelmate)
+                    toast.success(newTravelmate.status === 1 ? 'Kuulutus avalikustatud' : 'Kuulutus peidetud')
+                })
+                .catch((err) => {
+                    toast.error('Kuulutuse muutmine ebaõnnestus')
+                })
+        }
     }
 
     const renderAgeAndGender = () => {
         let value = undefined
-        const gender = content.user.gender ? (content.user.gender === 1 ? 'M' : 'N') : undefined
-        if (content.user.age && gender) {
-            value = gender + ', ' + content.user.age
-        } else if (content.user.age) {
-            value = content.user.age
+        const gender = travelmate.user.gender ? (travelmate.user.gender === 1 ? 'M' : 'N') : undefined
+        if (travelmate.user.age && gender) {
+            value = gender + ', ' + travelmate.user.age
+        } else if (travelmate.user.age) {
+            value = travelmate.user.age
         } else if (gender) {
             value = gender
         }
@@ -80,15 +94,27 @@ const TravelmatePage = ({ content }: Props) => {
         if (userIsAdmin) {
             return (
                 <div className={styles.ActionButtons}>
-                    <span className={styles.ActionButton} onClick={() => router.push('/reisikaaslased/' + content.id + '/muuda')}>Muuda</span>{' '}
+                    <span
+                        className={styles.ActionButton}
+                        onClick={() => router.push('/reisikaaslased/' + travelmate.id + '/muuda')}
+                    >
+                        Muuda
+                    </span>{' '}
                     /
-                    <span className={styles.ActionButton} onClick={hideTravelmate}>Peida</span>
+                    <span className={styles.ActionButton} onClick={onToggleStatus}>
+                        {travelmate.status === 1 ? 'Peida' : 'Avalikusta'}
+                    </span>
                 </div>
             )
         } else if (userIsOwner) {
             return (
                 <div className={styles.ActionButtons}>
-                    <span className={styles.ActionButton} onClick={() => router.push('/reisikaaslased/' + content.id + '/muuda')}>Muuda</span>
+                    <span
+                        className={styles.ActionButton}
+                        onClick={() => router.push('/reisikaaslased/' + travelmate.id + '/muuda')}
+                    >
+                        Muuda
+                    </span>
                 </div>
             )
         }
@@ -97,8 +123,8 @@ const TravelmatePage = ({ content }: Props) => {
     }
 
     const renderGender = () => {
-        if (content.gender === 'M' || content.gender === 'N') {
-            return content.gender === 'M' ? 'Mees' : 'Naine'
+        if (travelmate.gender === 'M' || travelmate.gender === 'N') {
+            return travelmate.gender === 'M' ? 'Mees' : 'Naine'
         } else {
             return 'Kõik sobib'
         }
@@ -119,11 +145,16 @@ const TravelmatePage = ({ content }: Props) => {
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.PageContentContainer}>
                     <div className={styles.PageContent}>
-                        <div className={styles.TravelmateTitle}>{content.title}</div>
+                        {travelmate.status === 0 && (
+                            <div className={styles.Alert}>
+                                <Alert title={'Kuulutus ei ole avalikustatud!'} type={'warning'} />
+                            </div>
+                        )}
+                        <div className={styles.TravelmateTitle}>{travelmate.title}</div>
                         <div className={styles.MetaData}>
-                            <div className={styles.CreatedAt}>Lisatud {content.createdAt}</div>
+                            <div className={styles.CreatedAt}>Lisatud {travelmate.createdAt}</div>
                             <div className={styles.Tags}>
-                                {content.destinations?.map((destination: Destination) => {
+                                {travelmate.destinations?.map((destination: Destination) => {
                                     return (
                                         <Tag
                                             title={destination.name}
@@ -133,14 +164,17 @@ const TravelmatePage = ({ content }: Props) => {
                                         />
                                     )
                                 })}
-                                {content.topics?.map((topic: Topic) => {
+                                {travelmate.topics?.map((topic: Topic) => {
                                     return <Tag title={topic.name} key={topic.id} />
                                 })}
                             </div>
                         </div>
-                        <div className={clsx(styles.Body, {
-                            [styles.WithBodyMargin]: !(userIsOwner || userIsAdmin)
-                        })} dangerouslySetInnerHTML={{ __html: content.body }} />
+                        <div
+                            className={clsx(styles.Body, {
+                                [styles.WithBodyMargin]: !(userIsOwner || userIsAdmin),
+                            })}
+                            dangerouslySetInnerHTML={{ __html: travelmate.body }}
+                        />
 
                         {renderActionButtons()}
 
@@ -170,21 +204,21 @@ const TravelmatePage = ({ content }: Props) => {
                             <div className={styles.UserInfo}>
                                 <div
                                     className={styles.UserAvatar}
-                                    onClick={() => router.push('/user/' + content.user.id)}
+                                    onClick={() => router.push('/user/' + travelmate.user.id)}
                                 >
-                                    <UserAvatar user={content.user} />
+                                    <UserAvatar user={travelmate.user} />
                                 </div>
                                 <div className={styles.UserNameContainer}>
-                                    <Link href={'/user/' + content.user.id}>
-                                        <a className={styles.UserName}>{content.user.name}</a>
+                                    <Link href={'/user/' + travelmate.user.id}>
+                                        <a className={styles.UserName}>{travelmate.user.name}</a>
                                     </Link>
                                     {renderAgeAndGender()}
                                 </div>
                             </div>
-                            {userIsLoggedIn && content.user.id !== user?.id && (
+                            {userIsLoggedIn && travelmate.user.id !== user?.id && (
                                 <div
                                     className={styles.SendButton}
-                                    onClick={() => router.push('/profile/messages/' + content.user.id)}
+                                    onClick={() => router.push('/profile/messages/' + travelmate.user.id)}
                                 >
                                     Saada sõnum
                                 </div>
@@ -193,11 +227,11 @@ const TravelmatePage = ({ content }: Props) => {
                         <div className={styles.InfoCard}>
                             <div className={styles.InfoBlock}>
                                 <div className={styles.InfoQuestion}>Reisi algus</div>
-                                <div className={styles.InfoAnswer}>{content.startMonth ?? '-'}</div>
+                                <div className={styles.InfoAnswer}>{travelmate.startMonth ?? '-'}</div>
                             </div>
                             <div className={styles.InfoBlock}>
                                 <div className={styles.InfoQuestion}>Reisi kestvus</div>
-                                <div className={styles.InfoAnswer}>{content.duration ?? '-'}</div>
+                                <div className={styles.InfoAnswer}>{travelmate.duration ?? '-'}</div>
                             </div>
                             <div className={styles.InfoBlock}>
                                 <div className={styles.InfoQuestion}>Millist kaaslast soovid leida?</div>

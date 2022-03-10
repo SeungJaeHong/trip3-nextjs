@@ -13,3 +13,9 @@ export const storeTravelmate = async (formValues: any): Promise<AxiosResponse> =
 export const updateTravelmate = async (travelmate: TravelmateContent, formValues: any): Promise<AxiosResponse> => {
     return await ApiClient.post('/travelmate/' + travelmate.id + '/update', formValues)
 }
+
+export const toggleTravelmateStatus = async (travelmate: TravelmateContent, value: boolean): Promise<AxiosResponse> => {
+    return await ApiClient.post('/travelmate/' + travelmate.id + '/status', {
+        value: value
+    })
+}
