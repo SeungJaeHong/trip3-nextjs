@@ -35,8 +35,9 @@ const ForumPost = (item: Content) => {
             const status = !post.status
             togglePostStatus(post, status)
                 .then((res) => {
-                    setPost(res.data)
-                    toast.success(res.data.status === 1 ? 'Postitus avalikustatud' : 'Postitus peidetud')
+                    const newPost = {...post, status: res.data}
+                    setPost(newPost)
+                    toast.success(newPost.status === 1 ? 'Postitus avalikustatud' : 'Postitus peidetud')
                 })
                 .catch((err) => {
                     if (err.response?.status === 401 || err.response?.status === 419) {
