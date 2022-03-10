@@ -16,7 +16,7 @@ import BlockTitle from '../../../components/BlockTitle'
 import CommentEditor from '../../../components/CommentEditor'
 import { postComment } from '../../../services/comment.service'
 import { toast } from 'react-toastify'
-import clsx from "clsx";
+import clsx from "clsx"
 
 type Props = {
     content: TravelmateContent
@@ -94,6 +94,14 @@ const TravelmatePage = ({ content }: Props) => {
         }
 
         return null
+    }
+
+    const renderGender = () => {
+        if (content.gender === 'M' || content.gender === 'N') {
+            return content.gender === 'M' ? 'Mees' : 'Naine'
+        } else {
+            return 'Kõik sobib'
+        }
     }
 
     return (
@@ -185,15 +193,15 @@ const TravelmatePage = ({ content }: Props) => {
                         <div className={styles.InfoCard}>
                             <div className={styles.InfoBlock}>
                                 <div className={styles.InfoQuestion}>Reisi algus</div>
-                                <div className={styles.InfoAnswer}>Märts, 2016</div>
+                                <div className={styles.InfoAnswer}>{content.startMonth ?? '-'}</div>
                             </div>
                             <div className={styles.InfoBlock}>
                                 <div className={styles.InfoQuestion}>Reisi kestvus</div>
-                                <div className={styles.InfoAnswer}>1 - 2 nädalat</div>
+                                <div className={styles.InfoAnswer}>{content.duration ?? '-'}</div>
                             </div>
                             <div className={styles.InfoBlock}>
                                 <div className={styles.InfoQuestion}>Millist kaaslast soovid leida?</div>
-                                <div className={styles.InfoAnswer}>Kõik sobib</div>
+                                <div className={styles.InfoAnswer}>{renderGender()}</div>
                             </div>
                         </div>
                     </div>
