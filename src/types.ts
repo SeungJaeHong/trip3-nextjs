@@ -64,6 +64,11 @@ export interface Topic {
     name: string
 }
 
+export interface Tag {
+    id: number
+    name: string
+}
+
 export interface Comment {
     id: number
     commentableId: number
@@ -124,12 +129,13 @@ export type FlightContent = {
     id: number
     title: string
     body: string
+    bodyRaw: string
     slug: string
     status: number
     createdAt: string
     backgroundImageUrl: string
     destinations?: Destination[]
-    topics?: Topic[]
+    tags?: Tag[]
 }
 
 export type NewsContent = {

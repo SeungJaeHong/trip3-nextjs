@@ -1,25 +1,25 @@
-import React, {Fragment} from 'react'
-import Header from "../../components/Header"
-import {GetServerSideProps} from "next"
-import Footer from "../../components/Footer";
-import containerStyle from "../../styles/containers.module.scss";
-import styles from "./FlightOfferPage.module.scss"
-import FlightOfferFilterTags from "../../components/FlightOffer/FlightOfferFilterTags"
-import {FlightOfferRowType} from "../../types";
-import FlightOfferList from "../../components/FlightOffer/FlightOfferList";
-import MoreLink from "../../components/MoreLink";
-import SimplePaginator from "../../components/Paginator/SimplePaginator";
-import {objectToQueryString} from "../../helpers";
-import {useRouter} from "next/router"
-import Button from "../../components/Button";
-import ApiClientSSR from "../../lib/ApiClientSSR";
+import React, { Fragment } from 'react'
+import Header from '../../components/Header'
+import { GetServerSideProps } from 'next'
+import Footer from '../../components/Footer'
+import containerStyle from '../../styles/containers.module.scss'
+import styles from './FlightOfferPage.module.scss'
+import FlightOfferFilterTags from '../../components/FlightOffer/FlightOfferFilterTags'
+import { FlightOfferRowType } from '../../types'
+import FlightOfferList from '../../components/FlightOffer/FlightOfferList'
+import MoreLink from '../../components/MoreLink'
+import SimplePaginator from '../../components/Paginator/SimplePaginator'
+import { objectToQueryString } from '../../helpers'
+import { useRouter } from 'next/router'
+import Button from '../../components/Button'
+import ApiClientSSR from '../../lib/ApiClientSSR'
 
 type Props = {
-    flightOffers: FlightOfferRowType[],
-    currentPage: number,
-    filter?: [],
-    destination?: number,
-    hasMore: boolean,
+    flightOffers: FlightOfferRowType[]
+    currentPage: number
+    filter?: []
+    destination?: number
+    hasMore: boolean
 }
 
 const FlightsIndex = (props: Props) => {
@@ -31,7 +31,7 @@ const FlightsIndex = (props: Props) => {
 
         const urlParams = {
             filter: props.filter,
-            page: props.currentPage + 1
+            page: props.currentPage + 1,
         }
 
         const queryString = objectToQueryString(urlParams)
@@ -42,7 +42,7 @@ const FlightsIndex = (props: Props) => {
         if (props.currentPage > 1) {
             const urlParams = {
                 filter: props.filter,
-                page: props.currentPage - 1
+                page: props.currentPage - 1,
             }
 
             const queryString = objectToQueryString(urlParams)
@@ -67,7 +67,8 @@ const FlightsIndex = (props: Props) => {
                             <div className={styles.Paginator}>
                                 <SimplePaginator
                                     nextPageUrl={getNextPageUrl()}
-                                    previousPageUrl={getPreviousPageUrl()} />
+                                    previousPageUrl={getPreviousPageUrl()}
+                                />
                             </div>
                         </div>
                         <div className={styles.Sidebar}>
@@ -86,7 +87,7 @@ const FlightsIndex = (props: Props) => {
                                 </div>
                             </div>
                             <div className={styles.AddNewButton}>
-                                <Button title={'Lisa uus pakkumine'} route={'/'} />
+                                <Button title={'Lisa uus pakkumine'} onClick={() => router.push('/odavad-lennupiletid/lisa-uus')} />
                             </div>
                         </div>
                     </div>
@@ -116,7 +117,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     data.hasMore = res.data.flightOffers?.hasMore
 
     return {
-        props: data
+        props: data,
     }
 }
 
