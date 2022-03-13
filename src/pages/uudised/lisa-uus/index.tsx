@@ -32,7 +32,7 @@ const NewsAddPage = ({destinations, topics}: Props) => {
             toast.success('Uudis lisatud')
             router.push('/uudised/' + res.data.slug)
         }).catch(e => {
-            toast.success('Uudise lisamine ebaõnnestus')
+            toast.error('Uudise lisamine ebaõnnestus')
         }).finally(() => setSubmitting(false))
     }
 

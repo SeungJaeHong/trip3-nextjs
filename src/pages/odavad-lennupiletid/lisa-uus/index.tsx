@@ -12,6 +12,8 @@ import LoadingSpinner2 from '../../../components/LoadingSpinner2'
 import { GetServerSideProps } from 'next'
 import ApiClientSSR from '../../../lib/ApiClientSSR'
 import FlightForm from '../../../components/FlightOffer/FlightForm'
+import {toast} from "react-toastify"
+import {storeFlight} from "../../../services/flight.service"
 
 type Props = {
     destinations: Destination[]
@@ -25,7 +27,13 @@ const FlightOfferAddPage = ({ destinations, tags }: Props) => {
     const [submitting, setSubmitting] = useState<boolean>(false)
 
     const onSubmit = (values: any) => {
-        console.log(values)
+        setSubmitting(true)
+        storeFlight(values).then(res => {
+            toast.success('Pakkumine lisatud')
+            router.push('/odavad-lennupiletid/' + res.data.slug)
+        }).catch(e => {
+            toast.error('Pakkumise lisamine ebaõnnestus')
+        }).finally(() => setSubmitting(false))
     }
 
     useEffect(() => {

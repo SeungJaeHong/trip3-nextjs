@@ -50,6 +50,7 @@ const FlightForm = ({flight, destinations, tags, onSubmit}: Props) => {
     const handleSave: SubmitHandler<Inputs> = async (values: Inputs) => {
         const formData = {
             ...values,
+            image: values.image[0],
             destinations: values.destinations.map((d) => parseInt(d.value)),
             tags: values?.tags.map((t) => parseInt(t.value)),
         }
