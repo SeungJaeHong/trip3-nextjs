@@ -3,7 +3,7 @@
 .UserNavBarMenu {
     position: relative;
     cursor: pointer;
-    z-index: 2;
+    //z-index: 2;
 
     .LinkTitle {
         color: $white;
@@ -30,6 +30,7 @@
         right: 0;
         top: 40px;
         display: none;
+        z-index: 1;
 
         .ArrowWrapper {
             display: flex;

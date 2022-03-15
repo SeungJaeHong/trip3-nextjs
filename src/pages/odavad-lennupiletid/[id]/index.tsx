@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from 'react'
 import {GetServerSideProps} from 'next'
-import {Destination, FlightContent, Topic} from "../../../types"
+import {Destination, FlightContent, Tag as TagType} from "../../../types"
 import Header from "../../../components/Header"
 import styles from "../FlightOfferPage.module.scss"
 import containerStyle from "../../../styles/containers.module.scss"
@@ -57,8 +57,8 @@ const FlightOfferShow = ({flightObj}: Props) => {
                         {flight.destinations?.map((destination: Destination) => {
                             return <Tag title={destination.name} type={'destination'} route={'/sihtkoht/' + destination.slug} large={true} key={destination.id} />
                         })}
-                        {flight.tags?.map((topic: Topic) => {
-                            return <Tag title={topic.name} large={true} key={topic.id} />
+                        {flight.tags?.map((tag: TagType) => {
+                            return <Tag title={tag.name} large={true} key={tag.id} white={true} />
                         })}
                     </div>
                     {userIsAdmin &&
