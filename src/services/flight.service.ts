@@ -26,3 +26,9 @@ export const storeFlight = async (values: any) => {
         }
     })
 }
+
+export const publishFlight = async (flightId: number, status = true) => {
+    return await ApiClient.post('/flight/' + flightId + '/publish', {
+        status: status
+    })
+}

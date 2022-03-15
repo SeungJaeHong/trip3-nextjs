@@ -90,12 +90,12 @@ const NewsShow = ({newsObj}: Props) => {
                         })}
                     </div>
                     {userIsAdmin &&
-                    <div className={styles.ActionButtons}>
-                        <div className={styles.ActionButton} onClick={() => router.push('/uudised/' + news.id + '/muuda')}>Muuda</div>
-                        <div className={clsx(styles.ActionButton, styles.Hide)} onClick={() => publish(!Boolean(news.status))}>
-                            {news.status === 0 ? 'Avalikusta' : 'Peida'}
+                        <div className={styles.ActionButtons}>
+                            <div className={styles.ActionButton} onClick={() => router.push('/uudised/' + news.id + '/muuda')}>Muuda</div>
+                            <div className={clsx(styles.ActionButton, styles.Hide)} onClick={() => publish(!Boolean(news.status))}>
+                                {news.status === 0 ? 'Avalikusta' : 'Peida'}
+                            </div>
                         </div>
-                    </div>
                     }
                 </div>
             </Header>

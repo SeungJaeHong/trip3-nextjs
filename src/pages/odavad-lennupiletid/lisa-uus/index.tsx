@@ -26,6 +26,7 @@ const FlightOfferAddPage = ({ destinations, tags }: Props) => {
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const [submitting, setSubmitting] = useState<boolean>(false)
 
+    //todo: move to form component
     const onSubmit = (values: any) => {
         setSubmitting(true)
         storeFlight(values).then(res => {

@@ -105,6 +105,32 @@
         padding-bottom: $spacer * 4;
         gap: $spacer;
     }
+
+    .ActionButtons {
+        display: flex;
+        gap: $spacer;
+        margin-bottom: $spacer * 3;
+
+        .ActionButton {
+            font-size: $font-size-xsmall;
+            font-weight: 500;
+            color: $white;
+            background: $green-dark;
+            padding: 4px $spacer * 2;
+            cursor: pointer;
+            border-radius: 3px;
+            opacity: .9;
+
+            &.Hide {
+                background: $warning-color;
+                color: $gray-dark;
+            }
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
 }
 
 .BodyContainer {

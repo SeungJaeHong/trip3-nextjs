@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useState} from 'react'
 import {GetServerSideProps} from 'next'
 import {Destination, FlightContent, Topic} from "../../../types"
 import Header from "../../../components/Header"
@@ -6,18 +6,33 @@ import styles from "../FlightOfferPage.module.scss"
 import containerStyle from "../../../styles/containers.module.scss"
 import Tag from "../../../components/Tag"
 import clsx from "clsx";
-import Button from "../../../components/Button"
 import Footer from "../../../components/Footer"
 import parse from 'html-react-parser'
 import FlightMap from "../../../components/FlightMap"
 import ApiClientSSR from "../../../lib/ApiClientSSR"
 import Alert from "../../../components/Alert"
+import useUser from "../../../hooks"
+import {useRouter} from "next/router"
+import {toast} from "react-toastify"
+import {publishFlight} from "../../../services/flight.service"
 
 type Props = {
-    flight: FlightContent
+    flightObj: FlightContent
 }
 
-const FlightOfferShow = ({flight}: Props) => {
+const FlightOfferShow = ({flightObj}: Props) => {
+    const [flight, setFlight] = useState<FlightContent>(flightObj)
+    const {userIsLoggedIn, user} = useUser()
+    const userIsAdmin = userIsLoggedIn && user?.isAdmin
+    const router = useRouter()
+
+    const publish = (status: boolean) => {
+        publishFlight(flight.id, status).then(res => {
+            setFlight({...flight, status: status ? 1 : 0})
+            toast.success(status ? 'Pakkumine avalikustatud' : 'Pakkumine peidetud')
+        }).catch(e => {})
+    }
+
     const renderBody = (htmlString: string) => {
         return parse(htmlString, {
             replace: (domNode: any) => {
@@ -46,6 +61,14 @@ const FlightOfferShow = ({flight}: Props) => {
                             return <Tag title={topic.name} large={true} key={topic.id} />
                         })}
                     </div>
+                    {userIsAdmin &&
+                        <div className={styles.ActionButtons}>
+                            <div className={styles.ActionButton} onClick={() => router.push('/odavad-lennupiletid/' + flight.id + '/muuda')}>Muuda</div>
+                            <div className={clsx(styles.ActionButton, styles.Hide)} onClick={() => publish(!Boolean(flight.status))}>
+                                {flight.status === 0 ? 'Avalikusta' : 'Peida'}
+                            </div>
+                        </div>
+                    }
                 </div>
             </Header>
             <div className={containerStyle.ContainerXl}>
@@ -77,10 +100,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         const slug = context.query.id
         let url = process.env.API_BASE_URL + '/flight/' + slug
         const response = await ApiClientSSR(context).get(url)
-
         return {
             props: {
-                flight: response.data
+                flightObj: response.data
             }
         }
     } catch (e) {
