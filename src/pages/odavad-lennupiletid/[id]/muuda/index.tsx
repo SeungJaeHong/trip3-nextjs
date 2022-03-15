@@ -1,26 +1,27 @@
 import React, { Fragment, useEffect, useState } from 'react'
-import Navbar from '../../../components/Navbar'
-import styles from './FlightOfferAddPage.module.scss'
+import Navbar from '../../../../components/Navbar'
+import styles from '../../lisa-uus/FlightOfferAddPage.module.scss'
 import clsx from 'clsx'
-import Footer from '../../../components/Footer'
-import containerStyle from '../../../styles/containers.module.scss'
-import BackgroundMap from '../../../components/BackgroundMap'
+import Footer from '../../../../components/Footer'
+import containerStyle from '../../../../styles/containers.module.scss'
+import BackgroundMap from '../../../../components/BackgroundMap'
 import { useRouter } from 'next/router'
-import useUser from '../../../hooks'
-import { Destination, Tag } from '../../../types'
-import LoadingSpinner2 from '../../../components/LoadingSpinner2'
+import useUser from '../../../../hooks'
+import { Destination, FlightContent, Tag } from '../../../../types'
+import LoadingSpinner2 from '../../../../components/LoadingSpinner2'
 import { GetServerSideProps } from 'next'
-import ApiClientSSR from '../../../lib/ApiClientSSR'
-import FlightForm from '../../../components/FlightOffer/FlightForm'
-import {toast} from "react-toastify"
-import {storeFlight} from "../../../services/flight.service"
+import ApiClientSSR from '../../../../lib/ApiClientSSR'
+import FlightForm from '../../../../components/FlightOffer/FlightForm'
+import { toast } from 'react-toastify'
+import {updateFlight} from '../../../../services/flight.service'
 
 type Props = {
+    flight: FlightContent
     destinations: Destination[]
     tags: Tag[]
 }
 
-const FlightOfferAddPage = ({ destinations, tags }: Props) => {
+const FlightOfferEditPage = ({ flight, destinations, tags }: Props) => {
     const router = useRouter()
     const { loading, userIsLoggedIn, user } = useUser()
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
@@ -29,12 +30,15 @@ const FlightOfferAddPage = ({ destinations, tags }: Props) => {
     //todo: move to form component?
     const onSubmit = (values: any) => {
         setSubmitting(true)
-        storeFlight(values).then(res => {
-            toast.success('Pakkumine lisatud')
-            router.push('/odavad-lennupiletid/' + res.data.slug)
-        }).catch(e => {
-            toast.error('Pakkumise lisamine ebaõnnestus')
-        }).finally(() => setSubmitting(false))
+        updateFlight(flight, values)
+            .then((res) => {
+                toast.success('Pakkumine muudetud')
+                router.push('/odavad-lennupiletid/' + res.data.slug)
+            })
+            .catch((e) => {
+                toast.error('Pakkumise muutmine ebaõnnestus')
+            })
+            .finally(() => setSubmitting(false))
     }
 
     useEffect(() => {
@@ -60,7 +64,7 @@ const FlightOfferAddPage = ({ destinations, tags }: Props) => {
                             <LoadingSpinner2 />
                         </div>
                     )}
-                    <FlightForm destinations={destinations} tags={tags} onSubmit={onSubmit} />
+                    <FlightForm flight={flight} destinations={destinations} tags={tags} onSubmit={onSubmit} />
                 </div>
             )
         }
@@ -79,9 +83,7 @@ const FlightOfferAddPage = ({ destinations, tags }: Props) => {
                 <div className={styles.Content}>
                     <div className={containerStyle.ContainerLg}>
                         <div className={containerStyle.CenteredContainer}>
-                            <div className={styles.Body}>
-                                {renderContent()}
-                            </div>
+                            <div className={styles.Body}>{renderContent()}</div>
                         </div>
                     </div>
                 </div>
@@ -93,11 +95,13 @@ const FlightOfferAddPage = ({ destinations, tags }: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
-        const url = process.env.API_BASE_URL + '/flights/add'
+        const id = context.query.id
+        const url = process.env.API_BASE_URL + '/flight/' + id + '/edit'
         const response: any = await ApiClientSSR(context).get(url)
 
         return {
             props: {
+                flight: response.data.flight,
                 destinations: response.data.destinations || [],
                 tags: response.data.tags || [],
             },
@@ -112,4 +116,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-export default FlightOfferAddPage
+export default FlightOfferEditPage
