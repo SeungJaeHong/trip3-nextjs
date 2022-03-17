@@ -2,10 +2,14 @@ import styles from './FlightOfferList.module.scss'
 import {FlightOfferRowType} from "../../../types"
 import FlightOfferRow from "../FlightOfferRow"
 
-const FlightOfferList = (props: {items: FlightOfferRowType[]}) => {
+type Props = {
+    items: FlightOfferRowType[]
+}
+
+const FlightOfferList = ({items}: Props) => {
     return (
         <div className={styles.FlightOfferList}>
-            {props.items.map((item: FlightOfferRowType) => {
+            {items.map((item: FlightOfferRowType) => {
                 return (
                     <div className={styles.FlightOfferRow} key={item.id}>
                         <FlightOfferRow {...item} />

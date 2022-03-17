@@ -73,6 +73,18 @@ const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }
         router.push(router.pathname + '?' + queryString)
     }
 
+    const renderResults = () => {
+        if (flightOffers.length === 0) {
+            return (
+                <div className={styles.NoResults}>
+                    Tulemusi ei leitud
+                </div>
+            )
+        }
+
+        return <FlightOfferList items={flightOffers} />
+    }
+
     return (
         <Fragment>
             <Header title={'Lennupakkumised'}>
@@ -84,7 +96,7 @@ const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }
                 <div className={containerStyle.CenteredContainer}>
                     <div className={styles.Content}>
                         <div className={styles.FlightOfferList}>
-                            <FlightOfferList items={flightOffers} />
+                            {renderResults()}
                             <div className={styles.Paginator}>
                                 <SimplePaginator
                                     nextPageUrl={getNextPageUrl()}
