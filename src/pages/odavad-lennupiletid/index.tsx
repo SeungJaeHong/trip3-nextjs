@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import Header from '../../components/Header'
 import { GetServerSideProps } from 'next'
 import Footer from '../../components/Footer'
@@ -16,22 +16,24 @@ import ApiClientSSR from '../../lib/ApiClientSSR'
 
 type Props = {
     flightOffers: FlightOfferRowType[]
+    filterTags: { id: number; name: string }[]
     currentPage: number
-    filter?: []
-    destination?: number
+    filter: []
     hasMore: boolean
 }
 
-const FlightsIndex = (props: Props) => {
+const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }: Props) => {
+    const [filters, setFilters] = useState<Array<number>>(filter)
     const router = useRouter()
+
     const getNextPageUrl = () => {
-        if (!props.hasMore) {
+        if (!hasMore) {
             return undefined
         }
 
         const urlParams = {
-            filter: props.filter,
-            page: props.currentPage + 1,
+            filter: filters,
+            page: currentPage + 1,
         }
 
         const queryString = objectToQueryString(urlParams)
@@ -39,10 +41,10 @@ const FlightsIndex = (props: Props) => {
     }
 
     const getPreviousPageUrl = () => {
-        if (props.currentPage > 1) {
+        if (currentPage > 1) {
             const urlParams = {
-                filter: props.filter,
-                page: props.currentPage - 1,
+                filter: filters,
+                page: currentPage - 1,
             }
 
             const queryString = objectToQueryString(urlParams)
@@ -52,18 +54,37 @@ const FlightsIndex = (props: Props) => {
         }
     }
 
+    const toggle = (id: number) => {
+        if (filters.includes(id)) {
+            return filters.filter((i) => i !== id)
+        } else return [...filters, id]
+    }
+
+    const onFilterSelect = (id: number) => {
+        const newFilters = toggle(id)
+        setFilters(newFilters)
+
+        const urlParams = {
+            filter: newFilters,
+            page: 1,
+        }
+
+        const queryString = objectToQueryString(urlParams)
+        router.push(router.pathname + '?' + queryString)
+    }
+
     return (
         <Fragment>
             <Header title={'Lennupakkumised'}>
                 <div className={styles.FlightOfferTabs}>
-                    <FlightOfferFilterTags />
+                    <FlightOfferFilterTags tags={filterTags} selected={filters} onSelect={onFilterSelect} />
                 </div>
             </Header>
             <div className={containerStyle.ContainerXl}>
                 <div className={containerStyle.CenteredContainer}>
                     <div className={styles.Content}>
                         <div className={styles.FlightOfferList}>
-                            <FlightOfferList items={props.flightOffers} />
+                            <FlightOfferList items={flightOffers} />
                             <div className={styles.Paginator}>
                                 <SimplePaginator
                                     nextPageUrl={getNextPageUrl()}
@@ -87,7 +108,10 @@ const FlightsIndex = (props: Props) => {
                                 </div>
                             </div>
                             <div className={styles.AddNewButton}>
-                                <Button title={'Lisa uus pakkumine'} onClick={() => router.push('/odavad-lennupiletid/lisa-uus')} />
+                                <Button
+                                    title={'Lisa uus pakkumine'}
+                                    onClick={() => router.push('/odavad-lennupiletid/lisa-uus')}
+                                />
                             </div>
                         </div>
                     </div>
@@ -102,22 +126,33 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const page = context.query?.page
     const filter = context.query?.filter
     let url = process.env.API_BASE_URL + '/flights'
-    if (page) {
-        url += '?page=' + page
+
+    const urlParams = {
+        filter: filter,
+        page: page,
     }
 
-    const data = {
-        flightOffers: [],
-        currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
-        hasMore: false,
-    }
+    const queryString = objectToQueryString(urlParams)
+    url += '?' + queryString
 
     const res = await ApiClientSSR(context).get(url)
-    data.flightOffers = res.data.flightOffers?.items
-    data.hasMore = res.data.flightOffers?.hasMore
+
+    let filterValue: Array<number> = []
+    if (filter) {
+        if (typeof filter === 'string') {
+            const values = filter.split(',')
+            filterValue = values.map(x => parseInt(x))
+        }
+    }
 
     return {
-        props: data,
+        props: {
+            flightOffers: res.data.flightOffers?.items,
+            filterTags: res.data.filterTags,
+            currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
+            hasMore: res.data.flightOffers?.hasMore,
+            filter: filterValue
+        },
     }
 }
 

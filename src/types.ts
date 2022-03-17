@@ -253,6 +253,7 @@ export type FlightOfferRowType = {
     slug: string
     createdAt: string
     destinations?: Destination[]
+    tags?: Tag[]
 }
 
 export type FlightOfferCardType = {
