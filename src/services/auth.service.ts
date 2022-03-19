@@ -3,9 +3,6 @@ import {AxiosResponse} from "axios"
 import {User} from "../types"
 
 export const getUser = async (): Promise<User> => {
-
-    //console.log('getUser')
-
     try {
         const res = await ApiClient.get('/user')
         return res.data

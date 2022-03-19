@@ -43,7 +43,7 @@ const RegisterPage = () => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
-        const user = await ApiClientSSR(context).get('/me')
+        const user = await ApiClientSSR(context).get('/user')
         if (user) {
             return {
                 redirect: {

@@ -78,24 +78,22 @@ const ForumIndexPage = (props: Props) => {
                     <MainSearchInput placeholder={props.searchPlaceholder} />
                 </div>
                 <div className={styles.Filters}>
-                    <div className={styles.Select}>
-                        <FormSelect
-                            id={'destination'}
-                            options={options}
-                            placeholder={'Sihtkoht'}
-                            className={styles.Select}
-                            classNamePrefix={'ForumFilter'}
-                            onChange={(value: any) => console.log(value)} />
-                    </div>
-                    <div className={styles.Select}>
-                        <FormSelect
-                            id={'topic'}
-                            options={options}
-                            placeholder={'Valdkond'}
-                            className={styles.Select}
-                            classNamePrefix={'ForumFilter'}
-                            onChange={(value: any) => console.log(value)} />
-                    </div>
+                    <FormSelect
+                        id={'destination'}
+                        options={options}
+                        placeholder={'Sihtkoht'}
+                        className={styles.Select}
+                        classNamePrefix={'ForumFilter'}
+                        onChange={(value: any) => console.log(value)}
+                    />
+                    <FormSelect
+                        id={'topic'}
+                        options={options}
+                        placeholder={'Valdkond'}
+                        className={styles.Select}
+                        classNamePrefix={'ForumFilter'}
+                        onChange={(value: any) => console.log(value)}
+                    />
                 </div>
             </Fragment>
         )

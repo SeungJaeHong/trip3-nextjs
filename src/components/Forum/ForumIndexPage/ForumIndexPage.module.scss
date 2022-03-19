@@ -38,9 +38,10 @@
     }
 
     .Select {
-        border-color: $white;
+        //border-color: $white;
         color: $white;
         width: 100%;
+        border: 0!important;
 
         :global(.ForumFilter__control) {
             background: rgba(0, 0, 0, .2);
@@ -48,6 +49,7 @@
             border-color: rgba(255, 255, 255, .6);
             box-shadow: none;
             height: 50px;
+            border-radius: 3px;
         }
 
         :global(.ForumFilter__placeholder) {
