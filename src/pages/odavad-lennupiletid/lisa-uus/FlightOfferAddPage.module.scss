@@ -48,10 +48,22 @@
                 justify-content: center;
                 z-index: 3;
             }
+
+            .Loading {
+                width: 50px;
+                height: 50px;
+                margin: 0 auto;
+                position: absolute;
+                transform: translateY(-50%);
+                top: 50%;
+                z-index: 3;
+            }
         }
 
         .Loader {
             margin: 0 auto;
+            width: 50px;
+            height: 50px;
         }
 
         @include md() {

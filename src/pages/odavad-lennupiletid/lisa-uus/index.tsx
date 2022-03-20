@@ -56,9 +56,12 @@ const FlightOfferAddPage = ({ destinations, tags }: Props) => {
             return (
                 <div className={styles.FlightForm}>
                     {submitting && (
-                        <div className={styles.FormSubmitOverLay}>
-                            <LoadingSpinner2 />
-                        </div>
+                        <>
+                            <div className={styles.FormSubmitOverLay} />
+                            <div className={styles.Loading}>
+                                <LoadingSpinner2 />
+                            </div>
+                        </>
                     )}
                     <FlightForm destinations={destinations} tags={tags} onSubmit={onSubmit} />
                 </div>

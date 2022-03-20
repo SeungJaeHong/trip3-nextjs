@@ -6,6 +6,7 @@ import {getForumPostById} from "../../../../services/admin.service";
 import {useRouter} from "next/router";
 import {Content} from "../../../../types";
 import LoadingSpinner2 from "../../../../components/LoadingSpinner2";
+import styles from '../../../../layouts/AdminLayout/AdminLayout.module.scss'
 
 const AdminForumPostEditPage = () => {
     const [post, setPost] = useState<Content>()
@@ -28,7 +29,7 @@ const AdminForumPostEditPage = () => {
     if (!post || loading) {
         return (
             <AdminLayout title={'Muuda postitust'}>
-                <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div className={styles.Loading}>
                     <LoadingSpinner2 />
                 </div>
             </AdminLayout>

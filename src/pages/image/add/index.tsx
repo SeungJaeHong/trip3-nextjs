@@ -74,7 +74,9 @@ const ImageAddPage = ({user, destinations}: Props) => {
                                 <div className={styles.Form}>
                                     {submitting &&
                                         <div className={styles.FormSubmitOverLay}>
-                                            <LoadingSpinner2 />
+                                            <div className={styles.Loading}>
+                                                <LoadingSpinner2 />
+                                            </div>
                                         </div>
                                     }
                                     <ImageUploadForm
