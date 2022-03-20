@@ -18,8 +18,8 @@
         .Destination {
             a {
                 color: $white;
-                font-size: 1.5rem;
-                line-height: 2rem;
+                font-size: 1.4rem;
+                line-height: 1.8rem;
                 font-weight: 600;
 
                 @include xs() {
@@ -58,7 +58,7 @@
             max-width: 100%;
             width: 100%;
             text-align: center;
-            padding-bottom: 50%;
+            padding-bottom: 55%;
             overflow: hidden;
 
             @include xs() {
