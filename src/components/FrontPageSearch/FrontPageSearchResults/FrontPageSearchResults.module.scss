@@ -7,11 +7,50 @@
     position: relative;
     background: $gray-light;
 
-    .Loader {
+    .ResultBlock {
         display: flex;
-        justify-content: center;
-        margin: 12px auto;
-        height: 40px;
-        width: 40px;
+        width: 100%;
+        gap: $spacer * 2;
+        border-bottom: 1px solid rgba(209, 212, 214, .5);
+        padding: $spacer * 1.5;
+
+        svg {
+            width: 35px;
+            height: 35px;
+            fill: $gray;
+        }
+
+        .Results {
+            display: flex;
+            flex-direction: column;
+
+            .CategoryTitle {
+                font-size: 10px;
+                text-transform: uppercase;
+                color: $red;
+                font-weight: 600;
+                font-family: $font-family-sailec;
+                margin-bottom: $spacer;
+            }
+
+            .ResultList {
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                gap: $spacer * .6;
+
+                .ResultRow {
+                    font-size: 14px;
+                    font-family: $font-family-sailec;
+                    color: $blue;
+                    font-weight: 500;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: $blue-hover;
+                    }
+                }
+            }
+        }
     }
 }

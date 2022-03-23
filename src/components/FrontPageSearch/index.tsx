@@ -4,6 +4,7 @@ import LoadingSpinner from "../LoadingSpinner"
 import {ChangeEvent, useEffect, useRef, useState} from "react"
 import clsx from "clsx"
 import FrontPageSearchResults from "./FrontPageSearchResults"
+import LoadingSpinner2 from "../LoadingSpinner2"
 
 const FrontPageSearch = () => {
     const searchRef = useRef(null)
@@ -16,9 +17,23 @@ const FrontPageSearch = () => {
 
     useEffect(() => {
         if (value && value.length >= 3) {
-            setSearching(true)
+            //setSearching(true)
         }
     }, [value])
+
+    const renderResults = () => {
+        if (searching) {
+            return (
+                <div className={styles.Loading}>
+                    <div className={styles.Loader}>
+                        <LoadingSpinner2 />
+                    </div>
+                </div>
+            )
+        } else {
+            return <FrontPageSearchResults results={[]} />
+        }
+    }
 
     return (
         <div className={styles.FrontPageSearchContainer} ref={searchRef}>
@@ -42,7 +57,7 @@ const FrontPageSearch = () => {
             <div className={clsx(styles.SearchResults, {
                 [styles.ShowResults]: value.length >= 3
             })}>
-                <FrontPageSearchResults results={[]} />
+                {renderResults()}
             </div>
         </div>
     )
