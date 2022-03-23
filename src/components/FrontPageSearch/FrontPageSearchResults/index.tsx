@@ -1,5 +1,8 @@
 import styles from './FrontPageSearchResults.module.scss'
 import PinIcon from "../../../icons/PinIcon";
+import TicketsIcon from "../../../icons/TicketsIcon";
+import CommentIcon from "../../../icons/CommentIcon";
+import ArrowRightIcon from "../../../icons/ArrowRightIcon";
 
 type Props = {
     results: []
@@ -26,7 +29,7 @@ const FrontPageSearchResults = ({results}: Props) => {
                 </div>
             </div>
             <div className={styles.ResultBlock}>
-                <PinIcon />
+                <TicketsIcon />
                 <div className={styles.Results}>
                     <div className={styles.CategoryTitle}>
                         Lennupakkumised
@@ -38,14 +41,14 @@ const FrontPageSearchResults = ({results}: Props) => {
                         <div className={styles.ResultRow}>
                             Otselennud suveks: edasi-tagasi lennupiletid Tallinnast Rooma al 45€
                         </div>
-                        <div className={styles.ResultRow}>
+                        {/*<div className={styles.ResultRow}>
                             Otselennud suveks Itaaliasse: edasi-tagasi Riiast Veneetsiasse al 17€
-                        </div>
+                        </div>*/}
                     </div>
                 </div>
             </div>
             <div className={styles.ResultBlock}>
-                <PinIcon />
+                <CommentIcon />
                 <div className={styles.Results}>
                     <div className={styles.CategoryTitle}>
                         Foorum
@@ -60,8 +63,15 @@ const FrontPageSearchResults = ({results}: Props) => {
                         <div className={styles.ResultRow}>
                             Tallinna lennujaamas hetke olukord
                         </div>
+                        <div className={styles.ResultRow}>
+                            Sihtriigi reeglid
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div className={styles.MoreResults}>
+                <span>Kõik tulemused(2270)</span>
+                <ArrowRightIcon />
             </div>
         </div>
     )

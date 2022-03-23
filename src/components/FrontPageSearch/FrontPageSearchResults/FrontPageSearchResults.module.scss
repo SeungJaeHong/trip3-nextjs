@@ -15,8 +15,8 @@
         padding: $spacer * 1.5;
 
         svg {
-            width: 35px;
-            height: 35px;
+            width: 30px;
+            height: 30px;
             fill: $gray;
         }
 
@@ -51,6 +51,30 @@
                     }
                 }
             }
+        }
+    }
+
+    .MoreResults {
+        display: flex;
+        width: 100%;
+        background: $white;
+        gap: $spacer;
+        align-items: center;
+        padding: $spacer * .5 0 $spacer 55px;
+        box-shadow: 0px -20px 20px 0px #ffffff;
+
+        span {
+            font-size: 14px;
+            font-family: $font-family-sailec;
+            color: $blue;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        svg {
+            width: 15px;
+            height: 15px;
+            fill: $gray;
         }
     }
 }
