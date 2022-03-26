@@ -16,7 +16,7 @@ const FrontPageSearch = () => {
     const [forum, setForum] = useState<ForumSearchResult[]>([])
     const [total, setTotal] = useState<number|undefined>(undefined)
     const [searching, setSearching] = useState<boolean>(false)
-    const [debouncedValue] = useDebounce(value, 200)
+    const [debouncedValue] = useDebounce(value, 300)
 
     const onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value)
@@ -72,9 +72,6 @@ const FrontPageSearch = () => {
                     placeholder={'Kuhu sa täna tahaksid minna?'}
                     onChange={onValueChange}
                 />
-                <div className={styles.LoadingSpinner}>
-                    <LoadingSpinner />
-                </div>
             </div>
             <div
                 className={clsx(styles.SearchResults, {

@@ -84,7 +84,7 @@
         gap: $spacer;
         align-items: center;
         padding: $spacer * .5 0 $spacer 55px;
-        box-shadow: 0px -20px 20px 0px #ffffff;
+        box-shadow: 0px -5px 30px 0px #ffffff;
 
         span {
             font-size: 14px;
@@ -102,6 +102,17 @@
             width: 14px;
             height: 14px;
             fill: $gray;
+        }
+
+        @include sm() {
+            span {
+                font-size: 13px;
+            }
+
+            svg {
+                width: 13px;
+                height: 13px;
+            }
         }
     }
 }
