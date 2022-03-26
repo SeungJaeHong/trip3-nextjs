@@ -195,12 +195,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         const slug = context.query.slug
         const url = process.env.API_BASE_URL + '/destination/' + slug
         const response = await ApiClientSSR(context).get(url)
-        const data = {
-            destination: response.data.destination
-        }
-
         return {
-            props: data
+            props: {
+                destination: response.data
+            }
         }
     } catch (e) {
         return {

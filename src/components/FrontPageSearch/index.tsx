@@ -1,25 +1,40 @@
 import styles from './FrontPageSearch.module.scss'
-import SearchIcon from "../../icons/SearchIcon"
-import LoadingSpinner from "../LoadingSpinner"
-import {ChangeEvent, useEffect, useRef, useState} from "react"
-import clsx from "clsx"
-import FrontPageSearchResults from "./FrontPageSearchResults"
-import LoadingSpinner2 from "../LoadingSpinner2"
+import SearchIcon from '../../icons/SearchIcon'
+import LoadingSpinner from '../LoadingSpinner'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import clsx from 'clsx'
+import FrontPageSearchResults from './FrontPageSearchResults'
+import LoadingSpinner2 from '../LoadingSpinner2'
+import { DestinationSearchResult, FlightSearchResult, ForumSearchResult, search } from '../../services/search.service'
+import { useDebounce } from 'use-debounce'
 
 const FrontPageSearch = () => {
     const searchRef = useRef(null)
     const [value, setValue] = useState<string>('')
+    const [destinations, setDestinations] = useState<DestinationSearchResult[]>([])
+    const [flights, setFlights] = useState<FlightSearchResult[]>([])
+    const [forum, setForum] = useState<ForumSearchResult[]>([])
+    const [total, setTotal] = useState<number|undefined>(undefined)
     const [searching, setSearching] = useState<boolean>(false)
+    const [debouncedValue] = useDebounce(value, 200)
 
     const onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value)
     }
 
     useEffect(() => {
-        if (value && value.length >= 3) {
-            //setSearching(true)
+        if (debouncedValue && debouncedValue.length >= 3) {
+            setSearching(true)
+            search(debouncedValue)
+                .then((res) => {
+                    setDestinations(res.data.destinations)
+                    setFlights(res.data.flights)
+                    setForum(res.data.forum)
+                    setTotal(res.data.total)
+                })
+                .finally(() => setSearching(false))
         }
-    }, [value])
+    }, [debouncedValue])
 
     const renderResults = () => {
         if (searching) {
@@ -31,15 +46,22 @@ const FrontPageSearch = () => {
                 </div>
             )
         } else {
-            return <FrontPageSearchResults results={[]} />
+            return <FrontPageSearchResults
+                destinations={destinations}
+                flights={flights}
+                forum={forum}
+                total={total}
+            />
         }
     }
 
     return (
         <div className={styles.FrontPageSearchContainer} ref={searchRef}>
-            <div className={clsx(styles.SearchInput, {
-                [styles.HasValue]: value.length > 0
-            })}>
+            <div
+                className={clsx(styles.SearchInput, {
+                    [styles.HasValue]: value.length > 0,
+                })}
+            >
                 <div className={styles.Icon}>
                     <SearchIcon />
                 </div>
@@ -54,9 +76,11 @@ const FrontPageSearch = () => {
                     <LoadingSpinner />
                 </div>
             </div>
-            <div className={clsx(styles.SearchResults, {
-                [styles.ShowResults]: value.length >= 3
-            })}>
+            <div
+                className={clsx(styles.SearchResults, {
+                    [styles.ShowResults]: value.length >= 3,
+                })}
+            >
                 {renderResults()}
             </div>
         </div>
