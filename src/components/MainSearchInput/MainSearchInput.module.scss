@@ -5,52 +5,89 @@
     width: 100%;
     text-align: center;
     position: relative;
+    height: 55px;
+    //border: 1px solid rgba(14, 18, 23, 0.2);
+    background: rgba(255, 255, 255, .9);
+    box-shadow: 0 18px 48px rgba(14, 18, 23, .6);
+    border-radius: 3px;
+
+    .Icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: $spacer * 2;
+
+        svg {
+            fill: $gray-dark;
+            height: 22px;
+            width: 22px;
+        }
+
+        @include sm() {
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
 
     input {
         width: 100%;
-        height: 60px;
-        background-color: rgba(0, 0, 0, .2);
-        border: 1px solid rgba(255, 255, 255, .3);
+        color: $gray-dark;
         outline: none;
-        color: $white;
         font-size: $font-size-medium;
-        line-height: 1.75rem;
-        padding-left: $spacer * 8;
         font-weight: 600;
         font-family: $font-family-sailec;
+        background: transparent;
+        border: 0;
+        padding-right: $spacer * 2;
 
         &::placeholder {
-            color: $white;
+            color: $gray-dark;
             font-weight: 400;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         @include lg() {
             font-size: 1.1rem;
-            line-height: 1.55rem;
-        }
-
-        @include sm() {
-            padding-left: $spacer * 6;
         }
     }
 
-    .Icon {
-        top: 16px;
-        left: 16px;
-        position: absolute;
+    button {
+        display: flex;
+        width: 150px;
+        position: relative;
+        align-items: center;
+        background: $green-darker;
+        border-radius: 3px;
+        justify-content: center;
+        text-align: center;
+        transition: all 0.2s;
         cursor: pointer;
+        outline: none;
+        border: 1px solid $green-darker;
+        height: 100%;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
 
-        svg {
-            fill: $white;
+        span {
+            color: $white;
+            font-family: $font-family-sailec;
+            font-size: $font-size-normal;
+            font-weight: 600;
         }
 
-        @include sm() {
-            top: 20px;
+        &:hover:not([disabled]) {
+            background: $green-hover;
+        }
+    }
 
-            svg {
-                width: 20px;
-                height: 20px;
+    @include sm() {
+        height: 50px;
+
+        input {
+            &::placeholder {
+                font-size: 1rem;
             }
         }
     }

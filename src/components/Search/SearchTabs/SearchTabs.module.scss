@@ -1,0 +1,42 @@
+@import "../../../styles/variables";
+
+.SearchTabs {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+
+    .Tab {
+        background: transparent;
+        display: flex;
+        align-items: center;
+        padding: $spacer * 2 $spacer * 3;
+        cursor: pointer;
+
+        .Title {
+            color: $gray-dark;
+            font-weight: 500;
+            line-height: 24px;
+            font-size: $font-size-normal;
+            white-space: nowrap;
+        }
+
+        &.Active {
+            background: $white;
+
+            .Title {
+                color: $blue;
+                font-weight: 600;
+            }
+        }
+
+        &:hover {
+            background: $white;
+
+            .Title {
+                color: $blue;
+            }
+        }
+    }
+}
