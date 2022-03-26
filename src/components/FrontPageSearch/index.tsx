@@ -1,16 +1,18 @@
 import styles from './FrontPageSearch.module.scss'
 import SearchIcon from '../../icons/SearchIcon'
-import LoadingSpinner from '../LoadingSpinner'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import FrontPageSearchResults from './FrontPageSearchResults'
 import LoadingSpinner2 from '../LoadingSpinner2'
 import { DestinationSearchResult, FlightSearchResult, ForumSearchResult, search } from '../../services/search.service'
 import { useDebounce } from 'use-debounce'
+import CloseIcon from "../../icons/CloseIcon"
 
 const FrontPageSearch = () => {
-    const searchRef = useRef(null)
+    const searchContainerRef = useRef<HTMLDivElement>(null)
+    const searchInputRef = useRef<HTMLInputElement>(null)
     const [value, setValue] = useState<string>('')
+    const [showResults, setShowResults] = useState<boolean>(false)
     const [destinations, setDestinations] = useState<DestinationSearchResult[]>([])
     const [flights, setFlights] = useState<FlightSearchResult[]>([])
     const [forum, setForum] = useState<ForumSearchResult[]>([])
@@ -22,6 +24,29 @@ const FrontPageSearch = () => {
         setValue(e.target.value)
     }
 
+    const onValueClear = () => {
+        setValue('')
+        setShowResults(false)
+        searchInputRef.current?.focus()
+    }
+
+    useEffect(() => {
+        const checkIfClickedOutside = (e: MouseEvent) => {
+            // @ts-ignore
+            if (showResults && searchContainerRef.current && !searchContainerRef.current.contains(e.target)) {
+                setShowResults(false)
+            }
+        }
+
+        if (showResults) {
+            document.addEventListener('mousedown', checkIfClickedOutside)
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', checkIfClickedOutside)
+        }
+    }, [showResults])
+
     useEffect(() => {
         if (debouncedValue && debouncedValue.length >= 3) {
             setSearching(true)
@@ -31,8 +56,11 @@ const FrontPageSearch = () => {
                     setFlights(res.data.flights)
                     setForum(res.data.forum)
                     setTotal(res.data.total)
+                    setShowResults(true)
                 })
                 .finally(() => setSearching(false))
+        } else {
+            setShowResults(false)
         }
     }, [debouncedValue])
 
@@ -46,17 +74,19 @@ const FrontPageSearch = () => {
                 </div>
             )
         } else {
-            return <FrontPageSearchResults
-                destinations={destinations}
-                flights={flights}
-                forum={forum}
-                total={total}
-            />
+            if (showResults) {
+                return <FrontPageSearchResults
+                    destinations={destinations}
+                    flights={flights}
+                    forum={forum}
+                    total={total}
+                />
+            } else return null
         }
     }
 
     return (
-        <div className={styles.FrontPageSearchContainer} ref={searchRef}>
+        <div className={styles.FrontPageSearchContainer} ref={searchContainerRef}>
             <div
                 className={clsx(styles.SearchInput, {
                     [styles.HasValue]: value.length > 0,
@@ -69,13 +99,20 @@ const FrontPageSearch = () => {
                     type="text"
                     autoComplete="off"
                     spellCheck={false}
+                    value={value}
                     placeholder={'Kuhu sa täna tahaksid minna?'}
                     onChange={onValueChange}
+                    ref={searchInputRef}
                 />
+                {value.length > 0 &&
+                    <div className={styles.ClearButton} onClick={onValueClear}>
+                        <CloseIcon />
+                    </div>
+                }
             </div>
             <div
                 className={clsx(styles.SearchResults, {
-                    [styles.ShowResults]: value.length >= 3,
+                    [styles.ShowResults]: showResults || searching,
                 })}
             >
                 {renderResults()}
