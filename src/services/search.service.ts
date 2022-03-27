@@ -21,7 +21,7 @@ export type ForumSearchResult = {
     type: string
 }
 
-export const search = async (
+export const frontpageSearch = async (
     value: string
 ): Promise<
     AxiosResponse<{
@@ -31,5 +31,16 @@ export const search = async (
         total: number
     }>
 > => {
+    return await ApiClient.get('/frontpage_search?q=' + value)
+}
+
+export const search = async (
+    value: string
+): Promise<
+    AxiosResponse<{
+        items: any[]
+        total: number
+    }>
+    > => {
     return await ApiClient.get('/search?q=' + value)
 }

@@ -5,31 +5,33 @@ import clsx from "clsx"
 
 const SearchTabs = () => {
     const router = useRouter()
+    const q = router.query.q
+    const type = router.query.type
     const tabs = [
         {
             title: 'Foorum',
-            route: '/foorum/uldfoorum',
-            active: true
+            route: '/search?q=' + q + '&type=forum',
+            active: !type || type === 'forum'
         },
         {
             title: 'Lennupakkumised',
-            route: '/foorum/ost-muuk',
-            active: router.pathname === '/foorum/ost-muuk'
+            route: '/search?q=' + q + '&type=flight',
+            active: type === 'flight'
         },
         {
             title: 'Uudised',
-            route: '/foorum/elu-valismaal',
-            active: router.pathname === '/foorum/elu-valismaal'
+            route: '/search?q=' + q + '&type=news',
+            active: type === 'news'
         },
         {
             title: 'Sihtkohad',
-            route: '/foorum/vaba-teema',
-            active: router.pathname === '/foorum/vaba-teema'
+            route: '/search?q=' + q + '&type=destination',
+            active: type === 'destination'
         },
         {
             title: 'Kasutajad',
-            route: '/foorum/minu-jalgimised',
-            active: router.pathname === '/foorum/minu-jalgimised'
+            route: '/search?q=' + q + '&type=user',
+            active: type === 'user'
         },
     ]
 

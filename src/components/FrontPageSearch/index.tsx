@@ -1,12 +1,18 @@
 import styles from './FrontPageSearch.module.scss'
 import SearchIcon from '../../icons/SearchIcon'
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import {ChangeEvent, useEffect, useRef, useState} from 'react'
 import clsx from 'clsx'
 import FrontPageSearchResults from './FrontPageSearchResults'
 import LoadingSpinner2 from '../LoadingSpinner2'
-import { DestinationSearchResult, FlightSearchResult, ForumSearchResult, search } from '../../services/search.service'
+import {
+    DestinationSearchResult,
+    FlightSearchResult,
+    ForumSearchResult,
+    frontpageSearch
+} from '../../services/search.service'
 import { useDebounce } from 'use-debounce'
 import CloseIcon from "../../icons/CloseIcon"
+import {useRouter} from "next/router"
 
 const FrontPageSearch = () => {
     const searchContainerRef = useRef<HTMLDivElement>(null)
@@ -19,6 +25,7 @@ const FrontPageSearch = () => {
     const [total, setTotal] = useState<number|undefined>(undefined)
     const [searching, setSearching] = useState<boolean>(false)
     const [debouncedValue] = useDebounce(value, 300)
+    const router = useRouter()
 
     const onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value)
@@ -28,6 +35,12 @@ const FrontPageSearch = () => {
         setValue('')
         setShowResults(false)
         searchInputRef.current?.focus()
+    }
+
+    const onKeyPress = (event: KeyboardEvent) => {
+        if (event.key === "Enter") {
+            router.push('/search?q=' + value)
+        }
     }
 
     useEffect(() => {
@@ -50,7 +63,7 @@ const FrontPageSearch = () => {
     useEffect(() => {
         if (debouncedValue && debouncedValue.length >= 3) {
             setSearching(true)
-            search(debouncedValue)
+            frontpageSearch(debouncedValue)
                 .then((res) => {
                     setDestinations(res.data.destinations)
                     setFlights(res.data.flights)
@@ -103,6 +116,8 @@ const FrontPageSearch = () => {
                     placeholder={'Kuhu sa täna tahaksid minna?'}
                     onChange={onValueChange}
                     ref={searchInputRef}
+                    // @ts-ignore
+                    onKeyPress={onKeyPress}
                 />
                 {value.length > 0 &&
                     <div className={styles.ClearButton} onClick={onValueClear}>
