@@ -1,5 +1,6 @@
 import ApiClient from '../lib/ApiClient'
 import { AxiosResponse } from 'axios'
+import {User} from "../types";
 
 export type DestinationSearchResult = {
     id: number
@@ -12,9 +13,27 @@ export type FlightSearchResult = {
     id: number
     title: string
     slug: string
+    created_at: string
+    thumb: string
 }
 
 export type ForumSearchResult = {
+    id: number
+    title: string
+    body: string
+    slug: string
+    type: string
+    created_at: string
+    user: User
+}
+
+export type FrontPageFlightSearchResult = {
+    id: number
+    title: string
+    slug: string
+}
+
+export type FrontPageForumSearchResult = {
     id: number
     title: string
     slug: string
@@ -26,8 +45,8 @@ export const frontpageSearch = async (
 ): Promise<
     AxiosResponse<{
         destinations: DestinationSearchResult[]
-        flights: FlightSearchResult[]
-        forum: ForumSearchResult[]
+        flights: FrontPageFlightSearchResult[]
+        forum: FrontPageForumSearchResult[]
         total: number
     }>
 > => {
@@ -35,12 +54,13 @@ export const frontpageSearch = async (
 }
 
 export const search = async (
-    value: string
+    value: string,
+    type: string
 ): Promise<
     AxiosResponse<{
         items: any[]
         total: number
     }>
     > => {
-    return await ApiClient.get('/search?q=' + value)
+    return await ApiClient.get('/search?q=' + value + '&type=' + type)
 }

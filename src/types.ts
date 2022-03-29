@@ -3,12 +3,12 @@ export interface User {
     name: string
     rank: number
     isAdmin: boolean
-    age?: number
-    gender?: number
     avatar?: string
 }
 
 export interface UserPublicProfile extends User {
+    age?: number
+    gender?: number
     rankName: string
     joinedDate: string
     description?: string
@@ -29,6 +29,7 @@ export interface UserProfile extends User {
     contact_twitter?: string
     contact_instagram?: string
     contact_homepage?: string
+    age?: number
     gender?: number
     birthYear?: number
     description?: string

@@ -3,24 +3,19 @@ import clsx from 'clsx'
 import containerStyle from '../../styles/containers.module.scss'
 import styles from './SearchPage.module.scss'
 import { useRouter } from 'next/router'
-import LoadingSpinner2 from '../../components/LoadingSpinner2'
 import BackgroundMap from '../../components/BackgroundMap'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import MainSearchInput from '../../components/MainSearchInput'
 import SearchTabs from '../../components/Search/SearchTabs'
-import {search} from "../../services/search.service";
+import SearchForumResults from "../../components/Search/ForumResults"
 
 const SearchPage = () => {
     const router = useRouter()
     const [searchValue, setSearchValue] = useState<string>('')
-    const [searchType, setSearchType] = useState<string>('')
-    const [searching, setSearching] = useState<boolean>(false)
-    const [results, setResults] = useState<Array<any>>([])
-    const [total, setTotal] = useState<number>(0)
+    const [searchType, setSearchType] = useState<string>('forum')
 
     const onSearch = (value: string) => {
-        console.log(value, 'onSearch')
         router.push('/search?q=' + value)
     }
 
@@ -43,32 +38,23 @@ const SearchPage = () => {
         }
     }, [router.query])
 
-    useEffect(() => {
-        if (searchValue) {
-            setSearching(true)
-            search(searchValue)
-                .then((res) => {
-                    setResults(res.data.items)
-                    setTotal(res.data.total)
-                })
-                .finally(() => setSearching(false))
-        }
-    }, [searchValue, searchType])
-
-    console.log(results)
-
     const renderContent = () => {
-        if (searching) {
-            return (
-                <div className={styles.Loader}>
-                    <LoadingSpinner2 />
-                </div>
-            )
+        if (!searchValue) {
+            return null
+        }
+
+        if (router.query.q !== undefined && !router.query.q) {
+            return <div>Sisesta otsingu väärtus</div>
         } else {
-            if (router.query.q !== undefined && !router.query.q) {
-                return <div>Sisesta otsingu väärtus</div>
-            } else {
-                return <div>Content</div>
+            switch (searchType) {
+                case 'forum':
+                    return <SearchForumResults searchValue={searchValue}/>
+                case 'flight':
+                    return <div>AASDF2</div>
+                case 'destination':
+                    return <div>AASDF3</div>
+                default:
+                    return null
             }
         }
     }

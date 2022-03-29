@@ -6,8 +6,8 @@ import FrontPageSearchResults from './FrontPageSearchResults'
 import LoadingSpinner2 from '../LoadingSpinner2'
 import {
     DestinationSearchResult,
-    FlightSearchResult,
-    ForumSearchResult,
+    FrontPageFlightSearchResult,
+    FrontPageForumSearchResult,
     frontpageSearch
 } from '../../services/search.service'
 import { useDebounce } from 'use-debounce'
@@ -20,8 +20,8 @@ const FrontPageSearch = () => {
     const [value, setValue] = useState<string>('')
     const [showResults, setShowResults] = useState<boolean>(false)
     const [destinations, setDestinations] = useState<DestinationSearchResult[]>([])
-    const [flights, setFlights] = useState<FlightSearchResult[]>([])
-    const [forum, setForum] = useState<ForumSearchResult[]>([])
+    const [flights, setFlights] = useState<FrontPageFlightSearchResult[]>([])
+    const [forum, setForum] = useState<FrontPageForumSearchResult[]>([])
     const [total, setTotal] = useState<number|undefined>(undefined)
     const [searching, setSearching] = useState<boolean>(false)
     const [debouncedValue] = useDebounce(value, 300)

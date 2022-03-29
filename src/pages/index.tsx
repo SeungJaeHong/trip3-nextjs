@@ -1,41 +1,43 @@
-import {GetServerSideProps} from "next"
-import Navbar from "../components/Navbar"
-import FrontPageSearch from "../components/FrontPageSearch"
+import { GetServerSideProps } from 'next'
+import Navbar from '../components/Navbar'
+import FrontPageSearch from '../components/FrontPageSearch'
 import containerStyle from '../styles/containers.module.scss'
 import styles from './Homepage.module.scss'
 import clsx from 'clsx'
-import MoreLink from "../components/MoreLink"
-import BlockTitle from "../components/BlockTitle";
-import ForumList from "../components/Forum/ForumList";
-import Button from "../components/Button"
-import ImageGallery from "../components/ImageGallery";
-import FlightOfferCard from "../components/FlightOffer/FlightOfferCard"
-import Footer from "../components/Footer"
-import {FlightOfferCardType, ForumRowType} from '../types'
-import FrontpageNewsBlock from "../components/News/FrontpageNewsBlock"
-import FlightOffersLatest from "../components/FlightOffer/FlightOffersLatest";
-import TravelmatesLatest from "../components/Travelmate/TravelmatesLatest";
-import ApiClientSSR from "../lib/ApiClientSSR";
-import useUser from "../hooks";
-import FrontPageImageGallery from "../components/FrontPageImageGallery";
+import MoreLink from '../components/MoreLink'
+import BlockTitle from '../components/BlockTitle'
+import ForumList from '../components/Forum/ForumList'
+import Button from '../components/Button'
+import FlightOfferCard from '../components/FlightOffer/FlightOfferCard'
+import Footer from '../components/Footer'
+import { FlightOfferCardType, ForumRowType } from '../types'
+import FrontpageNewsBlock from '../components/News/FrontpageNewsBlock'
+import FlightOffersLatest from '../components/FlightOffer/FlightOffersLatest'
+import TravelmatesLatest from '../components/Travelmate/TravelmatesLatest'
+import ApiClientSSR from '../lib/ApiClientSSR'
+import useUser from '../hooks'
+import FrontPageImageGallery from '../components/FrontPageImageGallery'
 
 type Props = {
-    flightOffers: FlightOfferCardType[],
-    forumPosts: ForumRowType[],
+    flightOffers: FlightOfferCardType[]
+    forumPosts: ForumRowType[]
 }
 
-const Home = ({flightOffers, forumPosts}: Props) => {
+const Home = ({ flightOffers, forumPosts }: Props) => {
     const { userIsLoggedIn } = useUser()
     return (
         <>
-            <div className={styles.Header}
-                 style={{
-                     backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url(/images/header6.jpg)",
-                     width: "100%",
-                     backgroundRepeat: "no-repeat",
-                     backgroundSize: "cover",
-                     backgroundPosition: "50% 50%"
-                }}>
+            <div
+                className={styles.Header}
+                style={{
+                    backgroundImage:
+                        'linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url(/images/header6.jpg)',
+                    width: '100%',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                    backgroundPosition: '50% 50%',
+                }}
+            >
                 <div className={clsx([containerStyle.ContainerXl, styles.Content])}>
                     <div className={styles.Navbar}>
                         <Navbar />
@@ -58,25 +60,28 @@ const Home = ({flightOffers, forumPosts}: Props) => {
                             <FlightOfferCard {...flightOffers[2]} color={'red'} />
                         </div>
                     </div>
-                    <div className={clsx(styles.MoreFlightsLink, {
-                        [styles.UserLoggedIn]: userIsLoggedIn
-                    })}>
+                    <div
+                        className={clsx(styles.MoreFlightsLink, {
+                            [styles.UserLoggedIn]: userIsLoggedIn,
+                        })}
+                    >
                         <MoreLink title={'Vaata kõiki lennupakkumisi'} route={'/odavad-lennupiletid'} />
                     </div>
 
-                    {!userIsLoggedIn &&
+                    {!userIsLoggedIn && (
                         <div className={styles.JoinTripBlock}>
                             <div className={styles.TripDescription}>
                                 <span className={styles.DescriptionText}>
-                                    Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.
+                                    Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade
+                                    ja kultuuride vastu.
                                 </span>
-                                <MoreLink title={'Loe lähemalt Trip.ee-st'} route={'/tripist'}/>
+                                <MoreLink title={'Loe lähemalt Trip.ee-st'} route={'/tripist'} />
                             </div>
                             <div className={styles.JoinButton}>
                                 <Button title={'Liitu Trip.ee-ga'} route={'/register'} />
                             </div>
                         </div>
-                    }
+                    )}
 
                     <div className={styles.ForumContainer}>
                         <div className={styles.ForumBlockTitle}>
@@ -90,24 +95,32 @@ const Home = ({flightOffers, forumPosts}: Props) => {
                                 <div className={styles.ForumLinks}>
                                     <div className={styles.ForumLink}>
                                         <MoreLink title={'Üldfoorum'} route={'/foorum/uldfoorum'} large={true} />
-                                        <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
+                                        <span className={styles.ForumDescription}>
+                                            Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi
+                                        </span>
                                     </div>
                                     <div className={styles.ForumLink}>
                                         <MoreLink title={'Ost-müük'} route={'/foorum/ost-muuk'} large={true} />
-                                        <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
+                                        <span className={styles.ForumDescription}>
+                                            Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi
+                                        </span>
                                     </div>
                                     <div className={styles.ForumLink}>
-                                        <MoreLink title={'Elu välismaal'} route={'/foorum/elu-valismaal'} large={true} />
-                                        <span className={styles.ForumDescription}>Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi</span>
+                                        <MoreLink
+                                            title={'Elu välismaal'}
+                                            route={'/foorum/elu-valismaal'}
+                                            large={true}
+                                        />
+                                        <span className={styles.ForumDescription}>
+                                            Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi
+                                        </span>
                                     </div>
                                 </div>
-                                {userIsLoggedIn &&
+                                {userIsLoggedIn && (
                                     <div className={styles.AddNewTopic}>
-                                        <Button
-                                            title={'Alusta uut teemat'}
-                                            route={'/foorum/lisa-uus'} />
+                                        <Button title={'Alusta uut teemat'} route={'/foorum/lisa-uus'} />
                                     </div>
-                                }
+                                )}
                             </div>
                         </div>
                         <div className={styles.ViewMoreForumPosts}>
@@ -148,7 +161,7 @@ const Home = ({flightOffers, forumPosts}: Props) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const data = {
         flightOffers: [],
-        forumPosts: []
+        forumPosts: [],
     }
 
     try {
@@ -160,7 +173,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 
     return {
-        props: data
+        props: data,
     }
 }
 

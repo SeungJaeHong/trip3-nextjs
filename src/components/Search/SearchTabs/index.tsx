@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styles from './SearchTabs.module.scss'
 import clsx from "clsx"
@@ -39,15 +38,13 @@ const SearchTabs = () => {
         <div className={styles.SearchTabs}>
             {tabs.map(tab => {
                 return (
-                    <Link href={tab.route} key={tab.route}>
-                        <a className={clsx(styles.Tab, {
-                            [styles.Active]: tab.active
-                        })}>
-                            <span className={styles.Title}>
-                                {tab.title}
-                            </span>
-                        </a>
-                    </Link>
+                    <div key={tab.route} className={clsx(styles.Tab, {
+                        [styles.Active]: tab.active
+                    })} onClick={tab.active ? undefined : () => router.push(tab.route)}>
+                        <span className={styles.Title}>
+                            {tab.title}
+                        </span>
+                    </div>
                 )
             })}
         </div>
