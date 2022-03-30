@@ -1,57 +1,49 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from 'react'
 import styles from './ForumPostComments.module.scss'
-import {Comment, Content} from "../../../types"
-import ForumComment from "../ForumComment"
-import PagePaginator from "../../Paginator/PagePaginator"
-import {getForumUrlByTypeAndSlug} from "../../../helpers"
-import clsx from "clsx"
+import { Comment, Content } from '../../../types'
+import ForumComment from '../ForumComment'
+import PagePaginator from '../../Paginator/PagePaginator'
+import { getForumUrlByTypeAndSlug } from '../../../helpers'
+import clsx from 'clsx'
 
 type Props = {
-    post: Content,
-    comments?: Comment[],
-    currentPage: number,
+    post: Content
+    comments?: Comment[]
+    currentPage: number
     lastPage: number
 }
 
-const ForumPostComments = (props: Props) => {
-    const [comments, setComments] = useState(props.comments)
+const ForumPostComments = ({ post, comments, currentPage, lastPage }: Props) => {
+    const [forumComments, setForumComments] = useState(comments)
     let url = ''
-    if (props.post.type === 'internal') {
-        url = '/admin/forum/' + props.post.id
+    if (post.type === 'internal') {
+        url = '/admin/forum/' + post.id
     } else {
-        url = getForumUrlByTypeAndSlug(props.post.type, props.post.slug)
+        url = getForumUrlByTypeAndSlug(post.type, post.slug)
     }
 
     useEffect(() => {
-        setComments(props.comments)
-    }, [props.comments])
+        setForumComments(comments)
+    }, [comments])
 
-    if (!props.comments) {
+    if (!comments) {
         return null
     }
 
     return (
         <div className={styles.ForumPostComments}>
             <div className={styles.Paginator}>
-                <PagePaginator
-                    currentPage={props.currentPage}
-                    lastPage={props.lastPage}
-                    baseUrl={url} />
+                <PagePaginator currentPage={currentPage} lastPage={lastPage} baseUrl={url} />
             </div>
-            {comments?.map((item: Comment) => {
+            {forumComments?.map((item: Comment) => {
                 return (
                     <div className={styles.CommentRow} key={item.id}>
-                        <ForumComment
-                            key={item.id}
-                            item={item} />
+                        <ForumComment key={item.id} item={item} />
                     </div>
                 )
             })}
             <div className={clsx(styles.Paginator, styles.Bottom)}>
-                <PagePaginator
-                    currentPage={props.currentPage}
-                    lastPage={props.lastPage}
-                    baseUrl={url} />
+                <PagePaginator currentPage={currentPage} lastPage={lastPage} baseUrl={url} />
             </div>
         </div>
     )

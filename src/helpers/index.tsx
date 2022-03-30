@@ -56,39 +56,3 @@ export const scrollToHash = () => {
         }
     }
 }
-
-export const getNext12MonthNamesWithYear = () => {
-    const now = new Date()
-    let month = now.getMonth()
-    let year = now.getFullYear()
-
-    const names = [
-        'Jaanuar',
-        'Veebruar',
-        'Märts',
-        'Aprill',
-        'Mai',
-        'Juuni',
-        'Juuli',
-        'August',
-        'September',
-        'Oktoober',
-        'November',
-        'Detsember',
-    ]
-
-    let res = []
-    for (let i = 0; i < 12; ++i) {
-        res.push({
-            value: month + 1 + '_' + year,
-            label: names[month] + ' ' + year,
-        })
-
-        if (++month === 12) {
-            month = 0
-            ++year
-        }
-    }
-
-    return res
-}

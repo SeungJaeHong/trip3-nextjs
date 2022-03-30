@@ -4,35 +4,37 @@ import Link from 'next/link'
 import clsx from "clsx"
 
 type Props = {
-    currentPage: number,
-    lastPage: number,
+    currentPage: number
+    lastPage: number
     baseUrl: string
 }
 
-const PagePaginator = (props: Props) => {
-    const pages: { value: any; selected: boolean }[] = []
-    if (props.lastPage === 1) {
+const PagePaginator = ({currentPage, lastPage, baseUrl}: Props) => {
+    const pages: { value: any, selected: boolean }[] = []
+    if (lastPage === 1) {
         return null
     }
 
-    if (props.lastPage <= 6) {
-        {[...Array(props.lastPage)].map((x, i) =>
+    const url = baseUrl.includes('?') ? baseUrl + '&page=' : baseUrl + '?page=';
+
+    if (lastPage <= 6) {
+        {[...Array(lastPage)].map((x, i) =>
             pages.push({
                 value: i + 1,
-                selected: (props.currentPage === i + 1)
+                selected: (currentPage === i + 1)
             })
         )}
     } else {
         let range = []
-        let left = props.currentPage - 2
-        let right = props.currentPage + 3
+        let left = currentPage - 2
+        let right = currentPage + 3
         let l
 
-        for (let i = 1; i <= props.lastPage; i++) {
-            if (i == 1 || i == props.lastPage || i >= left && i < right) {
+        for (let i = 1; i <= lastPage; i++) {
+            if (i == 1 || i == lastPage || i >= left && i < right) {
                 range.push({
                     value: i,
-                    selected: (props.currentPage === i)
+                    selected: (currentPage === i)
                 })
             }
         }
@@ -42,7 +44,7 @@ const PagePaginator = (props: Props) => {
                 if (item.value - l === 2) {
                     pages.push({
                         value: l + 1,
-                        selected: props.currentPage === l + 1
+                        selected: currentPage === l + 1
                     })
                 } else if (item.value - l !== 1) {
                     pages.push({
@@ -59,9 +61,9 @@ const PagePaginator = (props: Props) => {
     return (
         <div className={styles.PagePaginator}>
             {
-                props.currentPage === 1
+                currentPage === 1
                     ? <div className={clsx(styles.Arrow, styles.ArrowDisabled)}>‹</div>
-                    : <Link href={props.baseUrl + '?page=' + (props.currentPage - 1)} key={'prev_arrow'}>
+                    : <Link href={url + (currentPage - 1)} key={'prev_arrow'}>
                         <a className={styles.Arrow}>
                             ‹
                         </a>
@@ -77,7 +79,7 @@ const PagePaginator = (props: Props) => {
                     })} key={page.value}>{page.value}</div>
                 } else {
                     return (
-                        <Link href={props.baseUrl + '?page=' + page.value} key={page.value}>
+                        <Link href={url + page.value} key={page.value}>
                             <a className={styles.PageNumber}>
                                 {page.value}
                             </a>
@@ -87,9 +89,9 @@ const PagePaginator = (props: Props) => {
             })}
 
             {
-                props.currentPage === props.lastPage
+                currentPage === lastPage
                     ? <div className={clsx(styles.Arrow, styles.ArrowDisabled)}>›</div>
-                    : <Link href={props.baseUrl + '?page=' + (props.currentPage + 1)} key={'next_arrow'}>
+                    : <Link href={url + (currentPage + 1)} key={'next_arrow'}>
                         <a className={styles.Arrow}>
                             ›
                         </a>

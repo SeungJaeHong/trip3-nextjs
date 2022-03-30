@@ -1,6 +1,7 @@
 import ApiClient from '../lib/ApiClient'
 import { AxiosResponse } from 'axios'
 import {User} from "../types";
+import {objectToQueryString} from "../helpers";
 
 export type DestinationSearchResult = {
     id: number
@@ -55,12 +56,21 @@ export const frontpageSearch = async (
 
 export const search = async (
     value: string,
-    type: string
+    type: string,
+    take?: number,
+    offset?: number
 ): Promise<
     AxiosResponse<{
         items: any[]
         total: number
+        page: number
     }>
     > => {
-    return await ApiClient.get('/search?q=' + value + '&type=' + type)
+    const urlParams = objectToQueryString({
+        q: value,
+        type: type,
+        take: take,
+        offset: offset
+    })
+    return await ApiClient.get('/search?' + urlParams)
 }
