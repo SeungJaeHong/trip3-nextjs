@@ -13,6 +13,7 @@ export type DestinationSearchResult = {
 export type FlightSearchResult = {
     id: number
     title: string
+    body: string
     slug: string
     created_at: string
     thumb: string

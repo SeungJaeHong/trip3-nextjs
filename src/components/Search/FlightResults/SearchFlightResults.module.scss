@@ -1,0 +1,93 @@
+@import "../../../styles/variables";
+
+.SearchFlightResults {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .ResultCount {
+        font-family: $font-family-sailec;
+        color: $gray-darker;
+        font-weight: 500;
+        padding-bottom: $spacer;
+        margin-top: $spacer * 2;
+        border-bottom: 1px solid $gray;
+
+        @include sm() {
+            font-size: $font-size-small;
+        }
+    }
+
+    .Results {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: $spacer * 2;
+
+        .FlightRow {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: $spacer * 2;
+            border-bottom: 1px solid $gray;
+            padding: $spacer * 2.5 0;
+
+            .TitleContainer {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                font-family: $font-family-sailec;
+                gap: $spacer * 6;
+
+                .Title {
+                    display: flex;
+                    font-size: $font-size-medium;
+                    color: $blue;
+                    font-weight: 500;
+                    flex-wrap: wrap;
+
+                    &:hover {
+                        color: $blue-hover;
+                    }
+                }
+
+                .CreatedAt {
+                    color: $gray-dark;
+                    font-weight: 400;
+                    font-size: $font-size-small;
+                    white-space: nowrap;
+                    margin-top: 5px;
+                }
+            }
+
+            .ContentContainer {
+                display: flex;
+                width: 100%;
+                gap: $spacer * 2.5;
+
+                .Icon {
+                    svg {
+                        width: 30px;
+                        height: 30px;
+                        fill: $blue;
+                    }
+                }
+
+                .Content {
+                    font-size: $font-size-small;
+                    font-family: $font-family-sailec;
+                    color: $gray-darker;
+                    word-break: break-word;
+                }
+            }
+
+            &:last-child {
+                border-bottom: 0;
+            }
+        }
+    }
+
+    .Paginator {
+        margin: $spacer * 2;
+    }
+}

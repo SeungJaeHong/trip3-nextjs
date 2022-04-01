@@ -9,6 +9,7 @@ import Footer from '../../components/Footer'
 import MainSearchInput from '../../components/MainSearchInput'
 import SearchTabs from '../../components/Search/SearchTabs'
 import SearchForumResults from "../../components/Search/ForumResults"
+import SearchFlightResults from "../../components/Search/FlightResults";
 
 const SearchPage = () => {
     const router = useRouter()
@@ -16,7 +17,7 @@ const SearchPage = () => {
     const [searchType, setSearchType] = useState<string>('forum')
 
     const onSearch = (value: string) => {
-        router.push('/search?q=' + value)
+        router.push('/search?q=' + value + '&type=' + searchType)
     }
 
     useEffect(() => {
@@ -50,7 +51,7 @@ const SearchPage = () => {
                 case 'forum':
                     return <SearchForumResults searchValue={searchValue}/>
                 case 'flight':
-                    return <div>AASDF2</div>
+                    return <SearchFlightResults searchValue={searchValue} />
                 case 'destination':
                     return <div>AASDF3</div>
                 default:
