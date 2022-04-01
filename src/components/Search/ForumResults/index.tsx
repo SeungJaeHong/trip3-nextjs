@@ -1,7 +1,7 @@
 import styles from './SearchForumResults.module.scss'
 import stylesSearchPage from '../../../pages/search/SearchPage.module.scss'
 import LoadingSpinner2 from '../../LoadingSpinner2'
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import { ForumSearchResult, search } from '../../../services/search.service'
 import Link from 'next/link'
 import {getForumUrlByTypeAndSlug, objectToQueryString} from '../../../helpers'
@@ -14,6 +14,7 @@ type Props = {
 }
 
 const SearchForumResults = ({ searchValue }: Props) => {
+    const mounted = useRef(false)
     const type = 'forum'
     const itemsPerPage = 20
     const [searching, setSearching] = useState<boolean>(false)
@@ -33,6 +34,13 @@ const SearchForumResults = ({ searchValue }: Props) => {
     }
 
     useEffect(() => {
+        mounted.current = true
+        return () => {
+            mounted.current = false
+        }
+    }, [])
+
+    useEffect(() => {
         if (searchValue) {
             window.scrollTo(0, 0)
             setSearching(true)
@@ -40,21 +48,27 @@ const SearchForumResults = ({ searchValue }: Props) => {
             const fromValue = (pageValue - 1) * itemsPerPage + 1
             search(searchValue, type, itemsPerPage, fromValue === 1 ? undefined : fromValue)
                 .then((res) => {
-                    setResults(res.data.items)
-                    setTotal(res.data.total)
-                    setPage(pageValue)
-                    setFrom(fromValue)
+                    if (mounted.current) {
+                        setResults(res.data.items)
+                        setTotal(res.data.total)
+                        setPage(pageValue)
+                        setFrom(fromValue)
 
-                    let toValue = pageValue * itemsPerPage
-                    if (toValue > res.data.total) {
-                        toValue = res.data.total
+                        let toValue = pageValue * itemsPerPage
+                        if (toValue > res.data.total) {
+                            toValue = res.data.total
+                        }
+
+                        setTo(toValue)
+                        setLastPage(Math.round(res.data.total / itemsPerPage))
                     }
-
-                    setTo(toValue)
-                    setLastPage(Math.round(res.data.total / itemsPerPage))
                 })
                 .catch((e) => {})
-                .finally(() => setSearching(false))
+                .finally(() => {
+                    if (mounted.current) {
+                        setSearching(false)
+                    }
+                })
         }
     }, [searchValue, router.query.page])
 
