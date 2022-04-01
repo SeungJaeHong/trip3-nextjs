@@ -17,14 +17,12 @@ const SearchForumResults = ({ searchValue }: Props) => {
     const itemsPerPage = 20
     const [searching, setSearching] = useState<boolean>(false)
     const [results, setResults] = useState<ForumSearchResult[]>([])
-    const [total, setTotal] = useState<number>(0)
+    const [total, setTotal] = useState<number|undefined>(undefined)
     const [page, setPage] = useState<number>(1)
     const [from, setFrom] = useState<number>(0)
     const [to, setTo] = useState<number>(itemsPerPage)
     const [lastPage, setLastPage] = useState<number>(1)
     const router = useRouter()
-    //const from = (page - 1) * itemsPerPage + 1
-    //const to = page * itemsPerPage
 
     const getPageFromRoute = () => {
         const pageValue = router.query.page
@@ -37,20 +35,22 @@ const SearchForumResults = ({ searchValue }: Props) => {
         if (searchValue) {
             window.scrollTo(0, 0)
             setSearching(true)
-
-            console.log('search', page)
-
             const pageValue = getPageFromRoute()
             const fromValue = (pageValue - 1) * itemsPerPage + 1
-            const toValue = pageValue * itemsPerPage
             search(searchValue, 'forum', itemsPerPage, fromValue === 1 ? undefined : fromValue)
                 .then((res) => {
                     setResults(res.data.items)
                     setTotal(res.data.total)
                     setPage(pageValue)
                     setFrom(fromValue)
+
+                    let toValue = pageValue * itemsPerPage
+                    if (toValue > res.data.total) {
+                        toValue = res.data.total
+                    }
+
                     setTo(toValue)
-                    setLastPage(Math.floor(res.data.total / itemsPerPage))
+                    setLastPage(Math.round(res.data.total / itemsPerPage))
                 })
                 .catch((e) => {})
                 .finally(() => setSearching(false))
@@ -80,9 +80,17 @@ const SearchForumResults = ({ searchValue }: Props) => {
         )
     }
 
+    if (total === 0 ) {
+        return (
+            <div className={stylesSearchPage.NoResults}>
+                Tulemusi ei leitud
+            </div>
+        )
+    }
+
     return (
         <div className={styles.SearchForumResults}>
-            {total > itemsPerPage &&
+            {total && total > itemsPerPage &&
                 <div className={styles.ResultCount}>
                     {`Kuvan ${from}-${to} tulemust ${total}-st`}
                 </div>

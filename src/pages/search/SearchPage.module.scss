@@ -37,6 +37,14 @@
     }
 }
 
+.NoResults {
+    padding: $spacer * 3 0 0;
+    font-family: $font-family-sailec;
+    color: $gray-dark;
+    font-weight: 500;
+    font-size: $font-size-medium;
+}
+
 .Loader {
     margin: 0 auto;
     width: 50px;
