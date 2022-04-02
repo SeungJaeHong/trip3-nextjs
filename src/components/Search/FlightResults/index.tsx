@@ -2,6 +2,7 @@ import styles from './SearchFlightResults.module.scss'
 import React from 'react'
 import {FlightSearchResult} from '../../../services/search.service'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type Props = {
     results: FlightSearchResult[]
@@ -15,20 +16,25 @@ const SearchFlightResults = ({ results }: Props) => {
                     const itemUrl = '/odavad-lennupiletid/' + result.slug
                     return (
                         <div className={styles.FlightRow} key={result.id}>
-                            <div className={styles.TitleContainer}>
-                                <Link href={itemUrl}>
-                                    <a className={styles.Title}>{result.title}</a>
-                                </Link>
-                                <div className={styles.CreatedAt}>{result.created_at}</div>
+                            <div className={styles.Thumb}>
+                                <Image src={result.image} width={180} height={120} alt={''} />
                             </div>
-                            <div className={styles.ContentContainer}>
-                                <Link href={itemUrl}>
-                                    <a className={styles.Content}>
-                                        {result.body.length > 230
-                                            ? result.body.substring(0, 230).concat('...')
-                                            : result.body}
-                                    </a>
-                                </Link>
+                            <div className={styles.Body}>
+                                <div className={styles.TitleContainer}>
+                                    <Link href={itemUrl}>
+                                        <a className={styles.Title}>{result.title}</a>
+                                    </Link>
+                                    <div className={styles.CreatedAt}>{result.created_at}</div>
+                                </div>
+                                <div className={styles.ContentContainer}>
+                                    <Link href={itemUrl}>
+                                        <a className={styles.Content}>
+                                            {result.body.length > 230
+                                                ? result.body.substring(0, 230).concat('...')
+                                                : result.body}
+                                        </a>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     )

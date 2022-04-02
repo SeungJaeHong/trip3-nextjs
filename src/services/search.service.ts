@@ -16,7 +16,7 @@ export type FlightSearchResult = {
     body: string
     slug: string
     created_at: string
-    thumb: string
+    image: string
 }
 
 export type ForumSearchResult = {
