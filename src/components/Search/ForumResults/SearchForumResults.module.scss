@@ -5,19 +5,6 @@
     flex-direction: column;
     width: 100%;
 
-    .ResultCount {
-        font-family: $font-family-sailec;
-        color: $gray-darker;
-        font-weight: 500;
-        padding-bottom: $spacer;
-        margin-top: $spacer * 2;
-        border-bottom: 1px solid $gray;
-
-        @include sm() {
-            font-size: $font-size-small;
-        }
-    }
-
     .Results {
         display: flex;
         flex-direction: column;
@@ -84,9 +71,5 @@
                 border-bottom: 0;
             }
         }
-    }
-
-    .Paginator {
-        margin: $spacer * 2;
     }
 }

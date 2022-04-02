@@ -26,6 +26,7 @@
 
     .Body {
         display: flex;
+        flex-direction: column;
         width: 100%;
         margin: $spacer * 2 0;
         position: relative;
@@ -49,4 +50,21 @@
     margin: 0 auto;
     width: 50px;
     height: 50px;
+}
+
+.ResultCount {
+    font-family: $font-family-sailec;
+    color: $gray-darker;
+    font-weight: 500;
+    padding-bottom: $spacer;
+    margin-top: $spacer * 2;
+    border-bottom: 1px solid $gray;
+
+    @include sm() {
+        font-size: $font-size-small;
+    }
+}
+
+.Paginator {
+    margin: $spacer * 2;
 }
