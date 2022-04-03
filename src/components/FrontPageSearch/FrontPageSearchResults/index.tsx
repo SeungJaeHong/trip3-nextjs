@@ -12,13 +12,14 @@ import { useRouter } from 'next/router'
 import { getForumUrlByTypeAndSlug } from '../../../helpers'
 
 type Props = {
+    searchValue: string
     destinations?: DestinationSearchResult[]
     flights?: FrontPageFlightSearchResult[]
     forum?: FrontPageForumSearchResult[]
     total?: number
 }
 
-const FrontPageSearchResults = ({ destinations, flights, forum, total }: Props) => {
+const FrontPageSearchResults = ({ searchValue, destinations, flights, forum, total }: Props) => {
     const router = useRouter()
 
     if (total === 0) {
@@ -100,7 +101,7 @@ const FrontPageSearchResults = ({ destinations, flights, forum, total }: Props) 
             )}
             {total && total > 0 && (
                 <div className={styles.MoreResults}>
-                    <span>Kõik tulemused ({total})</span>
+                    <span onClick={() => router.push('/search?q=' + searchValue)}>Kõik tulemused ({total})</span>
                     <ArrowRightIcon />
                 </div>
             )}
