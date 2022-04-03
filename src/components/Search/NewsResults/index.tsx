@@ -1,21 +1,21 @@
-import styles from './SearchFlightResults.module.scss'
+import styles from './SearchNewsResults.module.scss'
 import React from 'react'
-import {FlightSearchResult} from '../../../services/search.service'
+import {NewsSearchResult} from '../../../services/search.service'
 import Link from 'next/link'
 import Image from 'next/image'
 
 type Props = {
-    results: FlightSearchResult[]
+    results: NewsSearchResult[]
 }
 
-const SearchFlightResults = ({ results }: Props) => {
+const SearchNewsResults = ({ results }: Props) => {
     return (
-        <div className={styles.SearchFlightResults}>
+        <div className={styles.SearchNewsResults}>
             <div className={styles.Results}>
                 {results.map((result) => {
-                    const itemUrl = '/odavad-lennupiletid/' + result.slug
+                    const itemUrl = '/uudised/' + result.slug
                     return (
-                        <div className={styles.FlightRow} key={result.id}>
+                        <div className={styles.NewsRow} key={result.id}>
                             <div className={styles.Thumb}>
                                 <Link href={itemUrl}>
                                     <a>
@@ -33,8 +33,8 @@ const SearchFlightResults = ({ results }: Props) => {
                                 <div className={styles.ContentContainer}>
                                     <Link href={itemUrl}>
                                         <a className={styles.Content}>
-                                            {result.body.length > 230
-                                                ? result.body.substring(0, 230).concat('...')
+                                            {result.body.length > 300
+                                                ? result.body.substring(0, 300).concat('...')
                                                 : result.body}
                                         </a>
                                     </Link>
@@ -48,4 +48,4 @@ const SearchFlightResults = ({ results }: Props) => {
     )
 }
 
-export default SearchFlightResults
+export default SearchNewsResults

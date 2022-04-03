@@ -19,6 +19,15 @@ export type FlightSearchResult = {
     image: string
 }
 
+export type NewsSearchResult = {
+    id: number
+    title: string
+    body: string
+    slug: string
+    created_at: string
+    image: string
+}
+
 export type ForumSearchResult = {
     id: number
     title: string

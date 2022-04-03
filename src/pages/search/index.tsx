@@ -14,6 +14,7 @@ import { search } from '../../services/search.service'
 import LoadingSpinner2 from '../../components/LoadingSpinner2'
 import { objectToQueryString } from '../../helpers'
 import PagePaginator from '../../components/Paginator/PagePaginator'
+import SearchNewsResults from '../../components/Search/NewsResults'
 
 const SearchPage = () => {
     const mounted = useRef(false)
@@ -49,9 +50,9 @@ const SearchPage = () => {
                 setResults([])
             }
 
-            /*setTimeout(() => {
+            setTimeout(() => {
                 window.scrollTo(0, 0)
-            }, 20)*/
+            }, 20)
             if (q !== undefined) {
                 if (Array.isArray(q)) {
                     setSearchValue(q[0])
@@ -140,6 +141,8 @@ const SearchPage = () => {
         switch (searchType) {
             case 'flight':
                 return <SearchFlightResults results={results} />
+            case 'news':
+                return <SearchNewsResults results={results} />
             case 'destination':
                 return <div>Destination</div>
             default:

@@ -1,6 +1,6 @@
 @import "../../../styles/variables";
 
-.SearchFlightResults {
+.SearchNewsResults {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -11,7 +11,7 @@
         width: 100%;
         margin-bottom: $spacer * 2;
 
-        .FlightRow {
+        .NewsRow {
             display: flex;
             width: 100%;
             gap: $spacer * 3;
