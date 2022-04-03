@@ -15,6 +15,7 @@ import LoadingSpinner2 from '../../components/LoadingSpinner2'
 import { objectToQueryString } from '../../helpers'
 import PagePaginator from '../../components/Paginator/PagePaginator'
 import SearchNewsResults from '../../components/Search/NewsResults'
+import SearchDestinationResults from "../../components/Search/DestinationResults";
 
 const SearchPage = () => {
     const mounted = useRef(false)
@@ -144,7 +145,7 @@ const SearchPage = () => {
             case 'news':
                 return <SearchNewsResults results={results} />
             case 'destination':
-                return <div>Destination</div>
+                return <SearchDestinationResults results={results} />
             default:
                 return <SearchForumResults results={results} />
         }
