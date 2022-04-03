@@ -56,8 +56,7 @@
     font-family: $font-family-sailec;
     color: $gray-darker;
     font-weight: 500;
-    padding-bottom: $spacer;
-    margin-top: $spacer * 2;
+    padding: $spacer * 2 0;
     border-bottom: 1px solid $gray;
 
     @include sm() {

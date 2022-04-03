@@ -10,6 +10,13 @@ export type DestinationSearchResult = {
     parent_name?: string
 }
 
+export type UserSearchResult = {
+    id: number
+    name: string
+    rank: number
+    image: string
+}
+
 export type FlightSearchResult = {
     id: number
     title: string

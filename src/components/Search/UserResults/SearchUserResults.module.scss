@@ -1,0 +1,58 @@
+@import "../../../styles/variables";
+
+.SearchUserResults {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .Results {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .UserRow {
+            display: flex;
+            width: 100%;
+            gap: $spacer * 3;
+            border-bottom: 1px solid $gray;
+            padding: $spacer * 1.5 0;
+            align-items: center;
+
+            .Avatar {
+                width: 50px;
+                height: 50px;
+            }
+
+            .TitleContainer {
+                display: flex;
+                justify-content: space-between;
+                font-family: $font-family-sailec;
+                gap: $spacer * 6;
+
+                .Title {
+                    display: flex;
+                    font-size: $font-size-medium;
+                    color: $blue;
+                    font-weight: 500;
+                    flex-wrap: wrap;
+
+                    &:hover {
+                        color: $blue-hover;
+                    }
+                }
+            }
+
+            &:last-child {
+                border-bottom: 0;
+            }
+
+            @include sm() {
+                .TitleContainer {
+                    .Title {
+                        font-size: $font-size-normal;
+                    }
+                }
+            }
+        }
+    }
+}

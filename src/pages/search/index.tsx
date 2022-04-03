@@ -16,6 +16,7 @@ import { objectToQueryString } from '../../helpers'
 import PagePaginator from '../../components/Paginator/PagePaginator'
 import SearchNewsResults from '../../components/Search/NewsResults'
 import SearchDestinationResults from "../../components/Search/DestinationResults";
+import SearchUserResults from "../../components/Search/UserResults";
 
 const SearchPage = () => {
     const mounted = useRef(false)
@@ -146,6 +147,8 @@ const SearchPage = () => {
                 return <SearchNewsResults results={results} />
             case 'destination':
                 return <SearchDestinationResults results={results} />
+            case 'user':
+                return <SearchUserResults results={results} />
             default:
                 return <SearchForumResults results={results} />
         }
