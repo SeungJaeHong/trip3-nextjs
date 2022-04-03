@@ -15,12 +15,13 @@ import LoadingSpinner2 from '../../components/LoadingSpinner2'
 import { objectToQueryString } from '../../helpers'
 import PagePaginator from '../../components/Paginator/PagePaginator'
 import SearchNewsResults from '../../components/Search/NewsResults'
-import SearchDestinationResults from "../../components/Search/DestinationResults";
-import SearchUserResults from "../../components/Search/UserResults";
+import SearchDestinationResults from '../../components/Search/DestinationResults'
+import SearchUserResults from '../../components/Search/UserResults'
 
 const SearchPage = () => {
     const mounted = useRef(false)
-    const itemsPerPage = 20
+    const itemsPerPage: number = 20
+    const minLength: number = 3
     const router = useRouter()
     const [searchValue, setSearchValue] = useState<string>('')
     const [searchType, setSearchType] = useState<string>('forum')
@@ -31,6 +32,7 @@ const SearchPage = () => {
     const [from, setFrom] = useState<number>(0)
     const [to, setTo] = useState<number>(itemsPerPage)
     const [lastPage, setLastPage] = useState<number>(1)
+    const [invalidLength, setInvalidLength] = useState<boolean>(false)
 
     const onSearch = (value: string) => {
         router.push('/search?q=' + value + '&type=' + searchType)
@@ -84,32 +86,37 @@ const SearchPage = () => {
 
     useEffect(() => {
         if (searchValue) {
-            window.scrollTo(0, 0)
-            setSearching(true)
-            setResults([])
-            const fromValue = (pageNumber - 1) * itemsPerPage + 1
-            search(searchValue, searchType, itemsPerPage, fromValue === 1 ? undefined : fromValue)
-                .then((res) => {
-                    if (mounted.current) {
-                        setResults(res.data.items)
-                        setTotal(res.data.total)
-                        setFrom(fromValue)
+            if (searchValue.length < minLength) {
+                setInvalidLength(true)
+            } else {
+                window.scrollTo(0, 0)
+                setInvalidLength(false)
+                setSearching(true)
+                setResults([])
+                const fromValue = (pageNumber - 1) * itemsPerPage + 1
+                search(searchValue, searchType, itemsPerPage, fromValue === 1 ? undefined : fromValue)
+                    .then((res) => {
+                        if (mounted.current) {
+                            setResults(res.data.items)
+                            setTotal(res.data.total)
+                            setFrom(fromValue)
 
-                        let toValue = pageNumber * itemsPerPage
-                        if (toValue > res.data.total) {
-                            toValue = res.data.total
+                            let toValue = pageNumber * itemsPerPage
+                            if (toValue > res.data.total) {
+                                toValue = res.data.total
+                            }
+
+                            setTo(toValue)
+                            setLastPage(Math.round(res.data.total / itemsPerPage))
                         }
-
-                        setTo(toValue)
-                        setLastPage(Math.round(res.data.total / itemsPerPage))
-                    }
-                })
-                .catch((e) => {})
-                .finally(() => {
-                    if (mounted.current) {
-                        setSearching(false)
-                    }
-                })
+                    })
+                    .catch((e) => {})
+                    .finally(() => {
+                        if (mounted.current) {
+                            setSearching(false)
+                        }
+                    })
+            }
         }
     }, [searchValue, searchType, pageNumber])
 
@@ -194,6 +201,7 @@ const SearchPage = () => {
                     </div>
                     <div className={styles.SearchBar}>
                         <MainSearchInput placeholder={'Otsi..'} onSearchClick={onSearch} value={searchValue} />
+                        {invalidLength && <span>Vähemalt 3 tähemärki on nõutud!</span>}
                     </div>
                     <div className={containerStyle.ContainerLg}>
                         <div className={clsx(containerStyle.CenteredContainer, styles.Tabs)}>

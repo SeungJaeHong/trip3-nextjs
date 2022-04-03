@@ -12,10 +12,19 @@
 
 .SearchBar {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     max-width: 500px;
     width: 100%;
     margin: 0 auto $spacer * 10 auto;
+    gap: $spacer;
+
+    span {
+        color: $red;
+        font-family: $font-family-sailec;
+        font-size: $font-size-xsmall;
+        font-weight: 600;
+    }
 }
 
 .Content {
