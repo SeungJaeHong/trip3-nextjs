@@ -35,7 +35,12 @@ const SearchPage = () => {
     const [invalidLength, setInvalidLength] = useState<boolean>(false)
 
     const onSearch = (value: string) => {
-        router.push('/search?q=' + value + '&type=' + searchType)
+        if (value && value.length >= minLength) {
+            setInvalidLength(false)
+            router.push('/search?q=' + value + '&type=' + searchType)
+        } else {
+            setInvalidLength(true)
+        }
     }
 
     useEffect(() => {
