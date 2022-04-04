@@ -1,4 +1,4 @@
-import React, {Fragment} from "react"
+import React, {Fragment, useState} from "react"
 import {ForumRowType} from "../../../types"
 import {objectToQueryString} from "../../../helpers";
 import ForumList from "../ForumList";
@@ -28,6 +28,7 @@ type Props = {
 }
 
 const ForumIndexPage = (props: Props) => {
+    const [searchValue, setSearchValue] = useState<string>('')
     const router = useRouter()
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
@@ -36,6 +37,10 @@ const ForumIndexPage = (props: Props) => {
         { value: 'value1', label: 'Value1' },
         { value: 'value2', label: 'Value2' }
     ]
+
+    const onSearch = (value: string) => {
+        console.log(value)
+    }
 
     const getNextPageUrl = () => {
         if (!props.hasMore) {
@@ -73,11 +78,20 @@ const ForumIndexPage = (props: Props) => {
         }
 
         return (
-            <Fragment>
+            <div className={styles.SearchContainer}>
                 <div className={styles.Search}>
-                    <MainSearchInput placeholder={props.searchPlaceholder} />
+                    <MainSearchInput
+                        placeholder={props.searchPlaceholder}
+                        value={searchValue}
+                        onSearchClick={onSearch}
+                    />
                 </div>
-                <div className={styles.Filters}>
+                <div className={styles.FilterContainer}>
+                    <div className={styles.Title}>
+                        Filter
+                    </div>
+                </div>
+                {/*<div className={styles.Filters}>
                     <FormSelect
                         id={'destination'}
                         options={options}
@@ -94,8 +108,8 @@ const ForumIndexPage = (props: Props) => {
                         classNamePrefix={'ForumFilter'}
                         onChange={(value: any) => console.log(value)}
                     />
-                </div>
-            </Fragment>
+                </div>*/}
+            </div>
         )
     }
 
