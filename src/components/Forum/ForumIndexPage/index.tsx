@@ -87,8 +87,31 @@ const ForumIndexPage = (props: Props) => {
                     />
                 </div>
                 <div className={styles.FilterContainer}>
-                    <div className={styles.Title}>
-                        Filter
+                    {/*<div className={styles.Title}>
+                        Täpsem otsing ›
+                    </div>*/}
+                    <div className={styles.AdvancedSearch}>
+                        <div className={styles.AdvancedSearchTitle}>
+                            Täpsem otsing:
+                        </div>
+                        <div className={styles.Filters}>
+                            <FormSelect
+                                id={'destination'}
+                                options={options}
+                                placeholder={'Sihtkoht'}
+                                className={styles.Select}
+                                classNamePrefix={'ForumFilter'}
+                                onChange={(value: any) => console.log(value)}
+                            />
+                            <FormSelect
+                                id={'topic'}
+                                options={options}
+                                placeholder={'Valdkond'}
+                                className={styles.Select}
+                                classNamePrefix={'ForumFilter'}
+                                onChange={(value: any) => console.log(value)}
+                            />
+                        </div>
                     </div>
                 </div>
                 {/*<div className={styles.Filters}>
