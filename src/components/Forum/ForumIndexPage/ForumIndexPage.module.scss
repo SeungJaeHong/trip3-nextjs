@@ -3,9 +3,8 @@
 .SearchContainer {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 55%;
     margin: 0 auto;
-    gap: $spacer;
 
     @include lg() {
         width: 75%;
@@ -26,29 +25,13 @@
     display: flex;
     flex-direction: column;
 
-    .Title {
-        font-family: $font-family-sailec;
-        font-weight: 600;
-        color: $gray;
-        cursor: pointer;
-
-        &:hover {
-            color: $white;
-        }
-    }
-
     .AdvancedSearch {
         background: rgba(255, 255, 255, .9);
         box-shadow: 0 18px 48px rgba(14, 18, 23, .6);
         display: flex;
         flex-direction: column;
-        padding: $spacer * 1.5 $spacer * 2 $spacer * 2.5 $spacer * 2;
+        padding: $spacer * 2;
         gap: $spacer;
-
-        .AdvancedSearchTitle {
-            color: $gray-dark;
-            font-weight: 600;
-        }
     }
 }
 

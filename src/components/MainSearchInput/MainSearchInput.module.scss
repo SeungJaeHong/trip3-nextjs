@@ -6,7 +6,6 @@
     text-align: center;
     position: relative;
     height: 55px;
-    //border: 1px solid rgba(14, 18, 23, 0.2);
     background: rgba(255, 255, 255, .9);
     border-radius: 3px;
 
@@ -23,9 +22,11 @@
         }
 
         @include sm() {
+            padding: $spacer;
+
             svg {
-                width: 20px;
-                height: 20px;
+                width: 18px;
+                height: 18px;
             }
         }
     }
@@ -50,11 +51,62 @@
         @include lg() {
             font-size: 1.1rem;
         }
+
+        @include sm() {
+            font-size: 1rem;
+        }
+    }
+
+    .Filter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 $spacer * 1.5 0 $spacer * 2.5;
+        cursor: pointer;
+        position: relative;
+
+        span {
+            font-family: $font-family-sailec;
+            font-size: $font-size-small;
+            color: $gray-dark;
+        }
+
+        svg {
+            width: 22px;
+            height: 22px;
+            fill: $gray-dark;
+        }
+
+        &:hover {
+            span {
+                color: $blue-hover;
+            }
+
+            svg {
+                fill: $blue-hover;
+            }
+        }
+
+        &:before {
+            content: '';
+            width: 0;
+            height: 50%;
+            position: absolute;
+            border: 1px solid rgba(209, 212, 214, .7);
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        @include sm() {
+            padding: 0 $spacer 0 $spacer * 1.5;
+        }
     }
 
     button {
         display: flex;
-        width: 150px;
+        max-width: 140px;
+        width: 100%;
         position: relative;
         align-items: center;
         background: $green-darker;
@@ -79,6 +131,10 @@
         &:hover:not([disabled]) {
             background: $green-hover;
         }
+
+        @include sm() {
+            max-width: 80px;
+        }
     }
 
     @include sm() {
@@ -87,6 +143,25 @@
         input {
             &::placeholder {
                 font-size: 1rem;
+            }
+        }
+    }
+
+    &.FilterActive {
+        border-radius: 0;
+        border-bottom: 1px solid $gray;
+
+        button {
+            border-radius: 0;
+        }
+
+        .Filter {
+            span {
+                color: $blue-hover;
+            }
+
+            svg {
+                fill: $blue-hover;
             }
         }
     }

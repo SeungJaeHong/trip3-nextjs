@@ -29,6 +29,7 @@ type Props = {
 
 const ForumIndexPage = (props: Props) => {
     const [searchValue, setSearchValue] = useState<string>('')
+    const [showFilter, setShowFilter] = useState<boolean>(false)
     const router = useRouter()
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
@@ -84,36 +85,33 @@ const ForumIndexPage = (props: Props) => {
                         placeholder={props.searchPlaceholder}
                         value={searchValue}
                         onSearchClick={onSearch}
+                        filterActive={showFilter}
                     />
                 </div>
-                <div className={styles.FilterContainer}>
-                    {/*<div className={styles.Title}>
-                        Täpsem otsing ›
-                    </div>*/}
-                    <div className={styles.AdvancedSearch}>
-                        <div className={styles.AdvancedSearchTitle}>
-                            Täpsem otsing:
-                        </div>
-                        <div className={styles.Filters}>
-                            <FormSelect
-                                id={'destination'}
-                                options={options}
-                                placeholder={'Sihtkoht'}
-                                className={styles.Select}
-                                classNamePrefix={'ForumFilter'}
-                                onChange={(value: any) => console.log(value)}
-                            />
-                            <FormSelect
-                                id={'topic'}
-                                options={options}
-                                placeholder={'Valdkond'}
-                                className={styles.Select}
-                                classNamePrefix={'ForumFilter'}
-                                onChange={(value: any) => console.log(value)}
-                            />
+                {showFilter &&
+                    <div className={styles.FilterContainer}>
+                        <div className={styles.AdvancedSearch}>
+                            <div className={styles.Filters}>
+                                <FormSelect
+                                    id={'destination'}
+                                    options={options}
+                                    placeholder={'Sihtkoht'}
+                                    className={styles.Select}
+                                    classNamePrefix={'ForumFilter'}
+                                    onChange={(value: any) => console.log(value)}
+                                />
+                                <FormSelect
+                                    id={'topic'}
+                                    options={options}
+                                    placeholder={'Valdkond'}
+                                    className={styles.Select}
+                                    classNamePrefix={'ForumFilter'}
+                                    onChange={(value: any) => console.log(value)}
+                                />
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
                 {/*<div className={styles.Filters}>
                     <FormSelect
                         id={'destination'}
