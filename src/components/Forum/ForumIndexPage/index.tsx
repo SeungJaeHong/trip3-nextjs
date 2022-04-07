@@ -1,46 +1,54 @@
-import React, {Fragment, useState} from "react"
-import {ForumRowType} from "../../../types"
-import {objectToQueryString} from "../../../helpers";
-import ForumList from "../ForumList";
-import SimplePaginator from "../../Paginator/SimplePaginator";
-import Header from "../../Header";
-import MainSearchInput from "../../MainSearchInput";
-import clsx from "clsx";
-import containerStyle from "../../../styles/containers.module.scss";
-import ForumTabs from "../ForumTabs";
-import BlockTitle from "../../BlockTitle"
-import Button from "../../Button"
-import Footer from "../../Footer"
-import styles from "./ForumIndexPage.module.scss"
+import React, { Fragment, useState } from 'react'
+import { ForumRowType } from '../../../types'
+import { objectToQueryString } from '../../../helpers'
+import ForumList from '../ForumList'
+import SimplePaginator from '../../Paginator/SimplePaginator'
+import Header from '../../Header'
+import MainSearchInput from '../../MainSearchInput'
+import clsx from 'clsx'
+import containerStyle from '../../../styles/containers.module.scss'
+import ForumTabs from '../ForumTabs'
+import BlockTitle from '../../BlockTitle'
+import Button from '../../Button'
+import Footer from '../../Footer'
+import styles from './ForumIndexPage.module.scss'
 import { useRouter } from 'next/router'
-import FormSelect from "../../Form/FormSelect"
+import FormSelect from '../../Form/FormSelect'
 
 type Props = {
-    type: 'general' | 'buysell' | 'foreign' | 'other' | 'follows',
-    title: string,
-    description: string,
-    searchPlaceholder: string,
-    forumPosts: ForumRowType[],
-    currentPage: number,
-    topic?: number,
-    destination?: number,
+    type: 'general' | 'buysell' | 'foreign' | 'other' | 'follows'
+    title: string
+    description: string
+    searchPlaceholder: string
+    forumPosts: ForumRowType[]
+    currentPage: number
     hasMore: boolean
+    search?: string
+    topic?: number
+    destination?: number
+    destinationOptions: { value: string; label: string }[]
+    topicOptions: { value: string; label: string }[]
 }
 
 const ForumIndexPage = (props: Props) => {
-    const [searchValue, setSearchValue] = useState<string>('')
+    const [searchValue, setSearchValue] = useState<string>(props.search || '')
     const [showFilter, setShowFilter] = useState<boolean>(false)
+    const [destinationValue, setDestinationValue] = useState<string | undefined>(undefined)
+    const [topicValue, setTopicValue] = useState<string | undefined>(undefined)
     const router = useRouter()
-    const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' },
-        { value: 'value1', label: 'Value1' },
-        { value: 'value2', label: 'Value2' }
-    ]
 
     const onSearch = (value: string) => {
-        console.log(value)
+        console.log('onSearch', value, destinationValue, topicValue, router.pathname)
+
+        const urlParams = {
+            q: value,
+            destination: destinationValue,
+            topic: topicValue,
+            page: props.currentPage > 1 ? props.currentPage : undefined,
+        }
+
+        const queryString = objectToQueryString(urlParams)
+        router.push(router.pathname + '?' + queryString)
     }
 
     const getNextPageUrl = () => {
@@ -51,7 +59,7 @@ const ForumIndexPage = (props: Props) => {
         const urlParams = {
             topic: props.topic,
             destination: props.destination,
-            page: props.currentPage + 1
+            page: props.currentPage + 1,
         }
 
         const queryString = objectToQueryString(urlParams)
@@ -63,7 +71,7 @@ const ForumIndexPage = (props: Props) => {
             const urlParams = {
                 topic: props.topic,
                 destination: props.destination,
-                page: props.currentPage - 1
+                page: props.currentPage - 1,
             }
 
             const queryString = objectToQueryString(urlParams)
@@ -71,6 +79,10 @@ const ForumIndexPage = (props: Props) => {
         } else {
             return undefined
         }
+    }
+
+    const onToggleFilter = () => {
+        setShowFilter(!showFilter)
     }
 
     const renderSearchAndFilters = () => {
@@ -86,50 +98,33 @@ const ForumIndexPage = (props: Props) => {
                         value={searchValue}
                         onSearchClick={onSearch}
                         filterActive={showFilter}
+                        onFilterClick={onToggleFilter}
                     />
                 </div>
-                {showFilter &&
+                {showFilter && (
                     <div className={styles.FilterContainer}>
                         <div className={styles.AdvancedSearch}>
                             <div className={styles.Filters}>
                                 <FormSelect
                                     id={'destination'}
-                                    options={options}
+                                    options={props.destinationOptions || []}
                                     placeholder={'Sihtkoht'}
                                     className={styles.Select}
                                     classNamePrefix={'ForumFilter'}
-                                    onChange={(value: any) => console.log(value)}
+                                    onChange={(value: string) => setDestinationValue(value)}
                                 />
                                 <FormSelect
                                     id={'topic'}
-                                    options={options}
+                                    options={props.topicOptions || []}
                                     placeholder={'Valdkond'}
                                     className={styles.Select}
                                     classNamePrefix={'ForumFilter'}
-                                    onChange={(value: any) => console.log(value)}
+                                    onChange={(value: string) => setTopicValue(value)}
                                 />
                             </div>
                         </div>
                     </div>
-                }
-                {/*<div className={styles.Filters}>
-                    <FormSelect
-                        id={'destination'}
-                        options={options}
-                        placeholder={'Sihtkoht'}
-                        className={styles.Select}
-                        classNamePrefix={'ForumFilter'}
-                        onChange={(value: any) => console.log(value)}
-                    />
-                    <FormSelect
-                        id={'topic'}
-                        options={options}
-                        placeholder={'Valdkond'}
-                        className={styles.Select}
-                        classNamePrefix={'ForumFilter'}
-                        onChange={(value: any) => console.log(value)}
-                    />
-                </div>*/}
+                )}
             </div>
         )
     }
@@ -143,9 +138,7 @@ const ForumIndexPage = (props: Props) => {
             <Fragment>
                 <ForumList items={props.forumPosts} />
                 <div className={styles.Paginator}>
-                    <SimplePaginator
-                        nextPageUrl={getNextPageUrl()}
-                        previousPageUrl={getPreviousPageUrl()} />
+                    <SimplePaginator nextPageUrl={getNextPageUrl()} previousPageUrl={getPreviousPageUrl()} />
                 </div>
             </Fragment>
         )
@@ -154,9 +147,7 @@ const ForumIndexPage = (props: Props) => {
     return (
         <Fragment>
             <Header>
-                <Fragment>
-                    {renderSearchAndFilters()}
-                </Fragment>
+                <Fragment>{renderSearchAndFilters()}</Fragment>
                 <div className={clsx(containerStyle.CenteredContainer, styles.Tabs)}>
                     <ForumTabs />
                 </div>
@@ -164,14 +155,10 @@ const ForumIndexPage = (props: Props) => {
             <div className={containerStyle.ContainerXl}>
                 <div className={containerStyle.CenteredContainer}>
                     <div className={styles.Content}>
-                        <div className={styles.ForumList}>
-                            {showList()}
-                        </div>
+                        <div className={styles.ForumList}>{showList()}</div>
                         <div className={styles.Sidebar}>
                             <BlockTitle title={props.title} />
-                            <div className={styles.ForumDescription}>
-                                {props.description}
-                            </div>
+                            <div className={styles.ForumDescription}>{props.description}</div>
                             <div className={styles.AddNewTopic}>
                                 <Button title={'Alusta uut teemat'} route={'/foorum/lisa-uus'} />
                             </div>

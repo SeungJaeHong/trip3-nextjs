@@ -5,6 +5,7 @@
     flex-direction: column;
     width: 55%;
     margin: 0 auto;
+    padding: $spacer * 2 0;
 
     @include lg() {
         width: 75%;
@@ -16,7 +17,6 @@
 }
 
 .Search {
-    padding-top: $spacer * 2;
     display: flex;
     width: 100%;
 }
