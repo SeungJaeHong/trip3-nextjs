@@ -38,7 +38,7 @@ const ForumIndexPage = (props: Props) => {
     const router = useRouter()
 
     const onSearch = (value: string) => {
-        console.log('onSearch', value, destinationValue, topicValue, router.pathname)
+        console.log('onSearch', value, destinationValue, topicValue)
 
         const urlParams = {
             q: value,

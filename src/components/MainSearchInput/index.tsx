@@ -21,15 +21,13 @@ const MainSearchInput = ({ value, placeholder, onSearchClick, filterActive, onFi
     const onKeyPress = (e: KeyboardEvent) => {
         if (onSearchClick && e.key === 'Enter') {
             const element = e.target as HTMLInputElement
-            if (element?.value) {
-                onSearchClick(element?.value)
-            }
+            onSearchClick(element?.value)
         }
     }
 
     const onButtonClick = () => {
-        if (inputValue && onSearchClick) {
-            onSearchClick(inputValue)
+        if (onSearchClick) {
+            onSearchClick(inputValue ?? '')
         }
     }
 

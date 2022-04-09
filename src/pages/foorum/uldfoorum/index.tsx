@@ -48,9 +48,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const topicOptions: { value: string, label: string }[] = res.data?.topics.map((topic: any) => ({ label: topic.name, value: topic.id.toString() }))
     return {
         props: {
-            forumPosts: res.data.forumList?.items,
+            forumPosts: res.data?.forumList.items || [],
             currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
-            hasMore: res.data.forumList?.hasMore,
+            hasMore: res.data.forumList?.hasMore || false,
             destinationOptions: destinationOptions || [],
             topicOptions: topicOptions || []
         },
