@@ -33,10 +33,16 @@ type Props = {
 
 const ForumIndexPage = (props: Props) => {
     const itemsPerPage = 15
-    const [showFilter, setShowFilter] = useState<boolean>(false)
     const [destinationValue, setDestinationValue] = useState<string | undefined>(undefined)
     const [topicValue, setTopicValue] = useState<string | undefined>(undefined)
     const router = useRouter()
+
+    let isFilterSearch = false
+    if (props.destination || props.topic) {
+        isFilterSearch = true
+    }
+
+    const [showFilter, setShowFilter] = useState<boolean>(isFilterSearch)
 
     const onSearch = (value: string) => {
         const urlParams = {

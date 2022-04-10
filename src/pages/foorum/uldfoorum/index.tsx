@@ -46,8 +46,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     url += '?' + queryString
 
     const res = await ApiClientSSR(context).get(url)
-    const destinationOptions: { value: string, label: string }[] = res.data?.destinations.map((destination: any) => ({ label: destination.name, value: destination.id.toString() }))
-    const topicOptions: { value: string, label: string }[] = res.data?.topics.map((topic: any) => ({ label: topic.name, value: topic.id.toString() }))
+    const destinationOptions: { value: string; label: string }[] = res.data?.destinations.map((destination: any) => ({
+        label: destination.name,
+        value: destination.id.toString(),
+    }))
+    const topicOptions: { value: string; label: string }[] = res.data?.topics.map((topic: any) => ({
+        label: topic.name,
+        value: topic.id.toString(),
+    }))
     return {
         props: {
             forumPosts: res.data?.items || [],
@@ -58,7 +64,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             destination: destination || null,
             topic: topic || null,
             destinationOptions: destinationOptions || [],
-            topicOptions: topicOptions || []
+            topicOptions: topicOptions || [],
         },
     }
 }
