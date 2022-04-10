@@ -7,11 +7,12 @@ type Props = {
     value?: string
     placeholder?: string
     onSearchClick?: (value: string) => void
+    showFilter?: boolean
     filterActive?: boolean
     onFilterClick?: () => void
 }
 
-const MainSearchInput = ({ value, placeholder, onSearchClick, filterActive, onFilterClick }: Props) => {
+const MainSearchInput = ({ value, placeholder, onSearchClick, filterActive, onFilterClick, showFilter }: Props) => {
     const [inputValue, setInputValue] = useState<string | undefined>(value)
 
     const onValueChange = (e: BaseSyntheticEvent) => {
@@ -52,12 +53,14 @@ const MainSearchInput = ({ value, placeholder, onSearchClick, filterActive, onFi
                 // @ts-ignore
                 onKeyPress={onKeyPress}
             />
-            <div className={styles.Filter} onClick={onFilterClick}>
-                <span>Filter</span>
-                <svg width="24" height="24" viewBox="0 0 24 24">
-                    <path d="m7 10l5 5l5-5H7z" />
-                </svg>
-            </div>
+            {showFilter &&
+                <div className={styles.Filter} onClick={onFilterClick}>
+                    <span>Filter</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path d="m7 10l5 5l5-5H7z" />
+                    </svg>
+                </div>
+            }
             <button onClick={onButtonClick}>
                 <span>Otsi</span>
             </button>
@@ -66,7 +69,8 @@ const MainSearchInput = ({ value, placeholder, onSearchClick, filterActive, onFi
 }
 
 MainSearchInput.defaultProps = {
-    filterActive: false
+    filterActive: false,
+    showFilter: true
 }
 
 export default MainSearchInput

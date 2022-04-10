@@ -205,7 +205,14 @@ const SearchPage = () => {
                         <Navbar darkMode={true} />
                     </div>
                     <div className={styles.SearchBar}>
-                        <MainSearchInput placeholder={'Otsi..'} onSearchClick={onSearch} value={searchValue} />
+                        <div className={styles.Input}>
+                            <MainSearchInput
+                                placeholder={'Otsi..'}
+                                onSearchClick={onSearch}
+                                value={searchValue}
+                                showFilter={false}
+                            />
+                        </div>
                         {invalidLength && <span>Vähemalt 3 tähemärki on nõutud!</span>}
                     </div>
                     <div className={containerStyle.ContainerLg}>
