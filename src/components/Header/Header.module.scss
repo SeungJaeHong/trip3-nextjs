@@ -27,5 +27,6 @@
 
     @include sm() {
         font-size: 2rem;
+        margin-bottom: $spacer * 3;
     }
 }
