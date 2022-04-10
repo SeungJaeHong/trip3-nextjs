@@ -23,6 +23,7 @@ type Props = {
     forumPosts: ForumRowType[]
     currentPage: number
     hasMore: boolean
+    total: number
     search?: string
     topic?: number
     destination?: number
@@ -31,20 +32,17 @@ type Props = {
 }
 
 const ForumIndexPage = (props: Props) => {
-    const [searchValue, setSearchValue] = useState<string>(props.search || '')
+    const itemsPerPage = 15
     const [showFilter, setShowFilter] = useState<boolean>(false)
     const [destinationValue, setDestinationValue] = useState<string | undefined>(undefined)
     const [topicValue, setTopicValue] = useState<string | undefined>(undefined)
     const router = useRouter()
 
     const onSearch = (value: string) => {
-        console.log('onSearch', value, destinationValue, topicValue)
-
         const urlParams = {
             q: value,
             destination: destinationValue,
             topic: topicValue,
-            page: props.currentPage > 1 ? props.currentPage : undefined,
         }
 
         const queryString = objectToQueryString(urlParams)
@@ -57,6 +55,7 @@ const ForumIndexPage = (props: Props) => {
         }
 
         const urlParams = {
+            q: props.search,
             topic: props.topic,
             destination: props.destination,
             page: props.currentPage + 1,
@@ -69,6 +68,7 @@ const ForumIndexPage = (props: Props) => {
     const getPreviousPageUrl = () => {
         if (props.currentPage > 1) {
             const urlParams = {
+                q: props.search,
                 topic: props.topic,
                 destination: props.destination,
                 page: props.currentPage - 1,
@@ -85,6 +85,24 @@ const ForumIndexPage = (props: Props) => {
         setShowFilter(!showFilter)
     }
 
+    const renderSearchResultInfo = () => {
+        if (props.search || props.destination || props.topic) {
+            const fromValue = (props.currentPage - 1) * itemsPerPage + 1
+            let toValue = props.currentPage * itemsPerPage
+            if (toValue > props.total) {
+                toValue = props.total
+            }
+
+            if (props.total && props.total > itemsPerPage) {
+                return (
+                    <div className={styles.ResultCount}>
+                        {`Kuvan ${fromValue}-${toValue} tulemust ${props.total}-st`}
+                    </div>
+                )
+            } else return null
+        } else return null
+    }
+
     const renderSearchAndFilters = () => {
         if (props.type === 'follows') {
             return <div className={styles.NoSearch} />
@@ -95,7 +113,7 @@ const ForumIndexPage = (props: Props) => {
                 <div className={styles.Search}>
                     <MainSearchInput
                         placeholder={props.searchPlaceholder}
-                        value={searchValue}
+                        value={props.search}
                         onSearchClick={onSearch}
                         filterActive={showFilter}
                         onFilterClick={onToggleFilter}
@@ -136,6 +154,7 @@ const ForumIndexPage = (props: Props) => {
 
         return (
             <Fragment>
+                {renderSearchResultInfo()}
                 <ForumList items={props.forumPosts} />
                 <div className={styles.Paginator}>
                     <SimplePaginator nextPageUrl={getNextPageUrl()} previousPageUrl={getPreviousPageUrl()} />

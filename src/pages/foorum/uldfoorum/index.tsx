@@ -8,9 +8,11 @@ import { objectToQueryString } from '../../../helpers'
 type Props = {
     forumPosts: ForumRowType[]
     currentPage: number
+    search?: string
     topic?: number
     destination?: number
     hasMore: boolean
+    total: number
     destinationOptions: { value: string; label: string }[]
     topicOptions: { value: string; label: string }[]
 }
@@ -48,9 +50,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const topicOptions: { value: string, label: string }[] = res.data?.topics.map((topic: any) => ({ label: topic.name, value: topic.id.toString() }))
     return {
         props: {
-            forumPosts: res.data?.forumList.items || [],
+            forumPosts: res.data?.items || [],
+            hasMore: res.data?.hasMore || false,
+            total: res.data.total,
             currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
-            hasMore: res.data.forumList?.hasMore || false,
+            search: q || '',
+            destination: destination || null,
+            topic: topic || null,
             destinationOptions: destinationOptions || [],
             topicOptions: topicOptions || []
         },
