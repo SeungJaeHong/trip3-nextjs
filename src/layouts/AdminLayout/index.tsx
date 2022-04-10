@@ -1,36 +1,27 @@
-import React from "react"
+import React from 'react'
 import styles from './AdminLayout.module.scss'
-import Footer from "../../components/Footer"
-import SidebarMenu from "../../components/Admin/SidebarMenu"
-import Navbar from "../../components/Navbar"
-import containerStyle from "../../styles/containers.module.scss"
-import clsx from "clsx";
+import Footer from '../../components/Footer'
+import SidebarMenu from '../../components/Admin/SidebarMenu'
+import Navbar from '../../components/Navbar'
 
 type Props = {
     title?: string
     children: React.ReactNode
 }
 
-const AdminLayout = ({title, children}: Props) => {
+const AdminLayout = ({ title, children }: Props) => {
     return (
-        <div className={clsx(containerStyle.ContainerXl, styles.Container)}>
-            <div className={styles.AdminLayout}>
+        <div className={styles.Container}>
+            <div className={styles.Layout}>
                 <div className={styles.SidebarMenu}>
                     <SidebarMenu />
                 </div>
                 <div className={styles.ContentContainer}>
                     <div className={styles.NavBar}>
-                        <Navbar
-                            darkMode={true}
-                            showLogo={false} />
+                        <Navbar darkMode={true} showLogo={false} />
                     </div>
                     <div className={styles.Content}>
-                        {title &&
-                            <h1 className={styles.Title}>
-                                {title}
-                            </h1>
-                        }
-
+                        {title && <h1 className={styles.Title}>{title}</h1>}
                         {children}
                     </div>
                 </div>

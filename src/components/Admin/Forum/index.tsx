@@ -18,7 +18,7 @@ const AdminForum = () => {
     useEffect(() => {
         try {
             setLoading(true)
-            const res = getForumPosts(Number(page)).then((response) => {
+            getForumPosts(Number(page)).then((response) => {
                 setPosts(response.data.items)
                 setHasMore(response.data.hasMore)
                 setLoading(false)

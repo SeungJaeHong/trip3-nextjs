@@ -3,7 +3,13 @@
 .AdminForumPost {
     display: flex;
     flex-direction: column;
+    max-width: 1000px;
     width: 100%;
+    margin: 0 auto;
+
+    @include sm() {
+        padding-right: $spacer;
+    }
 
     .ForumPost {
         margin: $spacer * 4 0 $spacer 0;
