@@ -113,7 +113,7 @@
     margin-top: $spacer * 8;
 
     @include sm() {
-        margin-top: $spacer * 7;
+        margin-top: $spacer * 6;
     }
 }
 
@@ -126,6 +126,11 @@
     @include md() {
         flex-direction: column;
         padding-top: $spacer * 6;
+    }
+
+    @include sm() {
+        flex-direction: column;
+        padding-top: $spacer * 3;
     }
 
     .ResultCount {

@@ -9,8 +9,8 @@ type Props = {
     forumPosts: ForumRowType[]
     currentPage: number
     search?: string
-    topic?: number
-    destination?: number
+    topic?: string
+    destination?: string
     hasMore: boolean
     total: number
     destinationOptions: { value: string; label: string }[]

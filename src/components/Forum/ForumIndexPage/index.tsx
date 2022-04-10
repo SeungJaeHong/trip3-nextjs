@@ -25,16 +25,16 @@ type Props = {
     hasMore: boolean
     total: number
     search?: string
-    topic?: number
-    destination?: number
+    topic?: string
+    destination?: string
     destinationOptions: { value: string; label: string }[]
     topicOptions: { value: string; label: string }[]
 }
 
 const ForumIndexPage = (props: Props) => {
     const itemsPerPage = 15
-    const [destinationValue, setDestinationValue] = useState<string | undefined>(undefined)
-    const [topicValue, setTopicValue] = useState<string | undefined>(undefined)
+    const [destinationValue, setDestinationValue] = useState<string | undefined>(props.destination)
+    const [topicValue, setTopicValue] = useState<string | undefined>(props.topic)
     const router = useRouter()
 
     let isFilterSearch = false
@@ -132,6 +132,7 @@ const ForumIndexPage = (props: Props) => {
                                 <FormSelect
                                     id={'destination'}
                                     options={props.destinationOptions || []}
+                                    value={destinationValue}
                                     placeholder={'Sihtkoht'}
                                     className={styles.Select}
                                     classNamePrefix={'ForumFilter'}
@@ -140,6 +141,7 @@ const ForumIndexPage = (props: Props) => {
                                 <FormSelect
                                     id={'topic'}
                                     options={props.topicOptions || []}
+                                    value={topicValue}
                                     placeholder={'Valdkond'}
                                     className={styles.Select}
                                     classNamePrefix={'ForumFilter'}
