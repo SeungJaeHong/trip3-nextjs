@@ -57,7 +57,9 @@ const NewsEditPage = ({news, destinations, topics}: Props) => {
                 <div className={styles.NewsForm}>
                     {submitting &&
                         <div className={styles.FormSubmitOverLay}>
-                            <LoadingSpinner2 />
+                            <div className={styles.Loading}>
+                                <LoadingSpinner2 />
+                            </div>
                         </div>
                     }
                     <NewsForm
@@ -102,7 +104,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         const id = context.query.id
         const url = process.env.API_BASE_URL + '/news/' + id + '/edit'
         const response: any = await ApiClientSSR(context).get(url)
-
         return {
             props: {
                 news: response.data.news,
