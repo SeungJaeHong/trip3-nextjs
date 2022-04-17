@@ -1,6 +1,6 @@
 import styles from './SearchFlightResults.module.scss'
 import React from 'react'
-import {FlightSearchResult} from '../../../services/search.service'
+import { FlightSearchResult } from '../../../services/search.service'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -19,7 +19,12 @@ const SearchFlightResults = ({ results }: Props) => {
                             <div className={styles.Thumb}>
                                 <Link href={itemUrl}>
                                     <a>
-                                        <Image src={result.image} width={180} height={120} alt={''} />
+                                        <Image
+                                            src={result.image ?? '/images/no_image.jpeg'}
+                                            width={180}
+                                            height={120}
+                                            alt={''}
+                                        />
                                     </a>
                                 </Link>
                             </div>
