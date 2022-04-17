@@ -191,7 +191,7 @@ export type TravelmateContent = {
     startMonth?: string
     duration?: string
     createdAt: string
-    user: User
+    user: UserProfile
     destinations?: Destination[]
     topics?: Topic[]
     comments?: Comment[]
@@ -271,7 +271,7 @@ export type TravelmateRowType = {
     title: string
     slug: string
     createdAt: string
-    user: User
+    user: UserProfile
     destinations?: Destination[]
     topics?: Topic[]
 }

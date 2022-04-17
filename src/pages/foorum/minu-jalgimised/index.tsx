@@ -1,24 +1,27 @@
 import React from 'react'
-import {GetServerSideProps} from "next"
-import {ForumRowType} from "../../../types"
-import ForumIndexPage from "../../../components/Forum/ForumIndexPage"
-import ApiClientSSR from "../../../lib/ApiClientSSR"
+import { GetServerSideProps } from 'next'
+import { ForumRowType } from '../../../types'
+import ForumIndexPage from '../../../components/Forum/ForumIndexPage'
+import ApiClientSSR from '../../../lib/ApiClientSSR'
 
 type Props = {
-    forumPosts: ForumRowType[],
-    currentPage: number,
-    topic?: number,
-    destination?: number,
-    hasMore: boolean,
+    forumPosts: ForumRowType[]
+    currentPage: number
+    topic?: string
+    destination?: string
+    hasMore: boolean
 }
 
 const FollowsForumIndex = (props: Props) => {
-    return <ForumIndexPage
-        type={'follows'}
-        title={'Minu jälgimised'}
-        description={'Postitused, mida Sa oled jälgitavaks märkinud.'}
-        searchPlaceholder={'Otsi vaba teema foorumist...'}
-        {...props} />
+    return (
+        <ForumIndexPage
+            type={'follows'}
+            title={'Minu jälgimised'}
+            description={'Postitused, mida Sa oled jälgitavaks märkinud.'}
+            searchPlaceholder={'Otsi vaba teema foorumist...'}
+            {...props}
+        />
+    )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -29,18 +32,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             url += '?page=' + page
         }
 
-        const data = {
-            forumPosts: [],
-            currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
-            hasMore: false,
-        }
-
         const res = await ApiClientSSR(context).get(url)
-        data.forumPosts = res.data.forumList?.items
-        data.hasMore = res.data.forumList?.hasMore
-
         return {
-            props: data
+            props: {
+                forumPosts: res.data.forumList?.items || [],
+                hasMore: res.data.forumList?.hasMore || false,
+                currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
+            }
         }
     } catch (e: any) {
         if (e.response?.status === 401 || e.response?.status === 419) {
@@ -52,7 +50,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             }
         } else {
             return {
-                notFound: true
+                notFound: true,
             }
         }
     }

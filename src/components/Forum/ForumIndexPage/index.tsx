@@ -23,12 +23,12 @@ type Props = {
     forumPosts: ForumRowType[]
     currentPage: number
     hasMore: boolean
-    total: number
+    total?: number
     search?: string
     topic?: string
     destination?: string
-    destinationOptions: { value: string; label: string }[]
-    topicOptions: { value: string; label: string }[]
+    destinationOptions?: { value: string; label: string }[]
+    topicOptions?: { value: string; label: string }[]
 }
 
 const ForumIndexPage = (props: Props) => {
@@ -92,7 +92,7 @@ const ForumIndexPage = (props: Props) => {
     }
 
     const renderSearchResultInfo = () => {
-        if (props.search || props.destination || props.topic) {
+        if ((props.search || props.destination || props.topic) && props.total !== undefined) {
             const fromValue = (props.currentPage - 1) * itemsPerPage + 1
             let toValue = props.currentPage * itemsPerPage
             if (toValue > props.total) {
