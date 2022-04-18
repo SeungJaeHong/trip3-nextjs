@@ -26,7 +26,7 @@ const ForumPostComments = ({ post, comments, currentPage, lastPage }: Props) => 
         setForumComments(comments)
     }, [comments])
 
-    if (!comments) {
+    if (!forumComments) {
         return null
     }
 

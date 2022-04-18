@@ -15,6 +15,8 @@ import BlockTitle from "../../BlockTitle"
 import {postComment} from "../../../services/comment.service"
 import {toast} from 'react-toastify'
 import useUser from "../../../hooks"
+import FlightOffersLatest from "../../FlightOffer/FlightOffersLatest"
+import TravelmatesLatest from "../../Travelmate/TravelmatesLatest"
 
 type Props = {
     post: Content,
@@ -121,6 +123,14 @@ const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
                         <div className={styles.SidebarButton}>
                             <Button title={'Alusta uut teemat'} light={true} route={'/foorum/lisa-uus'} />
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div className={styles.RelatedContentContainer}>
+                <div className={containerStyle.ContainerXl}>
+                    <div className={styles.LatestContentContainer}>
+                        <FlightOffersLatest />
+                        <TravelmatesLatest />
                     </div>
                 </div>
             </div>

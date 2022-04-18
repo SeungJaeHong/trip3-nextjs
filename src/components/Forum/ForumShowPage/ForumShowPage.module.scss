@@ -57,3 +57,12 @@
         }
     }
 }
+
+.RelatedContentContainer {
+    background: $gray-light;
+    padding: $spacer * 4 0;
+
+    .LatestContentContainer {
+        display: flex;
+    }
+}
