@@ -52,6 +52,10 @@
             margin: $spacer * 1.5 0;
         }
 
+        @include md() {
+            padding-left: 0;
+        }
+
         @include sm() {
             padding-left: 0;
         }
@@ -60,9 +64,27 @@
 
 .RelatedContentContainer {
     background: $gray-light;
-    padding: $spacer * 4 0;
+    padding: $spacer * 4 0 $spacer * 6;
 
     .LatestContentContainer {
         display: flex;
+        flex-direction: column;
+        gap: $spacer * 4;
+
+        .Column {
+            display: flex;
+            gap: $spacer * 4;
+
+            @include sm() {
+                flex-direction: column;
+                gap: $spacer * 3;
+            }
+        }
+
+        .Row {
+            display: flex;
+            width: 100%;
+
+        }
     }
 }

@@ -1,20 +1,18 @@
 import styles from './FlightOffersLatest.module.scss'
-import BlockTitle from "../../BlockTitle"
-import {useEffect, useState} from "react"
-import FlightOfferList from "../FlightOfferList"
-import MoreLink from "../../MoreLink"
-import {getLatestFlights} from "../../../services/flight.service"
+import BlockTitle from '../../BlockTitle'
+import { useEffect, useState } from 'react'
+import FlightOfferList from '../FlightOfferList'
+import MoreLink from '../../MoreLink'
+import { getLatestFlights } from '../../../services/flight.service'
+import { FlightOfferRowType } from '../../../types'
 
 const FlightOffersLatest = () => {
-    const [flights, setFlights] = useState([])
+    const [flights, setFlights] = useState<FlightOfferRowType[]>([])
 
     useEffect(() => {
-        const getFlights = async () => {
-            const result = await getLatestFlights()
-            setFlights(result.data.flightOffers)
-        }
-
-        getFlights()
+        getLatestFlights().then((res) => {
+            setFlights(res.data)
+        })
     }, [])
 
     return (

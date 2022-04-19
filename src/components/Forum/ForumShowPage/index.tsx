@@ -1,35 +1,38 @@
-import {Content} from "../../../types"
-import React, {Fragment, useEffect, useState} from "react"
-import {useRouter} from 'next/router'
-import Header from "../../Header"
-import styles from "./ForumShowPage.module.scss"
-import containerStyle from "../../../styles/containers.module.scss"
-import ForumPost from "../ForumPost"
-import MoreLink from "../../MoreLink"
-import ForumPostComments from "../ForumPostComments"
-import Footer from "../../Footer"
-import Button from "../../Button"
-import {getForumUrlByType, getForumUrlByTypeAndSlug, scrollToHash} from "../../../helpers"
-import CommentEditor from "../../CommentEditor"
-import BlockTitle from "../../BlockTitle"
-import {postComment} from "../../../services/comment.service"
-import {toast} from 'react-toastify'
-import useUser from "../../../hooks"
-import FlightOffersLatest from "../../FlightOffer/FlightOffersLatest"
-import TravelmatesLatest from "../../Travelmate/TravelmatesLatest"
+import { Content } from '../../../types'
+import React, { Fragment, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import Header from '../../Header'
+import styles from './ForumShowPage.module.scss'
+import containerStyle from '../../../styles/containers.module.scss'
+import ForumPost from '../ForumPost'
+import MoreLink from '../../MoreLink'
+import ForumPostComments from '../ForumPostComments'
+import Footer from '../../Footer'
+import Button from '../../Button'
+import { getForumUrlByType, getForumUrlByTypeAndSlug, scrollToHash } from '../../../helpers'
+import CommentEditor from '../../CommentEditor'
+import BlockTitle from '../../BlockTitle'
+import { postComment } from '../../../services/comment.service'
+import { toast } from 'react-toastify'
+import useUser from '../../../hooks'
+import FlightOffersLatest from '../../FlightOffer/FlightOffersLatest'
+import TravelmatesLatest from '../../Travelmate/TravelmatesLatest'
+import NewsLatest from '../../News/NewsLatest'
 
 type Props = {
-    post: Content,
+    post: Content
     lastCommentId?: number
-    currentPage: number,
+    currentPage: number
     lastPage: number
 }
 
-const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
+const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) => {
     const { userIsLoggedIn } = useUser()
     const [commentValue, setCommentValue] = useState<string>('')
     const [comments, setComments] = useState(post.comments)
-    const newestCommentUrl = lastCommentId ? getForumUrlByTypeAndSlug(post.type, post.slug) + '?page=' + lastPage + '#' + lastCommentId : ''
+    const newestCommentUrl = lastCommentId
+        ? getForumUrlByTypeAndSlug(post.type, post.slug) + '?page=' + lastPage + '#' + lastCommentId
+        : ''
     const [goToNewestLink, setGoToNewestLink] = useState(newestCommentUrl)
     const [submitting, setSubmitting] = useState<boolean>(false)
     const router = useRouter()
@@ -39,47 +42,48 @@ const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
     }, [post.comments])
 
     useEffect(() => {
-        setTimeout(
-            function() {
-                scrollToHash()
-            }, 0);
+        setTimeout(function () {
+            scrollToHash()
+        }, 0)
     }, [comments])
 
     const onSubmit = async (value: string) => {
         setSubmitting(true)
-        await postComment(value, post.id).then((response) => {
-            setCommentValue(value)
-            setCommentValue('')
-            const comment = response.data.comment
-            const newLastPage = response.data.lastPage
-            const newComments = comments ? [...comments, comment] : [comment]
-            setComments(newComments)
+        await postComment(value, post.id)
+            .then((response) => {
+                setCommentValue(value)
+                setCommentValue('')
+                const comment = response.data.comment
+                const newLastPage = response.data.lastPage
+                const newComments = comments ? [...comments, comment] : [comment]
+                setComments(newComments)
 
-            let url = getForumUrlByTypeAndSlug(post.type, post.slug)
-            if (lastPage > 1) {
-                if (lastPage !== newLastPage) {
-                    url += '?page=' + newLastPage
-                } else {
-                    url += '?page=' + lastPage
+                let url = getForumUrlByTypeAndSlug(post.type, post.slug)
+                if (lastPage > 1) {
+                    if (lastPage !== newLastPage) {
+                        url += '?page=' + newLastPage
+                    } else {
+                        url += '?page=' + lastPage
+                    }
                 }
-            }
 
-            setGoToNewestLink(url + '#' + comment.id)
-            router.push(url + '#' + comment.id)
-            toast.success('Kommentaar lisatud')
-            setSubmitting(false)
-        }).catch(err => {
-            setSubmitting(false)
-            if (err.response?.status === 401) {
-                toast.error('Sessioon on aegunud. Palun logi uuesti sisse')
-                const url = getForumUrlByTypeAndSlug(post.type, post.slug)
-                router.push(url)
-            } else if(err.response?.status === 422 && err.response?.data?.errors ) {
-                toast.error('Kommentaari sisu on kohustuslik!')
-            } else {
-                toast.error('Kommentaari lisamine ebaõnnestus')
-            }
-        })
+                setGoToNewestLink(url + '#' + comment.id)
+                router.push(url + '#' + comment.id)
+                toast.success('Kommentaar lisatud')
+                setSubmitting(false)
+            })
+            .catch((err) => {
+                setSubmitting(false)
+                if (err.response?.status === 401) {
+                    toast.error('Sessioon on aegunud. Palun logi uuesti sisse')
+                    const url = getForumUrlByTypeAndSlug(post.type, post.slug)
+                    router.push(url)
+                } else if (err.response?.status === 422 && err.response?.data?.errors) {
+                    toast.error('Kommentaari sisu on kohustuslik!')
+                } else {
+                    toast.error('Kommentaari lisamine ebaõnnestus')
+                }
+            })
     }
 
     return (
@@ -91,20 +95,19 @@ const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
                         <div className={styles.ForumPost}>
                             <ForumPost {...post} />
                         </div>
-                        {goToNewestLink.length > 1 &&
+                        {goToNewestLink.length > 1 && (
                             <div className={styles.LatestCommentLink}>
-                                <MoreLink
-                                    route={goToNewestLink}
-                                    title={'Mine uusima kommentaari juurde'} />
+                                <MoreLink route={goToNewestLink} title={'Mine uusima kommentaari juurde'} />
                             </div>
-                        }
+                        )}
                         <ForumPostComments
                             post={post}
                             comments={comments}
                             currentPage={currentPage}
-                            lastPage={lastPage} />
+                            lastPage={lastPage}
+                        />
 
-                        {userIsLoggedIn &&
+                        {userIsLoggedIn && (
                             <div className={styles.AddComment}>
                                 <BlockTitle title={'Lisa kommentaar'} />
                                 <CommentEditor
@@ -112,9 +115,10 @@ const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
                                     onSubmit={onSubmit}
                                     value={commentValue}
                                     submitButtonName={'Lisa kommentaar'}
-                                    submitting={submitting} />
+                                    submitting={submitting}
+                                />
                             </div>
-                        }
+                        )}
                     </div>
                     <div className={styles.Sidebar}>
                         <div className={styles.SidebarButton}>
@@ -129,8 +133,13 @@ const ForumShowPage = ({post, lastCommentId, currentPage, lastPage}: Props) => {
             <div className={styles.RelatedContentContainer}>
                 <div className={containerStyle.ContainerXl}>
                     <div className={styles.LatestContentContainer}>
-                        <FlightOffersLatest />
-                        <TravelmatesLatest />
+                        <div className={styles.Column}>
+                            <FlightOffersLatest />
+                            <TravelmatesLatest />
+                        </div>
+                        <div className={styles.Row}>
+                            <NewsLatest />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -11,7 +11,7 @@ import Button from '../components/Button'
 import FlightOfferCard from '../components/FlightOffer/FlightOfferCard'
 import Footer from '../components/Footer'
 import { FlightOfferCardType, ForumRowType } from '../types'
-import FrontpageNewsBlock from '../components/News/FrontpageNewsBlock'
+import NewsLatest from '../components/News/NewsLatest'
 import FlightOffersLatest from '../components/FlightOffer/FlightOffersLatest'
 import TravelmatesLatest from '../components/Travelmate/TravelmatesLatest'
 import ApiClientSSR from '../lib/ApiClientSSR'
@@ -129,7 +129,7 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                     </div>
                 </div>
                 <div className={styles.NewsContainer}>
-                    <FrontpageNewsBlock />
+                    <NewsLatest take={6} />
                 </div>
                 <BlockTitle title={'Viimati lisatud pildid'} />
             </div>

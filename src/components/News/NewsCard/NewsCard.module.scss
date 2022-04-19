@@ -22,6 +22,10 @@
         font-size: $font-size-medium;
         font-weight: 500;
 
+        @include md() {
+            font-size: 1.1rem;
+        }
+
         .CommentCount {
             color: $red;
             font-weight: 400;
