@@ -82,7 +82,7 @@
         line-height: 2.75rem;
         color: $white;
         font-weight: 600;
-        padding-top: $spacer * 9;
+        padding-top: $spacer * 8;
         padding-bottom: $spacer * 2.5;
         max-width: 720px;
 
@@ -102,7 +102,7 @@
     .Tags {
         display: flex;
         flex-wrap: wrap;
-        padding-bottom: $spacer * 4;
+        padding-bottom: $spacer * 5;
         gap: $spacer;
         justify-content: center;
     }
@@ -134,81 +134,97 @@
     }
 }
 
-.BodyContainer {
+.ContentContainer {
     display: flex;
     width: 100%;
-    padding: $spacer * 4 0;
+    padding: $spacer * 4 0 $spacer * 5;
 
     @include lg() {
         flex-direction: column;
     }
 
-    .Body {
+    .BodyContainer {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
         flex: 3;
-        color: $gray-dark;
-        font-family: $font-family-sailec;
-        font-size: $font-size-medium;
-        overflow-wrap: break-word;
-        word-wrap: break-word;
         padding-right: $spacer * 2;
+        gap: $spacer * 5;
 
-        @include md() {
-            font-size: $font-size-normal;
-        }
+        .Body {
+            color: $gray-dark;
+            font-family: $font-family-sailec;
+            font-size: $font-size-medium;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
 
-        .NotPublished {
-            padding-bottom: $spacer * 4;
-        }
-
-        a {
-            color: $blue;
-            word-break: break-all;
-
-            &:hover {
-                color: $blue-hover;
-            }
-        }
-
-        img {
-            width: 100%;
-        }
-
-        :global(.FlightAvailableTimes) {
-            display: flex;
-            margin: $spacer * 5 0;
-
-            @include sm() {
-                flex-direction: column;
-                gap: $spacer * 3;
+            @include md() {
+                font-size: $font-size-normal;
             }
 
-            :global(.FlightAvailableTimesCol) {
+            .NotPublished {
+                padding-bottom: $spacer * 4;
+            }
+
+            p:first-child {
+                margin-top: 0;
+            }
+
+            a {
+                color: $blue;
+                word-break: break-all;
+
+                &:hover {
+                    color: $blue-hover;
+                }
+            }
+
+            img {
+                width: 100%;
+            }
+
+            :global(.FlightAvailableTimes) {
                 display: flex;
-                flex-direction: column;
-                flex: 1;
+                margin: $spacer * 5 0;
 
-                :global(.FlightAvailableTimesHeader) {
-                    display: flex;
-                    font-size: $font-size-medium;
-                    font-weight: 600;
-                    color: $gray-dark-hover;
-                    margin-bottom: $spacer * 2.5;
+                @include sm() {
+                    flex-direction: column;
+                    gap: $spacer * 3;
                 }
 
-                :global(.FlightAvailableTimesRow) {
+                :global(.FlightAvailableTimesCol) {
                     display: flex;
-                    padding: $spacer 0;
+                    flex-direction: column;
+                    flex: 1;
 
-                    p {
-                        padding: 0;
-                        margin: 0;
+                    :global(.FlightAvailableTimesHeader) {
+                        display: flex;
+                        font-size: $font-size-medium;
+                        font-weight: 600;
+                        color: $gray-dark-hover;
+                        margin-bottom: $spacer * 2.5;
+                    }
 
-                        a {
-                            text-decoration: underline;
+                    :global(.FlightAvailableTimesRow) {
+                        display: flex;
+                        padding: $spacer 0;
+
+                        p {
+                            padding: 0;
+                            margin: 0;
+
+                            a {
+                                text-decoration: underline;
+                            }
                         }
                     }
                 }
             }
+        }
+
+        .MoreFlightOffers {
+            display: flex;
+            width: 100%;
         }
     }
 

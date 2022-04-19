@@ -8,13 +8,14 @@ import { getLatestNews } from '../../../services/news.service'
 
 type Props = {
     take: number
+    excludeId?: number
 }
 
-const NewsLatest = ({ take }: Props) => {
+const NewsLatest = ({ take, excludeId }: Props) => {
     const [news, setNews] = useState<NewsCardType[]>([])
 
     useEffect(() => {
-        getLatestNews(take).then((res) => {
+        getLatestNews(take, excludeId).then((res) => {
             setNews(res.data)
         })
     }, [])

@@ -6,11 +6,16 @@ import MoreLink from '../../MoreLink'
 import { getLatestFlights } from '../../../services/flight.service'
 import { FlightOfferRowType } from '../../../types'
 
-const FlightOffersLatest = () => {
+type Props = {
+    take: number
+    excludeId?: number
+}
+
+const FlightOffersLatest = ({ take, excludeId }: Props) => {
     const [flights, setFlights] = useState<FlightOfferRowType[]>([])
 
     useEffect(() => {
-        getLatestFlights().then((res) => {
+        getLatestFlights(take, excludeId).then((res) => {
             setFlights(res.data)
         })
     }, [])
@@ -26,6 +31,10 @@ const FlightOffersLatest = () => {
             </div>
         </div>
     )
+}
+
+FlightOffersLatest.defaultProps = {
+    take: 4,
 }
 
 export default FlightOffersLatest

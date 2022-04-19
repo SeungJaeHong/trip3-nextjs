@@ -9,14 +9,16 @@
     position: relative;
     width: 100%;
     margin-top: $spacer * -18;
-    padding-bottom: $spacer * 4;
+    padding-bottom: $spacer * 7;
 
     @include md() {
         flex-direction: column;
+        gap: $spacer * 3;
     }
 
     @include sm() {
         margin-top: $spacer * -20;
+        padding-bottom: $spacer * 4;
     }
 
     .ForumContent {
