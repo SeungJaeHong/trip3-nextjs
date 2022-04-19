@@ -8,10 +8,11 @@ import { FlightOfferRowType } from '../../../types'
 
 type Props = {
     take: number
+    title: string
     excludeId?: number
 }
 
-const FlightOffersLatest = ({ take, excludeId }: Props) => {
+const FlightOffersLatest = ({ take, title, excludeId }: Props) => {
     const [flights, setFlights] = useState<FlightOfferRowType[]>([])
 
     useEffect(() => {
@@ -22,7 +23,7 @@ const FlightOffersLatest = ({ take, excludeId }: Props) => {
 
     return (
         <div className={styles.FlightOffersLatest}>
-            <BlockTitle title={'Lennupakkumised'} />
+            <BlockTitle title={title} />
             <div className={styles.Content}>
                 <FlightOfferList items={flights} />
             </div>
@@ -35,6 +36,7 @@ const FlightOffersLatest = ({ take, excludeId }: Props) => {
 
 FlightOffersLatest.defaultProps = {
     take: 4,
+    title: 'Lennupakkumised'
 }
 
 export default FlightOffersLatest
