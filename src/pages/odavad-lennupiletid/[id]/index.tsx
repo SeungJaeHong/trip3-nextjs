@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { GetServerSideProps } from 'next'
 import { Destination, FlightContent, Tag as TagType } from '../../../types'
 import Header from '../../../components/Header'
@@ -15,7 +15,10 @@ import useUser from '../../../hooks'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import { publishFlight } from '../../../services/flight.service'
-import FlightOffersLatest from "../../../components/FlightOffer/FlightOffersLatest"
+import FlightOffersLatest from '../../../components/FlightOffer/FlightOffersLatest'
+import TravelmatesLatest from '../../../components/Travelmate/TravelmatesLatest'
+import NewsLatest from '../../../components/News/NewsLatest'
+import ForumLatest from '../../../components/Forum/ForumLatest'
 
 type Props = {
     flightObj: FlightContent
@@ -107,6 +110,19 @@ const FlightOfferShow = ({ flightObj }: Props) => {
                         </div>
                     </div>
                     <div className={styles.SidebarShow}>Sidebar</div>
+                </div>
+            </div>
+            <div className={styles.RelatedContentContainer}>
+                <div className={containerStyle.ContainerXl}>
+                    <div className={styles.LatestContentContainer}>
+                        <div className={styles.Column}>
+                            <ForumLatest />
+                            <TravelmatesLatest />
+                        </div>
+                        <div className={styles.Row}>
+                            <NewsLatest />
+                        </div>
+                    </div>
                 </div>
             </div>
             <Footer />

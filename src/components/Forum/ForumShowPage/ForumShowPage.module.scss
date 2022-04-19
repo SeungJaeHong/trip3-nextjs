@@ -71,11 +71,11 @@
     .LatestContentContainer {
         display: flex;
         flex-direction: column;
-        gap: $spacer * 4;
+        gap: $spacer * 5;
 
         .Column {
             display: flex;
-            gap: $spacer * 4;
+            gap: $spacer * 5;
 
             @include sm() {
                 flex-direction: column;

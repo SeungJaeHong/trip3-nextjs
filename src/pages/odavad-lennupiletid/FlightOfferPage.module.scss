@@ -137,10 +137,14 @@
 .ContentContainer {
     display: flex;
     width: 100%;
-    padding: $spacer * 4 0 $spacer * 5;
+    padding: $spacer * 4 0 $spacer * 7;
 
     @include lg() {
         flex-direction: column;
+    }
+
+    @include sm() {
+        padding: $spacer * 4 0 $spacer * 5;
     }
 
     .BodyContainer {
@@ -234,6 +238,33 @@
 
         @include lg() {
             padding-left: 0;
+        }
+    }
+}
+
+.RelatedContentContainer {
+    background: $gray-light;
+    padding: $spacer * 4 0 $spacer * 6;
+
+    .LatestContentContainer {
+        display: flex;
+        flex-direction: column;
+        gap: $spacer * 5;
+
+        .Column {
+            display: flex;
+            gap: $spacer * 5;
+
+            @include sm() {
+                flex-direction: column;
+                gap: $spacer * 3;
+            }
+        }
+
+        .Row {
+            display: flex;
+            width: 100%;
+
         }
     }
 }
