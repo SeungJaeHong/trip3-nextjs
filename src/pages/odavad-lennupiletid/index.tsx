@@ -13,6 +13,7 @@ import { objectToQueryString } from '../../helpers'
 import { useRouter } from 'next/router'
 import Button from '../../components/Button'
 import ApiClientSSR from '../../lib/ApiClientSSR'
+import RelatedContentBlock from '../../components/RelatedContentBlock'
 
 type Props = {
     flightOffers: FlightOfferRowType[]
@@ -75,11 +76,7 @@ const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }
 
     const renderResults = () => {
         if (flightOffers.length === 0) {
-            return (
-                <div className={styles.NoResults}>
-                    Tulemusi ei leitud
-                </div>
-            )
+            return <div className={styles.NoResults}>Tulemusi ei leitud</div>
         }
 
         return <FlightOfferList items={flightOffers} />
@@ -129,6 +126,7 @@ const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }
                     </div>
                 </div>
             </div>
+            <RelatedContentBlock type={'flight'} />
             <Footer />
         </Fragment>
     )
@@ -153,7 +151,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     if (filter) {
         if (typeof filter === 'string') {
             const values = filter.split(',')
-            filterValue = values.map(x => parseInt(x))
+            filterValue = values.map((x) => parseInt(x))
         }
     }
 
@@ -163,7 +161,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             filterTags: res.data.filterTags,
             currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
             hasMore: res.data.flightOffers?.hasMore,
-            filter: filterValue
+            filter: filterValue,
         },
     }
 }

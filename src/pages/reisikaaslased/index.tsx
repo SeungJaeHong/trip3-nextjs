@@ -13,12 +13,13 @@ import Button from '../../components/Button'
 import TravelmateCard from '../../components/Travelmate/TravelmateCard'
 import TravelmateFilter from '../../components/Travelmate/TravelmateFilter'
 import ApiClientSSR from '../../lib/ApiClientSSR'
+import RelatedContentBlock from '../../components/RelatedContentBlock'
 
 type Props = {
     travelmates: TravelmateRowType[]
     destinations: Destination[]
     topics: Topic[]
-    startOptions: {value: string, label: string}[]
+    startOptions: { value: string; label: string }[]
     selectedDestination?: number
     selectedTopic?: number
     selectedStart?: string
@@ -78,7 +79,7 @@ const TravelmatesIndex = ({
         const urlParams = {
             destination: destination,
             topic: topic,
-            start: start
+            start: start,
         }
 
         const queryString = objectToQueryString(urlParams)
@@ -107,9 +108,7 @@ const TravelmatesIndex = ({
                 <div className={styles.Content}>
                     <div className={styles.TravelmateGridContainer}>
                         <div className={styles.TravelmateGrid}>
-                            {travelmates.length === 0 &&
-                                <div>Tulemusi ei leitud</div>
-                            }
+                            {travelmates.length === 0 && <div>Tulemusi ei leitud</div>}
                             {travelmates.map((travelmate: TravelmateRowType) => {
                                 return <TravelmateCard {...travelmate} key={travelmate.id} />
                             })}
@@ -131,12 +130,16 @@ const TravelmatesIndex = ({
                                 <MoreLink route={'/kasutustingimused'} title={'Kasutustingimused'} medium={true} />
                             </div>
                             <div className={styles.AddNewButton}>
-                                <Button title={'Lisa kuulutus'} onClick={() => router.push('/reisikaaslased/lisa-uus')} />
+                                <Button
+                                    title={'Lisa kuulutus'}
+                                    onClick={() => router.push('/reisikaaslased/lisa-uus')}
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <RelatedContentBlock type={'travelmate'} />
             <Footer />
         </Fragment>
     )
@@ -153,7 +156,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         destination: destination,
         topic: topic,
         start: start,
-        page: page
+        page: page,
     }
 
     const queryString = objectToQueryString(urlParams)

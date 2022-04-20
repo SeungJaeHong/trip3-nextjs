@@ -19,6 +19,7 @@ import { toast } from 'react-toastify'
 import clsx from 'clsx'
 import { toggleTravelmateStatus } from '../../../services/travelmate.service'
 import Alert from '../../../components/Alert'
+import RelatedContentBlock from '../../../components/RelatedContentBlock'
 
 type Props = {
     content: TravelmateContent
@@ -62,7 +63,7 @@ const TravelmatePage = ({ content }: Props) => {
             const status = !travelmate.status
             toggleTravelmateStatus(travelmate, status)
                 .then((res) => {
-                    const newTravelmate = {...travelmate, status: res.data}
+                    const newTravelmate = { ...travelmate, status: res.data }
                     setTravelmate(newTravelmate)
                     toast.success(newTravelmate.status === 1 ? 'Kuulutus avalikustatud' : 'Kuulutus peidetud')
                 })
@@ -241,6 +242,7 @@ const TravelmatePage = ({ content }: Props) => {
                     </div>
                 </div>
             </div>
+            <RelatedContentBlock type={'travelmate'} />
             <Footer />
         </Fragment>
     )

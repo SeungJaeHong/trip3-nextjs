@@ -14,6 +14,7 @@ import Footer from '../../Footer'
 import styles from './ForumIndexPage.module.scss'
 import { useRouter } from 'next/router'
 import FormSelect from '../../Form/FormSelect'
+import RelatedContentBlock from '../../RelatedContentBlock'
 
 type Props = {
     type: 'general' | 'buysell' | 'foreign' | 'other' | 'follows'
@@ -193,6 +194,7 @@ const ForumIndexPage = (props: Props) => {
                     </div>
                 </div>
             </div>
+            <RelatedContentBlock type={'forum'} />
             <Footer />
         </Fragment>
     )
