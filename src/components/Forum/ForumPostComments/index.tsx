@@ -32,9 +32,11 @@ const ForumPostComments = ({ post, comments, currentPage, lastPage }: Props) => 
 
     return (
         <div className={styles.ForumPostComments}>
-            <div className={styles.Paginator}>
-                <PagePaginator currentPage={currentPage} lastPage={lastPage} baseUrl={url} />
-            </div>
+            {lastPage && lastPage !== 1 && (
+                <div className={styles.Paginator}>
+                    <PagePaginator currentPage={currentPage} lastPage={lastPage} baseUrl={url} />
+                </div>
+            )}
             {forumComments?.map((item: Comment) => {
                 return (
                     <div className={styles.CommentRow} key={item.id}>
@@ -42,9 +44,11 @@ const ForumPostComments = ({ post, comments, currentPage, lastPage }: Props) => 
                     </div>
                 )
             })}
-            <div className={clsx(styles.Paginator, styles.Bottom)}>
-                <PagePaginator currentPage={currentPage} lastPage={lastPage} baseUrl={url} />
-            </div>
+            {lastPage && lastPage !== 1 && (
+                <div className={clsx(styles.Paginator, styles.Bottom)}>
+                    <PagePaginator currentPage={currentPage} lastPage={lastPage} baseUrl={url} />
+                </div>
+            )}
         </div>
     )
 }
