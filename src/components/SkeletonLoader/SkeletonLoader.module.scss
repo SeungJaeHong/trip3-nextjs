@@ -1,0 +1,25 @@
+@import "../../styles/variables";
+
+.Container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: $spacer * 3;
+
+    .Row {
+        display: flex;
+        width: 100%;
+        gap: $spacer * 2;
+        align-items: center;
+
+        .Round {
+            display: flex;
+        }
+
+        .Rectangle {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+    }
+}

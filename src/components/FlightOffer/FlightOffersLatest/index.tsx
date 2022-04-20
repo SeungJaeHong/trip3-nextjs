@@ -5,6 +5,7 @@ import FlightOfferList from '../FlightOfferList'
 import MoreLink from '../../MoreLink'
 import { getLatestFlights } from '../../../services/flight.service'
 import { FlightOfferRowType } from '../../../types'
+import SkeletonLoader from '../../SkeletonLoader'
 
 type Props = {
     take: number
@@ -14,22 +15,33 @@ type Props = {
 
 const FlightOffersLatest = ({ take, title, excludeId }: Props) => {
     const [flights, setFlights] = useState<FlightOfferRowType[]>([])
+    const [loading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {
-        getLatestFlights(take, excludeId).then((res) => {
-            setFlights(res.data)
-        })
+        getLatestFlights(take, excludeId)
+            .then((res) => {
+                setFlights(res.data)
+            })
+            .finally(() => setLoading(false))
     }, [])
+
+    const renderContent = () => {
+        if (loading) {
+            return <SkeletonLoader />
+        } else {
+            return <FlightOfferList items={flights} />
+        }
+    }
 
     return (
         <div className={styles.FlightOffersLatest}>
             <BlockTitle title={title} />
-            <div className={styles.Content}>
-                <FlightOfferList items={flights} />
-            </div>
-            <div className={styles.ViewMore}>
-                <MoreLink route={'/odavad-lennupiletid'} title={'Kõik pakkumised'} />
-            </div>
+            <div className={styles.Content}>{renderContent()}</div>
+            {!loading && (
+                <div className={styles.ViewMore}>
+                    <MoreLink route={'/odavad-lennupiletid'} title={'Kõik pakkumised'} />
+                </div>
+            )}
         </div>
     )
 }

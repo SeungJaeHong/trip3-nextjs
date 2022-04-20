@@ -5,6 +5,7 @@ import MoreLink from '../../MoreLink'
 import { ForumRowType } from '../../../types'
 import { getLatestPosts } from '../../../services/forum.service'
 import ForumList from '../ForumList'
+import SkeletonLoader from '../../SkeletonLoader'
 
 type Props = {
     take: number
@@ -13,22 +14,33 @@ type Props = {
 
 const ForumLatest = ({ take, excludeId }: Props) => {
     const [forum, setForum] = useState<ForumRowType[]>([])
+    const [loading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {
-        getLatestPosts(take, excludeId).then((res) => {
-            setForum(res.data)
-        })
+        getLatestPosts(take, excludeId)
+            .then((res) => {
+                setForum(res.data)
+            })
+            .finally(() => setLoading(false))
     }, [])
+
+    const renderContent = () => {
+        if (loading) {
+            return <SkeletonLoader />
+        } else {
+            return <ForumList items={forum} />
+        }
+    }
 
     return (
         <div className={styles.ForumLatest}>
             <BlockTitle title={'Foorum'} />
-            <div className={styles.Content}>
-                <ForumList items={forum} />
-            </div>
-            <div className={styles.ViewMore}>
-                <MoreLink route={'/foorum/uldfoorum'} title={'Kõik postitused'} />
-            </div>
+            <div className={styles.Content}>{renderContent()}</div>
+            {!loading && (
+                <div className={styles.ViewMore}>
+                    <MoreLink route={'/foorum/uldfoorum'} title={'Kõik postitused'} />
+                </div>
+            )}
         </div>
     )
 }
