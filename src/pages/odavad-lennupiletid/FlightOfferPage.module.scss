@@ -242,30 +242,3 @@
     }
 }
 
-.RelatedContentContainer {
-    background: $gray-light;
-    padding: $spacer * 4 0 $spacer * 6;
-
-    .LatestContentContainer {
-        display: flex;
-        flex-direction: column;
-        gap: $spacer * 5;
-
-        .Column {
-            display: flex;
-            gap: $spacer * 5;
-
-            @include sm() {
-                flex-direction: column;
-                gap: $spacer * 3;
-            }
-        }
-
-        .Row {
-            display: flex;
-            width: 100%;
-
-        }
-    }
-}
-

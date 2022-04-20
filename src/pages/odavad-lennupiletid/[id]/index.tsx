@@ -16,9 +16,7 @@ import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import { publishFlight } from '../../../services/flight.service'
 import FlightOffersLatest from '../../../components/FlightOffer/FlightOffersLatest'
-import TravelmatesLatest from '../../../components/Travelmate/TravelmatesLatest'
-import NewsLatest from '../../../components/News/NewsLatest'
-import ForumLatest from '../../../components/Forum/ForumLatest'
+import RelatedContentBlock from '../../../components/RelatedContentBlock'
 
 type Props = {
     flightObj: FlightContent
@@ -112,19 +110,7 @@ const FlightOfferShow = ({ flightObj }: Props) => {
                     <div className={styles.SidebarShow}>Sidebar</div>
                 </div>
             </div>
-            <div className={styles.RelatedContentContainer}>
-                <div className={containerStyle.ContainerXl}>
-                    <div className={styles.LatestContentContainer}>
-                        <div className={styles.Column}>
-                            <ForumLatest />
-                            <TravelmatesLatest />
-                        </div>
-                        <div className={styles.Row}>
-                            <NewsLatest />
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <RelatedContentBlock type={'flight'} />
             <Footer />
         </Fragment>
     )

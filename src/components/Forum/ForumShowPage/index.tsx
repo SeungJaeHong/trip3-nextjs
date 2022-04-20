@@ -15,9 +15,7 @@ import BlockTitle from '../../BlockTitle'
 import { postComment } from '../../../services/comment.service'
 import { toast } from 'react-toastify'
 import useUser from '../../../hooks'
-import FlightOffersLatest from '../../FlightOffer/FlightOffersLatest'
-import TravelmatesLatest from '../../Travelmate/TravelmatesLatest'
-import NewsLatest from '../../News/NewsLatest'
+import RelatedContentBlock from '../../RelatedContentBlock'
 
 type Props = {
     post: Content
@@ -130,19 +128,7 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                     </div>
                 </div>
             </div>
-            <div className={styles.RelatedContentContainer}>
-                <div className={containerStyle.ContainerXl}>
-                    <div className={styles.LatestContentContainer}>
-                        <div className={styles.Column}>
-                            <FlightOffersLatest />
-                            <TravelmatesLatest />
-                        </div>
-                        <div className={styles.Row}>
-                            <NewsLatest />
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <RelatedContentBlock type={'forum'} />
             <Footer />
         </Fragment>
     )
