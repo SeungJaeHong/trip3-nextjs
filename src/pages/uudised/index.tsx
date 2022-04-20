@@ -14,6 +14,7 @@ import Footer from '../../components/Footer'
 import ApiClientSSR from '../../lib/ApiClientSSR'
 import useUser from '../../hooks'
 import FormSelect from '../../components/Form/FormSelect'
+import RelatedContentBlock from '../../components/RelatedContentBlock'
 
 type Props = {
     news?: NewsCardType[]
@@ -187,6 +188,7 @@ const NewsIndex = (props: Props) => {
                     </div>
                 </div>
             </div>
+            <RelatedContentBlock type={'news'} />
             <Footer />
         </Fragment>
     )

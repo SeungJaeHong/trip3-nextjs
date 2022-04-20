@@ -49,6 +49,18 @@ const RelatedContentBlock = ({ type }: Props) => {
                         </div>
                     </>
                 )
+            case 'news':
+                return (
+                    <>
+                        <div className={styles.Column}>
+                            <FlightOffersLatest />
+                            <ForumLatest />
+                        </div>
+                        <div className={styles.Row}>
+                            <TravelmatesLatest grid={true} />
+                        </div>
+                    </>
+                )
             default:
                 return null
         }

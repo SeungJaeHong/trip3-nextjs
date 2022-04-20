@@ -7,6 +7,20 @@
 
     .Content {
         margin: $spacer * 3 0 $spacer 0;
+
+        &.WithGrid {
+            margin-bottom: $spacer * 3;
+        }
+
+        .Grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: $spacer * 4;
+
+            @include sm() {
+                grid-template-columns: 1fr;
+            }
+        }
     }
 
     .ViewMore {

@@ -6,8 +6,14 @@ import TravelmateList from '../TravelmateList'
 import { getLatestTravelmates } from '../../../services/travelmate.service'
 import { TravelmateRowType } from '../../../types'
 import SkeletonLoader from '../../SkeletonLoader'
+import TravelmateRow from '../TravelmateRow'
+import clsx from 'clsx'
 
-const TravelmatesLatest = () => {
+type Props = {
+    grid: boolean
+}
+
+const TravelmatesLatest = ({ grid }: Props) => {
     const [travelmates, setTravelmates] = useState<TravelmateRowType[]>([])
     const [loading, setLoading] = useState<boolean>(true)
 
@@ -23,14 +29,30 @@ const TravelmatesLatest = () => {
         if (loading) {
             return <SkeletonLoader />
         } else {
-            return <TravelmateList items={travelmates} />
+            if (grid) {
+                return (
+                    <div className={styles.Grid}>
+                        {travelmates.map((item: TravelmateRowType) => {
+                            return <TravelmateRow {...item} />
+                        })}
+                    </div>
+                )
+            } else {
+                return <TravelmateList items={travelmates} />
+            }
         }
     }
 
     return (
         <div className={styles.TravelmatesLatest}>
             <BlockTitle title={'Reisikaaslased'} />
-            <div className={styles.Content}>{renderContent()}</div>
+            <div
+                className={clsx(styles.Content, {
+                    [styles.WithGrid]: grid,
+                })}
+            >
+                {renderContent()}
+            </div>
             {!loading && (
                 <div className={styles.ViewMore}>
                     <MoreLink route={'/reisikaaslased'} title={'Kõik reisikaaslased'} />
@@ -38,6 +60,10 @@ const TravelmatesLatest = () => {
             )}
         </div>
     )
+}
+
+TravelmatesLatest.defaultProps = {
+    grid: false,
 }
 
 export default TravelmatesLatest

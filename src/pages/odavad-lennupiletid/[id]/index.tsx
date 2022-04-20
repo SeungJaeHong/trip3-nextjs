@@ -104,7 +104,7 @@ const FlightOfferShow = ({ flightObj }: Props) => {
                             {renderBody(flight.body)}
                         </div>
                         <div className={styles.MoreFlightOffers}>
-                            <FlightOffersLatest title={'Veel odavaid lennupileteid'} excludeId={flight.id} />
+                            <FlightOffersLatest title={'Veel soodsaid lennupileteid'} excludeId={flight.id} />
                         </div>
                     </div>
                     <div className={styles.SidebarShow}>Sidebar</div>
