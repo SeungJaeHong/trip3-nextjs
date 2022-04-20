@@ -33,7 +33,7 @@ const TravelmatesLatest = ({ grid }: Props) => {
                 return (
                     <div className={styles.Grid}>
                         {travelmates.map((item: TravelmateRowType) => {
-                            return <TravelmateRow {...item} />
+                            return <TravelmateRow {...item} key={item.id} />
                         })}
                     </div>
                 )
