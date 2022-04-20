@@ -59,7 +59,6 @@ const TermsOfServicePage = () => {
                         </li>
                         <li>
                             Trip.ee toimetuse liikmetel on on õigus kommentaaride ja postituste eemaldamine foorumist kui postitus ei sobi foorumisse või läheb foorumireeglitega vastuollu.
-
                         </li>
                     </ul>
                     <p>

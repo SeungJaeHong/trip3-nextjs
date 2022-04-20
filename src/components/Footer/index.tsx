@@ -56,7 +56,7 @@ const col3 = [
     },
     {
         title: 'Kontakt',
-        route: '/'
+        route: '/kontakt'
     },
     {
         title: 'Kasutustingimused',

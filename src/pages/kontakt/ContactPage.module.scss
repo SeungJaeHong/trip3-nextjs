@@ -1,0 +1,43 @@
+@import "../../styles/variables";
+
+.Container {
+    position: relative;
+    background: $gray-light;
+}
+
+.Navbar {
+    padding-bottom: $spacer * 8;
+    padding-top: $spacer * 3;
+}
+
+.Title {
+    font-weight: 600;
+    font-size: 3rem;
+    color: $gray-dark;
+    display: flex;
+    justify-content: center;
+    padding-bottom: $spacer * 6;
+}
+
+.Body {
+    font-family: $font-family-sailec;
+    background: $white;
+    position: relative;
+    padding-top: $spacer * 4;
+    color: $gray-dark;
+    font-size: $font-size-medium;
+
+    @include sm() {
+        font-size: $font-size-normal;
+    }
+
+    p ul li {
+        margin-bottom: $spacer * 2;
+    }
+
+    i {
+        color: $gray-dark;
+        margin-left: $spacer;
+        font-size: $font-size-normal;
+    }
+}
