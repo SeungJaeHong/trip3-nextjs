@@ -23,7 +23,7 @@ const PrivacyTermsPage = () => {
                     <p>
                         Trip.ee kogub ja töötleb ainult neid isikuandmeid, mida kasutajad meiega vabatahtlikult jagavad.
                         Kasutaja annab isikuandmete töötlemise nõusoleku kasutajaks registreerimisel tehes märke
-                        "Nõustun ma kasutajatingimustega ja privaatsuspoliitikaga" välja juurde. Järgnevalt selgitame
+                        &quot;Nõustun ma kasutajatingimustega ja privaatsuspoliitikaga&quot; välja juurde. Järgnevalt selgitame
                         kuidas Trip.ee kogub, töötleb ja kasutab kasutajate andmeid.
                     </p>
                     <h3>Andmed mida me kogume ja töötleme</h3>
@@ -84,9 +84,9 @@ const PrivacyTermsPage = () => {
                         <li>
                             <strong>Kasutajasessioon</strong>
                             <p>
-                                Hoiame brauseris krüpteeritud cookie't mis identifitseerib kasutaja ning suurendab
+                                Hoiame brauseris krüpteeritud cookie&apos;t mis identifitseerib kasutaja ning suurendab
                                 kasutajamugavust: iga külastuse puhul ei tule ennast uuesti sisse logida. Seda saab
-                                kontrollida logimislehel seadistusega "Pea mu logimine meeles".
+                                kontrollida logimislehel seadistusega &quot;Pea mu logimine meeles&quot;.
                             </p>
                         </li>
                         <li>
@@ -99,7 +99,7 @@ const PrivacyTermsPage = () => {
                         <li>
                             <strong>Kasutaja viimane sisselogimine</strong>
                             <p>
-                                Me salvestame aja millal kasutaja end viimati Trip.ee'sse sisse logis. Sisselogimisaja
+                                Me salvestame aja millal kasutaja end viimati Trip.ee&apos;sse sisse logis. Sisselogimisaja
                                 abil saame vajadusel paluda kasutaja profiiliandmete uuendamist -- Trip.ee ei kasuta ega
                                 töötle aegunud isikuandmeid.
                             </p>
