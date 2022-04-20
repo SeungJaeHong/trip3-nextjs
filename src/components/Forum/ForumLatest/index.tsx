@@ -34,7 +34,7 @@ const ForumLatest = ({ take, excludeId }: Props) => {
 }
 
 ForumLatest.defaultProps = {
-    take: 4,
+    take: 3,
 }
 
 export default ForumLatest

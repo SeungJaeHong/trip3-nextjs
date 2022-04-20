@@ -23,7 +23,7 @@ export const likePost = async (content: Content, value: boolean): Promise<AxiosR
     })
 }
 
-export const getLatestPosts = async (take = 4, excludeId?: number) => {
+export const getLatestPosts = async (take = 3, excludeId?: number) => {
     const urlParams = {
         take: take,
         id: excludeId,

@@ -1,9 +1,15 @@
 import ApiClient from "../lib/ApiClient"
 import {AxiosResponse} from "axios"
 import {TravelmateContent} from "../types"
+import {objectToQueryString} from "../helpers"
 
-export const getLatestTravelmates = async () => {
-    return await ApiClient.get('/travelmates/latest')
+export const getLatestTravelmates = async (take = 3) => {
+    const urlParams = {
+        take: take
+    }
+
+    const queryString = objectToQueryString(urlParams)
+    return await ApiClient.get('/travelmates/latest?' + queryString)
 }
 
 export const storeTravelmate = async (formValues: any): Promise<AxiosResponse> => {

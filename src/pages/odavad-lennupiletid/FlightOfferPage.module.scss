@@ -137,7 +137,7 @@
 .ContentContainer {
     display: flex;
     width: 100%;
-    padding: $spacer * 4 0 $spacer * 7;
+    padding: $spacer * 5 0 $spacer * 7;
 
     @include lg() {
         flex-direction: column;

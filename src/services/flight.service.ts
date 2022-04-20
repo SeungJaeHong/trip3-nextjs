@@ -2,7 +2,7 @@ import ApiClient from '../lib/ApiClient'
 import { FlightContent } from '../types'
 import { objectToQueryString } from '../helpers'
 
-export const getLatestFlights = async (take = 4, excludeId?: number) => {
+export const getLatestFlights = async (take = 3, excludeId?: number) => {
     const urlParams = {
         take: take,
         id: excludeId,

@@ -257,7 +257,7 @@
     .Tags {
         display: flex;
         flex-wrap: wrap;
-        padding-bottom: $spacer * 3;
+        padding-bottom: $spacer * 4;
         gap: $spacer;
     }
 
@@ -295,7 +295,7 @@
 .BodyContainer {
     display: flex;
     width: 100%;
-    padding: $spacer * 4 0 $spacer * 6 0;
+    padding: $spacer * 5 0 $spacer * 6 0;
 
     @include lg() {
         flex-direction: column;
@@ -324,6 +324,10 @@
 
             @include md() {
                 font-size: $font-size-normal;
+            }
+
+            p:first-child {
+                margin-top: 0;
             }
 
             a {
@@ -358,7 +362,6 @@
     .SidebarShow {
         flex: 1;
         padding-left: $spacer * 6;
-        padding-top: $spacer * 2;
 
         @include lg() {
             padding-left: 0;

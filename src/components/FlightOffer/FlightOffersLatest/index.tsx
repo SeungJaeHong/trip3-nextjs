@@ -35,7 +35,7 @@ const FlightOffersLatest = ({ take, title, excludeId }: Props) => {
 }
 
 FlightOffersLatest.defaultProps = {
-    take: 4,
+    take: 3,
     title: 'Lennupakkumised'
 }
 
