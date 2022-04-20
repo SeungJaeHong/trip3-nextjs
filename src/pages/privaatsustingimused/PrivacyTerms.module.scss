@@ -20,24 +20,17 @@
 }
 
 .Body {
-    font-family: $font-family-sailec;
-    background: rgba(255, 255, 255, .5);
+    background: $white;
     position: relative;
-    padding: $spacer * 3 0;
+    padding-top: $spacer * 4;
     color: $gray-dark;
     font-size: $font-size-medium;
 
-    @include sm() {
-        font-size: $font-size-normal;
-    }
+    ul li {
+        margin-bottom: $spacer;
 
-    p ul li {
-        margin-bottom: $spacer * 2;
-    }
-
-    i {
-        color: $gray-dark;
-        margin-left: $spacer;
-        font-size: $font-size-normal;
+        p {
+            margin-top: $spacer;
+        }
     }
 }
