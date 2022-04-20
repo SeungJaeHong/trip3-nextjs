@@ -20,18 +20,18 @@ const col1 = [
         title: 'Uudised',
         route: '/uudised'
     },
-    {
+    /*{
         title: 'Reisiblogid',
         route: '/'
-    },
+    },*/
     {
         title: 'Reisipildid',
-        route: '/'
+        route: '/reisipildid'
     },
-    {
+    /*{
         title: 'Sihtkohad',
-        route: '/'
-    },
+        route: '/sihtkohad'
+    },*/
 ];
 
 const col2 = [

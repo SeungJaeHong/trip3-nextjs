@@ -84,8 +84,8 @@ const ImagesPage = ({images, currentPage, hasMore, destinationId, destinationOpt
         })
     }
 
-    const onSelectDestination = (props: {label: string, value: string}) => {
-        const destinationId = parseInt(props?.value)
+    const onSelectDestination = (value: string) => {
+        const destinationId = parseInt(value)
         const urlParams = {
             destination: destinationId,
             page: currentPage
