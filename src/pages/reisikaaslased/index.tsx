@@ -14,6 +14,7 @@ import TravelmateCard from '../../components/Travelmate/TravelmateCard'
 import TravelmateFilter from '../../components/Travelmate/TravelmateFilter'
 import ApiClientSSR from '../../lib/ApiClientSSR'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
+import useUser from '../../hooks'
 
 type Props = {
     travelmates: TravelmateRowType[]
@@ -42,6 +43,7 @@ const TravelmatesIndex = ({
     const [topic, setTopic] = useState<number | undefined>(selectedTopic)
     const [start, setStart] = useState<string | undefined>(selectedStart)
     const router = useRouter()
+    const { userIsLoggedIn } = useUser()
 
     const getNextPageUrl = () => {
         if (!hasMore) {
@@ -129,12 +131,14 @@ const TravelmatesIndex = ({
                             <div className={styles.MoreLink}>
                                 <MoreLink route={'/kasutustingimused'} title={'Kasutustingimused'} medium={true} />
                             </div>
-                            <div className={styles.AddNewButton}>
-                                <Button
-                                    title={'Lisa kuulutus'}
-                                    onClick={() => router.push('/reisikaaslased/lisa-uus')}
-                                />
-                            </div>
+                            {userIsLoggedIn && (
+                                <div className={styles.AddNewButton}>
+                                    <Button
+                                        title={'Lisa kuulutus'}
+                                        onClick={() => router.push('/reisikaaslased/lisa-uus')}
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

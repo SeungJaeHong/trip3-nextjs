@@ -14,6 +14,7 @@ import { useRouter } from 'next/router'
 import Button from '../../components/Button'
 import ApiClientSSR from '../../lib/ApiClientSSR'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
+import useUser from '../../hooks'
 
 type Props = {
     flightOffers: FlightOfferRowType[]
@@ -26,6 +27,8 @@ type Props = {
 const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }: Props) => {
     const [filters, setFilters] = useState<Array<number>>(filter)
     const router = useRouter()
+    const { userIsLoggedIn, user } = useUser()
+    const userIsAdmin = userIsLoggedIn && user?.isAdmin
 
     const getNextPageUrl = () => {
         if (!hasMore) {
@@ -116,12 +119,14 @@ const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }
                                     <MoreLink route={'/mis-on-veahind'} title={'Mis on veahind'} medium={true} />
                                 </div>
                             </div>
-                            <div className={styles.AddNewButton}>
-                                <Button
-                                    title={'Lisa uus pakkumine'}
-                                    onClick={() => router.push('/odavad-lennupiletid/lisa-uus')}
-                                />
-                            </div>
+                            {userIsAdmin && (
+                                <div className={styles.AddNewButton}>
+                                    <Button
+                                        title={'Lisa uus pakkumine'}
+                                        onClick={() => router.push('/odavad-lennupiletid/lisa-uus')}
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
