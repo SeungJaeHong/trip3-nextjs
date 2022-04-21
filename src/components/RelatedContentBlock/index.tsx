@@ -8,9 +8,10 @@ import ForumLatest from '../Forum/ForumLatest'
 
 type Props = {
     type: string
+    destinationId?: number
 }
 
-const RelatedContentBlock = ({ type }: Props) => {
+const RelatedContentBlock = ({ type, destinationId }: Props) => {
     const renderContentByType = () => {
         switch (type) {
             case 'forum':
@@ -58,6 +59,18 @@ const RelatedContentBlock = ({ type }: Props) => {
                         </div>
                         <div className={styles.Row}>
                             <TravelmatesLatest grid={true} />
+                        </div>
+                    </>
+                )
+            case 'destination':
+                return (
+                    <>
+                        <div className={styles.Column}>
+                            <FlightOffersLatest take={5} destinationId={destinationId} />
+                            <TravelmatesLatest take={5} destinationId={destinationId} />
+                        </div>
+                        <div className={styles.Row}>
+                            <NewsLatest destinationId={destinationId}/>
                         </div>
                     </>
                 )

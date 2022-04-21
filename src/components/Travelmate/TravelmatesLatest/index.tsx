@@ -11,19 +11,21 @@ import clsx from 'clsx'
 
 type Props = {
     grid: boolean
+    take: number
+    destinationId?: number
 }
 
-const TravelmatesLatest = ({ grid }: Props) => {
+const TravelmatesLatest = ({ grid, take, destinationId }: Props) => {
     const [travelmates, setTravelmates] = useState<TravelmateRowType[]>([])
     const [loading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {
-        getLatestTravelmates()
+        getLatestTravelmates(take, destinationId)
             .then((res) => {
                 setTravelmates(res.data)
             })
             .finally(() => setLoading(false))
-    }, [])
+    }, [destinationId])
 
     const renderContent = () => {
         if (loading) {
@@ -64,6 +66,7 @@ const TravelmatesLatest = ({ grid }: Props) => {
 
 TravelmatesLatest.defaultProps = {
     grid: false,
+    take: 3
 }
 
 export default TravelmatesLatest

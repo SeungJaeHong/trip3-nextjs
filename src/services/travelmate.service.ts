@@ -3,9 +3,10 @@ import {AxiosResponse} from "axios"
 import {TravelmateContent} from "../types"
 import {objectToQueryString} from "../helpers"
 
-export const getLatestTravelmates = async (take = 3) => {
+export const getLatestTravelmates = async (take = 3, destinationId?: number) => {
     const urlParams = {
-        take: take
+        take: take,
+        destinationId: destinationId
     }
 
     const queryString = objectToQueryString(urlParams)

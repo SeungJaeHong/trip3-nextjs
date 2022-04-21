@@ -11,19 +11,20 @@ type Props = {
     take: number
     title: string
     excludeId?: number
+    destinationId?: number
 }
 
-const FlightOffersLatest = ({ take, title, excludeId }: Props) => {
+const FlightOffersLatest = ({ take, title, excludeId, destinationId }: Props) => {
     const [flights, setFlights] = useState<FlightOfferRowType[]>([])
     const [loading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {
-        getLatestFlights(take, excludeId)
+        getLatestFlights(take, excludeId, destinationId)
             .then((res) => {
                 setFlights(res.data)
             })
             .finally(() => setLoading(false))
-    }, [])
+    }, [destinationId, excludeId])
 
     const renderContent = () => {
         if (loading) {

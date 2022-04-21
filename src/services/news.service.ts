@@ -3,10 +3,11 @@ import { AxiosResponse } from 'axios'
 import { Destination, Topic } from '../types'
 import { objectToQueryString } from '../helpers'
 
-export const getLatestNews = async (take = 3, excludeId?: number) => {
+export const getLatestNews = async (take = 3, excludeId?: number, destinationId?: number) => {
     const urlParams = {
         take: take,
         id: excludeId,
+        destinationId: destinationId,
     }
 
     const queryString = objectToQueryString(urlParams)
