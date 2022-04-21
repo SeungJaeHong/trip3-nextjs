@@ -131,6 +131,35 @@ const TravelmatePage = ({ content }: Props) => {
         }
     }
 
+    const renderDestinations = () => {
+        if (travelmate.destinations) {
+            let hasMoreCount = undefined
+            let destinations = travelmate.destinations
+            if (destinations.length > 4) {
+                hasMoreCount = '+' + (destinations.length - 3)
+                destinations = destinations.slice(0, 3)
+            }
+
+            return (
+                <>
+                    {destinations?.map((destination: Destination) => {
+                        return (
+                            <Tag
+                                title={destination.name}
+                                type={'destination'}
+                                route={'/sihtkoht/' + destination.slug}
+                                key={destination.id}
+                            />
+                        )
+                    })}
+                    {hasMoreCount !== undefined && <Tag title={hasMoreCount} type={'destination'} />}
+                </>
+            )
+        }
+
+        return null
+    }
+
     return (
         <Fragment>
             <Header>
@@ -155,16 +184,7 @@ const TravelmatePage = ({ content }: Props) => {
                         <div className={styles.MetaData}>
                             <div className={styles.CreatedAt}>Lisatud {travelmate.createdAt}</div>
                             <div className={styles.Tags}>
-                                {travelmate.destinations?.map((destination: Destination) => {
-                                    return (
-                                        <Tag
-                                            title={destination.name}
-                                            type={'destination'}
-                                            route={'/sihtkoht/' + destination.slug}
-                                            key={destination.id}
-                                        />
-                                    )
-                                })}
+                                {renderDestinations()}
                                 {travelmate.topics?.map((topic: Topic) => {
                                     return <Tag title={topic.name} key={topic.id} />
                                 })}

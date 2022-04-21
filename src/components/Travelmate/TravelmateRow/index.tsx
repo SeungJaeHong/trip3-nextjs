@@ -6,6 +6,35 @@ import Tag from '../../Tag'
 import clsx from 'clsx'
 
 const TravelmateRow = (item: TravelmateRowType) => {
+    const renderDestinations = () => {
+        if (item.destinations) {
+            let hasMoreCount = undefined
+            let destinations = item.destinations
+            if (destinations.length > 4) {
+                hasMoreCount = '+' + (destinations.length - 3)
+                destinations = destinations.slice(0, 3)
+            }
+
+            return (
+                <>
+                    {destinations?.map((destination: Destination) => {
+                        return (
+                            <Tag
+                                title={destination.name}
+                                type={'destination'}
+                                route={'/sihtkoht/' + destination.slug}
+                                key={destination.id}
+                            />
+                        )
+                    })}
+                    {hasMoreCount !== undefined && <Tag title={hasMoreCount} type={'destination'} />}
+                </>
+            )
+        }
+
+        return null
+    }
+
     return (
         <div className={styles.TravelmateRow}>
             <div className={styles.Avatar}>
@@ -27,16 +56,7 @@ const TravelmateRow = (item: TravelmateRowType) => {
                         <a className={clsx(styles.MetaItem, styles.Creator)}>{item.user.name}</a>
                     </Link>
                     <div className={styles.Tags}>
-                        {item.destinations?.map((destination: Destination) => {
-                            return (
-                                <Tag
-                                    title={destination.name}
-                                    type={'destination'}
-                                    route={'/sihtkoht/' + destination.slug}
-                                    key={destination.id}
-                                />
-                            )
-                        })}
+                        {renderDestinations()}
                         {item.topics?.map((topic: Topic) => {
                             return <Tag title={topic.name} route={'/'} key={topic.id} />
                         })}
