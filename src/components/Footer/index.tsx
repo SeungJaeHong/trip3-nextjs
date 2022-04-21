@@ -68,27 +68,27 @@ const col3 = [
     },
     {
         title: 'Reklaam',
-        route: '/'
+        route: '/reklaam'
     },
     {
         title: 'Logi sisse',
-        route: '/'
+        route: '/login'
     },
     {
         title: 'Registreeri',
-        route: '/'
+        route: '/register'
     },
 ];
 
 const social = [
     {
         title: 'Facebook',
-        route: '/',
+        route: 'https://www.facebook.com/tripeeee',
         icon: FacebookIcon
     },
     {
         title: 'Twitter',
-        route: '/',
+        route: 'https://twitter.com/trip_ee',
         icon: TwitterIcon
     },
     {
@@ -170,7 +170,7 @@ const Footer = (props: Props) => {
                     const Icon = item.icon
                     return (
                         <Link href={item.route} key={item.title}>
-                            <a>
+                            <a target={'_blank'}>
                                 <Icon />
                                 {item.title}
                             </a>

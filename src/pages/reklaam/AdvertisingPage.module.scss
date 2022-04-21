@@ -1,0 +1,37 @@
+@import "../../styles/variables";
+
+.Container {
+    position: relative;
+    background: $gray-light;
+}
+
+.Navbar {
+    padding-bottom: $spacer * 8;
+    padding-top: $spacer * 3;
+}
+
+.Title {
+    font-weight: 600;
+    font-size: 3rem;
+    color: $gray-dark;
+    display: flex;
+    justify-content: center;
+    padding-bottom: $spacer * 6;
+}
+
+.Body {
+    font-family: $font-family-sailec;
+    background: rgba(255, 255, 255, .5);
+    position: relative;
+    padding: $spacer * 3 0;
+    color: $gray-dark;
+    font-size: $font-size-medium;
+
+    @include sm() {
+        font-size: $font-size-normal;
+    }
+
+    ul li {
+        margin-bottom: $spacer * 2;
+    }
+}
