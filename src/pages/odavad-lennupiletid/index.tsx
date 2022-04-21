@@ -110,10 +110,10 @@ const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }
                                     Vaata soodsaid lennupakkumisi ning alusta oma reisi planeerimist siit.
                                 </div>
                                 <div className={styles.MoreLink}>
-                                    <MoreLink route={'/'} title={'Loe lähemalt Trip.ee-st'} medium={true} />
+                                    <MoreLink route={'/tripist'} title={'Loe lähemalt Trip.ee-st'} medium={true} />
                                 </div>
                                 <div className={styles.MoreLink}>
-                                    <MoreLink route={'/'} title={'Mis on veahind'} medium={true} />
+                                    <MoreLink route={'/mis-on-veahind'} title={'Mis on veahind'} medium={true} />
                                 </div>
                             </div>
                             <div className={styles.AddNewButton}>

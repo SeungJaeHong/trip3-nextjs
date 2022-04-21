@@ -15,6 +15,7 @@ import styles from './ForumIndexPage.module.scss'
 import { useRouter } from 'next/router'
 import FormSelect from '../../Form/FormSelect'
 import RelatedContentBlock from '../../RelatedContentBlock'
+import useUser from '../../../hooks'
 
 type Props = {
     type: 'general' | 'buysell' | 'foreign' | 'other' | 'follows'
@@ -37,6 +38,7 @@ const ForumIndexPage = (props: Props) => {
     const [destinationValue, setDestinationValue] = useState<string | undefined>(props.destination)
     const [topicValue, setTopicValue] = useState<string | undefined>(props.topic)
     const router = useRouter()
+    const { userIsLoggedIn } = useUser()
 
     let isFilterSearch = false
     if (props.destination || props.topic) {
@@ -187,9 +189,11 @@ const ForumIndexPage = (props: Props) => {
                         <div className={styles.Sidebar}>
                             <BlockTitle title={props.title} />
                             <div className={styles.ForumDescription}>{props.description}</div>
-                            <div className={styles.AddNewTopic}>
-                                <Button title={'Alusta uut teemat'} route={'/foorum/lisa-uus'} />
-                            </div>
+                            {userIsLoggedIn && (
+                                <div className={styles.AddNewTopic}>
+                                    <Button title={'Alusta uut teemat'} route={'/foorum/lisa-uus'} />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

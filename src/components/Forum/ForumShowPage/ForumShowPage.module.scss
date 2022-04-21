@@ -50,16 +50,20 @@
         flex-direction: column;
         padding-left: $spacer * 6;
 
-        .SidebarButton {
-            margin: $spacer * 1.5 0;
+        .SidebarButtons {
+            display: flex;
+            flex-direction: column;
+            margin-top: $spacer * 2;
+            gap: $spacer * 1.5;
         }
 
         @include md() {
             padding-left: 0;
-        }
 
-        @include sm() {
-            padding-left: 0;
+            .SidebarButtons {
+                max-width: 350px;
+                margin: 0 auto;
+            }
         }
     }
 }

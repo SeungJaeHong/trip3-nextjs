@@ -119,11 +119,11 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                         )}
                     </div>
                     <div className={styles.Sidebar}>
-                        <div className={styles.SidebarButton}>
+                        <div className={styles.SidebarButtons}>
                             <Button title={'Otsi foorumist'} light={true} route={getForumUrlByType(post.type)} />
-                        </div>
-                        <div className={styles.SidebarButton}>
-                            <Button title={'Alusta uut teemat'} light={true} route={'/foorum/lisa-uus'} />
+                            {userIsLoggedIn && (
+                                <Button title={'Alusta uut teemat'} light={true} route={'/foorum/lisa-uus'} />
+                            )}
                         </div>
                     </div>
                 </div>
