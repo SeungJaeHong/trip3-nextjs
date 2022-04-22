@@ -1,12 +1,16 @@
 @import "../styles/variables";
 
 .Navbar {
-    padding-bottom: $spacer * 8;
+    padding-bottom: $spacer * 10;
     padding-top: $spacer * 3;
+
+    @include sm() {
+        padding-bottom: $spacer * 7;
+    }
 }
 
 .Search {
-    padding-bottom: 115px;
+    padding-bottom: 120px;
     width: 50%;
     margin: 0 auto;
 
@@ -41,12 +45,12 @@
     margin: $spacer * -5.5 auto $spacer auto;
     width: 100%;
 
-    @include md() {
+    @include sm() {
         flex-direction: column;
     }
 
     .FlightOfferCard {
-        flex: 1 1 0;
+        flex: 1;
         border: none;
     }
 }

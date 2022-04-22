@@ -13,10 +13,9 @@
         justify-content: center;
         align-items: center;
         gap: $spacer * 2;
-        //max-width: 760px;
         max-width: 1000px;
         width: 100%;
-        margin: 0 auto $spacer * 2 auto;
+        margin: -12px auto $spacer * 2 auto;
         padding: $spacer * 2.5;
 
         @include md() {
