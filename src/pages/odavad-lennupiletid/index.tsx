@@ -15,6 +15,7 @@ import Button from '../../components/Button'
 import ApiClientSSR from '../../lib/ApiClientSSR'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
 import useUser from '../../hooks'
+import Ads from '../../components/Ads'
 
 type Props = {
     flightOffers: FlightOfferRowType[]
@@ -82,7 +83,7 @@ const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }
             return <div className={styles.NoResults}>Tulemusi ei leitud</div>
         }
 
-        return <FlightOfferList items={flightOffers} />
+        return <FlightOfferList items={flightOffers} withAds={true} />
     }
 
     return (
@@ -96,6 +97,7 @@ const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }
                 <div className={containerStyle.CenteredContainer}>
                     <div className={styles.Content}>
                         <div className={styles.FlightOfferList}>
+                            {/*<Ads type={'flight-offer-list-top'} />*/}
                             {renderResults()}
                             <div className={styles.Paginator}>
                                 <SimplePaginator
@@ -127,6 +129,10 @@ const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }
                                     />
                                 </div>
                             )}
+                            <div className={styles.Ads}>
+                                <Ads type={'sidebar-small'} />
+                                <Ads type={'sidebar-large'} />
+                            </div>
                         </div>
                     </div>
                 </div>

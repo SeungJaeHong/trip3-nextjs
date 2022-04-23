@@ -96,13 +96,18 @@ const FlightOfferShow = ({ flightObj }: Props) => {
                 <div className={styles.ContentContainer}>
                     <div className={styles.BodyContainer}>
                         <div className={styles.Body}>
-                            {flight.status === 0 && (
-                                <div className={styles.NotPublished}>
-                                    <Alert title={'Lennupakkumine ei ole avalikustatud!'} type={'warning'} />
-                                </div>
-                            )}
+                            <div className={styles.TopAd}>
+                                <Ads type={'body'} />
+                            </div>
+                            <div className={styles.Text}>
+                                {flight.status === 0 && (
+                                    <div className={styles.NotPublished}>
+                                        <Alert title={'Lennupakkumine ei ole avalikustatud!'} type={'warning'} />
+                                    </div>
+                                )}
 
-                            {renderBody(flight.body)}
+                                {renderBody(flight.body)}
+                            </div>
                         </div>
                         <div className={styles.MoreFlightOffers}>
                             <FlightOffersLatest title={'Veel soodsaid lennupileteid'} excludeId={flight.id} />

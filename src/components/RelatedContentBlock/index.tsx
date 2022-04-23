@@ -5,6 +5,8 @@ import FlightOffersLatest from '../FlightOffer/FlightOffersLatest'
 import TravelmatesLatest from '../Travelmate/TravelmatesLatest'
 import NewsLatest from '../News/NewsLatest'
 import ForumLatest from '../Forum/ForumLatest'
+import Ads from '../Ads'
+import clsx from 'clsx'
 
 type Props = {
     type: string
@@ -70,7 +72,7 @@ const RelatedContentBlock = ({ type, destinationId }: Props) => {
                             <TravelmatesLatest take={5} destinationId={destinationId} />
                         </div>
                         <div className={styles.Row}>
-                            <NewsLatest destinationId={destinationId}/>
+                            <NewsLatest destinationId={destinationId} />
                         </div>
                     </>
                 )
@@ -81,8 +83,9 @@ const RelatedContentBlock = ({ type, destinationId }: Props) => {
 
     return (
         <div className={styles.Container}>
-            <div className={containerStyle.ContainerXl}>
+            <div className={clsx(containerStyle.ContainerXl, styles.FlexColumn)}>
                 <div className={styles.Content}>{renderContentByType()}</div>
+                <Ads type={'footer'} />
             </div>
         </div>
     )

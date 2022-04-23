@@ -17,17 +17,18 @@
     display: flex;
     width: 100%;
     margin: $spacer * 7 0;
+    gap: $spacer * 9;
 
     @include md() {
         flex-direction: column;
         margin: $spacer * 5 0;
+        gap: $spacer;
     }
 
     .FlightOfferList {
         display: flex;
         flex-direction: column;
-        flex: 2;
-        padding-right: $spacer * 9;
+        flex: 2.4;
 
         .Paginator {
             margin-top: $spacer * 5;
@@ -53,6 +54,7 @@
     .DescriptionBlock {
         background: $gray-light;
         padding: $spacer * 3;
+        margin-bottom: $spacer * 3;
 
         .DescriptionFirstPart {
             color: $gray-dark-hover;
@@ -71,12 +73,13 @@
     }
 
     .AddNewButton {
-        margin-top: $spacer * 4;
+        margin-bottom: $spacer * 3;
     }
 
     .Ads {
         display: flex;
         width: 100%;
+        max-width: 270px;
         flex-direction: column;
         gap: $spacer * 2;
     }
@@ -168,69 +171,81 @@
         gap: $spacer * 5;
 
         .Body {
-            color: $gray-dark;
-            font-family: $font-family-sailec;
-            font-size: $font-size-medium;
-            overflow-wrap: break-word;
-            word-wrap: break-word;
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            gap: $spacer * 3;
 
-            @include md() {
-                font-size: $font-size-normal;
-            }
-
-            .NotPublished {
-                padding-bottom: $spacer * 4;
-            }
-
-            p:first-child {
-                margin-top: 0;
-            }
-
-            a {
-                color: $blue;
-                word-break: break-all;
-
-                &:hover {
-                    color: $blue-hover;
-                }
-            }
-
-            img {
+            .TopAd {
                 width: 100%;
+                max-width: 720px;
             }
 
-            :global(.FlightAvailableTimes) {
-                display: flex;
-                margin: $spacer * 5 0;
+            .Text {
+                color: $gray-dark;
+                font-family: $font-family-sailec;
+                font-size: $font-size-medium;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
 
-                @include sm() {
-                    flex-direction: column;
-                    gap: $spacer * 3;
+                @include md() {
+                    font-size: $font-size-normal;
                 }
 
-                :global(.FlightAvailableTimesCol) {
-                    display: flex;
-                    flex-direction: column;
-                    flex: 1;
+                .NotPublished {
+                    padding-bottom: $spacer * 4;
+                }
 
-                    :global(.FlightAvailableTimesHeader) {
-                        display: flex;
-                        font-size: $font-size-medium;
-                        font-weight: 600;
-                        color: $gray-dark-hover;
-                        margin-bottom: $spacer * 2.5;
+                p:first-child {
+                    margin-top: 0;
+                }
+
+                a {
+                    color: $blue;
+                    word-break: break-all;
+
+                    &:hover {
+                        color: $blue-hover;
+                    }
+                }
+
+                img {
+                    width: 100%;
+                }
+
+                :global(.FlightAvailableTimes) {
+                    display: flex;
+                    margin: $spacer * 5 0;
+
+                    @include sm() {
+                        flex-direction: column;
+                        gap: $spacer * 3;
                     }
 
-                    :global(.FlightAvailableTimesRow) {
+                    :global(.FlightAvailableTimesCol) {
                         display: flex;
-                        padding: $spacer 0;
+                        flex-direction: column;
+                        flex: 1;
 
-                        p {
-                            padding: 0;
-                            margin: 0;
+                        :global(.FlightAvailableTimesHeader) {
+                            display: flex;
+                            font-size: $font-size-medium;
+                            font-weight: 600;
+                            color: $gray-dark-hover;
+                            margin-bottom: $spacer * 2.5;
+                        }
 
-                            a {
-                                text-decoration: underline;
+                        :global(.FlightAvailableTimesRow) {
+                            display: flex;
+                            padding: $spacer 0;
+
+                            p {
+                                padding: 0;
+                                margin: 0;
+
+                                a {
+                                    text-decoration: underline;
+                                }
                             }
                         }
                     }
