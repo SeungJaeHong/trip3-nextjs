@@ -17,6 +17,7 @@ import { toast } from 'react-toastify'
 import { publishFlight } from '../../../services/flight.service'
 import FlightOffersLatest from '../../../components/FlightOffer/FlightOffersLatest'
 import RelatedContentBlock from '../../../components/RelatedContentBlock'
+import Ads from '../../../components/Ads'
 
 type Props = {
     flightObj: FlightContent
@@ -107,7 +108,12 @@ const FlightOfferShow = ({ flightObj }: Props) => {
                             <FlightOffersLatest title={'Veel soodsaid lennupileteid'} excludeId={flight.id} />
                         </div>
                     </div>
-                    <div className={styles.SidebarShow}>Sidebar</div>
+                    <div className={styles.Sidebar}>
+                        <div className={styles.Ads}>
+                            <Ads type={'sidebar-small'} />
+                            <Ads type={'sidebar-large'} />
+                        </div>
+                    </div>
                 </div>
             </div>
             <RelatedContentBlock type={'flight'} />

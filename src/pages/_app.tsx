@@ -1,9 +1,11 @@
-import type {AppProps} from 'next/app'
+import type { AppProps } from 'next/app'
 import NextNprogress from 'nextjs-progressbar'
 import '../styles/globals.scss'
 import 'keen-slider/keen-slider.min.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
+import Script from 'next/script'
+import AdsConfig from '../lib/AdsConfig'
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
@@ -28,6 +30,24 @@ function MyApp({ Component, pageProps }: AppProps) {
                 theme={'colored'}
             />
             <Component {...pageProps} />
+            <Script
+                id={'ads-js'}
+                src={'https://securepubads.g.doubleclick.net/tag/js/gpt.js'}
+                onLoad={() => {
+                    window.googletag = window.googletag || { cmd: [] }
+                    googletag.cmd.push(function () {
+                        AdsConfig.map((ad) => {
+                            googletag
+                                .defineSlot(ad.slotId, [[ad.width, ad.height], 'fluid'], ad.divId)
+                                ?.addService(googletag.pubads())
+                        })
+                        googletag.pubads().disableInitialLoad()
+                        googletag.pubads().enableSingleRequest()
+                        googletag.pubads().collapseEmptyDivs()
+                        googletag.enableServices()
+                    })
+                }}
+            />
         </>
     )
 }

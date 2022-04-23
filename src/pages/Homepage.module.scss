@@ -129,14 +129,20 @@
     .ForumBlock {
         display: flex;
         width: 100%;
+        gap: $spacer * 7;
 
         @include md() {
             flex-direction: column;
+            gap: $spacer * 3;
+        }
+
+        @include sm() {
+            gap: $spacer * 2;
         }
 
         .ForumList {
             display: flex;
-            flex: 2;
+            flex: 2.5;
             flex-direction: column;
             width: 100%;
             justify-content: flex-start;
@@ -148,16 +154,16 @@
             flex-direction: column;
             width: 100%;
             flex: 1;
-            padding: $spacer * 2 0 0 52px;
+            padding-top: $spacer * 2;
 
             @include md() {
-                padding: $spacer * 2 0 0 0;
                 justify-content: flex-start;
             }
 
             .ForumLinks {
                 display: flex;
                 flex-direction: column;
+                margin-bottom: $spacer * 2;
 
                 .ForumLink {
                     margin-bottom: $spacer * 4;
@@ -172,13 +178,21 @@
             }
 
             .AddNewTopic {
-                margin-top: $spacer;
-                max-width: 250px;
+                max-width: 260px;
                 width: 100%;
+                margin-bottom: $spacer * 2;
 
                 @include sm() {
                     max-width: none;
                 }
+            }
+
+            .Ads {
+                display: flex;
+                max-width: 260px;
+                width: 100%;
+                flex-direction: column;
+                gap: $spacer * 2;
             }
         }
     }

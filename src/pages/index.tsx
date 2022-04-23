@@ -17,6 +17,8 @@ import TravelmatesLatest from '../components/Travelmate/TravelmatesLatest'
 import ApiClientSSR from '../lib/ApiClientSSR'
 import useUser from '../hooks'
 import FrontPageImageGallery from '../components/FrontPageImageGallery'
+import Ads from '../components/Ads'
+import React from 'react'
 
 type Props = {
     flightOffers: FlightOfferCardType[]
@@ -102,7 +104,7 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                                     <div className={styles.ForumLink}>
                                         <MoreLink title={'Ost-müük'} route={'/foorum/ost-muuk'} large={true} />
                                         <span className={styles.ForumDescription}>
-                                            Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi
+                                            Lennupiletite, reisivarustuse ja muu reisimiseks vajaliku ost ja müük
                                         </span>
                                     </div>
                                     <div className={styles.ForumLink}>
@@ -112,7 +114,7 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                                             large={true}
                                         />
                                         <span className={styles.ForumDescription}>
-                                            Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi
+                                            Küsimused välismaal elavatelt eestlastelt
                                         </span>
                                     </div>
                                 </div>
@@ -121,6 +123,10 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                                         <Button title={'Alusta uut teemat'} route={'/foorum/lisa-uus'} />
                                     </div>
                                 )}
+                                <div className={styles.Ads}>
+                                    <Ads type={'sidebar-small'} />
+                                    <Ads type={'sidebar-large'} />
+                                </div>
                             </div>
                         </div>
                         <div className={styles.ViewMoreForumPosts}>

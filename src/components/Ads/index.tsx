@@ -1,0 +1,34 @@
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import AdsConfig from '../../lib/AdsConfig'
+
+type Props = {
+    type: string
+}
+
+const Ads = ({ type }: Props) => {
+    const router = useRouter()
+    const ad = AdsConfig.find((item) => item.type === type)
+
+    useEffect(() => {
+        setTimeout(() => {
+            if (ad && window.googletag !== undefined) {
+                googletag.cmd.push(function () {
+                    window.googletag.display(ad.divId)
+                    const slot = window.googletag
+                        .pubads()
+                        .getSlots()
+                        .find((item) => item.getSlotId().getName() === ad.slotId)
+
+                    if (slot) {
+                        window.googletag.pubads().refresh([slot])
+                    }
+                })
+            }
+        }, 150)
+    }, [router.query])
+
+    return ad ? <div id={ad.divId} /> : null
+}
+
+export default Ads
