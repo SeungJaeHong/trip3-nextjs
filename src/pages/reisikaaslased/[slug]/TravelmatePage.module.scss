@@ -43,9 +43,11 @@
     display: flex;
     width: 100%;
     font-family: $font-family-sailec;
+    gap: $spacer * 9;
 
     @include md() {
         flex-direction: column;
+        gap: $spacer;
     }
 
     .PageContent {
@@ -53,7 +55,6 @@
         display: flex;
         flex-direction: column;
         margin: $spacer * 4 0;
-        padding-right: $spacer * 8;
 
         @include sm() {
             flex: 1;
@@ -247,6 +248,15 @@
                     color: $gray-dark;
                 }
             }
+        }
+
+        .Ads {
+            display: flex;
+            flex-direction: column;
+            gap: $spacer * 2;
+            max-width: 280px;
+            width: 100%;
+            margin-bottom: $spacer * 3;
         }
     }
 }

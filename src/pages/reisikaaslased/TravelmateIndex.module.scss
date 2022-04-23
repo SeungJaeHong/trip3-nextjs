@@ -28,10 +28,12 @@
     display: flex;
     width: 100%;
     margin: $spacer * 7 0;
+    gap: $spacer * 9;
 
     @include md() {
         flex-direction: column;
         margin: $spacer * 5 0;
+        gap: $spacer;
     }
 
     .TravelmateGridContainer {
@@ -40,7 +42,6 @@
         flex: 3;
 
         .TravelmateGrid {
-            padding-right: $spacer * 8;
             padding-left: $spacer * 4;
             flex-wrap: wrap;
             display: grid;
@@ -50,7 +51,6 @@
             @include lg() {
                 flex: 1;
                 padding-left: $spacer * 5;
-                padding-right: $spacer * 6;
                 grid-template-columns: 1fr;
                 gap: $spacer * 3;
             }
@@ -97,6 +97,13 @@
             .AddNewButton {
                 margin-top: $spacer * 3;
             }
+        }
+
+        .Ads {
+            display: flex;
+            flex-direction: column;
+            gap: $spacer * 2;
+            width: 100%;
         }
     }
 }

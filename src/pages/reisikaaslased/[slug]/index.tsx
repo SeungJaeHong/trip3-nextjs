@@ -20,6 +20,7 @@ import clsx from 'clsx'
 import { toggleTravelmateStatus } from '../../../services/travelmate.service'
 import Alert from '../../../components/Alert'
 import RelatedContentBlock from '../../../components/RelatedContentBlock'
+import Ads from '../../../components/Ads'
 
 type Props = {
     content: TravelmateContent
@@ -258,6 +259,10 @@ const TravelmatePage = ({ content }: Props) => {
                                 <div className={styles.InfoQuestion}>Millist kaaslast soovid leida?</div>
                                 <div className={styles.InfoAnswer}>{renderGender()}</div>
                             </div>
+                        </div>
+                        <div className={styles.Ads}>
+                            <Ads type={'sidebar-small'} />
+                            <Ads type={'sidebar-large'} />
                         </div>
                     </div>
                 </div>
