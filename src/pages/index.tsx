@@ -91,7 +91,7 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                         </div>
                         <div className={styles.ForumBlock}>
                             <div className={styles.ForumList}>
-                                <ForumList items={forumPosts} />
+                                <ForumList items={forumPosts} withAds={true} />
                             </div>
                             <div className={styles.SidebarContent}>
                                 <div className={styles.ForumLinks}>
@@ -150,15 +150,17 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                 <div className={clsx([containerStyle.ContainerXl, styles.Content])}>
                     <div className={styles.TravelFlightContainer}>
                         <div className={styles.TravelmateFlightBlock}>
-                            <FlightOffersLatest />
+                            <FlightOffersLatest take={5} />
                         </div>
                         <div className={clsx(styles.TravelmateFlightBlock, styles.Travelmates)}>
-                            <TravelmatesLatest />
+                            <TravelmatesLatest take={5} />
                         </div>
+                    </div>
+                    <div className={styles.FooterAds}>
+                        <Ads type={'footer'} />
                     </div>
                 </div>
             </div>
-
             <Footer />
         </>
     )

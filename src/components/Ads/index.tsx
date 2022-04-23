@@ -25,7 +25,7 @@ const Ads = ({ type }: Props) => {
                     }
                 })
             }
-        }, 150)
+        }, 200)
     }, [router.query])
 
     return ad ? <div id={ad.divId} /> : null
