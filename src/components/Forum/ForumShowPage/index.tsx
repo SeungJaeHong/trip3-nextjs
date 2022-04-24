@@ -17,6 +17,7 @@ import { toast } from 'react-toastify'
 import useUser from '../../../hooks'
 import RelatedContentBlock from '../../RelatedContentBlock'
 import Ads from "../../Ads";
+import clsx from "clsx";
 
 type Props = {
     post: Content
@@ -95,7 +96,9 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                             <ForumPost {...post} />
                         </div>
                         {goToNewestLink.length > 1 && (
-                            <div className={styles.LatestCommentLink}>
+                            <div className={clsx(styles.LatestCommentLink, {
+                                [styles.HasPaginator]: lastPage > 1
+                            })}>
                                 <MoreLink route={goToNewestLink} title={'Mine uusima kommentaari juurde'} />
                             </div>
                         )}

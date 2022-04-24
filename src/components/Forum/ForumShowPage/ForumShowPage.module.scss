@@ -33,9 +33,13 @@
         }
 
         .LatestCommentLink {
-            margin-bottom: $spacer;
+            margin-bottom: $spacer * 4;
             display: flex;
             justify-content: flex-end;
+
+            &.HasPaginator {
+                margin-bottom: $spacer * 2;
+            }
         }
 
         .PostComments {
