@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import styles from './ForumPost.module.scss'
-import {Destination, ForumPostType, Topic} from '../../../types'
+import { Destination, ForumPostType, Topic } from '../../../types'
 import UserAvatar from '../../User/UserAvatar'
 import ThumbsUpIcon from '../../../icons/ThumbsUpIcon'
 import clsx from 'clsx'
@@ -12,13 +12,14 @@ import { togglePostStatus, likePost } from '../../../services/forum.service'
 import { toast } from 'react-toastify'
 import Alert from '../../Alert'
 import useUser from '../../../hooks'
+import { getForumUrlByType } from '../../../helpers'
 
 type Props = {
     item: ForumPostType
     showBreadCrumbs: boolean
 }
 
-const ForumPost = ({item, showBreadCrumbs}: Props) => {
+const ForumPost = ({ item, showBreadCrumbs }: Props) => {
     const [post, setPost] = useState<ForumPostType>(item)
     const { userIsLoggedIn, user } = useUser()
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
@@ -40,7 +41,7 @@ const ForumPost = ({item, showBreadCrumbs}: Props) => {
             const status = !post.status
             togglePostStatus(post, status)
                 .then((res) => {
-                    const newPost = {...post, status: res.data}
+                    const newPost = { ...post, status: res.data }
                     setPost(newPost)
                     toast.success(newPost.status === 1 ? 'Postitus avalikustatud' : 'Postitus peidetud')
                 })
@@ -87,49 +88,84 @@ const ForumPost = ({item, showBreadCrumbs}: Props) => {
         }
     }
 
-    return (
-        <div className={styles.ForumPost}>
-            {post.status === 0 && (
-                <div className={styles.Alert}>
-                    <Alert title={'Postitus ei ole avalikustatud!'} type={'warning'} />
-                </div>
-            )}
-            <div className={styles.Title}>{post.title}</div>
-            <div className={styles.MetaData}>
-                <Link href={'/user/' + post.user.id}>
-                    <a className={styles.User}>{post.user.name}</a>
+    const renderBreadCrumbs = () => {
+        if (!showBreadCrumbs) {
+            return null
+        }
+
+        const url = getForumUrlByType(post.type)
+        let name = 'Üldfoorum'
+        switch (post.type) {
+            case 'buysell':
+                name = 'Ost-müük'
+                break
+            case 'expat':
+                name = 'Elu välismaal'
+                break
+            case 'misc':
+                name = 'Vaba teema'
+                break
+        }
+
+        return (
+            <div className={styles.BreadCrumbs}>
+                <Link href={'/foorum/uldfoorum'}>
+                    <a>Foorum</a>
                 </Link>
-                <div className={styles.CreatedDate}>{post.createdAt}</div>
-                <div className={styles.UserAvatar}>
-                    <UserAvatar user={post.user} />
-                </div>
+                <span>/</span>
+                <Link href={url}>
+                    <a>{name}</a>
+                </Link>
             </div>
-            <div className={styles.Body} dangerouslySetInnerHTML={{ __html: post.body }} />
-            <div className={styles.Actions}>{renderActionButtons()}</div>
-            <div className={styles.BottomData}>
-                <div className={styles.Tags}>
-                    {post.destinations?.map((destination: Destination) => {
-                        return (
-                            <Tag
-                                title={destination.name}
-                                type={'destination'}
-                                route={'/sihtkoht/' + destination.slug}
-                                key={destination.id}
-                            />
-                        )
-                    })}
-                    {post.topics?.map((topic: Topic) => {
-                        return <Tag title={topic.name} route={'/'} key={topic.id} />
-                    })}
-                </div>
-                <div className={styles.Thumbs}>
-                    <div className={styles.Thumb} onClick={() => onThumbsClick(true)}>
-                        <ThumbsUpIcon />
-                        <span className={styles.ThumbsCount}>{post.likes}</span>
+        )
+    }
+
+    return (
+        <div className={styles.Container}>
+            {renderBreadCrumbs()}
+            <div className={styles.Post}>
+                {post.status === 0 && (
+                    <div className={styles.Alert}>
+                        <Alert title={'Postitus ei ole avalikustatud!'} type={'warning'} />
                     </div>
-                    <div className={clsx(styles.Thumb, styles.ThumbDown)} onClick={() => onThumbsClick(false)}>
-                        <ThumbsDownIcon />
-                        <span className={styles.ThumbsCount}>{post.dislikes}</span>
+                )}
+                <div className={styles.Title}>{post.title}</div>
+                <div className={styles.MetaData}>
+                    <Link href={'/user/' + post.user.id}>
+                        <a className={styles.User}>{post.user.name}</a>
+                    </Link>
+                    <div className={styles.CreatedDate}>{post.createdAt}</div>
+                    <div className={styles.UserAvatar}>
+                        <UserAvatar user={post.user} />
+                    </div>
+                </div>
+                <div className={styles.Body} dangerouslySetInnerHTML={{ __html: post.body }} />
+                <div className={styles.Actions}>{renderActionButtons()}</div>
+                <div className={styles.BottomData}>
+                    <div className={styles.Tags}>
+                        {post.destinations?.map((destination: Destination) => {
+                            return (
+                                <Tag
+                                    title={destination.name}
+                                    type={'destination'}
+                                    route={'/sihtkoht/' + destination.slug}
+                                    key={destination.id}
+                                />
+                            )
+                        })}
+                        {post.topics?.map((topic: Topic) => {
+                            return <Tag title={topic.name} route={'/'} key={topic.id} />
+                        })}
+                    </div>
+                    <div className={styles.Thumbs}>
+                        <div className={styles.Thumb} onClick={() => onThumbsClick(true)}>
+                            <ThumbsUpIcon />
+                            <span className={styles.ThumbsCount}>{post.likes}</span>
+                        </div>
+                        <div className={clsx(styles.Thumb, styles.ThumbDown)} onClick={() => onThumbsClick(false)}>
+                            <ThumbsDownIcon />
+                            <span className={styles.ThumbsCount}>{post.dislikes}</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -138,7 +174,7 @@ const ForumPost = ({item, showBreadCrumbs}: Props) => {
 }
 
 ForumPost.defaultProps = {
-    showBreadCrumbs: true
+    showBreadCrumbs: true,
 }
 
 export default ForumPost

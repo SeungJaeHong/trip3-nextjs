@@ -1,9 +1,38 @@
 @import "../../../styles/variables";
 
-.ForumPost {
+.Container {
     display: flex;
     flex-direction: column;
     width: 100%;
+    gap: $spacer;
+}
+
+.BreadCrumbs {
+    display: flex;
+    width: 100%;
+    background: transparent;
+    font-family: $font-family-sailec;
+
+    a {
+        color: $gray-darker;
+        font-weight: 500;
+
+        &:hover {
+            color: $gray-dark-hover;
+        }
+    }
+
+    span {
+        color: $gray-dark;
+        padding: 0 $spacer;
+    }
+}
+
+.Post {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: $white;
     border: 1px solid $gray;
     padding: $spacer * 5;
     padding-left: $spacer * 5;
