@@ -9,7 +9,7 @@
     position: relative;
     width: 100%;
     margin-top: $spacer * -18;
-    padding-bottom: $spacer * 7;
+    padding-bottom: $spacer * 6;
     gap: $spacer * 8;
 
     @include md() {
@@ -38,10 +38,29 @@
             justify-content: flex-end;
         }
 
+        .PostComments {
+            display: flex;
+            width: 100%;
+            margin-bottom: $spacer * 5;
+
+            @include sm() {
+                margin-bottom: $spacer * 2.5;
+            }
+        }
+
         .AddComment {
             display: flex;
             flex-direction: column;
             gap: $spacer * 2;
+        }
+
+        .BodyAd {
+            width: 100%;
+            overflow: hidden;
+
+            @include sm() {
+                margin-bottom: $spacer * 2;
+            }
         }
     }
 

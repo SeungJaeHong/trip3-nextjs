@@ -99,13 +99,14 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                                 <MoreLink route={goToNewestLink} title={'Mine uusima kommentaari juurde'} />
                             </div>
                         )}
-                        <ForumPostComments
-                            post={post}
-                            comments={comments}
-                            currentPage={currentPage}
-                            lastPage={lastPage}
-                        />
-
+                        <div className={styles.PostComments}>
+                            <ForumPostComments
+                                post={post}
+                                comments={comments}
+                                currentPage={currentPage}
+                                lastPage={lastPage}
+                            />
+                        </div>
                         {userIsLoggedIn && (
                             <div className={styles.AddComment}>
                                 <BlockTitle title={'Lisa kommentaar'} />
@@ -118,6 +119,9 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                                 />
                             </div>
                         )}
+                        <div className={styles.BodyAd}>
+                            <Ads type={'body'} />
+                        </div>
                     </div>
                     <div className={styles.Sidebar}>
                         <div className={styles.SidebarButtons}>

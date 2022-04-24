@@ -3,12 +3,19 @@
 .ForumPostComments {
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     .Paginator {
         margin-bottom: $spacer * 4;
 
         &.Bottom {
             margin: $spacer * 2 0;
+        }
+
+        @include sm() {
+            &.Bottom {
+                margin-top: 0;
+            }
         }
     }
 
