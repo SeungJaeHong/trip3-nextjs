@@ -4,9 +4,10 @@ import AdsConfig from '../../lib/AdsConfig'
 
 type Props = {
     type: string
+    className?: string
 }
 
-const Ads = ({ type }: Props) => {
+const Ads = ({ type, className }: Props) => {
     const router = useRouter()
     const ad = AdsConfig.find((item) => item.type === type)
 
@@ -28,7 +29,7 @@ const Ads = ({ type }: Props) => {
         }, 200)
     }, [router.query])
 
-    return ad ? <div id={ad.divId} /> : null
+    return ad ? <div id={ad.divId} className={className} /> : null
 }
 
 export default Ads

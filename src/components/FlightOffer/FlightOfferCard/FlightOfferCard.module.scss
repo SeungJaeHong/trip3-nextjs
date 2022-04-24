@@ -81,6 +81,7 @@
 
             @include lg() {
                 padding: $spacer * 2;
+                line-height: 1.6rem;
             }
 
             @include xs() {

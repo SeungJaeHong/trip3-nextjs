@@ -16,6 +16,7 @@ import { useRouter } from 'next/router'
 import FormSelect from '../../Form/FormSelect'
 import RelatedContentBlock from '../../RelatedContentBlock'
 import useUser from '../../../hooks'
+import Ads from '../../Ads'
 
 type Props = {
     type: 'general' | 'buysell' | 'foreign' | 'other' | 'follows'
@@ -194,6 +195,10 @@ const ForumIndexPage = (props: Props) => {
                                     <Button title={'Alusta uut teemat'} route={'/foorum/lisa-uus'} />
                                 </div>
                             )}
+                            <div className={styles.Ads}>
+                                <Ads type={'sidebar-small'} />
+                                <Ads type={'sidebar-large'} />
+                            </div>
                         </div>
                     </div>
                 </div>

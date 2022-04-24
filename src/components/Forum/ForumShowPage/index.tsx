@@ -16,6 +16,7 @@ import { postComment } from '../../../services/comment.service'
 import { toast } from 'react-toastify'
 import useUser from '../../../hooks'
 import RelatedContentBlock from '../../RelatedContentBlock'
+import Ads from "../../Ads";
 
 type Props = {
     post: Content
@@ -124,6 +125,10 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                             {userIsLoggedIn && (
                                 <Button title={'Alusta uut teemat'} light={true} route={'/foorum/lisa-uus'} />
                             )}
+                        </div>
+                        <div className={styles.Ads}>
+                            <Ads type={'sidebar-small'} />
+                            <Ads type={'sidebar-large'} />
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,7 @@ import ForumRow from '../ForumRow'
 import { ForumRowType } from '../../../types'
 import Ads from '../../Ads'
 import {Fragment} from "react";
+import clsx from "clsx";
 
 type Props = {
     items: ForumRowType[]
@@ -21,7 +22,7 @@ const ForumList = ({ items, withAds }: Props) => {
                             <div className={styles.ForumRow}>
                                 <ForumRow {...item} />
                             </div>
-                            <div className={styles.ForumRow}>
+                            <div className={clsx(styles.ForumRow, styles.Ad)}>
                                 <Ads type={'body'} />
                             </div>
                         </Fragment>

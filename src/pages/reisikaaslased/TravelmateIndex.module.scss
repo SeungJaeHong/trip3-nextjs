@@ -104,6 +104,11 @@
             flex-direction: column;
             gap: $spacer * 2;
             width: 100%;
+            max-width: 285px;
+
+            @include sm() {
+                max-width: 300px;
+            }
         }
     }
 }

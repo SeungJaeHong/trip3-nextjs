@@ -10,15 +10,15 @@
     width: 100%;
     margin-top: $spacer * -18;
     padding-bottom: $spacer * 7;
+    gap: $spacer * 8;
 
     @include md() {
         flex-direction: column;
-        gap: $spacer * 3;
+        gap: $spacer * 2;
     }
 
     @include sm() {
         margin-top: $spacer * -20;
-        padding-bottom: $spacer * 4;
     }
 
     .ForumContent {
@@ -48,21 +48,31 @@
     .Sidebar {
         flex: 1;
         flex-direction: column;
-        padding-left: $spacer * 6;
 
         .SidebarButtons {
             display: flex;
             flex-direction: column;
             margin-top: $spacer * 2;
             gap: $spacer * 1.5;
+            margin-bottom: $spacer * 4;
+        }
+
+        .Ads {
+            display: flex;
+            flex-direction: column;
+            gap: $spacer * 2;
+            width: 100%;
+            max-width: 270px;
+
+            @include sm() {
+                max-width: 300px;
+            }
         }
 
         @include md() {
-            padding-left: 0;
-
             .SidebarButtons {
                 max-width: 350px;
-                margin: 0 auto;
+                margin: 0 auto $spacer * 5;
             }
         }
     }

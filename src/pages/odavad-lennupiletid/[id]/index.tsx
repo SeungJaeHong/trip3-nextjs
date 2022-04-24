@@ -96,9 +96,7 @@ const FlightOfferShow = ({ flightObj }: Props) => {
                 <div className={styles.ContentContainer}>
                     <div className={styles.BodyContainer}>
                         <div className={styles.Body}>
-                            <div className={styles.TopAd}>
-                                <Ads type={'body'} />
-                            </div>
+                            <Ads type={'body'} className={styles.TopAd} />
                             <div className={styles.Text}>
                                 {flight.status === 0 && (
                                     <div className={styles.NotPublished}>

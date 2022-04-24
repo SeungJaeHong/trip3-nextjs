@@ -3,6 +3,7 @@ import { FlightOfferRowType } from '../../../types'
 import FlightOfferRow from '../FlightOfferRow'
 import { Fragment } from 'react'
 import Ads from '../../Ads'
+import clsx from "clsx";
 
 type Props = {
     items: FlightOfferRowType[]
@@ -20,7 +21,7 @@ const FlightOfferList = ({ items, withAds }: Props) => {
                             <div className={styles.FlightOfferRow}>
                                 <FlightOfferRow {...item} />
                             </div>
-                            <div className={styles.FlightOfferRow}>
+                            <div className={clsx(styles.FlightOfferRow, styles.Ad)}>
                                 <Ads type={'body'} />
                             </div>
                         </Fragment>

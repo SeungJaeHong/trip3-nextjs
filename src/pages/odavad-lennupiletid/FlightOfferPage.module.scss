@@ -46,6 +46,9 @@
 
 .Sidebar {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 
     @include lg() {
         padding-left: 0;
@@ -55,6 +58,13 @@
         background: $gray-light;
         padding: $spacer * 3;
         margin-bottom: $spacer * 3;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        @include sm() {
+            display: none;
+        }
 
         .DescriptionFirstPart {
             color: $gray-dark-hover;
@@ -79,9 +89,14 @@
     .Ads {
         display: flex;
         width: 100%;
-        max-width: 270px;
+        max-width: 275px;
         flex-direction: column;
         gap: $spacer * 2;
+        overflow: hidden;
+
+        @include sm() {
+            max-width: 300px;
+        }
     }
 }
 
