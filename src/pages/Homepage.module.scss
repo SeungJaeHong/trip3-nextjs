@@ -194,6 +194,10 @@
                 flex-direction: column;
                 gap: $spacer * 2;
                 overflow: hidden;
+
+                @include sm() {
+                    max-width: unset;
+                }
             }
         }
     }

@@ -19,6 +19,7 @@ import { useRouter } from 'next/router'
 import Alert from '../../../components/Alert'
 import { postComment } from '../../../services/comment.service'
 import RelatedContentBlock from '../../../components/RelatedContentBlock'
+import Ads from '../../../components/Ads'
 
 type Props = {
     newsObj: NewsContent
@@ -123,7 +124,10 @@ const NewsShow = ({ newsObj }: Props) => {
                                 <Alert title={'Uudis ei ole avalikustatud!'} type={'warning'} />
                             </div>
                         )}
-                        <div className={styles.Body} dangerouslySetInnerHTML={{ __html: news.body }} />
+                        <div className={styles.BodyWrapper}>
+                            <Ads type={'body'} className={styles.TopAd} />
+                            <div className={styles.Body} dangerouslySetInnerHTML={{ __html: news.body }} />
+                        </div>
                         <div className={styles.Comments}>
                             {comments?.map((comment: Comment) => {
                                 return <ForumComment key={comment.id} item={comment} type={'news'} />
@@ -142,7 +146,12 @@ const NewsShow = ({ newsObj }: Props) => {
                             </div>
                         )}
                     </div>
-                    <div className={styles.SidebarShow}>Sidebar</div>
+                    <div className={styles.Sidebar}>
+                        <div className={styles.Ads}>
+                            <Ads type={'sidebar-small'} />
+                            <Ads type={'sidebar-large'} />
+                        </div>
+                    </div>
                 </div>
             </div>
             <RelatedContentBlock type={'news'} />

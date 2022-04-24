@@ -15,6 +15,7 @@ import ApiClientSSR from '../../lib/ApiClientSSR'
 import useUser from '../../hooks'
 import FormSelect from '../../components/Form/FormSelect'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
+import Ads from '../../components/Ads'
 
 type Props = {
     news?: NewsCardType[]
@@ -184,6 +185,10 @@ const NewsIndex = (props: Props) => {
                                     <Button title={'Lisa uudis'} route={'/uudised/lisa-uus'} />
                                 </div>
                             )}
+                        </div>
+                        <div className={styles.Ads}>
+                            <Ads type={'sidebar-small'} />
+                            <Ads type={'sidebar-large'} />
                         </div>
                     </div>
                 </div>
