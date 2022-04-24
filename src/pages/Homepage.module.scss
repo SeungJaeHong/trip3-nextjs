@@ -163,7 +163,6 @@
             .ForumLinks {
                 display: flex;
                 flex-direction: column;
-                margin-bottom: $spacer * 2;
 
                 .ForumLink {
                     margin-bottom: $spacer * 4;
@@ -180,7 +179,7 @@
             .AddNewTopic {
                 max-width: 260px;
                 width: 100%;
-                margin-bottom: $spacer * 2;
+                margin-bottom: $spacer * 3;
 
                 @include sm() {
                     max-width: none;
