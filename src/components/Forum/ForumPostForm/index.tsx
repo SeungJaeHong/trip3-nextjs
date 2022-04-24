@@ -14,6 +14,7 @@ import { Destination, ForumPostType, Topic } from '../../../types'
 import FormMultiSelect from '../../Form/FormMultiSelect'
 import { addPost, updatePost } from '../../../services/forum.service'
 import { useRouter } from 'next/router'
+import Button from '../../Button'
 
 type Inputs = {
     category: string
@@ -240,13 +241,18 @@ const ForumPostForm = ({ post, destinations, topics }: Props) => {
                             }}
                         />
                     </div>
-                    <div className={styles.SubmitButton}>
-                        <SubmitButton
-                            onClick={handleSubmit(onSubmit)}
-                            type={'button'}
-                            title={'Salvesta'}
-                            submitting={isSubmitting}
-                        />
+                    <div className={styles.Buttons}>
+                        <div className={styles.Button}>
+                            <Button title={'Tagasi'} cancel={true} onClick={() => router.back()} />
+                        </div>
+                        <div className={styles.Button}>
+                            <SubmitButton
+                                onClick={handleSubmit(onSubmit)}
+                                type={'button'}
+                                title={'Salvesta'}
+                                submitting={isSubmitting}
+                            />
+                        </div>
                     </div>
                 </form>
             </div>
