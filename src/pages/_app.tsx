@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
 import Script from 'next/script'
 import AdsConfig from '../lib/AdsConfig'
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
@@ -29,6 +30,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                 pauseOnHover={false}
                 theme={'colored'}
             />
+            <Head>
+                <link rel="shortcut icon" href="/favicon.ico" />
+                <title>Trip.ee | Eesti reisiportaal</title>
+            </Head>
             <Component {...pageProps} />
             <Script
                 id={'ads-js'}
