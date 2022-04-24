@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import styles from './ForumPostComments.module.scss'
-import { Comment, Content } from '../../../types'
+import { Comment, ForumPostType } from '../../../types'
 import ForumComment from '../ForumComment'
 import PagePaginator from '../../Paginator/PagePaginator'
 import { getForumUrlByTypeAndSlug } from '../../../helpers'
 import clsx from 'clsx'
 
 type Props = {
-    post: Content
+    post: ForumPostType
     comments?: Comment[]
     currentPage: number
     lastPage: number

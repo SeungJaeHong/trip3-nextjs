@@ -1,16 +1,16 @@
-import React from "react"
-import styles from "./AdminForumForm.module.scss"
-import FormInput from "../../../Form/FormInput"
-import SubmitButton from "../../../Form/SubmitButton"
-import {toast} from 'react-toastify'
-import {setFormErrors} from "../../../../helpers"
-import {SubmitHandler, useForm, Controller} from "react-hook-form"
-import * as yup from "yup"
+import React from 'react'
+import styles from './AdminForumForm.module.scss'
+import FormInput from '../../../Form/FormInput'
+import SubmitButton from '../../../Form/SubmitButton'
+import { toast } from 'react-toastify'
+import { setFormErrors } from '../../../../helpers'
+import { SubmitHandler, useForm, Controller } from 'react-hook-form'
+import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import FormRichTextEditor from "../../../Form/FormRichTextEditor"
-import {Content} from "../../../../types"
-import {addPost, updatePost} from "../../../../services/admin.service"
-import {useRouter} from 'next/router'
+import FormRichTextEditor from '../../../Form/FormRichTextEditor'
+import { ForumPostType } from '../../../../types'
+import { addPost, updatePost } from '../../../../services/admin.service'
+import { useRouter } from 'next/router'
 
 type Inputs = {
     title: string
@@ -18,32 +18,41 @@ type Inputs = {
 }
 
 type Props = {
-    post?: Content
+    post?: ForumPostType
 }
 
-const AdminForumForm = ({post}: Props) => {
+const AdminForumForm = ({ post }: Props) => {
     const router = useRouter()
-    const forumPostSchema = yup.object().shape({
-        title: yup.string().required('Pealkiri on kohustuslik'),
-        body: yup.string().required('Sisu on kohustuslik'),
-    }).required()
+    const forumPostSchema = yup
+        .object()
+        .shape({
+            title: yup.string().required('Pealkiri on kohustuslik'),
+            body: yup.string().required('Sisu on kohustuslik'),
+        })
+        .required()
 
-    const { register, handleSubmit, control, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
+    const {
+        register,
+        handleSubmit,
+        control,
+        setError,
+        formState: { errors, isSubmitting },
+    } = useForm<Inputs>({
         resolver: yupResolver(forumPostSchema),
         defaultValues: {
             title: post ? post.title : '',
             body: post ? post.body : '',
-        }
+        },
     })
 
     const savePost = async (values: Inputs): Promise<any> => {
         if (post) {
-            return await updatePost(post, values).then(res => {
+            return await updatePost(post, values).then((res) => {
                 router.push('/admin/forum/' + post.id)
                 toast.success('Postitus muudetud!')
             })
         } else {
-            return await addPost(values).then(res => {
+            return await addPost(values).then((res) => {
                 router.push('/admin/forum')
                 toast.success('Uus postitus loodud!')
             })
@@ -51,7 +60,7 @@ const AdminForumForm = ({post}: Props) => {
     }
 
     const onSubmit: SubmitHandler<Inputs> = async (values: Inputs) => {
-        await savePost(values).catch(err => {
+        await savePost(values).catch((err) => {
             if (err.response?.data?.errors) {
                 setFormErrors(err.response.data.errors, setError)
             }
@@ -71,7 +80,8 @@ const AdminForumForm = ({post}: Props) => {
                             disabled={isSubmitting}
                             required={true}
                             error={errors.title?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
                     <div className={styles.FormInput}>
                         <Controller
@@ -96,7 +106,8 @@ const AdminForumForm = ({post}: Props) => {
                             onClick={handleSubmit(onSubmit)}
                             type={'button'}
                             title={'Salvesta'}
-                            submitting={isSubmitting} />
+                            submitting={isSubmitting}
+                        />
                     </div>
                 </form>
             </div>

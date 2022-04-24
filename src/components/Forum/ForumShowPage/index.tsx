@@ -1,4 +1,4 @@
-import { Content } from '../../../types'
+import { ForumPostType } from '../../../types'
 import React, { Fragment, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Header from '../../Header'
@@ -16,11 +16,11 @@ import { postComment } from '../../../services/comment.service'
 import { toast } from 'react-toastify'
 import useUser from '../../../hooks'
 import RelatedContentBlock from '../../RelatedContentBlock'
-import Ads from "../../Ads";
-import clsx from "clsx";
+import Ads from '../../Ads'
+import clsx from 'clsx'
 
 type Props = {
-    post: Content
+    post: ForumPostType
     lastCommentId?: number
     currentPage: number
     lastPage: number
@@ -93,12 +93,14 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                 <div className={styles.Content}>
                     <div className={styles.ForumContent}>
                         <div className={styles.ForumPost}>
-                            <ForumPost {...post} />
+                            <ForumPost item={post} />
                         </div>
                         {goToNewestLink.length > 1 && (
-                            <div className={clsx(styles.LatestCommentLink, {
-                                [styles.HasPaginator]: lastPage > 1
-                            })}>
+                            <div
+                                className={clsx(styles.LatestCommentLink, {
+                                    [styles.HasPaginator]: lastPage > 1,
+                                })}
+                            >
                                 <MoreLink route={goToNewestLink} title={'Mine uusima kommentaari juurde'} />
                             </div>
                         )}

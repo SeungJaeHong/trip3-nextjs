@@ -92,7 +92,7 @@ export interface UserComment extends Comment {
     }
 }
 
-export type Image = {
+export interface Image {
     id: number
     title: string
     slug: string
@@ -104,7 +104,7 @@ export type Image = {
     destinations?: Destination[]
 }
 
-export type Content = {
+export interface ForumPostType {
     id: number
     title: string
     body: string
@@ -114,9 +114,6 @@ export type Content = {
     status: number
     createdAt: string
     updatedAt?: string
-    //start_at?: string
-    //end_at?: string
-    //duration?: string
     likes?: number
     dislikes?: number
     price?: number
@@ -242,10 +239,10 @@ export type NewsRowType = {
 }
 
 export type ShortNewsListItemType = {
-    id: number;
-    title: string;
-    slug: string;
-    createdAt: string;
+    id: number
+    title: string
+    slug: string
+    createdAt: string
 }
 
 export type FlightOfferRowType = {

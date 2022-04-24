@@ -1,7 +1,7 @@
 import styles from "./AdminForumPost.module.scss"
 import React, {useEffect, useState} from "react"
 import {getForumPostData} from "../../../../services/admin.service"
-import {Comment, Content} from "../../../../types"
+import {Comment, ForumPostType} from "../../../../types"
 import {useRouter} from "next/router"
 import LoadingSpinner2 from "../../../LoadingSpinner2"
 import ForumPost from "../../../Forum/ForumPost"
@@ -16,14 +16,14 @@ import MoreLink from "../../../MoreLink"
 import {scrollToHash} from "../../../../helpers"
 
 type ForumResponse = {
-    post: Content
+    post: ForumPostType
     lastCommentId: number
     lastPage: number
 }
 
 const AdminForumPost = () => {
     const router = useRouter()
-    const [post, setPost] = useState<Content>()
+    const [post, setPost] = useState<ForumPostType>()
     const [comments, setComments] = useState<Comment[]>([])
     const [loading, setLoading] = useState<boolean>(false)
     const [lastPage, setLastPage] = useState<number>(1)
@@ -97,7 +97,7 @@ const AdminForumPost = () => {
     return (
         <div className={styles.AdminForumPost}>
             <div className={styles.ForumPost}>
-                <ForumPost {...post} />
+                <ForumPost item={post} showBreadCrumbs={false} />
             </div>
             {latestCommentLink.length > 0 &&
                 <div className={styles.LatestCommentLink}>

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import styles from './ForumPost.module.scss'
-import { Content, Destination, Topic } from '../../../types'
+import {Destination, ForumPostType, Topic} from '../../../types'
 import UserAvatar from '../../User/UserAvatar'
 import ThumbsUpIcon from '../../../icons/ThumbsUpIcon'
 import clsx from 'clsx'
@@ -13,8 +13,13 @@ import { toast } from 'react-toastify'
 import Alert from '../../Alert'
 import useUser from '../../../hooks'
 
-const ForumPost = (item: Content) => {
-    const [post, setPost] = useState<Content>(item)
+type Props = {
+    item: ForumPostType
+    showBreadCrumbs: boolean
+}
+
+const ForumPost = ({item, showBreadCrumbs}: Props) => {
+    const [post, setPost] = useState<ForumPostType>(item)
     const { userIsLoggedIn, user } = useUser()
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const isPostOwner = item.user.id === user?.id
@@ -130,6 +135,10 @@ const ForumPost = (item: Content) => {
             </div>
         </div>
     )
+}
+
+ForumPost.defaultProps = {
+    showBreadCrumbs: true
 }
 
 export default ForumPost

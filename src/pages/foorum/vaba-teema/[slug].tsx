@@ -1,13 +1,13 @@
 import React from 'react'
-import {GetServerSideProps} from 'next'
-import {Content} from "../../../types"
-import ForumShowPage from "../../../components/Forum/ForumShowPage"
-import ApiClientSSR from "../../../lib/ApiClientSSR";
+import { GetServerSideProps } from 'next'
+import { ForumPostType } from '../../../types'
+import ForumShowPage from '../../../components/Forum/ForumShowPage'
+import ApiClientSSR from '../../../lib/ApiClientSSR'
 
 type Props = {
-    post: Content,
+    post: ForumPostType
     lastCommentId?: number
-    currentPage: number,
+    currentPage: number
     lastPage: number
 }
 
@@ -33,11 +33,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         }
 
         return {
-            props: data
+            props: data,
         }
     } catch (e) {
         return {
-            notFound: true
+            notFound: true,
         }
     }
 }

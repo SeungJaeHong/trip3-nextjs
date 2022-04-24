@@ -10,7 +10,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import FormRadioButton from '../../Form/FormRadioButton'
 import FormRichTextEditor from '../../Form/FormRichTextEditor'
-import { Content, Destination, Topic } from '../../../types'
+import { Destination, ForumPostType, Topic } from '../../../types'
 import FormMultiSelect from '../../Form/FormMultiSelect'
 import { addPost, updatePost } from '../../../services/forum.service'
 import { useRouter } from 'next/router'
@@ -24,7 +24,7 @@ type Inputs = {
 }
 
 type Props = {
-    post?: Content
+    post?: ForumPostType
     destinations: Destination[]
     topics: Topic[]
 }
@@ -76,29 +76,33 @@ const ForumPostForm = ({ post, destinations, topics }: Props) => {
         }
 
         if (post) {
-            await updatePost(post, formData).then(res => {
-                if (res.data.type === 'forum') {
-                    router.push('/')
-                } else {
-                    const url = getForumUrlByTypeAndSlug(res.data.type, res.data.slug)
-                    router.push(url)
-                }
-                toast.success('Postitus muudetud!')
-            }).catch(e => {
-                toast.error('Postituse muutmine ebaõnnestus!')
-            })
+            await updatePost(post, formData)
+                .then((res) => {
+                    if (res.data.type === 'forum') {
+                        router.push('/')
+                    } else {
+                        const url = getForumUrlByTypeAndSlug(res.data.type, res.data.slug)
+                        router.push(url)
+                    }
+                    toast.success('Postitus muudetud!')
+                })
+                .catch((e) => {
+                    toast.error('Postituse muutmine ebaõnnestus!')
+                })
         } else {
-            await addPost(formData).then(res => {
-                if (res.data.type === 'forum') {
-                    router.push('/')
-                } else {
-                    const url = getForumUrlByType(res.data.type)
-                    router.push(url)
-                }
-                toast.success('Uus postitus loodud!')
-            }).catch(e => {
-                toast.error('Postituse loomine ebaõnnestus!')
-            })
+            await addPost(formData)
+                .then((res) => {
+                    if (res.data.type === 'forum') {
+                        router.push('/')
+                    } else {
+                        const url = getForumUrlByType(res.data.type)
+                        router.push(url)
+                    }
+                    toast.success('Uus postitus loodud!')
+                })
+                .catch((e) => {
+                    toast.error('Postituse loomine ebaõnnestus!')
+                })
         }
     }
 

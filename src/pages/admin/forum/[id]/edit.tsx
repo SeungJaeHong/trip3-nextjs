@@ -1,18 +1,18 @@
-import React, {useEffect, useState} from 'react'
-import AdminLayout from "../../../../layouts/AdminLayout"
-import {withAdminAuth} from "../../../../hoc/withAdminAuth"
-import AdminForumForm from "../../../../components/Admin/Forum/Form"
-import {getForumPostById} from "../../../../services/admin.service";
-import {useRouter} from "next/router";
-import {Content} from "../../../../types";
-import LoadingSpinner2 from "../../../../components/LoadingSpinner2";
+import React, { useEffect, useState } from 'react'
+import AdminLayout from '../../../../layouts/AdminLayout'
+import { withAdminAuth } from '../../../../hoc/withAdminAuth'
+import AdminForumForm from '../../../../components/Admin/Forum/Form'
+import { getForumPostById } from '../../../../services/admin.service'
+import { useRouter } from 'next/router'
+import { ForumPostType } from '../../../../types'
+import LoadingSpinner2 from '../../../../components/LoadingSpinner2'
 import styles from '../../../../layouts/AdminLayout/AdminLayout.module.scss'
 
 const AdminForumPostEditPage = () => {
-    const [post, setPost] = useState<Content>()
+    const [post, setPost] = useState<ForumPostType>()
     const [loading, setLoading] = useState<boolean>(false)
     const router = useRouter()
-    const {id} = router.query
+    const { id } = router.query
 
     useEffect(() => {
         try {
