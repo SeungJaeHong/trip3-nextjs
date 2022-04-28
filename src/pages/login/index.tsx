@@ -41,7 +41,7 @@ const LoginPage = (props: any) => {
                         <LoginForm />
                     </div>
                     <div className={styles.ForgotPassword}>
-                        Ei mäleta oma parooli? <Link href={'/reset_password'}><a className={styles.ForgotPasswordLink}>Taasta oma parool siin</a></Link>
+                        Ei mäleta oma parooli? <Link href={'/forgot-password'}><a className={styles.ForgotPasswordLink}>Taasta oma parool siin</a></Link>
                     </div>
                 </div>
             </div>

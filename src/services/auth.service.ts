@@ -1,6 +1,6 @@
-import ApiClient from "../lib/ApiClient"
-import {AxiosResponse} from "axios"
-import {User} from "../types"
+import ApiClient from '../lib/ApiClient'
+import { AxiosResponse } from 'axios'
+import { User } from '../types'
 
 export const getUser = async (): Promise<User> => {
     try {
@@ -15,7 +15,7 @@ export const login = async (name: string, password: string, remember_me: boolean
     return await ApiClient.post('/auth/login', {
         name,
         password,
-        remember_me
+        remember_me,
     })
 }
 
@@ -34,6 +34,12 @@ export const register = async (name: string, email: string, password: string): P
     return await ApiClient.post('/auth/register', {
         name,
         password,
-        email
+        email,
+    })
+}
+
+export const forgotPassword = async (email: string): Promise<AxiosResponse> => {
+    return await ApiClient.post('/auth/forgot-password', {
+        email,
     })
 }

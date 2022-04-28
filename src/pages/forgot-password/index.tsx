@@ -1,16 +1,15 @@
 import React, { Fragment } from 'react'
-import Link from 'next/link'
 import Navbar from '../../components/Navbar'
-import styles from './Register.module.scss'
+import styles from './ResetPassword.module.scss'
 import clsx from 'clsx'
 import Footer from '../../components/Footer'
 import containerStyle from '../../styles/containers.module.scss'
 import BackgroundMap from '../../components/BackgroundMap'
-import RegisterForm from '../../components/RegisterForm'
 import { GetServerSideProps } from 'next'
 import ApiClientSSR from '../../lib/ApiClientSSR'
+import ResetPasswordForm from '../../components/ResetPasswordForm'
 
-const RegisterPage = () => {
+const ResetPasswordPage = () => {
     return (
         <Fragment>
             <div className={styles.Container}>
@@ -19,24 +18,10 @@ const RegisterPage = () => {
                     <div className={clsx(styles.Navbar)}>
                         <Navbar darkMode={true} />
                     </div>
-                    <div className={styles.Title}>Registreeri</div>
-                    <div className={styles.RegisterTitle}>Liitu Trip.ee reisihuviliste seltskonnaga</div>
+                    <div className={styles.Title}>Ei mäleta oma parooli?</div>
+                    <div className={styles.RegisterTitle}>Sisesta oma e-mail ja me saadame sulle kinnituslingi</div>
                     <div className={styles.Form}>
-                        <RegisterForm />
-                    </div>
-                    <div className={styles.BottomInfo}>
-                        <div className={styles.ExtraInfo}>
-                            Trip.ee keskkonnaga liitudes nõustun ma
-                            <Link href={'/kasutustingimused'}>
-                                <a className={styles.ExtraInfoLink}>kasutustingimustega</a>
-                            </Link>
-                        </div>
-                        <div className={styles.ExtraInfo}>
-                            Kasutaja olemas?
-                            <Link href={'/login'}>
-                                <a className={styles.ExtraInfoLink}>Logi sisse</a>
-                            </Link>
-                        </div>
+                        <ResetPasswordForm />
                     </div>
                 </div>
             </div>
@@ -61,4 +46,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-export default RegisterPage
+export default ResetPasswordPage
