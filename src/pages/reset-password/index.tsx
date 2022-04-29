@@ -7,8 +7,9 @@ import containerStyle from '../../styles/containers.module.scss'
 import BackgroundMap from '../../components/BackgroundMap'
 import { GetServerSideProps } from 'next'
 import ApiClientSSR from '../../lib/ApiClientSSR'
+import ForgotPasswordForm from '../../components/ForgotPasswordForm'
 
-const ResetPasswordPage = () => {
+const ForgotPasswordPage = () => {
     return (
         <Fragment>
             <div className={styles.Container}>
@@ -17,9 +18,10 @@ const ResetPasswordPage = () => {
                     <div className={clsx(styles.Navbar)}>
                         <Navbar darkMode={true} />
                     </div>
-                    <div className={styles.Title}>Vali uus parool</div>
+                    <div className={styles.Title}>Ei mäleta oma parooli?</div>
+                    <div className={styles.InfoTitle}>Sisesta oma e-mail ja me saadame sulle kinnituslingi</div>
                     <div className={styles.Form}>
-                        Form
+                        <ForgotPasswordForm />
                     </div>
                 </div>
             </div>
@@ -44,4 +46,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-export default ResetPasswordPage
+export default ForgotPasswordPage

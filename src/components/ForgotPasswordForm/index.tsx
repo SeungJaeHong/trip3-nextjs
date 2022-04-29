@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react'
-import styles from './ResetPasswordForm.module.scss'
+import styles from './ForgotPasswordForm.module.scss'
 import Router, { useRouter } from 'next/router'
 import FormInput from '../Form/FormInput'
 import SubmitButton from '../Form/SubmitButton'
@@ -13,21 +13,18 @@ import { setFormErrors } from '../../helpers'
 
 type Inputs = {
     email: string
-    password: string
-    password_confirmation: string
 }
 
-const ResetPasswordForm = () => {
+const ForgotPasswordForm = () => {
     const router = useRouter()
-    const { userIsLoggedIn } = useUser()
 
-    const resetSchema = yup.object().shape({
-        email: yup.string().email('E-mail ei ole korrektne').required('E-mail on kohustuslik'),
-        password: yup.string().required('Parool on kohustuslik'),
-        password_confirmation: yup.string()
-            .required('Parooli kordamine on kohustuslik')
-            .oneOf([yup.ref('password'), null], 'Paroolid ei ühti'),
-    }).required()
+    const { userIsLoggedIn } = useUser()
+    const loginSchema = yup
+        .object()
+        .shape({
+            email: yup.string().email('Sisesta e-mail').required('E-mail on kohustuslik'),
+        })
+        .required()
 
     const {
         register,
@@ -35,7 +32,7 @@ const ResetPasswordForm = () => {
         setError,
         formState: { errors, isSubmitting },
     } = useForm<Inputs>({
-        resolver: yupResolver(resetSchema),
+        resolver: yupResolver(loginSchema),
     })
 
     useEffect(() => {
@@ -44,12 +41,9 @@ const ResetPasswordForm = () => {
         }
     }, [userIsLoggedIn])
 
-    const handleFormSubmit: SubmitHandler<Inputs> = async (values: Inputs) => {
-        const { email, password } = values
-
-        console.log(values)
-
-        /*await forgotPassword(email)
+    const handleSend: SubmitHandler<Inputs> = async (values: Inputs) => {
+        const { email } = values
+        await forgotPassword(email)
             .then((res) => {
                 toast.success('E-mail saadetud!')
                 router.push('/login')
@@ -65,14 +59,14 @@ const ResetPasswordForm = () => {
                         } else toast.error('E-mail saatmine ebaõnnestus!')
                     }
                 } else toast.error('E-mail saatmine ebaõnnestus!')
-            })*/
+            })
     }
 
     return (
         <Fragment>
-            <div className={styles.ResetPasswordForm}>
+            <div className={styles.ForgotPasswordForm}>
                 <div className={styles.FormContainer}>
-                    <form onSubmit={handleSubmit(handleFormSubmit)}>
+                    <form onSubmit={handleSubmit(handleSend)}>
                         <div className={styles.FormInput}>
                             <FormInput
                                 name={'email'}
@@ -85,30 +79,8 @@ const ResetPasswordForm = () => {
                                 register={register}
                             />
                         </div>
-                        <div className={styles.FormInput}>
-                            <FormInput
-                                name={'password'}
-                                id={'password'}
-                                label={'Parool'}
-                                type={'password'}
-                                disabled={isSubmitting}
-                                required={true}
-                                error={errors.password?.message}
-                                register={register} />
-                        </div>
-                        <div className={styles.FormInput}>
-                            <FormInput
-                                name={'password_confirmation'}
-                                id={'password_confirmation'}
-                                label={'Parool uuesti'}
-                                type={'password'}
-                                disabled={isSubmitting}
-                                required={true}
-                                error={errors.password_confirmation?.message}
-                                register={register} />
-                        </div>
                         <div className={styles.SubmitButton}>
-                            <SubmitButton title={'Kinnita'} submitting={isSubmitting} />
+                            <SubmitButton title={'Saada'} submitting={isSubmitting} />
                         </div>
                     </form>
                 </div>
@@ -117,4 +89,4 @@ const ResetPasswordForm = () => {
     )
 }
 
-export default ResetPasswordForm
+export default ForgotPasswordForm
