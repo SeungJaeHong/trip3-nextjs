@@ -43,3 +43,11 @@ export const forgotPassword = async (email: string): Promise<AxiosResponse> => {
         email,
     })
 }
+
+export const resetPassword = async (email: string, password: string, token: string): Promise<AxiosResponse> => {
+    return await ApiClient.post('/auth/reset-password', {
+        email,
+        password,
+        token
+    })
+}

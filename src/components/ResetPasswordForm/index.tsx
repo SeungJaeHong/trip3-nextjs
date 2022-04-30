@@ -7,7 +7,7 @@ import useUser from '../../hooks'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { forgotPassword } from '../../services/auth.service'
+import { resetPassword } from '../../services/auth.service'
 import { toast } from 'react-toastify'
 import { setFormErrors } from '../../helpers'
 
@@ -17,17 +17,25 @@ type Inputs = {
     password_confirmation: string
 }
 
-const ResetPasswordForm = () => {
+type Props = {
+    disabled: boolean
+}
+
+const ResetPasswordForm = ({ disabled }: Props) => {
     const router = useRouter()
     const { userIsLoggedIn } = useUser()
 
-    const resetSchema = yup.object().shape({
-        email: yup.string().email('E-mail ei ole korrektne').required('E-mail on kohustuslik'),
-        password: yup.string().required('Parool on kohustuslik'),
-        password_confirmation: yup.string()
-            .required('Parooli kordamine on kohustuslik')
-            .oneOf([yup.ref('password'), null], 'Paroolid ei ühti'),
-    }).required()
+    const resetSchema = yup
+        .object()
+        .shape({
+            email: yup.string().email('E-mail ei ole korrektne').required('E-mail on kohustuslik'),
+            password: yup.string().required('Parool on kohustuslik').min(8, 'Vähemalt 8 tähemärki'),
+            password_confirmation: yup
+                .string()
+                .required('Parooli kordamine on kohustuslik')
+                .oneOf([yup.ref('password'), null], 'Paroolid ei ühti'),
+        })
+        .required()
 
     const {
         register,
@@ -45,27 +53,21 @@ const ResetPasswordForm = () => {
     }, [userIsLoggedIn])
 
     const handleFormSubmit: SubmitHandler<Inputs> = async (values: Inputs) => {
+        if (disabled) return false
+
         const { email, password } = values
-
-        console.log(values)
-
-        /*await forgotPassword(email)
+        const token = String(router.query?.token)
+        await resetPassword(email, password, token)
             .then((res) => {
-                toast.success('E-mail saadetud!')
-                router.push('/login')
+                toast.success('Parool muudetud!')
+                //router.push('/login')
             })
             .catch((err) => {
-                if (err.response?.data) {
-                    if (err.response?.data?.errors) {
-                        setFormErrors(err.response.data.errors, setError)
-                        toast.error('E-mail saatmine ebaõnnestus!')
-                    } else {
-                        if (err.response.data === 'passwords.user') {
-                            toast.error('Sisestatud e-mailiga kasutajat ei leitud!')
-                        } else toast.error('E-mail saatmine ebaõnnestus!')
-                    }
-                } else toast.error('E-mail saatmine ebaõnnestus!')
-            })*/
+                if (err.response?.data?.errors) {
+                    setFormErrors(err.response.data.errors, setError)
+                }
+                toast.error('Parooli taastamine ebaõnnestus!')
+            })
     }
 
     return (
@@ -94,7 +96,8 @@ const ResetPasswordForm = () => {
                                 disabled={isSubmitting}
                                 required={true}
                                 error={errors.password?.message}
-                                register={register} />
+                                register={register}
+                            />
                         </div>
                         <div className={styles.FormInput}>
                             <FormInput
@@ -105,16 +108,21 @@ const ResetPasswordForm = () => {
                                 disabled={isSubmitting}
                                 required={true}
                                 error={errors.password_confirmation?.message}
-                                register={register} />
+                                register={register}
+                            />
                         </div>
                         <div className={styles.SubmitButton}>
-                            <SubmitButton title={'Kinnita'} submitting={isSubmitting} />
+                            <SubmitButton title={'Kinnita'} submitting={isSubmitting} disabled={disabled} />
                         </div>
                     </form>
                 </div>
             </div>
         </Fragment>
     )
+}
+
+ResetPasswordForm.defaultProps = {
+    disabled: false,
 }
 
 export default ResetPasswordForm
