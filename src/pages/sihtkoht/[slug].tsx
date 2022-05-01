@@ -17,6 +17,7 @@ import ApiClientSSR from '../../lib/ApiClientSSR'
 import DotMap from '../../components/DotMap'
 import DestinationImageGallery from '../../components/Destination/DestinationImageGallery'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
+import Ads from "../../components/Ads";
 
 type Props = {
     destination: DestinationContent
@@ -137,7 +138,7 @@ const DestinationPage = ({ destination }: Props) => {
                                     </tbody>
                                 </table>
 
-                                {renderDescription()}
+                                {/*{renderDescription()}*/}
                             </div>
                             <div className={styles.Map}>
                                 <DotMap destination={destination} />
@@ -173,7 +174,12 @@ const DestinationPage = ({ destination }: Props) => {
                             <MoreLink route={'/foorum/uldfoorum'} title={'Kõik positused'} />
                         </div>
                     </div>
-                    <div className={styles.AdsContent}>Sidebar</div>
+                    <div className={styles.Sidebar}>
+                        <div className={styles.Ads}>
+                            <Ads type={'sidebar-small'} />
+                            <Ads type={'sidebar-large'} />
+                        </div>
+                    </div>
                 </div>
             </div>
             <RelatedContentBlock type={'destination'} destinationId={destination.id} />

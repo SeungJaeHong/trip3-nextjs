@@ -304,9 +304,27 @@
         }
     }
 
-    .AdsContent {
+    .Sidebar {
         flex: 1;
         display: flex;
+
+        @include md() {
+            flex-direction: column;
+        }
+
+        .Ads {
+            display: flex;
+            width: 100%;
+            max-width: 275px;
+            flex-direction: column;
+            gap: $spacer * 2;
+            overflow: hidden;
+            margin-top: $spacer * 2;
+
+            @include sm() {
+                max-width: 300px;
+            }
+        }
     }
 }
 
