@@ -24,6 +24,7 @@ type Props = {
 const ResetPasswordForm = ({ disabled }: Props) => {
     const router = useRouter()
     const { userIsLoggedIn } = useUser()
+    const email = String(router.query?.email)
 
     const resetSchema = yup
         .object()
@@ -44,6 +45,9 @@ const ResetPasswordForm = ({ disabled }: Props) => {
         formState: { errors, isSubmitting },
     } = useForm<Inputs>({
         resolver: yupResolver(resetSchema),
+        defaultValues: {
+            email: email
+        }
     })
 
     useEffect(() => {
@@ -60,7 +64,7 @@ const ResetPasswordForm = ({ disabled }: Props) => {
         await resetPassword(email, password, token)
             .then((res) => {
                 toast.success('Parool muudetud!')
-                //router.push('/login')
+                router.push('/')
             })
             .catch((err) => {
                 if (err.response?.data?.errors) {

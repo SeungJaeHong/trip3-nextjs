@@ -23,10 +23,11 @@ export const logout = async (): Promise<AxiosResponse> => {
     return await ApiClient.post('/auth/logout')
 }
 
-export const createUserOrLogin = async (name: string, email: string): Promise<AxiosResponse> => {
+export const createUserOrLogin = async (name: string, email: string, imageUrl?: string): Promise<AxiosResponse> => {
     return await ApiClient.post('/auth/login_or_create', {
         name,
         email,
+        imageUrl
     })
 }
 

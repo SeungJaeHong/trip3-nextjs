@@ -1,38 +1,36 @@
-import React, {Fragment} from "react"
+import React, { Fragment } from 'react'
 import Script from 'next/script'
-import styles from "./GoogleLogin.module.scss"
-import {toast} from 'react-toastify'
-import {createUserOrLogin} from "../../services/auth.service"
-import useUser from "../../hooks"
+import styles from './GoogleLogin.module.scss'
+import { toast } from 'react-toastify'
+import { createUserOrLogin } from '../../services/auth.service'
+import useUser from '../../hooks'
+import jwt_decode from 'jwt-decode'
 
 const GoogleLogin = () => {
-    const {mutate } = useUser()
+    const { mutate } = useUser()
 
-    const handleError = (err: any) => {
-        toast.error('Sisselogimine ebaõnnestus!')
-    }
-
-    const handleSuccess = async (googleUser: any) => {
-        const profile = googleUser.getBasicProfile()
-        const name = profile.getName()
-        const email = profile.getEmail()
-        const image = profile.getImageUrl() //NB! 96 is the image size there!! -> A=s96-c
-
-        await createUserOrLogin(name, email).then(res => {
-            mutate(res.data)
-            toast.success('Tere, ' + res.data.name + '!')
-        }).catch(err => {
-            toast.error('Sisselogimine ebaõnnestus!')
+    const signInGoogle = () => {
+        google.accounts.id.prompt((notification) => {
+            if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+                toast.error('Google sisselogimine ebaõnnestus!')
+            }
         })
     }
 
-    const signInGoogle = () => {
-        // @ts-ignore
-        const auth2 = gapi.auth2.getAuthInstance()
-        auth2.signIn().then(
-            (res: any) => handleSuccess(res),
-            (err: any) => handleError(err)
-        )
+    const handleResponse = async (response: any) => {
+        const profile: any = jwt_decode(response.credential)
+        const name = profile.name
+        const email = profile.email
+        const imageUrl = profile.picture ? profile.picture.replace('=s96', '=s180') : undefined
+
+        await createUserOrLogin(name, email, imageUrl)
+            .then((res) => {
+                mutate(res.data)
+                toast.success('Tere, ' + res.data.name + '!')
+            })
+            .catch((err) => {
+                toast.error('Sisselogimine ebaõnnestus!')
+            })
     }
 
     return (
@@ -42,14 +40,11 @@ const GoogleLogin = () => {
             </div>
 
             <Script
-                src={"https://apis.google.com/js/api.js"}
+                src={'https://accounts.google.com/gsi/client'}
                 onLoad={() => {
-                    // @ts-ignore
-                    gapi.load('auth2', function() {
-                        // @ts-ignore
-                        gapi.auth2.init({
-                            client_id: process.env.GOOGLE_CLIENT_ID,
-                        })
+                    google.accounts.id.initialize({
+                        client_id: process.env.GOOGLE_CLIENT_ID as string,
+                        callback: handleResponse,
                     })
                 }}
             />
