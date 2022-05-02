@@ -272,6 +272,7 @@
         display: flex;
         width: 100%;
         padding: $spacer * 4 0;
+        gap: $spacer * 10;
 
         .ForumList {
             flex: 2;
@@ -289,14 +290,36 @@
 
         .Sidebar {
             flex: 1;
-            padding-left: $spacer * 8;
+
+            .Ads {
+                display: flex;
+                width: 100%;
+                max-width: 275px;
+                flex-direction: column;
+                gap: $spacer * 2;
+                overflow: hidden;
+                margin-top: $spacer * 2;
+
+                @include sm() {
+                    max-width: 300px;
+                }
+            }
+        }
+
+        @include md() {
+            gap: $spacer * 6;
         }
 
         @include sm() {
             flex-direction: column;
+            gap: 0;
 
             .ForumList {
                 flex: 1;
+
+                .ForumListTitle {
+                    margin-bottom: $spacer * 2;
+                }
             }
 
             .Sidebar {

@@ -30,6 +30,12 @@
                 color: $gray-dark;
                 font-weight: 500;
             }
+
+            @include sm() {
+                a {
+                    font-size: $font-size-normal;
+                }
+            }
         }
     }
 }
