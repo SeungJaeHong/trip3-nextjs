@@ -129,7 +129,16 @@ const ForumPost = ({ item, showBreadCrumbs }: Props) => {
                         <Alert title={'Postitus ei ole avalikustatud!'} type={'warning'} />
                     </div>
                 )}
-                <div className={styles.Title}>{post.title}</div>
+                <div className={styles.TitleContainer}>
+                    <div className={styles.Title}>{post.title}</div>
+                    <div
+                        className={clsx(styles.FollowButton, {
+                            [styles.Following]: true,
+                        })}
+                    >
+                        <span>Jälgi</span>
+                    </div>
+                </div>
                 <div className={styles.MetaData}>
                     <Link href={'/user/' + post.user.id}>
                         <a className={styles.User}>{post.user.name}</a>

@@ -1,19 +1,19 @@
-import React, {useRef} from "react"
-import styles from "./UserEditForm.module.scss"
-import Router from "next/router"
+import React, { useRef } from 'react'
+import styles from './UserEditForm.module.scss'
+import Router from 'next/router'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import {toast} from 'react-toastify'
-import {useForm, SubmitHandler, Controller} from "react-hook-form"
-import FormInput from "../../Form/FormInput"
-import SubmitButton from "../../Form/SubmitButton"
-import {UserProfile} from "../../../types"
-import FormTextarea from "../../Form/FormTextarea"
-import FormRadioButton from "../../Form/FormRadioButton"
-import {updateUserProfile} from "../../../services/user.service"
-import {setFormErrors} from "../../../helpers"
-import FormCheckbox from "../../Form/FormCheckbox"
-import FormImageUpload from "../../Form/FormImageUpload"
+import { toast } from 'react-toastify'
+import { useForm, SubmitHandler, Controller } from 'react-hook-form'
+import FormInput from '../../Form/FormInput'
+import SubmitButton from '../../Form/SubmitButton'
+import { UserProfile } from '../../../types'
+import FormTextarea from '../../Form/FormTextarea'
+import FormRadioButton from '../../Form/FormRadioButton'
+import { updateUserProfile } from '../../../services/user.service'
+import { setFormErrors } from '../../../helpers'
+import FormCheckbox from '../../Form/FormCheckbox'
+import FormImageUpload from '../../Form/FormImageUpload'
 
 type Inputs = {
     image: any
@@ -34,21 +34,35 @@ type Inputs = {
 
 const UserEditForm = (userProfile: UserProfile) => {
     const formRef = useRef<HTMLFormElement>(null)
-    const registerSchema = yup.object().shape({
-        image: yup.array().length(1, 'Lubatud failide arv on 1').nullable(),
-        name: yup.string().required('Kasutajanimi on kohustuslik'),
-        email: yup.string().email('E-post ei ole korrektne').required('E-post on kohustuslik'),
-        password: yup.string(),
-        password_confirmation: yup.string().oneOf([yup.ref('password'), null], 'Paroolid ei ühti'),
-        birthyear: yup.number().max(new Date().getFullYear(), 'Valesti sisestatud aasta').min(1900, 'Valesti sisestatud aasta').nullable(),
-        gender: yup.string().nullable(),
-        facebook: yup.string().url('Ei ole korrektne url').nullable(),
-        instagram: yup.string().url('Ei ole korrektne url').nullable(),
-        twitter: yup.string().url('Ei ole korrektne url').nullable(),
-        homepage: yup.string().url('Ei ole korrektne url').nullable()
-    }).required()
+    const registerSchema = yup
+        .object()
+        .shape({
+            image: yup.array().length(1, 'Lubatud failide arv on 1').nullable(),
+            name: yup.string().required('Kasutajanimi on kohustuslik'),
+            email: yup.string().email('E-post ei ole korrektne').required('E-post on kohustuslik'),
+            password: yup.string(),
+            password_confirmation: yup.string().oneOf([yup.ref('password'), null], 'Paroolid ei ühti'),
+            birthyear: yup
+                .number()
+                .max(new Date().getFullYear(), 'Valesti sisestatud aasta')
+                .min(1900, 'Valesti sisestatud aasta')
+                .nullable(),
+            gender: yup.string().nullable(),
+            facebook: yup.string().url('Ei ole korrektne url').nullable(),
+            instagram: yup.string().url('Ei ole korrektne url').nullable(),
+            twitter: yup.string().url('Ei ole korrektne url').nullable(),
+            homepage: yup.string().url('Ei ole korrektne url').nullable(),
+        })
+        .required()
 
-    const { register, control, handleSubmit, setError, setFocus, formState: { errors, isSubmitting } } = useForm<Inputs>({
+    const {
+        register,
+        control,
+        handleSubmit,
+        setError,
+        setFocus,
+        formState: { errors, isSubmitting },
+    } = useForm<Inputs>({
         resolver: yupResolver(registerSchema),
         defaultValues: {
             name: userProfile.name,
@@ -64,7 +78,7 @@ const UserEditForm = (userProfile: UserProfile) => {
             notify_follow: userProfile.notify_follow,
         },
         criteriaMode: 'firstError',
-        shouldFocusError: true
+        shouldFocusError: true,
     })
 
     /*useEffect(() => {
@@ -77,25 +91,25 @@ const UserEditForm = (userProfile: UserProfile) => {
     }, [errors, setFocus])*/
 
     const handleUpdate: SubmitHandler<Inputs> = async (values: Inputs) => {
-        await updateUserProfile(userProfile.id, values).then(res => {
-            Router.push('/user/' + userProfile.id)
-            toast.success('Profiili uuendamine õnnestus!')
-        }).catch(err => {
-            if (err.response?.data?.errors) {
-                setFormErrors(err.response?.data?.errors, setError)
-            }
-            formRef.current?.scrollIntoView()
-            toast.error('Profiili uuendamine ebaõnnestus!')
-        })
+        await updateUserProfile(userProfile.id, values)
+            .then((res) => {
+                Router.push('/user/' + userProfile.id)
+                toast.success('Profiili uuendamine õnnestus!')
+            })
+            .catch((err) => {
+                if (err.response?.data?.errors) {
+                    setFormErrors(err.response?.data?.errors, setError)
+                }
+                formRef.current?.scrollIntoView()
+                toast.error('Profiili uuendamine ebaõnnestus!')
+            })
     }
 
     return (
         <div className={styles.UserEditForm}>
             <div className={styles.FormContainer}>
                 <form onSubmit={handleSubmit(handleUpdate)} ref={formRef}>
-                    <div className={styles.SubHeading}>
-                        Profiilipilt
-                    </div>
+                    <div className={styles.SubHeading}>Profiilipilt</div>
                     <div className={styles.FormInput}>
                         <Controller
                             name={'image'}
@@ -107,14 +121,13 @@ const UserEditForm = (userProfile: UserProfile) => {
                                         files={userProfile?.avatar ? [userProfile?.avatar] : []}
                                         onChange={field.onChange}
                                         error={fieldState.error?.message}
-                                        disabled={isSubmitting} />
+                                        disabled={isSubmitting}
+                                    />
                                 )
                             }}
                         />
                     </div>
-                    <div className={styles.SubHeading}>
-                        Kasutaja andmed
-                    </div>
+                    <div className={styles.SubHeading}>Kasutaja andmed</div>
                     <div className={styles.FormInput}>
                         <FormInput
                             name={'name'}
@@ -123,7 +136,8 @@ const UserEditForm = (userProfile: UserProfile) => {
                             disabled={isSubmitting}
                             required={true}
                             error={errors.name?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
                     <div className={styles.FormInput}>
                         <FormInput
@@ -134,7 +148,8 @@ const UserEditForm = (userProfile: UserProfile) => {
                             disabled={isSubmitting}
                             required={true}
                             error={errors.email?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
                     <div className={styles.FormInput}>
                         <FormInput
@@ -144,7 +159,8 @@ const UserEditForm = (userProfile: UserProfile) => {
                             type={'password'}
                             disabled={isSubmitting}
                             error={errors.password?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
                     <div className={styles.FormInput}>
                         <FormInput
@@ -154,17 +170,14 @@ const UserEditForm = (userProfile: UserProfile) => {
                             type={'password'}
                             disabled={isSubmitting}
                             error={errors.password_confirmation?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
-                    <div className={styles.SubHeading}>
-                        Üldinfo
-                    </div>
+                    <div className={styles.SubHeading}>Üldinfo</div>
                     <div className={styles.FormInput}>
                         <div className={styles.TwoColField}>
                             <div className={styles.GenderField}>
-                                <div className={styles.GenderLabel}>
-                                    Sugu
-                                </div>
+                                <div className={styles.GenderLabel}>Sugu</div>
                                 <div className={styles.GenderInputs}>
                                     <FormRadioButton
                                         id={'male'}
@@ -174,7 +187,8 @@ const UserEditForm = (userProfile: UserProfile) => {
                                         value={'1'}
                                         error={errors.gender?.message}
                                         disabled={isSubmitting}
-                                        register={register} />
+                                        register={register}
+                                    />
 
                                     <FormRadioButton
                                         id={'female'}
@@ -184,7 +198,8 @@ const UserEditForm = (userProfile: UserProfile) => {
                                         value={'2'}
                                         error={errors.gender?.message}
                                         disabled={isSubmitting}
-                                        register={register} />
+                                        register={register}
+                                    />
                                 </div>
                             </div>
                             <div className={styles.BirthYearField}>
@@ -195,7 +210,8 @@ const UserEditForm = (userProfile: UserProfile) => {
                                     type={'number'}
                                     disabled={isSubmitting}
                                     error={errors.birthyear?.message}
-                                    register={register} />
+                                    register={register}
+                                />
                             </div>
                         </div>
                     </div>
@@ -206,11 +222,10 @@ const UserEditForm = (userProfile: UserProfile) => {
                             label={'Lühikirjeldus'}
                             disabled={isSubmitting}
                             error={errors.description?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
-                    <div className={styles.SubHeading}>
-                        E-posti teavitused
-                    </div>
+                    <div className={styles.SubHeading}>E-posti teavitused</div>
                     <div className={styles.FormInput}>
                         <FormCheckbox
                             name={'notify_message'}
@@ -218,7 +233,8 @@ const UserEditForm = (userProfile: UserProfile) => {
                             label={'Teavita mind, kui keegi on saatnud mulle sõnumi'}
                             disabled={isSubmitting}
                             error={errors.notify_message?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
                     <div className={styles.FormInput}>
                         <FormCheckbox
@@ -227,11 +243,10 @@ const UserEditForm = (userProfile: UserProfile) => {
                             label={'Teavita mind, kui keegi on kirjutanud kommentaari postitusele, mida ma jälgin'}
                             disabled={isSubmitting}
                             error={errors.notify_follow?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
-                    <div className={styles.SubHeading}>
-                        Kontaktinfo
-                    </div>
+                    <div className={styles.SubHeading}>Kontaktinfo</div>
                     <div className={styles.FormInput}>
                         <FormInput
                             name={'facebook'}
@@ -239,7 +254,8 @@ const UserEditForm = (userProfile: UserProfile) => {
                             label={'Facebook'}
                             disabled={isSubmitting}
                             error={errors.facebook?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
                     <div className={styles.FormInput}>
                         <FormInput
@@ -248,7 +264,8 @@ const UserEditForm = (userProfile: UserProfile) => {
                             label={'Instagram'}
                             disabled={isSubmitting}
                             error={errors.instagram?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
                     <div className={styles.FormInput}>
                         <FormInput
@@ -257,22 +274,22 @@ const UserEditForm = (userProfile: UserProfile) => {
                             label={'Twitter'}
                             disabled={isSubmitting}
                             error={errors.twitter?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
                     <div className={styles.FormInput}>
                         <FormInput
                             name={'homepage'}
                             id={'homepage'}
-                            label={'Homepage'}
+                            label={'Koduleht'}
                             disabled={isSubmitting}
                             error={errors.homepage?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
 
                     <div className={styles.SubmitButton}>
-                        <SubmitButton
-                            title={'Salvesta'}
-                            submitting={isSubmitting} />
+                        <SubmitButton title={'Salvesta'} submitting={isSubmitting} />
                     </div>
                 </form>
             </div>

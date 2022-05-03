@@ -44,14 +44,61 @@
         margin-bottom: $spacer * 3;
     }
 
-    .Title {
-        font-size: $font-size-xlarge;
-        font-weight: 600;
-        color: $gray-dark-hover;
-        padding-bottom: $spacer * 2;
+    .TitleContainer {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        gap: $spacer * 3;
 
-        @include sm() {
-            font-size: $font-size-large;
+        .Title {
+            font-size: $font-size-xlarge;
+            line-height: 2.5rem;
+            font-weight: 600;
+            color: $gray-dark-hover;
+            padding-bottom: $spacer * 2;
+
+            @include sm() {
+                font-size: $font-size-large;
+            }
+        }
+
+        .FollowButton {
+            display: flex;
+            padding: $spacer $spacer * 2;
+            border-radius: 3px;
+            border: 1px solid $blue;
+            height: 24px;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-top: $spacer;
+            
+            span {
+                font-family: $font-family-sailec;
+                font-size: $font-size-xsmall;
+                color: $blue;
+                font-weight: 500;
+            }
+
+            &.Following {
+                background: $blue;
+
+                span {
+                    color: $white;
+                }
+            }
+
+            &:hover {
+                background: $blue;
+
+                span {
+                    color: $white;
+                }
+
+                &.Following {
+                    background: $blue-hover;
+                }
+            }
         }
     }
 
