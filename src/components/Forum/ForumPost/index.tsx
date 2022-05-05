@@ -8,7 +8,7 @@ import ThumbsDownIcon from '../../../icons/ThumbsDownIcon'
 import Tag from '../../Tag'
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import { togglePostStatus, likePost } from '../../../services/forum.service'
+import {togglePostStatus, likePost, toggleFollow} from '../../../services/forum.service'
 import { toast } from 'react-toastify'
 import Alert from '../../Alert'
 import useUser from '../../../hooks'
@@ -46,10 +46,22 @@ const ForumPost = ({ item, showBreadCrumbs }: Props) => {
                     toast.success(newPost.status === 1 ? 'Postitus avalikustatud' : 'Postitus peidetud')
                 })
                 .catch((err) => {
-                    if (err.response?.status === 401 || err.response?.status === 419) {
-                        toast.error('Sessioon on aegunud. Palun logi uuesti sisse')
-                        router.reload()
-                    }
+                    toast.error('Postituse avalikustamine ebaõnnestus')
+                })
+        }
+    }
+
+    const onToggleFollow = () => {
+        if (userIsLoggedIn) {
+            const status = !post.following
+            toggleFollow(post, status)
+                .then((res) => {
+                    const newPost = { ...post, following: res.data }
+                    setPost(newPost)
+                    toast.success(newPost.following ? 'Jälgimine listatud' : 'Jälgimine eemaldatud')
+                })
+                .catch((err) => {
+                    toast.error('Jälgimise muutmine ebaõnnestus')
                 })
         }
     }
@@ -131,13 +143,16 @@ const ForumPost = ({ item, showBreadCrumbs }: Props) => {
                 )}
                 <div className={styles.TitleContainer}>
                     <div className={styles.Title}>{post.title}</div>
-                    <div
-                        className={clsx(styles.FollowButton, {
-                            [styles.Following]: true,
-                        })}
-                    >
-                        <span>Jälgi</span>
-                    </div>
+                    {userIsLoggedIn && (
+                        <div
+                            className={clsx(styles.FollowButton, {
+                                [styles.Following]: post.following,
+                            })}
+                            onClick={onToggleFollow}
+                        >
+                            <span>{post.following ? 'Jälgin' : 'Jälgi'}</span>
+                        </div>
+                    )}
                 </div>
                 <div className={styles.MetaData}>
                     <Link href={'/user/' + post.user.id}>

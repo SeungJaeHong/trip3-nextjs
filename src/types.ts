@@ -116,7 +116,7 @@ export interface ForumPostType {
     updatedAt?: string
     likes?: number
     dislikes?: number
-    price?: number
+    following: boolean
     user: User
     comments?: Comment[]
     destinations?: Destination[]
