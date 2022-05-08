@@ -29,9 +29,12 @@
         }
     }
 
+    &.Clickable {
+        cursor: pointer;
+    }
+
     &.Destination {
         border: 1px solid $orange;
-        cursor: pointer;
 
         .Title {
             color: $orange;
@@ -65,8 +68,6 @@
 
     &.Red {
         border: 1px solid rgba(237, 100, 100, .9);
-        //background: $red-light;
-        //opacity: .9;
         background: rgba(237, 100, 100, .9);
 
         .Title {

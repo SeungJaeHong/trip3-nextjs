@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import styles from './ForumRow.module.scss'
-import clsx from "clsx"
-import {Destination, ForumRowType, Topic} from "../../../types"
-import Tag from "../../Tag";
-import UserAvatar from "../../User/UserAvatar"
+import clsx from 'clsx'
+import { Destination, ForumRowType, Topic } from '../../../types'
+import Tag from '../../Tag'
+import UserAvatar from '../../User/UserAvatar'
 
 const ForumRow = (item: ForumRowType) => {
     const renderUnreadContentTags = () => {
@@ -17,7 +17,11 @@ const ForumRow = (item: ForumRowType) => {
             const suffix = item.unreadCommentsCount === 1 ? 'uus' : 'uut'
             return (
                 <span className={styles.MetaItem}>
-                    <Tag title={item.unreadCommentsCount + ' ' + suffix} route={'/'} red={true} />
+                    <Tag
+                        title={item.unreadCommentsCount + ' ' + suffix}
+                        route={item.firstUnreadCommentUrl}
+                        red={true}
+                    />
                 </span>
             )
         }
@@ -36,21 +40,15 @@ const ForumRow = (item: ForumRowType) => {
             <div className={styles.Content}>
                 <Link href={item.url}>
                     <a>
-                        <span className={styles.Title}>
-                            {item.title}
-                        </span>
+                        <span className={styles.Title}>{item.title}</span>
                     </a>
                 </Link>
                 <div className={styles.Meta}>
                     {renderUnreadContentTags()}
-                    <span className={styles.MetaItem}>
-                        {item.updatedAt}
-                    </span>
-                    {item.viewsCount >= 25 &&
-                        <span className={clsx(styles.MetaItem, styles.ReadCount)}>
-                            Loetud {item.viewsCount} korda
-                        </span>
-                    }
+                    <span className={styles.MetaItem}>{item.updatedAt}</span>
+                    {item.viewsCount >= 25 && (
+                        <span className={clsx(styles.MetaItem, styles.ReadCount)}>Loetud {item.viewsCount} korda</span>
+                    )}
                     <span className={clsx(styles.MetaItem, styles.Creator)}>
                         <Link href={'/user/' + item.user.id}>
                             <a>{item.user.name}</a>
@@ -59,7 +57,11 @@ const ForumRow = (item: ForumRowType) => {
                     {item.destinations?.map((destination: Destination) => {
                         return (
                             <div className={clsx(styles.MetaItem, styles.Tag)} key={destination.id}>
-                                <Tag title={destination.name} type={'destination'} route={'/sihtkoht/' + destination.slug} />
+                                <Tag
+                                    title={destination.name}
+                                    type={'destination'}
+                                    route={'/sihtkoht/' + destination.slug}
+                                />
                             </div>
                         )
                     })}

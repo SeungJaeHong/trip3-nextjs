@@ -202,6 +202,7 @@ export type ForumRowType = {
     updatedAt: string
     isNew: boolean
     unreadCommentsCount: number
+    firstUnreadCommentUrl?: string
     viewsCount: number
     commentsCount: number
     user: User
