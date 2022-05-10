@@ -17,7 +17,7 @@ import ApiClientSSR from '../../lib/ApiClientSSR'
 import DotMap from '../../components/DotMap'
 import DestinationImageGallery from '../../components/Destination/DestinationImageGallery'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
-import Ads from "../../components/Ads";
+import Ads from '../../components/Ads'
 
 type Props = {
     destination: DestinationContent
@@ -72,7 +72,10 @@ const DestinationPage = ({ destination }: Props) => {
                 <div className={styles.HeaderContainer}>
                     {destination.previousDestination ? (
                         <Link href={'/sihtkoht/' + destination.previousDestination.slug}>
-                            <a className={styles.NextDestination}>‹ {destination.previousDestination.name}</a>
+                            <a className={styles.NextDestination}>
+                                <span className={styles.Arrow}>‹</span>
+                                <span className={styles.NextDestinationName}>{destination.previousDestination.name}</span>
+                            </a>
                         </Link>
                     ) : (
                         <span className={styles.NextDestination} />
@@ -87,7 +90,10 @@ const DestinationPage = ({ destination }: Props) => {
                     </div>
                     {destination.nextDestination ? (
                         <Link href={'/sihtkoht/' + destination.nextDestination.slug}>
-                            <a className={styles.NextDestination}>{destination.nextDestination.name} ›</a>
+                            <a className={styles.NextDestination}>
+                                <span className={styles.NextDestinationName}>{destination.nextDestination.name}</span>
+                                <span className={styles.Arrow}>›</span>
+                            </a>
                         </Link>
                     ) : (
                         <span className={styles.NextDestination} />

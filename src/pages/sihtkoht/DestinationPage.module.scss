@@ -8,7 +8,8 @@
     padding-top: $spacer * 4;
 
     @include sm() {
-        justify-content: center;
+        padding-bottom: $spacer * 14;
+        padding-top: $spacer;
     }
 
     .NextDestination {
@@ -16,13 +17,24 @@
         color: $yellow;
         font-weight: 500;
         cursor: pointer;
-
-        @include sm() {
-            display: none;
-        }
+        display: flex;
+        gap: $spacer;
 
         &:hover {
             color: $white;
+        }
+
+        @include sm() {
+            .NextDestinationName {
+                display: none;
+            }
+
+            .Arrow {
+                font-size: $font-size-xxlarge;
+                min-width: 30px;
+                display: flex;
+                justify-content: center;
+            }
         }
     }
 
