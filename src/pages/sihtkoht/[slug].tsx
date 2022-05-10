@@ -18,6 +18,7 @@ import DotMap from '../../components/DotMap'
 import DestinationImageGallery from '../../components/Destination/DestinationImageGallery'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
 import Ads from '../../components/Ads'
+import { Tooltip } from '@mantine/core'
 
 type Props = {
     destination: DestinationContent
@@ -74,7 +75,9 @@ const DestinationPage = ({ destination }: Props) => {
                         <Link href={'/sihtkoht/' + destination.previousDestination.slug}>
                             <a className={styles.NextDestination}>
                                 <span className={styles.Arrow}>‹</span>
-                                <span className={styles.NextDestinationName}>{destination.previousDestination.name}</span>
+                                <span className={styles.NextDestinationName}>
+                                    {destination.previousDestination.name}
+                                </span>
                             </a>
                         </Link>
                     ) : (
@@ -155,14 +158,19 @@ const DestinationPage = ({ destination }: Props) => {
                     {renderChildDestinations()}
 
                     <div className={styles.HaveBeenBlock}>
-                        <div className={styles.BlockItem}>
-                            <PinIcon />
-                            <span>{destination.usersHaveBeen || 0}</span>
-                        </div>
-                        <div className={styles.BlockItem}>
-                            <StarIcon />
-                            <span>{destination.usersWantsToGo || 0}</span>
-                        </div>
+                        <Tooltip label={'On siin käinud'} withArrow>
+                            <div className={styles.BlockItem}>
+                                <PinIcon />
+                                <span>{destination.usersHaveBeen || 0}</span>
+                            </div>
+                        </Tooltip>
+
+                        <Tooltip label={'Tahab siia minna'} withArrow>
+                            <div className={styles.BlockItem}>
+                                <StarIcon />
+                                <span>{destination.usersWantsToGo || 0}</span>
+                            </div>
+                        </Tooltip>
                     </div>
                 </div>
             </div>
