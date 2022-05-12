@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify'
 import Script from 'next/script'
 import AdsConfig from '../lib/AdsConfig'
 import Head from 'next/head'
+import { GoogleAnalytics } from '../components/GoogleAnalytics'
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
@@ -34,22 +35,8 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <link rel="shortcut icon" href="/favicon.ico" />
                 <title>Trip.ee | Eesti reisiportaal</title>
             </Head>
+            <GoogleAnalytics />
             <Component {...pageProps} />
-            <Script
-                strategy="lazyOnload"
-                src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-            />
-
-            <Script id="google-analytics" strategy="lazyOnload">
-                {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
-              page_path: window.location.pathname,
-            });
-                `}
-            </Script>
             <Script
                 id={'ads-js'}
                 src={'https://securepubads.g.doubleclick.net/tag/js/gpt.js'}
