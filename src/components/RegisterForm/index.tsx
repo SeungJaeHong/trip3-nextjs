@@ -1,37 +1,48 @@
-import React, {useEffect} from "react"
-import styles from "./RegisterForm.module.scss"
-import clsx from "clsx"
-import Router from "next/router"
-import FormInput from "../Form/FormInput"
-import SubmitButton from "../Form/SubmitButton"
-import useUser from "../../hooks"
-import {register as registerUser} from "../../services/auth.service"
-import {toast} from 'react-toastify'
-import { useForm, SubmitHandler } from "react-hook-form"
+import React, { useEffect } from 'react'
+import styles from './RegisterForm.module.scss'
+import clsx from 'clsx'
+import Router from 'next/router'
+import FormInput from '../Form/FormInput'
+import SubmitButton from '../Form/SubmitButton'
+import useUser from '../../hooks'
+import { register as registerUser } from '../../services/auth.service'
+import { toast } from 'react-toastify'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import {setFormErrors} from "../../helpers"
+import { setFormErrors } from '../../helpers'
+import FacebookLogin from '../FacebookLogin'
+import GoogleLogin from '../GoogleLogin'
 
 type Inputs = {
-    name: string,
-    email: string,
+    name: string
+    email: string
     password: string
     password_confirmation: string
 }
 
 const RegisterForm = () => {
     const { userIsLoggedIn } = useUser()
-    const registerSchema = yup.object().shape({
-        name: yup.string().required('Kasutajanimi on kohustuslik'),
-        email: yup.string().email('E-post ei ole korrektne').required('E-post on kohustuslik'),
-        password: yup.string().required('Parool on kohustuslik'),
-        password_confirmation: yup.string()
-            .required('Parooli kordamine on kohustuslik')
-            .oneOf([yup.ref('password'), null], 'Paroolid ei ühti'),
-    }).required()
+    const registerSchema = yup
+        .object()
+        .shape({
+            name: yup.string().required('Kasutajanimi on kohustuslik'),
+            email: yup.string().email('E-post ei ole korrektne').required('E-post on kohustuslik'),
+            password: yup.string().required('Parool on kohustuslik'),
+            password_confirmation: yup
+                .string()
+                .required('Parooli kordamine on kohustuslik')
+                .oneOf([yup.ref('password'), null], 'Paroolid ei ühti'),
+        })
+        .required()
 
-    const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
-        resolver: yupResolver(registerSchema)
+    const {
+        register,
+        handleSubmit,
+        setError,
+        formState: { errors, isSubmitting },
+    } = useForm<Inputs>({
+        resolver: yupResolver(registerSchema),
     })
 
     useEffect(() => {
@@ -42,33 +53,33 @@ const RegisterForm = () => {
 
     const handleRegister: SubmitHandler<Inputs> = async (values: Inputs) => {
         const { name, email, password } = values
-        await registerUser(name, email, password).then(res => {
-            Router.push('/login')
-            toast.success('Kasutaja loomine õnnestus!', {
-                autoClose: 5000
+        await registerUser(name, email, password)
+            .then((res) => {
+                Router.push('/login')
+                toast.success('Kasutaja loomine õnnestus!', {
+                    autoClose: 5000,
+                })
+                toast.success('Palun kontrolli oma e-posti ja vii kasutaja registeerimine lõpuni', {
+                    autoClose: 5000,
+                })
             })
-            toast.success('Palun kontrolli oma e-posti ja vii kasutaja registeerimine lõpuni', {
-                autoClose: 5000
+            .catch((err) => {
+                if (err.response?.data?.errors) {
+                    setFormErrors(err.response?.data?.errors, setError)
+                }
+                toast.error('Registreerimine ebaõnnestus!')
             })
-        }).catch(err => {
-            if (err.response?.data?.errors) {
-                setFormErrors(err.response?.data?.errors, setError)
-            }
-            toast.error('Registreerimine ebaõnnestus!')
-        })
     }
 
     return (
         <div className={styles.RegisterForm}>
             <div className={styles.Tabs}>
-                <div className={clsx(styles.Tab, styles.UserName)}>
-                    E-mailiga
+                <div className={clsx(styles.Tab, styles.UserName)}>E-mailiga</div>
+                <div className={styles.Tab}>
+                    <FacebookLogin />
                 </div>
-                <div className={clsx(styles.Tab, styles.Social, styles.Facebook)}>
-                    Facebook
-                </div>
-                <div className={clsx(styles.Tab, styles.Social, styles.Google)}>
-                    Google
+                <div className={styles.Tab}>
+                    <GoogleLogin />
                 </div>
             </div>
             <div className={styles.FormContainer}>
@@ -81,7 +92,8 @@ const RegisterForm = () => {
                             disabled={isSubmitting}
                             required={true}
                             error={errors.name?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
                     <div className={styles.FormInput}>
                         <FormInput
@@ -92,7 +104,8 @@ const RegisterForm = () => {
                             disabled={isSubmitting}
                             required={true}
                             error={errors.email?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
                     <div className={styles.FormInput}>
                         <FormInput
@@ -103,7 +116,8 @@ const RegisterForm = () => {
                             disabled={isSubmitting}
                             required={true}
                             error={errors.password?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
                     <div className={styles.FormInput}>
                         <FormInput
@@ -114,12 +128,11 @@ const RegisterForm = () => {
                             disabled={isSubmitting}
                             required={true}
                             error={errors.password_confirmation?.message}
-                            register={register} />
+                            register={register}
+                        />
                     </div>
                     <div className={styles.SubmitButton}>
-                        <SubmitButton
-                            title={'Registreeri'}
-                            submitting={isSubmitting} />
+                        <SubmitButton title={'Registreeri'} submitting={isSubmitting} />
                     </div>
                 </form>
             </div>
