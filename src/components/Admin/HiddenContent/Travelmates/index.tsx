@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react"
-import styles from "./AdminHiddenContentTravelmates.module.scss"
-import {useRouter} from "next/router"
-import {TravelmateRowType} from "../../../../types"
-import {getHiddenTravelmates} from "../../../../services/admin.service"
-import LoadingSpinner2 from "../../../LoadingSpinner2"
-import SimplePaginator from "../../../Paginator/SimplePaginator"
-import TravelmateCard from "../../../Travelmate/TravelmateCard"
+import React, { useEffect, useState } from 'react'
+import styles from './AdminHiddenContentTravelmates.module.scss'
+import { useRouter } from 'next/router'
+import { TravelmateRowType } from '../../../../types'
+import { getHiddenTravelmates } from '../../../../services/admin.service'
+import LoadingSpinner from '../../../LoadingSpinner'
+import SimplePaginator from '../../../Paginator/SimplePaginator'
+import TravelmateCard from '../../../Travelmate/TravelmateCard'
 
 const AdminHiddenContentTravelmates = () => {
     const router = useRouter()
@@ -46,7 +46,7 @@ const AdminHiddenContentTravelmates = () => {
     if (loading) {
         return (
             <div className={styles.Loading}>
-                <LoadingSpinner2 />
+                <LoadingSpinner />
             </div>
         )
     }
@@ -54,16 +54,13 @@ const AdminHiddenContentTravelmates = () => {
     return (
         <div className={styles.AdminHiddenContentTravelmates}>
             <div className={styles.Grid}>
-                {travelmates?.map(item => {
+                {travelmates?.map((item) => {
                     return <TravelmateCard {...item} key={item.id} />
                 })}
             </div>
 
             <div className={styles.Paginator}>
-                <SimplePaginator
-                    nextPageUrl={getNextPageUrl()}
-                    previousPageUrl={getPreviousPageUrl()}
-                />
+                <SimplePaginator nextPageUrl={getNextPageUrl()} previousPageUrl={getPreviousPageUrl()} />
             </div>
         </div>
     )

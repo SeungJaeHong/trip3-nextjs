@@ -8,12 +8,12 @@ import BackgroundMap from '../../../../components/BackgroundMap'
 import { useRouter } from 'next/router'
 import useUser from '../../../../hooks'
 import { Destination, FlightContent, Tag } from '../../../../types'
-import LoadingSpinner2 from '../../../../components/LoadingSpinner2'
+import LoadingSpinner from '../../../../components/LoadingSpinner'
 import { GetServerSideProps } from 'next'
 import ApiClientSSR from '../../../../lib/ApiClientSSR'
 import FlightForm from '../../../../components/FlightOffer/FlightForm'
 import { toast } from 'react-toastify'
-import {updateFlight} from '../../../../services/flight.service'
+import { updateFlight } from '../../../../services/flight.service'
 
 type Props = {
     flight: FlightContent
@@ -53,7 +53,7 @@ const FlightOfferEditPage = ({ flight, destinations, tags }: Props) => {
         if (loading) {
             return (
                 <div className={styles.Loader}>
-                    <LoadingSpinner2 />
+                    <LoadingSpinner />
                 </div>
             )
         } else {
@@ -63,7 +63,7 @@ const FlightOfferEditPage = ({ flight, destinations, tags }: Props) => {
                         <>
                             <div className={styles.FormSubmitOverLay} />
                             <div className={styles.Loading}>
-                                <LoadingSpinner2 />
+                                <LoadingSpinner />
                             </div>
                         </>
                     )}

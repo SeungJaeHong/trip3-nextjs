@@ -2,7 +2,7 @@ import styles from './UserLastComments.module.scss'
 import { useEffect, useState } from 'react'
 import { getLastComments } from '../../../services/user.service'
 import { UserComment, UserPublicProfile } from '../../../types'
-import LoadingSpinner2 from '../../LoadingSpinner2'
+import LoadingSpinner from '../../LoadingSpinner'
 import ForumComment from '../../Forum/ForumComment'
 import Link from 'next/link'
 
@@ -44,7 +44,7 @@ const UserLastComments = (user: UserPublicProfile) => {
     if (loading) {
         return (
             <div className={styles.Loading}>
-                <LoadingSpinner2 />
+                <LoadingSpinner />
             </div>
         )
     }

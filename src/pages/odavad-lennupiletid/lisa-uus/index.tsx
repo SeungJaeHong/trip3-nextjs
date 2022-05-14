@@ -8,12 +8,12 @@ import BackgroundMap from '../../../components/BackgroundMap'
 import { useRouter } from 'next/router'
 import useUser from '../../../hooks'
 import { Destination, Tag } from '../../../types'
-import LoadingSpinner2 from '../../../components/LoadingSpinner2'
+import LoadingSpinner from '../../../components/LoadingSpinner'
 import { GetServerSideProps } from 'next'
 import ApiClientSSR from '../../../lib/ApiClientSSR'
 import FlightForm from '../../../components/FlightOffer/FlightForm'
-import {toast} from "react-toastify"
-import {storeFlight} from "../../../services/flight.service"
+import { toast } from 'react-toastify'
+import { storeFlight } from '../../../services/flight.service'
 
 type Props = {
     destinations: Destination[]
@@ -29,12 +29,15 @@ const FlightOfferAddPage = ({ destinations, tags }: Props) => {
     //todo: move to form component?
     const onSubmit = (values: any) => {
         setSubmitting(true)
-        storeFlight(values).then(res => {
-            toast.success('Pakkumine lisatud')
-            router.push('/odavad-lennupiletid/' + res.data.slug)
-        }).catch(e => {
-            toast.error('Pakkumise lisamine ebaõnnestus')
-        }).finally(() => setSubmitting(false))
+        storeFlight(values)
+            .then((res) => {
+                toast.success('Pakkumine lisatud')
+                router.push('/odavad-lennupiletid/' + res.data.slug)
+            })
+            .catch((e) => {
+                toast.error('Pakkumise lisamine ebaõnnestus')
+            })
+            .finally(() => setSubmitting(false))
     }
 
     useEffect(() => {
@@ -49,7 +52,7 @@ const FlightOfferAddPage = ({ destinations, tags }: Props) => {
         if (loading) {
             return (
                 <div className={styles.Loader}>
-                    <LoadingSpinner2 />
+                    <LoadingSpinner />
                 </div>
             )
         } else {
@@ -59,7 +62,7 @@ const FlightOfferAddPage = ({ destinations, tags }: Props) => {
                         <>
                             <div className={styles.FormSubmitOverLay} />
                             <div className={styles.Loading}>
-                                <LoadingSpinner2 />
+                                <LoadingSpinner />
                             </div>
                         </>
                     )}
@@ -82,9 +85,7 @@ const FlightOfferAddPage = ({ destinations, tags }: Props) => {
                 <div className={styles.Content}>
                     <div className={containerStyle.ContainerLg}>
                         <div className={containerStyle.CenteredContainer}>
-                            <div className={styles.Body}>
-                                {renderContent()}
-                            </div>
+                            <div className={styles.Body}>{renderContent()}</div>
                         </div>
                     </div>
                 </div>

@@ -1,26 +1,26 @@
-import React, {Fragment, useEffect, useState} from "react"
-import Navbar from "../../../components/Navbar"
+import React, { Fragment, useEffect, useState } from 'react'
+import Navbar from '../../../components/Navbar'
 import styles from './NewsAddPage.module.scss'
-import clsx from "clsx"
-import Footer from "../../../components/Footer"
-import containerStyle from "../../../styles/containers.module.scss"
-import BackgroundMap from "../../../components/BackgroundMap"
-import {useRouter} from "next/router"
-import useUser from "../../../hooks"
-import {Destination, Topic} from "../../../types"
-import LoadingSpinner2 from "../../../components/LoadingSpinner2"
-import NewsForm from "../../../components/News/NewsForm"
-import {addNews} from "../../../services/news.service"
-import {toast} from 'react-toastify'
-import {GetServerSideProps} from "next"
-import ApiClientSSR from "../../../lib/ApiClientSSR"
+import clsx from 'clsx'
+import Footer from '../../../components/Footer'
+import containerStyle from '../../../styles/containers.module.scss'
+import BackgroundMap from '../../../components/BackgroundMap'
+import { useRouter } from 'next/router'
+import useUser from '../../../hooks'
+import { Destination, Topic } from '../../../types'
+import LoadingSpinner from '../../../components/LoadingSpinner'
+import NewsForm from '../../../components/News/NewsForm'
+import { addNews } from '../../../services/news.service'
+import { toast } from 'react-toastify'
+import { GetServerSideProps } from 'next'
+import ApiClientSSR from '../../../lib/ApiClientSSR'
 
 type Props = {
     destinations: Destination[]
     topics: Topic[]
 }
 
-const NewsAddPage = ({destinations, topics}: Props) => {
+const NewsAddPage = ({ destinations, topics }: Props) => {
     const router = useRouter()
     const { loading, userIsLoggedIn, user } = useUser()
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
@@ -28,12 +28,15 @@ const NewsAddPage = ({destinations, topics}: Props) => {
 
     const onSubmit = (title: string, body: string, destinations: Destination[], image: File, topics?: Topic[]) => {
         setSubmitting(true)
-        addNews(title, image, body, destinations, topics).then(res => {
-            toast.success('Uudis lisatud')
-            router.push('/uudised/' + res.data.slug)
-        }).catch(e => {
-            toast.error('Uudise lisamine ebaõnnestus')
-        }).finally(() => setSubmitting(false))
+        addNews(title, image, body, destinations, topics)
+            .then((res) => {
+                toast.success('Uudis lisatud')
+                router.push('/uudised/' + res.data.slug)
+            })
+            .catch((e) => {
+                toast.error('Uudise lisamine ebaõnnestus')
+            })
+            .finally(() => setSubmitting(false))
     }
 
     useEffect(() => {
@@ -48,22 +51,23 @@ const NewsAddPage = ({destinations, topics}: Props) => {
         if (loading) {
             return (
                 <div className={styles.Loader}>
-                    <LoadingSpinner2 />
+                    <LoadingSpinner />
                 </div>
             )
         } else {
             return (
                 <div className={styles.NewsForm}>
-                    {submitting &&
+                    {submitting && (
                         <div className={styles.FormSubmitOverLay}>
-                            <LoadingSpinner2 />
+                            <LoadingSpinner />
                         </div>
-                    }
+                    )}
                     <NewsForm
                         destinations={destinations}
                         topics={topics}
                         // @ts-ignore
-                        onSubmit={onSubmit} />
+                        onSubmit={onSubmit}
+                    />
                 </div>
             )
         }
@@ -77,16 +81,12 @@ const NewsAddPage = ({destinations, topics}: Props) => {
                     <div className={clsx(styles.Navbar)}>
                         <Navbar darkMode={true} />
                     </div>
-                    <div className={styles.Title}>
-                        Lisa uus uudis
-                    </div>
+                    <div className={styles.Title}>Lisa uus uudis</div>
                 </div>
                 <div className={styles.Content}>
                     <div className={containerStyle.ContainerLg}>
                         <div className={containerStyle.CenteredContainer}>
-                            <div className={styles.Body}>
-                                {renderContent()}
-                            </div>
+                            <div className={styles.Body}>{renderContent()}</div>
                         </div>
                     </div>
                 </div>
@@ -104,8 +104,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         return {
             props: {
                 destinations: response.data.destinations || [],
-                topics: response.data.topics || []
-            }
+                topics: response.data.topics || [],
+            },
         }
     } catch (e) {
         return {

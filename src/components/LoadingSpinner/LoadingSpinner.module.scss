@@ -1,26 +1,17 @@
 @import "../../styles/variables";
 
 .LoadingSpinner {
-    position: relative;
-    display: flex;
-    justify-content: center;
-
-    .Spinner {
-        border-top: 3px solid $white;
-        border-right: 3px solid transparent;
-        border-radius: 50%;
-        animation: rotation 0.8s linear infinite;
-        width: 25px;
-        height: 25px;
-    }
+    border: 4px solid $gray-light;
+    border-radius: 50%;
+    border-top: 4px solid $blue;
+    width: 100%;
+    height: 100%;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
 }
 
-@keyframes rotation{
-    from{
-        transform: rotate(0deg);
-    }
-    to{
-        transform: rotate(360deg);
-    }
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 

@@ -11,7 +11,7 @@ import SearchTabs from '../../components/Search/SearchTabs'
 import SearchForumResults from '../../components/Search/ForumResults'
 import SearchFlightResults from '../../components/Search/FlightResults'
 import { search } from '../../services/search.service'
-import LoadingSpinner2 from '../../components/LoadingSpinner2'
+import LoadingSpinner from '../../components/LoadingSpinner'
 import { objectToQueryString } from '../../helpers'
 import PagePaginator from '../../components/Paginator/PagePaginator'
 import SearchNewsResults from '../../components/Search/NewsResults'
@@ -174,7 +174,7 @@ const SearchPage = () => {
         if (searching) {
             return (
                 <div className={styles.Loader}>
-                    <LoadingSpinner2 />
+                    <LoadingSpinner />
                 </div>
             )
         }

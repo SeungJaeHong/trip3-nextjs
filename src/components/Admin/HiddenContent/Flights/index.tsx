@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react"
-import styles from "./AdminHiddenContentFlights.module.scss"
-import {useRouter} from "next/router"
-import {FlightOfferRowType} from "../../../../types"
-import {getHiddenFlights} from "../../../../services/admin.service"
-import LoadingSpinner2 from "../../../LoadingSpinner2"
-import SimplePaginator from "../../../Paginator/SimplePaginator"
-import FlightOfferList from "../../../FlightOffer/FlightOfferList"
+import React, { useEffect, useState } from 'react'
+import styles from './AdminHiddenContentFlights.module.scss'
+import { useRouter } from 'next/router'
+import { FlightOfferRowType } from '../../../../types'
+import { getHiddenFlights } from '../../../../services/admin.service'
+import LoadingSpinner from '../../../LoadingSpinner'
+import SimplePaginator from '../../../Paginator/SimplePaginator'
+import FlightOfferList from '../../../FlightOffer/FlightOfferList'
 
 const AdminHiddenContentFlights = () => {
     const router = useRouter()
@@ -46,7 +46,7 @@ const AdminHiddenContentFlights = () => {
     if (loading) {
         return (
             <div className={styles.Loading}>
-                <LoadingSpinner2 />
+                <LoadingSpinner />
             </div>
         )
     }
@@ -55,10 +55,7 @@ const AdminHiddenContentFlights = () => {
         <div className={styles.AdminHiddenContentFlights}>
             <FlightOfferList items={flights} />
             <div className={styles.Paginator}>
-                <SimplePaginator
-                    nextPageUrl={getNextPageUrl()}
-                    previousPageUrl={getPreviousPageUrl()}
-                />
+                <SimplePaginator nextPageUrl={getNextPageUrl()} previousPageUrl={getPreviousPageUrl()} />
             </div>
         </div>
     )

@@ -3,7 +3,7 @@ import SearchIcon from '../../icons/SearchIcon'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import FrontPageSearchResults from './FrontPageSearchResults'
-import LoadingSpinner2 from '../LoadingSpinner2'
+import LoadingSpinner from '../LoadingSpinner'
 import {
     DestinationSearchResult,
     FrontPageFlightSearchResult,
@@ -82,7 +82,7 @@ const FrontPageSearch = () => {
             return (
                 <div className={styles.Loading}>
                     <div className={styles.Loader}>
-                        <LoadingSpinner2 />
+                        <LoadingSpinner />
                     </div>
                 </div>
             )

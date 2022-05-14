@@ -1,12 +1,12 @@
-import styles from "./AdminForum.module.scss"
-import {useEffect, useState} from "react";
-import {getForumPosts} from "../../../services/admin.service";
-import ForumList from "../../Forum/ForumList";
-import {ForumRowType} from "../../../types";
-import SimplePaginator from "../../Paginator/SimplePaginator";
-import {useRouter} from "next/router"
-import LoadingSpinner2 from "../../LoadingSpinner2"
-import Button from "../../Button";
+import styles from './AdminForum.module.scss'
+import { useEffect, useState } from 'react'
+import { getForumPosts } from '../../../services/admin.service'
+import ForumList from '../../Forum/ForumList'
+import { ForumRowType } from '../../../types'
+import SimplePaginator from '../../Paginator/SimplePaginator'
+import { useRouter } from 'next/router'
+import LoadingSpinner from '../../LoadingSpinner'
+import Button from '../../Button'
 
 const AdminForum = () => {
     const router = useRouter()
@@ -47,7 +47,7 @@ const AdminForum = () => {
     if (loading) {
         return (
             <div className={styles.Loading}>
-                <LoadingSpinner2 />
+                <LoadingSpinner />
             </div>
         )
     }
@@ -59,14 +59,10 @@ const AdminForum = () => {
                     <ForumList items={posts} />
                 </div>
                 <div className={styles.NewButton}>
-                    <Button
-                        title={'Lisa uus postitus'}
-                        route={'/admin/forum/add'} />
+                    <Button title={'Lisa uus postitus'} route={'/admin/forum/add'} />
                 </div>
             </div>
-            <SimplePaginator
-                nextPageUrl={getNextPageUrl()}
-                previousPageUrl={getPreviousPageUrl()} />
+            <SimplePaginator nextPageUrl={getNextPageUrl()} previousPageUrl={getPreviousPageUrl()} />
         </div>
     )
 }

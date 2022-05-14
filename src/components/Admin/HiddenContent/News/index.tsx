@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react"
-import styles from "./AdminHiddenContentNews.module.scss"
-import {useRouter} from "next/router"
-import {NewsCardType} from "../../../../types"
-import {getHiddenNews} from "../../../../services/admin.service"
-import LoadingSpinner2 from "../../../LoadingSpinner2"
-import SimplePaginator from "../../../Paginator/SimplePaginator"
-import NewsRow from "../../../News/NewsRow"
+import React, { useEffect, useState } from 'react'
+import styles from './AdminHiddenContentNews.module.scss'
+import { useRouter } from 'next/router'
+import { NewsCardType } from '../../../../types'
+import { getHiddenNews } from '../../../../services/admin.service'
+import LoadingSpinner from '../../../LoadingSpinner'
+import SimplePaginator from '../../../Paginator/SimplePaginator'
+import NewsRow from '../../../News/NewsRow'
 
 const AdminHiddenContentNews = () => {
     const router = useRouter()
@@ -46,14 +46,14 @@ const AdminHiddenContentNews = () => {
     if (loading) {
         return (
             <div className={styles.Loading}>
-                <LoadingSpinner2 />
+                <LoadingSpinner />
             </div>
         )
     }
 
     return (
         <div className={styles.AdminHiddenContentNews}>
-            {news?.map(item => {
+            {news?.map((item) => {
                 return (
                     <div className={styles.NewsRow} key={item.id}>
                         <NewsRow {...item} />
@@ -62,10 +62,7 @@ const AdminHiddenContentNews = () => {
             })}
 
             <div className={styles.Paginator}>
-                <SimplePaginator
-                    nextPageUrl={getNextPageUrl()}
-                    previousPageUrl={getPreviousPageUrl()}
-                />
+                <SimplePaginator nextPageUrl={getNextPageUrl()} previousPageUrl={getPreviousPageUrl()} />
             </div>
         </div>
     )

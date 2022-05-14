@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { getForumPostData } from '../../../../services/admin.service'
 import { Comment, ForumPostType } from '../../../../types'
 import { useRouter } from 'next/router'
-import LoadingSpinner2 from '../../../LoadingSpinner2'
+import LoadingSpinner from '../../../LoadingSpinner'
 import ForumPost from '../../../Forum/ForumPost'
 import { AxiosResponse } from 'axios'
 import ForumPostComments from '../../../Forum/ForumPostComments'
@@ -59,7 +59,7 @@ const AdminForumPost = () => {
     if (loading || !post) {
         return (
             <div className={styles.Loading}>
-                <LoadingSpinner2 />
+                <LoadingSpinner />
             </div>
         )
     }

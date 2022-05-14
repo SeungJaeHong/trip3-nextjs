@@ -1,16 +1,16 @@
-import React, {useEffect, useRef, useState} from "react"
-import styles from "./UserChat.module.scss"
-import {User, UserChatMessage} from "../../../types"
-import {getChatWithUser, sendMessageToUser} from "../../../services/user.service"
-import LoadingSpinner2 from "../../LoadingSpinner2"
-import {useRouter} from "next/router"
-import useUser from "../../../hooks"
-import clsx from "clsx"
-import ChatMessage from "./ChatMessage"
-import ArrowLeftIcon from "../../../icons/ArrowLeftIcon"
-import UserAvatar from "../UserAvatar"
-import SendIcon from "../../../icons/SendIcon"
-import {toast} from 'react-toastify'
+import React, { useEffect, useRef, useState } from 'react'
+import styles from './UserChat.module.scss'
+import { User, UserChatMessage } from '../../../types'
+import { getChatWithUser, sendMessageToUser } from '../../../services/user.service'
+import LoadingSpinner from '../../LoadingSpinner'
+import { useRouter } from 'next/router'
+import useUser from '../../../hooks'
+import clsx from 'clsx'
+import ChatMessage from './ChatMessage'
+import ArrowLeftIcon from '../../../icons/ArrowLeftIcon'
+import UserAvatar from '../UserAvatar'
+import SendIcon from '../../../icons/SendIcon'
+import { toast } from 'react-toastify'
 
 const UserChat = () => {
     const [messages, setMessages] = useState<UserChatMessage[]>([])
@@ -27,14 +27,16 @@ const UserChat = () => {
     useEffect(() => {
         if (id && user) {
             setLoading(false)
-            getChatWithUser(id).then((response) => {
-                setMessages(response.data.messages)
-                setChatWithUser(response.data.user)
-                setLoading(false)
-                bodyRef.current?.scrollBy({top: bodyRef.current?.scrollHeight})
-            }).catch(err => {
-                setLoading(false)
-            })
+            getChatWithUser(id)
+                .then((response) => {
+                    setMessages(response.data.messages)
+                    setChatWithUser(response.data.user)
+                    setLoading(false)
+                    bodyRef.current?.scrollBy({ top: bodyRef.current?.scrollHeight })
+                })
+                .catch((err) => {
+                    setLoading(false)
+                })
         }
     }, [id, user])
 
@@ -45,23 +47,25 @@ const UserChat = () => {
     const onSendMessage = () => {
         if (!sending && chatWithUser && message.length) {
             setSending(true)
-            sendMessageToUser(chatWithUser.id, message).then(res => {
-                const newMessages = [...messages, res.data]
-                setMessages(newMessages)
-                setMessage('')
-                bodyRef.current?.scrollBy({top: bodyRef.current?.scrollHeight})
-                setSending(false)
-            }).catch(err => {
-                toast.error('Sõnumi saatmine ebaõnnestus')
-                setSending(false)
-            })
+            sendMessageToUser(chatWithUser.id, message)
+                .then((res) => {
+                    const newMessages = [...messages, res.data]
+                    setMessages(newMessages)
+                    setMessage('')
+                    bodyRef.current?.scrollBy({ top: bodyRef.current?.scrollHeight })
+                    setSending(false)
+                })
+                .catch((err) => {
+                    toast.error('Sõnumi saatmine ebaõnnestus')
+                    setSending(false)
+                })
         }
     }
 
     if (loading) {
         return (
             <div className={styles.Loader}>
-                <LoadingSpinner2 />
+                <LoadingSpinner />
             </div>
         )
     }
@@ -81,23 +85,21 @@ const UserChat = () => {
                     <div className={styles.Avatar}>
                         <UserAvatar user={chatWithUser} />
                     </div>
-                    <div className={styles.UserName}>
-                        {chatWithUser.name}
-                    </div>
+                    <div className={styles.UserName}>{chatWithUser.name}</div>
                 </div>
             </div>
             <div className={styles.Body} ref={bodyRef}>
                 <div className={styles.List}>
-                    {messages.map(message => {
+                    {messages.map((message) => {
                         return (
-                            <div className={clsx(styles.MessageContainer, {
-                                [styles.MyMessage]: message.userFromId === user?.id
-                            })} key={message.id}>
+                            <div
+                                className={clsx(styles.MessageContainer, {
+                                    [styles.MyMessage]: message.userFromId === user?.id,
+                                })}
+                                key={message.id}
+                            >
                                 <div className={styles.Message}>
-                                    <ChatMessage
-                                        message={message}
-                                        me={user}
-                                        userWith={chatWithUser} />
+                                    <ChatMessage message={message} me={user} userWith={chatWithUser} />
                                 </div>
                             </div>
                         )
@@ -110,7 +112,8 @@ const UserChat = () => {
                     placeholder={'Kirjuta sõnum...'}
                     ref={textareaRef}
                     onChange={onChangeMessage}
-                    value={message} />
+                    value={message}
+                />
                 <div className={styles.SendButton} onClick={onSendMessage}>
                     <SendIcon />
                 </div>

@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react"
-import styles from "./AdminHiddenContentForum.module.scss"
-import {useRouter} from "next/router"
-import {ForumRowHiddenType} from "../../../../types"
-import {getHiddenForumPosts} from "../../../../services/admin.service"
-import LoadingSpinner2 from "../../../LoadingSpinner2"
-import AdminHiddenContentForumRow from "../ForumRow";
-import SimplePaginator from "../../../Paginator/SimplePaginator";
+import React, { useEffect, useState } from 'react'
+import styles from './AdminHiddenContentForum.module.scss'
+import { useRouter } from 'next/router'
+import { ForumRowHiddenType } from '../../../../types'
+import { getHiddenForumPosts } from '../../../../services/admin.service'
+import LoadingSpinner from '../../../LoadingSpinner'
+import AdminHiddenContentForumRow from '../ForumRow'
+import SimplePaginator from '../../../Paginator/SimplePaginator'
 
 const AdminHiddenContentForum = () => {
     const router = useRouter()
@@ -46,14 +46,14 @@ const AdminHiddenContentForum = () => {
     if (loading) {
         return (
             <div className={styles.Loading}>
-                <LoadingSpinner2 />
+                <LoadingSpinner />
             </div>
         )
     }
 
     return (
         <div className={styles.AdminHiddenContentForum}>
-            {posts.map(post => {
+            {posts.map((post) => {
                 return (
                     <div className={styles.ForumRow} key={post.id}>
                         <AdminHiddenContentForumRow {...post} />
@@ -61,10 +61,7 @@ const AdminHiddenContentForum = () => {
                 )
             })}
             <div className={styles.Paginator}>
-                <SimplePaginator
-                    nextPageUrl={getNextPageUrl()}
-                    previousPageUrl={getPreviousPageUrl()}
-                />
+                <SimplePaginator nextPageUrl={getNextPageUrl()} previousPageUrl={getPreviousPageUrl()} />
             </div>
         </div>
     )

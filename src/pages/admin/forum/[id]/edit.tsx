@@ -5,7 +5,7 @@ import AdminForumForm from '../../../../components/Admin/Forum/Form'
 import { getForumPostById } from '../../../../services/admin.service'
 import { useRouter } from 'next/router'
 import { ForumPostType } from '../../../../types'
-import LoadingSpinner2 from '../../../../components/LoadingSpinner2'
+import LoadingSpinner from '../../../../components/LoadingSpinner'
 import styles from '../../../../layouts/AdminLayout/AdminLayout.module.scss'
 
 const AdminForumPostEditPage = () => {
@@ -30,7 +30,7 @@ const AdminForumPostEditPage = () => {
         return (
             <AdminLayout title={'Muuda postitust'}>
                 <div className={styles.Loading}>
-                    <LoadingSpinner2 />
+                    <LoadingSpinner />
                 </div>
             </AdminLayout>
         )

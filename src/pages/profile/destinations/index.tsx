@@ -1,16 +1,16 @@
-import React, {Fragment, useEffect, useState} from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import styles from './UserProfileDestinationPage.module.scss'
 import containerStyle from '../../../styles/containers.module.scss'
-import {Destination} from "../../../types"
-import useUser from "../../../hooks"
-import {useRouter} from "next/router"
-import BackgroundMap from "../../../components/BackgroundMap"
-import clsx from "clsx";
-import Navbar from "../../../components/Navbar";
-import Footer from "../../../components/Footer";
-import LoadingSpinner2 from "../../../components/LoadingSpinner2"
-import {getMyDestinationsData} from "../../../services/user.service"
-import UserProfileDestinationForm from "../../../components/User/UserProfileDestinationForm"
+import { Destination } from '../../../types'
+import useUser from '../../../hooks'
+import { useRouter } from 'next/router'
+import BackgroundMap from '../../../components/BackgroundMap'
+import clsx from 'clsx'
+import Navbar from '../../../components/Navbar'
+import Footer from '../../../components/Footer'
+import LoadingSpinner from '../../../components/LoadingSpinner'
+import { getMyDestinationsData } from '../../../services/user.service'
+import UserProfileDestinationForm from '../../../components/User/UserProfileDestinationForm'
 
 const UserProfileDestinationPage = () => {
     const { userIsLoggedIn } = useUser()
@@ -22,17 +22,19 @@ const UserProfileDestinationPage = () => {
 
     useEffect(() => {
         setLoading(true)
-        getMyDestinationsData().then((response) => {
-            setAllDestinations(response.data.options)
-            setVisited(response.data.visited)
-            setWantsToGo(response.data.wantsToGo)
-            setLoading(false)
-        }).catch(err => {
-            setLoading(false)
-            if (err.response.status === 401) {
-                router.push('/')
-            }
-        })
+        getMyDestinationsData()
+            .then((response) => {
+                setAllDestinations(response.data.options)
+                setVisited(response.data.visited)
+                setWantsToGo(response.data.wantsToGo)
+                setLoading(false)
+            })
+            .catch((err) => {
+                setLoading(false)
+                if (err.response.status === 401) {
+                    router.push('/')
+                }
+            })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -43,7 +45,7 @@ const UserProfileDestinationPage = () => {
     if (loading) {
         return (
             <div className={styles.Loader}>
-                <LoadingSpinner2 />
+                <LoadingSpinner />
             </div>
         )
     }
@@ -56,14 +58,9 @@ const UserProfileDestinationPage = () => {
                     <div className={clsx(styles.Navbar)}>
                         <Navbar darkMode={true} />
                     </div>
-                    <div className={styles.Title}>
-                        Minu sihtkohad
-                    </div>
+                    <div className={styles.Title}>Minu sihtkohad</div>
                     <div className={styles.Form}>
-                        <UserProfileDestinationForm
-                            options={allDestinations}
-                            visited={visited}
-                            wantsToGo={wantsToGo} />
+                        <UserProfileDestinationForm options={allDestinations} visited={visited} wantsToGo={wantsToGo} />
                     </div>
                 </div>
             </div>
