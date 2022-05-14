@@ -11,6 +11,9 @@ const FacebookLogin = () => {
         FB.login(function(response) {
             if (response.status === 'connected') {
                 FB.api('/me?fields=id,email,name,picture.width(800).height(800)', function(userResponse: any) {
+
+                    console.log(userResponse, 'userResponse')
+
                     createUserOrLogin(userResponse.name, userResponse.email).then(res => {
                         mutate(res.data)
                         toast.success('Tere, ' + res.data.name + '!')
@@ -36,7 +39,7 @@ const FacebookLogin = () => {
                             appId      : process.env.FACEBOOK_APP_ID,
                             cookie     : false,
                             xfbml      : true,
-                            version    : 'v12.0'
+                            version    : 'v13.0'
                         });
                     };
                 }}
