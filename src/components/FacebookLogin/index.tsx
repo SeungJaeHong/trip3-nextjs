@@ -10,10 +10,11 @@ const FacebookLogin = () => {
     const signInFB = () => {
         FB.login(function(response) {
             if (response.status === 'connected') {
-                FB.api('/me?fields=id,email,name,picture.width(800).height(800)', function(userResponse: any) {
+                FB.api('/me?fields=id,email,name,picture', function(userResponse: any) {
 
                     console.log(userResponse, 'userResponse')
 
+                    const imageUrl = userResponse?.picture?.data?.url ? userResponse.picture.data.url : undefined
                     createUserOrLogin(userResponse.name, userResponse.email).then(res => {
                         mutate(res.data)
                         toast.success('Tere, ' + res.data.name + '!')
