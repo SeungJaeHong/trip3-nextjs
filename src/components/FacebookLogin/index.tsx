@@ -10,7 +10,7 @@ const FacebookLogin = () => {
     const signInFB = () => {
         FB.login(function(response) {
             if (response.status === 'connected') {
-                FB.api('/me?fields=id,email,name,picture', function(userResponse: any) {
+                FB.api('/me?fields=id,email,name,picture.width(200).height(200)', function(userResponse: any) {
 
                     console.log(userResponse, 'userResponse')
 
