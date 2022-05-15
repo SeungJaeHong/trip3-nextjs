@@ -143,13 +143,28 @@ const FlightOfferShow = ({ flightObj }: Props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const slug = context.query.id
-    let url = process.env.API_BASE_URL + '/flight/' + slug
-    const response = await ApiClientSSR(context).get(url)
-    return {
-        props: {
-            flightObj: response.data,
-        },
+    try {
+        const slug = context.query.id
+        let url = process.env.API_BASE_URL + '/flight/' + slug
+        const response = await ApiClientSSR(context).get(url)
+        return {
+            props: {
+                flightObj: response.data,
+            },
+        }
+    } catch (e: any) {
+        if (e?.response?.status === 500) {
+            return {
+                redirect: {
+                    destination: '/500',
+                    permanent: false,
+                },
+            }
+        } else {
+            return {
+                notFound: true,
+            }
+        }
     }
 }
 
