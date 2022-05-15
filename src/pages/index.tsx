@@ -179,7 +179,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         data.flightOffers = res.data.flightOffers
         data.forumPosts = res.data.forumPosts
     } catch (error: any) {
-        if (error?.code === 'ECONNREFUSED') {
+        if (error?.code === 'ECONNREFUSED' || error?.response?.status === 500) {
             return {
                 redirect: {
                     destination: '/500',
