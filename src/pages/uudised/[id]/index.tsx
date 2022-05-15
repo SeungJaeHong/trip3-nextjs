@@ -80,6 +80,9 @@ const NewsShow = ({ newsObj }: Props) => {
                     images: [
                         {
                             url: news.socialImgUrl,
+                            width: 1024,
+                            height: undefined,
+                            type: undefined
                         },
                     ],
                 }}

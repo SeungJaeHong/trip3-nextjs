@@ -64,6 +64,9 @@ const FlightOfferShow = ({ flightObj }: Props) => {
                     images: [
                         {
                             url: flight.socialImgUrl,
+                            width: 1024,
+                            height: undefined,
+                            type: undefined
                         },
                     ],
                 }}
@@ -140,19 +143,13 @@ const FlightOfferShow = ({ flightObj }: Props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    try {
-        const slug = context.query.id
-        let url = process.env.API_BASE_URL + '/flight/' + slug
-        const response = await ApiClientSSR(context).get(url)
-        return {
-            props: {
-                flightObj: response.data,
-            },
-        }
-    } catch (e) {
-        return {
-            notFound: true,
-        }
+    const slug = context.query.id
+    let url = process.env.API_BASE_URL + '/flight/' + slug
+    const response = await ApiClientSSR(context).get(url)
+    return {
+        props: {
+            flightObj: response.data,
+        },
     }
 }
 

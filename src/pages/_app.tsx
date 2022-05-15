@@ -75,7 +75,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                             url: '/images/social.jpg',
                             width: 1200,
                             height: 627,
-                            alt: 'Trip.ee',
                             type: 'image/jpeg',
                         },
                     ],
