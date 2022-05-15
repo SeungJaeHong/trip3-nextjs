@@ -6,8 +6,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
 import Script from 'next/script'
 import AdsConfig from '../lib/AdsConfig'
-import Head from 'next/head'
 import { GoogleAnalytics } from '../components/GoogleAnalytics'
+import { DefaultSeo } from 'next-seo'
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
@@ -31,10 +31,50 @@ function MyApp({ Component, pageProps }: AppProps) {
                 pauseOnHover={false}
                 theme={'colored'}
             />
-            <Head>
-                <link rel="shortcut icon" href="/favicon.ico" />
-                <title>Trip.ee | Eesti reisiportaal</title>
-            </Head>
+            <DefaultSeo
+                dangerouslySetAllPagesToNoFollow={String(process.env.APP_URL) !== 'https://trip.ee'}
+                dangerouslySetAllPagesToNoIndex={String(process.env.APP_URL) !== 'https://trip.ee'}
+                title={'Trip.ee | Eesti reisiportaal'}
+                description={
+                    'Trip.ee koondab kokku kõik reisimiseks vajaliku: reisijate kogemused ja reisisoovitused, reisiideed, odavad piletid, reisikaaslaste otsingu ja reisivarustuse ost ja müük'
+                }
+                additionalLinkTags={[
+                    {
+                        rel: 'icon',
+                        href: '/favicon.ico',
+                    },
+                    {
+                        rel: 'apple-touch-icon',
+                        href: '/favicons/apple-touch-icon-76x76.png',
+                        sizes: '76x76',
+                    },
+                    {
+                        rel: 'apple-touch-icon',
+                        href: '/favicons/apple-touch-icon-180x180.png',
+                        sizes: '180x180',
+                    },
+                    {
+                        rel: 'icon',
+                        type: 'image/png',
+                        href: '/favicons/android-chrome-72x72.png',
+                        sizes: '72x72',
+                    },
+                    {
+                        rel: 'icon',
+                        type: 'image/png',
+                        href: '/favicons/android-chrome-192x192.png',
+                        sizes: '192x192',
+                    },
+                ]}
+                openGraph={{
+                    type: 'website',
+                    locale: 'et_EE',
+                    site_name: 'Trip.ee',
+                }}
+                twitter={{
+                    cardType: 'summary_large_image',
+                }}
+            />
             <GoogleAnalytics />
             <Component {...pageProps} />
             <Script
