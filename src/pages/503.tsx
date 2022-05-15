@@ -12,12 +12,12 @@ export default function ErrorPage503() {
                 </div>
                 <div className={containerStyle.ContainerLg}>
                     <div className={styles.Content}>
-                        <h2>Uuendame...</h2>
+                        <h2>Käib töö ja vile koos...</h2>
                         <p>
-                            Uunedame trippi
+                            Hetkel toimub uuenduste ja paranduste üleslaadimine.
                         </p>
                         <p>
-                            Proovi mõne aja pärast uuesti.
+                            Proovi mõne minuti pärast uuesti.
                         </p>
                     </div>
                 </div>
