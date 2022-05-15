@@ -16,9 +16,11 @@ const NewsLatest = ({ take, excludeId, destinationId }: Props) => {
     const [news, setNews] = useState<NewsCardType[]>([])
 
     useEffect(() => {
-        getLatestNews(take, excludeId, destinationId).then((res) => {
-            setNews(res.data)
-        })
+        getLatestNews(take, excludeId, destinationId)
+            .then((res) => {
+                setNews(res.data)
+            })
+            .catch((e) => {})
     }, [destinationId, excludeId])
 
     return (

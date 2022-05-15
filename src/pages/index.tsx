@@ -51,17 +51,19 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
             </div>
             <div className={clsx([containerStyle.ContainerXl, styles.Content])}>
                 <div className={styles.CenteredContainer}>
-                    <div className={styles.FlightOffers}>
-                        <div className={styles.FlightOfferCard}>
-                            <FlightOfferCard {...flightOffers[0]} color={'purple'} />
+                    {flightOffers.length >= 3 && (
+                        <div className={styles.FlightOffers}>
+                            <div className={styles.FlightOfferCard}>
+                                <FlightOfferCard {...flightOffers[0]} color={'purple'} />
+                            </div>
+                            <div className={styles.FlightOfferCard}>
+                                <FlightOfferCard {...flightOffers[1]} color={'yellow'} />
+                            </div>
+                            <div className={styles.FlightOfferCard}>
+                                <FlightOfferCard {...flightOffers[2]} color={'red'} />
+                            </div>
                         </div>
-                        <div className={styles.FlightOfferCard}>
-                            <FlightOfferCard {...flightOffers[1]} color={'yellow'} />
-                        </div>
-                        <div className={styles.FlightOfferCard}>
-                            <FlightOfferCard {...flightOffers[2]} color={'red'} />
-                        </div>
-                    </div>
+                    )}
                     <div
                         className={clsx(styles.MoreFlightsLink, {
                             [styles.UserLoggedIn]: userIsLoggedIn,
@@ -176,8 +178,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         const res = await ApiClientSSR(context).get('/frontpage')
         data.flightOffers = res.data.flightOffers
         data.forumPosts = res.data.forumPosts
-    } catch (error) {
-        //console.error(error)
+    } catch (error: any) {
+        if (error?.code === 'ECONNREFUSED') {
+            return {
+                redirect: {
+                    destination: '/500',
+                    permanent: false,
+                },
+            }
+        }
     }
 
     return {

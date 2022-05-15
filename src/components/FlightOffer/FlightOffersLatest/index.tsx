@@ -23,6 +23,7 @@ const FlightOffersLatest = ({ take, title, excludeId, destinationId }: Props) =>
             .then((res) => {
                 setFlights(res.data)
             })
+            .catch((e) => {})
             .finally(() => setLoading(false))
     }, [destinationId, excludeId])
 

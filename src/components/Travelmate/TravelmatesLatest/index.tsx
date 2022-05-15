@@ -24,6 +24,7 @@ const TravelmatesLatest = ({ grid, take, destinationId }: Props) => {
             .then((res) => {
                 setTravelmates(res.data)
             })
+            .catch((e) => {})
             .finally(() => setLoading(false))
     }, [destinationId])
 
@@ -66,7 +67,7 @@ const TravelmatesLatest = ({ grid, take, destinationId }: Props) => {
 
 TravelmatesLatest.defaultProps = {
     grid: false,
-    take: 3
+    take: 3,
 }
 
 export default TravelmatesLatest
