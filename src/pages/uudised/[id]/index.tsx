@@ -188,9 +188,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                 newsObj: response.data,
             },
         }
-    } catch (e) {
-        return {
-            notFound: true,
+    } catch (e: any) {
+        if (e?.response?.status === 500) {
+            return {
+                redirect: {
+                    destination: '/500',
+                    permanent: false,
+                },
+            }
+        } else {
+            return {
+                notFound: true,
+            }
         }
     }
 }

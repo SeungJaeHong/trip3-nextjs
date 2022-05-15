@@ -38,6 +38,12 @@ function MyApp({ Component, pageProps }: AppProps) {
                 description={
                     'Trip.ee koondab kokku kõik reisimiseks vajaliku: reisijate kogemused ja reisisoovitused, reisiideed, odavad piletid, reisikaaslaste otsingu ja reisivarustuse ost ja müük'
                 }
+                additionalMetaTags={[
+                    {
+                        name: 'keywords',
+                        content: 'Reisifoorum, odavad lennupiletid, reisikaaslased, reisiuudised'
+                    }
+                ]}
                 additionalLinkTags={[
                     {
                         rel: 'icon',

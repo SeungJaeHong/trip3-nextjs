@@ -1,14 +1,14 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 import Header from '../../../components/Header'
 import { GetServerSideProps } from 'next'
 import containerStyle from '../../../styles/containers.module.scss'
 import styles from './TravelmateAddPage.module.scss'
 import { Destination, Topic } from '../../../types'
-import { useRouter } from 'next/router'
 import ApiClientSSR from '../../../lib/ApiClientSSR'
 import Footer from '../../../components/Footer'
 import MoreLink from '../../../components/MoreLink'
 import TravelmateForm from '../../../components/Travelmate/TravelmateForm'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     destinations: Destination[]
@@ -17,10 +17,10 @@ type Props = {
     monthOptions: { value: string; label: string }[]
 }
 
-const TravelmateAddPage = ({ destinations, topics, durationOptions, monthOptions}: Props) => {
-    const router = useRouter()
+const TravelmateAddPage = ({ destinations, topics, durationOptions, monthOptions }: Props) => {
     return (
         <Fragment>
+            <NextSeo nofollow={true} noindex={true} />
             <Header title={'Reisikaaslased'} className={styles.Header} />
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.ContentContainer}>

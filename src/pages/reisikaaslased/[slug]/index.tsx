@@ -21,6 +21,7 @@ import { toggleTravelmateStatus } from '../../../services/travelmate.service'
 import Alert from '../../../components/Alert'
 import RelatedContentBlock from '../../../components/RelatedContentBlock'
 import Ads from '../../../components/Ads'
+import {NextSeo} from "next-seo";
 
 type Props = {
     content: TravelmateContent
@@ -163,6 +164,14 @@ const TravelmatePage = ({ content }: Props) => {
 
     return (
         <Fragment>
+            <NextSeo
+                title={'Trip.ee | Reisikaaslased'}
+                description={travelmate.description}
+                openGraph={{
+                    title: travelmate.title,
+                    description: travelmate.description,
+                }}
+            />
             <Header>
                 <div className={styles.PageTitleContainer}>
                     <div className={styles.PageTitle}>

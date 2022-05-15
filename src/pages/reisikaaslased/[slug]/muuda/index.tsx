@@ -3,12 +3,12 @@ import Header from '../../../../components/Header'
 import { GetServerSideProps } from 'next'
 import containerStyle from '../../../../styles/containers.module.scss'
 import styles from '../../lisa-uus/TravelmateAddPage.module.scss'
-import {Destination, Topic, TravelmateContent} from '../../../../types'
-import { useRouter } from 'next/router'
+import { Destination, Topic, TravelmateContent } from '../../../../types'
 import TravelmateForm from '../../../../components/Travelmate/TravelmateForm'
 import MoreLink from '../../../../components/MoreLink'
 import Footer from '../../../../components/Footer'
 import ApiClientSSR from '../../../../lib/ApiClientSSR'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     travelmate: TravelmateContent
@@ -19,9 +19,9 @@ type Props = {
 }
 
 const TravelmateEditPage = ({ travelmate, destinations, topics, durationOptions, monthOptions }: Props) => {
-    const router = useRouter()
     return (
         <Fragment>
+            <NextSeo nofollow={true} noindex={true} />
             <Header title={'Reisikaaslased'} className={styles.Header} />
             <div className={containerStyle.ContainerXl}>
                 <div className={styles.ContentContainer}>
@@ -76,12 +76,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                 destinations: response.data.destinations || [],
                 topics: response.data.topics || [],
                 durationOptions: response.data.durationOptions,
-                monthOptions: response.data.monthOptions
+                monthOptions: response.data.monthOptions,
             },
         }
     } catch (e) {
         return {
-            notFound: true
+            notFound: true,
         }
     }
 }

@@ -4,6 +4,7 @@ import { ForumRowType } from '../../../types'
 import ForumIndexPage from '../../../components/Forum/ForumIndexPage'
 import ApiClientSSR from '../../../lib/ApiClientSSR'
 import { objectToQueryString } from '../../../helpers'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     forumPosts: ForumRowType[]
@@ -19,13 +20,23 @@ type Props = {
 
 const MainForumIndex = (props: Props) => {
     return (
-        <ForumIndexPage
-            type={'general'}
-            title={'Üldfoorum'}
-            description={'Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi.'}
-            searchPlaceholder={'Otsi üldfoorumist...'}
-            {...props}
-        />
+        <>
+            <NextSeo
+                title={'Trip.ee | Üldfoorum'}
+                description={'Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi'}
+                openGraph={{
+                    title: 'Üldfoorum',
+                    description: 'Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi',
+                }}
+            />
+            <ForumIndexPage
+                type={'general'}
+                title={'Üldfoorum'}
+                description={'Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi.'}
+                searchPlaceholder={'Otsi üldfoorumist...'}
+                {...props}
+            />
+        </>
     )
 }
 

@@ -10,6 +10,7 @@ import ApiClientSSR from '../../../../lib/ApiClientSSR'
 import MoreLink from '../../../../components/MoreLink'
 import ForumPostForm from '../../../../components/Forum/ForumPostForm'
 import { Destination, ForumPostType, Topic } from '../../../../types'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     post: ForumPostType
@@ -20,6 +21,7 @@ type Props = {
 const EditForumTopicPage = ({ destinations, topics, post }: Props) => {
     return (
         <Fragment>
+            <NextSeo nofollow={true} noindex={true} />
             <div className={styles.Container}>
                 <BackgroundMap />
                 <div className={containerStyle.ContainerXl}>

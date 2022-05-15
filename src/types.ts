@@ -107,6 +107,7 @@ export interface Image {
 export interface ForumPostType {
     id: number
     title: string
+    description: string
     body: string
     type: string
     slug: string
@@ -182,6 +183,7 @@ export type DestinationContent = {
 export type TravelmateContent = {
     id: number
     title: string
+    description: string
     body: string
     slug: string
     status: number

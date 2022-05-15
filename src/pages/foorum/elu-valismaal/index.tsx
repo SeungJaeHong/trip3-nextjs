@@ -4,6 +4,7 @@ import { ForumRowType } from '../../../types'
 import ForumIndexPage from '../../../components/Forum/ForumIndexPage'
 import ApiClientSSR from '../../../lib/ApiClientSSR'
 import { objectToQueryString } from '../../../helpers'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     forumPosts: ForumRowType[]
@@ -19,13 +20,23 @@ type Props = {
 
 const ForeignForumIndex = (props: Props) => {
     return (
-        <ForumIndexPage
-            type={'foreign'}
-            title={'Elu välismaal'}
-            description={'Soovitused välismaal elavatelt eestlastelt.'}
-            searchPlaceholder={'Otsi elu välismaal foorumist...'}
-            {...props}
-        />
+        <>
+            <NextSeo
+                title={'Trip.ee | Elu välismaal'}
+                description={'Soovitused välismaal elavatelt eestlastelt'}
+                openGraph={{
+                    title: 'Elu välismaal',
+                    description: 'Soovitused välismaal elavatelt eestlastelt',
+                }}
+            />
+            <ForumIndexPage
+                type={'foreign'}
+                title={'Elu välismaal'}
+                description={'Soovitused välismaal elavatelt eestlastelt.'}
+                searchPlaceholder={'Otsi elu välismaal foorumist...'}
+                {...props}
+            />
+        </>
     )
 }
 

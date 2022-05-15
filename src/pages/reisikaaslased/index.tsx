@@ -16,6 +16,7 @@ import ApiClientSSR from '../../lib/ApiClientSSR'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
 import useUser from '../../hooks'
 import Ads from '../../components/Ads'
+import {NextSeo} from "next-seo";
 
 type Props = {
     travelmates: TravelmateRowType[]
@@ -91,6 +92,14 @@ const TravelmatesIndex = ({
 
     return (
         <Fragment>
+            <NextSeo
+                title={'Trip.ee | Reisikaaslased'}
+                description={'Leia endale reisikaaslane juba planeeritud reisiks või uute plaanide koostamiseks'}
+                openGraph={{
+                    title: 'Reisikaaslased',
+                    description: 'Leia endale reisikaaslane juba planeeritud reisiks või uute plaanide koostamiseks'
+                }}
+            />
             <Header title={'Reisikaaslased'} className={styles.TravelmatesHeader}>
                 <div className={styles.FilterContainer}>
                     <TravelmateFilter

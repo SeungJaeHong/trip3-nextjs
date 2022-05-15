@@ -3,6 +3,7 @@ import { GetServerSideProps } from 'next'
 import { ForumRowType } from '../../../types'
 import ForumIndexPage from '../../../components/Forum/ForumIndexPage'
 import ApiClientSSR from '../../../lib/ApiClientSSR'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     forumPosts: ForumRowType[]
@@ -14,13 +15,16 @@ type Props = {
 
 const FollowsForumIndex = (props: Props) => {
     return (
-        <ForumIndexPage
-            type={'follows'}
-            title={'Minu jälgimised'}
-            description={'Postitused, mida Sa oled jälgitavaks märkinud.'}
-            searchPlaceholder={'Otsi vaba teema foorumist...'}
-            {...props}
-        />
+        <>
+            <NextSeo nofollow={true} noindex={true} />
+            <ForumIndexPage
+                type={'follows'}
+                title={'Minu jälgimised'}
+                description={'Postitused, mida Sa oled jälgitavaks märkinud.'}
+                searchPlaceholder={'Otsi vaba teema foorumist...'}
+                {...props}
+            />
+        </>
     )
 }
 
@@ -38,7 +42,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                 forumPosts: res.data.forumList?.items || [],
                 hasMore: res.data.forumList?.hasMore || false,
                 currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
-            }
+            },
         }
     } catch (e: any) {
         if (e.response?.status === 401 || e.response?.status === 419) {

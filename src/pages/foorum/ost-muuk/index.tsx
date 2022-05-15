@@ -4,6 +4,7 @@ import { ForumRowType } from '../../../types'
 import ForumIndexPage from '../../../components/Forum/ForumIndexPage'
 import ApiClientSSR from '../../../lib/ApiClientSSR'
 import { objectToQueryString } from '../../../helpers'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     forumPosts: ForumRowType[]
@@ -19,13 +20,23 @@ type Props = {
 
 const BuySellForumIndex = (props: Props) => {
     return (
-        <ForumIndexPage
-            type={'buysell'}
-            title={'Ost-müük'}
-            description={'Lennupiletite, reisivarustuse ja muu reisimiseks vajaliku ost ja müük.'}
-            searchPlaceholder={'Otsi ost-müük foorumist...'}
-            {...props}
-        />
+        <>
+            <NextSeo
+                title={'Trip.ee | Ost-müük'}
+                description={'Lennupiletite, reisivarustuse ja muu reisimiseks vajaliku ost ja müük'}
+                openGraph={{
+                    title: 'Ost-müük',
+                    description: 'Lennupiletite, reisivarustuse ja muu reisimiseks vajaliku ost ja müük',
+                }}
+            />
+            <ForumIndexPage
+                type={'buysell'}
+                title={'Ost-müük'}
+                description={'Lennupiletite, reisivarustuse ja muu reisimiseks vajaliku ost ja müük.'}
+                searchPlaceholder={'Otsi ost-müük foorumist...'}
+                {...props}
+            />
+        </>
     )
 }
 
