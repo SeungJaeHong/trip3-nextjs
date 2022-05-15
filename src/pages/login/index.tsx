@@ -1,16 +1,17 @@
-import React, {Fragment, useEffect} from "react"
-import Navbar from "../../components/Navbar"
+import React, { Fragment, useEffect } from 'react'
+import Navbar from '../../components/Navbar'
 import styles from './Login.module.scss'
-import clsx from "clsx"
-import Footer from "../../components/Footer"
-import containerStyle from "../../styles/containers.module.scss"
-import BackgroundMap from "../../components/BackgroundMap"
-import Link from "next/link"
-import LoginForm from "../../components/LoginForm"
-import {GetServerSideProps} from "next"
-import ApiClientSSR from "../../lib/ApiClientSSR"
-import {useRouter} from "next/router"
-import {toast} from 'react-toastify'
+import clsx from 'clsx'
+import Footer from '../../components/Footer'
+import containerStyle from '../../styles/containers.module.scss'
+import BackgroundMap from '../../components/BackgroundMap'
+import Link from 'next/link'
+import LoginForm from '../../components/LoginForm'
+import { GetServerSideProps } from 'next'
+import ApiClientSSR from '../../lib/ApiClientSSR'
+import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
+import { NextSeo } from 'next-seo'
 
 const LoginPage = (props: any) => {
     const router = useRouter()
@@ -22,15 +23,14 @@ const LoginPage = (props: any) => {
 
     return (
         <Fragment>
+            <NextSeo title={'Trip.ee | Logi sisse'} />
             <div className={styles.Container}>
                 <BackgroundMap />
                 <div className={containerStyle.ContainerXl}>
                     <div className={clsx(styles.Navbar)}>
                         <Navbar darkMode={true} />
                     </div>
-                    <div className={styles.Title}>
-                        Logi sisse
-                    </div>
+                    <div className={styles.Title}>Logi sisse</div>
                     <div className={styles.RegisterTitle}>
                         Pole veel kasutaja?
                         <Link href={'/register'}>
@@ -41,7 +41,10 @@ const LoginPage = (props: any) => {
                         <LoginForm />
                     </div>
                     <div className={styles.ForgotPassword}>
-                        Ei mäleta oma parooli? <Link href={'/reset-password'}><a className={styles.ForgotPasswordLink}>Taasta oma parool siin</a></Link>
+                        Ei mäleta oma parooli?{' '}
+                        <Link href={'/reset-password'}>
+                            <a className={styles.ForgotPasswordLink}>Taasta oma parool siin</a>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -61,7 +64,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         }
     } catch (e) {
         return {
-            props: {}
+            props: {},
         }
     }
 }

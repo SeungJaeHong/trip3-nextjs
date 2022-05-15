@@ -16,6 +16,7 @@ import useUser from '../../hooks'
 import FormSelect from '../../components/Form/FormSelect'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
 import Ads from '../../components/Ads'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     news?: NewsCardType[]
@@ -130,6 +131,10 @@ const NewsIndex = (props: Props) => {
 
     return (
         <Fragment>
+            <NextSeo
+                title={'Trip.ee | Uudised'}
+                description={'Uudised reisimisest, reisi- ja lennufirmadest, viisadest ja muust parasjagu aktuaalsest'}
+            />
             <Header title={'Uudised'}>
                 <div className={styles.SearchContainer}>
                     <div className={styles.Search}>

@@ -9,10 +9,12 @@ import BackgroundMap from '../../components/BackgroundMap'
 import RegisterForm from '../../components/RegisterForm'
 import { GetServerSideProps } from 'next'
 import ApiClientSSR from '../../lib/ApiClientSSR'
+import { NextSeo } from 'next-seo'
 
 const RegisterPage = () => {
     return (
         <Fragment>
+            <NextSeo title={'Trip.ee | Registreeri'} />
             <div className={styles.Container}>
                 <BackgroundMap />
                 <div className={containerStyle.ContainerXl}>

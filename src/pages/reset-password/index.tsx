@@ -8,10 +8,12 @@ import BackgroundMap from '../../components/BackgroundMap'
 import { GetServerSideProps } from 'next'
 import ApiClientSSR from '../../lib/ApiClientSSR'
 import ForgotPasswordForm from '../../components/ForgotPasswordForm'
+import { NextSeo } from 'next-seo'
 
 const ForgotPasswordPage = () => {
     return (
         <Fragment>
+            <NextSeo title={'Trip.ee | Taasta parool'} />
             <div className={styles.Container}>
                 <BackgroundMap />
                 <div className={containerStyle.ContainerXl}>

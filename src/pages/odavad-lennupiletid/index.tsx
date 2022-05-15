@@ -16,6 +16,7 @@ import ApiClientSSR from '../../lib/ApiClientSSR'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
 import useUser from '../../hooks'
 import Ads from '../../components/Ads'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     flightOffers: FlightOfferRowType[]
@@ -88,6 +89,16 @@ const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }
 
     return (
         <Fragment>
+            <NextSeo
+                title={'Trip.ee | Lennupakkumised'}
+                description={
+                    'Kõik odavad lennupiletid mugavalt ühelt lehel. Vaata soodsaid lennupakkumisi ning alusta oma reisi planeerimist siit'
+                }
+                openGraph={{
+                    title: 'Lennupakkumised',
+                    description: 'Kõik odavad lennupiletid mugavalt ühelt lehel. Vaata soodsaid lennupakkumisi ning alusta oma reisi planeerimist siit'
+                }}
+            />
             <Header title={'Lennupakkumised'}>
                 <div className={styles.FlightOfferTabs}>
                     <FlightOfferFilterTags tags={filterTags} selected={filters} onSelect={onFilterSelect} />

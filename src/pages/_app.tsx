@@ -70,6 +70,15 @@ function MyApp({ Component, pageProps }: AppProps) {
                     type: 'website',
                     locale: 'et_EE',
                     site_name: 'Trip.ee',
+                    images: [
+                        {
+                            url: '/images/social.jpg',
+                            width: 1200,
+                            height: 627,
+                            alt: 'Trip.ee',
+                            type: 'image/jpeg',
+                        },
+                    ],
                 }}
                 twitter={{
                     cardType: 'summary_large_image',
