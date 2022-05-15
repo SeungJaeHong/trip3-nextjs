@@ -14,6 +14,7 @@ import ApiClientSSR from '../../../../lib/ApiClientSSR'
 import FlightForm from '../../../../components/FlightOffer/FlightForm'
 import { toast } from 'react-toastify'
 import { updateFlight } from '../../../../services/flight.service'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     flight: FlightContent
@@ -75,6 +76,7 @@ const FlightOfferEditPage = ({ flight, destinations, tags }: Props) => {
 
     return (
         <Fragment>
+            <NextSeo nofollow={true} noindex={true} />
             <div className={styles.Container}>
                 <BackgroundMap />
                 <div className={containerStyle.ContainerXl}>

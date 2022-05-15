@@ -20,6 +20,7 @@ import Alert from '../../../components/Alert'
 import { postComment } from '../../../services/comment.service'
 import RelatedContentBlock from '../../../components/RelatedContentBlock'
 import Ads from '../../../components/Ads'
+import {NextSeo} from "next-seo";
 
 type Props = {
     newsObj: NewsContent
@@ -70,6 +71,14 @@ const NewsShow = ({ newsObj }: Props) => {
 
     return (
         <Fragment>
+            <NextSeo
+                title={'Trip.ee | Uudised'}
+                description={news.description}
+                openGraph={{
+                    title: news.title,
+                    description: news.description,
+                }}
+            />
             <Header backgroundImage={news.backgroundImageUrl}>
                 <div className={clsx(containerStyle.CenteredContainer, styles.HeaderContainer)}>
                     <div className={styles.HeaderTitle}>{news.title}</div>

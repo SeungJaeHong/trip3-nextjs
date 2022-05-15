@@ -14,6 +14,7 @@ import ApiClientSSR from '../../../lib/ApiClientSSR'
 import FlightForm from '../../../components/FlightOffer/FlightForm'
 import { toast } from 'react-toastify'
 import { storeFlight } from '../../../services/flight.service'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     destinations: Destination[]
@@ -74,6 +75,7 @@ const FlightOfferAddPage = ({ destinations, tags }: Props) => {
 
     return (
         <Fragment>
+            <NextSeo nofollow={true} noindex={true} />
             <div className={styles.Container}>
                 <BackgroundMap />
                 <div className={containerStyle.ContainerXl}>

@@ -140,6 +140,7 @@ export type FlightContent = {
 export type NewsContent = {
     id: number
     title: string
+    description: string
     body: string
     bodyRaw: string
     slug: string

@@ -14,6 +14,7 @@ import { addNews } from '../../../services/news.service'
 import { toast } from 'react-toastify'
 import { GetServerSideProps } from 'next'
 import ApiClientSSR from '../../../lib/ApiClientSSR'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     destinations: Destination[]
@@ -75,6 +76,7 @@ const NewsAddPage = ({ destinations, topics }: Props) => {
 
     return (
         <Fragment>
+            <NextSeo nofollow={true} noindex={true} />
             <div className={styles.Container}>
                 <BackgroundMap />
                 <div className={containerStyle.ContainerXl}>
