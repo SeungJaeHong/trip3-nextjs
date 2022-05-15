@@ -186,7 +186,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                     permanent: false,
                 },
             }
-        } else if (error?.code === 503) {
+        } else if (error?.response?.status === 503) {
             return {
                 redirect: {
                     destination: '/503',
