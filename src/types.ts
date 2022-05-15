@@ -126,6 +126,7 @@ export interface ForumPostType {
 export type FlightContent = {
     id: number
     title: string
+    description: string
     body: string
     bodyRaw: string
     slug: string

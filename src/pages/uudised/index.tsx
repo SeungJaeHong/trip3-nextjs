@@ -134,6 +134,10 @@ const NewsIndex = (props: Props) => {
             <NextSeo
                 title={'Trip.ee | Uudised'}
                 description={'Uudised reisimisest, reisi- ja lennufirmadest, viisadest ja muust parasjagu aktuaalsest'}
+                openGraph={{
+                    title: 'Uudised',
+                    description: 'Uudised reisimisest, reisi- ja lennufirmadest, viisadest ja muust parasjagu aktuaalsest'
+                }}
             />
             <Header title={'Uudised'}>
                 <div className={styles.SearchContainer}>

@@ -18,6 +18,7 @@ import { publishFlight } from '../../../services/flight.service'
 import FlightOffersLatest from '../../../components/FlightOffer/FlightOffersLatest'
 import RelatedContentBlock from '../../../components/RelatedContentBlock'
 import Ads from '../../../components/Ads'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     flightObj: FlightContent
@@ -54,6 +55,14 @@ const FlightOfferShow = ({ flightObj }: Props) => {
 
     return (
         <Fragment>
+            <NextSeo
+                title={'Trip.ee | Lennupakkumised'}
+                description={flight.description}
+                openGraph={{
+                    title: flight.title,
+                    description: flight.description,
+                }}
+            />
             <Header backgroundImage={flight.backgroundImageUrl}>
                 <div className={clsx(containerStyle.CenteredContainer, styles.HeaderContainer)}>
                     <div className={styles.HeaderTitle}>{flight.title}</div>
