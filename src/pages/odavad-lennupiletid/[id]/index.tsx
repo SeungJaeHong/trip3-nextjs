@@ -61,6 +61,11 @@ const FlightOfferShow = ({ flightObj }: Props) => {
                 openGraph={{
                     title: flight.title,
                     description: flight.description,
+                    images: [
+                        {
+                            url: flight.socialImgUrl,
+                        },
+                    ],
                 }}
             />
             <Header backgroundImage={flight.backgroundImageUrl}>

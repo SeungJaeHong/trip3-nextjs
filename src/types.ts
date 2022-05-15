@@ -133,6 +133,7 @@ export type FlightContent = {
     status: number
     createdAt: string
     backgroundImageUrl: string
+    socialImgUrl: string
     destinations?: Destination[]
     tags?: Tag[]
 }
@@ -147,6 +148,7 @@ export type NewsContent = {
     status: number
     createdAt: string
     backgroundImageUrl: string
+    socialImgUrl: string
     user: User
     destinations?: Destination[]
     topics?: Topic[]

@@ -20,7 +20,7 @@ import Alert from '../../../components/Alert'
 import { postComment } from '../../../services/comment.service'
 import RelatedContentBlock from '../../../components/RelatedContentBlock'
 import Ads from '../../../components/Ads'
-import {NextSeo} from "next-seo";
+import { NextSeo } from 'next-seo'
 
 type Props = {
     newsObj: NewsContent
@@ -77,6 +77,11 @@ const NewsShow = ({ newsObj }: Props) => {
                 openGraph={{
                     title: news.title,
                     description: news.description,
+                    images: [
+                        {
+                            url: news.socialImgUrl,
+                        },
+                    ],
                 }}
             />
             <Header backgroundImage={news.backgroundImageUrl}>
