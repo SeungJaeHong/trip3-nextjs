@@ -5,10 +5,17 @@ import clsx from 'clsx'
 import Footer from '../../components/Footer'
 import containerStyle from '../../styles/containers.module.scss'
 import BackgroundMap from '../../components/BackgroundMap'
+import { NextSeo } from 'next-seo'
 
 const ContactPage = () => {
     return (
         <Fragment>
+            <NextSeo
+                title={'Trip.ee | Kontakt'}
+                openGraph={{
+                    title: 'Kontakt',
+                }}
+            />
             <div className={styles.Container}>
                 <BackgroundMap />
                 <div className={containerStyle.ContainerXl}>

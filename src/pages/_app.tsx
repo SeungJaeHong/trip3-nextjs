@@ -75,7 +75,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 openGraph={{
                     type: 'website',
                     locale: 'et_EE',
-                    site_name: 'Trip.ee',
+                    site_name: 'trip.ee',
                     images: [
                         {
                             url: '/images/social.jpg',

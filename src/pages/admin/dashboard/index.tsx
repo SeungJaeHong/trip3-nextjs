@@ -1,7 +1,7 @@
 import React from 'react'
-import AdminLayout from "../../../layouts/AdminLayout";
-import AdminDashboard from "../../../components/Admin/Dashboard";
-import {withAdminAuth} from "../../../hoc/withAdminAuth";
+import AdminLayout from '../../../layouts/AdminLayout'
+import AdminDashboard from '../../../components/Admin/Dashboard'
+import { withAdminAuth } from '../../../hoc/withAdminAuth'
 
 const AdminDashboardPage = () => {
     return (

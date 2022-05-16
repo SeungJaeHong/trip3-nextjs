@@ -5,10 +5,17 @@ import clsx from 'clsx'
 import Footer from '../../components/Footer'
 import containerStyle from '../../styles/containers.module.scss'
 import BackgroundMap from '../../components/BackgroundMap'
+import { NextSeo } from 'next-seo'
 
 const PrivacyTermsPage = () => {
     return (
         <Fragment>
+            <NextSeo
+                title={'Trip.ee | Privaatsustingimused'}
+                openGraph={{
+                    title: 'Privaatsustingimused',
+                }}
+            />
             <div className={styles.Container}>
                 <BackgroundMap />
                 <div className={containerStyle.ContainerXl}>
@@ -23,8 +30,8 @@ const PrivacyTermsPage = () => {
                     <p>
                         Trip.ee kogub ja töötleb ainult neid isikuandmeid, mida kasutajad meiega vabatahtlikult jagavad.
                         Kasutaja annab isikuandmete töötlemise nõusoleku kasutajaks registreerimisel tehes märke
-                        &quot;Nõustun ma kasutajatingimustega ja privaatsuspoliitikaga&quot; välja juurde. Järgnevalt selgitame
-                        kuidas Trip.ee kogub, töötleb ja kasutab kasutajate andmeid.
+                        &quot;Nõustun ma kasutajatingimustega ja privaatsuspoliitikaga&quot; välja juurde. Järgnevalt
+                        selgitame kuidas Trip.ee kogub, töötleb ja kasutab kasutajate andmeid.
                     </p>
                     <h3>Andmed mida me kogume ja töötleme</h3>
                     <ul>
@@ -99,9 +106,9 @@ const PrivacyTermsPage = () => {
                         <li>
                             <strong>Kasutaja viimane sisselogimine</strong>
                             <p>
-                                Me salvestame aja millal kasutaja end viimati Trip.ee&apos;sse sisse logis. Sisselogimisaja
-                                abil saame vajadusel paluda kasutaja profiiliandmete uuendamist -- Trip.ee ei kasuta ega
-                                töötle aegunud isikuandmeid.
+                                Me salvestame aja millal kasutaja end viimati Trip.ee&apos;sse sisse logis.
+                                Sisselogimisaja abil saame vajadusel paluda kasutaja profiiliandmete uuendamist --
+                                Trip.ee ei kasuta ega töötle aegunud isikuandmeid.
                             </p>
                         </li>
                         <li>
