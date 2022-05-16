@@ -1,23 +1,24 @@
-import React, {Fragment, useEffect, useState} from "react"
-import Navbar from "../../../../components/Navbar"
+import React, { Fragment, useEffect, useState } from 'react'
+import Navbar from '../../../../components/Navbar'
 import styles from '../../../reisipildid/ImagesPage.module.scss'
-import clsx from "clsx"
-import Footer from "../../../../components/Footer"
-import containerStyle from "../../../../styles/containers.module.scss"
-import BackgroundMap from "../../../../components/BackgroundMap"
-import {GetServerSideProps} from "next"
-import ApiClientSSR from "../../../../lib/ApiClientSSR"
-import {useRouter} from "next/router"
-import {objectToQueryString} from "../../../../helpers"
-import {Image as ImageType, User} from "../../../../types"
+import clsx from 'clsx'
+import Footer from '../../../../components/Footer'
+import containerStyle from '../../../../styles/containers.module.scss'
+import BackgroundMap from '../../../../components/BackgroundMap'
+import { GetServerSideProps } from 'next'
+import ApiClientSSR from '../../../../lib/ApiClientSSR'
+import { useRouter } from 'next/router'
+import { objectToQueryString } from '../../../../helpers'
+import { Image as ImageType, User } from '../../../../types'
 import Image from 'next/image'
-import SimplePaginator from "../../../../components/Paginator/SimplePaginator"
-import ImageGalleryModal from "../../../../components/ImageGallery/ImageGalleryModal"
-import {hidePhoto} from "../../../../services/general.service"
-import {toast} from 'react-toastify'
-import UserAvatar from "../../../../components/User/UserAvatar"
-import Button from "../../../../components/Button"
-import useUser from "../../../../hooks"
+import SimplePaginator from '../../../../components/Paginator/SimplePaginator'
+import ImageGalleryModal from '../../../../components/ImageGallery/ImageGalleryModal'
+import { hidePhoto } from '../../../../services/general.service'
+import { toast } from 'react-toastify'
+import UserAvatar from '../../../../components/User/UserAvatar'
+import Button from '../../../../components/Button'
+import useUser from '../../../../hooks'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     targetUser: User
@@ -26,9 +27,9 @@ type Props = {
     hasMore: boolean
 }
 
-const UserImagesPage = ({targetUser, images, currentPage, hasMore}: Props) => {
+const UserImagesPage = ({ targetUser, images, currentPage, hasMore }: Props) => {
     const router = useRouter()
-    const [imageItems, setImagesItems] = useState<ImageType[]|undefined>(images)
+    const [imageItems, setImagesItems] = useState<ImageType[] | undefined>(images)
     const [showModal, setShowModal] = useState<boolean>(false)
     const [selectedImage, setSelectedImage] = useState<ImageType | undefined>(undefined)
     const { user } = useUser()
@@ -50,7 +51,7 @@ const UserImagesPage = ({targetUser, images, currentPage, hasMore}: Props) => {
 
         const urlParams = {
             id: targetUser.id,
-            page: currentPage + 1
+            page: currentPage + 1,
         }
 
         const queryString = objectToQueryString(urlParams)
@@ -61,7 +62,7 @@ const UserImagesPage = ({targetUser, images, currentPage, hasMore}: Props) => {
         if (currentPage > 1) {
             const urlParams = {
                 id: targetUser.id,
-                page: currentPage - 1
+                page: currentPage - 1,
             }
 
             const queryString = objectToQueryString(urlParams)
@@ -72,17 +73,20 @@ const UserImagesPage = ({targetUser, images, currentPage, hasMore}: Props) => {
     }
 
     const hideImage = async (image: ImageType) => {
-        await hidePhoto(image.id).then(res => {
-            const newImages = imageItems?.filter(img => img.id !== image.id)
-            setImagesItems(newImages)
-            toast.success('Pilt peidetud')
-        }).catch(e => {
-            toast.error('Pildi peitmine ebaõnnestus')
-        })
+        await hidePhoto(image.id)
+            .then((res) => {
+                const newImages = imageItems?.filter((img) => img.id !== image.id)
+                setImagesItems(newImages)
+                toast.success('Pilt peidetud')
+            })
+            .catch((e) => {
+                toast.error('Pildi peitmine ebaõnnestus')
+            })
     }
 
     return (
         <Fragment>
+            <NextSeo noindex={true} />
             <div className={styles.Container}>
                 <BackgroundMap />
                 <div className={containerStyle.ContainerLg}>
@@ -91,11 +95,11 @@ const UserImagesPage = ({targetUser, images, currentPage, hasMore}: Props) => {
                     </div>
                     <div className={styles.Title}>
                         <div>Reisipildid</div>
-                        {isUserOwner &&
+                        {isUserOwner && (
                             <div className={styles.AddNewButton}>
                                 <Button title={'Lisa uus'} route={'/image/add'} />
                             </div>
-                        }
+                        )}
                         <div className={styles.AddNewButtonMobile}>
                             <span>+</span>
                         </div>
@@ -105,41 +109,39 @@ const UserImagesPage = ({targetUser, images, currentPage, hasMore}: Props) => {
                             <div className={styles.UserAvatar}>
                                 <UserAvatar user={targetUser} />
                             </div>
-                            <div className={styles.UserName}>
-                                {targetUser.name}
-                            </div>
+                            <div className={styles.UserName}>{targetUser.name}</div>
                         </div>
                     </div>
                     <div className={styles.ImagesContainer}>
                         <div className={styles.ImagesGrid}>
-                            {imageItems?.map(image => {
+                            {imageItems?.map((image) => {
                                 return (
                                     <div className={styles.Image} key={image.id} onClick={() => openGallery(image)}>
                                         <Image
                                             src={image.urlSmall}
                                             alt={image.title}
                                             layout={'fill'}
-                                            objectFit={'cover'} />
+                                            objectFit={'cover'}
+                                        />
                                     </div>
                                 )
                             })}
                         </div>
                         <div className={styles.Paginator}>
-                            <SimplePaginator
-                                nextPageUrl={getNextPageUrl()}
-                                previousPageUrl={getPreviousPageUrl()} />
+                            <SimplePaginator nextPageUrl={getNextPageUrl()} previousPageUrl={getPreviousPageUrl()} />
                         </div>
                     </div>
                 </div>
             </div>
-            {imageItems && selectedImage !== undefined &&
+            {imageItems && selectedImage !== undefined && (
                 <ImageGalleryModal
                     show={showModal}
                     images={imageItems}
                     selectedImage={selectedImage}
                     onHide={() => setShowModal(false)}
-                    onImageHide={hideImage} />
-            }
+                    onImageHide={hideImage}
+                />
+            )}
             <Footer simple={true} />
         </Fragment>
     )
@@ -162,7 +164,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 
     return {
-        props: data
+        props: data,
     }
 }
 

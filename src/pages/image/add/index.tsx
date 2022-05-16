@@ -14,6 +14,7 @@ import { uploadImage } from '../../../services/image.service'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import LoadingSpinner from '../../../components/LoadingSpinner'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     user: User
@@ -57,6 +58,7 @@ const ImageAddPage = ({ user, destinations }: Props) => {
 
     return (
         <Fragment>
+            <NextSeo nofollow={true} noindex={true} />
             <div className={styles.Container}>
                 <BackgroundMap />
                 <div className={containerStyle.ContainerXl}>

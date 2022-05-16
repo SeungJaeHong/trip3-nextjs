@@ -21,6 +21,7 @@ import useUser from '../../../hooks'
 import { useRouter } from 'next/router'
 import UserImageGallery from '../../../components/User/UserImageGallery'
 import Ads from '../../../components/Ads'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     userProfile: UserPublicProfile
@@ -49,6 +50,11 @@ const UserPage = ({ userProfile }: Props) => {
 
     return (
         <Fragment>
+            <NextSeo
+                noindex={true}
+                title={'Trip.ee | ' + userProfile.name}
+                description={userProfile.rankName + ', liitus tripiga ' + userProfile.joinedDate}
+            />
             <Header
                 backgroundImage={'/images/user_page_bg.jpg'}
                 className={styles.Header}

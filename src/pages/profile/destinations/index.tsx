@@ -11,6 +11,7 @@ import Footer from '../../../components/Footer'
 import LoadingSpinner from '../../../components/LoadingSpinner'
 import { getMyDestinationsData } from '../../../services/user.service'
 import UserProfileDestinationForm from '../../../components/User/UserProfileDestinationForm'
+import { NextSeo } from 'next-seo'
 
 const UserProfileDestinationPage = () => {
     const { userIsLoggedIn } = useUser()
@@ -52,6 +53,7 @@ const UserProfileDestinationPage = () => {
 
     return (
         <Fragment>
+            <NextSeo nofollow={true} noindex={true} />
             <div className={styles.Container}>
                 <BackgroundMap />
                 <div className={containerStyle.ContainerXl}>

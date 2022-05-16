@@ -17,6 +17,7 @@ import PagePaginator from '../../components/Paginator/PagePaginator'
 import SearchNewsResults from '../../components/Search/NewsResults'
 import SearchDestinationResults from '../../components/Search/DestinationResults'
 import SearchUserResults from '../../components/Search/UserResults'
+import {NextSeo} from "next-seo";
 
 const SearchPage = () => {
     const mounted = useRef(false)
@@ -198,6 +199,7 @@ const SearchPage = () => {
 
     return (
         <Fragment>
+            <NextSeo noindex={true} />
             <div className={styles.Container}>
                 <BackgroundMap />
                 <div className={containerStyle.ContainerXl}>

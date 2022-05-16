@@ -19,6 +19,7 @@ import DestinationImageGallery from '../../components/Destination/DestinationIma
 import RelatedContentBlock from '../../components/RelatedContentBlock'
 import Ads from '../../components/Ads'
 import { Tooltip } from '@mantine/core'
+import { NextSeo } from 'next-seo'
 
 type Props = {
     destination: DestinationContent
@@ -69,6 +70,13 @@ const DestinationPage = ({ destination }: Props) => {
 
     return (
         <Fragment>
+            <NextSeo
+                title={'Trip.ee | ' + destination.name}
+                description={
+                    destination.name +
+                    ': reisiinfo ning ülevaate headest pakkumistest, reisisoovitustest, kuulutustest ja reisikaaslastest'
+                }
+            />
             <Header backgroundImage={'https://trip.ee/images/large/Ateena-acropolis-px_kfwx.jpeg'}>
                 <div className={styles.HeaderContainer}>
                     {destination.previousDestination ? (
