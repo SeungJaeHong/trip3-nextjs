@@ -102,7 +102,7 @@ const FlightForm = ({flight, destinations, tags, onSubmit}: Props) => {
                                         name={'body'}
                                         value={field.value}
                                         label={'Sisu'}
-                                        type={'news'}
+                                        type={'flight'}
                                         onChange={field.onChange}
                                         error={fieldState.error?.message}
                                         disabled={isSubmitting} />

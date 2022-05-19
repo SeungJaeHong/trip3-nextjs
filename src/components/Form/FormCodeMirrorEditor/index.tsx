@@ -1,19 +1,19 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from "react"
-import stylesInput from "../FormInput/FormInput.module.scss"
-import styles from "./FormCodeMirrorEditor.module.scss"
-import clsx from "clsx"
-import dynamic from "next/dynamic"
-import "easymde/dist/easymde.min.css"
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import stylesInput from '../FormInput/FormInput.module.scss'
+import styles from './FormCodeMirrorEditor.module.scss'
+import clsx from 'clsx'
+import dynamic from 'next/dynamic'
+import 'easymde/dist/easymde.min.css'
 import { useDebounce } from 'use-debounce'
-import {parseFlightBody} from "../../../services/flight.service"
-import {parseNewsBody} from "../../../services/news.service"
-import CheckIcon from "../../../icons/CheckIcon"
-import ImageSelectSidebar from "../../ImageSelectSidebar"
-import {Editor} from "codemirror"
+import { parseFlightBody } from '../../../services/flight.service'
+import { parseNewsBody } from '../../../services/news.service'
+import ImageSelectSidebar from '../../ImageSelectSidebar'
+import { Editor } from 'codemirror'
+import Button from '../../Button'
 
 // @ts-ignore
-const EasyMDE = dynamic(() => import("easymde"), { ssr: false })
-const SimpleMdeReact = dynamic(() => import("react-simplemde-editor"), { ssr: false })
+const EasyMDE = dynamic(() => import('easymde'), { ssr: false })
+const SimpleMdeReact = dynamic(() => import('react-simplemde-editor'), { ssr: false })
 
 type Props = {
     id: string
@@ -30,7 +30,7 @@ type Props = {
 
 const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, className }: Props) => {
     const [editorValue, setEditorValue] = React.useState<string>(value)
-    const [editor, setEditor] = React.useState<Editor|undefined>(undefined)
+    const [editor, setEditor] = React.useState<Editor | undefined>(undefined)
     const editorRef = useRef(null)
     const [showEditor, setShowEditor] = useState<boolean>(false)
     const [debouncedValue] = useDebounce(editorValue, 500)
@@ -44,11 +44,11 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
     useEffect(() => {
         if (debouncedValue) {
             if (type === 'news') {
-                parseNewsBody(debouncedValue).then(res => {
+                parseNewsBody(debouncedValue).then((res) => {
                     setPreviewValue(res.data)
                 })
             } else {
-                parseFlightBody(debouncedValue).then(res => {
+                parseFlightBody(debouncedValue).then((res) => {
                     setPreviewValue(res.data)
                 })
             }
@@ -60,10 +60,6 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
         setShowEditor(false)
     }
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [showEditor])
-
     const onImageSelect = (imageId: number) => {
         if (editor) {
             const doc = editor.getDoc()
@@ -72,7 +68,7 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
             doc.replaceRange('\n\n' + '[[' + imageId + ']]' + '\n', cursor)
             doc.setCursor({
                 line: cursor.line + 3,
-                ch: 0
+                ch: 0,
             })
             editor.focus()
             setShowSidebar(false)
@@ -80,19 +76,19 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
     }
 
     const getToolbar = () => {
-        let toolbar =  [
+        let toolbar = [
             {
                 name: 'bold',
                 // @ts-ignore
                 action: EasyMDE.toggleBold,
-                className: "fa fa-bold",
+                className: 'fa fa-bold',
                 title: 'Bold',
             },
             {
                 name: 'italics',
                 // @ts-ignore
                 action: EasyMDE.toggleItalic,
-                className: "fa fa-italic",
+                className: 'fa fa-italic',
                 title: 'italic',
             },
             '|',
@@ -106,23 +102,23 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
             {
                 name: 'table',
                 action: (editor: EasyMDE) => {
-                    const cm = editor.codemirror;
+                    const cm = editor.codemirror
                     const doc = cm.getDoc()
                     const cursor = doc.getCursor()
                     doc.replaceRange('\nEsimene | Teine\n---|---\nEsimene | Teine\n\n', cursor)
                     doc.setCursor({
                         line: cursor.line + 4,
-                        ch: 7
+                        ch: 7,
                     })
                     editor.codemirror.focus()
                 },
-                className: "fa fa-table",
-                title: 'Table'
+                className: 'fa fa-table',
+                title: 'Table',
             },
             {
                 name: 'calendar',
                 action: (editor: EasyMDE) => {
-                    const cm = editor.codemirror;
+                    const cm = editor.codemirror
                     const doc = cm.getDoc()
                     const cursor = doc.getCursor()
                     doc.replaceRange(
@@ -131,34 +127,34 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
                     )
                     doc.setCursor({
                         line: cursor.line + 3,
-                        ch: 7
+                        ch: 7,
                     })
                     editor.codemirror.focus()
                 },
-                className: "fa fa-calendar",
-                title: 'Calendar'
+                className: 'fa fa-calendar',
+                title: 'Calendar',
             },
             {
                 name: 'link',
                 action: (editor: EasyMDE) => {
-                    const cm = editor.codemirror;
-                    let text = cm.getSelection();
+                    const cm = editor.codemirror
+                    let text = cm.getSelection()
                     const doc = cm.getDoc()
                     const link = window.prompt('Link', 'http://')
                     doc.replaceSelection('[' + text + '](' + link + ')')
                     editor.codemirror.focus()
                 },
-                className: "fa fa-link",
-                title: 'Link'
+                className: 'fa fa-link',
+                title: 'Link',
             },
             {
                 name: 'image',
                 action: (editor: EasyMDE) => {
                     setShowSidebar(true)
                 },
-                className: "fa fa-image",
-                title: 'Image'
-            }
+                className: 'fa fa-image',
+                title: 'Image',
+            },
         ]
 
         if (type === 'news') {
@@ -172,25 +168,23 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
 
     const autofocusNoSpellcheckerOptions = useMemo(() => {
         return {
-            autofocus: true,
+            autofocus: !value,
             spellChecker: false,
             lineNumbers: false,
             theme: 'neo',
-            toolbar: getToolbar()
+            toolbar: getToolbar(),
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
         <>
-            <div className={clsx(stylesInput.FormInput, styles.FormCodeMirrorEditor, className, {
-                [stylesInput.Invalid]: error.length > 0
-            })}>
-                {label !== undefined &&
-                    <label htmlFor={id ?? name}>
-                        {label}
-                    </label>
-                }
+            <div
+                className={clsx(stylesInput.FormInput, styles.FormCodeMirrorEditor, className, {
+                    [stylesInput.Invalid]: error.length > 0,
+                })}
+            >
+                {label !== undefined && <label htmlFor={id ?? name}>{label}</label>}
 
                 <textarea
                     value={value}
@@ -198,19 +192,16 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
                     spellCheck={false}
                     rows={8}
                     onClick={() => setShowEditor(true)}
-                    readOnly={true} />
+                    readOnly={true}
+                />
 
-                {error?.length > 0 &&
-                    <div className={stylesInput.ErrorText}>
-                        {error}
-                    </div>
-                }
+                {error?.length > 0 && <div className={stylesInput.ErrorText}>{error}</div>}
             </div>
-            {showEditor &&
+            {showEditor && (
                 <>
                     <div className={styles.Editor}>
-                        <div className={styles.SaveButton} onClick={saveChanges}>
-                            <CheckIcon />
+                        <div className={styles.SaveButton}>
+                            <Button title={'Salvesta'} onClick={saveChanges} />
                         </div>
                         <div className={styles.EditorContainer}>
                             <div className={styles.Code} ref={editorRef}>
@@ -220,7 +211,8 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
                                     // @ts-ignore
                                     options={autofocusNoSpellcheckerOptions}
                                     value={editorValue}
-                                    onChange={onEditorChange} />
+                                    onChange={onEditorChange}
+                                />
                             </div>
                             <div className={styles.Preview} dangerouslySetInnerHTML={{ __html: previewValue }} />
                         </div>
@@ -228,9 +220,10 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
                     <ImageSelectSidebar
                         open={showSidebar}
                         onClose={() => setShowSidebar(false)}
-                        onImageSelect={onImageSelect} />
+                        onImageSelect={onImageSelect}
+                    />
                 </>
-            }
+            )}
         </>
     )
 }

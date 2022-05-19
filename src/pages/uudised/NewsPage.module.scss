@@ -188,7 +188,7 @@
 
     .Ads {
         width: 100%;
-        max-width: 285px;
+        max-width: 275px;
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -306,7 +306,7 @@
     display: flex;
     width: 100%;
     padding: $spacer * 5 0 $spacer * 6 0;
-    gap: $spacer * 9;
+    gap: $spacer * 10;
 
     @include lg() {
         flex-direction: column;
