@@ -12,7 +12,6 @@ import { Editor } from 'codemirror'
 import Button from '../../Button'
 
 // @ts-ignore
-const EasyMDE = dynamic(() => import('easymde'), { ssr: false })
 const SimpleMdeReact = dynamic(() => import('react-simplemde-editor'), { ssr: false })
 
 type Props = {
@@ -77,20 +76,8 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
 
     const getToolbar = () => {
         let toolbar = [
-            {
-                name: 'bold',
-                // @ts-ignore
-                action: EasyMDE.toggleBold,
-                className: 'fa fa-bold',
-                title: 'Bold',
-            },
-            {
-                name: 'italics',
-                // @ts-ignore
-                action: EasyMDE.toggleItalic,
-                className: 'fa fa-italic',
-                title: 'italic',
-            },
+            'bold',
+            'italic',
             '|',
             'unordered-list',
             'ordered-list',
@@ -99,7 +86,7 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
             'heading-2',
             'heading-3',
             '|',
-            {
+            /*{
                 name: 'table',
                 action: (editor: EasyMDE) => {
                     const cm = editor.codemirror
@@ -114,7 +101,7 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
                 },
                 className: 'fa fa-table',
                 title: 'Table',
-            },
+            },*/
             {
                 name: 'calendar',
                 action: (editor: EasyMDE) => {
@@ -141,8 +128,10 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
                     let text = cm.getSelection()
                     const doc = cm.getDoc()
                     const link = window.prompt('Link', 'http://')
-                    doc.replaceSelection('[' + text + '](' + link + ')')
-                    editor.codemirror.focus()
+                    if (link) {
+                        doc.replaceSelection('[' + text + '](' + link + ')')
+                        editor.codemirror.focus()
+                    }
                 },
                 className: 'fa fa-link',
                 title: 'Link',
