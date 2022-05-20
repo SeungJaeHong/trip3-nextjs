@@ -1,14 +1,14 @@
-import styles from "./UserAvatar.module.scss"
-import {User} from "../../../types"
+import styles from './UserAvatar.module.scss'
+import { User } from '../../../types'
 import UserIcon from '../../../icons/UserIcon'
-import {useState, useRef, useEffect} from "react"
+import { useState, useRef, useEffect } from 'react'
 
 type Props = {
-    user:  User
+    user: User
     borderWidth: number
 }
 
-const UserAvatar = ({user, borderWidth}: Props) => {
+const UserAvatar = ({ user, borderWidth }: Props) => {
     const [height, setHeight] = useState(0)
     const ref = useRef<HTMLImageElement>(null)
 
@@ -22,7 +22,7 @@ const UserAvatar = ({user, borderWidth}: Props) => {
         const angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0
         return {
             x: centerX + radius * Math.cos(angleInRadians),
-            y: centerY + radius * Math.sin(angleInRadians)
+            y: centerY + radius * Math.sin(angleInRadians),
         }
     }
 
@@ -40,7 +40,7 @@ const UserAvatar = ({user, borderWidth}: Props) => {
     }
 
     const renderImage = () => {
-        if (user.avatar) {
+        if (user?.avatar) {
             return <img src={user.avatar} alt={user.name} className={styles.Image} ref={ref} />
         } else {
             return (
@@ -56,12 +56,12 @@ const UserAvatar = ({user, borderWidth}: Props) => {
             {renderImage()}
             <div className={styles.ArcRank}>
                 <svg>
-                    <path fill="none" strokeWidth={borderWidth} d={generateArc(0, user.rank * 90)} />
+                    <path fill="none" strokeWidth={borderWidth} d={generateArc(0, (user?.rank || 0) * 90)} />
                 </svg>
             </div>
             <div className={styles.ArcRest}>
                 <svg>
-                    <path fill="none" strokeWidth={borderWidth} d={generateArc(user.rank * 90, 360)} />
+                    <path fill="none" strokeWidth={borderWidth} d={generateArc((user?.rank || 0) * 90, 360)} />
                 </svg>
             </div>
         </div>
@@ -69,7 +69,7 @@ const UserAvatar = ({user, borderWidth}: Props) => {
 }
 
 UserAvatar.defaultProps = {
-    borderWidth: 3
+    borderWidth: 3,
 }
 
 export default UserAvatar
