@@ -52,3 +52,7 @@ export const resetPassword = async (email: string, password: string, token: stri
         token
     })
 }
+
+export const getUnreadMessageCount = async (): Promise<AxiosResponse> => {
+    return await ApiClient.get('/profile/unread')
+}

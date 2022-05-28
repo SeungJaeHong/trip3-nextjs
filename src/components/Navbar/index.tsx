@@ -5,12 +5,12 @@ import TripLogo from '../../icons/TripLogo'
 import styles from './Navbar.module.scss'
 import clsx from 'clsx'
 import MenuIcon from '../../icons/MenuIcon'
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import CloseIcon from '../../icons/CloseIcon'
 import UserNavBarMenu from '../UserNavbarMenu'
 import React from 'react'
 import useUser from '../../hooks'
-import { logout } from '../../services/auth.service'
+import {getUnreadMessageCount, logout} from '../../services/auth.service'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import UserAvatar from '../User/UserAvatar'
@@ -45,6 +45,17 @@ const Navbar = ({ darkMode, showSearch, showLogo }: Props) => {
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const [menuOpen, setMenuOpen] = useState(false)
     const router = useRouter()
+    const [unreadMessageCount, setUnreadMessageCount] = useState<number|undefined>(undefined)
+
+    useEffect(() => {
+        if (userIsLoggedIn && user !== undefined) {
+            try {
+                getUnreadMessageCount().then((response) => {
+                    setUnreadMessageCount(response.data ? parseInt(response.data) : undefined)
+                })
+            } catch (e: any) {}
+        }
+    }, [userIsLoggedIn])
 
     const onLogoutClick = async () => {
         try {
@@ -220,7 +231,7 @@ const Navbar = ({ darkMode, showSearch, showLogo }: Props) => {
                 })}
 
                 <div className={styles.UserAvatar}>
-                    <UserNavBarMenu darkMode={darkMode} />
+                    <UserNavBarMenu darkMode={darkMode} unreadMessageCount={unreadMessageCount}/>
                 </div>
             </div>
             <div className={styles.MenuIcon} onClick={() => setMenuOpen(true)}>

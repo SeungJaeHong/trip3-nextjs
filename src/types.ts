@@ -4,6 +4,7 @@ export interface User {
     rank: number
     isAdmin: boolean
     avatar?: string
+    unreadMessageCount?: number
 }
 
 export interface UserPublicProfile extends User {
