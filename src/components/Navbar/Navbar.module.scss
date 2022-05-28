@@ -66,11 +66,28 @@
 
             .MobileLink {
                 padding: $spacer * 1.5;
-                color: $white;
-                font-weight: 500;
-                font-size: 1.25rem;
-                line-height: 1.5rem;
                 cursor: pointer;
+
+                .LinkTitle {
+                    color: $white;
+                    font-weight: 500;
+                    font-size: 1.25rem;
+                    line-height: 1.5rem;
+                    display: flex;
+                }
+
+                span {
+                    border-radius: 50%;
+                    color: $white;
+                    background: $red;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: .7rem;
+                    width: 22px;
+                    height: 22px;
+                    text-align: center;
+                    margin-left: $spacer;
+                }
             }
         }
     }
@@ -101,6 +118,21 @@
         .UserIcon {
             width: 40px;
             height: 40px;
+
+            .UnreadMessageCount {
+                position: absolute;
+                right: -2px;
+                top: -2px;
+                border-radius: 50%;
+                color: $white;
+                background: $red;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: .7rem;
+                width: 15px;
+                height: 15px;
+            }
         }
     }
 
