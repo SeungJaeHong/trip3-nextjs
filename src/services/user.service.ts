@@ -54,3 +54,7 @@ export const getUserImages = async (userId: number): Promise<AxiosResponse<{imag
     return await ApiClient.get('/user/' + userId + '/images')
 }
 
+export const getUnreadMessageCount = async (): Promise<AxiosResponse> => {
+    return await ApiClient.get('/profile/unread')
+}
+

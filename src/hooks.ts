@@ -1,5 +1,6 @@
 import useSWR from 'swr'
-import { getUnreadMessageCount, getUser } from './services/auth.service'
+import { getUser } from './services/auth.service'
+import { getUnreadMessageCount } from './services/user.service'
 
 export function useUser() {
     const { data, mutate, error } = useSWR('get_user', getUser, {
