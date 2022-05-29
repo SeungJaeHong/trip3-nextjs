@@ -3,7 +3,7 @@ import Script from 'next/script'
 import styles from './FacebookLogin.module.scss'
 import { toast } from 'react-toastify'
 import { createUserOrLogin } from '../../services/auth.service'
-import useUser from '../../hooks'
+import { useUser } from '../../hooks'
 
 const FacebookLogin = () => {
     const { mutate } = useUser()

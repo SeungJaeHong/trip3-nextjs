@@ -6,7 +6,7 @@ import Navbar from '../../../../components/Navbar'
 import BackgroundMap from '../../../../components/BackgroundMap'
 import UserChat from '../../../../components/User/UserChat'
 import { useRouter } from 'next/router'
-import useUser from '../../../../hooks'
+import { useUser } from '../../../../hooks'
 import { NextSeo } from 'next-seo'
 
 const UserProfileChatPage = () => {

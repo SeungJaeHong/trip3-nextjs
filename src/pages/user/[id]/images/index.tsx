@@ -17,7 +17,7 @@ import { hidePhoto } from '../../../../services/general.service'
 import { toast } from 'react-toastify'
 import UserAvatar from '../../../../components/User/UserAvatar'
 import Button from '../../../../components/Button'
-import useUser from '../../../../hooks'
+import { useUser } from '../../../../hooks'
 import { NextSeo } from 'next-seo'
 
 type Props = {

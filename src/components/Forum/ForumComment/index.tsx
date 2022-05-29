@@ -10,7 +10,7 @@ import CommentEditor from '../../CommentEditor'
 import { updateComment, likeComment, toggleCommentStatus } from '../../../services/comment.service'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
-import useUser from '../../../hooks'
+import { useUser } from '../../../hooks'
 
 type Props = {
     item: Comment

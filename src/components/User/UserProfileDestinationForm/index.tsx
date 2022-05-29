@@ -1,18 +1,18 @@
-import React from "react"
-import styles from "./UserProfileDestinationForm.module.scss"
-import Router from "next/router"
-import {toast} from 'react-toastify'
-import {useForm, SubmitHandler, Controller} from "react-hook-form"
-import SubmitButton from "../../Form/SubmitButton"
-import {Destination} from "../../../types"
-import {setFormErrors} from "../../../helpers"
-import FormMultiSelect from "../../Form/FormMultiSelect"
-import {updateMyDestinations} from "../../../services/user.service"
-import useUser from "../../../hooks"
+import React from 'react'
+import styles from './UserProfileDestinationForm.module.scss'
+import Router from 'next/router'
+import { toast } from 'react-toastify'
+import { useForm, SubmitHandler, Controller } from 'react-hook-form'
+import SubmitButton from '../../Form/SubmitButton'
+import { Destination } from '../../../types'
+import { setFormErrors } from '../../../helpers'
+import FormMultiSelect from '../../Form/FormMultiSelect'
+import { updateMyDestinations } from '../../../services/user.service'
+import { useUser } from '../../../hooks'
 
 type Inputs = {
-    visited: { value: string, label: string }[]
-    wantsToGo: { value: string, label: string }[]
+    visited: { value: string; label: string }[]
+    wantsToGo: { value: string; label: string }[]
 }
 
 type Props = {
@@ -21,44 +21,60 @@ type Props = {
     wantsToGo?: Destination[]
 }
 
-const UserProfileDestinationForm = ({visited, wantsToGo, options}: Props) => {
+const UserProfileDestinationForm = ({ visited, wantsToGo, options }: Props) => {
     const { user } = useUser()
-    const { handleSubmit, control, setError, formState: { errors, isSubmitting } } = useForm<Inputs>({
+    const {
+        handleSubmit,
+        control,
+        setError,
+        formState: { errors, isSubmitting },
+    } = useForm<Inputs>({
         defaultValues: {
-            visited: visited ? visited?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
-            wantsToGo: wantsToGo ? wantsToGo?.map(d => { return {label: d.name, value: d.id.toString()}}) : [],
-        }
+            visited: visited
+                ? visited?.map((d) => {
+                      return { label: d.name, value: d.id.toString() }
+                  })
+                : [],
+            wantsToGo: wantsToGo
+                ? wantsToGo?.map((d) => {
+                      return { label: d.name, value: d.id.toString() }
+                  })
+                : [],
+        },
     })
 
     const handleUpdate: SubmitHandler<Inputs> = async (values: Inputs) => {
-        const visitedIds = values?.visited.map(value => {
+        const visitedIds = values?.visited.map((value) => {
             return Number(value.value)
         })
 
-        const wantsToGoIds = values?.wantsToGo.map(value => {
+        const wantsToGoIds = values?.wantsToGo.map((value) => {
             return Number(value.value)
         })
 
-        await updateMyDestinations(visitedIds, wantsToGoIds).then(res => {
-            // @ts-ignore
-            Router.push('/user/' + user.id)
-            toast.success('Sihtkohtade uuendamine õnnestus!')
-        }).catch(err => {
-            if (err.response?.data?.errors) {
-                setFormErrors(err.response?.data?.errors, setError)
-            }
-            toast.error('Sihtkohtade uuendamine ebaõnnestus!')
-        })
+        await updateMyDestinations(visitedIds, wantsToGoIds)
+            .then((res) => {
+                // @ts-ignore
+                Router.push('/user/' + user.id)
+                toast.success('Sihtkohtade uuendamine õnnestus!')
+            })
+            .catch((err) => {
+                if (err.response?.data?.errors) {
+                    setFormErrors(err.response?.data?.errors, setError)
+                }
+                toast.error('Sihtkohtade uuendamine ebaõnnestus!')
+            })
     }
 
-    const allOptions: { label: string; value: string }[] = options.map(destination => ({ label: destination.name, value: destination.id.toString() }))
+    const allOptions: { label: string; value: string }[] = options.map((destination) => ({
+        label: destination.name,
+        value: destination.id.toString(),
+    }))
     return (
         <div className={styles.UserProfileDestinationForm}>
             <div className={styles.FormContainer}>
                 <form onSubmit={handleSubmit(handleUpdate)}>
-                    <div className={styles.SubHeading}>
-                        Olen käinud
-                    </div>
+                    <div className={styles.SubHeading}>Olen käinud</div>
                     <div className={styles.FormInput}>
                         <Controller
                             name={'visited'}
@@ -78,9 +94,7 @@ const UserProfileDestinationForm = ({visited, wantsToGo, options}: Props) => {
                             }}
                         />
                     </div>
-                    <div className={styles.SubHeading}>
-                        Tahan minna
-                    </div>
+                    <div className={styles.SubHeading}>Tahan minna</div>
                     <div className={styles.FormInput}>
                         <Controller
                             name={'wantsToGo'}
@@ -101,9 +115,7 @@ const UserProfileDestinationForm = ({visited, wantsToGo, options}: Props) => {
                         />
                     </div>
                     <div className={styles.SubmitButton}>
-                        <SubmitButton
-                            title={'Salvesta'}
-                            submitting={isSubmitting} />
+                        <SubmitButton title={'Salvesta'} submitting={isSubmitting} />
                     </div>
                 </form>
             </div>

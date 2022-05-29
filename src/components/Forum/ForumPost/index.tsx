@@ -11,7 +11,7 @@ import { useRouter } from 'next/router'
 import {togglePostStatus, likePost, toggleFollow} from '../../../services/forum.service'
 import { toast } from 'react-toastify'
 import Alert from '../../Alert'
-import useUser from '../../../hooks'
+import { useUser } from '../../../hooks'
 import { getForumUrlByType } from '../../../helpers'
 
 type Props = {

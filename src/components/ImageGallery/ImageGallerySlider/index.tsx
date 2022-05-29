@@ -6,7 +6,7 @@ import Image from 'next/image'
 import clsx from "clsx"
 import UserAvatar from "../../User/UserAvatar"
 import {useRouter} from "next/router"
-import useUser from "../../../hooks"
+import { useUser } from "../../../hooks"
 import Tag from "../../Tag"
 
 type Props = {

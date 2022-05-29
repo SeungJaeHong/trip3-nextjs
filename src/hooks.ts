@@ -1,7 +1,7 @@
 import useSWR from 'swr'
-import { getUser } from './services/auth.service'
+import { getUnreadMessageCount, getUser } from './services/auth.service'
 
-export default function useUser() {
+export function useUser() {
     const { data, mutate, error } = useSWR('get_user', getUser, {
         shouldRetryOnError: false,
     })
@@ -12,6 +12,19 @@ export default function useUser() {
         loading,
         userIsLoggedIn,
         user: data,
+        mutate,
+    }
+}
+
+export function useUnreadMessageCount() {
+    const { user } = useUser()
+    const { data, mutate } = useSWR(user && user?.id > 0 ? 'get_unread_messages' : null, getUnreadMessageCount, {
+        shouldRetryOnError: false,
+        revalidateOnFocus: false,
+    })
+
+    return {
+        unreadMessageCount: data?.data,
         mutate,
     }
 }

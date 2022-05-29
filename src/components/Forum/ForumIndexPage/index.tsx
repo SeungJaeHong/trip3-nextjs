@@ -15,7 +15,7 @@ import styles from './ForumIndexPage.module.scss'
 import { useRouter } from 'next/router'
 import FormSelect from '../../Form/FormSelect'
 import RelatedContentBlock from '../../RelatedContentBlock'
-import useUser from '../../../hooks'
+import { useUser } from '../../../hooks'
 import Ads from '../../Ads'
 
 type Props = {

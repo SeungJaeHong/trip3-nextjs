@@ -14,9 +14,9 @@ import TravelmateCard from '../../components/Travelmate/TravelmateCard'
 import TravelmateFilter from '../../components/Travelmate/TravelmateFilter'
 import ApiClientSSR from '../../lib/ApiClientSSR'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
-import useUser from '../../hooks'
+import { useUser } from '../../hooks'
 import Ads from '../../components/Ads'
-import {NextSeo} from "next-seo";
+import { NextSeo } from 'next-seo'
 
 type Props = {
     travelmates: TravelmateRowType[]
@@ -97,7 +97,7 @@ const TravelmatesIndex = ({
                 description={'Leia endale reisikaaslane juba planeeritud reisiks või uute plaanide koostamiseks'}
                 openGraph={{
                     title: 'Reisikaaslased',
-                    description: 'Leia endale reisikaaslane juba planeeritud reisiks või uute plaanide koostamiseks'
+                    description: 'Leia endale reisikaaslane juba planeeritud reisiks või uute plaanide koostamiseks',
                 }}
             />
             <Header title={'Reisikaaslased'} className={styles.TravelmatesHeader}>

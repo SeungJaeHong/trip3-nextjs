@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import styles from './ForumTabs.module.scss'
 import clsx from "clsx"
-import useUser from "../../../hooks"
+import { useUser } from "../../../hooks"
 
 const ForumTabs = () => {
     const router = useRouter()

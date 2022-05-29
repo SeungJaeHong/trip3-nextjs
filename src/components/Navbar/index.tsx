@@ -5,12 +5,12 @@ import TripLogo from '../../icons/TripLogo'
 import styles from './Navbar.module.scss'
 import clsx from 'clsx'
 import MenuIcon from '../../icons/MenuIcon'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import CloseIcon from '../../icons/CloseIcon'
 import UserNavBarMenu from '../UserNavbarMenu'
 import React from 'react'
-import useUser from '../../hooks'
-import { getUnreadMessageCount, logout } from '../../services/auth.service'
+import {useUnreadMessageCount, useUser} from '../../hooks'
+import { logout } from '../../services/auth.service'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import UserAvatar from '../User/UserAvatar'
@@ -42,20 +42,10 @@ type Props = {
 
 const Navbar = ({ darkMode, showSearch, showLogo }: Props) => {
     const { user, userIsLoggedIn, mutate } = useUser()
+    const { unreadMessageCount } = useUnreadMessageCount()
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const [menuOpen, setMenuOpen] = useState(false)
     const router = useRouter()
-    const [unreadMessageCount, setUnreadMessageCount] = useState<number | undefined>(undefined)
-
-    useEffect(() => {
-        if (userIsLoggedIn && user !== undefined) {
-            try {
-                getUnreadMessageCount().then((response) => {
-                    setUnreadMessageCount(response.data ? parseInt(response.data) : undefined)
-                })
-            } catch (e: any) {}
-        }
-    }, [userIsLoggedIn])
 
     const onLogoutClick = async () => {
         try {

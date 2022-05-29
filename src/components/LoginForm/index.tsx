@@ -4,7 +4,7 @@ import clsx from "clsx"
 import Router from "next/router"
 import FormInput from "../Form/FormInput"
 import SubmitButton from "../Form/SubmitButton"
-import useUser from "../../hooks"
+import { useUser } from "../../hooks"
 import {toast} from 'react-toastify'
 import {setFormErrors} from "../../helpers"
 import {login} from "../../services/auth.service"

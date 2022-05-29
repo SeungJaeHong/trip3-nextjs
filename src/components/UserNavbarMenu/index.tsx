@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import styles from './UserNavBarMenu.module.scss'
 import UserAvatar from '../User/UserAvatar'
 import { toast } from 'react-toastify'
-import useUser from '../../hooks'
+import { useUser } from '../../hooks'
 import { logout } from '../../services/auth.service'
 
 type Props = {

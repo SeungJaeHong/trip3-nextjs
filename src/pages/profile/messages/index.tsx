@@ -7,7 +7,7 @@ import clsx from 'clsx'
 import Navbar from '../../../components/Navbar'
 import Footer from '../../../components/Footer'
 import { useRouter } from 'next/router'
-import useUser from '../../../hooks'
+import { useUser } from '../../../hooks'
 import { NextSeo } from 'next-seo'
 
 const UserProfileMessagesPage = () => {

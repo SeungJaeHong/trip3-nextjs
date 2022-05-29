@@ -14,7 +14,7 @@ import { useRouter } from 'next/router'
 import Button from '../../components/Button'
 import ApiClientSSR from '../../lib/ApiClientSSR'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
-import useUser from '../../hooks'
+import { useUser } from '../../hooks'
 import Ads from '../../components/Ads'
 import { NextSeo } from 'next-seo'
 
