@@ -57,7 +57,7 @@ const UserNavBarMenu = ({ darkMode, unreadMessageCount }: Props) => {
             return (
                 <div className={styles.UserAvatar}>
                     <UserAvatar user={user} borderWidth={2} />
-                    {unreadMessageCount && unreadMessageCount > 0 && (
+                    {unreadMessageCount !== undefined && unreadMessageCount > 0 && (
                         <span className={styles.UnreadMessageCount}>{unreadMessageCount}</span>
                     )}
                 </div>
@@ -108,7 +108,13 @@ const UserNavBarMenu = ({ darkMode, unreadMessageCount }: Props) => {
     }
 
     const renderMenuLink = (link: { title: string; route: string }) => {
-        if (userIsLoggedIn && user !== undefined && link.route === '/profile/messages' && unreadMessageCount) {
+        if (
+            userIsLoggedIn &&
+            user !== undefined &&
+            link.route === '/profile/messages' &&
+            unreadMessageCount !== undefined &&
+            unreadMessageCount > 0
+        ) {
             return (
                 <div className={styles.Link}>
                     {link.title}

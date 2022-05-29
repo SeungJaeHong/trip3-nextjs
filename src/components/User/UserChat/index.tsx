@@ -20,12 +20,12 @@ const UserChat = () => {
     const [sending, setSending] = useState<boolean>(false)
     const router = useRouter()
     const id = Number(router.query?.id)
-    const { user } = useUser()
+    const { user, userIsLoggedIn } = useUser()
     const bodyRef = useRef<null | HTMLDivElement>(null)
     const textareaRef = useRef<HTMLTextAreaElement>(null)
 
     useEffect(() => {
-        if (id && user) {
+        if (id && userIsLoggedIn) {
             setLoading(false)
             getChatWithUser(id)
                 .then((response) => {
@@ -38,7 +38,7 @@ const UserChat = () => {
                     setLoading(false)
                 })
         }
-    }, [id, user])
+    }, [id, userIsLoggedIn])
 
     const onChangeMessage = () => {
         setMessage(textareaRef.current?.value ?? '')

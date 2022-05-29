@@ -197,7 +197,7 @@ const Navbar = ({ darkMode, showSearch, showLogo }: Props) => {
             return (
                 <div className={styles.UserIcon}>
                     <UserAvatar user={user} borderWidth={2} />
-                    {unreadMessageCount && unreadMessageCount > 0 && (
+                    {unreadMessageCount !== undefined && unreadMessageCount > 0 && (
                         <span className={styles.UnreadMessageCount}>{unreadMessageCount}</span>
                     )}
                 </div>

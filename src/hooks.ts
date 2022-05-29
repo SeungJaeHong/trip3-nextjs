@@ -19,7 +19,7 @@ export function useUser() {
 
 export function useUnreadMessageCount() {
     const { user } = useUser()
-    const { data, mutate } = useSWR(user && user?.id > 0 ? 'get_unread_messages' : null, getUnreadMessageCount, {
+    const { data, mutate } = useSWR(user && user?.id > 0 ? 'get_unread_message_count' : null, getUnreadMessageCount, {
         shouldRetryOnError: false,
         revalidateOnFocus: false,
     })

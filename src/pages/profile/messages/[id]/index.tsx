@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import styles from './UserProfileChatPage.module.scss'
 import containerStyle from '../../../../styles/containers.module.scss'
 import clsx from 'clsx'
@@ -12,10 +12,6 @@ import { NextSeo } from 'next-seo'
 const UserProfileChatPage = () => {
     const { userIsLoggedIn } = useUser()
     const router = useRouter()
-
-    useEffect(() => {
-
-    }, [])
 
     if (userIsLoggedIn === false) {
         router.push('/')
