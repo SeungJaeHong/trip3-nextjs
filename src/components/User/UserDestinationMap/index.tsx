@@ -1,14 +1,14 @@
 import { geoPath, geoMercator, select } from 'd3'
-import mapData from '../../../public/data/country_geodata.json'
+import mapData from '../../../../public/data/country_geodata.json'
 import { useEffect, useRef } from 'react'
-import { Destination } from '../../types'
+import { Destination } from '../../../types'
 
 type Props = {
     selectedCountries?: Destination[]
     selectedCities?: Destination[]
 }
 
-const Map = ({selectedCountries, selectedCities}: Props) => {
+const UserDestinationMap = ({selectedCountries, selectedCities}: Props) => {
     const svgRef = useRef(null)
     const wrapperRef = useRef(null)
 
@@ -74,4 +74,4 @@ const Map = ({selectedCountries, selectedCities}: Props) => {
     )
 }
 
-export default Map
+export default UserDestinationMap

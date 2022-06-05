@@ -23,7 +23,7 @@ import Ads from '../../../components/Ads'
 import { NextSeo } from 'next-seo'
 import dynamic from 'next/dynamic'
 
-const Map = dynamic(() => import('../../../components/Map'), { ssr: false })
+const UserDestinationMap = dynamic(() => import('../../../components/User/UserDestinationMap'), { ssr: false })
 
 type Props = {
     userProfile: UserPublicProfile
@@ -93,7 +93,7 @@ const UserPage = ({ userProfile }: Props) => {
                         </div>
 
                         <div className={styles.BackGroundMap}>
-                            <Map
+                            <UserDestinationMap
                                 selectedCountries={userProfile.countriesVisited}
                                 selectedCities={userProfile.citiesVisited}
                             />
