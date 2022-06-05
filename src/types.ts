@@ -58,6 +58,8 @@ export interface Destination {
     name: string
     slug: string
     parentDestination?: Destination
+    lat?: number
+    lon?: number
 }
 
 export interface Topic {

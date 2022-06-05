@@ -7,7 +7,6 @@ import { UserPublicProfile } from '../../../types'
 import ApiClientSSR from '../../../lib/ApiClientSSR'
 import containerStyle from '../../../styles/containers.module.scss'
 import UserProfileAvatar from '../../../components/User/UserProfileAvatar'
-import DottedMapIcon from '../../../icons/DottedMapIcon'
 import ThumbsUpIcon from '../../../icons/ThumbsUpIcon'
 import PostIcon from '../../../icons/Admin/PostIcon'
 import CommentIcon from '../../../icons/CommentIcon'
@@ -22,6 +21,9 @@ import { useRouter } from 'next/router'
 import UserImageGallery from '../../../components/User/UserImageGallery'
 import Ads from '../../../components/Ads'
 import { NextSeo } from 'next-seo'
+import dynamic from 'next/dynamic'
+
+const Map = dynamic(() => import('../../../components/Map'), { ssr: false })
 
 type Props = {
     userProfile: UserPublicProfile
@@ -63,9 +65,6 @@ const UserPage = ({ userProfile }: Props) => {
             <div className={styles.BodyContainer}>
                 <div className={containerStyle.ContainerLg}>
                     <div className={styles.Body}>
-                        <div className={styles.BackGroundMap}>
-                            <DottedMapIcon />
-                        </div>
                         <div className={styles.Avatar}>
                             <UserProfileAvatar {...userProfile} />
                         </div>
@@ -91,6 +90,13 @@ const UserPage = ({ userProfile }: Props) => {
                                 <CommentIcon />
                                 <span className={styles.StatisticsLabel}>{userProfile.commentCount} kommentaari</span>
                             </div>
+                        </div>
+
+                        <div className={styles.BackGroundMap}>
+                            <Map
+                                selectedCountries={userProfile.countriesVisited}
+                                selectedCities={userProfile.citiesVisited}
+                            />
                         </div>
 
                         {showVisitedBlock && (
