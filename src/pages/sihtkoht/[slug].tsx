@@ -21,14 +21,14 @@ import { Tooltip } from '@mantine/core'
 import { NextSeo } from 'next-seo'
 import dynamic from 'next/dynamic'
 
-const DestinationMap = dynamic(() => import('../../components/DotMap'), { ssr: false })
+const DestinationMap = dynamic(() => import('../../components/Destination/DestinationMap'), { ssr: false })
 
 type Props = {
     destination: DestinationContent
 }
 
 const DestinationPage = ({ destination }: Props) => {
-    const [showMore, setShowMore] = useState(false)
+    //const [showMore, setShowMore] = useState(false)
     const renderChildDestinations = () => {
         if (!destination.childDestinations?.length) {
             return null

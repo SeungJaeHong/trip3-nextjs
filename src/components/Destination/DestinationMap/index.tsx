@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Destination } from '../../types'
+import { Destination } from '../../../types'
 import { GeoJSON, MapContainer, Marker, TileLayer } from 'react-leaflet'
-import mapData from '../../../public/data/country_geodata.json'
+import mapData from '../../../../public/data/country_geodata.json'
 
 type Props = {
     destination: Destination
 }
 
-const DotMap = ({ destination }: Props) => {
+const DestinationMap = ({ destination }: Props) => {
     const [geoJsonData, setGeoJsonData] = useState<any>(undefined)
     const mapCreated = (map: any) => {
         const country = mapData.features.filter((f) => f.properties.id === destination.id)
@@ -84,4 +84,4 @@ const DotMap = ({ destination }: Props) => {
     )
 }
 
-export default DotMap
+export default DestinationMap
