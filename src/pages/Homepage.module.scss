@@ -45,13 +45,24 @@
     margin: $spacer * -5.5 auto $spacer auto;
     width: 100%;
 
-    @include sm() {
-        flex-direction: column;
-    }
-
     .FlightOfferCard {
         flex: 1;
         border: none;
+        max-width: 300px;
+        width: 100%;
+    }
+
+    @include sm() {
+        display: flex;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        .FlightOfferCard {
+            max-width: 275px;
+            flex-shrink: 0;
+            flex: none;
+        }
     }
 }
 
@@ -67,6 +78,7 @@
 
     @include sm() {
         justify-content: center;
+        margin-bottom: $spacer * 3;
     }
 }
 

@@ -75,10 +75,10 @@ const Navbar = ({ darkMode, showSearch, showLogo }: Props) => {
             return (
                 <React.Fragment>
                     <div className={styles.MobileLink} onClick={() => onMobileLinkClick('/login')}>
-                        <span>{'Logi sisse'}</span>
+                        <div className={styles.LinkTitle}>{'Logi sisse'}</div>
                     </div>
                     <div className={styles.MobileLink} onClick={() => onMobileLinkClick('/register')}>
-                        <span>{'Registreeri'}</span>
+                        <div className={styles.LinkTitle}>{'Registreeri'}</div>
                     </div>
                 </React.Fragment>
             )
