@@ -58,8 +58,10 @@ export interface Destination {
     name: string
     slug: string
     parentDestination?: Destination
+    isContinent: boolean
+    isCountry: boolean
     lat?: number
-    lon?: number
+    lng?: number
 }
 
 export interface Topic {
@@ -180,6 +182,10 @@ export type DestinationContent = {
         population?: number
         timezone?: string
     }
+    isContinent: boolean
+    isCountry: boolean
+    lat?: number
+    lng?: number
 }
 
 export type TravelmateContent = {

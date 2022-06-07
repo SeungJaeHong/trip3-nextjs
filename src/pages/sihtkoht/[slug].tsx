@@ -14,12 +14,14 @@ import StarIcon from '../../icons/StarIcon'
 import ForumList from '../../components/Forum/ForumList'
 import BlockTitle from '../../components/BlockTitle'
 import ApiClientSSR from '../../lib/ApiClientSSR'
-import DotMap from '../../components/DotMap'
 import DestinationImageGallery from '../../components/Destination/DestinationImageGallery'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
 import Ads from '../../components/Ads'
 import { Tooltip } from '@mantine/core'
 import { NextSeo } from 'next-seo'
+import dynamic from 'next/dynamic'
+
+const DestinationMap = dynamic(() => import('../../components/DotMap'), { ssr: false })
 
 type Props = {
     destination: DestinationContent
@@ -53,7 +55,7 @@ const DestinationPage = ({ destination }: Props) => {
         )
     }
 
-    const renderDescription = () => {
+    /*const renderDescription = () => {
         if (destination.description?.length) {
             return (
                 <div className={styles.Description}>
@@ -66,7 +68,7 @@ const DestinationPage = ({ destination }: Props) => {
         }
 
         return null
-    }
+    }*/
 
     return (
         <Fragment>
@@ -154,11 +156,9 @@ const DestinationPage = ({ destination }: Props) => {
                                         </tr>
                                     </tbody>
                                 </table>
-
-                                {/*{renderDescription()}*/}
-                            </div>
-                            <div className={styles.Map}>
-                                <DotMap destination={destination} />
+                                <div className={styles.Map}>
+                                    <DestinationMap destination={destination} />
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -150,11 +150,10 @@
 
             .InfoContainer {
                 display: flex;
-                flex-direction: column;
-                z-index: 3;
+                justify-content: space-between;
+                margin-top: $spacer * 4;
 
                 .InfoTable {
-                    padding-top: $spacer * 4;
                     border: 0;
                     color: $white;
                     display: flex;
@@ -192,25 +191,13 @@
             }
 
             .Map {
-                display: flex;
-                position: absolute;
-                right: -40px;
-                top: -30px;
-
-                svg {
-                    width: 550px;
-                    fill: $yellow-dark;
-                }
+                position: relative;
+                width: 450px;
+                height: 250px;
+                z-index: 0;
 
                 @include md() {
-                    position: relative;
-                    right: 0;
-                    top: 0;
 
-                    svg {
-                        width: 100%;
-                        margin-top: $spacer * 3;
-                    }
                 }
             }
         }

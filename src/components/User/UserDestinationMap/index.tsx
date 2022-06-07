@@ -57,11 +57,11 @@ const UserDestinationMap = ({selectedCountries, selectedCities}: Props) => {
                 return (
                     svg.append('circle')
                         // @ts-ignore
-                        .attr('cx', (d) => projection([dest.lon, dest.lat])[0])
+                        .attr('cx', (d) => projection([dest.lng, dest.lat])[0])
                         // @ts-ignore
-                        .attr('cy', (d) => projection([dest.lon, dest.lat])[1])
+                        .attr('cy', (d) => projection([dest.lng, dest.lat])[1])
                         .attr('r', 2)
-                        .attr('fill', '#FF5050')
+                        .attr('fill', '#FF9A3E')
                 )
             })
         }

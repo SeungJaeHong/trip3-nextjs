@@ -17,4 +17,5 @@ data.features.map((d, i) => {
     }
 })
 
-fs.writeFileSync('../../public/data/country_geodata.json', JSON.stringify(data));
+//NB! Will overwrite file. Current file has manually added improvements
+//fs.writeFileSync('../../public/data/country_geodata.json', JSON.stringify(data));

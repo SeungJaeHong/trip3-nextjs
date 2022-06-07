@@ -8,6 +8,7 @@ import Script from 'next/script'
 import AdsConfig from '../lib/AdsConfig'
 import { GoogleAnalytics } from '../components/GoogleAnalytics'
 import { DefaultSeo } from 'next-seo'
+import '../styles/leaflet_map.scss'
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
