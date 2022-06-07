@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .HeaderContainer {
     display: flex;
@@ -132,8 +132,8 @@
                     .FlightOfferTitle {
                         color: $white;
                         font-weight: 500;
-                        font-size: $font-size-medium;
-                        line-height: 1.7rem;
+                        font-size: $font-size-normal;
+                        line-height: 1.6rem;
                         cursor: pointer;
 
                         &:hover {
@@ -337,4 +337,3 @@
         }
     }
 }
-
