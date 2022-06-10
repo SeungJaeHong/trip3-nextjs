@@ -119,6 +119,12 @@
             font-size: $font-size-large;
             padding-top: $spacer * 5;
         }
+
+        @include sm() {
+            font-size: $font-size-medium;
+            padding-top: 0;
+            line-height: 2.2rem;
+        }
     }
 
     .HeaderDate {
@@ -174,8 +180,8 @@
         gap: $spacer * 3;
     }
 
-    @include sm() {
-        padding: $spacer * 4 0 $spacer * 5;
+    @include md() {
+        padding: $spacer * 3 0 $spacer * 5;
     }
 
     .BodyContainer {
@@ -257,11 +263,11 @@
 
                         :global(.FlightAvailableTimesRow) {
                             display: flex;
-                            padding: $spacer 0;
+                            padding: 0 0 $spacer * 1.5 0;
 
                             p {
                                 padding: 0;
-                                margin: 0;
+                                margin-bottom: 0;
 
                                 a {
                                     text-decoration: underline;
