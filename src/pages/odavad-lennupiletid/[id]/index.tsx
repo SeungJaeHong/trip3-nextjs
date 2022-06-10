@@ -45,11 +45,11 @@ const FlightOfferShow = ({ flightObj }: Props) => {
 
     const renderBody = (htmlString: string) => {
         return parse(htmlString, {
-            replace: (domNode: any) => {
+            /*replace: (domNode: any) => {
                 if (domNode.name === 'flightmap') {
                     return <FlightMap />
                 }
-            },
+            },*/
         })
     }
 

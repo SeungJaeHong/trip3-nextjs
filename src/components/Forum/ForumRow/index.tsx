@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { Destination, ForumRowType, Topic } from '../../../types'
 import Tag from '../../Tag'
 import UserAvatar from '../../User/UserAvatar'
+import { getForumUrlByType } from '../../../helpers'
 
 const ForumRow = (item: ForumRowType) => {
     const renderUnreadContentTags = () => {
@@ -68,7 +69,7 @@ const ForumRow = (item: ForumRowType) => {
                     {item.topics?.map((topic: Topic) => {
                         return (
                             <div className={clsx(styles.MetaItem, styles.Tag)} key={topic.id}>
-                                <Tag title={topic.name} route={'/'} />
+                                <Tag title={topic.name} route={getForumUrlByType(item.type) + '?topic=' + topic.id} />
                             </div>
                         )
                     })}
