@@ -45,6 +45,21 @@
                     white-space: nowrap;
                     margin-top: 5px;
                 }
+
+                @include sm() {
+                    gap: $spacer;
+                    flex-direction: column;
+
+                    .Title {
+                        font-size: $font-size-normal;
+                    }
+
+                    .CreatedAt {
+                        margin-top: 0;
+                        font-size: $font-size-xsmall;
+                        font-weight: 500;
+                    }
+                }
             }
 
             .ContentContainer {
@@ -64,6 +79,12 @@
                     font-family: $font-family-sailec;
                     color: $gray-darker;
                     word-break: break-word;
+                }
+
+                @include sm() {
+                    .User {
+                        display: none;
+                    }
                 }
             }
 

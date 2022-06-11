@@ -56,6 +56,21 @@
                         white-space: nowrap;
                         margin-top: 5px;
                     }
+
+                    @include sm() {
+                        gap: $spacer;
+                        flex-direction: column;
+
+                        .Title {
+                            font-size: $font-size-normal;
+                        }
+
+                        .CreatedAt {
+                            margin-top: 0;
+                            font-size: $font-size-xsmall;
+                            font-weight: 500;
+                        }
+                    }
                 }
 
                 .ContentContainer {
@@ -82,7 +97,7 @@
                 }
 
                 .Body {
-                    gap: $spacer;
+                    gap: $spacer * 2;
 
                     .TitleContainer {
                         .Title {
