@@ -50,7 +50,7 @@ const ForumTabs = () => {
                 const tab = document.getElementById(activeTab[0].route)
                 const pos = tab?.getBoundingClientRect()
                 if (pos && ref?.current && pos.left >= 200) {
-                    ref.current.scrollLeft = pos.left + pos.width
+                    ref.current.scrollLeft = pos.left - pos.width / 2
                 }
             }
         }

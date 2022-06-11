@@ -9,7 +9,7 @@ import { useState } from 'react'
 import CloseIcon from '../../icons/CloseIcon'
 import UserNavBarMenu from '../UserNavbarMenu'
 import React from 'react'
-import {useUnreadMessageCount, useUser} from '../../hooks'
+import { useUnreadMessageCount, useUser } from '../../hooks'
 import { logout } from '../../services/auth.service'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
@@ -90,7 +90,7 @@ const Navbar = ({ darkMode, showSearch, showLogo }: Props) => {
             return (
                 <div className={styles.LinkTitle}>
                     {link.title}
-                    <span>{unreadMessageCount}</span>
+                    {unreadMessageCount > 0 && <span>{unreadMessageCount}</span>}
                 </div>
             )
         } else {
