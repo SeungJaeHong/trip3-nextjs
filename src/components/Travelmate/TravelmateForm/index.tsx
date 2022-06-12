@@ -74,7 +74,7 @@ const TravelmateForm = ({travelmate, destinations, topics, durationOptions, mont
         defaultValues: {
             title: travelmate?.title ?? '',
             body: travelmate?.body ?? '',
-            gender: travelmate?.gender ?? '',
+            gender: travelmate?.gender ?? 'All',
             startType: travelmate?.startType ?? 'start_and_end',
             startMonth: travelmate?.startMonth ?? monthOptions[5]['value'],
             dateRange: { startDate: travelmate?.startDate, endDate: travelmate?.endDate },
@@ -89,7 +89,7 @@ const TravelmateForm = ({travelmate, destinations, topics, durationOptions, mont
     const startMonth = watch('startMonth')
     const genderValues = [
         {
-            value: '',
+            value: 'All',
             label: 'Pole oluline'
         },
         {

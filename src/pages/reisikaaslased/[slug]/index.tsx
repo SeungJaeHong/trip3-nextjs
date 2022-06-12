@@ -21,7 +21,7 @@ import { toggleTravelmateStatus } from '../../../services/travelmate.service'
 import Alert from '../../../components/Alert'
 import RelatedContentBlock from '../../../components/RelatedContentBlock'
 import Ads from '../../../components/Ads'
-import {NextSeo} from "next-seo";
+import { NextSeo } from 'next-seo'
 
 type Props = {
     content: TravelmateContent
@@ -128,8 +128,10 @@ const TravelmatePage = ({ content }: Props) => {
     const renderGender = () => {
         if (travelmate.gender === 'M' || travelmate.gender === 'N') {
             return travelmate.gender === 'M' ? 'Mees' : 'Naine'
-        } else {
+        } else if (travelmate.gender === 'All') {
             return 'Kõik sobib'
+        } else {
+            return '-'
         }
     }
 
