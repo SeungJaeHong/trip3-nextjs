@@ -137,6 +137,14 @@
                 margin: 0 0 $spacer * 1.5 0;
             }
 
+            a {
+                color: $blue;
+
+                &:hover {
+                    color: $blue-hover;
+                }
+            }
+
             @include sm() {
                 font-size: $font-size-normal;
             }
