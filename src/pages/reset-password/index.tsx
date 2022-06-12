@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import Navbar from '../../components/Navbar'
 import styles from './ResetPassword.module.scss'
 import clsx from 'clsx'
@@ -9,8 +9,17 @@ import { GetServerSideProps } from 'next'
 import ApiClientSSR from '../../lib/ApiClientSSR'
 import ForgotPasswordForm from '../../components/ForgotPasswordForm'
 import { NextSeo } from 'next-seo'
+import Router from 'next/router'
+import { useUser } from '../../hooks'
 
 const ForgotPasswordPage = () => {
+    const { userIsLoggedIn } = useUser()
+    useEffect(() => {
+        if (userIsLoggedIn) {
+            Router.replace('/')
+        }
+    }, [userIsLoggedIn])
+
     return (
         <Fragment>
             <NextSeo title={'Trip.ee | Taasta parool'} />
@@ -34,12 +43,18 @@ const ForgotPasswordPage = () => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
-        await ApiClientSSR(context).get('/user')
-        return {
-            redirect: {
-                destination: '/',
-                permanent: false,
-            },
+        const user = await ApiClientSSR(context).get('/user')
+        if (user?.data?.id) {
+            return {
+                redirect: {
+                    destination: '/',
+                    permanent: false,
+                },
+            }
+        } else {
+            return {
+                props: {},
+            }
         }
     } catch (e) {
         return {

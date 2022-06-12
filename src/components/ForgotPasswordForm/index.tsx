@@ -1,9 +1,8 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment } from 'react'
 import styles from './ForgotPasswordForm.module.scss'
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import FormInput from '../Form/FormInput'
 import SubmitButton from '../Form/SubmitButton'
-import { useUser } from '../../hooks'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -17,8 +16,6 @@ type Inputs = {
 
 const ForgotPasswordForm = () => {
     const router = useRouter()
-
-    const { userIsLoggedIn } = useUser()
     const loginSchema = yup
         .object()
         .shape({
@@ -34,12 +31,6 @@ const ForgotPasswordForm = () => {
     } = useForm<Inputs>({
         resolver: yupResolver(loginSchema),
     })
-
-    useEffect(() => {
-        if (userIsLoggedIn) {
-            Router.replace('/')
-        }
-    }, [userIsLoggedIn])
 
     const handleSend: SubmitHandler<Inputs> = async (values: Inputs) => {
         const { email } = values
