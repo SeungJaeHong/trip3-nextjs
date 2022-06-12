@@ -41,12 +41,12 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                 }}
             >
                 <div className={clsx([containerStyle.ContainerXl, styles.Content])}>
-                    {/*<div className={styles.Navbar}>
+                    <div className={styles.Navbar}>
                         <Navbar />
                     </div>
                     <div className={styles.Search}>
                         <FrontPageSearch />
-                    </div>*/}
+                    </div>
                 </div>
             </div>
             <div className={clsx([containerStyle.ContainerXl, styles.Content])}>
