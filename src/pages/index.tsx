@@ -41,16 +41,16 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                 }}
             >
                 <div className={clsx([containerStyle.ContainerXl, styles.Content])}>
-                    <div className={styles.Navbar}>
+                    {/*<div className={styles.Navbar}>
                         <Navbar />
                     </div>
                     <div className={styles.Search}>
                         <FrontPageSearch />
-                    </div>
+                    </div>*/}
                 </div>
             </div>
             <div className={clsx([containerStyle.ContainerXl, styles.Content])}>
-                <div className={styles.CenteredContainer}>
+                {/*<div className={styles.CenteredContainer}>
                     {flightOffers.length >= 3 && (
                         <div className={styles.FlightOffers}>
                             <div className={styles.FlightOfferCard}>
@@ -135,7 +135,7 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                             <MoreLink route={'/foorum/uldfoorum'} title={'Kõik postitused'} />
                         </div>
                     </div>
-                </div>
+                </div>*/}
                 <div className={styles.NewsContainer}>
                     <NewsLatest take={6} />
                 </div>
