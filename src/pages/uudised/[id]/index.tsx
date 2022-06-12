@@ -87,7 +87,7 @@ const NewsShow = ({ newsObj }: Props) => {
                     ],
                 }}
             />
-            <Header backgroundImage={news.backgroundImageUrl}>
+            <Header backgroundImage={news.backgroundImageUrl ?? '/images/header6.jpg'}>
                 <div className={clsx(containerStyle.CenteredContainer, styles.HeaderContainer)}>
                     <div className={styles.HeaderTitle}>{news.title}</div>
                     <div className={styles.DateAndUser}>

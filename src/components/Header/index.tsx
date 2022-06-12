@@ -17,9 +17,8 @@ type Props = {
 const Header = (props: Props) => {
     let style = undefined
     if (props.backgroundImage && !props.withBackgroundMap) {
-        const img = props.backgroundImage ?? '/images/header6.jpg'
         style = {
-            backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(" + img + ")",
+            backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(" + props.backgroundImage + ")",
             width: "100%",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
