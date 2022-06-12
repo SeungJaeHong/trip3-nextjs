@@ -9,17 +9,26 @@ import Link from 'next/link'
 import LoginForm from '../../components/LoginForm'
 import { GetServerSideProps } from 'next'
 import ApiClientSSR from '../../lib/ApiClientSSR'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import { NextSeo } from 'next-seo'
+import { useUser } from '../../hooks'
 
-const LoginPage = (props: any) => {
+const LoginPage = () => {
     const router = useRouter()
+    const { userIsLoggedIn } = useUser()
+
     useEffect(() => {
         if (router.query?.verified) {
             toast.success('Kasutajakonto on verifitseeritud!')
         }
     }, [router.query?.verified])
+
+    useEffect(() => {
+        if (userIsLoggedIn) {
+            Router.replace('/')
+        }
+    }, [userIsLoggedIn])
 
     return (
         <Fragment>
@@ -55,12 +64,18 @@ const LoginPage = (props: any) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
-        await ApiClientSSR(context).get('/user')
-        return {
-            redirect: {
-                destination: '/',
-                permanent: false,
-            },
+        const user = await ApiClientSSR(context).get('/user')
+        if (user?.data?.id) {
+            return {
+                redirect: {
+                    destination: '/',
+                    permanent: false,
+                },
+            }
+        } else {
+            return {
+                props: {},
+            }
         }
     } catch (e) {
         return {

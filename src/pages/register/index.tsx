@@ -49,12 +49,18 @@ const RegisterPage = () => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
-        await ApiClientSSR(context).get('/user')
-        return {
-            redirect: {
-                destination: '/',
-                permanent: false,
-            },
+        const user = await ApiClientSSR(context).get('/user')
+        if (user?.data?.id) {
+            return {
+                redirect: {
+                    destination: '/',
+                    permanent: false,
+                },
+            }
+        } else {
+            return {
+                props: {},
+            }
         }
     } catch (e) {
         return {
