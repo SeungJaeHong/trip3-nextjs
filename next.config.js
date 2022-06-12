@@ -33,4 +33,8 @@ module.exports = {
     experimental: {
         scrollRestoration: true,
     },
+    i18n: {
+        locales: ['et'],
+        defaultLocale: 'et',
+    },
 }
