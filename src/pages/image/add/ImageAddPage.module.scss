@@ -8,6 +8,11 @@
 .Navbar {
     padding-bottom: $spacer * 8;
     padding-top: $spacer * 3;
+
+    @include sm() {
+        padding-bottom: $spacer * 5;
+        padding-top: $spacer * 2;
+    }
 }
 
 .Title {
@@ -17,6 +22,10 @@
     display: flex;
     justify-content: center;
     margin-bottom: $spacer * 6;
+
+    @include sm() {
+        font-size: 2.5rem;
+    }
 }
 
 .Content {
@@ -41,6 +50,11 @@
                 font-size: $font-size-xxlarge;
                 font-weight: 500;
                 margin-bottom: $spacer * 5;
+
+                @include sm() {
+                    font-size: $font-size-large;
+                    margin-bottom: $spacer * 3;
+                }
             }
 
             .Form {
