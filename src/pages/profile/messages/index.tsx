@@ -15,7 +15,7 @@ const UserProfileMessagesPage = () => {
     const router = useRouter()
 
     if (userIsLoggedIn === false) {
-        router.push('/')
+        router.push('/login')
     }
 
     return (
