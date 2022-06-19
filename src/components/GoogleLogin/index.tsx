@@ -4,29 +4,40 @@ import styles from './GoogleLogin.module.scss'
 import { toast } from 'react-toastify'
 import { createUserOrLogin } from '../../services/auth.service'
 import { useUser } from '../../hooks'
-import jwt_decode from 'jwt-decode'
+import axios from 'axios'
 
 const GoogleLogin = () => {
     const { mutate } = useUser()
 
     const signInGoogle = () => {
-        google.accounts.id.prompt((notification) => {
-            if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-                toast.error('Google sisselogimine ebaõnnestus!')
-            }
+        const tokenClient = google.accounts.oauth2.initTokenClient({
+            client_id: process.env.GOOGLE_CLIENT_ID as string,
+            callback: handleResponse,
+            scope: 'profile email',
+            prompt: 'select_account',
         })
+
+        tokenClient.requestAccessToken()
     }
 
     const handleResponse = async (response: any) => {
-        const profile: any = jwt_decode(response.credential)
-        const name = profile.name
-        const email = profile.email
-        const imageUrl = profile.picture ? profile.picture.replace('=s96', '=s180') : undefined
-
-        await createUserOrLogin(name, email, imageUrl)
+        const access_token = response.access_token
+        await axios
+            .get('https://www.googleapis.com/oauth2/v3/userinfo', {
+                headers: {
+                    Authorization: `Bearer ${access_token}`,
+                },
+            })
             .then((res) => {
-                mutate(res.data)
-                toast.success('Tere, ' + res.data.name + '!')
+                const profile = res.data
+                const name = profile.name
+                const email = profile.email
+                const imageUrl = profile.picture ? profile.picture.replace('=s96', '=s180') : undefined
+
+                createUserOrLogin(name, email, imageUrl).then((res) => {
+                    mutate(res.data)
+                    toast.success('Tere, ' + res.data.name + '!')
+                })
             })
             .catch((err) => {
                 toast.error('Sisselogimine ebaõnnestus!')

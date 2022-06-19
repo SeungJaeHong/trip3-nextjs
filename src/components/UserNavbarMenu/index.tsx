@@ -44,7 +44,7 @@ const UserNavBarMenu = ({ darkMode, unreadMessageCount }: Props) => {
             await logout().then((response) => {
                 mutate(undefined)
                 router.push('/')
-                toast.success('Väljalogimine õnnestus!')
+                toast.success('Oled välja logitud!')
             })
         } catch (e: any) {
             setMenuOpen(false)
