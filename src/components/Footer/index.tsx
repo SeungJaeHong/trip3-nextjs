@@ -1,24 +1,24 @@
 import Link from 'next/link'
-import TripTextLogo from "../../icons/TripTextLogo"
-import RssIcon from "../../icons/RssIcon"
+import TripTextLogo from '../../icons/TripTextLogo'
 import styles from './Footer.module.scss'
-import clsx from "clsx"
-import containerStyle from "../../styles/containers.module.scss"
-import FacebookIcon from "../../icons/FacebookIcon"
-import TwitterIcon from "../../icons/TwitterIcon"
+import clsx from 'clsx'
+import containerStyle from '../../styles/containers.module.scss'
+import FacebookIcon from '../../icons/FacebookIcon'
+import TwitterIcon from '../../icons/TwitterIcon'
+import InstagramIcon from '../../icons/InstagramIcon'
 
 const col1 = [
     {
         title: 'Lennupakkumised',
-        route: '/odavad-lennupiletid'
+        route: '/odavad-lennupiletid',
     },
     {
         title: 'Reisikaaslased',
-        route: '/reisikaaslased'
+        route: '/reisikaaslased',
     },
     {
         title: 'Uudised',
-        route: '/uudised'
+        route: '/uudised',
     },
     /*{
         title: 'Reisiblogid',
@@ -26,72 +26,77 @@ const col1 = [
     },*/
     {
         title: 'Reisipildid',
-        route: '/reisipildid'
+        route: '/reisipildid',
     },
     /*{
         title: 'Sihtkohad',
         route: '/sihtkohad'
     },*/
-];
+]
 
 const col2 = [
     {
         title: 'Foorum',
-        route: '/foorum/uldfoorum'
+        route: '/foorum/uldfoorum',
     },
     {
         title: 'Ost-müük',
-        route: '/foorum/ost-muuk'
+        route: '/foorum/ost-muuk',
     },
     {
         title: 'Elu välismaal',
-        route: '/foorum'
+        route: '/foorum',
     },
-];
+]
 
 const col3 = [
     {
         title: 'Mis on Trip',
-        route: '/tripist'
+        route: '/tripist',
     },
     {
         title: 'Kontakt',
-        route: '/kontakt'
+        route: '/kontakt',
     },
     {
         title: 'Kasutustingimused',
-        route: '/kasutustingimused'
+        route: '/kasutustingimused',
     },
     {
         title: 'Privaatsustingimused',
-        route: '/privaatsustingimused'
+        route: '/privaatsustingimused',
     },
     {
         title: 'Reklaam',
-        route: '/reklaam'
+        route: '/reklaam',
     },
     {
         title: 'Logi sisse',
-        route: '/login'
+        route: '/login',
     },
     {
         title: 'Registreeri',
-        route: '/register'
+        route: '/register',
     },
-];
+]
 
 const social = [
     {
         title: 'Facebook',
         route: 'https://www.facebook.com/tripeeee',
-        icon: FacebookIcon
+        icon: FacebookIcon,
     },
     {
         title: 'Twitter',
         route: 'https://twitter.com/trip_ee',
-        icon: TwitterIcon
+        icon: TwitterIcon,
     },
     {
+        title: 'Instagram',
+        route: 'https://www.instagram.com/trip.ee',
+        icon: InstagramIcon,
+    },
+    /*{
         title: 'Lennupakkumiste RSS',
         route: '/',
         icon: RssIcon
@@ -100,8 +105,8 @@ const social = [
         title: 'Uudiste RSS',
         route: '/',
         icon: RssIcon
-    },
-];
+    },*/
+]
 
 type Props = {
     simple: boolean
@@ -111,18 +116,21 @@ const Footer = (props: Props) => {
     let style = {}
     if (!props.simple) {
         style = {
-            backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/footer.jpeg)",
-            width: "100%",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            backgroundPosition: "50% 50%"
+            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/footer.jpeg)',
+            width: '100%',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundPosition: '50% 50%',
         }
     }
 
     return (
-        <div className={clsx(styles.Footer, {
-            [styles.Simple]: props.simple
-        })} style={style}>
+        <div
+            className={clsx(styles.Footer, {
+                [styles.Simple]: props.simple,
+            })}
+            style={style}
+        >
             <div className={clsx([containerStyle.ContainerLg, styles.Content])}>
                 <div className={styles.Col}>
                     <Link href={'/'}>
@@ -132,55 +140,47 @@ const Footer = (props: Props) => {
                     </Link>
                 </div>
                 <div className={styles.Col}>
-                    {col1.map(item => {
+                    {col1.map((item) => {
                         return (
                             <Link href={item.route} key={item.title}>
-                                <a>
-                                    {item.title}
-                                </a>
+                                <a>{item.title}</a>
                             </Link>
                         )
                     })}
                 </div>
                 <div className={styles.Col}>
-                    {col2.map(item => {
+                    {col2.map((item) => {
                         return (
                             <Link href={item.route} key={item.title}>
-                                <a>
-                                    {item.title}
-                                </a>
+                                <a>{item.title}</a>
                             </Link>
                         )
                     })}
                 </div>
                 <div className={styles.Col}>
-                    {col3.map(item => {
+                    {col3.map((item) => {
                         return (
                             <Link href={item.route} key={item.title}>
-                                <a>
-                                    {item.title}
-                                </a>
+                                <a>{item.title}</a>
                             </Link>
                         )
                     })}
                 </div>
             </div>
             <div className={styles.SocialLinks}>
-                {social.map(item => {
+                {social.map((item) => {
                     const Icon = item.icon
                     return (
                         <Link href={item.route} key={item.title}>
                             <a target={'_blank'}>
                                 <Icon />
-                                {item.title}
+                                <span>{item.title}</span>
                             </a>
                         </Link>
                     )
                 })}
             </div>
-            <div className={styles.CopyRight}>
-                Copyright © 1998 - {new Date().getFullYear()}
-            </div>
+            <div className={styles.CopyRight}>Copyright © 1998 - {new Date().getFullYear()}</div>
         </div>
     )
 }
