@@ -191,7 +191,7 @@
             .AddNewTopic {
                 max-width: 260px;
                 width: 100%;
-                margin-bottom: $spacer * 3;
+                margin-bottom: $spacer * 5;
 
                 @include sm() {
                     max-width: none;
