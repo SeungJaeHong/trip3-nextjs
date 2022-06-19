@@ -36,12 +36,12 @@
             display: flex;
             flex: 1;
             flex-direction: column;
-            gap: $spacer;
+            gap: $spacer * .5;
 
             .UserNameContainer {
                 display: flex;
                 gap: $spacer * 2;
-                align-items: center;
+                justify-content: space-between;
 
                 .UserName {
                     width: 100%;
@@ -56,6 +56,8 @@
                     font-size: $font-size-small;
                     display: flex;
                     gap: $spacer;
+                    flex-wrap: wrap;
+                    justify-content: flex-end;
                 }
             }
 
