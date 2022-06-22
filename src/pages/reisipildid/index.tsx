@@ -140,8 +140,9 @@ const ImagesPage = ({ images, currentPage, hasMore, destinationId, destinationOp
                                 id={'destination-select'}
                                 options={destinationOptions}
                                 placeholder={'Kõik sihtkohad'}
-                                //value={selectedDestinationId?.toString()}
+                                value={selectedDestinationId?.toString()}
                                 onChange={onSelectDestination}
+                                key={selectedDestinationId?.toString()}
                             />
                         </div>
                     </div>
