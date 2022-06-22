@@ -83,7 +83,7 @@ const UserChat = () => {
             <div className={styles.Header}>
                 <div className={styles.Back} onClick={() => router.push('/profile/messages')}>
                     <ArrowLeftIcon />
-                    <span className={styles.BackText}>Tagasi</span>
+                    <span className={styles.BackText}>Kõik sõnumid</span>
                 </div>
                 <div className={styles.WithUser}>
                     <div className={styles.Avatar}>
