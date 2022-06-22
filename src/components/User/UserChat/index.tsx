@@ -35,7 +35,11 @@ const UserChat = () => {
                     bodyRef.current?.scrollBy({ top: bodyRef.current?.scrollHeight })
                 })
                 .catch((err) => {
-                    setLoading(false)
+                    if (err?.response.status === 403) {
+                        router.push('/profile/messages')
+                    } else {
+                        setLoading(false)
+                    }
                 })
         }
     }, [id, userIsLoggedIn])
