@@ -6,6 +6,7 @@ import containerStyle from '../../styles/containers.module.scss'
 import FacebookIcon from '../../icons/FacebookIcon'
 import TwitterIcon from '../../icons/TwitterIcon'
 import InstagramIcon from '../../icons/InstagramIcon'
+import {useUser} from "../../hooks";
 
 const col1 = [
     {
@@ -113,6 +114,7 @@ type Props = {
 }
 
 const Footer = (props: Props) => {
+    const { userIsLoggedIn } = useUser()
     let style = {}
     if (!props.simple) {
         style = {
@@ -159,6 +161,10 @@ const Footer = (props: Props) => {
                 </div>
                 <div className={styles.Col}>
                     {col3.map((item) => {
+                        if ((item.route === '/login' || item.route === '/register') && userIsLoggedIn) {
+                            return null
+                        }
+
                         return (
                             <Link href={item.route} key={item.title}>
                                 <a>{item.title}</a>
