@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { NewsCardType } from '../../../types'
 import MoreLink from '../../MoreLink'
 import { getLatestNews } from '../../../services/news.service'
+import { useIsMounted } from '../../../hooks'
 
 type Props = {
     take: number
@@ -14,11 +15,14 @@ type Props = {
 
 const NewsLatest = ({ take, excludeId, destinationId }: Props) => {
     const [news, setNews] = useState<NewsCardType[]>([])
+    const isMounted = useIsMounted()
 
     useEffect(() => {
         getLatestNews(take, excludeId, destinationId)
             .then((res) => {
-                setNews(res.data)
+                if (isMounted()) {
+                    setNews(res.data)
+                }
             })
             .catch((e) => {})
     }, [destinationId, excludeId])

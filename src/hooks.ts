@@ -1,6 +1,7 @@
 import useSWR from 'swr'
 import { getUser } from './services/auth.service'
 import { getUnreadMessageCount } from './services/user.service'
+import { useCallback, useEffect, useRef } from 'react'
 
 export function useUser() {
     const { data, mutate, error } = useSWR('get_user', getUser, {
@@ -28,4 +29,18 @@ export function useUnreadMessageCount() {
         unreadMessageCount: data?.data,
         mutate,
     }
+}
+
+export function useIsMounted() {
+    const isMounted = useRef(false)
+
+    useEffect(() => {
+        isMounted.current = true
+
+        return () => {
+            isMounted.current = false
+        }
+    }, [])
+
+    return useCallback(() => isMounted.current, [])
 }

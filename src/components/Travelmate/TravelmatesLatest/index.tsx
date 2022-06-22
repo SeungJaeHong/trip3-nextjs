@@ -8,6 +8,7 @@ import { TravelmateRowType } from '../../../types'
 import SkeletonLoader from '../../SkeletonLoader'
 import TravelmateRow from '../TravelmateRow'
 import clsx from 'clsx'
+import { useIsMounted } from '../../../hooks'
 
 type Props = {
     grid: boolean
@@ -18,14 +19,21 @@ type Props = {
 const TravelmatesLatest = ({ grid, take, destinationId }: Props) => {
     const [travelmates, setTravelmates] = useState<TravelmateRowType[]>([])
     const [loading, setLoading] = useState<boolean>(true)
+    const isMounted = useIsMounted()
 
     useEffect(() => {
         getLatestTravelmates(take, destinationId)
             .then((res) => {
-                setTravelmates(res.data)
+                if (isMounted()) {
+                    setTravelmates(res.data)
+                }
             })
             .catch((e) => {})
-            .finally(() => setLoading(false))
+            .finally(() => {
+                if (isMounted()) {
+                    setLoading(false)
+                }
+            })
     }, [destinationId])
 
     const renderContent = () => {

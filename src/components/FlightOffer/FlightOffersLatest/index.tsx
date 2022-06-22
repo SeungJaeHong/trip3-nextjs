@@ -6,6 +6,7 @@ import MoreLink from '../../MoreLink'
 import { getLatestFlights } from '../../../services/flight.service'
 import { FlightOfferRowType } from '../../../types'
 import SkeletonLoader from '../../SkeletonLoader'
+import { useIsMounted } from '../../../hooks'
 
 type Props = {
     take: number
@@ -17,14 +18,21 @@ type Props = {
 const FlightOffersLatest = ({ take, title, excludeId, destinationId }: Props) => {
     const [flights, setFlights] = useState<FlightOfferRowType[]>([])
     const [loading, setLoading] = useState<boolean>(true)
+    const isMounted = useIsMounted()
 
     useEffect(() => {
         getLatestFlights(take, excludeId, destinationId)
             .then((res) => {
-                setFlights(res.data)
+                if (isMounted()) {
+                    setFlights(res.data)
+                }
             })
             .catch((e) => {})
-            .finally(() => setLoading(false))
+            .finally(() => {
+                if (isMounted()) {
+                    setLoading(false)
+                }
+            })
     }, [destinationId, excludeId])
 
     const renderContent = () => {

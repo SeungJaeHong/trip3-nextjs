@@ -6,6 +6,7 @@ import { ForumRowType } from '../../../types'
 import { getLatestPosts } from '../../../services/forum.service'
 import ForumList from '../ForumList'
 import SkeletonLoader from '../../SkeletonLoader'
+import { useIsMounted } from '../../../hooks'
 
 type Props = {
     take: number
@@ -15,13 +16,20 @@ type Props = {
 const ForumLatest = ({ take, excludeId }: Props) => {
     const [forum, setForum] = useState<ForumRowType[]>([])
     const [loading, setLoading] = useState<boolean>(true)
+    const isMounted = useIsMounted()
 
     useEffect(() => {
         getLatestPosts(take, excludeId)
             .then((res) => {
-                setForum(res.data)
+                if (isMounted()) {
+                    setForum(res.data)
+                }
             })
-            .finally(() => setLoading(false))
+            .finally(() => {
+                if (isMounted()) {
+                    setLoading(false)
+                }
+            })
     }, [])
 
     const renderContent = () => {
