@@ -56,11 +56,14 @@ const ImageSelectSidebar = ({ open, onClose, onImageSelect }: Props) => {
         <div
             className={clsx(styles.ImageSelectSidebar, {
                 [styles.Open]: open,
+                [styles.Loading]: loading,
             })}
         >
             {loading && (
-                <div className={styles.Loading}>
-                    <LoadingSpinner />
+                <div className={styles.LoadingContainer}>
+                    <div className={styles.Loading}>
+                        <LoadingSpinner />
+                    </div>
                 </div>
             )}
             <div className={styles.CloseIcon}>
