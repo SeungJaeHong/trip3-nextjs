@@ -11,8 +11,12 @@
         align-items: flex-start;
         padding: $spacer * 1.2 $spacer * 4;
 
+        @include md() {
+            padding: $spacer $spacer * 2;
+        }
+
         @include xs() {
-            padding: $spacer $spacer * 4;
+            padding: $spacer $spacer * 3;
         }
 
         .Destination {
@@ -22,7 +26,7 @@
                 line-height: 1.8rem;
                 font-weight: 600;
 
-                @include xs() {
+                @include md() {
                     font-size: 1.2rem;
                     line-height: 1.6rem;
                 }

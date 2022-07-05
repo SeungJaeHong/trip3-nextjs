@@ -12,13 +12,18 @@
     padding-bottom: $spacer * 6;
     gap: $spacer * 8;
 
+    @include lg() {
+        gap: $spacer * 6;
+    }
+
     @include md() {
         flex-direction: column;
-        gap: $spacer * 2;
+        gap: $spacer * 5;
     }
 
     @include sm() {
         margin-top: $spacer * -23;
+        gap: $spacer * 3;
     }
 
     .ForumContent {
@@ -60,7 +65,25 @@
 
         .BodyAd {
             width: 100%;
+            display: block;
             overflow: hidden;
+
+            @include lg() {
+                max-width: 650px;
+            }
+
+            @media (max-width: 912px) {
+                max-width: 588px;
+            }
+
+
+            @media (max-width: 820px) {
+                max-width: 500px;
+            }
+
+            @include md() {
+                max-width: unset;
+            }
 
             @include sm() {
                 margin-bottom: $spacer * 2;
@@ -86,6 +109,10 @@
             gap: $spacer * 2;
             width: 100%;
             max-width: 270px;
+
+            @include md() {
+                margin: 0 auto;
+            }
 
             @include sm() {
                 max-width: 300px;
