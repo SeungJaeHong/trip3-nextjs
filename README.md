@@ -4,8 +4,6 @@ Trip stack **FRONTEND** experiment built on [Next.js](https://nextjs.org/) and b
 
 See also the **BACKEND** part [https://github.com/kkallasm/trip3-laravel](https://github.com/kkallasm/trip3-laravel) -> works only as API
 
-NOTE! It can be used with any other BACKEND system/framework which supports cookie/session based authentication.
-
 ## Demo
 
 [https://tripstaging.eu](https://tripstaging.eu)
@@ -66,8 +64,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
  - better readme
  - Dockerfile
- - typescript types (any is used at the moment)
- - authentication with backend
- - LARAVEL_API_URL to more generic variable
- - eslint & prettier
  - ...
