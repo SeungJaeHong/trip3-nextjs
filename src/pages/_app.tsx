@@ -9,8 +9,10 @@ import AdsConfig from '../lib/AdsConfig'
 import { GoogleAnalytics } from '../components/GoogleAnalytics'
 import { DefaultSeo } from 'next-seo'
 import '../styles/leaflet_map.scss'
+import ErrorPage503 from './503'
 
 function MyApp({ Component, pageProps }: AppProps) {
+    const maintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE as string
     return (
         <>
             <NextNprogress
@@ -42,8 +44,8 @@ function MyApp({ Component, pageProps }: AppProps) {
                 additionalMetaTags={[
                     {
                         name: 'keywords',
-                        content: 'Reisifoorum, odavad lennupiletid, reisikaaslased, reisiuudised'
-                    }
+                        content: 'Reisifoorum, odavad lennupiletid, reisikaaslased, reisiuudised',
+                    },
                 ]}
                 additionalLinkTags={[
                     {
@@ -91,7 +93,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 }}
             />
             <GoogleAnalytics />
-            <Component {...pageProps} />
+            {maintenance === 'true' ? <ErrorPage503 /> : <Component {...pageProps} />}
             <Script
                 id={'ads-js'}
                 src={'https://securepubads.g.doubleclick.net/tag/js/gpt.js'}
