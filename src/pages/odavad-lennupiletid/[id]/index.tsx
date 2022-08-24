@@ -70,7 +70,7 @@ const FlightOfferShow = ({ flightObj }: Props) => {
                     ],
                 }}
             />
-            <Header backgroundImage={flight.backgroundImageUrl ? flight.backgroundImageUrl : '/images/header6.webp'}>
+            <Header backgroundImage={flight.backgroundImageUrl ? flight.backgroundImageUrl : '/images/header.webp'}>
                 <div className={clsx(containerStyle.CenteredContainer, styles.HeaderContainer)}>
                     <div className={styles.HeaderTitle}>{flight.title}</div>
                     <div className={styles.HeaderDate}>{flight.createdAt}</div>
