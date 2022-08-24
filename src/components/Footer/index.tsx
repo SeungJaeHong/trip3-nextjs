@@ -118,7 +118,7 @@ const Footer = (props: Props) => {
     let style = {}
     if (!props.simple) {
         style = {
-            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/footer.jpeg)',
+            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/footer.webp)',
             width: '100%',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',

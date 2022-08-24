@@ -49,7 +49,7 @@ const Header = (props: Props) => {
 }
 
 Header.defaultProps = {
-    backgroundImage: '/images/header6.webp',
+    backgroundImage: '/images/header.webp',
     withBackgroundMap: false,
     light: false
 }
