@@ -79,7 +79,7 @@ const DestinationPage = ({ destination }: Props) => {
                     ': reisiinfo ning ülevaate headest pakkumistest, reisisoovitustest, kuulutustest ja reisikaaslastest'
                 }
             />
-            <Header backgroundImage={'https://trip.ee/images/large/Ateena-acropolis-px_kfwx.jpeg'}>
+            <Header backgroundImage={'https://trip3spaces.fra1.cdn.digitaloceanspaces.com/images/content/background/Ateena-acropolis-px_kfwx.jpeg'}>
                 <div className={styles.HeaderContainer}>
                     {destination.previousDestination ? (
                         <Link href={'/sihtkoht/' + destination.previousDestination.slug}>
