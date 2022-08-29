@@ -111,6 +111,18 @@
                 }
             }
         }
+
+        @media (max-width: 325px) {
+            height: 45px;
+
+            input {
+                font-size: $font-size-small;
+
+                &::placeholder {
+                    font-size: $font-size-small;
+                }
+            }
+        }
     }
 
     .SearchResults {
@@ -153,6 +165,10 @@
                     width: 24px;
                 }
             }
+        }
+
+        @media (max-width: 325px) {
+            top: 45px;
         }
     }
 }

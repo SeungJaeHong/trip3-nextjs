@@ -12,7 +12,7 @@ const SearchDestinationResults = ({ results }: Props) => {
         <div className={styles.SearchDestinationResults}>
             <div className={styles.Results}>
                 {results.map((result) => {
-                    const itemUrl = '/sihkoht/' + result.slug
+                    const itemUrl = '/sihtkoht/' + result.slug
                     const name = result.parent_name ? result.name + ', ' + result.parent_name : result.name
                     return (
                         <div className={styles.DestinationRow} key={result.id}>

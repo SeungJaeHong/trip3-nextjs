@@ -13,6 +13,7 @@ import Router, { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import { NextSeo } from 'next-seo'
 import { useUser } from '../../hooks'
+import WarningIcon from "../../icons/WarningIcon";
 
 const LoginPage = () => {
     const router = useRouter()
@@ -45,6 +46,13 @@ const LoginPage = () => {
                         <Link href={'/register'}>
                             <a>Registreeri siin</a>
                         </Link>
+                    </div>
+                    <div className={styles.CookieInfoContainer}>
+                        <WarningIcon />
+                        <div className={styles.CookieInfoText}>
+                            Kui sisselogimisega tekib viga, siis soovitame esilagu küpsised brauseris ära kustutada ja uuesti proovida.<br/>
+                            Infot kustutamise kohta leiab <a href={'http://et.wondershare.com/recover-data/delete-cookies-from-web-browser.html'} target={'_blank'}>siit</a>.
+                        </div>
                     </div>
                     <div className={styles.Form}>
                         <LoginForm />

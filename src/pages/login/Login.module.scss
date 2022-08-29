@@ -37,6 +37,40 @@
     }
 }
 
+.CookieInfoContainer {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto $spacer * 3 auto;
+    display: flex;
+    padding: $spacer * 2;
+    background: #feebc8;
+    position: relative;
+    gap: $spacer * 3;
+    align-items: center;
+
+    svg {
+        width: 20px;
+        min-width: 20px;
+        height: 20px;
+        stroke: $yellow-dark;
+    }
+
+    .CookieInfoText {
+        font-family: $font-family-sailec;
+        font-size: 15px;
+        font-weight: 500;
+
+        a {
+            color: $blue;
+            font-weight: 600;
+
+            &:hover {
+                color: $blue-hover;
+            }
+        }
+    }
+}
+
 .Form {
     display: flex;
     flex-direction: column;

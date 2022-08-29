@@ -88,7 +88,7 @@ const UserNavBarMenu = ({ darkMode, unreadMessageCount }: Props) => {
             if (userIsAdmin) {
                 links.push({
                     title: 'Toimetus',
-                    route: '/admin/dashboard',
+                    route: '/admin/forum',
                 })
             }
         } else {
