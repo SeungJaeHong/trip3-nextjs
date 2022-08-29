@@ -50,7 +50,7 @@ const LoginPage = () => {
                     <div className={styles.CookieInfoContainer}>
                         <WarningIcon />
                         <div className={styles.CookieInfoText}>
-                            Kui sisselogimisega tekib viga, siis soovitame esilagu küpsised brauseris ära kustutada ja uuesti proovida.<br/>
+                            Kui sisselogimisel tekib viga, siis soovitame esialgu küpsised brauseris ära kustutada ja uuesti proovida.<br/>
                             Infot kustutamise kohta leiab <a href={'http://et.wondershare.com/recover-data/delete-cookies-from-web-browser.html'} target={'_blank'} rel={'noreferrer'}>siit</a>.
                         </div>
                     </div>
