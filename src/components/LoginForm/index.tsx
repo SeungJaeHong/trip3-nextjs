@@ -37,6 +37,9 @@ const LoginForm = () => {
         formState: { errors, isSubmitting },
     } = useForm<Inputs>({
         resolver: yupResolver(loginSchema),
+        defaultValues: {
+            remember_me: true
+        }
     })
 
     const handleLogin: SubmitHandler<Inputs> = async (values: Inputs) => {

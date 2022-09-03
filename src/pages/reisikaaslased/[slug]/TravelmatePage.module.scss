@@ -140,6 +140,7 @@
 
             a {
                 color: $blue;
+                word-break: break-all;
 
                 &:hover {
                     color: $blue-hover;
