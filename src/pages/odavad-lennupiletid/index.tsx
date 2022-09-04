@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import Header from '../../components/Header'
 import { GetServerSideProps } from 'next'
 import Footer from '../../components/Footer'
@@ -17,6 +17,7 @@ import RelatedContentBlock from '../../components/RelatedContentBlock'
 import { useUser } from '../../hooks'
 import Ads from '../../components/Ads'
 import { NextSeo } from 'next-seo'
+import FormSelect from '../../components/Form/FormSelect'
 
 type Props = {
     flightOffers: FlightOfferRowType[]
@@ -24,13 +25,28 @@ type Props = {
     currentPage: number
     filter: []
     hasMore: boolean
+    destination: string
+    destinationOptions: [{ label: string; value: string }]
 }
 
-const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }: Props) => {
+const FlightsIndex = ({
+    flightOffers,
+    filterTags,
+    currentPage,
+    filter,
+    hasMore,
+    destination,
+    destinationOptions,
+}: Props) => {
     const [filters, setFilters] = useState<Array<number>>(filter)
+    const [selectedDestination, setSelectedDestination] = useState<string | undefined>(destination)
     const router = useRouter()
     const { userIsLoggedIn, user } = useUser()
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
+
+    useEffect(() => {
+        setSelectedDestination(destination)
+    }, [destination])
 
     const getNextPageUrl = () => {
         if (!hasMore) {
@@ -40,6 +56,7 @@ const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }
         const urlParams = {
             filter: filters,
             page: currentPage + 1,
+            destination: selectedDestination,
         }
 
         const queryString = objectToQueryString(urlParams)
@@ -51,6 +68,7 @@ const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }
             const urlParams = {
                 filter: filters,
                 page: currentPage - 1,
+                destination: selectedDestination,
             }
 
             const queryString = objectToQueryString(urlParams)
@@ -73,6 +91,19 @@ const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }
         const urlParams = {
             filter: newFilters,
             page: 1,
+            destination: selectedDestination,
+        }
+
+        const queryString = objectToQueryString(urlParams)
+        router.push(router.pathname + '?' + queryString)
+    }
+
+    const onSelectDestination = (id?: string) => {
+        setSelectedDestination(id)
+        const urlParams = {
+            filter: filters,
+            page: currentPage,
+            destination: id,
         }
 
         const queryString = objectToQueryString(urlParams)
@@ -96,7 +127,8 @@ const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }
                 }
                 openGraph={{
                     title: 'Lennupakkumised',
-                    description: 'Kõik odavad lennupiletid mugavalt ühelt lehel. Vaata soodsaid lennupakkumisi ning alusta oma reisi planeerimist siit'
+                    description:
+                        'Kõik odavad lennupiletid mugavalt ühelt lehel. Vaata soodsaid lennupakkumisi ning alusta oma reisi planeerimist siit',
                 }}
             />
             <Header title={'Lennupakkumised'}>
@@ -108,6 +140,18 @@ const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }
                 <div className={containerStyle.CenteredContainer}>
                     <div className={styles.Content}>
                         <div className={styles.FlightOfferList}>
+                            {userIsAdmin &&
+                                <div className={styles.DestinationSelect}>
+                                    <FormSelect
+                                        id={'destination'}
+                                        options={destinationOptions}
+                                        placeholder={'Vali sihtkoht'}
+                                        value={selectedDestination}
+                                        onChange={onSelectDestination}
+                                        key={selectedDestination?.toString()}
+                                    />
+                                </div>
+                            }
                             {/*<Ads type={'flight-offer-list-top'} />*/}
                             {renderResults()}
                             <div className={styles.Paginator}>
@@ -157,11 +201,13 @@ const FlightsIndex = ({ flightOffers, filterTags, currentPage, filter, hasMore }
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const page = context.query?.page
     const filter = context.query?.filter
+    const destination = context.query?.destination
     let url = process.env.API_BASE_URL + '/flights'
 
     const urlParams = {
         filter: filter,
         page: page,
+        destination: destination,
     }
 
     const queryString = objectToQueryString(urlParams)
@@ -177,6 +223,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         }
     }
 
+    const destinationOptions: { value: string; label: string }[] = res.data?.destinations.map((destination: any) => ({
+        label: destination.name,
+        value: destination.id.toString(),
+    }))
+
     return {
         props: {
             flightOffers: res.data.flightOffers?.items,
@@ -184,6 +235,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
             hasMore: res.data.flightOffers?.hasMore,
             filter: filterValue,
+            destination: destination || null,
+            destinationOptions: destinationOptions,
         },
     }
 }

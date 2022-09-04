@@ -55,7 +55,8 @@ FormSelect.defaultProps = {
     isClearable: true,
     error: '',
     disabled: false,
-    required: false
+    required: false,
+    options: []
 }
 
 export default FormSelect
