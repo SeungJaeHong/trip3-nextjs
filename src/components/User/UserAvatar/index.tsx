@@ -15,12 +15,9 @@ const UserAvatar = ({ user, borderWidth }: Props) => {
     useEffect(() => {
         setTimeout(() => {
             if (ref?.current) {
-
-                console.log(ref?.current.clientHeight)
-
                 setHeight(ref?.current.clientHeight)
             }
-        }, 100)
+        }, 50)
     }, [])
 
     const polarToCartesian = (centerX: number, centerY: number, radius: number, angleInDegrees: number) => {
