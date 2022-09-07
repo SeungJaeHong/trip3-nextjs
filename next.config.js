@@ -37,4 +37,5 @@ module.exports = {
         locales: ['et'],
         defaultLocale: 'et',
     },
+    generateEtags: false,
 }
