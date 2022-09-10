@@ -15,10 +15,11 @@ import NewsLatest from '../components/News/NewsLatest'
 import FlightOffersLatest from '../components/FlightOffer/FlightOffersLatest'
 import TravelmatesLatest from '../components/Travelmate/TravelmatesLatest'
 import ApiClientSSR from '../lib/ApiClientSSR'
-import { useUser } from '../hooks'
+import { useIsMounted, useUser } from '../hooks'
 import FrontPageImageGallery from '../components/FrontPageImageGallery'
 import Ads from '../components/Ads'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { getLatestPosts } from '../services/forum.service'
 
 type Props = {
     flightOffers: FlightOfferCardType[]
@@ -27,6 +28,17 @@ type Props = {
 
 const Home = ({ flightOffers, forumPosts }: Props) => {
     const { userIsLoggedIn } = useUser()
+    const [posts, setPosts] = useState<ForumRowType[]>(forumPosts)
+    const isMounted = useIsMounted()
+
+    useEffect(() => {
+        getLatestPosts(15).then((res) => {
+            if (isMounted()) {
+                setPosts(res.data)
+            }
+        })
+    }, [])
+
     return (
         <>
             <div
@@ -93,7 +105,7 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                         </div>
                         <div className={styles.ForumBlock}>
                             <div className={styles.ForumList}>
-                                <ForumList items={forumPosts} withAds={true} />
+                                <ForumList items={posts} withAds={true} />
                             </div>
                             <div className={styles.SidebarContent}>
                                 <div className={styles.ForumLinks}>

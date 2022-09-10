@@ -29,7 +29,7 @@ export const likePost = async (content: ForumPostType, value: boolean): Promise<
     })
 }
 
-export const getLatestPosts = async (take = 3, excludeId?: number) => {
+export const getLatestPosts = async (take = 3, excludeId?: number): Promise<AxiosResponse> => {
     const urlParams = {
         take: take,
         id: excludeId,
