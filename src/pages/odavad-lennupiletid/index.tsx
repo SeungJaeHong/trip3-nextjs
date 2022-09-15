@@ -102,7 +102,6 @@ const FlightsIndex = ({
         setSelectedDestination(id)
         const urlParams = {
             filter: filters,
-            page: currentPage,
             destination: id,
         }
 
@@ -140,18 +139,16 @@ const FlightsIndex = ({
                 <div className={containerStyle.CenteredContainer}>
                     <div className={styles.Content}>
                         <div className={styles.FlightOfferList}>
-                            {userIsAdmin &&
-                                <div className={styles.DestinationSelect}>
-                                    <FormSelect
-                                        id={'destination'}
-                                        options={destinationOptions}
-                                        placeholder={'Vali sihtkoht'}
-                                        value={selectedDestination}
-                                        onChange={onSelectDestination}
-                                        key={selectedDestination?.toString()}
-                                    />
-                                </div>
-                            }
+                            <div className={styles.DestinationSelect}>
+                                <FormSelect
+                                    id={'destination'}
+                                    options={destinationOptions}
+                                    placeholder={'Vali sihtkoht'}
+                                    value={selectedDestination}
+                                    onChange={onSelectDestination}
+                                    key={selectedDestination?.toString()}
+                                />
+                            </div>
                             {/*<Ads type={'flight-offer-list-top'} />*/}
                             {renderResults()}
                             <div className={styles.Paginator}>
