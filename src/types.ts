@@ -240,6 +240,7 @@ export type NewsCardType = {
     slug: string
     imageUrl: string
     createdAt: string
+    createdAtRaw: string
     commentsCount: number
 }
 
@@ -265,6 +266,7 @@ export type FlightOfferRowType = {
     title: string
     slug: string
     createdAt: string
+    createdAtRaw: string
     destinations?: Destination[]
     tags?: Tag[]
 }
