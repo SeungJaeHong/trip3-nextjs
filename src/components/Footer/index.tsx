@@ -7,6 +7,7 @@ import FacebookIcon from '../../icons/FacebookIcon'
 import TwitterIcon from '../../icons/TwitterIcon'
 import InstagramIcon from '../../icons/InstagramIcon'
 import {useUser} from "../../hooks";
+import RssIcon from "../../icons/RssIcon";
 
 const col1 = [
     {
@@ -97,16 +98,16 @@ const social = [
         route: 'https://www.instagram.com/trip.ee',
         icon: InstagramIcon,
     },
-    /*{
+    {
         title: 'Lennupakkumiste RSS',
-        route: '/',
+        route: '/odavad-lennupiletid/rss',
         icon: RssIcon
     },
     {
         title: 'Uudiste RSS',
-        route: '/',
+        route: '/uudised/rss',
         icon: RssIcon
-    },*/
+    },
 ]
 
 type Props = {
