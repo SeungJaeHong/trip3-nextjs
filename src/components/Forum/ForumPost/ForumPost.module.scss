@@ -52,13 +52,12 @@
 
         .Title {
             font-size: $font-size-xlarge;
-            line-height: 2.5rem;
             font-weight: 600;
             color: $gray-dark-hover;
             padding-bottom: $spacer * 2;
 
             @include sm() {
-                font-size: $font-size-large;
+                font-size: $font-size-medium;
             }
         }
 
@@ -98,6 +97,10 @@
                 &.Following {
                     background: $blue-hover;
                 }
+            }
+
+            @include sm() {
+                margin-top: $spacer * .5;
             }
         }
     }
@@ -242,13 +245,18 @@
     }
 
     @include sm() {
-        padding: $spacer * 4;
+        padding: $spacer * 3;
 
-        .MetaData .UserAvatar {
-            width: 46px;
-            height: 46px;
-            left: -55px;
-            top: -15px;
+        .MetaData {
+            align-items: center;
+
+            .UserAvatar {
+                position: relative;
+                width: 46px;
+                height: 46px;
+                left: unset;
+                top: unset;
+            }
         }
     }
 }

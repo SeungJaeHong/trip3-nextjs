@@ -130,13 +130,13 @@ const ForumComment = ({ item, type }: Props) => {
             id={comment.id.toString()}
         >
             <div className={styles.MetaData}>
+                <div className={styles.UserAvatar}>
+                    <UserAvatar user={comment.user} />
+                </div>
                 <Link href={'/user/' + comment.user.id}>
                     <a className={styles.User}>{comment.user.name}</a>
                 </Link>
                 <div className={styles.CreatedDate}>{comment.createdAt}</div>
-                <div className={styles.UserAvatar}>
-                    <UserAvatar user={comment.user} />
-                </div>
             </div>
             <div className={styles.Body} dangerouslySetInnerHTML={{ __html: comment.body }} />
             <div

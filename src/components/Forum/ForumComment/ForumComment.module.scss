@@ -6,7 +6,6 @@
     width: 100%;
     border: 2px solid $gray;
     padding: $spacer * 4;
-    padding-left: $spacer * 4;
     padding-bottom: $spacer * 3;
     padding-top: $spacer * 3;
 
@@ -148,13 +147,18 @@
     }
 
     @include sm() {
-        padding-left: $spacer * 4;
+        padding: $spacer * 3;
 
-        .MetaData .UserAvatar {
-            width: 40px;
-            height: 40px;
-            left: -52px;
-            top: -10px;
+        .MetaData {
+            align-items: center;
+
+            .UserAvatar {
+                position: relative;
+                width: 40px;
+                height: 40px;
+                left: unset;
+                top: unset;
+            }
         }
     }
 }

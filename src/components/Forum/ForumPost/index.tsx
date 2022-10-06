@@ -155,13 +155,13 @@ const ForumPost = ({ item, showBreadCrumbs }: Props) => {
                     )}
                 </div>
                 <div className={styles.MetaData}>
+                    <div className={styles.UserAvatar}>
+                        <UserAvatar user={post.user} />
+                    </div>
                     <Link href={'/user/' + post.user.id}>
                         <a className={styles.User}>{post.user.name}</a>
                     </Link>
                     <div className={styles.CreatedDate}>{post.createdAt}</div>
-                    <div className={styles.UserAvatar}>
-                        <UserAvatar user={post.user} />
-                    </div>
                 </div>
                 <div className={styles.Body} dangerouslySetInnerHTML={{ __html: post.body }} />
                 <div className={styles.Actions}>{renderActionButtons()}</div>
