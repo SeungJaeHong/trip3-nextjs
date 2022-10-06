@@ -20,6 +20,10 @@
 
         a {
             display: flex;
+
+            img {
+                max-width: 60px;
+            }
         }
 
         @include md() {
