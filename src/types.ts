@@ -119,6 +119,7 @@ export interface ForumPostType {
     status: number
     createdAt: string
     updatedAt?: string
+    lockedForComments: boolean
     likes?: number
     dislikes?: number
     following: boolean

@@ -63,6 +63,16 @@
             margin-bottom: $spacer * 6;
         }
 
+        .LockedForComments {
+            display: flex;
+            width: 100%;
+            margin-bottom: $spacer * 8;
+
+            @include sm() {
+                margin-bottom: $spacer * 6;
+            }
+        }
+
         .BodyAd {
             width: 100%;
             display: block;

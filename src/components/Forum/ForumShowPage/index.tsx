@@ -18,6 +18,7 @@ import { useUser } from '../../../hooks'
 import RelatedContentBlock from '../../RelatedContentBlock'
 import Ads from '../../Ads'
 import clsx from 'clsx'
+import Alert from '../../Alert'
 
 type Props = {
     post: ForumPostType
@@ -113,16 +114,30 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                             />
                         </div>
                         {userIsLoggedIn && (
-                            <div className={styles.AddComment}>
-                                <BlockTitle title={'Lisa kommentaar'} />
-                                <CommentEditor
-                                    id={'comment-editor'}
-                                    onSubmit={onSubmit}
-                                    value={commentValue}
-                                    submitButtonName={'Lisa kommentaar'}
-                                    submitting={submitting}
-                                />
-                            </div>
+                            <>
+                                {post.lockedForComments && (
+                                    <div className={styles.LockedForComments}>
+                                        <Alert
+                                            type={'info'}
+                                            title={
+                                                'Postitus on olnud pikka aega mitteaktiivne. Teemasse kommenteerimine on suletud.'
+                                            }
+                                        />
+                                    </div>
+                                )}
+                                {!post.lockedForComments && (
+                                    <div className={styles.AddComment}>
+                                        <BlockTitle title={'Lisa kommentaar'} />
+                                        <CommentEditor
+                                            id={'comment-editor'}
+                                            onSubmit={onSubmit}
+                                            value={commentValue}
+                                            submitButtonName={'Lisa kommentaar'}
+                                            submitting={submitting}
+                                        />
+                                    </div>
+                                )}
+                            </>
                         )}
                         <div className={styles.BodyAd}>
                             <Ads type={'body'} />
