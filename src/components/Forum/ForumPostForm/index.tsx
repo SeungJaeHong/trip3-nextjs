@@ -36,7 +36,7 @@ const ForumPostForm = ({ post, destinations, topics }: Props) => {
         .object()
         .shape({
             category: yup.string().required('Kategooria on kohustuslik'),
-            title: yup.string().required('Pealkiri on kohustuslik'),
+            title: yup.string().required('Pealkiri on kohustuslik').min(15, 'Palun kirjuta natuke pikem pealkiri'),
             body: yup.string().required('Sisu on kohustuslik'),
             destinations: yup.array().nullable(),
             topics: yup.array().nullable(),
@@ -111,6 +111,9 @@ const ForumPostForm = ({ post, destinations, topics }: Props) => {
     const onSubmit: SubmitHandler<Inputs> = async (values: Inputs) => {
         await savePost(values).catch((err) => {
             if (err.response?.data?.errors) {
+
+                console.log(err.response?.data?.errors)
+
                 setFormErrors(err.response.data.errors, setError)
             }
             toast.error('Salvestamine ebaõnnestus!')
