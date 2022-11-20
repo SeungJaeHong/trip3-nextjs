@@ -15,9 +15,11 @@ import Button from '../../components/Button'
 import ApiClientSSR from '../../lib/ApiClientSSR'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
 import { useUser } from '../../hooks'
-import Ads from '../../components/Ads'
 import { NextSeo } from 'next-seo'
 import FormSelect from '../../components/Form/FormSelect'
+import dynamic from "next/dynamic"
+
+const Ads = dynamic(() => import('../../components/Ads'), { ssr: false })
 
 type Props = {
     flightOffers: FlightOfferRowType[]

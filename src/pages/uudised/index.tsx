@@ -15,8 +15,10 @@ import ApiClientSSR from '../../lib/ApiClientSSR'
 import { useUser } from '../../hooks'
 import FormSelect from '../../components/Form/FormSelect'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
-import Ads from '../../components/Ads'
 import { NextSeo } from 'next-seo'
+import dynamic from "next/dynamic"
+
+const Ads = dynamic(() => import('../../components/Ads'), { ssr: false })
 
 type Props = {
     news?: NewsCardType[]

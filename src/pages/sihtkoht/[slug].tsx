@@ -16,11 +16,11 @@ import BlockTitle from '../../components/BlockTitle'
 import ApiClientSSR from '../../lib/ApiClientSSR'
 import DestinationImageGallery from '../../components/Destination/DestinationImageGallery'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
-import Ads from '../../components/Ads'
 import { Tooltip } from '@mantine/core'
 import { NextSeo } from 'next-seo'
 import dynamic from 'next/dynamic'
 
+const Ads = dynamic(() => import('../../components/Ads'), { ssr: false })
 const DestinationMap = dynamic(() => import('../../components/Destination/DestinationMap'), { ssr: false })
 
 type Props = {

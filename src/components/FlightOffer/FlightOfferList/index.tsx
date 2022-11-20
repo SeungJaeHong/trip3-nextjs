@@ -2,8 +2,10 @@ import styles from './FlightOfferList.module.scss'
 import { FlightOfferRowType } from '../../../types'
 import FlightOfferRow from '../FlightOfferRow'
 import { Fragment } from 'react'
-import Ads from '../../Ads'
 import clsx from "clsx";
+import dynamic from "next/dynamic";
+
+const Ads = dynamic(() => import('../../Ads'), { ssr: false })
 
 type Props = {
     items: FlightOfferRowType[]

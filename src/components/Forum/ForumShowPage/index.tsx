@@ -16,9 +16,11 @@ import { postComment } from '../../../services/comment.service'
 import { toast } from 'react-toastify'
 import { useUser } from '../../../hooks'
 import RelatedContentBlock from '../../RelatedContentBlock'
-import Ads from '../../Ads'
 import clsx from 'clsx'
 import Alert from '../../Alert'
+import dynamic from "next/dynamic"
+
+const Ads = dynamic(() => import('../../Ads'), { ssr: false })
 
 type Props = {
     post: ForumPostType

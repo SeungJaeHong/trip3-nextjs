@@ -5,8 +5,10 @@ import FlightOffersLatest from '../FlightOffer/FlightOffersLatest'
 import TravelmatesLatest from '../Travelmate/TravelmatesLatest'
 import NewsLatest from '../News/NewsLatest'
 import ForumLatest from '../Forum/ForumLatest'
-import Ads from '../Ads'
 import clsx from 'clsx'
+import dynamic from "next/dynamic"
+
+const Ads = dynamic(() => import('../Ads'), { ssr: false })
 
 type Props = {
     type: string

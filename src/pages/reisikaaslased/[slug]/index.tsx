@@ -20,8 +20,10 @@ import clsx from 'clsx'
 import { toggleTravelmateStatus } from '../../../services/travelmate.service'
 import Alert from '../../../components/Alert'
 import RelatedContentBlock from '../../../components/RelatedContentBlock'
-import Ads from '../../../components/Ads'
 import { NextSeo } from 'next-seo'
+import dynamic from "next/dynamic"
+
+const Ads = dynamic(() => import('../../../components/Ads'), { ssr: false })
 
 type Props = {
     content: TravelmateContent

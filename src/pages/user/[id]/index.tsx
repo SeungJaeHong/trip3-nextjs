@@ -19,10 +19,10 @@ import UserLastComments from '../../../components/User/UserLastComments'
 import { useUser } from '../../../hooks'
 import { useRouter } from 'next/router'
 import UserImageGallery from '../../../components/User/UserImageGallery'
-import Ads from '../../../components/Ads'
 import { NextSeo } from 'next-seo'
 import dynamic from 'next/dynamic'
 
+const Ads = dynamic(() => import('../../../components/Ads'), { ssr: false })
 const UserDestinationMap = dynamic(() => import('../../../components/User/UserDestinationMap'), { ssr: false })
 
 type Props = {

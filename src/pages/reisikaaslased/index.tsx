@@ -15,8 +15,10 @@ import TravelmateFilter from '../../components/Travelmate/TravelmateFilter'
 import ApiClientSSR from '../../lib/ApiClientSSR'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
 import { useUser } from '../../hooks'
-import Ads from '../../components/Ads'
 import { NextSeo } from 'next-seo'
+import dynamic from "next/dynamic"
+
+const Ads = dynamic(() => import('../../components/Ads'), { ssr: false })
 
 type Props = {
     travelmates: TravelmateRowType[]

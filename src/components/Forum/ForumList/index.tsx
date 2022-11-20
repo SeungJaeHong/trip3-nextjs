@@ -1,18 +1,19 @@
 import styles from './ForumList.module.scss'
 import ForumRow from '../ForumRow'
 import { ForumRowType } from '../../../types'
-import Ads from '../../Ads'
-import {Fragment} from "react";
-import clsx from "clsx";
+import { Fragment } from 'react'
+import clsx from 'clsx'
+import dynamic from 'next/dynamic'
 
 type Props = {
     items: ForumRowType[]
     withAds: boolean
 }
 
+const Ads = dynamic(() => import('../../Ads'), { ssr: false })
+
 const ForumList = ({ items, withAds }: Props) => {
     const middle = withAds && items ? Math.floor(items?.length / 2) : undefined
-
     return (
         <div className={styles.ForumList}>
             {items?.map((item: ForumRowType, index: number) => {

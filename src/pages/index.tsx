@@ -17,9 +17,11 @@ import TravelmatesLatest from '../components/Travelmate/TravelmatesLatest'
 import ApiClientSSR from '../lib/ApiClientSSR'
 import { useIsMounted, useUser } from '../hooks'
 import FrontPageImageGallery from '../components/FrontPageImageGallery'
-import Ads from '../components/Ads'
 import React, { useEffect, useState } from 'react'
 import { getLatestPosts } from '../services/forum.service'
+import dynamic from "next/dynamic";
+
+const Ads = dynamic(() => import('../components/Ads'), { ssr: false })
 
 type Props = {
     flightOffers: FlightOfferCardType[]

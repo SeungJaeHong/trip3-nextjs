@@ -16,7 +16,9 @@ import { useRouter } from 'next/router'
 import FormSelect from '../../Form/FormSelect'
 import RelatedContentBlock from '../../RelatedContentBlock'
 import { useUser } from '../../../hooks'
-import Ads from '../../Ads'
+import dynamic from "next/dynamic"
+
+const Ads = dynamic(() => import('../../Ads'), { ssr: false })
 
 type Props = {
     type: 'general' | 'buysell' | 'foreign' | 'other' | 'follows'
