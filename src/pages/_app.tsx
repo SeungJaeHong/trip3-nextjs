@@ -100,6 +100,9 @@ function MyApp({ Component, pageProps }: AppProps) {
                 src={'https://securepubads.g.doubleclick.net/tag/js/gpt.js'}
                 onLoad={() => {
                     window.googletag = window.googletag || { cmd: [] }
+
+                    console.log('gpt loaded', window.googletag)
+
                     googletag.cmd.push(function () {
                         AdsConfig.map((ad) => {
                             googletag
