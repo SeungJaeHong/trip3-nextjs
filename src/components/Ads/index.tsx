@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import AdsConfig from '../../lib/AdsConfig'
+import { useRouter } from 'next/router'
 
 type Props = {
     type: string
@@ -7,6 +8,7 @@ type Props = {
 }
 
 const Ads = ({ type, className }: Props) => {
+    const router = useRouter()
     const ad = AdsConfig.find((item) => item.type === type)
 
     useEffect(() => {
@@ -24,8 +26,8 @@ const Ads = ({ type, className }: Props) => {
                     }
                 })
             }
-        }, 200)
-    }, [window.googletag])
+        }, 250)
+    }, [router.query])
 
     return ad ? <div id={ad.divId} className={className} /> : null
 }
