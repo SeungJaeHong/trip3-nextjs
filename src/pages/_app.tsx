@@ -10,6 +10,7 @@ import { GoogleAnalytics } from '../components/GoogleAnalytics'
 import { DefaultSeo } from 'next-seo'
 import '../styles/leaflet_map.scss'
 import ErrorPage503 from './503'
+import MainLayout from '../layouts/MainLayout'
 
 function MyApp({ Component, pageProps }: AppProps) {
     const maintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE as string
@@ -93,7 +94,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 }}
             />
             <GoogleAnalytics />
-            {maintenance === 'true' ? <ErrorPage503 /> : <Component {...pageProps} />}
+            <MainLayout>{maintenance === 'true' ? <ErrorPage503 /> : <Component {...pageProps} />}</MainLayout>
             <Script
                 id={'ads-js'}
                 src={'https://securepubads.g.doubleclick.net/tag/js/gpt.js'}

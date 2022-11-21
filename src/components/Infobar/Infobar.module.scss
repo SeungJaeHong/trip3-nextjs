@@ -1,0 +1,31 @@
+@import "../../styles/variables";
+
+.Container {
+    display: flex;
+    width: 100%;
+    position: relative;
+    background: black;
+    color: $white;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    font-family: $font-family-sailec;
+    font-size: $font-size-normal;
+    font-weight: 600;
+    gap: 12px;
+
+    a {
+        color: $white;
+        letter-spacing: .2px;
+
+        &:hover {
+            color: $blue-hover;
+        }
+    }
+
+    svg {
+        width: 24px;
+        height: 24px;
+        fill: $red;
+    }
+}
