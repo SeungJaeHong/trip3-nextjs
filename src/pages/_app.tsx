@@ -107,6 +107,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                         googletag.pubads().enableSingleRequest();
                         googletag.pubads().collapseEmptyDivs();
                         googletag.enableServices();
+                        console.log('loaded');
                     })`,
                     }}
                 />

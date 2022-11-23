@@ -15,6 +15,7 @@ const Ads = ({ type, className }: Props) => {
         setTimeout(() => {
             if (ad && window.googletag !== undefined && window.googletag.apiReady) {
                 googletag.cmd.push(function () {
+                    console.log('show', ad.divId);
                     window.googletag.display(ad.divId)
                     const slot = window.googletag
                         .pubads()
