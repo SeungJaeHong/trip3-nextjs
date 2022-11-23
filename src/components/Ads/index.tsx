@@ -27,7 +27,7 @@ const Ads = ({ type, className }: Props) => {
                 }
             })
         }
-    }, [router.query, window.googletag])
+    }, [router.query, window.googletag, window.googletag.apiReady])
 
     return ad ? <div id={ad.divId} className={className} /> : null
 }
