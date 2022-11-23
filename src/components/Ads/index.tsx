@@ -1,15 +1,20 @@
 import { useEffect } from 'react'
 import AdsConfig from '../../lib/AdsConfig'
 import { useRouter } from 'next/router'
+import {useUser} from "../../hooks";
 
 type Props = {
     type: string
     className?: string
+    googletag?: any
 }
 
 const Ads = ({ type, className }: Props) => {
     const router = useRouter()
+    const { userIsLoggedIn } = useUser()
     const ad = AdsConfig.find((item) => item.type === type)
+
+    console.log(type, 'ads component')
 
     useEffect(() => {
         console.log('init ad', window.googletag, window.googletag.apiReady);
