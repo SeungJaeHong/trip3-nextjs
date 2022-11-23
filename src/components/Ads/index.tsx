@@ -13,7 +13,7 @@ const Ads = ({ type, className }: Props) => {
 
     useEffect(() => {
         console.log('init ad', window.googletag, window.googletag.apiReady);
-        if (ad && window.googletag !== undefined && window.googletag.apiReady) {
+        if (ad && window.googletag !== undefined && googletag.apiReady) {
             googletag.cmd.push(function () {
                 console.log('show', ad.divId);
                 window.googletag.display(ad.divId)
@@ -27,7 +27,7 @@ const Ads = ({ type, className }: Props) => {
                 }
             })
         }
-    }, [router.query, window.googletag, window.googletag.apiReady])
+    }, [router.query, window.googletag, googletag.apiReady])
 
     return ad ? <div id={ad.divId} className={className} /> : null
 }
