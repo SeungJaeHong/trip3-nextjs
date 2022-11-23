@@ -14,10 +14,10 @@ const Ads = ({ type, className }: Props) => {
     const { userIsLoggedIn } = useUser()
     const ad = AdsConfig.find((item) => item.type === type)
 
-    console.log(type, 'ads component')
+    console.log(type, googletag.apiReady, 'ads component')
 
     useEffect(() => {
-        console.log('init ad', window.googletag, window.googletag.apiReady);
+        console.log('init ad', window.googletag, googletag.apiReady);
         if (ad && window.googletag !== undefined && googletag.apiReady) {
             googletag.cmd.push(function () {
                 console.log('show', ad.divId);
@@ -32,7 +32,7 @@ const Ads = ({ type, className }: Props) => {
                 }
             })
         }
-    }, [router.query, window.googletag, googletag.apiReady])
+    }, [router.query, ad, window.googletag, googletag.apiReady])
 
     return ad ? <div id={ad.divId} className={className} /> : null
 }

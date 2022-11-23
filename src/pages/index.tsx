@@ -140,7 +140,7 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                                     </div>
                                 )}
                                 <div className={styles.Ads}>
-                                    <Ads type={'sidebar-small'} googletag={posts}/>
+                                    <Ads type={'sidebar-small'} />
                                     <Ads type={'sidebar-large'} />
                                 </div>
                             </div>
