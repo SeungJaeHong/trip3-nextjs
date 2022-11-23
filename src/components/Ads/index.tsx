@@ -12,23 +12,21 @@ const Ads = ({ type, className }: Props) => {
     const ad = AdsConfig.find((item) => item.type === type)
 
     useEffect(() => {
-        setTimeout(() => {
-            console.log('show', window.googletag, window.googletag.apiReady);
-            if (ad && window.googletag !== undefined && window.googletag.apiReady) {
-                googletag.cmd.push(function () {
-                    console.log('show', ad.divId);
-                    window.googletag.display(ad.divId)
-                    const slot = window.googletag
-                        .pubads()
-                        .getSlots()
-                        .find((item) => item.getSlotId().getName() === ad.slotId)
+        console.log('init ad', window.googletag, window.googletag.apiReady);
+        if (ad && window.googletag !== undefined && window.googletag.apiReady) {
+            googletag.cmd.push(function () {
+                console.log('show', ad.divId);
+                window.googletag.display(ad.divId)
+                const slot = window.googletag
+                    .pubads()
+                    .getSlots()
+                    .find((item) => item.getSlotId().getName() === ad.slotId)
 
-                    if (slot) {
-                        window.googletag.pubads().refresh([slot])
-                    }
-                })
-            }
-        }, 200)
+                if (slot) {
+                    window.googletag.pubads().refresh([slot])
+                }
+            })
+        }
     }, [router.query, window.googletag])
 
     return ad ? <div id={ad.divId} className={className} /> : null
