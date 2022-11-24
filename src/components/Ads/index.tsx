@@ -14,21 +14,24 @@ const Ads = ({ type, className }: Props) => {
     console.log('ad component render', window.googletag?.apiReady)
 
     useEffect(() => {
-        console.log('init ad useEffect', window.googletag, window.googletag?.apiReady);
-        if (ad && window.googletag !== undefined && googletag.apiReady) {
-            googletag.cmd.push(function () {
-                console.log('show', ad.divId);
-                window.googletag.display(ad.divId)
-                const slot = window.googletag
-                    .pubads()
-                    .getSlots()
-                    .find((item) => item.getSlotId().getName() === ad.slotId)
+        setTimeout(() => {
+            console.log('init ad useEffect', window.googletag, window.googletag?.apiReady);
+            if (ad && window.googletag !== undefined && googletag.apiReady) {
+                googletag.cmd.push(function () {
+                    console.log('show', ad.divId);
+                    window.googletag.display(ad.divId)
+                    const slot = window.googletag
+                        .pubads()
+                        .getSlots()
+                        .find((item) => item.getSlotId().getName() === ad.slotId)
 
-                if (slot) {
-                    window.googletag.pubads().refresh([slot])
-                }
-            })
-        }
+                    if (slot) {
+                        window.googletag.pubads().refresh([slot])
+                    }
+                })
+            }
+        }, 200)
+
     }, [router.query, ad, window.googletag])
 
     return ad ? <div id={ad.divId} className={className} /> : null
