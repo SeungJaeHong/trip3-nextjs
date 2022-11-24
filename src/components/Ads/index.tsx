@@ -1,23 +1,20 @@
 import { useEffect } from 'react'
 import AdsConfig from '../../lib/AdsConfig'
 import { useRouter } from 'next/router'
-import {useUser} from "../../hooks";
 
 type Props = {
     type: string
     className?: string
-    googletag?: any
 }
 
 const Ads = ({ type, className }: Props) => {
     const router = useRouter()
-    const { userIsLoggedIn } = useUser()
     const ad = AdsConfig.find((item) => item.type === type)
 
-    console.log(type, googletag.apiReady, 'ads component')
+    console.log('ad component render', window.googletag?.apiReady)
 
     useEffect(() => {
-        console.log('init ad', window.googletag, googletag.apiReady);
+        console.log('init ad useEffect', window.googletag, window.googletag?.apiReady);
         if (ad && window.googletag !== undefined && googletag.apiReady) {
             googletag.cmd.push(function () {
                 console.log('show', ad.divId);
@@ -32,7 +29,7 @@ const Ads = ({ type, className }: Props) => {
                 }
             })
         }
-    }, [router.query, ad, window.googletag, googletag.apiReady])
+    }, [router.query, ad, window.googletag])
 
     return ad ? <div id={ad.divId} className={className} /> : null
 }

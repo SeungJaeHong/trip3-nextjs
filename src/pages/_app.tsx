@@ -10,6 +10,8 @@ import '../styles/leaflet_map.scss'
 import ErrorPage503 from './503'
 import MainLayout from '../layouts/MainLayout'
 import Head from 'next/head'
+import Script from 'next/script'
+import AdsConfig from '../lib/AdsConfig'
 
 function MyApp({ Component, pageProps }: AppProps) {
     const maintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE as string
@@ -92,7 +94,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     cardType: 'summary_large_image',
                 }}
             />
-            <Head>
+            {/*<Head>
                 <script async src={'https://securepubads.g.doubleclick.net/tag/js/gpt.js'} />
                 <script
                     dangerouslySetInnerHTML={{
@@ -112,9 +114,29 @@ function MyApp({ Component, pageProps }: AppProps) {
                     }}
                 />
                 <title>{'Trip.ee | Eesti reisiportaal'}</title>
-            </Head>
+            </Head>*/}
             <GoogleAnalytics />
             <MainLayout>{maintenance === 'true' ? <ErrorPage503 /> : <Component {...pageProps} />}</MainLayout>
+            <Script
+                id={'ads-js'}
+                src={'https://securepubads.g.doubleclick.net/tag/js/gpt.js'}
+                onLoad={() => {
+                    window.googletag = window.googletag || { cmd: [] }
+                    googletag.cmd.push(function () {
+                        AdsConfig.map((ad) => {
+                            googletag
+                                .defineSlot(ad.slotId, [[ad.width, ad.height], 'fluid'], ad.divId)
+                                ?.addService(googletag.pubads())
+                        })
+                        googletag.pubads().disableInitialLoad()
+                        googletag.pubads().enableSingleRequest()
+                        googletag.pubads().collapseEmptyDivs()
+                        googletag.enableServices()
+
+                        console.log('gpt loaded', window.googletag)
+                    })
+                }}
+            />
         </>
     )
 }
