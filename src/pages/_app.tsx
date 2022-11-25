@@ -94,7 +94,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     cardType: 'summary_large_image',
                 }}
             />
-            {/*<Head>
+            <Head>
                 <script async src={'https://securepubads.g.doubleclick.net/tag/js/gpt.js'} />
                 <script
                     dangerouslySetInnerHTML={{
@@ -114,10 +114,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                     }}
                 />
                 <title>{'Trip.ee | Eesti reisiportaal'}</title>
-            </Head>*/}
+            </Head>
             <GoogleAnalytics />
             <MainLayout>{maintenance === 'true' ? <ErrorPage503 /> : <Component {...pageProps} />}</MainLayout>
-            <Script
+            {/*<Script
                 id={'ads-js'}
                 src={'https://securepubads.g.doubleclick.net/tag/js/gpt.js'}
                 onLoad={() => {
@@ -136,7 +136,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                         console.log('gpt loaded', window.googletag)
                     })
                 }}
-            />
+            />*/}
         </>
     )
 }
