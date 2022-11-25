@@ -28,9 +28,6 @@ const Ads = ({ type, className }: Props) => {
                         .find((item) => item.getSlotId().getName() === ad.slotId)
 
                     if (slot) {
-
-                        //console.log(slot)
-
                         //window.googletag.display(ad.divId)
                         //window.googletag.pubads().refresh([slot])
                     }

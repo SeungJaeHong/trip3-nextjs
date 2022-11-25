@@ -113,10 +113,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                             renderMarginPercent: 200,
                             mobileScaling: 2.0 
                         });*/
-                        googletag.pubads().addEventListener('impressionViewable', (event) => {
+                        /*googletag.pubads().addEventListener('impressionViewable', (event) => {
                               const slot = event.slot;
                               console.log('viewable', slot)
-                            });
+                            });*/
                         googletag.enableServices();
                     })`,
                     }}
