@@ -17,7 +17,7 @@ const Ads = ({ type, className }: Props) => {
         let slot: any = undefined
         setTimeout(() => {
             console.log('init ad useEffect', window.googletag, window.googletag?.apiReady, googletag?.apiReady);
-            if (ad && window.googletag && googletag.apiReady) {
+            if (ad && window.googletag) {
                 googletag.cmd.push(function () {
                     window.googletag.defineSlot(ad.slotId,[[ad.width,ad.height],'fluid'],ad.divId)?.addService(googletag.pubads())
                     console.log('show', ad.divId)
