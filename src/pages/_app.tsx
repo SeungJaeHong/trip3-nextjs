@@ -105,11 +105,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                         googletag.defineSlot('/85819747/body',[[720,120],'fluid'],'body-gpt').addService(googletag.pubads());
                         googletag.defineSlot('/85819747/footer',[[1152,144],'fluid'],'footer-gpt').addService(googletag.pubads());
                         googletag.defineSlot('/85819747/flightoffers_list_top',[[720,120],'fluid'],'flight-offer-list-top-gpt').addService(googletag.pubads());
-                        googletag.pubads().disableInitialLoad();
-                        googletag.pubads().enableSingleRequest();
+                        //googletag.pubads().disableInitialLoad();
+                        //googletag.pubads().enableSingleRequest();
                         googletag.pubads().collapseEmptyDivs();
                         googletag.enableServices();
-                        console.log('loaded');
                     })`,
                     }}
                 />
