@@ -11,26 +11,38 @@ const Ads = ({ type, className }: Props) => {
     const router = useRouter()
     const ad = AdsConfig.find((item) => item.type === type)
 
-    console.log('ad component render', window.googletag?.apiReady)
+    console.log('ad component init', window.googletag?.apiReady)
 
     useEffect(() => {
+        let slot: any = undefined
         setTimeout(() => {
             console.log('init ad useEffect', window.googletag, window.googletag?.apiReady);
             if (ad && window.googletag && googletag.apiReady) {
                 googletag.cmd.push(function () {
-                    console.log('show', ad.divId);
+                    window.googletag.defineSlot(ad.slotId,[[ad.width,ad.height],'fluid'],ad.divId)?.addService(googletag.pubads())
+                    console.log('show', ad.divId)
                     window.googletag.display(ad.divId)
-                    const slot = window.googletag
+                    slot = window.googletag
                         .pubads()
                         .getSlots()
                         .find((item) => item.getSlotId().getName() === ad.slotId)
 
                     if (slot) {
-                        window.googletag.pubads().refresh([slot])
+
+                        //console.log(slot)
+
+                        //window.googletag.display(ad.divId)
+                        //window.googletag.pubads().refresh([slot])
                     }
                 })
             }
         }, 200)
+
+        return () => {
+            if (slot) {
+                window.googletag.destroySlots([slot])
+            }
+        }
 
     }, [router.query, ad])
 
