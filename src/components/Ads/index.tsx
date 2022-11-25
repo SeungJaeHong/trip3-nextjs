@@ -16,7 +16,7 @@ const Ads = ({ type, className }: Props) => {
     useEffect(() => {
         let slot: any = undefined
         setTimeout(() => {
-            console.log('init ad useEffect', window.googletag, window.googletag?.apiReady);
+            console.log('init ad useEffect', window.googletag, window.googletag?.apiReady, googletag?.apiReady);
             if (ad && window.googletag && googletag.apiReady) {
                 googletag.cmd.push(function () {
                     window.googletag.defineSlot(ad.slotId,[[ad.width,ad.height],'fluid'],ad.divId)?.addService(googletag.pubads())
@@ -44,7 +44,7 @@ const Ads = ({ type, className }: Props) => {
             }
         }
 
-    }, [router.query, ad])
+    }, [router.query, ad, window.googletag])
 
     return ad ? <div id={ad.divId} className={className} /> : null
 }
