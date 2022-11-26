@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import {useEffect, useState} from 'react'
 import AdsConfig from '../../lib/AdsConfig'
 import { useRouter } from 'next/router'
+import Slot = googletag.Slot;
 
 type Props = {
     type: string
@@ -10,38 +11,51 @@ type Props = {
 const Ads = ({ type, className }: Props) => {
     const router = useRouter()
     const ad = AdsConfig.find((item) => item.type === type)
+    //const [target, setTarget] = useState<Slot|undefined>(undefined)
 
     console.log('ad component init', window.googletag?.apiReady)
 
     useEffect(() => {
-        let slot: any = undefined
-        setTimeout(() => {
-            console.log('init ad useEffect', window.googletag, window.googletag?.apiReady, googletag?.apiReady);
-            if (ad && window.googletag) {
-                googletag.cmd.push(function () {
-                    window.googletag.defineSlot(ad.slotId,[[ad.width,ad.height],'fluid'],ad.divId)?.addService(googletag.pubads())
+        let slot: Slot|undefined = undefined
+        console.log('init ad useEffect', window.googletag, window.googletag?.apiReady, googletag?.apiReady);
+        if (ad && window.googletag) {
+            googletag.cmd.push(function () {
+                slot = window.googletag
+                    .pubads()
+                    .getSlots()
+                    .find((item) => item.getSlotId().getName() === ad.slotId)
+
+                if (slot) {
+                    console.log('refresh', ad.divId)
+                    window.googletag.pubads().refresh([slot])
+                } else {
+                    slot = window.googletag.defineSlot(ad.slotId,[[ad.width,ad.height],'fluid'],ad.divId)?.addService(googletag.pubads())
                     console.log('show', ad.divId)
-                    window.googletag.display(ad.divId)
-                    slot = window.googletag
-                        .pubads()
-                        .getSlots()
-                        .find((item) => item.getSlotId().getName() === ad.slotId)
+                    // @ts-ignore
+                    window.googletag.display(slot)
+                }
 
-                    if (slot) {
-                        //window.googletag.display(ad.divId)
-                        //window.googletag.pubads().refresh([slot])
-                    }
-                })
-            }
-        }, 200)
-
-        return () => {
-            if (slot) {
-                window.googletag.destroySlots([slot])
-            }
+                /*if (slot) {
+                    setTarget(slot)
+                    console.log('show', ad.divId)
+                    window.googletag.display(slot)
+                    //window.googletag.display(ad.divId)
+                    //window.googletag.pubads().refresh([slot])
+                }*/
+            })
         }
 
-    }, [router.query, ad, window.googletag])
+        /*return () => {
+            if (slot) {
+                googletag.cmd.push(function () {
+                    console.log('destroy', ad?.divId)
+                    // @ts-ignore
+                    window.googletag.destroySlots([])
+                });
+            }
+        }*/
+
+    }, [router.query, ad])
 
     return ad ? <div id={ad.divId} className={className} /> : null
 }
