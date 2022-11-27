@@ -33,7 +33,7 @@ const ForumList = ({ items, withAds }: Props) => {
                             }
                             {(twoThirds && twoThirds === index + 1) &&
                                 <div className={clsx(styles.ForumRow, styles.Ad)}>
-                                    <Ads type={'mobile_320x50'} />
+                                    <Ads type={'mobile_320x100_lower'} />
                                 </div>
                             }
                         </Fragment>

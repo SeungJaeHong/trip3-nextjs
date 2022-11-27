@@ -34,17 +34,31 @@ const AdsConfig: Array<{type: string, slotId: string, divId: string, width: numb
         width: 720,
         height: 120
     },
-    {
+    /*{
         type: 'mobile_big',
         slotId: '/85819747/mobile_big',
         divId: 'mobile_big-gpt',
         width: 300,
         height: 250
+    },*/
+    {
+        type: 'mobile_320x200',
+        slotId: '/85819747/mobile_320x200',
+        divId: 'mobile_320x200-gpt',
+        width: 320,
+        height: 200
     },
     {
         type: 'mobile_320x100',
         slotId: '/85819747/mobile_320x100',
         divId: 'mobile_320x100-gpt',
+        width: 320,
+        height: 100
+    },
+    {
+        type: 'mobile_320x100_lower',
+        slotId: '/85819747/mobile_320x100_lower',
+        divId: 'mobile_320x100_lower-gpt',
         width: 320,
         height: 100
     },
