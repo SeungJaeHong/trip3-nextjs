@@ -18,6 +18,15 @@
         max-width: 670px;
         width: 100%;
         overflow: hidden;
+        margin-bottom: 0;
+
+        iframe {
+            margin-bottom: $spacer * 3;
+
+            @include xs() {
+                margin-bottom: $spacer * 2;
+            }
+        }
 
         @include lg() {
             max-width: 645px;

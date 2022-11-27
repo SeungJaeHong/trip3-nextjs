@@ -34,6 +34,27 @@ const AdsConfig: Array<{type: string, slotId: string, divId: string, width: numb
         width: 720,
         height: 120
     },
+    {
+        type: 'mobile_big',
+        slotId: '/85819747/mobile_big',
+        divId: 'mobile_big-gpt',
+        width: 300,
+        height: 250
+    },
+    {
+        type: 'mobile_320x100',
+        slotId: '/85819747/mobile_320x100',
+        divId: 'mobile_320x100-gpt',
+        width: 320,
+        height: 100
+    },
+    {
+        type: 'mobile_320x50',
+        slotId: '/85819747/mobile_320x50',
+        divId: 'mobile_320x50-gpt',
+        width: 320,
+        height: 50
+    },
 ]
 
 export default AdsConfig

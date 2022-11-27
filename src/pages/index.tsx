@@ -101,6 +101,11 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                         </div>
                     )}
 
+                    <div className={styles.Ads}>
+                        {/*<Ads type={'mobile_320x100'} />*/}
+                        <Ads type={'mobile_big'} />
+                    </div>
+
                     <div className={styles.ForumContainer}>
                         <div className={styles.ForumBlockTitle}>
                             <BlockTitle title={'Tripikad räägivad'} />
@@ -140,8 +145,10 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                                     </div>
                                 )}
                                 <div className={styles.Ads}>
-                                    <Ads type={'sidebar-small'} />
-                                    <Ads type={'sidebar-large'} />
+                                    <Ads type={'body'} />
+                                    {/*<Ads type={'mobile_big'} />*/}
+                                    {/*<Ads type={'sidebar-small'} />
+                                    <Ads type={'sidebar-large'} />*/}
                                 </div>
                             </div>
                         </div>
