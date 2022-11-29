@@ -10,8 +10,6 @@ import '../styles/leaflet_map.scss'
 import ErrorPage503 from './503'
 import MainLayout from '../layouts/MainLayout'
 import Head from 'next/head'
-import Script from 'next/script'
-import AdsConfig from '../lib/AdsConfig'
 
 function MyApp({ Component, pageProps }: AppProps) {
     const maintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE as string
