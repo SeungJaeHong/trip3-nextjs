@@ -29,7 +29,8 @@ const Ads = ({ type, className }: Props) => {
                     console.log('refresh', ad.divId)
                     window.googletag.pubads().refresh([slot])
                 } else {
-                    slot = window.googletag.defineSlot(ad.slotId,[[ad.width,ad.height],'fluid'],ad.divId)?.addService(googletag.pubads())
+                    // @ts-ignore
+                    slot = window.googletag.defineSlot(ad.slotId, ad.sizes, ad.divId)?.addService(googletag.pubads())
                     console.log('show', ad.divId)
                     // @ts-ignore
                     window.googletag.display(slot)

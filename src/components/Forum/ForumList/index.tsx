@@ -13,7 +13,7 @@ type Props = {
 const Ads = dynamic(() => import('../../Ads'), { ssr: false })
 
 const ForumList = ({ items, withAds }: Props) => {
-    //const middle = withAds && items ? Math.floor(items?.length / 2) : undefined
+    const middle = withAds && items ? Math.floor(items?.length / 2) : undefined
     const oneThird = withAds && items ? Math.floor(items?.length / 3) : undefined
     const twoThirds = withAds && oneThird ? Math.floor(oneThird * 2) : undefined
 
@@ -34,6 +34,11 @@ const ForumList = ({ items, withAds }: Props) => {
                             {(twoThirds && twoThirds === index + 1) &&
                                 <div className={clsx(styles.ForumRow, styles.Ad)}>
                                     <Ads type={'mobile_320x100_lower'} />
+                                </div>
+                            }
+                            {(middle && middle === index + 1) &&
+                                <div className={clsx(styles.ForumRow, styles.Ad)}>
+                                    <Ads type={'desktop_list_middle'} />
                                 </div>
                             }
                         </Fragment>

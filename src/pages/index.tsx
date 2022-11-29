@@ -145,8 +145,8 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                                 )}
                                 <div className={styles.Ads}>
                                     <Ads type={'sidebar-small'} />
+                                    <Ads type={'sidebar-large'} />
                                     {/*<Ads type={'mobile_big'} />*/}
-                                    {/*<Ads type={'body'} />*/}
                                     {/*<Ads type={'mobile_big'} />*/}
                                     {/*<Ads type={'sidebar-small'} />
                                     <Ads type={'sidebar-large'} />*/}

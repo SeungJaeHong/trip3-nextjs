@@ -19,8 +19,11 @@
         width: 100%;
         overflow: hidden;
         margin-bottom: 0;
-        display: flex;
-        justify-content: center;
+
+        @include xs() {
+            display: flex;
+            justify-content: center;
+        }
 
         iframe {
             margin-bottom: $spacer * 3;
