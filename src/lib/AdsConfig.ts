@@ -77,7 +77,7 @@ const AdsConfig: Array<{type: string, slotId: string, divId: string, sizes: Arra
         type: 'desktop_list_middle',
         slotId: '/85819747/desktop_list_middle',
         divId: 'desktop_list_middle-gpt',
-        sizes: ['fluid', [720, 120]]
+        sizes: [[720, 120], 'fluid']
     },
     {
         type: 'list_middle',

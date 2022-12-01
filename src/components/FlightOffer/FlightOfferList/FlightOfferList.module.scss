@@ -14,5 +14,14 @@
         max-width: 660px;
         width: 100%;
         overflow: hidden;
+
+        iframe {
+            margin-bottom: $spacer * 2.5;
+        }
+
+        @include sm() {
+            display: flex;
+            justify-content: center;
+        }
     }
 }

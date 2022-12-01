@@ -1,7 +1,7 @@
 import styles from './FlightOfferList.module.scss'
 import { FlightOfferRowType } from '../../../types'
 import FlightOfferRow from '../FlightOfferRow'
-import { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import clsx from "clsx";
 import dynamic from "next/dynamic";
 
@@ -14,18 +14,33 @@ type Props = {
 
 const FlightOfferList = ({ items, withAds }: Props) => {
     const middle = withAds && items ? Math.floor(items?.length / 2) : undefined
+    const oneThird = withAds && items ? Math.floor(items?.length / 3) : undefined
+    const twoThirds = withAds && oneThird ? Math.floor(oneThird * 2) : undefined
+
     return (
         <div className={styles.FlightOfferList}>
             {items?.map((item: FlightOfferRowType, index: number) => {
-                if (withAds && middle && middle === index) {
+                if (withAds) {
                     return (
                         <Fragment key={item.id}>
                             <div className={styles.FlightOfferRow}>
                                 <FlightOfferRow {...item} />
                             </div>
-                            <div className={clsx(styles.FlightOfferRow, styles.Ad)}>
-                                <Ads type={'body'} />
-                            </div>
+                            {(oneThird && oneThird === index + 1) &&
+                                <div className={clsx(styles.Ad)}>
+                                    <Ads type={'mobile_320x100'} />
+                                </div>
+                            }
+                            {(twoThirds && twoThirds === index + 1) &&
+                                <div className={clsx(styles.Ad)}>
+                                    <Ads type={'mobile_320x100_lower'} />
+                                </div>
+                            }
+                            {(middle && middle === index + 1) &&
+                                <div className={clsx(styles.Ad)}>
+                                    <Ads type={'desktop_list_middle'} />
+                                </div>
+                            }
                         </Fragment>
                     )
                 } else {

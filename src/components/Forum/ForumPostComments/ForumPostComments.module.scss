@@ -22,4 +22,18 @@
     .CommentRow {
         margin-bottom: $spacer * 3;
     }
+
+    .Ad {
+        width: 100%;
+        overflow: hidden;
+
+        iframe {
+            margin-bottom: $spacer * 3;
+        }
+
+        @include sm() {
+            display: flex;
+            justify-content: center;
+        }
+    }
 }

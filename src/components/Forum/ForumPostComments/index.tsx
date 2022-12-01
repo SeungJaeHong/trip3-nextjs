@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './ForumPostComments.module.scss'
 import { Comment, ForumPostType } from '../../../types'
 import ForumComment from '../ForumComment'
 import PagePaginator from '../../Paginator/PagePaginator'
 import { getForumUrlByTypeAndSlug } from '../../../helpers'
 import clsx from 'clsx'
+import dynamic from "next/dynamic";
+
+const Ads = dynamic(() => import('../../Ads'), { ssr: false })
 
 type Props = {
     post: ForumPostType
@@ -30,6 +33,10 @@ const ForumPostComments = ({ post, comments, currentPage, lastPage }: Props) => 
         return null
     }
 
+    const middle = forumComments ? Math.floor(forumComments?.length / 2) : undefined
+    const oneThird = forumComments ? Math.floor(forumComments?.length / 3) : undefined
+    const twoThirds = oneThird ? Math.floor(oneThird * 2) : undefined
+
     return (
         <div className={styles.ForumPostComments}>
             {lastPage && lastPage !== 1 && (
@@ -37,11 +44,29 @@ const ForumPostComments = ({ post, comments, currentPage, lastPage }: Props) => 
                     <PagePaginator currentPage={currentPage} lastPage={lastPage} baseUrl={url} />
                 </div>
             )}
-            {forumComments?.map((item: Comment) => {
+            {forumComments?.map((item: Comment, index: number) => {
                 return (
-                    <div className={styles.CommentRow} key={item.id}>
-                        <ForumComment key={item.id} item={item} />
-                    </div>
+                    <>
+                        <div className={styles.CommentRow} key={item.id}>
+                            <ForumComment key={item.id} item={item} />
+                        </div>
+
+                        {(oneThird && oneThird === index + 1) &&
+                            <div className={clsx(styles.Ad)}>
+                                <Ads type={'mobile_320x100'} />
+                            </div>
+                        }
+                        {(twoThirds && twoThirds === index + 1) &&
+                            <div className={clsx(styles.Ad)}>
+                                <Ads type={'mobile_320x100_lower'} />
+                            </div>
+                        }
+                        {(middle && middle === index + 1) &&
+                            <div className={clsx(styles.Ad)}>
+                                <Ads type={'desktop_list_middle'} />
+                            </div>
+                        }
+                    </>
                 )
             })}
             {lastPage && lastPage !== 1 && (
