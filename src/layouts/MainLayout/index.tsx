@@ -9,13 +9,13 @@ type Props = {
 const MainLayout = ({ children }: Props) => {
     return (
         <>
-            <Infobar>
+            {/*<Infobar>
                 <Link href={'/odavad-lennupiletid/trip-ee-uelevaade-black-friday-kampaaniatest'}>
                     <a>
                         Vaata kõiki <u>Musta Reede</u> pakkumisi SIIT
                     </a>
                 </Link>
-            </Infobar>
+            </Infobar>*/}
             {children}
         </>
     )

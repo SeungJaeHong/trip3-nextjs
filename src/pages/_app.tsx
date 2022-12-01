@@ -10,8 +10,7 @@ import '../styles/leaflet_map.scss'
 import ErrorPage503 from './503'
 import MainLayout from '../layouts/MainLayout'
 import Head from 'next/head'
-import Script from 'next/script'
-import AdsConfig from '../lib/AdsConfig'
+import {Hotjar} from "../components/Hotjar";
 
 function MyApp({ Component, pageProps }: AppProps) {
     const maintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE as string
@@ -123,6 +122,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 />
                 <title>{'Trip.ee | Eesti reisiportaal'}</title>
             </Head>
+            <Hotjar />
             <GoogleAnalytics />
             <MainLayout>{maintenance === 'true' ? <ErrorPage503 /> : <Component {...pageProps} />}</MainLayout>
             {/*<Script
