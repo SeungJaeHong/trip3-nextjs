@@ -34,6 +34,7 @@ const ForumPostComments = ({ post, comments, currentPage, lastPage }: Props) => 
     }
 
     const middle = forumComments?.length >= 10 ? Math.floor(forumComments?.length / 2) : undefined
+    const mobileMiddle = (forumComments?.length >= 5 && forumComments?.length < 12) ? Math.floor(forumComments?.length / 2) : undefined
     const oneThird = forumComments?.length >= 12 ? Math.floor(forumComments?.length / 3) : undefined
     const twoThirds = oneThird ? Math.floor(oneThird * 2) : undefined
 
@@ -64,6 +65,11 @@ const ForumPostComments = ({ post, comments, currentPage, lastPage }: Props) => 
                         {(middle && middle === index + 1) &&
                             <div className={clsx(styles.Ad)}>
                                 <Ads type={'desktop_list_middle'} />
+                            </div>
+                        }
+                        {(mobileMiddle && mobileMiddle === index + 1) &&
+                            <div className={clsx(styles.Ad)}>
+                                <Ads type={'mobile_320x100'} />
                             </div>
                         }
                     </>

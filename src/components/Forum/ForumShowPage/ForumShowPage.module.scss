@@ -23,7 +23,7 @@
 
     @include sm() {
         margin-top: $spacer * -23;
-        gap: $spacer * 3;
+        gap: $spacer * 2;
     }
 
     .ForumContent {
@@ -61,6 +61,10 @@
             flex-direction: column;
             gap: $spacer * 2;
             margin-bottom: $spacer * 6;
+
+            @include sm() {
+                margin-bottom: $spacer * 5;
+            }
         }
 
         .LockedForComments {
@@ -75,7 +79,7 @@
 
         .BodyAd {
             width: 100%;
-            display: block;
+            //display: block;
             overflow: hidden;
 
             @include lg() {
@@ -86,7 +90,6 @@
                 max-width: 588px;
             }
 
-
             @media (max-width: 820px) {
                 max-width: 500px;
             }
@@ -96,7 +99,14 @@
             }
 
             @include sm() {
-                margin-bottom: $spacer * 2;
+                //margin-bottom: $spacer * 2;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                iframe {
+                    margin-bottom: $spacer * 2;
+                }
             }
         }
     }
@@ -118,14 +128,15 @@
             flex-direction: column;
             gap: $spacer * 2;
             width: 100%;
-            max-width: 270px;
+            //max-width: 270px;
 
             @include md() {
                 margin: 0 auto;
             }
 
             @include sm() {
-                max-width: 300px;
+                //max-width: 320px;
+                align-items: center;
             }
         }
 
