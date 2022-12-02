@@ -6,7 +6,9 @@ export function Hotjar() {
     const hotjarVersion = process.env.NEXT_PUBLIC_HOTJAR_VERSION as string
 
     useEffect(() => {
-        hotjar.initialize(Number(hotjarId), Number(hotjarVersion))
+        if (hotjarId && hotjarVersion) {
+            hotjar.initialize(Number(hotjarId), Number(hotjarVersion))
+        }
     }, [])
 
     return null
