@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import styles from './ForumPostComments.module.scss'
 import { Comment, ForumPostType } from '../../../types'
 import ForumComment from '../ForumComment'
@@ -47,8 +47,8 @@ const ForumPostComments = ({ post, comments, currentPage, lastPage }: Props) => 
             )}
             {forumComments?.map((item: Comment, index: number) => {
                 return (
-                    <>
-                        <div className={styles.CommentRow} key={item.id}>
+                    <Fragment key={item.id}>
+                        <div className={styles.CommentRow} >
                             <ForumComment key={item.id} item={item} />
                         </div>
 
@@ -72,7 +72,7 @@ const ForumPostComments = ({ post, comments, currentPage, lastPage }: Props) => 
                                 <Ads type={'mobile_320x100'} />
                             </div>
                         }
-                    </>
+                    </Fragment>
                 )
             })}
             {lastPage && lastPage !== 1 && (
