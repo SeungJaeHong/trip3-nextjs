@@ -9,7 +9,7 @@
     padding: $spacer * 3;
 
     @include sm() {
-        padding: $spacer * 2.5;
+        padding: $spacer * 2;
     }
 
     .Editor {
