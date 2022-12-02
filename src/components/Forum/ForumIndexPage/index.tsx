@@ -169,7 +169,7 @@ const ForumIndexPage = (props: Props) => {
         return (
             <Fragment>
                 {renderSearchResultInfo()}
-                <ForumList items={props.forumPosts} />
+                <ForumList items={props.forumPosts} withAds={true} />
                 <div className={styles.Paginator}>
                     <SimplePaginator nextPageUrl={getNextPageUrl()} previousPageUrl={getPreviousPageUrl()} />
                 </div>
@@ -198,8 +198,9 @@ const ForumIndexPage = (props: Props) => {
                                 </div>
                             )}
                             <div className={styles.Ads}>
-                                <Ads type={'sidebar-small'} />
-                                <Ads type={'sidebar-large'} />
+                                <Ads type={'mobile_320x200'} />
+                                {/*<Ads type={'sidebar-small'} />
+                                <Ads type={'sidebar-large'} />*/}
                             </div>
                         </div>
                     </div>

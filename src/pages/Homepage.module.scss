@@ -127,6 +127,10 @@
     .JoinButton {
         flex: 1;
         margin-top: $spacer * 2.5;
+
+        @include sm() {
+            margin-top: $spacer;
+        }
     }
 }
 
