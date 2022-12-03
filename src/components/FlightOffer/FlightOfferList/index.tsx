@@ -28,7 +28,7 @@ const FlightOfferList = ({ items, withAds }: Props) => {
                             </div>
                             {(oneThird && oneThird === index + 1) &&
                                 <div className={clsx(styles.Ad)}>
-                                    <Ads type={'mobile_320x100'} />
+                                    <Ads type={'mobile_320x200'} />
                                 </div>
                             }
                             {(twoThirds && twoThirds === index + 1) &&

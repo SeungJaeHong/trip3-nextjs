@@ -141,6 +141,7 @@ const FlightsIndex = ({
                 <div className={containerStyle.CenteredContainer}>
                     <div className={styles.Content}>
                         <div className={styles.FlightOfferList}>
+                            <Ads type={'mobile_320x100'} className={styles.ListTopAd} />
                             <div className={styles.DestinationSelect}>
                                 <FormSelect
                                     id={'destination'}
