@@ -80,6 +80,10 @@
     @include sm() {
         justify-content: center;
         margin-bottom: $spacer * 3;
+
+        &.UserLoggedIn {
+            margin-bottom: $spacer * 2;
+        }
     }
 }
 

@@ -121,7 +121,8 @@
         overflow: hidden;
 
         @include sm() {
-            //max-width: 300px;
+            max-width: unset;
+            align-items: center;
         }
     }
 }
