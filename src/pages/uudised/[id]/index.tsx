@@ -144,7 +144,8 @@ const NewsShow = ({ newsObj }: Props) => {
                             </div>
                         )}
                         <div className={styles.BodyWrapper}>
-                            <Ads type={'body'} className={styles.TopAd} />
+                            {/*<Ads type={'body'} className={styles.TopAd} />*/}
+                            <Ads type={'mobile_320x200'} className={styles.TopAd} />
                             <div className={styles.Body} dangerouslySetInnerHTML={{ __html: news.body }} />
                         </div>
                         <div className={styles.Comments}>
@@ -167,8 +168,9 @@ const NewsShow = ({ newsObj }: Props) => {
                     </div>
                     <div className={styles.Sidebar}>
                         <div className={styles.Ads}>
-                            <Ads type={'sidebar-small'} />
-                            <Ads type={'sidebar-large'} />
+                            <Ads type={'mobile_320x100'} />
+                            {/*<Ads type={'sidebar-small'} />
+                            <Ads type={'sidebar-large'} />*/}
                         </div>
                     </div>
                 </div>

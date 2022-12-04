@@ -313,6 +313,10 @@
         gap: $spacer * 3;
     }
 
+    @include sm() {
+        padding: $spacer * 4 0 $spacer * 5 0;
+    }
+
     .BodyWithComments {
         display: flex;
         width: 100%;
@@ -335,6 +339,8 @@
                 width: 100%;
                 max-width: 720px;
                 overflow: hidden;
+                display: flex;
+                justify-content: center;
             }
 
             .Body {
@@ -388,6 +394,10 @@
             flex-direction: column;
             gap: $spacer * 3;
             margin-bottom: $spacer * 5;
+
+            @include sm() {
+                margin-bottom: $spacer * 2;
+            }
         }
 
         .AddComment {
