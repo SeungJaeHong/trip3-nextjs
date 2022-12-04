@@ -8,6 +8,18 @@
     position: relative;
     padding: $spacer * 3 $spacer * 4 $spacer * 3 $spacer * 7;
 
+    @include sm() {
+        padding: $spacer * 3 $spacer * 2;
+        flex-direction: row;
+        gap: $spacer * 2;
+    }
+
+    .Content {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+    }
+
     .UserAndDate {
         display: flex;
         justify-content: space-between;
@@ -76,10 +88,19 @@
         cursor: pointer;
 
         @include sm() {
-            height: 60px;
-            width: 60px;
-            top: 20px;
-            left: -30px;
+            display: none;
+        }
+    }
+
+    .UserAvatarMobile {
+        display: none;
+        height: 60px;
+        width: 60px;
+        min-width: 60px;
+        cursor: pointer;
+
+        @include sm() {
+            display: flex;
         }
     }
 }

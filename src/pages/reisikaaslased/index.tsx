@@ -17,6 +17,7 @@ import RelatedContentBlock from '../../components/RelatedContentBlock'
 import { useUser } from '../../hooks'
 import { NextSeo } from 'next-seo'
 import dynamic from "next/dynamic"
+import clsx from "clsx";
 
 const Ads = dynamic(() => import('../../components/Ads'), { ssr: false })
 
@@ -92,6 +93,33 @@ const TravelmatesIndex = ({
         router.push('/reisikaaslased?' + queryString)
     }
 
+    const middle = travelmates ? Math.floor(travelmates?.length / 2) : undefined
+    const oneThird = travelmates ? Math.floor(travelmates?.length / 3) : undefined
+    const twoThirds = oneThird ? Math.floor(oneThird * 2) : undefined
+
+    const renderCard = (travelmate: TravelmateRowType, index: number) => {
+        return (
+            <Fragment key={travelmate.id}>
+                <TravelmateCard {...travelmate} />
+                {(oneThird && oneThird === index + 1) &&
+                    <div className={clsx(styles.MobileAd)}>
+                        <Ads type={'mobile_320x100'} />
+                    </div>
+                }
+                {(twoThirds && twoThirds === index + 1) &&
+                    <div className={clsx(styles.MobileAd)}>
+                        <Ads type={'mobile_320x100_lower'} />
+                    </div>
+                }
+                {(middle && middle === index + 2 ) &&
+                    <div className={clsx(styles.Ad)}>
+                        <Ads type={'desktop_list_middle'} />
+                    </div>
+                }
+            </Fragment>
+        )
+    }
+
     return (
         <Fragment>
             <NextSeo
@@ -123,8 +151,8 @@ const TravelmatesIndex = ({
                     <div className={styles.TravelmateGridContainer}>
                         <div className={styles.TravelmateGrid}>
                             {travelmates.length === 0 && <div>Tulemusi ei leitud</div>}
-                            {travelmates.map((travelmate: TravelmateRowType) => {
-                                return <TravelmateCard {...travelmate} key={travelmate.id} />
+                            {travelmates.map((travelmate: TravelmateRowType, index: number) => {
+                                return renderCard(travelmate, index)
                             })}
                         </div>
                         <div className={styles.Paginator}>
@@ -137,7 +165,7 @@ const TravelmatesIndex = ({
                                 Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?
                             </div>
                             <div className={styles.DescriptionSecondPart}>
-                                Siit leiad omale sobiva reisikaaslase. Kasuta ka allpool olevat filtrit soovitud
+                                Siit leiad omale sobiva reisikaaslase. Kasuta ka ülevalpool olevat filtrit soovitud
                                 tulemuse saamiseks.
                             </div>
                             <div className={styles.MoreLink}>
@@ -153,8 +181,9 @@ const TravelmatesIndex = ({
                             )}
                         </div>
                         <div className={styles.Ads}>
-                            <Ads type={'sidebar-small'} />
-                            <Ads type={'sidebar-large'} />
+                            <Ads type={'mobile_320x200'} />
+                            {/*<Ads type={'sidebar-small'} />
+                            <Ads type={'sidebar-large'} />*/}
                         </div>
                     </div>
                 </div>
