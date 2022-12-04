@@ -63,9 +63,9 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                     </div>
                 </div>
             </div>
-            <div className={clsx([containerStyle.ContainerXl, styles.Content])}>
-                <div className={styles.CenteredContainer}>
-                    {flightOffers.length >= 3 && (
+            {flightOffers.length >= 3 && (
+                <div className={styles.FlightOffersContainer}>
+                    <div className={clsx(styles.CenteredContainer, styles.FlightsCenterContainer)}>
                         <div className={styles.FlightOffers}>
                             <div className={styles.FlightOfferCard}>
                                 <FlightOfferCard {...flightOffers[0]} color={'purple'} />
@@ -77,7 +77,11 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                                 <FlightOfferCard {...flightOffers[2]} color={'red'} />
                             </div>
                         </div>
-                    )}
+                    </div>
+                </div>
+            )}
+            <div className={clsx([containerStyle.ContainerXl, styles.Content])}>
+                <div className={styles.CenteredContainer}>
                     <div
                         className={clsx(styles.MoreFlightsLink, {
                             [styles.UserLoggedIn]: userIsLoggedIn,
