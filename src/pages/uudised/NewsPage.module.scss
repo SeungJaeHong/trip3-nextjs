@@ -155,6 +155,31 @@
                 gap: $spacer * 4;
                 margin-bottom: $spacer * 4;
             }
+
+            .Ad {
+                margin: 0 auto;
+                grid-column: 1 / span 2;
+                height: auto;
+                width: 100%;
+
+                @include lg() {
+                    grid-column: 1;
+                }
+
+                @include sm() {
+                    display: none;
+                }
+            }
+
+            .MobileAd {
+                display: none;
+
+                @include sm() {
+                    display: flex;
+                    grid-column: 1;
+                    justify-content: center;
+                }
+            }
         }
 
         .Paginator {

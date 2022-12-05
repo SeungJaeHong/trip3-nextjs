@@ -17,6 +17,7 @@ import FormSelect from '../../components/Form/FormSelect'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
 import { NextSeo } from 'next-seo'
 import dynamic from "next/dynamic"
+import clsx from "clsx";
 
 const Ads = dynamic(() => import('../../components/Ads'), { ssr: false })
 
@@ -112,6 +113,38 @@ const NewsIndex = (props: Props) => {
         } else return null
     }
 
+    const middle = props.news ? Math.floor(props.news?.length / 2) : undefined
+    const oneThird = props.news ? Math.floor(props.news?.length / 3) : undefined
+    const twoThirds = oneThird ? Math.floor(oneThird * 2) : undefined
+
+    const renderCard = (news: NewsCardType, index: number) => {
+        return (
+            <Fragment key={news.id}>
+                <NewsCard {...news} />
+                {(oneThird && oneThird === index + 2) &&
+                    <div className={clsx(styles.MobileAd)}>
+                        <Ads type={'mobile_320x100'} />
+                    </div>
+                }
+                {(twoThirds && twoThirds === index) &&
+                    <div className={clsx(styles.MobileAd)}>
+                        <Ads type={'mobile_320x100_lower'} />
+                    </div>
+                }
+                {(middle && middle === index + 2 ) &&
+                    <div className={clsx(styles.Ad)}>
+                        <Ads type={'desktop_list_middle'} />
+                    </div>
+                }
+                {(middle && middle === index + 2 ) &&
+                    <div className={clsx(styles.MobileAd)}>
+                        <Ads type={'mobile_320x200'} />
+                    </div>
+                }
+            </Fragment>
+        )
+    }
+
     const renderGrid = () => {
         if (!props.news?.length) {
             return <div>Tulemusi ei leitud</div>
@@ -120,8 +153,8 @@ const NewsIndex = (props: Props) => {
         return (
             <Fragment>
                 <div className={styles.NewsGrid}>
-                    {props.news?.map((news: NewsCardType) => {
-                        return <NewsCard {...news} key={news.id} />
+                    {props.news?.map((news: NewsCardType, index: number) => {
+                        return renderCard(news, index)
                     })}
                 </div>
                 <div className={styles.Paginator}>
@@ -198,8 +231,9 @@ const NewsIndex = (props: Props) => {
                             )}
                         </div>
                         <div className={styles.Ads}>
-                            <Ads type={'sidebar-small'} />
-                            <Ads type={'sidebar-large'} />
+                            {/*<Ads type={'mobile_320x200'} />*/}
+                           {/* <Ads type={'sidebar-small'} />
+                            <Ads type={'sidebar-large'} />*/}
                         </div>
                     </div>
                 </div>
