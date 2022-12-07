@@ -20,7 +20,7 @@ import Alert from '../../../components/Alert'
 import { postComment } from '../../../services/comment.service'
 import RelatedContentBlock from '../../../components/RelatedContentBlock'
 import { NextSeo } from 'next-seo'
-import dynamic from "next/dynamic"
+import dynamic from 'next/dynamic'
 
 const Ads = dynamic(() => import('../../../components/Ads'), { ssr: false })
 
@@ -84,7 +84,7 @@ const NewsShow = ({ newsObj }: Props) => {
                             url: news.socialImgUrl,
                             width: 1024,
                             height: undefined,
-                            type: undefined
+                            type: undefined,
                         },
                     ],
                 }}
@@ -148,11 +148,13 @@ const NewsShow = ({ newsObj }: Props) => {
                             <Ads type={'mobile_320x200'} className={styles.TopAd} />
                             <div className={styles.Body} dangerouslySetInnerHTML={{ __html: news.body }} />
                         </div>
-                        <div className={styles.Comments}>
-                            {comments?.map((comment: Comment) => {
-                                return <ForumComment key={comment.id} item={comment} type={'news'} />
-                            })}
-                        </div>
+                        {comments && comments?.length > 0 && (
+                            <div className={styles.Comments}>
+                                {comments?.map((comment: Comment) => {
+                                    return <ForumComment key={comment.id} item={comment} type={'news'} />
+                                })}
+                            </div>
+                        )}
                         {userIsLoggedIn && (
                             <div className={styles.AddComment}>
                                 <BlockTitle title={'Lisa kommentaar'} />

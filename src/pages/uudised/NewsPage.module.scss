@@ -386,6 +386,10 @@
                     font-size: $font-size-normal;
                 }
 
+                @include sm() {
+                    margin-bottom: $spacer * 4;
+                }
+
                 p:first-child {
                     margin-top: 0;
                 }
