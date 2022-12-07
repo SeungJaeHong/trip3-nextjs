@@ -126,6 +126,12 @@
             .AddNewButton {
                 margin-top: $spacer * 3;
             }
+
+            &.hideWhenNotLoggedIn {
+                @include sm() {
+                    display: none;
+                }
+            }
         }
 
         .Ads {

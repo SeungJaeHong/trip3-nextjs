@@ -51,6 +51,10 @@
         gap: $spacer;
     }
 
+    @include sm() {
+        gap: $spacer * 3;
+    }
+
     .PageContent {
         flex: 2;
         display: flex;
@@ -150,6 +154,10 @@
             @include sm() {
                 font-size: $font-size-normal;
                 margin-top: $spacer * 3;
+
+                &.WithBodyMargin {
+                    margin-bottom: $spacer * 2.5;
+                }
             }
         }
 
@@ -158,12 +166,25 @@
             flex-direction: column;
             gap: $spacer * 3;
             margin-bottom: $spacer * 5;
+
+            @include sm() {
+                margin-top: $spacer * 4;
+                margin-bottom: $spacer;
+            }
         }
 
         .AddComment {
             display: flex;
             flex-direction: column;
             gap: $spacer * .5;
+        }
+
+        .BodyAd {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
         }
     }
 
@@ -281,12 +302,13 @@
             display: flex;
             flex-direction: column;
             gap: $spacer * 2;
-            max-width: 280px;
+            //max-width: 280px;
             width: 100%;
             overflow: hidden;
+            align-items: center;
 
             @include sm() {
-                max-width: 300px;
+                //max-width: 300px;
             }
         }
     }

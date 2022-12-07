@@ -160,7 +160,9 @@ const TravelmatesIndex = ({
                         </div>
                     </div>
                     <div className={styles.Sidebar}>
-                        <div className={styles.DescriptionBlock}>
+                        <div className={clsx(styles.DescriptionBlock,  {
+                            [styles.hideWhenNotLoggedIn]: !userIsLoggedIn
+                        })}>
                             <div className={styles.DescriptionFirstPart}>
                                 Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?
                             </div>

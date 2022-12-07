@@ -220,7 +220,9 @@ const NewsIndex = (props: Props) => {
                         {renderGrid()}
                     </div>
                     <div className={styles.Sidebar}>
-                        <div className={styles.DescriptionBlock}>
+                        <div className={clsx(styles.DescriptionBlock, {
+                            [styles.hideWhenNotLoggedIn]: !userIsLoggedIn
+                        })}>
                             <div className={styles.Description}>
                                 Uudised reisimisest, reisi- ja lennufirmadest, viisadest ja muust parasjagu aktuaalsest.
                             </div>

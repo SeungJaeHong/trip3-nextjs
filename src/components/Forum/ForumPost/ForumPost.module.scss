@@ -245,7 +245,7 @@
     }
 
     @include sm() {
-        padding: $spacer * 3;
+        padding: $spacer * 2.5;
 
         .MetaData {
             align-items: center;
