@@ -52,22 +52,22 @@ const ForumPostComments = ({ post, comments, currentPage, lastPage }: Props) => 
                             <ForumComment key={item.id} item={item} />
                         </div>
 
-                        {(oneThird && oneThird === index + 1) &&
+                        {(oneThird !== undefined && oneThird === index + 1) &&
                             <div className={clsx(styles.Ad)}>
                                 <Ads type={'mobile_320x100'} />
                             </div>
                         }
-                        {(twoThirds && twoThirds === index + 1) &&
+                        {(twoThirds !== undefined && twoThirds === index + 1) &&
                             <div className={clsx(styles.Ad)}>
                                 <Ads type={'mobile_320x100_lower'} />
                             </div>
                         }
-                        {(middle && middle === index + 1) &&
+                        {(middle !== undefined && middle === index + 1) &&
                             <div className={clsx(styles.Ad)}>
                                 <Ads type={'desktop_list_middle'} />
                             </div>
                         }
-                        {(mobileMiddle && mobileMiddle === index + 1) &&
+                        {(mobileMiddle !== undefined && mobileMiddle === index + 1) &&
                             <div className={clsx(styles.Ad)}>
                                 <Ads type={'mobile_320x100'} />
                             </div>

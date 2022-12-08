@@ -191,15 +191,16 @@ const DestinationPage = ({ destination }: Props) => {
                 <div className={styles.RelatedContent}>
                     <div className={styles.ForumContent}>
                         <BlockTitle title={'Tripikad räägivad'} className={styles.ForumBlockTitle} />
-                        <ForumList items={destination.forumPosts || []} />
+                        <ForumList items={destination.forumPosts || []} withAds={true} />
                         <div className={styles.MoreForumLink}>
                             <MoreLink route={'/foorum/uldfoorum'} title={'Kõik positused'} />
                         </div>
                     </div>
                     <div className={styles.Sidebar}>
                         <div className={styles.Ads}>
-                            <Ads type={'sidebar-small'} />
-                            <Ads type={'sidebar-large'} />
+                            <Ads type={'mobile_320x200'} />
+                            {/*<Ads type={'sidebar-small'} />
+                            <Ads type={'sidebar-large'} />*/}
                         </div>
                     </div>
                 </div>

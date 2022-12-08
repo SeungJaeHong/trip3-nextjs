@@ -26,17 +26,17 @@ const ForumList = ({ items, withAds }: Props) => {
                             <div className={styles.ForumRow}>
                                 <ForumRow {...item} />
                             </div>
-                            {(oneThird && oneThird === index + 1) &&
+                            {(oneThird !== undefined && oneThird === index + 1) &&
                                 <div className={clsx(styles.ForumRow, styles.Ad)}>
                                     <Ads type={'mobile_320x100'} />
                                 </div>
                             }
-                            {(twoThirds && twoThirds === index + 1) &&
+                            {(twoThirds !== undefined && twoThirds === index + 1) &&
                                 <div className={clsx(styles.ForumRow, styles.Ad)}>
                                     <Ads type={'mobile_320x100_lower'} />
                                 </div>
                             }
-                            {(middle && middle === index + 1) &&
+                            {(middle !== undefined && middle === index + 1) &&
                                 <div className={clsx(styles.ForumRow, styles.Ad)}>
                                     <Ads type={'desktop_list_middle'} />
                                 </div>
