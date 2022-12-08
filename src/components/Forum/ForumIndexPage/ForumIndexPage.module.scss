@@ -131,7 +131,7 @@
 
     @include sm() {
         flex-direction: column;
-        padding-top: $spacer * 3;
+        padding-top: $spacer * 4;
     }
 
     .ResultCount {
