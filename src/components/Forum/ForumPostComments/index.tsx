@@ -54,12 +54,12 @@ const ForumPostComments = ({ post, comments, currentPage, lastPage }: Props) => 
 
                         {(oneThird !== undefined && oneThird === index + 1) &&
                             <div className={clsx(styles.Ad)}>
-                                <Ads type={'mobile_320x100'} />
+                                <Ads type={'mobile_320x200'} />
                             </div>
                         }
                         {(twoThirds !== undefined && twoThirds === index + 1) &&
                             <div className={clsx(styles.Ad)}>
-                                <Ads type={'mobile_320x100_lower'} />
+                                <Ads type={'mobile_320_200_2'} />
                             </div>
                         }
                         {(middle !== undefined && middle === index + 1) &&
@@ -69,7 +69,7 @@ const ForumPostComments = ({ post, comments, currentPage, lastPage }: Props) => 
                         }
                         {(mobileMiddle !== undefined && mobileMiddle === index + 1) &&
                             <div className={clsx(styles.Ad)}>
-                                <Ads type={'mobile_320x100'} />
+                                <Ads type={'mobile_320x200'} />
                             </div>
                         }
                     </Fragment>

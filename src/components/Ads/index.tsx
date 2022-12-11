@@ -13,11 +13,11 @@ const Ads = ({ type, className }: Props) => {
     const ad = AdsConfig.find((item) => item.type === type)
     //const [target, setTarget] = useState<Slot|undefined>(undefined)
 
-    console.log('ad component init', window.googletag?.apiReady)
+    //console.log('ad component init', window.googletag?.apiReady)
 
     useEffect(() => {
         let slot: Slot|undefined = undefined
-        console.log('init ad useEffect', window.googletag, window.googletag?.apiReady, googletag?.apiReady);
+        //console.log('init ad useEffect', window.googletag, window.googletag?.apiReady, googletag?.apiReady);
         if (ad && window.googletag) {
             googletag.cmd.push(function () {
                 slot = window.googletag

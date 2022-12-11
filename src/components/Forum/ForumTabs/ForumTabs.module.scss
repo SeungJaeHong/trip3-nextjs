@@ -5,6 +5,8 @@
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 
     .Tab {
         background: transparent;
@@ -37,4 +39,8 @@
             }
         }
     }
+}
+
+.ForumTabs::-webkit-scrollbar {
+    display: none;
 }

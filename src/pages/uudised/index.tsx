@@ -121,26 +121,26 @@ const NewsIndex = (props: Props) => {
         return (
             <Fragment key={news.id}>
                 <NewsCard {...news} />
-                {(oneThird && oneThird === index + 2) &&
-                    <div className={clsx(styles.MobileAd)}>
-                        <Ads type={'mobile_320x100'} />
-                    </div>
-                }
-                {(twoThirds && twoThirds === index) &&
-                    <div className={clsx(styles.MobileAd)}>
-                        <Ads type={'mobile_320x100_lower'} />
-                    </div>
-                }
-                {(middle && middle === index + 2 ) &&
-                    <div className={clsx(styles.Ad)}>
-                        <Ads type={'desktop_list_middle'} />
-                    </div>
-                }
-                {(middle && middle === index + 2 ) &&
+                {(oneThird && oneThird === index + 1) &&
                     <div className={clsx(styles.MobileAd)}>
                         <Ads type={'mobile_320x200'} />
                     </div>
                 }
+                {(twoThirds && twoThirds === index + 1) &&
+                    <div className={clsx(styles.MobileAd)}>
+                        <Ads type={'mobile_320_200_2'} />
+                    </div>
+                }
+                {(middle && middle === index + 2) &&
+                    <div className={clsx(styles.Ad)}>
+                        <Ads type={'desktop_list_middle'} />
+                    </div>
+                }
+                {/*{(middle && middle === index + 2 ) &&
+                    <div className={clsx(styles.MobileAd)}>
+                        <Ads type={'mobile_320_200_2'} />
+                    </div>
+                }*/}
             </Fragment>
         )
     }

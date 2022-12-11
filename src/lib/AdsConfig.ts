@@ -50,8 +50,18 @@ const AdsConfig: Array<{type: string, slotId: string, divId: string, sizes: Arra
         slotId: '/85819747/mobile_320x200',
         divId: 'mobile_320x200-gpt',
         sizes: [[320, 200], 'fluid']
-        //width: 320,
-        //height: 200
+    },
+    {
+        type: 'mobile_320_200_2',
+        slotId: '/85819747/mobile_320_200_2',
+        divId: 'mobile_320_200_2-gpt',
+        sizes: [[320, 200], 'fluid']
+    },
+    {
+        type: 'mobile_320x200_3',
+        slotId: '/85819747/mobile_320x200_3',
+        divId: 'mobile_320x200_3-gpt',
+        sizes: [[320, 200], 'fluid']
     },
     {
         type: 'mobile_320x100',

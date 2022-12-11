@@ -26,19 +26,20 @@ const FlightOfferList = ({ items, withAds }: Props) => {
                             <div className={styles.FlightOfferRow}>
                                 <FlightOfferRow {...item} />
                             </div>
-                            {(oneThird !== undefined && oneThird === index + 1) &&
+                            {/*{(oneThird !== undefined && oneThird === index + 1) &&
                                 <div className={clsx(styles.Ad)}>
                                     <Ads type={'mobile_320x200'} />
                                 </div>
                             }
                             {(twoThirds !== undefined && twoThirds === index + 1) &&
                                 <div className={clsx(styles.Ad)}>
-                                    <Ads type={'mobile_320x100_lower'} />
+                                    <Ads type={'mobile_320_200_2'} />
                                 </div>
-                            }
+                            }*/}
                             {(middle !== undefined && middle === index + 1) &&
                                 <div className={clsx(styles.Ad)}>
                                     <Ads type={'desktop_list_middle'} />
+                                    <Ads type={'mobile_320_200_2'} />
                                 </div>
                             }
                         </Fragment>

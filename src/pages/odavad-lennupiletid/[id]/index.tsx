@@ -125,14 +125,14 @@ const FlightOfferShow = ({ flightObj }: Props) => {
                                 {renderBody(flight.body)}
                             </div>
                         </div>
-                        <Ads type={'mobile_320x100'} />
+                        <Ads type={'mobile_320_200_2'} />
                         <div className={styles.MoreFlightOffers}>
                             <FlightOffersLatest title={'Veel soodsaid lennupileteid'} excludeId={flight.id} />
                         </div>
                     </div>
                     <div className={styles.Sidebar}>
                         <div className={styles.Ads}>
-                            <Ads type={'mobile_320x100_lower'} />
+                            <Ads type={'mobile_320x200_3'} />
                             {/*<Ads type={'sidebar-small'} />
                             <Ads type={'sidebar-large'} />*/}
                         </div>

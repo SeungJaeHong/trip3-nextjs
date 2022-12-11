@@ -21,7 +21,7 @@
     margin-bottom: $spacer * 4;
 
     @include sm() {
-        margin: 0 auto $spacer * 4 auto;
+        margin: 0 auto $spacer * 3 auto;
     }
 }
 

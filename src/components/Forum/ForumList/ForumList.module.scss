@@ -20,11 +20,6 @@
         overflow: hidden;
         margin-bottom: 0;
 
-        @include xs() {
-            display: flex;
-            justify-content: center;
-        }
-
         iframe {
             margin-bottom: $spacer * 3;
 
@@ -47,6 +42,12 @@
 
         @include md() {
             max-width: 700px;
+        }
+
+        @include sm() {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
     }
 }

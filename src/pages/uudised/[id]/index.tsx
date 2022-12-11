@@ -170,7 +170,7 @@ const NewsShow = ({ newsObj }: Props) => {
                     </div>
                     <div className={styles.Sidebar}>
                         <div className={styles.Ads}>
-                            <Ads type={'mobile_320x100'} />
+                            <Ads type={'mobile_320_200_2'} />
                             {/*<Ads type={'sidebar-small'} />
                             <Ads type={'sidebar-large'} />*/}
                         </div>

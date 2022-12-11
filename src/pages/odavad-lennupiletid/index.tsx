@@ -141,7 +141,6 @@ const FlightsIndex = ({
                 <div className={containerStyle.CenteredContainer}>
                     <div className={styles.Content}>
                         <div className={styles.FlightOfferList}>
-                            <Ads type={'mobile_320x100'} className={styles.ListTopAd} />
                             <div className={styles.DestinationSelect}>
                                 <FormSelect
                                     id={'destination'}
@@ -152,6 +151,7 @@ const FlightsIndex = ({
                                     key={selectedDestination?.toString()}
                                 />
                             </div>
+                            <Ads type={'mobile_320x200'} className={styles.ListTopAd} />
                             {/*<Ads type={'flight-offer-list-top'} />*/}
                             {renderResults()}
                             <div className={styles.Paginator}>
@@ -160,6 +160,7 @@ const FlightsIndex = ({
                                     previousPageUrl={getPreviousPageUrl()}
                                 />
                             </div>
+                            <Ads type={'mobile_320x200_3'} className={styles.ListTopAd} />
                         </div>
                         <div className={styles.Sidebar}>
                             <div className={styles.DescriptionBlock}>
