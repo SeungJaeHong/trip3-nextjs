@@ -160,6 +160,7 @@ const NewsIndex = (props: Props) => {
                 <div className={styles.Paginator}>
                     <SimplePaginator nextPageUrl={getNextPageUrl()} previousPageUrl={getPreviousPageUrl()} />
                 </div>
+                <Ads type={'mobile_320x200_3'} />
             </Fragment>
         )
     }
