@@ -117,7 +117,9 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                             <div className={styles.ForumList}>
                                 <ForumList items={posts} withAds={true} onlyMiddleAd={true} />
                             </div>
-                            <Ads type={'mobile_320x200_3'} />
+                            <div className={styles.Ads}>
+                                <Ads type={'mobile_320x200_3'} />
+                            </div>
                             <div className={styles.SidebarContent}>
                                 <div className={styles.ForumLinks}>
                                     <div className={styles.ForumLink}>

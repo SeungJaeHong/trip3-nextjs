@@ -111,19 +111,19 @@
     .AddNewButton {
         margin-bottom: $spacer * 3;
     }
+}
 
-    .Ads {
-        display: flex;
-        width: 100%;
-        max-width: 275px;
-        flex-direction: column;
-        gap: $spacer * 2;
-        overflow: hidden;
+.Ads {
+    display: flex;
+    width: 100%;
+    max-width: 275px;
+    flex-direction: column;
+    gap: $spacer * 2;
+    overflow: hidden;
 
-        @include sm() {
-            max-width: unset;
-            align-items: center;
-        }
+    @include sm() {
+        max-width: unset;
+        align-items: center;
     }
 }
 
@@ -217,6 +217,10 @@
         width: 100%;
         flex: 3;
         gap: $spacer * 5;
+
+        @include sm() {
+            gap: $spacer * 4;
+        }
 
         .Body {
             display: flex;

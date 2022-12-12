@@ -143,7 +143,7 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                         )}
                         <div className={styles.BodyAd}>
                             <Ads type={'desktop_list_middle'} />
-                            <Ads type={'mobile_320_200_2'} />
+                            <Ads type={'mobile_320x200'} />
                         </div>
                     </div>
                     <div className={styles.Sidebar}>
@@ -154,14 +154,14 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                             )}
                         </div>
                         <div className={styles.Ads}>
-                            <Ads type={'mobile_320x200_3'} />
+                            {/*<Ads type={'mobile_320x200_3'} />*/}
                             {/*<Ads type={'sidebar-small'} />
                             <Ads type={'sidebar-large'} />*/}
                         </div>
                     </div>
                 </div>
             </div>
-            <RelatedContentBlock type={'forum'} />
+            <RelatedContentBlock type={'forum'} ad={comments && comments?.length >= 12 ? 'mobile_320x200_3' : 'mobile_320_200_2'} />
             <Footer />
         </Fragment>
     )

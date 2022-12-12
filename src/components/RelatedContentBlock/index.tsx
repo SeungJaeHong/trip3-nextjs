@@ -13,9 +13,10 @@ const Ads = dynamic(() => import('../Ads'), { ssr: false })
 type Props = {
     type: string
     destinationId?: number
+    ad?: string
 }
 
-const RelatedContentBlock = ({ type, destinationId }: Props) => {
+const RelatedContentBlock = ({ type, destinationId, ad }: Props) => {
     const renderContentByType = () => {
         switch (type) {
             case 'forum':
@@ -23,6 +24,7 @@ const RelatedContentBlock = ({ type, destinationId }: Props) => {
                     <>
                         <div className={styles.Column}>
                             <FlightOffersLatest />
+                            {ad ? <div className={styles.Ad}><Ads type={ad} /></div> : null}
                             <TravelmatesLatest />
                         </div>
                         <div className={styles.Row}>
@@ -35,6 +37,7 @@ const RelatedContentBlock = ({ type, destinationId }: Props) => {
                     <>
                         <div className={styles.Column}>
                             <ForumLatest />
+                            {ad ? <div className={styles.Ad}><Ads type={ad} /></div> : null}
                             <TravelmatesLatest />
                         </div>
                         <div className={styles.Row}>
@@ -47,6 +50,7 @@ const RelatedContentBlock = ({ type, destinationId }: Props) => {
                     <>
                         <div className={styles.Column}>
                             <FlightOffersLatest />
+                            {ad ? <div className={styles.Ad}><Ads type={ad} /></div> : null}
                             <ForumLatest />
                         </div>
                         <div className={styles.Row}>

@@ -216,18 +216,23 @@
             }
         }
     }
+}
 
-    .Ads {
-        width: 100%;
-        max-width: 275px;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        gap: $spacer * 2;
+.Ads {
+    width: 100%;
+    max-width: 275px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: $spacer * 2;
 
-        @include sm() {
-            max-width: unset;
-        }
+    iframe {
+        margin-bottom: $spacer * 4;
+    }
+
+    @include sm() {
+        max-width: unset;
+        align-items: center;
     }
 }
 

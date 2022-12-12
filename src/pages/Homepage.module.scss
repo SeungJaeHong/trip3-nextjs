@@ -231,19 +231,20 @@
                     margin-bottom: $spacer * 3;
                 }
             }
+        }
+    }
 
-            .Ads {
-                display: flex;
-                max-width: 260px;
-                width: 100%;
-                flex-direction: column;
-                gap: $spacer * 2;
-                overflow: hidden;
+    .Ads {
+        display: flex;
+        max-width: 260px;
+        width: 100%;
+        flex-direction: column;
+        gap: $spacer * 2;
+        overflow: hidden;
 
-                @include sm() {
-                    max-width: unset;
-                }
-            }
+        @include sm() {
+            align-items: center;
+            max-width: unset;
         }
     }
 

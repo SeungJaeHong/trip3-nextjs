@@ -213,10 +213,6 @@ const TravelmatePage = ({ content }: Props) => {
 
                         {renderActionButtons()}
 
-                        <div className={styles.BodyAd}>
-                            <Ads type={'mobile_320x100'} />
-                        </div>
-
                         {comments && comments?.length > 0 && (
                             <div className={styles.Comments}>
                                 {comments.map((comment: Comment) => {
@@ -237,6 +233,9 @@ const TravelmatePage = ({ content }: Props) => {
                                 />
                             </div>
                         )}
+                        <div className={styles.BodyAd}>
+                            <Ads type={'mobile_320x200'} />
+                        </div>
                     </div>
                     <div className={styles.Sidebar}>
                         <div className={styles.UserCard}>
@@ -278,14 +277,14 @@ const TravelmatePage = ({ content }: Props) => {
                             </div>
                         </div>
                         <div className={styles.Ads}>
-                            <Ads type={'mobile_320x200'} />
+                            {/*<Ads type={'mobile_320_200_2'} />*/}
                             {/*<Ads type={'sidebar-small'} />
                             <Ads type={'sidebar-large'} />*/}
                         </div>
                     </div>
                 </div>
             </div>
-            <RelatedContentBlock type={'travelmate'} />
+            <RelatedContentBlock type={'travelmate'} ad={'mobile_320_200_2'} />
             <Footer />
         </Fragment>
     )

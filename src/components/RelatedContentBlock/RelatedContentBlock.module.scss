@@ -23,7 +23,13 @@
         .Row {
             display: flex;
             width: 100%;
+        }
 
+        .Ad {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 

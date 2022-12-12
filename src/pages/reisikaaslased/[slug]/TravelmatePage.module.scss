@@ -52,7 +52,8 @@
     }
 
     @include sm() {
-        gap: $spacer * 3;
+        gap: $spacer * 4;
+        margin-bottom: $spacer * 4;
     }
 
     .PageContent {
@@ -156,7 +157,7 @@
                 margin-top: $spacer * 3;
 
                 &.WithBodyMargin {
-                    margin-bottom: $spacer * 2.5;
+                    margin-bottom: $spacer * 3;
                 }
             }
         }
@@ -168,8 +169,7 @@
             margin-bottom: $spacer * 5;
 
             @include sm() {
-                margin-top: $spacer * 4;
-                margin-bottom: $spacer;
+                margin-bottom: $spacer * 4;
             }
         }
 

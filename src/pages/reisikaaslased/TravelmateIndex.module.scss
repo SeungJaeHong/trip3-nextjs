@@ -41,6 +41,10 @@
         flex-direction: column;
         flex: 3;
 
+        @include sm() {
+            margin-bottom: $spacer;
+        }
+
         .TravelmateGrid {
             padding-left: $spacer * 4;
             flex-wrap: wrap;
@@ -62,6 +66,11 @@
 
             @include sm() {
                 padding-left: 0;
+                margin-bottom: $spacer * 5;
+            }
+
+            .NoResults {
+                margin-bottom: $spacer * 4;
             }
 
             .Ad {
@@ -133,19 +142,19 @@
                 }
             }
         }
+    }
 
-        .Ads {
+    .Ads {
+        display: flex;
+        flex-direction: column;
+        gap: $spacer * 2;
+        width: 100%;
+        max-width: 285px;
+
+        @include sm() {
+            max-width: unset;
             display: flex;
-            flex-direction: column;
-            gap: $spacer * 2;
-            width: 100%;
-            max-width: 285px;
-
-            @include sm() {
-                max-width: unset;
-                display: flex;
-                align-items: center;
-            }
+            align-items: center;
         }
     }
 }

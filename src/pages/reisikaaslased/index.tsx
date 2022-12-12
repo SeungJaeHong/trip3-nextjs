@@ -101,21 +101,21 @@ const TravelmatesIndex = ({
         return (
             <Fragment key={travelmate.id}>
                 <TravelmateCard {...travelmate} />
-                {(oneThird && oneThird === index + 1) &&
+                {(oneThird !== undefined && oneThird === index + 1) &&
                     <div className={clsx(styles.MobileAd)}>
-                        <Ads type={'mobile_320x100'} />
+                        <Ads type={'mobile_320x200'} />
                     </div>
                 }
-                {(twoThirds && twoThirds === index + 1) &&
+                {(twoThirds !== undefined && twoThirds === index) &&
                     <div className={clsx(styles.MobileAd)}>
-                        <Ads type={'mobile_320x100_lower'} />
+                        <Ads type={'mobile_320_200_2'} />
                     </div>
                 }
-                {(middle && middle === index + 2 ) &&
+                {/*{(middle && middle === index + 2 ) &&
                     <div className={clsx(styles.Ad)}>
                         <Ads type={'desktop_list_middle'} />
                     </div>
-                }
+                }*/}
             </Fragment>
         )
     }
@@ -150,13 +150,18 @@ const TravelmatesIndex = ({
                 <div className={styles.Content}>
                     <div className={styles.TravelmateGridContainer}>
                         <div className={styles.TravelmateGrid}>
-                            {travelmates.length === 0 && <div>Tulemusi ei leitud</div>}
+                            {travelmates.length === 0 && <div className={styles.NoResults}>Tulemusi ei leitud</div>}
                             {travelmates.map((travelmate: TravelmateRowType, index: number) => {
                                 return renderCard(travelmate, index)
                             })}
                         </div>
-                        <div className={styles.Paginator}>
-                            <SimplePaginator nextPageUrl={getNextPageUrl()} previousPageUrl={getPreviousPageUrl()} />
+                        {travelmates.length >= 15 &&
+                            <div className={styles.Paginator}>
+                                <SimplePaginator nextPageUrl={getNextPageUrl()} previousPageUrl={getPreviousPageUrl()} />
+                            </div>
+                        }
+                        <div className={styles.Ads}>
+                            <Ads type={'mobile_320x200_3'} />
                         </div>
                     </div>
                     <div className={styles.Sidebar}>
@@ -183,7 +188,7 @@ const TravelmatesIndex = ({
                             )}
                         </div>
                         <div className={styles.Ads}>
-                            <Ads type={'mobile_320x200'} />
+                            {/*<Ads type={'mobile_320x200'} />*/}
                             {/*<Ads type={'sidebar-small'} />
                             <Ads type={'sidebar-large'} />*/}
                         </div>

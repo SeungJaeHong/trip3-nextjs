@@ -148,6 +148,11 @@ const NewsShow = ({ newsObj }: Props) => {
                             <Ads type={'mobile_320x200'} className={styles.TopAd} />
                             <div className={styles.Body} dangerouslySetInnerHTML={{ __html: news.body }} />
                         </div>
+                        <div className={styles.Ads}>
+                            <Ads type={'mobile_320_200_2'} />
+                            {/*<Ads type={'sidebar-small'} />
+                            <Ads type={'sidebar-large'} />*/}
+                        </div>
                         {comments && comments?.length > 0 && (
                             <div className={styles.Comments}>
                                 {comments?.map((comment: Comment) => {
@@ -170,7 +175,7 @@ const NewsShow = ({ newsObj }: Props) => {
                     </div>
                     <div className={styles.Sidebar}>
                         <div className={styles.Ads}>
-                            <Ads type={'mobile_320_200_2'} />
+                            {/*<Ads type={'mobile_320_200_2'} />*/}
                             {/*<Ads type={'sidebar-small'} />
                             <Ads type={'sidebar-large'} />*/}
                         </div>
