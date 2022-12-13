@@ -182,7 +182,7 @@ const NewsShow = ({ newsObj }: Props) => {
                     </div>
                 </div>
             </div>
-            <RelatedContentBlock type={'news'} />
+            <RelatedContentBlock type={'news'} ad={'mobile_320x200_3'} />
             <Footer />
         </Fragment>
     )

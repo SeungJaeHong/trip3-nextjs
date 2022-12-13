@@ -63,6 +63,7 @@ const RelatedContentBlock = ({ type, destinationId, ad }: Props) => {
                     <>
                         <div className={styles.Column}>
                             <FlightOffersLatest />
+                            {ad ? <div className={styles.Ad}><Ads type={ad} /></div> : null}
                             <ForumLatest />
                         </div>
                         <div className={styles.Row}>

@@ -24,6 +24,7 @@
     @include sm() {
         margin-top: $spacer * -23;
         gap: $spacer * 2;
+        padding-bottom: $spacer;
     }
 
     .ForumContent {

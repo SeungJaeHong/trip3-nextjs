@@ -116,7 +116,7 @@ const FlightsIndex = ({
             return <div className={styles.NoResults}>Tulemusi ei leitud</div>
         }
 
-        return <FlightOfferList items={flightOffers} withAds={true} />
+        return <FlightOfferList items={flightOffers} withAds={flightOffers.length > 0} />
     }
 
     return (
@@ -151,7 +151,9 @@ const FlightsIndex = ({
                                     key={selectedDestination?.toString()}
                                 />
                             </div>
-                            <Ads type={'mobile_320x200'} className={styles.ListTopAd} />
+                            {flightOffers.length > 0 &&
+                                <Ads type={'mobile_320x200'} className={styles.ListTopAd} />
+                            }
                             {/*<Ads type={'flight-offer-list-top'} />*/}
                             {renderResults()}
                             <div className={styles.Paginator}>
