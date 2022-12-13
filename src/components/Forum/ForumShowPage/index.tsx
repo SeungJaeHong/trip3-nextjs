@@ -153,6 +153,11 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                                 <Button title={'Alusta uut teemat'} light={true} route={'/foorum/lisa-uus'} />
                             )}
                         </div>
+                        {comments && comments?.length >= 12 &&
+                            <div className={styles.Ads}>
+                                <Ads type={'mobile_320x200_3'} />
+                            </div>
+                        }
                         <div className={styles.Ads}>
                             {/*<Ads type={'mobile_320x200_3'} />*/}
                             {/*<Ads type={'sidebar-small'} />
@@ -161,7 +166,7 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                     </div>
                 </div>
             </div>
-            <RelatedContentBlock type={'forum'} ad={comments && comments?.length >= 12 ? 'mobile_320x200_3' : 'mobile_320_200_2'} />
+            <RelatedContentBlock type={'forum'} ad={comments && comments?.length >= 12 ? undefined : 'mobile_320_200_2'} />
             <Footer />
         </Fragment>
     )
