@@ -50,6 +50,30 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
         }, 0)
     }, [comments])
 
+    const getLastAd = () => {
+        if (!comments)
+            return undefined
+
+        if (userIsLoggedIn && comments?.length >= 5 && comments?.length < 12) {
+            return 'mobile_320x200_3'
+        } else if (comments?.length <= 12) {
+            return 'mobile_320_200_2'
+        }
+
+        return undefined
+    }
+
+    const getLastAd2 = () => {
+        if (!comments)
+            return undefined
+
+        if (!userIsLoggedIn && comments?.length < 12) {
+            return 'mobile_320x200_3'
+        }
+
+        return undefined
+    }
+
     const onSubmit = async (value: string) => {
         setSubmitting(true)
         await postComment(value, post.id)
@@ -144,6 +168,9 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                         <div className={styles.BodyAd}>
                             <Ads type={'desktop_list_middle'} />
                             <Ads type={'mobile_320x200'} />
+                            {userIsLoggedIn && comments && comments?.length >= 5 && comments?.length < 12 &&
+                                <Ads type={'mobile_320_200_2'} />
+                            }
                         </div>
                     </div>
                     <div className={styles.Sidebar}>
@@ -166,7 +193,10 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                     </div>
                 </div>
             </div>
-            <RelatedContentBlock type={'forum'} ad={comments && comments?.length >= 12 ? undefined : 'mobile_320_200_2'} />
+            <RelatedContentBlock
+                type={'forum'}
+                ad={getLastAd()}
+                ad2={getLastAd2()} />
             <Footer />
         </Fragment>
     )

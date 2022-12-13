@@ -14,9 +14,10 @@ type Props = {
     type: string
     destinationId?: number
     ad?: string
+    ad2?: string
 }
 
-const RelatedContentBlock = ({ type, destinationId, ad }: Props) => {
+const RelatedContentBlock = ({ type, destinationId, ad, ad2 }: Props) => {
     const renderContentByType = () => {
         switch (type) {
             case 'forum':
@@ -27,8 +28,9 @@ const RelatedContentBlock = ({ type, destinationId, ad }: Props) => {
                             {ad ? <div className={styles.Ad}><Ads type={ad} /></div> : null}
                             <TravelmatesLatest />
                         </div>
+                        {/*{ad2 ? <div className={styles.Ad}><Ads type={ad2} /></div> : null}*/}
                         <div className={styles.Row}>
-                            <NewsLatest />
+                            <NewsLatest ad={ad2} />
                         </div>
                     </>
                 )

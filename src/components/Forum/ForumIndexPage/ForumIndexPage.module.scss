@@ -167,6 +167,10 @@
             font-size: $font-size-normal;
             color: $gray-darker;
             margin: $spacer * 2 0;
+
+            @include sm() {
+                margin-bottom: $spacer * 3;
+            }
         }
 
         .AddNewTopic {

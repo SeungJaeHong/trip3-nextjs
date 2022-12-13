@@ -139,6 +139,10 @@
                 //max-width: 320px;
                 align-items: center;
             }
+
+            iframe {
+                margin-bottom: $spacer * 2;
+            }
         }
 
         @include md() {

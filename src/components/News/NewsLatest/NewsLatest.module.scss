@@ -12,6 +12,13 @@
         gap: $spacer * 4;
         flex-wrap: wrap;
 
+        .Ad {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+        }
+
         @include sm() {
             grid-template-columns: 1fr;
         }
