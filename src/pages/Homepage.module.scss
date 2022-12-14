@@ -234,7 +234,17 @@
         }
     }
 
-    .Ads {
+    .MobileAd {
+        display: none;
+
+        @include sm() {
+            display: flex;
+            width: 100%;
+            align-items: center;
+        }
+    }
+
+    .SidebarAd {
         display: flex;
         max-width: 260px;
         width: 100%;
@@ -243,8 +253,7 @@
         overflow: hidden;
 
         @include sm() {
-            align-items: center;
-            max-width: unset;
+            display: none;
         }
     }
 
