@@ -50,6 +50,18 @@
             color: $gray;
         }
 
+        .DefaultLinks {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .AuthLinks {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         &.LinksMobile {
             display: none;
 
@@ -58,6 +70,9 @@
                 flex-direction: column;
                 align-items: center;
                 margin-top: $spacer * 4;
+                justify-content: space-between;
+                height: 100%;
+                margin-bottom: $spacer * 3;
 
                 a {
                     font-size: 1.25rem;
@@ -136,11 +151,19 @@
         }
     }
 
+    .MenuContainer {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 32px;
+        height: 100%;
+    }
+
     .MobileMenu {
         background: $green;
         bottom: 0;
         left: 0;
-        padding: 2rem;
+        //padding: 2rem;
         position: fixed;
         right: 0;
         top: 0;

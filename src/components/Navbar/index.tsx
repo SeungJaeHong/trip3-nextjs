@@ -136,22 +136,28 @@ const Navbar = ({ darkMode, showSearch, showLogo }: Props) => {
 
             return (
                 <div className={styles.MobileMenu}>
-                    <div className={styles.CloseIcon} onClick={() => setMenuOpen(false)}>
-                        <CloseIcon />
-                    </div>
-                    <div className={clsx([styles.Links, styles.LinksMobile])}>
-                        {mobileLinks.map((link) => {
-                            return (
-                                <div
-                                    className={styles.MobileLink}
-                                    key={link.title}
-                                    onClick={() => onMobileLinkClick(link.route)}
-                                >
-                                    {renderMobileMenuLink(link)}
-                                </div>
-                            )
-                        })}
-                        {mobileMenuUserLinks()}
+                    <div className={styles.MenuContainer}>
+                        <div className={styles.CloseIcon} onClick={() => setMenuOpen(false)}>
+                            <CloseIcon />
+                        </div>
+                        <div className={clsx([styles.Links, styles.LinksMobile])}>
+                            <div className={styles.DefaultLinks}>
+                                {mobileLinks.map((link) => {
+                                    return (
+                                        <div
+                                            className={styles.MobileLink}
+                                            key={link.title}
+                                            onClick={() => onMobileLinkClick(link.route)}
+                                        >
+                                            {renderMobileMenuLink(link)}
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                            <div className={styles.AuthLinks}>
+                                {mobileMenuUserLinks()}
+                            </div>
+                        </div>
                     </div>
                 </div>
             )
