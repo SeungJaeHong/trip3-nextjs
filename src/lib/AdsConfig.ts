@@ -90,10 +90,12 @@ const AdsConfig: Array<{type: string, slotId: string, divId: string, sizes: Arra
         sizes: [[720, 120], 'fluid']
     },
     {
-        type: 'list_middle',
-        slotId: '/85819747/list_middle',
-        divId: 'list_middle-gpt',
+        type: 'desktop_body',
+        slotId: '/85819747/desktop_body',
+        divId: 'desktop_body-gpt',
         sizes: [[720, 120], 'fluid']
+        //width: 720,
+        //height: 120
     },
     /*{
         type: 'list_top',

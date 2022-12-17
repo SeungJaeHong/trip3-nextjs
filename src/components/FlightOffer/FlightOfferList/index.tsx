@@ -38,7 +38,7 @@ const FlightOfferList = ({ items, withAds }: Props) => {
                             }*/}
                             {(middle !== undefined && middle === index + 1) &&
                                 <div className={clsx(styles.Ad)}>
-                                    <Ads type={'desktop_list_middle'} />
+                                    <Ads type={'desktop_body'} />
                                     <Ads type={'mobile_320_200_2'} />
                                 </div>
                             }

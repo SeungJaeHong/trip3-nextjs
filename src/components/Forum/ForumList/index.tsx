@@ -39,7 +39,7 @@ const ForumList = ({ items, withAds, onlyMiddleAd }: Props) => {
                             }
                             {(middle !== undefined && middle === index + 1) &&
                                 <div className={clsx(styles.ForumRow, styles.Ad)}>
-                                    <Ads type={'desktop_list_middle'} />
+                                    <Ads type={'desktop_body'} />
                                 </div>
                             }
                             {(onlyMiddleAd && middle === index + 1) &&

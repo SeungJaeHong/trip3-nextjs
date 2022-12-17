@@ -11,9 +11,10 @@
     }
 
     .Ad {
-        max-width: 660px;
+        max-width: 640px;
         width: 100%;
         overflow: hidden;
+        margin: 0 auto;
 
         iframe {
             margin-bottom: $spacer * 2.5;
