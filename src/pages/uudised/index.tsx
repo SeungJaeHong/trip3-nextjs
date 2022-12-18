@@ -133,7 +133,7 @@ const NewsIndex = (props: Props) => {
                 }
                 {(middle && middle === index + 2) &&
                     <div className={clsx(styles.Ad)}>
-                        <Ads type={'desktop_list_middle'} />
+                        <Ads type={'desktop_body'} />
                     </div>
                 }
                 {/*{(middle && middle === index + 2 ) &&
@@ -234,6 +234,7 @@ const NewsIndex = (props: Props) => {
                             )}
                         </div>
                         <div className={styles.Ads}>
+                            <Ads type={'desktop_sidebar_small'} />
                             {/*<Ads type={'mobile_320x200'} />*/}
                            {/* <Ads type={'sidebar-small'} />
                             <Ads type={'sidebar-large'} />*/}

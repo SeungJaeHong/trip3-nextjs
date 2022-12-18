@@ -177,14 +177,30 @@
             display: flex;
             flex-direction: column;
             gap: $spacer * .5;
+            margin-bottom: $spacer * 6;
+
+            @include sm() {
+                margin-bottom: $spacer * 5;
+            }
         }
 
         .BodyAd {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             width: 100%;
+
+            iframe {
+                margin-top: $spacer * 2;
+
+                @include lg() {
+                    margin-top: 0;
+                }
+            }
+
+            @include sm() {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
         }
     }
 

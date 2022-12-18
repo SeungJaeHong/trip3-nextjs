@@ -187,10 +187,11 @@ const FlightsIndex = ({
                                     />
                                 </div>
                             )}
-                            {/*<div className={styles.Ads}>
-                                <Ads type={'sidebar-small'} />
-                                <Ads type={'sidebar-large'} />
-                            </div>*/}
+                            <div className={styles.Ads}>
+                                <Ads type={'desktop_sidebar_small'} />
+                                {/*<Ads type={'sidebar-small'} />
+                                <Ads type={'sidebar-large'} />*/}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -178,11 +178,14 @@
         }
 
         .Ads {
-            display: flex;
             width: 100%;
-            flex-direction: column;
-            gap: $spacer * 2;
-            align-items: center;
+
+            @include sm() {
+                display: flex;
+                flex-direction: column;
+                gap: $spacer * 2;
+                align-items: center;
+            }
         }
     }
 }

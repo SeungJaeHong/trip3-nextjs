@@ -51,6 +51,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: $spacer * 4 $spacer * 7;
+            margin-bottom: $spacer * 8;
 
             @include lg() {
                 flex: 1;
@@ -100,10 +101,10 @@
         }
 
         .Paginator {
-            margin-top: $spacer * 8;
+            margin-bottom: $spacer * 8;
 
             @include md() {
-                margin: $spacer * 3 0 $spacer * 5 0;
+                margin-bottom: $spacer * 6;
             }
         }
     }
@@ -147,7 +148,7 @@
     .Ads {
         display: flex;
         flex-direction: column;
-        gap: $spacer * 2;
+        //gap: $spacer * 2;
         width: 100%;
         max-width: 285px;
 

@@ -129,11 +129,8 @@
             flex-direction: column;
             gap: $spacer * 2;
             width: 100%;
-            //max-width: 270px;
-
-            @include md() {
-                margin: 0 auto;
-            }
+            max-width: 270px;
+            margin: 0 auto;
 
             @include sm() {
                 //max-width: 320px;

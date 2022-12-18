@@ -111,9 +111,9 @@ const TravelmatesIndex = ({
                         <Ads type={'mobile_320_200_2'} />
                     </div>
                 }
-                {/*{(middle && middle === index + 2 ) &&
+                {/*{(middle !== undefined && middle === index ) &&
                     <div className={clsx(styles.Ad)}>
-                        <Ads type={'desktop_list_middle'} />
+                        <Ads type={'desktop_body'} />
                     </div>
                 }*/}
             </Fragment>
@@ -155,13 +155,14 @@ const TravelmatesIndex = ({
                                 return renderCard(travelmate, index)
                             })}
                         </div>
-                        {travelmates.length >= 15 &&
+                        {(getNextPageUrl() || getPreviousPageUrl()) &&
                             <div className={styles.Paginator}>
                                 <SimplePaginator nextPageUrl={getNextPageUrl()} previousPageUrl={getPreviousPageUrl()} />
                             </div>
                         }
                         <div className={styles.Ads}>
                             <Ads type={'mobile_320x200_3'} />
+                            <Ads type={'desktop_body'} />
                         </div>
                     </div>
                     <div className={styles.Sidebar}>
@@ -188,6 +189,7 @@ const TravelmatesIndex = ({
                             )}
                         </div>
                         <div className={styles.Ads}>
+                            <Ads type={'desktop_sidebar_small'} />
                             {/*<Ads type={'mobile_320x200'} />*/}
                             {/*<Ads type={'sidebar-small'} />
                             <Ads type={'sidebar-large'} />*/}

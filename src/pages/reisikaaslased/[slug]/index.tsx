@@ -235,6 +235,7 @@ const TravelmatePage = ({ content }: Props) => {
                         )}
                         <div className={styles.BodyAd}>
                             <Ads type={'mobile_320x200'} />
+                            {/*<Ads type={'desktop_body'} />*/}
                         </div>
                     </div>
                     <div className={styles.Sidebar}>

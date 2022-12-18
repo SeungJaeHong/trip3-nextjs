@@ -64,7 +64,7 @@ const ForumPostComments = ({ post, comments, currentPage, lastPage }: Props) => 
                         }
                         {(middle !== undefined && middle === index + 1) &&
                             <div className={clsx(styles.Ad)}>
-                                <Ads type={'desktop_list_middle'} />
+                                <Ads type={'desktop_body'} />
                             </div>
                         }
                         {(mobileMiddle !== undefined && mobileMiddle === index + 1) &&

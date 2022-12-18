@@ -114,7 +114,10 @@ const FlightOfferShow = ({ flightObj }: Props) => {
                 <div className={styles.ContentContainer}>
                     <div className={styles.BodyContainer}>
                         <div className={styles.Body}>
-                            <Ads type={'mobile_320x200'} className={styles.TopAd} />
+                            <div className={styles.BodyAd}>
+                                <Ads type={'mobile_320x200'} className={styles.TopAd} />
+                                <Ads type={'desktop_body'} />
+                            </div>
                             <div className={styles.Text}>
                                 {flight.status === 0 && (
                                     <div className={styles.NotPublished}>
@@ -134,6 +137,7 @@ const FlightOfferShow = ({ flightObj }: Props) => {
                     </div>
                     <div className={styles.Sidebar}>
                         <div className={styles.Ads}>
+                            <Ads type={'desktop_sidebar_small'} />
                            {/* <Ads type={'mobile_320x200_3'} />*/}
                             {/*<Ads type={'sidebar-small'} />
                             <Ads type={'sidebar-large'} />*/}

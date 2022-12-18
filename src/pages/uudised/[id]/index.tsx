@@ -150,8 +150,6 @@ const NewsShow = ({ newsObj }: Props) => {
                         </div>
                         <div className={styles.Ads}>
                             <Ads type={'mobile_320_200_2'} />
-                            {/*<Ads type={'sidebar-small'} />
-                            <Ads type={'sidebar-large'} />*/}
                         </div>
                         {comments && comments?.length > 0 && (
                             <div className={styles.Comments}>
@@ -175,6 +173,7 @@ const NewsShow = ({ newsObj }: Props) => {
                     </div>
                     <div className={styles.Sidebar}>
                         <div className={styles.Ads}>
+                            <Ads type={'desktop_sidebar_small'} />
                             {/*<Ads type={'mobile_320_200_2'} />*/}
                             {/*<Ads type={'sidebar-small'} />
                             <Ads type={'sidebar-large'} />*/}

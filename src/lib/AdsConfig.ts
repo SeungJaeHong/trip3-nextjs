@@ -38,13 +38,6 @@ const AdsConfig: Array<{type: string, slotId: string, divId: string, sizes: Arra
         width: 720,
         height: 120
     },*/
-    /*{
-        type: 'mobile_big',
-        slotId: '/85819747/mobile_big',
-        divId: 'mobile_big-gpt',
-        width: 300,
-        height: 250
-    },*/
     {
         type: 'mobile_320x200',
         slotId: '/85819747/mobile_320x200',
@@ -68,8 +61,6 @@ const AdsConfig: Array<{type: string, slotId: string, divId: string, sizes: Arra
         slotId: '/85819747/mobile_320x100',
         divId: 'mobile_320x100-gpt',
         sizes:  [[320, 100], 'fluid']
-        //width: 320,
-        //height: 100
     },
     {
         type: 'mobile_320x100_lower',
@@ -84,25 +75,17 @@ const AdsConfig: Array<{type: string, slotId: string, divId: string, sizes: Arra
         sizes:  [[320, 50], 'fluid']
     },
     {
-        type: 'desktop_list_middle',
-        slotId: '/85819747/desktop_list_middle',
-        divId: 'desktop_list_middle-gpt',
-        sizes: [[720, 120], 'fluid']
-    },
-    {
         type: 'desktop_body',
         slotId: '/85819747/desktop_body',
         divId: 'desktop_body-gpt',
         sizes: [[720, 120], 'fluid']
-        //width: 720,
-        //height: 120
     },
-    /*{
-        type: 'list_top',
-        slotId: '/85819747/list_top',
-        divId: 'list_top-gpt',
-        sizes: [[320, 100], [680, 100], 'fluid']
-    },*/
+    {
+        type: 'desktop_sidebar_small',
+        slotId: '/85819747/desktop_sidebar_small',
+        divId: 'desktop_sidebar_small-gpt',
+        sizes: [[384, 240], 'fluid']
+    },
 ]
 
 export default AdsConfig
