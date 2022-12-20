@@ -189,8 +189,7 @@ const FlightsIndex = ({
                             )}
                             <div className={styles.Ads}>
                                 <Ads type={'desktop_sidebar_small'} />
-                                {/*<Ads type={'sidebar-small'} />
-                                <Ads type={'sidebar-large'} />*/}
+                                <Ads type={'desktop_sidebar_large'} />
                             </div>
                         </div>
                     </div>

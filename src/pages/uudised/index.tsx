@@ -160,7 +160,9 @@ const NewsIndex = (props: Props) => {
                 <div className={styles.Paginator}>
                     <SimplePaginator nextPageUrl={getNextPageUrl()} previousPageUrl={getPreviousPageUrl()} />
                 </div>
-                <Ads type={'mobile_320x200_3'} />
+                <div className={styles.MobileAd}>
+                    <Ads type={'mobile_320x200_3'} />
+                </div>
             </Fragment>
         )
     }
@@ -235,9 +237,7 @@ const NewsIndex = (props: Props) => {
                         </div>
                         <div className={styles.Ads}>
                             <Ads type={'desktop_sidebar_small'} />
-                            {/*<Ads type={'mobile_320x200'} />*/}
-                           {/* <Ads type={'sidebar-small'} />
-                            <Ads type={'sidebar-large'} />*/}
+                            <Ads type={'desktop_sidebar_large'} />
                         </div>
                     </div>
                 </div>

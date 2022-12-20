@@ -190,9 +190,7 @@ const TravelmatesIndex = ({
                         </div>
                         <div className={styles.Ads}>
                             <Ads type={'desktop_sidebar_small'} />
-                            {/*<Ads type={'mobile_320x200'} />*/}
-                            {/*<Ads type={'sidebar-small'} />
-                            <Ads type={'sidebar-large'} />*/}
+                            <Ads type={'desktop_sidebar_large'} />
                         </div>
                     </div>
                 </div>

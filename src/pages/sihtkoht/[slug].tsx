@@ -199,8 +199,8 @@ const DestinationPage = ({ destination }: Props) => {
                     <div className={styles.Sidebar}>
                         <div className={styles.Ads}>
                             <Ads type={'mobile_320x200'} />
-                            {/*<Ads type={'sidebar-small'} />
-                            <Ads type={'sidebar-large'} />*/}
+                            <Ads type={'desktop_sidebar_small'} />
+                            <Ads type={'desktop_sidebar_large'} />
                         </div>
                     </div>
                 </div>

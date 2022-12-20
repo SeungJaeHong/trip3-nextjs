@@ -198,10 +198,11 @@ const ForumIndexPage = (props: Props) => {
                                 </div>
                             )}
                             <div className={styles.Ads}>
-                                <Ads type={'mobile_320x200'} />
                                 <Ads type={'desktop_sidebar_small'} />
-                                {/*<Ads type={'sidebar-small'} />
-                                <Ads type={'sidebar-large'} />*/}
+                                <Ads type={'desktop_sidebar_large'} />
+                            </div>
+                            <div className={styles.MobileAd}>
+                                <Ads type={'mobile_320x200'} />
                             </div>
                         </div>
                     </div>

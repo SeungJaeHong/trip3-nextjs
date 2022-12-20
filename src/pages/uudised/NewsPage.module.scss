@@ -189,6 +189,19 @@
                 margin-bottom: $spacer * 4;
             }
         }
+
+        .MobileAd {
+            display: none;
+
+            @include sm() {
+                display: flex;
+                justify-content: center;
+
+                iframe {
+                    margin: $spacer * 2 0;
+                }
+            }
+        }
     }
 }
 
@@ -225,14 +238,10 @@
     display: flex;
     flex-direction: column;
     gap: $spacer * 2;
-
-    iframe {
-        margin-bottom: $spacer * 4;
-    }
+    margin: 0 auto;
 
     @include sm() {
-        max-width: unset;
-        align-items: center;
+        display: none;
     }
 }
 
@@ -370,6 +379,23 @@
             width: 100%;
             flex-direction: column;
             gap: $spacer * 3;
+
+            .DesktopTopAd {
+                display: flex;
+                width: 100%;
+
+                @include sm() {
+                    display: none;
+                }
+            }
+
+            .MobileTopAd {
+                display: none;
+
+                @include sm() {
+                    display: flex;
+                }
+            }
 
             .TopAd {
                 width: 100%;

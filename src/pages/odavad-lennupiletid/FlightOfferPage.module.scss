@@ -240,6 +240,8 @@
                 width: 100%;
                 display: flex;
                 flex-direction: column;
+                /*max-width: 720px;
+                overflow: hidden;*/
 
                 iframe {
                     margin-bottom: $spacer * 3;

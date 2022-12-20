@@ -69,12 +69,6 @@ const AdsConfig: Array<{type: string, slotId: string, divId: string, sizes: Arra
         sizes:  [[320, 100], 'fluid']
     },
     {
-        type: 'mobile_320x50',
-        slotId: '/85819747/mobile_320x50',
-        divId: 'mobile_320x50-gpt',
-        sizes:  [[320, 50], 'fluid']
-    },
-    {
         type: 'desktop_body',
         slotId: '/85819747/desktop_body',
         divId: 'desktop_body-gpt',
@@ -85,6 +79,12 @@ const AdsConfig: Array<{type: string, slotId: string, divId: string, sizes: Arra
         slotId: '/85819747/desktop_sidebar_small',
         divId: 'desktop_sidebar_small-gpt',
         sizes: [[384, 240], 'fluid']
+    },
+    {
+        type: 'desktop_sidebar_large',
+        slotId: '/85819747/desktop_sidebar_large',
+        divId: 'desktop_sidebar_large-gpt',
+        sizes: [[336, 576], 'fluid']
     },
 ]
 

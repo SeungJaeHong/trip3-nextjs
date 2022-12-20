@@ -179,12 +179,22 @@
 
         .Ads {
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: $spacer * 2;
+
+            @include sm() {
+                display: none;
+            }
+        }
+
+        .MobileAd {
+            display: none;
 
             @include sm() {
                 display: flex;
-                flex-direction: column;
-                gap: $spacer * 2;
-                align-items: center;
+                width: 100%;
+                justify-content: center;
             }
         }
     }

@@ -325,15 +325,15 @@
         .Ads {
             display: flex;
             width: 100%;
-            //max-width: 275px;
+            max-width: 275px;
             flex-direction: column;
             gap: $spacer * 2;
             overflow: hidden;
             margin-top: $spacer * 2;
-            align-items: center;
+            //align-items: center;
 
             @include sm() {
-                //max-width: 300px;
+                max-width: 300px;
             }
         }
     }

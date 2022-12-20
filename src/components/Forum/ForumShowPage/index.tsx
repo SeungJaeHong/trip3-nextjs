@@ -187,9 +187,7 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                         }
                         <div className={styles.Ads}>
                             <Ads type={'desktop_sidebar_small'} />
-                            {/*<Ads type={'mobile_320x200_3'} />*/}
-                            {/*<Ads type={'sidebar-small'} />
-                            <Ads type={'sidebar-large'} />*/}
+                            <Ads type={'desktop_sidebar_large'} />
                         </div>
                     </div>
                 </div>
