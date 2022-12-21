@@ -86,6 +86,12 @@ const AdsConfig: Array<{type: string, slotId: string, divId: string, sizes: Arra
         divId: 'desktop_sidebar_large-gpt',
         sizes: [[336, 576], 'fluid']
     },
+    {
+        type: 'flightoffers_list_top',
+        slotId: '/85819747/flightoffers_list_top',
+        divId: 'flightoffers_list_top-gpt',
+        sizes: [[720, 120], 'fluid']
+    }
 ]
 
 export default AdsConfig

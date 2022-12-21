@@ -152,7 +152,13 @@ const FlightsIndex = ({
                                 />
                             </div>
                             {flightOffers.length > 0 &&
-                                <Ads type={'mobile_320x200'} className={styles.ListTopAd} />
+                                (
+                                    <>
+                                        <Ads type={'flightoffers_list_top'} />
+                                        <Ads type={'mobile_320x200'} className={styles.ListTopAd} />
+                                    </>
+                                )
+
                             }
                             {/*<Ads type={'flight-offer-list-top'} />*/}
                             {renderResults()}
