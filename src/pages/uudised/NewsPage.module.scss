@@ -189,25 +189,16 @@
                 margin-bottom: $spacer * 4;
             }
         }
-
-        .MobileAd {
-            display: none;
-
-            @include sm() {
-                display: flex;
-                justify-content: center;
-
-                iframe {
-                    margin: $spacer * 2 0;
-                }
-            }
-        }
     }
 }
 
 .Sidebar {
     flex: 1;
     flex-direction: column;
+
+    @include sm() {
+        display: none;
+    }
 
     .DescriptionBlock {
         background: $gray-light;
@@ -394,6 +385,7 @@
 
                 @include sm() {
                     display: flex;
+                    justify-content: center;
                 }
             }
 
@@ -471,6 +463,19 @@
             display: flex;
             flex-direction: column;
             gap: $spacer * 2;
+        }
+
+        .MobileAdBody {
+            display: none;
+
+            @include sm() {
+                display: flex;
+                justify-content: center;
+
+                iframe {
+                    margin-bottom: $spacer * 5;
+                }
+            }
         }
     }
 

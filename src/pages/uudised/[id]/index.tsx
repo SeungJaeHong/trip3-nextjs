@@ -148,7 +148,7 @@ const NewsShow = ({ newsObj }: Props) => {
                             <Ads type={'mobile_320x200'} className={styles.MobileTopAd} />
                             <div className={styles.Body} dangerouslySetInnerHTML={{ __html: news.body }} />
                         </div>
-                        <div className={styles.Ads}>
+                        <div className={styles.MobileAdBody}>
                             <Ads type={'mobile_320_200_2'} />
                         </div>
                         {comments && comments?.length > 0 && (
