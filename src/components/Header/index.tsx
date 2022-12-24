@@ -22,7 +22,7 @@ const Header = (props: Props) => {
             width: "100%",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
-            backgroundPosition: "50% 50%"
+            backgroundPosition: "50% 60%"
         }
     }
 
@@ -49,7 +49,7 @@ const Header = (props: Props) => {
 }
 
 Header.defaultProps = {
-    backgroundImage: '/images/header.webp',
+    backgroundImage: '/images/header_winter.webp',
     withBackgroundMap: false,
     light: false
 }

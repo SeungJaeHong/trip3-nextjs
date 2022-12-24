@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useEffect} from 'react'
 import AdsConfig from '../../lib/AdsConfig'
 import { useRouter } from 'next/router'
 import Slot = googletag.Slot;
@@ -11,13 +11,12 @@ type Props = {
 const Ads = ({ type, className }: Props) => {
     const router = useRouter()
     const ad = AdsConfig.find((item) => item.type === type)
-    //const [target, setTarget] = useState<Slot|undefined>(undefined)
 
-    console.log('ad component init', window.googletag?.apiReady)
+    //console.log('ad component init', window.googletag?.apiReady)
 
     useEffect(() => {
         let slot: Slot|undefined = undefined
-        console.log('init ad useEffect', window.googletag, window.googletag?.apiReady, googletag?.apiReady);
+        //console.log('init ad useEffect', window.googletag, window.googletag?.apiReady, googletag?.apiReady);
         if (ad && window.googletag) {
             googletag.cmd.push(function () {
                 slot = window.googletag
@@ -26,11 +25,11 @@ const Ads = ({ type, className }: Props) => {
                     .find((item) => item.getSlotId().getName() === ad.slotId)
 
                 if (slot) {
-                    console.log('refresh', ad.divId)
+                    //console.log('refresh', ad.divId)
                     window.googletag.pubads().refresh([slot])
                 } else {
                     slot = window.googletag.defineSlot(ad.slotId,[[ad.width,ad.height],'fluid'],ad.divId)?.addService(googletag.pubads())
-                    console.log('show', ad.divId)
+                    //console.log('show', ad.divId)
                     // @ts-ignore
                     window.googletag.display(slot)
                 }

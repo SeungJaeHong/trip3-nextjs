@@ -119,11 +119,11 @@ const Footer = (props: Props) => {
     let style = {}
     if (!props.simple) {
         style = {
-            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/footer.webp)',
+            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/footer_winter.webp)',
             width: '100%',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
-            backgroundPosition: '50% 50%',
+            backgroundPosition: '50% 90%',
         }
     }
 
