@@ -59,7 +59,7 @@ const ForumPostComments = ({ post, comments, currentPage, lastPage }: Props) => 
                         }
                         {(twoThirds !== undefined && twoThirds === index + 1) &&
                             <div className={clsx(styles.Ad)}>
-                                <Ads type={'mobile_320_200_2'} />
+                                <Ads type={'mobile_320x200_2'} />
                             </div>
                         }
                         {(middle !== undefined && middle === index + 1) &&

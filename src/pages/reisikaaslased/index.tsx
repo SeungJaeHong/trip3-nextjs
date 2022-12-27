@@ -108,7 +108,7 @@ const TravelmatesIndex = ({
                 }
                 {(twoThirds !== undefined && twoThirds === index) &&
                     <div className={clsx(styles.MobileAd)}>
-                        <Ads type={'mobile_320_200_2'} />
+                        <Ads type={'mobile_320x200_2'} />
                     </div>
                 }
                 {/*{(middle !== undefined && middle === index ) &&

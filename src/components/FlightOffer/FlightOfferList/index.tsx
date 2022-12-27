@@ -39,7 +39,7 @@ const FlightOfferList = ({ items, withAds }: Props) => {
                             {(middle !== undefined && middle === index) &&
                                 <div className={clsx(styles.Ad)}>
                                     <Ads type={'desktop_body'} />
-                                    <Ads type={'mobile_320_200_2'} />
+                                    <Ads type={'mobile_320x200_2'} />
                                 </div>
                             }
                         </Fragment>

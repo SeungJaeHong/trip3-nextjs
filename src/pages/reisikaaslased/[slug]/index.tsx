@@ -284,7 +284,7 @@ const TravelmatePage = ({ content }: Props) => {
                     </div>
                 </div>
             </div>
-            <RelatedContentBlock type={'travelmate'} ad={'mobile_320_200_2'} />
+            <RelatedContentBlock type={'travelmate'} ad={'mobile_320x200_2'} />
             <Footer />
         </Fragment>
     )

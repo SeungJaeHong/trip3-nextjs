@@ -29,7 +29,7 @@ const ForumList = ({ items, withAds, onlyMiddleAd }: Props) => {
                             </div>
                             {(!onlyMiddleAd && oneThird !== undefined && oneThird === index + 1) &&
                                 <div className={clsx(styles.ForumRow, styles.Ad)}>
-                                    <Ads type={'mobile_320_200_2'} />
+                                    <Ads type={'mobile_320x200_2'} />
                                 </div>
                             }
                             {(!onlyMiddleAd && twoThirds !== undefined && twoThirds === index + 1) &&
@@ -44,7 +44,7 @@ const ForumList = ({ items, withAds, onlyMiddleAd }: Props) => {
                             }
                             {(onlyMiddleAd && middle === index + 1) &&
                                 <div className={clsx(styles.ForumRow, styles.Ad)}>
-                                    <Ads type={'mobile_320_200_2'} />
+                                    <Ads type={'mobile_320x200_2'} />
                                 </div>
                             }
                         </Fragment>

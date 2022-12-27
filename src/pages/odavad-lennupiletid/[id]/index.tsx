@@ -129,7 +129,7 @@ const FlightOfferShow = ({ flightObj }: Props) => {
                             </div>
                         </div>
                         <div className={styles.Ads}>
-                            <Ads type={'mobile_320_200_2'} />
+                            <Ads type={'mobile_320x200_2'} />
                         </div>
                         <div className={styles.MoreFlightOffers}>
                             <FlightOffersLatest title={'Veel soodsaid lennupileteid'} excludeId={flight.id} />
