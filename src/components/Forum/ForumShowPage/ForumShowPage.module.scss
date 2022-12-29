@@ -100,8 +100,7 @@
             }
 
             @include sm() {
-                //margin-bottom: $spacer * 2;
-                display: flex;
+                display: block;
                 flex-direction: column;
                 align-items: center;
 
@@ -133,8 +132,10 @@
             margin: 0 auto;
 
             @include sm() {
+                display: block;
                 //max-width: 320px;
                 align-items: center;
+                max-width: unset;
             }
 
             iframe {

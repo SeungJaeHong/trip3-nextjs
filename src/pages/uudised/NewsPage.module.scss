@@ -175,8 +175,7 @@
                 display: none;
 
                 @include sm() {
-                    display: flex;
-                    grid-column: 1;
+                    display: block;
                     justify-content: center;
                 }
             }
@@ -469,8 +468,7 @@
             display: none;
 
             @include sm() {
-                display: flex;
-                justify-content: center;
+                display: block;
 
                 iframe {
                     margin-bottom: $spacer * 5;

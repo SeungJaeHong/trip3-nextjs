@@ -32,7 +32,7 @@
         }
 
         @include sm() {
-            display: flex;
+            display: block;
             justify-content: center;
         }
     }

@@ -32,7 +32,7 @@
             justify-content: center;
 
             @include sm() {
-                display: flex;
+                display: block;
             }
         }
     }

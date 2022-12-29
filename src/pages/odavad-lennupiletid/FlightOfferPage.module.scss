@@ -122,6 +122,7 @@
     overflow: hidden;
 
     @include sm() {
+        display: block;
         max-width: unset;
         align-items: center;
     }

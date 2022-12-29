@@ -21,7 +21,7 @@
         }
 
         @include sm() {
-            display: flex;
+            display: block;
             flex-direction: column;
             justify-content: center;
         }

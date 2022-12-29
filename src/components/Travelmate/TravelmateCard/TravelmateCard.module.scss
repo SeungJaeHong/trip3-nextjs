@@ -100,7 +100,7 @@
         cursor: pointer;
 
         @include sm() {
-            display: flex;
+            display: block;
         }
     }
 }

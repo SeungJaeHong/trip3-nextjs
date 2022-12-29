@@ -43,7 +43,7 @@
     display: flex;
     width: 100%;
     font-family: $font-family-sailec;
-    gap: $spacer * 9;
+    gap: $spacer * 10;
     margin-bottom: $spacer * 5;
 
     @include md() {
@@ -196,7 +196,7 @@
             }
 
             @include sm() {
-                display: flex;
+                display: block;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
@@ -315,13 +315,18 @@
         }
 
         .Ads {
-            display: flex;
-            flex-direction: column;
-            gap: $spacer * 2;
-            //max-width: 280px;
+            //display: flex;
+            //flex-direction: column;
+            //gap: $spacer * 2;
+            max-width: 280px;
             width: 100%;
             overflow: hidden;
             align-items: center;
+            //margin: 0 auto;
+
+            iframe {
+                margin-bottom: $spacer * 2;
+            }
 
             @include sm() {
                 //max-width: 300px;
