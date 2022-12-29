@@ -162,7 +162,7 @@ const TravelmatesIndex = ({
                         }
                         <div className={styles.Ads}>
                             <Ads type={'mobile_320x200_3'} />
-                            <Ads type={'desktop_body'} />
+                            {/*<Ads type={'desktop_body'} />*/}
                         </div>
                     </div>
                     <div className={styles.Sidebar}>
