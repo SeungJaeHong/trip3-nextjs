@@ -333,7 +333,9 @@
             //align-items: center;
 
             @include sm() {
-                max-width: 300px;
+                display: block;
+                max-width: 320px;
+                margin: 0 auto;
             }
         }
     }
