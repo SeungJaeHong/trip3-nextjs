@@ -13,7 +13,7 @@ const Ads = ({ type, className }: Props) => {
     const ad = AdsConfig.find((item) => item.type === type)
     //const [target, setTarget] = useState<Slot|undefined>(undefined)
 
-    console.log('ad component init', window.googletag?.apiReady)
+    //console.log('ad component init', window.googletag?.apiReady)
 
     useEffect(() => {
         let slot: Slot|undefined = undefined
@@ -26,12 +26,12 @@ const Ads = ({ type, className }: Props) => {
                     .find((item) => item.getSlotId().getName() === ad.slotId)
 
                 if (slot) {
-                    console.log('refresh', ad.divId)
+                    //console.log('refresh', ad.divId)
                     window.googletag.pubads().refresh([slot])
                 } else {
                     // @ts-ignore
                     slot = window.googletag.defineSlot(ad.slotId, ad.sizes, ad.divId)?.addService(googletag.pubads())
-                    console.log('show', ad.divId)
+                    //console.log('show', ad.divId)
                     // @ts-ignore
                     window.googletag.display(slot)
                 }
