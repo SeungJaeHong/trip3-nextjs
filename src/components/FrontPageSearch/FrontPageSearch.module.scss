@@ -13,8 +13,10 @@
         text-align: center;
         position: relative;
         border: 1px solid rgba(14, 18, 23, 0.2);
-        background-color: rgba(255, 255, 255, .3);
-        box-shadow: 0 18px 48px rgba(14, 18, 23, .6);
+        background-color: rgba(255, 255, 255, .7);
+        box-shadow: 0 18px 48px rgba(14, 18, 23, .7);
+        //background-color: rgba(255, 255, 255, .3);
+        //box-shadow: 0 18px 48px rgba(14, 18, 23, .6);
 
         .Icon {
             display: flex;
@@ -26,7 +28,8 @@
             svg {
                 width: 22px;
                 height: 22px;
-                fill: $white;
+                fill: $gray-darker;
+                //fill: $white;
             }
         }
 
@@ -34,14 +37,16 @@
             width: 100%;
             border: 0;
             outline: none;
-            color: $white;
+            //color: $white;
+            color: $gray-darker;
             background: transparent;
             font-size: $font-size-medium;
             font-weight: 600;
             font-family: $font-family-sailec;
 
             &::placeholder {
-                color: $white;
+                color: $gray-darker;
+                //color: $white;
                 font-weight: 500;
                 font-size: 1.2rem;
             }

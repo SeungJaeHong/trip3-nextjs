@@ -1,7 +1,7 @@
 @import "../styles/variables";
 
 .Navbar {
-    padding-bottom: $spacer * 10;
+    padding-bottom: $spacer * 12;
     padding-top: $spacer * 3;
 
     @include sm() {

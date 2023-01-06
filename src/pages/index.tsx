@@ -47,11 +47,11 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                 className={styles.Header}
                 style={{
                     backgroundImage:
-                        'linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url(/images/header.webp)',
+                        'linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url(/images/header_winter.webp)',
                     width: '100%',
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'cover',
-                    backgroundPosition: '50% 50%',
+                    backgroundPosition: '50% 60%',
                 }}
             >
                 <div className={clsx([containerStyle.ContainerXl, styles.Content])}>
