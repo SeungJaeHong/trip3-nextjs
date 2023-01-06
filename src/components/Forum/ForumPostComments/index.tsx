@@ -34,7 +34,7 @@ const ForumPostComments = ({ post, comments, currentPage, lastPage }: Props) => 
     }
 
     const middle = forumComments?.length >= 10 ? Math.floor(forumComments?.length / 2) : undefined
-    const mobileMiddle = (forumComments?.length >= 5 && forumComments?.length < 12) ? Math.floor(forumComments?.length / 2) : undefined
+    const mobileMiddle = (forumComments?.length >= 6 && forumComments?.length < 12) ? Math.floor(forumComments?.length / 2) : undefined
     const oneThird = forumComments?.length >= 12 ? Math.floor(forumComments?.length / 3) : undefined
     const twoThirds = oneThird ? Math.floor(oneThird * 2) : undefined
 

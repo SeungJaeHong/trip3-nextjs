@@ -54,7 +54,7 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
         if (!comments)
             return undefined
 
-        if (userIsLoggedIn && comments?.length >= 5 && comments?.length < 12) {
+        if (userIsLoggedIn && comments?.length >= 6 && comments?.length < 12) {
             return 'mobile_320x200_3'
         } else if (comments?.length <= 12) {
             return 'mobile_320x200_2'
@@ -167,8 +167,12 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                         )}
                         <div className={styles.BodyAd}>
                             <Ads type={'desktop_body'} />
-                            <Ads type={'mobile_320x200'} />
-                            {userIsLoggedIn && comments && comments?.length >= 5 && comments?.length < 12 &&
+                        </div>
+                        <div className={styles.BodyAdMobile}>
+                            {comments && comments?.length < 6 &&
+                                <Ads type={'mobile_320x200'} />
+                            }
+                            {userIsLoggedIn && comments && comments?.length >= 6 && comments?.length < 12 &&
                                 <Ads type={'mobile_320x200_2'} />
                             }
                         </div>

@@ -32,8 +32,10 @@
         }
 
         @include sm() {
+            max-width: 320px;
             display: block;
             justify-content: center;
+            margin: 0 auto;
         }
     }
 }
