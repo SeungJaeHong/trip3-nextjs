@@ -28,11 +28,10 @@ const AirbalticCampaignPage = () => {
                     <div className={styles.Block}>
                         <ul>
                             <li>
-                                2 lennupiletit koos äraantava pagasiga airBalticu edasi-tagasi otselennule algusega
-                                Tallinnast võitja poolt valitud sihtkohta.
+                                2 lennupiletit koos äraantava pagasiga airBalticu edasi-tagasi otselennule algusega Tallinnast võitja poolt valitud sihtkohta.
                             </li>
                             <li>
-                                Valida saab kõikide airBalticu otselendude vahel, mis algavad Tallinnast
+                                Valida saab kõikide airBalticu otselendude vahel, mis algavad Tallinnast.
                             </li>
                         </ul>
                     </div>
@@ -41,15 +40,14 @@ const AirbalticCampaignPage = () => {
                     <div className={styles.Block}>
                         <ul>
                             <li>
-                                Auhinnamängu, mis kestab 01.02 - 09.02.2022, korraldab reisiportaal Trip.ee koostöös
-                                airBalticuga.
+                                Auhinnamängu, mis kestab 10.01 - 17.01.2023, korraldab reisiportaal Trip.ee koostöös airBalticuga.
                             </li>
                             <li>
                                 Auhinnaks on airBalticu edasi-tagasi lennupiletid otselendudele algusega Tallinnast
                                 kahele koos äraantava pagasiga (kuni 23kg).
                             </li>
                             <li>
-                                Auhinnamängus osalevad kõik perioodil 01.02 - 09.02.2022 Trip.ee Facebooki lehel loosimängus osalenud isikud.<br/>
+                                Auhinnamängus osalevad kõik perioodil 10.01 - 17.01.2023 Trip.ee Facebooki lehel loosimängus osalenud isikud.<br/>
                                 <div className={styles.Requirements}>Osalemise tingimused:</div>
                                 <ol>
                                     <li className={styles.Requirement}>
@@ -71,11 +69,11 @@ const AirbalticCampaignPage = () => {
                                 </ol>
                             </li>
                             <li>
-                                Võitja nimi avaldatakse <a href="https://www.facebook.com/tripeeee" target="_blank" rel={"noreferrer noopener"} >Trip.ee Facebooki lehel</a> 10.02.2022
-                                ning võitja peab võtma Tripiga ühendust kas siis läbi Facebooki sõnumite või e-meilitsi aadressil turundus@trip.ee hiljemalt 24.02.2022.
+                                Võitja nimi avaldatakse <a href="https://www.facebook.com/tripeeee" target="_blank" rel={"noreferrer noopener"} >Trip.ee Facebooki lehel</a> 18.01.2023
+                                ning võitja peab võtma Tripiga ühendust kas siis läbi Facebooki sõnumite või e-meilitsi aadressil turundus@trip.ee hiljemalt 28.02.2023.
                             </li>
                             <li>
-                                Kui võitjaga ei õnnestu ühendust saada hiljemalt 24.02.2022, ei ole Trip.ee kohustatud
+                                Kui võitjaga ei õnnestu ühendust saada hiljemalt 31.01.2023, ei ole Trip.ee kohustatud
                                 auhinda väljastama.
                             </li>
                         </ul>
@@ -89,7 +87,7 @@ const AirbalticCampaignPage = () => {
                                 pagasiga Tallinnast airBalticu lennule.
                             </li>
                             <li>
-                                Lennupiletid tuleb ära kasutada perioodil 21.02.2022 - 29.10.2022. Sellesse perioodi
+                                Lennupiletid tuleb ära kasutada perioodil 01.02.2023 - 30.04.2023. Sellesse perioodi
                                 peavad jääma lennud mõlemas suunas. Lennupiletid tuleb ära kasutada ühe tervikuna,
                                 st reisides kahekesi koos. Vähemalt üks kahest reisijast peab olema täiskasvanu.
                             </li>
