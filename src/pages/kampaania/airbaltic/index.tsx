@@ -53,7 +53,7 @@ const AirbalticCampaignPage = () => {
                                 <div className={styles.Requirements}>Osalemise tingimused:</div>
                                 <ol>
                                     <li className={styles.Requirement}>
-                                        Märgi <a href="https://www.facebook.com/tripeeee/posts/6905903886146636" target="_blank" className="AirBaltic__campaignLink">kampaaniapakkumise</a> kommentaaridesse airBalticu otselennu sihtkoht Tallinnast kuhu lennata soovid.
+                                        Märgi <a href="https://www.facebook.com/tripeeee/posts/6905903886146636" target="_blank" rel={"noreferrer noopener"}>kampaaniapakkumise</a> kommentaaridesse airBalticu otselennu sihtkoht Tallinnast kuhu lennata soovid.
                                     </li>
                                     {/*<li>
                                         <span className="AirBaltic__listCounter">1.</span>
@@ -71,7 +71,7 @@ const AirbalticCampaignPage = () => {
                                 </ol>
                             </li>
                             <li>
-                                Võitja nimi avaldatakse <a href="https://www.facebook.com/tripeeee" target="_blank">Trip.ee Facebooki lehel</a> 10.02.2022
+                                Võitja nimi avaldatakse <a href="https://www.facebook.com/tripeeee" target="_blank" rel={"noreferrer noopener"} >Trip.ee Facebooki lehel</a> 10.02.2022
                                 ning võitja peab võtma Tripiga ühendust kas siis läbi Facebooki sõnumite või e-meilitsi aadressil turundus@trip.ee hiljemalt 24.02.2022.
                             </li>
                             <li>
@@ -126,7 +126,7 @@ const AirbalticCampaignPage = () => {
 
                     <div className={styles.ActionBtn}>
                         <Link href="https://www.facebook.com/tripeeee/posts/6905903886146636" passHref>
-                            <a target="_blank" rel="noopener noreferrer" className={styles.Button}>
+                            <a target={"_blank"} rel={"noreferrer noopener"} className={styles.Button} >
                                 <span>Osalemiseks klikka siia</span>
                             </a>
                         </Link>
