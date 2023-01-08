@@ -12,6 +12,7 @@ type Props = {
     withBackgroundMap?: boolean
     className?: string
     style?: CSSProperties
+    navBarDark: boolean
 }
 
 const Header = (props: Props) => {
@@ -32,7 +33,7 @@ const Header = (props: Props) => {
         })} style={{...style, ...props.style}}>
             <div className={clsx([containerStyle.ContainerXl, styles.Container])}>
                 <div className={styles.Navbar}>
-                    <Navbar darkMode={props.withBackgroundMap} />
+                    <Navbar darkMode={props.withBackgroundMap || props.navBarDark} />
                 </div>
                 {props.title &&
                     <div className={styles.Title}>
@@ -51,7 +52,7 @@ const Header = (props: Props) => {
 Header.defaultProps = {
     backgroundImage: '/images/header_winter.webp',
     withBackgroundMap: false,
-    light: false
+    navBarDark: false
 }
 
 export default Header

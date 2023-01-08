@@ -1,0 +1,132 @@
+@import "../../../styles/variables";
+
+.Title {
+    font-size: 32px;
+    color: $white;
+    display: flex;
+    justify-content: center;
+    padding: $spacer * 3 0 $spacer * 8 0;
+    margin: 0 auto;
+    text-align: center;
+    max-width: 700px;
+    font-weight: bold;
+
+    @include sm() {
+        font-size: 24px;
+        padding: $spacer 0 $spacer * 6 0;
+    }
+}
+
+.Body {
+    font-family: $font-family-sailec;
+    background: rgba(255, 255, 255, .4);
+    position: relative;
+    padding: $spacer * 3 0;
+    color: $gray-dark;
+    font-size: $font-size-normal;
+
+    @include sm() {
+        font-size: $font-size-normal;
+        padding: $spacer * 2 0;
+    }
+
+    ul li {
+        margin-bottom: $spacer;
+    }
+
+    i {
+        color: $gray-dark;
+        margin-left: $spacer;
+        font-size: $font-size-normal;
+    }
+
+    a {
+        color: $blue;
+
+        &:hover {
+            color: $blue-hover;
+        }
+    }
+
+    h2 {
+        margin-bottom: 0;
+
+        @include sm() {
+            font-size: 20px;
+        }
+    }
+
+    .Block {
+        margin-bottom: $spacer * 5;
+
+        @include sm() {
+            margin-bottom: $spacer * 4;
+        }
+
+        ol {
+            margin-bottom: $spacer * 2;
+
+            @include sm() {
+                padding-left: $spacer * 2;
+            }
+        }
+
+        ol > li::marker {
+            font-weight: bold;
+            color: $gray-dark;
+        }
+
+        .Requirements {
+            margin-bottom: $spacer * 2;
+            text-decoration: underline;
+            font-style: italic;
+        }
+
+        .Requirement {
+            color: $green-dark;
+        }
+    }
+
+    .ActionBtn {
+        display: flex;
+        justify-content: center;
+        margin: $spacer * 8 auto 0 auto;
+        max-width: 250px;
+
+        @include sm() {
+            margin: $spacer * 6 auto 0 auto;
+        }
+
+        .Button {
+            display: flex;
+            width: 100%;
+            position: relative;
+            align-items: center;
+            background: $green-darker;
+            border-radius: 3px;
+            justify-content: center;
+            padding: 12px 36px;
+            text-align: center;
+            transition: all .2s;
+            cursor: pointer;
+            box-shadow: 0 0 2px 0 $gray;
+            outline: none;
+            border: 0;
+            max-height: 50px;
+            height: 100%;
+
+            span {
+                font-family: $font-family-sailec;
+                color: $white;
+                font-weight: 600;
+                font-size: $font-size-normal;
+                line-height: 1.6rem;
+                white-space: nowrap;
+            }
+
+            &:hover {
+                background: $green-hover;
+            }
+        }
+    }
+}
