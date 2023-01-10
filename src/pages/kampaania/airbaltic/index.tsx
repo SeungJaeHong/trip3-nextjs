@@ -51,7 +51,7 @@ const AirbalticCampaignPage = () => {
                                 <div className={styles.Requirements}>Osalemise tingimused:</div>
                                 <ol>
                                     <li className={styles.Requirement}>
-                                        Märgi <a href="https://www.facebook.com/tripeeee/posts/6905903886146636" target="_blank" rel={"noreferrer noopener"}>kampaaniapakkumise</a> kommentaaridesse airBalticu otselennu sihtkoht Tallinnast kuhu lennata soovid.
+                                        Märgi <a href="https://www.facebook.com/tripeeee/posts/pfbid0a1yHSynyswwzU1h6Hf8wvJkYdUieUuJG9TucZbBg7vKVi8YQLGjXgbKevh7fwhcgl" target="_blank" rel={"noreferrer noopener"}>kampaaniapakkumise</a> kommentaaridesse airBalticu otselennu sihtkoht Tallinnast kuhu lennata soovid.
                                     </li>
                                     {/*<li>
                                         <span className="AirBaltic__listCounter">1.</span>
@@ -123,7 +123,7 @@ const AirbalticCampaignPage = () => {
                     </div>
 
                     <div className={styles.ActionBtn}>
-                        <Link href="https://www.facebook.com/tripeeee/posts/6905903886146636" passHref>
+                        <Link href="https://www.facebook.com/tripeeee/posts/pfbid0a1yHSynyswwzU1h6Hf8wvJkYdUieUuJG9TucZbBg7vKVi8YQLGjXgbKevh7fwhcgl" passHref>
                             <a target={"_blank"} rel={"noreferrer noopener"} className={styles.Button} >
                                 <span>Osalemiseks klikka siia</span>
                             </a>
