@@ -193,7 +193,7 @@ const DestinationPage = ({ destination }: Props) => {
                         <BlockTitle title={'Tripikad räägivad'} className={styles.ForumBlockTitle} />
                         <ForumList items={destination.forumPosts || []} withAds={destination.forumPosts && destination.forumPosts?.length > 3} onlyMiddleAd={destination.forumPosts && destination.forumPosts?.length <= 8}/>
                         <div className={styles.MoreForumLink}>
-                            <MoreLink route={'/foorum/uldfoorum'} title={'Kõik positused'} />
+                            <MoreLink route={'/foorum/uldfoorum?destination=' + destination.id} title={'Kõik positused'} />
                         </div>
                     </div>
                     <div className={styles.Sidebar}>
