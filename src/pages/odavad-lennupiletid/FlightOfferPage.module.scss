@@ -51,9 +51,9 @@
         }
 
         .ListTopAd {
+            max-width: 660px;
             width: 100%;
-            display: flex;
-            justify-content: center;
+            overflow: hidden;
 
             iframe {
                 margin-bottom: 24px;
