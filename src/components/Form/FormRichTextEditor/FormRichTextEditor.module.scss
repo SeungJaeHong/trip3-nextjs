@@ -74,6 +74,10 @@
             margin-bottom: $spacer;
         }
 
+        img {
+            width: 100%;
+        }
+
         @include sm() {
             padding: $spacer * 2;
             height: 260px;
