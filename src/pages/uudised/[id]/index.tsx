@@ -126,7 +126,7 @@ const NewsShow = ({ newsObj }: Props) => {
                                 Muuda
                             </div>
                             <div
-                                className={clsx(styles.ActionButton, styles.Hide)}
+                                className={styles.ActionButton}
                                 onClick={() => publish(!Boolean(news.status))}
                             >
                                 {news.status === 0 ? 'Avalikusta' : 'Peida'}
