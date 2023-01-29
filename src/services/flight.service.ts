@@ -66,3 +66,10 @@ export const publishFlight = async (flightId: number, status = true) => {
         status: status,
     })
 }
+
+export const makeFlightSticky = async (flightId: number, status = true) => {
+    return await ApiClient.post('/flight/' + flightId + '/sticky', {
+        sticky: status,
+    })
+}
+

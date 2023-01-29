@@ -60,4 +60,28 @@
             }
         }
     }
+
+    &.Sticky {
+        .Icon {
+            svg {
+                fill: $green-darker;
+            }
+        }
+
+        .Content {
+            .Title {
+                color: $green-darker;
+
+                &:hover {
+                    color: $green-hover;
+                }
+            }
+
+            .Meta {
+                .CreatedDate {
+                    display: none;
+                }
+            }
+        }
+    }
 }

@@ -1,0 +1,14 @@
+@import "../../../styles/variables";
+
+.Container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: 1px solid rgba(209, 212, 214, 0.5);
+    margin-bottom: $spacer * 4;
+
+    .FlightOfferRow {
+        width: 100%;
+        margin-bottom: $spacer * 2.5;
+    }
+}

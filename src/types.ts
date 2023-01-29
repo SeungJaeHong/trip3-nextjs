@@ -142,6 +142,7 @@ export type FlightContent = {
     socialImgUrl: string
     destinations?: Destination[]
     tags?: Tag[]
+    sticky: boolean
 }
 
 export type NewsContent = {
@@ -270,6 +271,7 @@ export type FlightOfferRowType = {
     createdAtRaw: string
     destinations?: Destination[]
     tags?: Tag[]
+    sticky: boolean
 }
 
 export type FlightOfferCardType = {

@@ -13,11 +13,11 @@ import Alert from '../../../components/Alert'
 import { useUser } from '../../../hooks'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
-import { publishFlight } from '../../../services/flight.service'
+import {makeFlightSticky, publishFlight} from '../../../services/flight.service'
 import FlightOffersLatest from '../../../components/FlightOffer/FlightOffersLatest'
 import RelatedContentBlock from '../../../components/RelatedContentBlock'
 import { NextSeo } from 'next-seo'
-import dynamic from "next/dynamic";
+import dynamic from "next/dynamic"
 
 const Ads = dynamic(() => import('../../../components/Ads'), { ssr: false })
 
@@ -40,6 +40,15 @@ const FlightOfferShow = ({ flightObj }: Props) => {
             .then((res) => {
                 setFlight({ ...flight, status: status ? 1 : 0 })
                 toast.success(status ? 'Pakkumine avalikustatud' : 'Pakkumine peidetud')
+            })
+            .catch((e) => {})
+    }
+
+    const makeSticky = (status: boolean) => {
+        makeFlightSticky(flight.id, status)
+            .then((res) => {
+                setFlight({ ...flight, sticky: status })
+                toast.success(status ? 'Sticky lisatud' : 'Sticky eemaldatud')
             })
             .catch((e) => {})
     }
@@ -101,10 +110,16 @@ const FlightOfferShow = ({ flightObj }: Props) => {
                                 Muuda
                             </div>
                             <div
-                                className={clsx(styles.ActionButton, styles.Hide)}
+                                className={styles.ActionButton}
                                 onClick={() => publish(!Boolean(flight.status))}
                             >
                                 {flight.status === 0 ? 'Avalikusta' : 'Peida'}
+                            </div>
+                            <div
+                                className={styles.ActionButton}
+                                onClick={() => makeSticky(!Boolean(flight.sticky))}
+                            >
+                                {!flight.sticky ? 'Lisa sticky' : 'Eemalda sticky'}
                             </div>
                         </div>
                     )}

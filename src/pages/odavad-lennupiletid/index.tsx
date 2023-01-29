@@ -18,11 +18,13 @@ import { useUser } from '../../hooks'
 import { NextSeo } from 'next-seo'
 import FormSelect from '../../components/Form/FormSelect'
 import dynamic from "next/dynamic"
+import FlightOfferStickies from "../../components/FlightOffer/FlightOfferStickies";
 
 const Ads = dynamic(() => import('../../components/Ads'), { ssr: false })
 
 type Props = {
     flightOffers: FlightOfferRowType[]
+    stickies: FlightOfferRowType[]
     filterTags: { id: number; name: string }[]
     currentPage: number
     filter: []
@@ -33,6 +35,7 @@ type Props = {
 
 const FlightsIndex = ({
     flightOffers,
+    stickies,
     filterTags,
     currentPage,
     filter,
@@ -116,7 +119,12 @@ const FlightsIndex = ({
             return <div className={styles.NoResults}>Tulemusi ei leitud</div>
         }
 
-        return <FlightOfferList items={flightOffers} withAds={flightOffers.length > 0} />
+        return (
+            <>
+                {stickies.length > 0 && <FlightOfferStickies items={stickies} />}
+                <FlightOfferList items={flightOffers} withAds={flightOffers.length > 0} />
+            </>
+        )
     }
 
     return (
@@ -160,7 +168,6 @@ const FlightsIndex = ({
                                 )
 
                             }
-                            {/*<Ads type={'flight-offer-list-top'} />*/}
                             {renderResults()}
                             <div className={styles.Paginator}>
                                 <SimplePaginator
@@ -240,6 +247,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
         props: {
             flightOffers: res.data.flightOffers?.items,
+            stickies: res.data.stickies,
             filterTags: res.data.filterTags,
             currentPage: page && typeof page === 'string' ? parseInt(page) : 1,
             hasMore: res.data.flightOffers?.hasMore,

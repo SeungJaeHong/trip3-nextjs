@@ -4,10 +4,13 @@ import styles from './FlightOfferRow.module.scss'
 import TicketsIcon from "../../../icons/TicketsIcon"
 import {Destination, FlightOfferRowType, Tag as TagType} from "../../../types"
 import Tag from "../../Tag"
+import clsx from "clsx";
 
 const FlightOfferRow = (item: FlightOfferRowType) => {
     return (
-        <div className={styles.FlightOfferRow}>
+        <div className={clsx(styles.FlightOfferRow, {
+            [styles.Sticky]: item.sticky
+        })}>
             <div className={styles.Icon}>
                 <TicketsIcon />
             </div>

@@ -140,7 +140,7 @@
         line-height: 2.75rem;
         color: $white;
         font-weight: 600;
-        padding-top: $spacer * 8;
+        padding-top: $spacer * 6;
         padding-bottom: $spacer * 2.5;
         max-width: 720px;
 
@@ -151,7 +151,7 @@
 
         @include sm() {
             font-size: $font-size-medium;
-            padding-top: 0;
+            padding-top: $spacer;
             line-height: 2.2rem;
         }
     }
