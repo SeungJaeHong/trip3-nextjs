@@ -25,9 +25,10 @@ type Props = {
     error: string
     disabled: boolean
     className?: string
+    required: boolean
 }
 
-const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, className }: Props) => {
+const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, className, required }: Props) => {
     const [editorValue, setEditorValue] = React.useState<string>(value)
     const [editor, setEditor] = React.useState<Editor | undefined>(undefined)
     const editorRef = useRef(null)
@@ -173,7 +174,7 @@ const FormCodeMirrorEditor = ({ id, name, value, label, type, error, onChange, c
                     [stylesInput.Invalid]: error.length > 0,
                 })}
             >
-                {label !== undefined && <label htmlFor={id ?? name}>{label}</label>}
+                {label !== undefined && <label htmlFor={id ?? name}>{label}{required ? <span>*</span> : null}</label>}
 
                 <textarea
                     value={value}
@@ -222,7 +223,8 @@ FormCodeMirrorEditor.defaultProps = {
     label: undefined,
     spellCheck: false,
     error: '',
-    type: 'flight'
+    type: 'flight',
+    required: false
 }
 
 export default FormCodeMirrorEditor

@@ -8,6 +8,7 @@ import PostIcon from "../../../icons/Admin/PostIcon"
 import HomeIcon from "../../../icons/Admin/HomeIcon"
 import HiddenContentIcon from "../../../icons/Admin/HiddenContentIcon"
 import {useRouter} from "next/router"
+import ContentMarketingIcon from "../../../icons/Admin/ContentMarketingIcon";
 
 const SidebarMenu = () => {
     const router = useRouter()
@@ -16,6 +17,13 @@ const SidebarMenu = () => {
             || router.route === '/admin/forum/add'
             || router.route === '/admin/forum/[id]'
             || router.route === '/admin/forum/[id]/edit'
+    }
+
+    const isContentMarketingPage = () => {
+        return router.route === '/admin/content-marketing'
+            || router.route === '/admin/content-marketing/add'
+            || router.route === '/admin/content-marketing/[id]'
+            || router.route === '/admin/content-marketing/[id]/edit'
     }
 
     return (
@@ -70,6 +78,16 @@ const SidebarMenu = () => {
                         <a>
                             <HiddenContentIcon />
                             <span className={styles.Title}>Peidetud sisu</span>
+                        </a>
+                    </Link>
+                </div>
+                <div className={clsx(styles.MenuItem, {
+                    [styles.Active]: isContentMarketingPage()
+                })}>
+                    <Link href="/admin/content-marketing">
+                        <a>
+                            <ContentMarketingIcon />
+                            <span className={styles.Title}>Sisuturundus</span>
                         </a>
                     </Link>
                 </div>

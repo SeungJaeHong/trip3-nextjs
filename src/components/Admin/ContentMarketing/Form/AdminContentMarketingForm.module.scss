@@ -1,0 +1,34 @@
+@import "../../../../styles/variables";
+
+.Container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: $white;
+    max-width: 1000px;
+
+    .FormContainer {
+        display: flex;
+        padding: $spacer $spacer * 5 $spacer * 5 $spacer * 5;
+
+        form {
+            width: 100%;
+
+            .FormInput {
+                margin-bottom: $spacer * 3;
+            }
+        }
+
+        .Buttons {
+            display: flex;
+            width: 100%;
+            gap: $spacer * 2;
+            margin-top: $spacer * 5;
+
+            .Button {
+                max-width: 200px;
+                width: 100%;
+            }
+        }
+    }
+}

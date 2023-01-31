@@ -13,6 +13,7 @@ type Props = {
     disabled: boolean
     mimeTypes: Array<string>
     maxSize: number
+    required: boolean
 }
 
 const FormImageUpload = (props: Props) => {
@@ -70,7 +71,7 @@ const FormImageUpload = (props: Props) => {
 
     return (
         <div className={styles.FormImageUpload}>
-            {props.label && <label>{props.label}</label>}
+            {props.label && <label>{props.label}{props.required ? <span>*</span> : null}</label>}
             <div className={styles.DropzoneContainer}>
                 <div className={styles.DropzoneContent}>
                     {renderPreviewImages()}
@@ -96,7 +97,8 @@ FormImageUpload.defaultProps = {
     disabled: false,
     mimeTypes: ['image/jpeg', 'image/png'],
     maxSize: 5,
-    files: []
+    files: [],
+    required: false
 }
 
 export default FormImageUpload

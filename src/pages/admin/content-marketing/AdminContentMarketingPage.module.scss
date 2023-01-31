@@ -1,0 +1,26 @@
+@import "../../../styles/variables";
+
+.Container {
+    width: 100%;
+
+    .TitleContainer {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: $spacer * 3;
+
+        h1 {
+            color: $gray-dark;
+
+            @include sm() {
+                font-size: $font-size-large;
+            }
+        }
+
+        .AddBtn {
+            max-width: 120px;
+            padding: $spacer;
+        }
+    }
+}

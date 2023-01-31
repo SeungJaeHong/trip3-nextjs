@@ -37,3 +37,24 @@ export const getHiddenNews = async (page?: number): Promise<AxiosResponse> => {
 export const getHiddenTravelmates = async (page?: number): Promise<AxiosResponse> => {
     return await ApiClient.get('/admin/hidden/travelmates?page=' + page)
 }
+
+export const addContentMarketingPost = async (formValues: any): Promise<AxiosResponse> => {
+    const formData = new FormData()
+    Object.keys(formValues).forEach((key) => {
+        if (formValues[key]) {
+            if (Array.isArray(formValues[key])) {
+                formValues[key].forEach(function (item: any) {
+                    formData.append(key + '[]', item.toString())
+                })
+            } else {
+                formData.append(key, formValues[key])
+            }
+        }
+    })
+
+    return await ApiClient.post('/admin/content-marketing/create', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
+}

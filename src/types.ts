@@ -292,3 +292,17 @@ export type TravelmateRowType = {
     destinations?: Destination[]
     topics?: Topic[]
 }
+
+export interface ContentMarketingItem {
+    id: number
+    title: string
+    slug: string
+    clientName: string
+    body: string
+    bodyRaw: string
+    backgroundImageUrl: string
+    smallImageUrl: string
+    logoUrl: string
+    createdAt: string
+    //destinations?: Destination[]
+}
