@@ -6,12 +6,12 @@ type Props = {
     id: string
     label?: string
     placeholder?: string
-    files?: Array<string>
+    files?: string[]
     onChange: (value: any) => void
     maxFiles: number
     error: string
     disabled: boolean
-    mimeTypes: Array<string>
+    accept: string[]
     maxSize: number
     required: boolean
 }
@@ -40,7 +40,7 @@ const FormImageUpload = (props: Props) => {
     const {getRootProps, getInputProps} = useDropzone({
         onDrop,
         maxFiles: props.maxFiles,
-        accept: props.mimeTypes.toString(),
+        accept: props.accept.toString(),
         maxSize: props.maxSize * 1024 * 1024, //mb to bytes
         disabled: props.disabled
     })
@@ -95,7 +95,7 @@ FormImageUpload.defaultProps = {
     placeholder: 'Lohista pilt siia või kliki',
     error: '',
     disabled: false,
-    mimeTypes: ['image/jpeg', 'image/png'],
+    accept: ['image/jpeg', 'image/png'],
     maxSize: 5,
     files: [],
     required: false

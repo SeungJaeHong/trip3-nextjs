@@ -12,6 +12,7 @@ import Button from '../../../Button'
 import { addContentMarketingPost } from '../../../../services/admin.service'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
+import {setFormErrors} from "../../../../helpers";
 
 type Inputs = {
     title: string
@@ -52,6 +53,7 @@ const AdminContentMarketingForm = ({ item }: Props) => {
         control,
         handleSubmit,
         formState: { errors, isSubmitting },
+        setError
     } = useForm<Inputs>({
         resolver: yupResolver(newsSchema),
         defaultValues: {
@@ -69,18 +71,20 @@ const AdminContentMarketingForm = ({ item }: Props) => {
             logo: values.logo ? values.logo[0] : undefined,
         }
 
-        console.log(formData)
-
         await addContentMarketingPost(formData)
             .then((res) => {
-                console.log(res, 'RES')
-
                 router.push('/admin/content-marketing')
                 toast.success('Uus postitus loodud!')
             })
             .catch((err) => {
                 console.log(err.response)
-                toast.error('Postituse lisamine ebaõnnestus!')
+
+                if (err.response?.data) {
+                    if (err.response?.data?.errors) {
+                        setFormErrors(err.response.data.errors, setError)
+                        toast.error('Postituse lisamine ebaõnnestus!')
+                    }
+                } else toast.error('Postituse lisamine ebaõnnestus!')
             })
     }
 
@@ -148,12 +152,13 @@ const AdminContentMarketingForm = ({ item }: Props) => {
                                 return (
                                     <FormImageUpload
                                         id={'logo'}
-                                        label={'Logo'}
+                                        label={'Logo (.svg)'}
                                         required={true}
                                         files={item?.logoUrl ? [item.logoUrl] : []}
                                         onChange={field.onChange}
                                         error={fieldState.error?.message}
                                         disabled={isSubmitting}
+                                        accept={['image/svg', 'image/svg+xml']}
                                     />
                                 )
                             }}
@@ -184,7 +189,7 @@ const AdminContentMarketingForm = ({ item }: Props) => {
                         <Button
                             title={'Tagasi'}
                             cancel={true}
-                            onClick={() => console.log('asd')}
+                            onClick={() => router.push('/admin/content-marketing')}
                             className={styles.Button}
                         />
                         <div className={styles.Button}>
