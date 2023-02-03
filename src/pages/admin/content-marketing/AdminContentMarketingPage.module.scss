@@ -2,6 +2,9 @@
 
 .Container {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: $spacer * 6;
 
     .TitleContainer {
         width: 100%;
@@ -21,6 +24,18 @@
         .AddBtn {
             max-width: 120px;
             padding: $spacer;
+        }
+    }
+
+    .Content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: $spacer * 4;
+
+        .Post {
+            display: flex;
+            width: 100%;
         }
     }
 }

@@ -1,11 +1,33 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import AdminLayout from "../../../layouts/AdminLayout"
 import {withAdminAuth} from "../../../hoc/withAdminAuth"
-import ContentItem from "../../../components/Admin/ContentMarketing/Item";
+import ContentPost from "../../../components/Admin/ContentMarketing/Post";
 import styles from "./AdminContentMarketingPage.module.scss"
 import Button from "../../../components/Button";
+import {ContentMarketingPost} from "../../../types";
+import {getContentMarketingPosts} from "../../../services/admin.service";
+import {useRouter} from "next/router";
 
 const AdminContentMarketingPage = () => {
+    const router = useRouter()
+    const [posts, setPosts] = useState<ContentMarketingPost[]>([])
+    const [hasMore, setHasMore] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false)
+    const page = router.query?.page || 1
+
+    useEffect(() => {
+        try {
+            setLoading(true)
+            getContentMarketingPosts(Number(page)).then((response) => {
+                setPosts(response.data.items)
+                setHasMore(response.data.hasMore)
+                setLoading(false)
+            })
+        } catch (e: any) {
+            setLoading(false)
+        }
+    }, [page])
+
     return (
         <AdminLayout>
             <div className={styles.Container}>
@@ -13,8 +35,16 @@ const AdminContentMarketingPage = () => {
                     <h1>Sisuturundus</h1>
                     <Button title={'Lisa uus'} className={styles.AddBtn} route={'/admin/content-marketing/add'}/>
                 </div>
+                <div className={styles.Content}>
+                    {posts.map(post => {
+                        return (
+                            <div className={styles.Post} key={post.id}>
+                                <ContentPost {...post} />
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
-            {/*<ContentItem />*/}
         </AdminLayout>
     )
 }

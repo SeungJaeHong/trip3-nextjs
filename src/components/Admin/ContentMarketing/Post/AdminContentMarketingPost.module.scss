@@ -1,0 +1,120 @@
+@import "../../../../styles/variables";
+
+.Container {
+    display: flex;
+    width: 100%;
+    border: 1px solid $gray;
+    border-radius: 8px;
+    gap: $spacer * 3;
+
+    @include sm() {
+        flex-direction: column;
+        gap: $spacer * 2;
+    }
+
+    .BgImage {
+        display: flex;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+        overflow: hidden;
+        cursor: pointer;
+
+        img {
+            width: 300px;
+            height: 170px;
+        }
+
+        @include sm() {
+            border-top-right-radius: 8px;
+            border-bottom-left-radius: 0;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+
+    .BodyContainer {
+        display: flex;
+        width: 100%;
+        padding: $spacer * 2 $spacer * 2 $spacer * 2 0;
+        font-family: $font-family-sailec;
+        color: $gray-darker;
+        gap: $spacer * 6;
+
+        @include sm() {
+            padding: 0 $spacer * 2 $spacer * 2;
+            flex-direction: column;
+            gap: $spacer * 3;
+        }
+
+        .Body {
+            width: 100%;
+
+            h3 {
+                margin: 0;
+                padding: 0;
+                margin-bottom: $spacer;
+
+                @include sm() {
+                    font-size: $font-size-normal;
+                }
+            }
+
+            .Meta {
+                color: $gray-darker;
+                margin-bottom: $spacer * 2;
+            }
+
+            .Preview {
+                max-width: 800px;
+                width: 100%;
+            }
+        }
+
+        .ActionButtons {
+            display: flex;
+            gap: $spacer * 1.5;
+            align-items: flex-start;
+
+            .ActiveButton {
+                align-items: flex-start;
+
+                input {
+                    cursor: pointer;
+                }
+            }
+
+            svg {
+                width: 24px;
+                cursor: pointer;
+                fill: $gray;
+                display: flex;
+            }
+
+            @include sm() {
+                align-items: center;
+                justify-content: flex-end;
+            }
+
+            .ActionMenu {
+
+            }
+        }
+    }
+
+    &:hover {
+        .Body {
+            h3 {
+                color: $gray-dark-hover;
+            }
+        }
+    }
+
+    :global(.mantine-Menu-itemIcon) {
+        svg {
+            width: 20px;
+        }
+    }
+}

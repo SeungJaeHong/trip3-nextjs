@@ -38,6 +38,10 @@ export const getHiddenTravelmates = async (page?: number): Promise<AxiosResponse
     return await ApiClient.get('/admin/hidden/travelmates?page=' + page)
 }
 
+export const getContentMarketingPosts = async (page?: number): Promise<AxiosResponse> => {
+    return await ApiClient.get('/admin/content-marketing?page=' + page)
+}
+
 export const addContentMarketingPost = async (formValues: any): Promise<AxiosResponse> => {
     const formData = new FormData()
     Object.keys(formValues).forEach((key) => {

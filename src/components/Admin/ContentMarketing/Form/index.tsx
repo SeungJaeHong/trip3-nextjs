@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import styles from './AdminContentMarketingForm.module.scss'
-import { ContentMarketingItem } from '../../../../types'
+import {ContentMarketingFullPost} from '../../../../types'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
@@ -24,7 +24,7 @@ type Inputs = {
 }
 
 type Props = {
-    item?: ContentMarketingItem
+    item?: ContentMarketingFullPost
 }
 
 const AdminContentMarketingForm = ({ item }: Props) => {
