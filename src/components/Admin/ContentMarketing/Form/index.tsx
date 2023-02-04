@@ -9,7 +9,7 @@ import FormImageUpload from '../../../Form/FormImageUpload'
 import FormCodeMirrorEditor from '../../../Form/FormCodeMirrorEditor'
 import SubmitButton from '../../../Form/SubmitButton'
 import Button from '../../../Button'
-import { addContentMarketingPost } from '../../../../services/admin.service'
+import {addContentMarketingPost, updateContentMarketingPost} from '../../../../services/admin.service'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import {setFormErrors} from "../../../../helpers";
@@ -59,6 +59,8 @@ const AdminContentMarketingForm = ({ item }: Props) => {
         defaultValues: {
             title: item?.title,
             body: item?.bodyRaw,
+            clientName: item?.clientName,
+            url: item?.url,
         },
         criteriaMode: 'firstError',
         shouldFocusError: true,
@@ -71,21 +73,39 @@ const AdminContentMarketingForm = ({ item }: Props) => {
             logo: values.logo ? values.logo[0] : undefined,
         }
 
-        await addContentMarketingPost(formData)
-            .then((res) => {
-                router.push('/admin/content-marketing')
-                toast.success('Uus postitus loodud!')
-            })
-            .catch((err) => {
-                console.log(err.response)
+        if (item) {
+            await updateContentMarketingPost(item, formData)
+                .then((res) => {
+                    router.push('/admin/content-marketing')
+                    toast.success('Postitus muudetud!')
+                })
+                .catch((err) => {
+                    console.log(err.response)
 
-                if (err.response?.data) {
-                    if (err.response?.data?.errors) {
-                        setFormErrors(err.response.data.errors, setError)
-                        toast.error('Postituse lisamine ebaõnnestus!')
-                    }
-                } else toast.error('Postituse lisamine ebaõnnestus!')
-            })
+                    if (err.response?.data) {
+                        if (err.response?.data?.errors) {
+                            setFormErrors(err.response.data.errors, setError)
+                            toast.error('Postituse muutmine ebaõnnestus!')
+                        }
+                    } else toast.error('Postituse muutmine ebaõnnestus!')
+                })
+        } else {
+            await addContentMarketingPost(formData)
+                .then((res) => {
+                    router.push('/admin/content-marketing')
+                    toast.success('Uus postitus loodud!')
+                })
+                .catch((err) => {
+                    console.log(err.response)
+
+                    if (err.response?.data) {
+                        if (err.response?.data?.errors) {
+                            setFormErrors(err.response.data.errors, setError)
+                            toast.error('Postituse lisamine ebaõnnestus!')
+                        }
+                    } else toast.error('Postituse lisamine ebaõnnestus!')
+                })
+        }
     }
 
     return (
@@ -154,7 +174,7 @@ const AdminContentMarketingForm = ({ item }: Props) => {
                                         id={'logo'}
                                         label={'Logo (.svg)'}
                                         required={true}
-                                        files={item?.logoUrl ? [item.logoUrl] : []}
+                                        files={item?.clientLogoUrl ? [item.clientLogoUrl] : []}
                                         onChange={field.onChange}
                                         error={fieldState.error?.message}
                                         disabled={isSubmitting}
@@ -189,7 +209,7 @@ const AdminContentMarketingForm = ({ item }: Props) => {
                         <Button
                             title={'Tagasi'}
                             cancel={true}
-                            onClick={() => router.push('/admin/content-marketing')}
+                            onClick={() => router.back()}
                             className={styles.Button}
                         />
                         <div className={styles.Button}>

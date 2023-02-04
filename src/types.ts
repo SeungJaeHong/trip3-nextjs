@@ -302,7 +302,7 @@ export interface ContentMarketingPost {
     body: string
     active: boolean
     backgroundImageUrl: string
-    logoUrl: string
+    clientLogoUrl: string
     createdAt: string
 }
 

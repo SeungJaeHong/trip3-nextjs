@@ -16,12 +16,11 @@
         display: flex;
         border-top-left-radius: 8px;
         border-bottom-left-radius: 8px;
-        overflow: hidden;
         cursor: pointer;
 
         img {
-            width: 300px;
-            height: 170px;
+            width: 280px;
+            object-fit: cover;
         }
 
         @include sm() {
@@ -68,8 +67,9 @@
             }
 
             .Preview {
-                max-width: 800px;
                 width: 100%;
+                word-break: break-all;
+                color: $gray;
             }
         }
 

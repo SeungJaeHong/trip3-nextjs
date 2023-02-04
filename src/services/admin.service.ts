@@ -1,6 +1,6 @@
 import ApiClient from '../lib/ApiClient'
 import { AxiosResponse } from 'axios'
-import { ForumPostType } from '../types'
+import {ContentMarketingFullPost, ForumPostType} from '../types'
 
 export const getForumPosts = async (page?: number): Promise<AxiosResponse> => {
     return await ApiClient.get('/admin/forum?page=' + page)
@@ -42,6 +42,10 @@ export const getContentMarketingPosts = async (page?: number): Promise<AxiosResp
     return await ApiClient.get('/admin/content-marketing?page=' + page)
 }
 
+export const getContentMarketingPostById = async (id: number): Promise<AxiosResponse> => {
+    return await ApiClient.get('/admin/content-marketing/' + id)
+}
+
 export const addContentMarketingPost = async (formValues: any): Promise<AxiosResponse> => {
     const formData = new FormData()
     Object.keys(formValues).forEach((key) => {
@@ -57,6 +61,27 @@ export const addContentMarketingPost = async (formValues: any): Promise<AxiosRes
     })
 
     return await ApiClient.post('/admin/content-marketing/create', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
+}
+
+export const updateContentMarketingPost = async (post: ContentMarketingFullPost, formValues: any): Promise<AxiosResponse> => {
+    const formData = new FormData()
+    Object.keys(formValues).forEach((key) => {
+        if (formValues[key]) {
+            if (Array.isArray(formValues[key])) {
+                formValues[key].forEach(function (item: any) {
+                    formData.append(key + '[]', item.toString())
+                })
+            } else {
+                formData.append(key, formValues[key])
+            }
+        }
+    })
+
+    return await ApiClient.post('/admin/content-marketing/' + post.id + '/update', formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
         },

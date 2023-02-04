@@ -7,6 +7,7 @@ import Button from "../../../components/Button";
 import {ContentMarketingPost} from "../../../types";
 import {getContentMarketingPosts} from "../../../services/admin.service";
 import {useRouter} from "next/router";
+import {useIsMounted} from "../../../hooks";
 
 const AdminContentMarketingPage = () => {
     const router = useRouter()
@@ -14,14 +15,17 @@ const AdminContentMarketingPage = () => {
     const [hasMore, setHasMore] = useState<boolean>(false)
     const [loading, setLoading] = useState<boolean>(false)
     const page = router.query?.page || 1
+    const isMounted = useIsMounted()
 
     useEffect(() => {
         try {
             setLoading(true)
             getContentMarketingPosts(Number(page)).then((response) => {
-                setPosts(response.data.items)
-                setHasMore(response.data.hasMore)
-                setLoading(false)
+                if (isMounted()) {
+                    setPosts(response.data.items)
+                    setHasMore(response.data.hasMore)
+                    setLoading(false)
+                }
             })
         } catch (e: any) {
             setLoading(false)
