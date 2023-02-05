@@ -1,0 +1,204 @@
+@import "../../styles/variables";
+
+.HeaderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: $spacer * 4;
+
+    .HeaderTitle {
+        font-size: $font-size-xxlarge;
+        line-height: 2.75rem;
+        color: $white;
+        font-weight: 600;
+        padding-bottom: $spacer * 4;
+        max-width: 720px;
+
+        @include md() {
+            font-size: $font-size-large;
+        }
+    }
+
+    .DateAndUser {
+        display: flex;
+        margin-bottom: $spacer * 5;
+
+        a {
+            display: flex;
+            gap: $spacer * 2;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .ClientLogo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: $white;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .ClientName {
+            color: $blue;
+            display: flex;
+            font-size: $font-size-medium;
+            font-weight: bold;
+        }
+
+        &:hover {
+            .ClientName {
+                color: $blue-hover;
+            }
+        }
+    }
+
+    .ActionButtons {
+        display: flex;
+        gap: $spacer;
+        margin-bottom: $spacer * 3;
+
+        .ActionButton {
+            font-size: $font-size-xsmall;
+            font-weight: 500;
+            color: $white;
+            background: $green-dark;
+            padding: 4px $spacer * 2;
+            cursor: pointer;
+            border-radius: 3px;
+            opacity: .9;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+
+    @include sm() {
+        padding-top: $spacer * 3;
+    }
+}
+
+.BodyContainer {
+    display: flex;
+    width: 100%;
+    padding: $spacer * 5 0 $spacer * 6 0;
+    gap: $spacer * 10;
+
+    @include lg() {
+        flex-direction: column;
+        gap: $spacer * 3;
+    }
+
+    @include sm() {
+        padding: $spacer * 4 0;
+    }
+
+    .BodyWithComments {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        flex: 3;
+
+        .BodyWrapper {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            gap: $spacer * 3;
+
+            .DesktopTopAd {
+                display: flex;
+                width: 100%;
+
+                @include sm() {
+                    display: none;
+                }
+            }
+
+            .Body {
+                color: $gray-dark;
+                font-family: $font-family-sailec;
+                font-size: $font-size-medium;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                margin-bottom: $spacer * 6;
+
+                @include md() {
+                    font-size: $font-size-normal;
+                }
+
+                @include sm() {
+                    margin-bottom: $spacer * 2;
+                }
+
+                p:first-child {
+                    margin-top: 0;
+                }
+
+                a {
+                    color: $blue;
+                    word-break: break-word;
+
+                    &:hover {
+                        color: $blue-hover;
+                    }
+                }
+
+                img {
+                    width: 100%;
+                }
+
+                :global(.Youtube__iframe) {
+                    width: 100%;
+                    position: relative;
+                    padding-bottom: 56.25%;
+                    height: 0;
+
+                    iframe {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.Sidebar {
+    flex: 1;
+    flex-direction: column;
+
+    .DescriptionBlock {
+        background: $gray-light;
+        padding: $spacer * 3;
+        margin-bottom: $spacer * 3;
+        gap: $spacer * 2;
+        display: flex;
+        flex-direction: column;
+
+        .ClientSidebarLogo {
+            display: flex;
+            justify-content: center;
+            max-width: 200px;
+            width: 100%;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .Description {
+            color: $gray-dark;
+        }
+    }
+}

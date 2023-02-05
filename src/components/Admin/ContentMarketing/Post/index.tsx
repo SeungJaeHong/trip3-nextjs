@@ -1,11 +1,12 @@
 import { ContentMarketingPost as ContentMarketingPostType } from '../../../../types'
 import styles from './AdminContentMarketingPost.module.scss'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import EllipsisIcon from '../../../../icons/EllipsisIcon'
 import { Switch, Menu } from '@mantine/core'
 import TrashIcon from '../../../../icons/TrashIcon'
 import EditIcon from '../../../../icons/EditIcon'
 import { useRouter } from 'next/router'
+import Link from "next/link";
 
 const ContentMarketingPost = (post: ContentMarketingPostType) => {
     const [checked, setChecked] = useState(false)
@@ -14,11 +15,17 @@ const ContentMarketingPost = (post: ContentMarketingPostType) => {
     return (
         <div className={styles.Container}>
             <div className={styles.BgImage}>
-                <img src={post.backgroundImageUrl} alt={post.title} />
+                <Link href={'/sisuturundus/' + post.slug}>
+                    <a><img src={post.backgroundImageUrl} alt={post.title} /></a>
+                </Link>
             </div>
             <div className={styles.BodyContainer}>
                 <div className={styles.Body}>
-                    <h3>{post.title}</h3>
+                    <h3>
+                        <Link href={'/sisuturundus/' + post.slug}>
+                            <a>{post.title}</a>
+                        </Link>
+                    </h3>
                     <div className={styles.Meta}>
                         {post.createdAt} &nbsp;|&nbsp; {post.clientName}
                     </div>

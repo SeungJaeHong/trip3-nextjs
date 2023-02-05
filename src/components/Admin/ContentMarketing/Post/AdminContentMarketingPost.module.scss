@@ -18,6 +18,10 @@
         border-bottom-left-radius: 8px;
         cursor: pointer;
 
+        a {
+            display: flex;
+        }
+
         img {
             width: 280px;
             object-fit: cover;
@@ -55,6 +59,14 @@
                 margin: 0;
                 padding: 0;
                 margin-bottom: $spacer;
+
+                a {
+                    color: $gray-darker;
+
+                    &:hover {
+                        color: $gray-dark-hover;
+                    }
+                }
 
                 @include sm() {
                     font-size: $font-size-normal;
@@ -106,7 +118,7 @@
 
     &:hover {
         .Body {
-            h3 {
+            h3 > a {
                 color: $gray-dark-hover;
             }
         }
