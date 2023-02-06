@@ -10,7 +10,7 @@ import ForumList from '../components/Forum/ForumList'
 import Button from '../components/Button'
 import FlightOfferCard from '../components/FlightOffer/FlightOfferCard'
 import Footer from '../components/Footer'
-import { FlightOfferCardType, ForumRowType } from '../types'
+import {ContentMarketingPost, FlightOfferCardType, ForumRowType} from '../types'
 import NewsLatest from '../components/News/NewsLatest'
 import FlightOffersLatest from '../components/FlightOffer/FlightOffersLatest'
 import TravelmatesLatest from '../components/Travelmate/TravelmatesLatest'
@@ -26,9 +26,10 @@ const Ads = dynamic(() => import('../components/Ads'), { ssr: false })
 type Props = {
     flightOffers: FlightOfferCardType[]
     forumPosts: ForumRowType[]
+    contentMarketingPosts: ContentMarketingPost[]
 }
 
-const Home = ({ flightOffers, forumPosts }: Props) => {
+const Home = ({ flightOffers, forumPosts, contentMarketingPosts }: Props) => {
     const { userIsLoggedIn } = useUser()
     const [posts, setPosts] = useState<ForumRowType[]>(forumPosts)
     const isMounted = useIsMounted()
@@ -115,7 +116,12 @@ const Home = ({ flightOffers, forumPosts }: Props) => {
                         </div>
                         <div className={styles.ForumBlock}>
                             <div className={styles.ForumList}>
-                                <ForumList items={posts} withAds={true} onlyMiddleAd={true} />
+                                <ForumList
+                                    items={posts}
+                                    withAds={true}
+                                    onlyMiddleAd={true}
+                                    contentMarketingPost={contentMarketingPosts[1]}
+                                />
                             </div>
                             <div className={styles.MobileAd}>
                                 <Ads type={'mobile_320x200_3'} />
@@ -197,12 +203,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const data = {
         flightOffers: [],
         forumPosts: [],
+        contentMarketingPosts: []
     }
 
     try {
         const res = await ApiClientSSR(context).get('/frontpage')
         data.flightOffers = res.data.flightOffers
         data.forumPosts = res.data.forumPosts
+        data.contentMarketingPosts = res.data.contentMarketingPosts
     } catch (error: any) {
         if (error?.code === 'ECONNREFUSED' || error?.response?.status === 500) {
             return {

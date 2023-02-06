@@ -1,0 +1,83 @@
+@import "../../../styles/variables";
+
+.ForumRow {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+
+    .UserIcon {
+        margin-right: $spacer * 3;
+        position: relative;
+        height: 62px;
+        width: 62px;
+        min-width: 62px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: $white;
+        border-radius: 50%;
+        border: 3px solid $gray;
+
+        img {
+            width: 100%;
+        }
+
+        @include sm() {
+            margin-right: $spacer * 2.5;
+            height: 48px;
+            width: 48px;
+        }
+    }
+
+    .Content {
+        display: flex;
+        flex-direction: column;
+        gap: $spacer * .5;
+
+        .Title {
+            color: $gray-dark;
+            font-size: $font-size-medium;
+            font-weight: 500;
+
+            @include xs() {
+                font-size: $font-size-normal;
+            }
+
+            &:hover {
+                color: $gray-dark-hover;
+            }
+        }
+
+        .Meta {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            flex-wrap: wrap;
+
+            .MetaItem {
+                margin-right: $spacer * 2;
+                font-size: $font-size-small;
+                color: $gray-darker;
+                margin-bottom: $spacer * 0.5;
+
+                &.ReadCount {
+                    color: $orange;
+                }
+
+                &.Creator {
+                    a {
+                        color: $blue-light;
+
+                        &:hover {
+                            color: $blue;
+                        }
+                    }
+                }
+
+                &.Tag {
+                    margin-right: $spacer;
+                }
+            }
+        }
+    }
+}
