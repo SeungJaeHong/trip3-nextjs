@@ -6,17 +6,29 @@ import { Switch, Menu } from '@mantine/core'
 import TrashIcon from '../../../../icons/TrashIcon'
 import EditIcon from '../../../../icons/EditIcon'
 import { useRouter } from 'next/router'
-import Link from "next/link";
+import Link from 'next/link'
 
-const ContentMarketingPost = (post: ContentMarketingPostType) => {
+type Props = {
+    post: ContentMarketingPostType
+    onActiveChange: (post: ContentMarketingPostType, checked: boolean) => void
+}
+
+const ContentMarketingPost = ({ post, onActiveChange }: Props) => {
     const [checked, setChecked] = useState(false)
     const router = useRouter()
+
+    const onChange = (checked: boolean) => {
+        onActiveChange(post, checked)
+        setChecked(checked)
+    }
 
     return (
         <div className={styles.Container}>
             <div className={styles.BgImage}>
                 <Link href={'/sisuturundus/' + post.slug}>
-                    <a><img src={post.backgroundImageUrl} alt={post.title} /></a>
+                    <a>
+                        <img src={post.backgroundImageUrl} alt={post.title} />
+                    </a>
                 </Link>
             </div>
             <div className={styles.BodyContainer}>
@@ -36,7 +48,7 @@ const ContentMarketingPost = (post: ContentMarketingPostType) => {
                         className={styles.ActiveButton}
                         size={'lg'}
                         checked={checked}
-                        onChange={(event) => setChecked(event.currentTarget.checked)}
+                        onChange={(event) => onChange(event.currentTarget.checked)}
                     />
                     <Menu
                         shadow="sm"
@@ -54,7 +66,9 @@ const ContentMarketingPost = (post: ContentMarketingPostType) => {
                         >
                             Muuda
                         </Menu.Item>
-                        <Menu.Item icon={<TrashIcon width={20} height={20} />} disabled={true}>Kustuta</Menu.Item>
+                        <Menu.Item icon={<TrashIcon width={20} height={20} />} disabled={true}>
+                            Kustuta
+                        </Menu.Item>
                     </Menu>
                 </div>
             </div>
