@@ -44,7 +44,7 @@ const ContentMarketingPage = ({ content }: Props) => {
                 <div className={clsx(containerStyle.CenteredContainer, styles.HeaderContainer)}>
                     <div className={styles.HeaderTitle}>{post.title}</div>
                     <div className={styles.DateAndUser}>
-                        <a href={post.url} target={'_blank'}>
+                        <a href={post.url} target={'_blank'} rel={'noreferrer'}>
                             <div className={styles.ClientLogo}>
                                 <img src={post.clientLogoUrl} alt={post.clientName} />
                             </div>
@@ -63,7 +63,7 @@ const ContentMarketingPage = ({ content }: Props) => {
                     <div className={styles.Sidebar}>
                         <div className={styles.DescriptionBlock}>
                             <div className={styles.ClientSidebarLogo}>
-                                <a href={post.url} target={'_blank'}>
+                                <a href={post.url} target={'_blank'} rel={'noreferrer'}>
                                     <img src={post.clientLogoUrl} alt={post.clientName} />
                                 </a>
                             </div>
