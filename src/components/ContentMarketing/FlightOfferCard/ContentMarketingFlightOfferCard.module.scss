@@ -1,0 +1,110 @@
+@import "../../../styles/variables";
+
+.FlightOfferCard {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .DestinationContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: $spacer * 1.2 $spacer * 4;
+        height: 70px;
+
+        @include md() {
+            padding: $spacer $spacer * 2;
+            height: 65px;
+        }
+
+        @include xs() {
+            padding: 6px $spacer * 3;
+            height: 60px;
+        }
+
+        .Destination {
+            a {
+                color: $white;
+                font-size: 1.4rem;
+                line-height: 1.8rem;
+                font-weight: 600;
+
+                @include md() {
+                    font-size: 1.2rem;
+                    line-height: 1.6rem;
+                }
+
+                @include xs() {
+                    font-size: 1.1rem;
+                    line-height: 1.5rem;
+                }
+
+                &:hover {
+                    color: $gray-light;
+                }
+            }
+        }
+
+        .ParentDestination {
+            a {
+                color: $white;
+                line-height: 1.2rem;
+                font-weight: 500;
+                opacity: .8;
+
+                &:hover {
+                    color: $gray-light;
+                }
+            }
+        }
+    }
+
+    .Content {
+        display: flex;
+        position: relative;
+        text-align: center;
+
+        .Background {
+            background-repeat: no-repeat;
+            background-size: cover;
+            max-width: 100%;
+            width: 100%;
+            text-align: center;
+            padding-bottom: 55%;
+            overflow: hidden;
+
+            @include xs() {
+                padding-bottom: 50%;
+            }
+        }
+
+        .Title {
+            position: absolute;
+            color: $white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-shadow: 0 1px 0 rgb(0 0 0 / 30%);
+            padding: $spacer * 3 $spacer * 4;
+            height: 100%;
+            width: 100%;
+
+            @include lg() {
+                padding: $spacer * 2;
+                line-height: 1.6rem;
+            }
+
+            @include md() {
+                font-size: $font-size-normal;
+            }
+        }
+
+        &:hover {
+            .Title {
+                color: $gray;
+            }
+        }
+    }
+}

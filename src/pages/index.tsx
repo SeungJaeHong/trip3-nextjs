@@ -20,6 +20,7 @@ import FrontPageImageGallery from '../components/FrontPageImageGallery'
 import React, { useEffect, useState } from 'react'
 import { getLatestPosts } from '../services/forum.service'
 import dynamic from "next/dynamic";
+import ContentMarketingFlightOfferCard from "../components/ContentMarketing/FlightOfferCard";
 
 const Ads = dynamic(() => import('../components/Ads'), { ssr: false })
 
@@ -41,6 +42,12 @@ const Home = ({ flightOffers, forumPosts, contentMarketingPosts }: Props) => {
             }
         })
     }, [])
+
+    const renderContentMarketingFlightCard = () => {
+        if (contentMarketingPosts[0]) {
+            return <ContentMarketingFlightOfferCard {...contentMarketingPosts[0]} />
+        } else return <FlightOfferCard {...flightOffers[2]} color={'red'} />
+    }
 
     return (
         <>
@@ -75,7 +82,7 @@ const Home = ({ flightOffers, forumPosts, contentMarketingPosts }: Props) => {
                                 <FlightOfferCard {...flightOffers[1]} color={'yellow'} />
                             </div>
                             <div className={styles.FlightOfferCard}>
-                                <FlightOfferCard {...flightOffers[2]} color={'red'} />
+                                {renderContentMarketingFlightCard()}
                             </div>
                         </div>
                     </div>
