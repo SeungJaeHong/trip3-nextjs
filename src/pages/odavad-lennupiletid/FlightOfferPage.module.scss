@@ -28,8 +28,8 @@
 .Content {
     display: flex;
     width: 100%;
-    margin: $spacer * 6 0;
-    gap: $spacer * 9;
+    margin: $spacer * 6 0 $spacer * 7;
+    gap: $spacer * 10;
 
     @include md() {
         flex-direction: column;
@@ -44,7 +44,7 @@
     .FlightOfferList {
         display: flex;
         flex-direction: column;
-        flex: 2.4;
+        flex: 2.5;
 
         .Paginator {
             margin-top: $spacer * 5;
@@ -116,9 +116,9 @@
 .Ads {
     display: flex;
     width: 100%;
-    max-width: 275px;
+    max-width: 320px;
     flex-direction: column;
-    gap: $spacer * 2;
+    gap: $spacer * 3;
     overflow: hidden;
 
     @include sm() {

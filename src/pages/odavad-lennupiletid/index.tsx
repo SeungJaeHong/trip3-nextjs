@@ -146,64 +146,62 @@ const FlightsIndex = ({
                 </div>
             </Header>
             <div className={containerStyle.ContainerXl}>
-                <div className={containerStyle.CenteredContainer}>
-                    <div className={styles.Content}>
-                        <div className={styles.FlightOfferList}>
-                            <div className={styles.DestinationSelect}>
-                                <FormSelect
-                                    id={'destination'}
-                                    options={destinationOptions}
-                                    placeholder={'Vali sihtkoht'}
-                                    value={selectedDestination}
-                                    onChange={onSelectDestination}
-                                    key={selectedDestination?.toString()}
-                                />
-                            </div>
-                            {flightOffers.length > 0 &&
-                                (
-                                    <>
-                                        <Ads type={'flightoffers_list_top'} className={styles.ListTopAd} />
-                                        <Ads type={'mobile_320x200'} className={styles.ListTopAd} />
-                                    </>
-                                )
-
-                            }
-                            {renderResults()}
-                            <div className={styles.Paginator}>
-                                <SimplePaginator
-                                    nextPageUrl={getNextPageUrl()}
-                                    previousPageUrl={getPreviousPageUrl()}
-                                />
-                            </div>
-                            <Ads type={'mobile_320x200_3'} className={styles.ListTopAd} />
+                <div className={styles.Content}>
+                    <div className={styles.FlightOfferList}>
+                        <div className={styles.DestinationSelect}>
+                            <FormSelect
+                                id={'destination'}
+                                options={destinationOptions}
+                                placeholder={'Vali sihtkoht'}
+                                value={selectedDestination}
+                                onChange={onSelectDestination}
+                                key={selectedDestination?.toString()}
+                            />
                         </div>
-                        <div className={styles.Sidebar}>
-                            <div className={styles.DescriptionBlock}>
-                                <div className={styles.DescriptionFirstPart}>
-                                    Hoiame headel pakkumistel igapäevaselt silma peal ja jagame neid kõigi huvilistega.
-                                </div>
-                                <div className={styles.DescriptionSecondPart}>
-                                    Vaata soodsaid lennupakkumisi ning alusta oma reisi planeerimist siit.
-                                </div>
-                                <div className={styles.MoreLink}>
-                                    <MoreLink route={'/tripist'} title={'Loe lähemalt Trip.ee-st'} medium={true} />
-                                </div>
-                                <div className={styles.MoreLink}>
-                                    <MoreLink route={'/mis-on-veahind'} title={'Mis on veahind'} medium={true} />
-                                </div>
+                        {flightOffers.length > 0 &&
+                            (
+                                <>
+                                    <Ads type={'flightoffers_list_top'} className={styles.ListTopAd} />
+                                    <Ads type={'mobile_320x200'} className={styles.ListTopAd} />
+                                </>
+                            )
+
+                        }
+                        {renderResults()}
+                        <div className={styles.Paginator}>
+                            <SimplePaginator
+                                nextPageUrl={getNextPageUrl()}
+                                previousPageUrl={getPreviousPageUrl()}
+                            />
+                        </div>
+                        <Ads type={'mobile_320x200_3'} className={styles.ListTopAd} />
+                    </div>
+                    <div className={styles.Sidebar}>
+                        <div className={styles.DescriptionBlock}>
+                            <div className={styles.DescriptionFirstPart}>
+                                Hoiame headel pakkumistel igapäevaselt silma peal ja jagame neid kõigi huvilistega.
                             </div>
-                            {userIsAdmin && (
-                                <div className={styles.AddNewButton}>
-                                    <Button
-                                        title={'Lisa uus pakkumine'}
-                                        onClick={() => router.push('/odavad-lennupiletid/lisa-uus')}
-                                    />
-                                </div>
-                            )}
-                            <div className={styles.Ads}>
-                                <Ads type={'desktop_sidebar_small'} />
-                                <Ads type={'desktop_sidebar_large'} />
+                            <div className={styles.DescriptionSecondPart}>
+                                Vaata soodsaid lennupakkumisi ning alusta oma reisi planeerimist siit.
                             </div>
+                            <div className={styles.MoreLink}>
+                                <MoreLink route={'/tripist'} title={'Loe lähemalt Trip.ee-st'} medium={true} />
+                            </div>
+                            <div className={styles.MoreLink}>
+                                <MoreLink route={'/mis-on-veahind'} title={'Mis on veahind'} medium={true} />
+                            </div>
+                        </div>
+                        {userIsAdmin && (
+                            <div className={styles.AddNewButton}>
+                                <Button
+                                    title={'Lisa uus pakkumine'}
+                                    onClick={() => router.push('/odavad-lennupiletid/lisa-uus')}
+                                />
+                            </div>
+                        )}
+                        <div className={styles.Ads}>
+                            <Ads type={'desktop_sidebar_small'} />
+                            <Ads type={'desktop_sidebar_large'} />
                         </div>
                     </div>
                 </div>
