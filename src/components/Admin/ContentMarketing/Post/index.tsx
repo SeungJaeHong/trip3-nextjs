@@ -14,7 +14,7 @@ type Props = {
 }
 
 const ContentMarketingPost = ({ post, onActiveChange }: Props) => {
-    const [checked, setChecked] = useState(false)
+    const [checked, setChecked] = useState(post.active)
     const router = useRouter()
 
     const onChange = (checked: boolean) => {
