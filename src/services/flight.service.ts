@@ -1,6 +1,7 @@
 import ApiClient from '../lib/ApiClient'
 import { FlightContent } from '../types'
 import { objectToQueryString } from '../helpers'
+import {AxiosResponse} from "axios";
 
 export const getLatestFlights = async (take = 3, excludeId?: number, destinationId?: number) => {
     const urlParams = {
@@ -71,5 +72,9 @@ export const makeFlightSticky = async (flightId: number, status = true) => {
     return await ApiClient.post('/flight/' + flightId + '/sticky', {
         sticky: status,
     })
+}
+
+export const getContentMarketingPosts = async (): Promise<AxiosResponse> => {
+    return await ApiClient.get('/content-marketing')
 }
 

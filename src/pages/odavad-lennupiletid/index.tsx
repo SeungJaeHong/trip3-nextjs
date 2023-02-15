@@ -5,7 +5,7 @@ import Footer from '../../components/Footer'
 import containerStyle from '../../styles/containers.module.scss'
 import styles from './FlightOfferPage.module.scss'
 import FlightOfferFilterTags from '../../components/FlightOffer/FlightOfferFilterTags'
-import { FlightOfferRowType } from '../../types'
+import {ContentMarketingPost, FlightOfferRowType} from '../../types'
 import FlightOfferList from '../../components/FlightOffer/FlightOfferList'
 import MoreLink from '../../components/MoreLink'
 import SimplePaginator from '../../components/Paginator/SimplePaginator'
@@ -14,11 +14,13 @@ import { useRouter } from 'next/router'
 import Button from '../../components/Button'
 import ApiClientSSR from '../../lib/ApiClientSSR'
 import RelatedContentBlock from '../../components/RelatedContentBlock'
-import { useUser } from '../../hooks'
+import {useIsMounted, useUser} from '../../hooks'
 import { NextSeo } from 'next-seo'
 import FormSelect from '../../components/Form/FormSelect'
 import dynamic from "next/dynamic"
 import FlightOfferStickies from "../../components/FlightOffer/FlightOfferStickies";
+import ContentMarketingSlider from "../../components/ContentMarketing/Slider/ContentMarketingSlider";
+import {getContentMarketingPosts} from "../../services/flight.service";
 
 const Ads = dynamic(() => import('../../components/Ads'), { ssr: false })
 
@@ -44,13 +46,22 @@ const FlightsIndex = ({
     destinationOptions,
 }: Props) => {
     const [filters, setFilters] = useState<Array<number>>(filter)
+    const [contentMarketingPosts, setContentMarketingPosts] = useState<ContentMarketingPost[]>([])
     const [selectedDestination, setSelectedDestination] = useState<string | undefined>(destination)
     const router = useRouter()
     const { userIsLoggedIn, user } = useUser()
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
+    const isMounted = useIsMounted()
 
     useEffect(() => {
         setSelectedDestination(destination)
+        getContentMarketingPosts().then(res => {
+            if (isMounted()) {
+                setContentMarketingPosts(res.data)
+            }
+        }).catch(e => {
+
+        })
     }, [destination])
 
     const getNextPageUrl = () => {
@@ -201,6 +212,7 @@ const FlightsIndex = ({
                         )}
                         <div className={styles.Ads}>
                             <Ads type={'desktop_sidebar_small'} />
+                            {contentMarketingPosts.length > 0 && <div className={styles.ContentMarketingSlider}><ContentMarketingSlider posts={contentMarketingPosts} /></div>}
                             <Ads type={'desktop_sidebar_large'} />
                         </div>
                     </div>

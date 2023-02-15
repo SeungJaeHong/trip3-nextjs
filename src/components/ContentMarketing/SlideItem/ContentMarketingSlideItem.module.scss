@@ -1,0 +1,56 @@
+@import "../../../styles/variables";
+
+.Container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: $spacer;
+
+    .Image {
+        display: flex;
+        width: 100%;
+
+        img {
+            width: 100%;
+            max-height: 180px;
+            height: 100%;
+        }
+    }
+
+    .Content {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        padding: 8px 16px 16px;
+        gap: $spacer * 1.5;
+
+        .Client {
+            display: flex;
+            width: 100%;
+            gap: $spacer;
+            justify-content: space-between;
+
+            img {
+                width: 50px;
+                display: flex;
+            }
+        }
+
+        .Title {
+            color: $blue;
+            font-size: $font-size-normal;
+            font-weight: 600;
+            display: block;
+            margin-bottom: $spacer * 0.5;
+            cursor: pointer;
+
+            @include sm() {
+                font-size: $font-size-normal;
+            }
+
+            &:hover {
+                color: $blue-hover;
+            }
+        }
+    }
+}

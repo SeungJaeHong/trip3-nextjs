@@ -74,7 +74,8 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    //width: 100%;
+    width: 320px;
 
     @include lg() {
         padding-left: 0;
@@ -115,16 +116,23 @@
 
 .Ads {
     display: flex;
-    width: 100%;
+    //width: 100%;
+    width: 320px;
     max-width: 320px;
     flex-direction: column;
     gap: $spacer * 3;
     overflow: hidden;
 
+    .ContentMarketingSlider {
+        width: 100%;
+        background: $gray-light;
+    }
+
     @include sm() {
         display: block;
         align-items: center;
         max-width: 320px;
+        width: 100%;
         margin: 0 auto;
     }
 }
