@@ -58,25 +58,12 @@
         }
 
         @include sm() {
-            .Slider {
-                max-height: 350px;
-            }
-
             .Arrow {
-                position: absolute;
                 padding: 10px;
-                left: 0;
-                top: 50%;
-                transform: translateY(-50%);
 
                 svg {
                     width: 20px;
                     height: 20px;
-                }
-
-                &.Right {
-                    left: auto;
-                    right: 0;
                 }
             }
         }
