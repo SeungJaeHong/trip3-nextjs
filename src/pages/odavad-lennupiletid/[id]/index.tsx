@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { GetServerSideProps } from 'next'
-import { Destination, FlightContent, Tag as TagType } from '../../../types'
+import {ContentMarketingPost, Destination, FlightContent, Tag as TagType} from '../../../types'
 import Header from '../../../components/Header'
 import styles from '../FlightOfferPage.module.scss'
 import containerStyle from '../../../styles/containers.module.scss'
@@ -10,14 +10,15 @@ import Footer from '../../../components/Footer'
 import parse from 'html-react-parser'
 import ApiClientSSR from '../../../lib/ApiClientSSR'
 import Alert from '../../../components/Alert'
-import { useUser } from '../../../hooks'
+import {useIsMounted, useUser} from '../../../hooks'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
-import {makeFlightSticky, publishFlight} from '../../../services/flight.service'
+import {getContentMarketingPosts, makeFlightSticky, publishFlight} from '../../../services/flight.service'
 import FlightOffersLatest from '../../../components/FlightOffer/FlightOffersLatest'
 import RelatedContentBlock from '../../../components/RelatedContentBlock'
 import { NextSeo } from 'next-seo'
 import dynamic from "next/dynamic"
+import ContentMarketingSlider from "../../../components/ContentMarketing/Slider/ContentMarketingSlider";
 
 const Ads = dynamic(() => import('../../../components/Ads'), { ssr: false })
 
@@ -27,12 +28,21 @@ type Props = {
 
 const FlightOfferShow = ({ flightObj }: Props) => {
     const [flight, setFlight] = useState<FlightContent>(flightObj)
+    const [contentMarketingPosts, setContentMarketingPosts] = useState<ContentMarketingPost[]>([])
     const { userIsLoggedIn, user } = useUser()
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const router = useRouter()
+    const isMounted = useIsMounted()
 
     useEffect(() => {
         setFlight(flightObj)
+        getContentMarketingPosts().then(res => {
+            if (isMounted()) {
+                setContentMarketingPosts(res.data)
+            }
+        }).catch(e => {
+
+        })
     }, [flightObj])
 
     const publish = (status: boolean) => {
@@ -153,6 +163,7 @@ const FlightOfferShow = ({ flightObj }: Props) => {
                     <div className={styles.Sidebar}>
                         <div className={styles.Ads}>
                             <Ads type={'desktop_sidebar_small'} />
+                            {contentMarketingPosts.length > 0 && <div className={styles.ContentMarketingSlider}><ContentMarketingSlider posts={contentMarketingPosts} /></div>}
                             <Ads type={'desktop_sidebar_large'} />
                         </div>
                     </div>
