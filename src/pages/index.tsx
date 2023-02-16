@@ -175,7 +175,7 @@ const Home = ({ flightOffers, forumPosts, contentMarketingPosts }: Props) => {
                     </div>
                 </div>
                 <div className={styles.NewsContainer}>
-                    <NewsLatest take={6} />
+                    <NewsLatest take={contentMarketingPosts[2] !== undefined ? 5 : 6} contentMarketingPost={contentMarketingPosts[2]} />
                 </div>
                 <BlockTitle title={'Viimati lisatud pildid'} />
             </div>

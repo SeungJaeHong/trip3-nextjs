@@ -1,0 +1,44 @@
+@import "../../../styles/variables";
+
+.Container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    a {
+        display: block;
+    }
+
+    .Background {
+        display: flex;
+        position: relative;
+        padding-bottom: 57%;
+        width: 100%;
+    }
+
+    .Title {
+        margin-top: $spacer;
+        color: $blue;
+        font-size: $font-size-medium;
+        font-weight: 500;
+
+        @include md() {
+            font-size: 1.1rem;
+        }
+    }
+
+    &:hover {
+        .Title {
+            color: $blue-hover;
+        }
+    }
+
+    .CreatedAt {
+        display: flex;
+        width: 100%;
+        gap: $spacer * 1.5;
+        font-size: $font-size-small;
+        color: $gray-darker;
+        margin-top: $spacer * 0.5;
+    }
+}

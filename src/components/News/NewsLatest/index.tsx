@@ -1,12 +1,13 @@
 import styles from './NewsLatest.module.scss'
 import BlockTitle from '../../BlockTitle'
 import NewsCard from '../NewsCard'
-import React, { useEffect, useState } from 'react'
-import { NewsCardType } from '../../../types'
+import React, {Fragment, useEffect, useState} from 'react'
+import {ContentMarketingPost, NewsCardType} from '../../../types'
 import MoreLink from '../../MoreLink'
 import { getLatestNews } from '../../../services/news.service'
 import { useIsMounted } from '../../../hooks'
 import dynamic from "next/dynamic";
+import ContentMarketingNewsCard from "../../ContentMarketing/NewsCard";
 
 const Ads = dynamic(() => import('../../Ads'), { ssr: false })
 
@@ -15,9 +16,10 @@ type Props = {
     excludeId?: number
     destinationId?: number
     ad?: string
+    contentMarketingPost?: ContentMarketingPost
 }
 
-const NewsLatest = ({ take, excludeId, destinationId, ad }: Props) => {
+const NewsLatest = ({ take, excludeId, destinationId, ad, contentMarketingPost }: Props) => {
     const [news, setNews] = useState<NewsCardType[]>([])
     const isMounted = useIsMounted()
 
@@ -38,12 +40,21 @@ const NewsLatest = ({ take, excludeId, destinationId, ad }: Props) => {
                 {news.map((newsItem: NewsCardType, index: number) => {
                     if (ad && index === 1) {
                         return (
-                            <>
+                            <Fragment key={newsItem.id}>
                                 <div className={styles.Ad}><Ads type={ad} /></div>
-                                <NewsCard {...newsItem} key={newsItem.id} />
-                            </>
+                                <NewsCard {...newsItem} />
+                            </Fragment>
                         )
-                    } else return <NewsCard {...newsItem} key={newsItem.id} />
+                    } else if (contentMarketingPost && index === 2) {
+                        return (
+                            <Fragment key={newsItem.id}>
+                                <ContentMarketingNewsCard {...contentMarketingPost} />
+                                <NewsCard {...newsItem} />
+                            </Fragment>
+                        )
+                    } else {
+                        return <NewsCard {...newsItem} key={newsItem.id} />
+                    }
                 })}
             </div>
             <div className={styles.ViewMore}>
