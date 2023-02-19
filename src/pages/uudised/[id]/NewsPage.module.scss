@@ -1,239 +1,4 @@
-@import "../../styles/variables";
-
-.SearchContainer {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    margin: 0 auto;
-    padding-bottom: $spacer * 9;
-
-    @include lg() {
-        width: 75%;
-    }
-
-    @include md() {
-        width: 100%;
-    }
-
-    @include sm() {
-        padding-bottom: $spacer * 7;
-    }
-}
-
-.Search {
-    display: flex;
-    width: 100%;
-}
-
-.FilterContainer {
-    display: flex;
-    flex-direction: column;
-
-    .AdvancedSearch {
-        background: rgba(255, 255, 255, .9);
-        box-shadow: 0 18px 48px rgba(14, 18, 23, .6);
-        display: flex;
-        flex-direction: column;
-        padding: $spacer * 2;
-        gap: $spacer;
-    }
-}
-
-.Filters {
-    display: flex;
-    gap: $spacer * 2;
-
-    @include sm() {
-        flex-direction: column;
-        width: 100%;
-        gap: $spacer * 2;
-    }
-
-    .Select {
-        color: $white;
-        width: 100%;
-
-        :global(.ForumFilter__control) {
-            background: transparent;
-            cursor: pointer;
-            border-color: rgba(255, 255, 255, .6);
-            box-shadow: none;
-            height: 45px;
-            border-radius: 3px;
-        }
-
-        :global(.ForumFilter__placeholder) {
-            color: $gray-dark;
-            font-family: $font-family-sailec;
-            opacity: .8;
-        }
-
-        :global(.ForumFilter__control--menu-is-open, .ForumFilter__control--is-focused) {
-            border-color: $gray-dark;
-            box-shadow: none;
-        }
-
-        :global(.ForumFilter__input) {
-            color: $gray-dark;
-            font-family: $font-family-sailec;
-        }
-
-        :global(.ForumFilter__single-value) {
-            color: $gray-dark;
-            font-weight: 500;
-            font-family: $font-family-sailec;
-        }
-
-        :global(.ForumFilter__option) {
-            color: $gray-darker;
-            cursor: pointer;
-        }
-
-        :global(.ForumFilter__option--is-selected) {
-            color: $gray-dark-hover;
-            background-color: $blue;
-        }
-
-        :global(.ForumFilter__menu-notice) {
-            color: $gray-dark;
-        }
-
-        :global(.ForumFilter__indicator) {
-            color: $gray-dark;
-
-            &:hover {
-                color: $gray;
-            }
-        }
-    }
-}
-
-.Content {
-    display: flex;
-    width: 100%;
-    margin: $spacer * 6 0;
-    gap: $spacer * 9;
-
-    @include md() {
-        flex-direction: column;
-        margin: $spacer * 5 0;
-        gap: $spacer * 2;
-    }
-
-    @include sm() {
-        margin: $spacer * 3 0;
-    }
-
-    .NewsGridContainer {
-        display: flex;
-        flex-direction: column;
-        flex: 3;
-
-        .ResultCount {
-            font-family: $font-family-sailec;
-            color: $gray-darker;
-            font-weight: 500;
-            padding-bottom: $spacer;
-            border-bottom: 1px solid rgba(209, 212, 214, .7);
-            margin-bottom: $spacer * 3;
-
-            @include sm() {
-                font-size: $font-size-small;
-            }
-        }
-
-        .NewsGrid {
-            flex-wrap: wrap;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: $spacer * 5;
-            margin-bottom: $spacer * 5;
-
-            @include lg() {
-                flex: 1;
-                grid-template-columns: 1fr;
-                gap: $spacer * 4;
-                margin-bottom: $spacer * 4;
-            }
-
-            .Ad {
-                margin: 0 auto;
-                grid-column: 1 / span 2;
-                height: auto;
-                width: 100%;
-
-                @include lg() {
-                    grid-column: 1;
-                }
-
-                @include sm() {
-                    display: none;
-                }
-            }
-
-            .MobileAd {
-                display: none;
-
-                @include sm() {
-                    display: block;
-                    justify-content: center;
-                }
-            }
-        }
-
-        .Paginator {
-            margin-bottom: $spacer;
-
-            @include md() {
-                margin-bottom: $spacer * 4;
-            }
-        }
-    }
-}
-
-.Sidebar {
-    flex: 1;
-    flex-direction: column;
-
-    @include sm() {
-        display: none;
-    }
-
-    .DescriptionBlock {
-        background: $gray-light;
-        padding: $spacer * 3;
-        margin-bottom: $spacer * 3;
-
-        .Description {
-            color: $gray-dark-hover;
-            font-weight: 500;
-        }
-
-        .AddNewButton {
-            margin-top: $spacer * 3;
-        }
-
-        &.hideWhenNotLoggedIn {
-            @include sm() {
-                display: none;
-            }
-        }
-    }
-}
-
-.Ads {
-    width: 100%;
-    max-width: 275px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: $spacer * 2;
-    margin: 0 auto;
-
-    @include sm() {
-        display: none;
-    }
-}
+@import "../../../styles/variables";
 
 .HeaderContainer {
     display: flex;
@@ -476,10 +241,58 @@
             }
         }
     }
+}
 
-    .SidebarShow {
-        flex: 1;
+.Sidebar {
+    //flex: 1;
+    flex-direction: column;
+    gap: $spacer * 3;
+    //width: 100%;
+    max-width: 300px;
+    display: flex;
+    width: 300px;
 
+    @include sm() {
+        display: none;
+    }
 
+    .DescriptionBlock {
+        background: $gray-light;
+        padding: $spacer * 3;
+        margin-bottom: $spacer * 3;
+
+        .Description {
+            color: $gray-dark-hover;
+            font-weight: 500;
+        }
+
+        .AddNewButton {
+            margin-top: $spacer * 3;
+        }
+
+        &.hideWhenNotLoggedIn {
+            @include sm() {
+                display: none;
+            }
+        }
+    }
+
+    .ContentMarketingSlider {
+        width: 100%;
+        background: $gray-light;
+    }
+
+    .Ads {
+        width: 100%;
+        max-width: 300px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: $spacer * 2;
+        margin: 0 auto;
+
+        @include sm() {
+            display: none;
+        }
     }
 }

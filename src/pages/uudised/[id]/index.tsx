@@ -1,8 +1,8 @@
-import React, { Fragment, useState } from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import { GetServerSideProps } from 'next'
-import { Comment, Destination, NewsContent, Topic } from '../../../types'
+import {Comment, ContentMarketingPost, Destination, NewsContent, Topic} from '../../../types'
 import Header from '../../../components/Header'
-import styles from '../NewsPage.module.scss'
+import styles from './NewsPage.module.scss'
 import containerStyle from '../../../styles/containers.module.scss'
 import Tag from '../../../components/Tag'
 import clsx from 'clsx'
@@ -11,7 +11,7 @@ import Footer from '../../../components/Footer'
 import ForumComment from '../../../components/Forum/ForumComment'
 import ApiClientSSR from '../../../lib/ApiClientSSR'
 import { publishNews } from '../../../services/news.service'
-import { useUser } from '../../../hooks'
+import {useIsMounted, useUser} from '../../../hooks'
 import BlockTitle from '../../../components/BlockTitle'
 import CommentEditor from '../../../components/CommentEditor'
 import { toast } from 'react-toastify'
@@ -21,6 +21,8 @@ import { postComment } from '../../../services/comment.service'
 import RelatedContentBlock from '../../../components/RelatedContentBlock'
 import { NextSeo } from 'next-seo'
 import dynamic from 'next/dynamic'
+import ContentMarketingSlider from "../../../components/ContentMarketing/Slider/ContentMarketingSlider";
+import {getContentMarketingPosts} from "../../../services/flight.service";
 
 const Ads = dynamic(() => import('../../../components/Ads'), { ssr: false })
 
@@ -31,11 +33,23 @@ type Props = {
 const NewsShow = ({ newsObj }: Props) => {
     const [news, setNews] = useState<NewsContent>(newsObj)
     const [comments, setComments] = useState<Comment[] | undefined>(newsObj.comments)
+    const [contentMarketingPosts, setContentMarketingPosts] = useState<ContentMarketingPost[]>([])
     const { userIsLoggedIn, user } = useUser()
     const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const [commentValue, setCommentValue] = useState<string>('')
     const [submitting, setSubmitting] = useState<boolean>(false)
     const router = useRouter()
+    const isMounted = useIsMounted()
+
+    useEffect(() => {
+        getContentMarketingPosts().then(res => {
+            if (isMounted()) {
+                setContentMarketingPosts(res.data)
+            }
+        }).catch(e => {
+
+        })
+    }, [newsObj])
 
     const onSubmit = async (value: string) => {
         setSubmitting(true)
@@ -172,6 +186,7 @@ const NewsShow = ({ newsObj }: Props) => {
                         )}
                     </div>
                     <div className={styles.Sidebar}>
+                        {contentMarketingPosts.length > 0 && <div className={styles.ContentMarketingSlider}><ContentMarketingSlider posts={contentMarketingPosts} /></div>}
                         <div className={styles.Ads}>
                             <Ads type={'desktop_sidebar_small'} />
                             <Ads type={'desktop_sidebar_large'} />
