@@ -15,7 +15,7 @@
 }
 
 .DestinationSelect {
-    max-width: 320px;
+    max-width: 300px;
     width: 100%;
     display: flex;
     margin-bottom: $spacer * 4;
@@ -75,7 +75,7 @@
     display: flex;
     flex-direction: column;
     //width: 100%;
-    width: 320px;
+    width: 300px;
 
     @include sm() {
         align-items: center;
@@ -123,8 +123,8 @@
 
 .Ads {
     display: flex;
-    width: 320px;
-    max-width: 320px;
+    width: 300px;
+    max-width: 300px;
     flex-direction: column;
     gap: $spacer * 3;
     overflow: hidden;
