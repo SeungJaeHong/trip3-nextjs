@@ -244,37 +244,15 @@
 }
 
 .Sidebar {
-    //flex: 1;
     flex-direction: column;
     gap: $spacer * 3;
-    //width: 100%;
     max-width: 300px;
     display: flex;
     width: 300px;
 
     @include sm() {
-        display: none;
-    }
-
-    .DescriptionBlock {
-        background: $gray-light;
-        padding: $spacer * 3;
-        margin-bottom: $spacer * 3;
-
-        .Description {
-            color: $gray-dark-hover;
-            font-weight: 500;
-        }
-
-        .AddNewButton {
-            margin-top: $spacer * 3;
-        }
-
-        &.hideWhenNotLoggedIn {
-            @include sm() {
-                display: none;
-            }
-        }
+        max-width: unset;
+        width: 100%;
     }
 
     .ContentMarketingSlider {
