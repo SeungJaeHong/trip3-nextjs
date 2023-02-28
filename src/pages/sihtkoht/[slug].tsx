@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import { GetServerSideProps } from 'next'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
@@ -19,16 +19,39 @@ import RelatedContentBlock from '../../components/RelatedContentBlock'
 import { Tooltip } from '@mantine/core'
 import { NextSeo } from 'next-seo'
 import dynamic from 'next/dynamic'
+import Button from '../../components/Button'
+import { useUser } from '../../hooks'
+import DestinationDescriptionEditModal from '../../components/Destination/DescriptionEditModal'
+import {updateDescription} from "../../services/destination.service";
+import {toast} from "react-toastify";
 
 const Ads = dynamic(() => import('../../components/Ads'), { ssr: false })
 const DestinationMap = dynamic(() => import('../../components/Destination/DestinationMap'), { ssr: false })
 
 type Props = {
-    destination: DestinationContent
+    destinationObj: DestinationContent
 }
 
-const DestinationPage = ({ destination }: Props) => {
-    //const [showMore, setShowMore] = useState(false)
+const DestinationPage = ({ destinationObj }: Props) => {
+    const [destination, setDestination] = useState<DestinationContent>(destinationObj)
+    const [showMoreDestination, setShowMoreDestination] = useState<boolean>(false)
+    const [showDescriptionModal, setShowDescriptionModal] = useState<boolean>(false)
+    const { userIsLoggedIn, user } = useUser()
+    const userIsAdmin = userIsLoggedIn && user?.isAdmin
+
+    useEffect(() => {
+        setDestination(destinationObj)
+    }, [destinationObj])
+
+    const onDescriptionSave = (value: string) => {
+        updateDescription(destination, value).then(resp => {
+            setShowDescriptionModal(false)
+            const newDest = {...destination, description: value}
+            setDestination(newDest)
+            toast.success('Muudetud')
+        })
+    }
+
     const renderChildDestinations = () => {
         if (!destination.childDestinations?.length) {
             return null
@@ -55,20 +78,43 @@ const DestinationPage = ({ destination }: Props) => {
         )
     }
 
-    /*const renderDescription = () => {
-        if (destination.description?.length) {
-            return (
-                <div className={styles.Description}>
-                    {showMore ? destination.description : destination.descriptionPreview}
-                    <span className={styles.ReadMore} onClick={() => setShowMore(!showMore)}>
-                        {showMore ? 'Loe vähem ›' : 'Loe edasi ›'}
-                    </span>
-                </div>
-            )
+    const renderDescription = () => {
+        if (!destination.description) {
+            if (userIsAdmin) {
+                return (
+                    <div className={styles.DescriptionContainer}>
+                        <Button
+                            title={'Lisa kirjeldus'}
+                            className={styles.EditDescriptionButton}
+                            onClick={() => setShowDescriptionModal(true)}
+                        />
+                    </div>
+                )
+            } else return null
         }
 
-        return null
-    }*/
+        const descriptionPreview =
+            destination.description.length < 400
+                ? destination.description
+                : destination.description?.substring(0, 400) + '...'
+        return (
+            <div className={styles.DescriptionContainer}>
+                <div className={styles.Description}>
+                    {showMoreDestination ? destination.description : descriptionPreview}
+                    {destination.description.length > 400 && (
+                        <span className={styles.ReadMore} onClick={() => setShowMoreDestination(!showMoreDestination)}>
+                            {showMoreDestination ? ' Loe vähem ›' : ' Loe edasi ›'}
+                        </span>
+                    )}
+                </div>
+                <Button
+                    title={'Muuda kirjeldust'}
+                    className={styles.EditDescriptionButton}
+                    onClick={() => setShowDescriptionModal(true)}
+                />
+            </div>
+        )
+    }
 
     return (
         <Fragment>
@@ -79,7 +125,11 @@ const DestinationPage = ({ destination }: Props) => {
                     ': reisiinfo ning ülevaate headest pakkumistest, reisisoovitustest, kuulutustest ja reisikaaslastest'
                 }
             />
-            <Header backgroundImage={'https://trip3spaces.fra1.cdn.digitaloceanspaces.com/images/content/background/Ateena-acropolis-px_kfwx.jpeg'}>
+            <Header
+                backgroundImage={
+                    'https://trip3spaces.fra1.cdn.digitaloceanspaces.com/images/content/background/Ateena-acropolis-px_kfwx.jpeg'
+                }
+            >
                 <div className={styles.HeaderContainer}>
                     {destination.previousDestination ? (
                         <Link href={'/sihtkoht/' + destination.previousDestination.slug}>
@@ -163,6 +213,8 @@ const DestinationPage = ({ destination }: Props) => {
                         </div>
                     </div>
 
+                    {renderDescription()}
+
                     {renderChildDestinations()}
 
                     <div className={styles.HaveBeenBlock}>
@@ -191,9 +243,16 @@ const DestinationPage = ({ destination }: Props) => {
                 <div className={styles.RelatedContent}>
                     <div className={styles.ForumContent}>
                         <BlockTitle title={'Tripikad räägivad'} className={styles.ForumBlockTitle} />
-                        <ForumList items={destination.forumPosts || []} withAds={destination.forumPosts && destination.forumPosts?.length > 3} onlyMiddleAd={destination.forumPosts && destination.forumPosts?.length <= 8}/>
+                        <ForumList
+                            items={destination.forumPosts || []}
+                            withAds={destination.forumPosts && destination.forumPosts?.length > 3}
+                            onlyMiddleAd={destination.forumPosts && destination.forumPosts?.length <= 8}
+                        />
                         <div className={styles.MoreForumLink}>
-                            <MoreLink route={'/foorum/uldfoorum?destination=' + destination.id} title={'Kõik positused'} />
+                            <MoreLink
+                                route={'/foorum/uldfoorum?destination=' + destination.id}
+                                title={'Kõik positused'}
+                            />
                         </div>
                     </div>
                     <div className={styles.Sidebar}>
@@ -207,6 +266,13 @@ const DestinationPage = ({ destination }: Props) => {
             </div>
             <RelatedContentBlock type={'destination'} destinationId={destination.id} />
             <Footer />
+            <DestinationDescriptionEditModal
+                destination={destination}
+                show={showDescriptionModal}
+                onHide={() => setShowDescriptionModal(false)}
+                onDescriptionSave={onDescriptionSave}
+                key={destination.id}
+            />
         </Fragment>
     )
 }
@@ -218,7 +284,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         const response = await ApiClientSSR(context).get(url)
         return {
             props: {
-                destination: response.data,
+                destinationObj: response.data,
             },
         }
     } catch (e) {

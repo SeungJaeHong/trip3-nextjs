@@ -179,26 +179,6 @@
                     }
                 }
 
-                /*.Description {
-                    color: $white;
-                    font-size: $font-size-normal;
-                    max-width: 350px;
-                    margin-top: $spacer * 3;
-                    font-weight: 500;
-
-                    .ReadMore {
-                        font-weight: 600;
-                        cursor: pointer;
-                        color: $yellow-dark;
-                        margin-left: $spacer;
-                        white-space: nowrap;
-
-                        &:hover {
-                            color: $white;
-                        }
-                    }
-                }*/
-
                 .Map {
                     position: relative;
                     max-width: 450px;
@@ -211,6 +191,48 @@
                     flex-direction: column;
                     gap: $spacer * 3;
                 }
+            }
+        }
+    }
+
+    .DescriptionContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: $spacer * 4;
+        gap: $spacer;
+
+        .Description {
+            color: $white;
+            font-size: $font-size-normal;
+            width: 100%;
+            font-weight: 500;
+            //white-space: pre-wrap;
+
+            p {
+                margin: 0;
+                padding: 0;
+            }
+
+            .ReadMore {
+                font-weight: 600;
+                cursor: pointer;
+                color: $yellow-dark;
+                margin-left: $spacer;
+                white-space: nowrap;
+
+                &:hover {
+                    color: $white;
+                }
+            }
+        }
+
+        .EditDescriptionButton {
+            width: 140px;
+            height: 30px;
+
+            span {
+                font-size: 14px;
             }
         }
     }

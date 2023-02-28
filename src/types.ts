@@ -162,14 +162,9 @@ export type NewsContent = {
     comments?: Comment[]
 }
 
-export type DestinationContent = {
-    id: number
-    name: string
-    slug: string
+export interface DestinationContent extends Destination {
     backgroundImageUrl: string
     description?: string
-    descriptionPreview?: string
-    parentDestination?: Destination
     nextDestination?: Destination
     previousDestination?: Destination
     childDestinations?: Destination[]
@@ -184,10 +179,6 @@ export type DestinationContent = {
         population?: number
         timezone?: string
     }
-    isContinent: boolean
-    isCountry: boolean
-    lat?: number
-    lng?: number
 }
 
 export type TravelmateContent = {

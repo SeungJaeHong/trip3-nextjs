@@ -52,7 +52,6 @@ const Modal = ({show, className, children, onHide}: Props) => {
 Modal.defaultProps = {
     show: false,
     className: undefined,
-    onHide: undefined
 }
 
 export default Modal

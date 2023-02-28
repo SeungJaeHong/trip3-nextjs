@@ -1,0 +1,40 @@
+@import "../../../styles/variables";
+
+.Container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: $white;
+    border-radius: 12px;
+    padding: $spacer * 4 $spacer * 3;
+    justify-content: center;
+    align-items: center;
+    font-family: $font-family-sailec;
+    width: 500px;
+
+    @include xs() {
+        width: 100%;
+    }
+
+    h2 {
+        margin-top: 0;
+    }
+
+    textarea {
+        width: 100%;
+        outline: none;
+        margin-bottom: $spacer * 4;
+        font-family: $font-family-sailec;
+        font-size: 16px;
+
+        @include xs() {
+            max-height: 400px;
+        }
+    }
+
+    .Buttons {
+        display: flex;
+        align-items: center;
+        gap: $spacer * 2;
+    }
+}

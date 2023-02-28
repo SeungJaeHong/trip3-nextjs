@@ -9,3 +9,9 @@ export const getDestinationImages = async (destination: Destination): Promise<Ax
 export const getDestinations = async (): Promise<AxiosResponse> => {
     return await ApiClient.get('/destinations')
 }
+
+export const updateDescription = async (destination: Destination, value: string): Promise<AxiosResponse> => {
+    return await ApiClient.put('/destination/' + destination.id + '/update_description', {
+        value: value
+    })
+}
