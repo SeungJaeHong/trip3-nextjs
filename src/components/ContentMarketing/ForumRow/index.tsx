@@ -17,9 +17,9 @@ const ContentMarketingForumRow = (item: ContentMarketingPost) => {
                     </a>
                 </Link>
                 <div className={styles.Meta}>
-                    {item.viewsCount >= 25 && (
+                    {/*{item.viewsCount >= 25 && (
                         <span className={clsx(styles.MetaItem, styles.ReadCount)}>Loetud {item.viewsCount} korda</span>
-                    )}
+                    )}*/}
                     <span className={clsx(styles.MetaItem, styles.Creator)}>
                         <Link href={'/sisuturundus/' + item.slug}>
                             <a>{item.clientName}</a>
