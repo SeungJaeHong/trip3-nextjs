@@ -11,6 +11,7 @@ type Props = {
     white?: boolean
     red?: boolean
     onClick?: MouseEventHandler<HTMLDivElement> | undefined
+    className?: string
 }
 
 const Tag = (props: Props) => {
@@ -18,7 +19,7 @@ const Tag = (props: Props) => {
         return (
             <Link href={props.route}>
                 <a
-                    className={clsx(styles.Tag, {
+                    className={clsx(styles.Tag, props.className, {
                         [styles.Destination]: props.type === 'destination',
                         [styles.Large]: props.large,
                         [styles.White]: props.white,
@@ -33,7 +34,7 @@ const Tag = (props: Props) => {
     } else {
         return (
             <div
-                className={clsx(styles.Tag, {
+                className={clsx(styles.Tag, props.className, {
                     [styles.Destination]: props.type === 'destination',
                     [styles.Large]: props.large,
                     [styles.White]: props.white,
