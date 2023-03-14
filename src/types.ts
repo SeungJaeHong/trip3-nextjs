@@ -294,7 +294,7 @@ export interface ContentMarketingPost {
     active: boolean
     backgroundImageUrl: string
     clientLogoUrl: string
-    viewsCount: number
+    //viewsCount: number
     createdAt: string
 }
 
