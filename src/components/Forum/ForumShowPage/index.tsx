@@ -19,6 +19,7 @@ import RelatedContentBlock from '../../RelatedContentBlock'
 import clsx from 'clsx'
 import Alert from '../../Alert'
 import dynamic from "next/dynamic"
+import {toggleCommentEnabled} from "../../../services/forum.service";
 
 const Ads = dynamic(() => import('../../Ads'), { ssr: false })
 
@@ -30,7 +31,8 @@ type Props = {
 }
 
 const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) => {
-    const { userIsLoggedIn } = useUser()
+    const { userIsLoggedIn, user } = useUser()
+    const userIsAdmin = userIsLoggedIn && user?.isAdmin
     const [commentValue, setCommentValue] = useState<string>('')
     const [comments, setComments] = useState(post.comments)
     const newestCommentUrl = lastCommentId
@@ -38,17 +40,23 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
         : ''
     const [goToNewestLink, setGoToNewestLink] = useState(newestCommentUrl)
     const [submitting, setSubmitting] = useState<boolean>(false)
+    const [commentsDisabled, setCommentsDisabled] = useState<boolean>(post.commentsDisabled)
     const router = useRouter()
 
     useEffect(() => {
         setComments(post.comments)
     }, [post.comments])
 
-    useEffect(() => {
-        setTimeout(function () {
-            scrollToHash()
-        }, 0)
-    }, [comments])
+    const onToggleCommentsEnabled = () => {
+        toggleCommentEnabled(post, commentsDisabled)
+            .then((res) => {
+                setCommentsDisabled(res.data)
+                toast.success('Kommenteerimine lubatud')
+            })
+            .catch((err) => {
+                toast.error('Kommenteerimise muutmine ebaõnnestus')
+            })
+    }
 
     const getLastAd = () => {
         if (!comments)
@@ -113,6 +121,16 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
             })
     }
 
+    useEffect(() => {
+        setComments(post.comments)
+    }, [post.comments])
+
+    useEffect(() => {
+        setTimeout(function () {
+            scrollToHash()
+        }, 0)
+    }, [comments])
+
     return (
         <Fragment>
             <Header withBackgroundMap={true} className={styles.Header} />
@@ -141,7 +159,7 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                         </div>
                         {userIsLoggedIn && (
                             <>
-                                {post.lockedForComments && (
+                                {commentsDisabled && (
                                     <div className={styles.LockedForComments}>
                                         <Alert
                                             type={'info'}
@@ -149,9 +167,12 @@ const ForumShowPage = ({ post, lastCommentId, currentPage, lastPage }: Props) =>
                                                 'Postitus on olnud pikka aega mitteaktiivne. Teemasse kommenteerimine on suletud.'
                                             }
                                         />
+                                        {(post.canEnableComments && userIsAdmin) &&
+                                            <Button title={'Luba'} className={styles.EnableButton} onClick={onToggleCommentsEnabled} />
+                                        }
                                     </div>
                                 )}
-                                {!post.lockedForComments && (
+                                {!commentsDisabled && (
                                     <div className={styles.AddComment}>
                                         <BlockTitle title={'Lisa kommentaar'} />
                                         <CommentEditor

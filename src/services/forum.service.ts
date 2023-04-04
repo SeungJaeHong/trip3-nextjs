@@ -17,6 +17,12 @@ export const togglePostStatus = async (content: ForumPostType, value: boolean): 
     })
 }
 
+export const toggleCommentEnabled = async (content: ForumPostType, value: boolean): Promise<AxiosResponse> => {
+    return await ApiClient.post('/forum/' + content.id + '/comments_enabled', {
+        value: value,
+    })
+}
+
 export const toggleFollow = async (content: ForumPostType, value: boolean): Promise<AxiosResponse> => {
     return await ApiClient.post('/forum/' + content.id + '/follow', {
         value: value,

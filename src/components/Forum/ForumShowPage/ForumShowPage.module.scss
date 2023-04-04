@@ -73,8 +73,27 @@
             width: 100%;
             margin-bottom: $spacer * 8;
 
+            .EnableButton {
+                width: 100px;
+                background: #3498db;
+
+                &:hover {
+                    background: $blue-hover;
+                }
+            }
+
             @include sm() {
                 margin-bottom: $spacer * 6;
+
+                .EnableButton {
+                    width: 80px;
+                }
+            }
+
+            @include md() {
+                .EnableButton {
+                    height: auto;
+                }
             }
         }
 
