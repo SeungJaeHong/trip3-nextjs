@@ -68,7 +68,7 @@ const ContentMarketingPage = ({ content }: Props) => {
                                 </a>
                             </div>
                             <div className={styles.Description}>
-                                See on {post.clientName} kureeritud ja toimetatud blogi, mis tutvustab firma põnevamaid sündmusi.
+                                Selle artikli sisu toimetavad Trip.ee koostööpartnerid.
                             </div>
                         </div>
                     </div>
