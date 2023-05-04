@@ -117,30 +117,47 @@ const NewsIndex = (props: Props) => {
     const oneThird = props.news ? Math.floor(props.news?.length / 3) : undefined
     const twoThirds = oneThird ? Math.floor(oneThird * 2) : undefined
 
+    const renderAds = (index: number) => {
+        const adBlocks = []
+        let bodyIndex = 1
+        if (props.news && props.news.length > 4 && props.news.length % 2 === 0) {
+            bodyIndex = 2
+        }
+
+        if (oneThird !== undefined && oneThird === index + 1) {
+            adBlocks.push(
+                <div className={clsx(styles.MobileAd)} key={'mobile_320x200'}>
+                    <Ads type={'mobile_320x200'} />
+                </div>
+            )
+        }
+
+        if (twoThirds !== undefined && twoThirds === index + 1) {
+            adBlocks.push(
+                <div className={clsx(styles.MobileAd)} key={'mobile_320x200_2'}>
+                    <Ads type={'mobile_320x200_2'} />
+                </div>
+            )
+        }
+
+        if (middle !== undefined && middle === index + bodyIndex) {
+            adBlocks.push(
+                <div className={clsx(styles.Ad)} key={'desktop_body'}>
+                    <Ads type={'desktop_body'} />
+                </div>
+            )
+        }
+
+        return adBlocks
+    }
+
     const renderCard = (news: NewsCardType, index: number) => {
         return (
             <Fragment key={news.id}>
                 <NewsCard {...news} />
-                {(oneThird && oneThird === index + 1) &&
-                    <div className={clsx(styles.MobileAd)}>
-                        <Ads type={'mobile_320x200'} />
-                    </div>
+                {(props.news?.length && props.news?.length >= 4) &&
+                    renderAds(index)
                 }
-                {(twoThirds && twoThirds === index + 1) &&
-                    <div className={clsx(styles.MobileAd)}>
-                        <Ads type={'mobile_320x200_2'} />
-                    </div>
-                }
-                {(middle && middle === index + 2) &&
-                    <div className={clsx(styles.Ad)}>
-                        <Ads type={'desktop_body'} />
-                    </div>
-                }
-                {/*{(middle && middle === index + 2 ) &&
-                    <div className={clsx(styles.MobileAd)}>
-                        <Ads type={'mobile_320_200_2'} />
-                    </div>
-                }*/}
             </Fragment>
         )
     }
