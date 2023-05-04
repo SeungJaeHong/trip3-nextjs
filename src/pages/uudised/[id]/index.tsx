@@ -109,14 +109,22 @@ const NewsShow = ({ newsObj, contentMarketingPosts }: Props) => {
                                 <Tag
                                     title={destination.name}
                                     type={'destination'}
-                                    route={'/sihtkoht/' + destination.slug}
+                                    route={'/uudised?destination=' + destination.id}
                                     large={true}
                                     key={destination.id}
                                 />
                             )
                         })}
                         {news.topics?.map((topic: Topic) => {
-                            return <Tag title={topic.name} large={true} white={true} key={topic.id} />
+                            return (
+                                <Tag
+                                    title={topic.name}
+                                    large={true}
+                                    white={true}
+                                    key={topic.id}
+                                    route={'/uudised?topic=' + topic.id}
+                                />
+                            )
                         })}
                     </div>
                     {userIsAdmin && (
