@@ -154,7 +154,7 @@ const Home = ({ flightOffers, forumPosts, contentMarketingPosts }: Props) => {
                                             large={true}
                                         />
                                         <span className={styles.ForumDescription}>
-                                            Küsimused välismaal elavatelt eestlastelt
+                                            Kõik mis puudutab välismaal elamist-töötamist
                                         </span>
                                     </div>
                                 </div>

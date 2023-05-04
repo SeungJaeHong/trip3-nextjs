@@ -23,16 +23,16 @@ const ForeignForumIndex = (props: Props) => {
         <>
             <NextSeo
                 title={'Trip.ee | Elu välismaal'}
-                description={'Soovitused välismaal elavatelt eestlastelt'}
+                description={'Kõik mis puudutab välismaal elamist-töötamist'}
                 openGraph={{
                     title: 'Elu välismaal',
-                    description: 'Soovitused välismaal elavatelt eestlastelt',
+                    description: 'Kõik mis puudutab välismaal elamist-töötamist',
                 }}
             />
             <ForumIndexPage
                 type={'foreign'}
                 title={'Elu välismaal'}
-                description={'Soovitused välismaal elavatelt eestlastelt.'}
+                description={'Kõik mis puudutab välismaal elamist-töötamist.'}
                 searchPlaceholder={'Otsi elu välismaal foorumist...'}
                 {...props}
             />
