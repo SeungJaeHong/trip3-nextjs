@@ -4,7 +4,9 @@ export default function Document() {
     const gtmId = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID as string
     return (
         <Html>
-            <Head />
+            <Head>
+                <script defer data-domain="trip.ee" src="https://plausible.io/js/script.js"></script>
+            </Head>
             <body>
             <noscript>
                 {gtmId &&
