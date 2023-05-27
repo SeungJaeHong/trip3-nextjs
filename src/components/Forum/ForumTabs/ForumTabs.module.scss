@@ -9,7 +9,9 @@
     scrollbar-width: none;
 
     .Tab {
-        background: transparent;
+        //background: transparent;
+        background: rgba(255, 255, 255, .2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         display: flex;
         align-items: center;
         padding: $spacer * 2 $spacer * 3;
@@ -17,7 +19,7 @@
 
         .Title {
             color: $white;
-            font-weight: 500;
+            font-weight: 600;
             line-height: 24px;
             font-size: $font-size-normal;
             white-space: nowrap;

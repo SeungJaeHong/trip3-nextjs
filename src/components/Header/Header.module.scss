@@ -4,8 +4,27 @@
     position: relative;
     display: flex;
 
+    &.WithDefaultBackground {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/images/header_mountain.webp');
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
     &.Light {
+        background-image: none;
         background-color: $gray-light;
+    }
+
+    @include sm() {
+        &.WithDefaultBackground {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/images/header_mountain_mobile.webp');
+        }
+
+        &.Light {
+            background-image: none;
+        }
     }
 }
 

@@ -116,23 +116,22 @@ type Props = {
 
 const Footer = (props: Props) => {
     const { userIsLoggedIn } = useUser()
-    let style = {}
+    /*let style = {}
     if (!props.simple) {
         style = {
-            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/footer_winter.webp)',
+            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/footer_summer.webp)',
             width: '100%',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             backgroundPosition: '50% 90%',
         }
-    }
+    }*/
 
     return (
-        <div
-            className={clsx(styles.Footer, {
+        <div className={clsx(styles.Footer, {
                 [styles.Simple]: props.simple,
             })}
-            style={style}
+            //style={style}
         >
             <div className={clsx([containerStyle.ContainerLg, styles.Content])}>
                 <div className={styles.Col}>

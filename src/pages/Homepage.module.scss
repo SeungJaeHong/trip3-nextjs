@@ -1,5 +1,17 @@
 @import "../styles/variables";
 
+.Header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/images/header_mountain.webp');
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+
+    @include sm() {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url('/images/header_mountain_mobile.webp');
+    }
+}
+
 .Navbar {
     padding-bottom: $spacer * 12;
     padding-top: $spacer * 3;

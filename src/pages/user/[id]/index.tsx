@@ -58,9 +58,9 @@ const UserPage = ({ userProfile }: Props) => {
                 description={userProfile.rankName + ', liitus tripiga ' + userProfile.joinedDate}
             />
             <Header
-                backgroundImage={'/images/user_page_bg.jpg'}
+                //backgroundImage={'/images/user_page_bg.jpg'}
                 className={styles.Header}
-                style={{ backgroundPosition: '50% 25%' }}
+                style={{ backgroundPosition: '50% 0%' }}
             />
             <div className={styles.BodyContainer}>
                 <div className={containerStyle.ContainerLg}>

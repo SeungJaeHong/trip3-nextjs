@@ -19,17 +19,18 @@ const Header = (props: Props) => {
     let style = undefined
     if (props.backgroundImage && !props.withBackgroundMap) {
         style = {
-            backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(" + props.backgroundImage + ")",
+            backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3)), url(" + props.backgroundImage + ")",
             width: "100%",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
-            backgroundPosition: "50% 60%"
+            backgroundPosition: "50% 50%"
         }
     }
 
     return (
         <div className={clsx(styles.Header, props.className, {
-            [styles.Light]: props.withBackgroundMap
+            [styles.Light]: props.withBackgroundMap,
+            [styles.WithDefaultBackground]: props.backgroundImage === undefined
         })} style={{...style, ...props.style}}>
             <div className={clsx([containerStyle.ContainerXl, styles.Container])}>
                 <div className={styles.Navbar}>
@@ -50,7 +51,8 @@ const Header = (props: Props) => {
 }
 
 Header.defaultProps = {
-    backgroundImage: '/images/header_winter.webp',
+    //backgroundImage: '/images/header_mountain.webp',
+    backgroundImage: undefined,
     withBackgroundMap: false,
     navBarDark: false
 }

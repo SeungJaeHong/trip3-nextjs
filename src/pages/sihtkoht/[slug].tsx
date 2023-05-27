@@ -126,9 +126,9 @@ const DestinationPage = ({ destinationObj }: Props) => {
                 }
             />
             <Header
-                backgroundImage={
+                /*backgroundImage={
                     'https://trip3spaces.fra1.cdn.digitaloceanspaces.com/images/content/background/Ateena-acropolis-px_kfwx.jpeg'
-                }
+                }*/
             >
                 <div className={styles.HeaderContainer}>
                     {destination.previousDestination ? (

@@ -51,17 +51,7 @@ const Home = ({ flightOffers, forumPosts, contentMarketingPosts }: Props) => {
 
     return (
         <>
-            <div
-                className={styles.Header}
-                style={{
-                    backgroundImage:
-                        'linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url(/images/header_winter.webp)',
-                    width: '100%',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
-                    backgroundPosition: '50% 60%',
-                }}
-            >
+            <div className={styles.Header}>
                 <div className={clsx([containerStyle.ContainerXl, styles.Content])}>
                     <div className={styles.Navbar}>
                         <Navbar />

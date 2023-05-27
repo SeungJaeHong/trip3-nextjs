@@ -3,9 +3,15 @@
 .Footer {
     padding: $spacer * 10 0;
     overflow: hidden;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/footer_summer.webp');
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 90%;
 
     @include sm() {
         padding-top: $spacer * 6;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/footer_summer_mobile.webp');
     }
 
     .Content {
@@ -80,6 +86,7 @@
 
     &.Simple {
         background-color: $white;
+        background-image: none;
 
         .Col, .SocialLinks {
             a {
