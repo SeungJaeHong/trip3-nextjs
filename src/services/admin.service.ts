@@ -1,6 +1,6 @@
 import ApiClient from '../lib/ApiClient'
 import { AxiosResponse } from 'axios'
-import {ContentMarketingFullPost, ContentMarketingPost, ForumPostType} from '../types'
+import {Admin, ContentMarketingFullPost, ContentMarketingPost, ForumPostType} from '../types'
 
 export const getForumPosts = async (page?: number): Promise<AxiosResponse> => {
     return await ApiClient.get('/admin/forum?page=' + page)
@@ -90,4 +90,8 @@ export const updateContentMarketingPost = async (post: ContentMarketingFullPost,
 
 export const toggleActive = async (post: ContentMarketingPost, checked: boolean): Promise<AxiosResponse> => {
     return await ApiClient.put('/admin/content-marketing/' + post.id + '/active', {active: checked})
+}
+
+export const getModerators = async (): Promise<AxiosResponse<Admin[]>> => {
+    return await ApiClient.get('/admin/users?type=admin')
 }

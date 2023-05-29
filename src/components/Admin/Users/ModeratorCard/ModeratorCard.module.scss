@@ -1,0 +1,56 @@
+@import '../../../../styles/variables';
+
+.Container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 240px;
+    justify-content: center;
+    align-items: center;
+    padding: $spacer * 3;
+    font-family: $font-family-sailec;
+    box-shadow: 0 0 20px 0 $gray;
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0 0 5px 0 $gray;
+    }
+
+    .Avatar {
+        width: 100px;
+        height: 100px;
+        margin-bottom: $spacer * 1;
+    }
+
+    .Name {
+        font-weight: 500;
+        color: $gray-dark;
+        font-size: $font-size-medium;
+        margin-bottom: $spacer;
+        text-align: center;
+    }
+
+    .Joined {
+        color: $gray;
+        font-size: $font-size-small;
+        font-weight: 500;
+        margin-bottom: $spacer * .5;
+    }
+
+    .Visited {
+        display: flex;
+        gap: $spacer;
+
+        svg {
+            width: 20px;
+            height: 20px;
+            fill: $gray;
+        }
+
+        span {
+            color: $gray;
+            font-size: $font-size-small;
+            font-weight: 500;
+        }
+    }
+}

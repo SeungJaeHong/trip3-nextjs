@@ -37,6 +37,12 @@ export interface UserProfile extends User {
     notify_follow?: boolean
 }
 
+export interface Admin extends User {
+    joinedDate: string
+    countriesVisited: number
+    countryPercentage: number
+}
+
 export interface UserMessage {
     id: number
     user: User

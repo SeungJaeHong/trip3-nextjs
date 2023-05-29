@@ -41,7 +41,7 @@ const SidebarMenu = () => {
                 </a>
             </div>
             <div className={styles.Menu}>
-                <div className={clsx(styles.MenuItem, {
+                {/*<div className={clsx(styles.MenuItem, {
                     [styles.Active]: router.route === "/admin/dashboard"
                 })}>
                     <Link href="/admin/dashboard">
@@ -50,7 +50,7 @@ const SidebarMenu = () => {
                             <span className={styles.Title}>Avaleht</span>
                         </a>
                     </Link>
-                </div>
+                </div>*/}
                 <div className={clsx(styles.MenuItem, {
                     [styles.Active]: isForumPage()
                 })}>

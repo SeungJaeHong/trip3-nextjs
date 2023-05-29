@@ -10,7 +10,7 @@ module.exports = {
             },
             {
                 source: '/admin',
-                destination: '/admin/dashboard',
+                destination: '/admin/forum',
                 permanent: false,
             },
         ]

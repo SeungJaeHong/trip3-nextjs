@@ -1,0 +1,19 @@
+@import "../../../styles/variables";
+
+.Container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: $spacer * 5;
+
+    .UsersTable {
+        width: 100%;
+    }
+
+    .ModeratorGrid {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: $spacer * 2;
+    }
+}
