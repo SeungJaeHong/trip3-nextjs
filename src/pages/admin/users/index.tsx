@@ -3,6 +3,7 @@ import AdminLayout from "../../../layouts/AdminLayout"
 import {withAdminAuth} from "../../../hoc/withAdminAuth"
 import styles from './AdminUsers.module.scss'
 import ModeratorGrid from "../../../components/Admin/Users/ModeratorGrid";
+import UsersTable from "../../../components/Admin/Users/UsersTable";
 
 const AdminUsersPage = () => {
     return (
@@ -10,7 +11,7 @@ const AdminUsersPage = () => {
             <div className={styles.Container}>
                 <div className={styles.UsersTable}>
                     <h2>Kasutajad</h2>
-                    Tulekul...
+                    <UsersTable />
                 </div>
                 <div className={styles.ModeratorGrid}>
                     <h2>Toimetus</h2>

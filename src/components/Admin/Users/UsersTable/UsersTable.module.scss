@@ -1,0 +1,155 @@
+@import '../../../../styles/variables';
+
+.Container {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: $spacer * 3 $spacer * 3;
+    flex-direction: column;
+
+    table {
+        width: 100%;
+        font-family: $font-family-sailec;
+        border-collapse: collapse;
+
+        tr:nth-child(even):not(.InputsTr) {
+            background-color: #f2f2f2;
+        }
+
+        td, th {
+            border: 1px solid $gray;
+            padding: 8px;
+        }
+
+        td {
+            a {
+                color: $blue;
+
+                &:hover {
+                    color: $blue-hover;
+                }
+            }
+        }
+
+        th:first-child {
+            width: 200px;
+        }
+
+        tr:hover:not(.InputsTr) {
+            background-color: #ddd;
+        }
+
+        th:not(.InputsTr th) {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: $gray-dark;
+            color: white;
+        }
+
+        .InputsTr {
+            th {
+                padding: $spacer * 2;
+
+                input {
+                    font-size: $font-size-medium;
+                    font-weight: 600;
+                    border-radius: 3px;
+                    border: 2px solid $gray;
+                    color: $gray-dark;
+                    padding: $spacer;
+                    width: 100%;
+
+                    &::placeholder {
+                        color: $gray;
+                        font-size: $font-size-normal;
+                        font-weight: 400;
+                    }
+                }
+            }
+        }
+
+        .ActionButtons {
+            width: 100%;
+            display: flex;
+            gap: 10px;
+
+            button {
+                cursor: pointer;
+                height: 40px;
+                width: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &:disabled {
+                    cursor: not-allowed;
+                }
+            }
+        }
+
+        &.Loading {
+            tr:hover {
+                background-color: unset;
+            }
+        }
+    }
+
+    .PaginationContainer {
+        width: 100%;
+        display: flex;
+        position: relative;
+
+        .PaginationButtons {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+
+            .PaginationButton {
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                user-select: none;
+
+                svg {
+                    width: 30px;
+                    height: 30px;
+                    fill: $gray-dark;
+                }
+
+                &:hover {
+                    svg {
+                        fill: $gray-dark-hover;
+                    }
+                }
+
+                &.Disabled {
+                    cursor: not-allowed;
+
+                    svg {
+                        fill: $gray-light;
+                    }
+                }
+            }
+        }
+
+        .PaginationInfo {
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: $gray-dark;
+            white-space: nowrap;
+        }
+
+        @include sm() {
+            margin: 0 auto;
+
+            .PaginationInfo {
+                display: flex;
+                position: relative;
+            }
+        }
+    }
+}
