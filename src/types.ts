@@ -37,6 +37,21 @@ export interface UserProfile extends User {
     notify_follow?: boolean
 }
 
+export interface AdminTableUser extends UserProfile {
+    joinedDate: string
+    email?: string
+    contact_facebook?: string
+    contact_twitter?: string
+    contact_instagram?: string
+    contact_homepage?: string
+    age?: number
+    gender?: number
+    birthYear?: number
+    description?: string
+    notify_message?: boolean
+    notify_follow?: boolean
+}
+
 export interface Admin extends User {
     joinedDate: string
     countriesVisited: number

@@ -1,0 +1,25 @@
+@import "../../../../styles/variables";
+
+.Container {
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
+    overflow: auto;
+    background: white;
+    height: 100%;
+    border-radius: 12px;
+    position: relative;
+
+    .CloseButton {
+        position: absolute;
+        top: $spacer * 1.5;
+        right: $spacer * 1.5;
+        z-index: 3;
+        cursor: pointer;
+
+        svg {
+            width: 35px;
+            height: 35px;
+        }
+    }
+}

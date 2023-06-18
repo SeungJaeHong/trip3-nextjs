@@ -1,8 +1,7 @@
 import ApiClient from '../lib/ApiClient'
 import { AxiosResponse } from 'axios'
-import {Admin, ContentMarketingFullPost, ContentMarketingPost, ForumPostType, User} from '../types'
-import {UserTableUser} from "../components/Admin/Users/UsersTable";
-import {objectToQueryString} from "../helpers";
+import { Admin, AdminTableUser, ContentMarketingFullPost, ContentMarketingPost, ForumPostType, User } from '../types'
+import { objectToQueryString } from '../helpers'
 
 export const getForumPosts = async (page?: number): Promise<AxiosResponse> => {
     return await ApiClient.get('/admin/forum?page=' + page)
@@ -69,7 +68,10 @@ export const addContentMarketingPost = async (formValues: any): Promise<AxiosRes
     })
 }
 
-export const updateContentMarketingPost = async (post: ContentMarketingFullPost, formValues: any): Promise<AxiosResponse> => {
+export const updateContentMarketingPost = async (
+    post: ContentMarketingFullPost,
+    formValues: any
+): Promise<AxiosResponse> => {
     const formData = new FormData()
     Object.keys(formValues).forEach((key) => {
         if (formValues[key]) {
@@ -91,14 +93,16 @@ export const updateContentMarketingPost = async (post: ContentMarketingFullPost,
 }
 
 export const toggleActive = async (post: ContentMarketingPost, checked: boolean): Promise<AxiosResponse> => {
-    return await ApiClient.put('/admin/content-marketing/' + post.id + '/active', {active: checked})
+    return await ApiClient.put('/admin/content-marketing/' + post.id + '/active', { active: checked })
 }
 
 export const getModerators = async (): Promise<AxiosResponse<Admin[]>> => {
     return await ApiClient.get('/admin/users?type=admin')
 }
 
-export const getUsers = async (params: any): Promise<{users: UserTableUser[], page: number, total: number, hasMore: boolean}> => {
+export const getUsers = async (
+    params: any
+): Promise<{ users: AdminTableUser[]; page: number; total: number; hasMore: boolean }> => {
     const queryString = objectToQueryString(params)
     const users = await ApiClient.get('/admin/users?' + queryString)
     return users.data

@@ -12,14 +12,8 @@ import ArrowRightIcon from '../../../../icons/ArrowRightIcon'
 import { useDebounce } from 'use-debounce'
 import UsersTableSkeleton from '../UsersTableSkeleton'
 import clsx from 'clsx'
-
-export type UserTableUser = {
-    id: number
-    name: string
-    email: string
-    rank: number
-    joinedDate: string
-}
+import UserEditModal from '../UserEditModal'
+import { AdminTableUser, UserProfile } from '../../../../types'
 
 type paramsType = {
     id?: number
@@ -29,7 +23,8 @@ type paramsType = {
 }
 
 const UsersTable = () => {
-    const { mutate } = useSWRConfig()
+    const [selectedUser, setSelectedUser] = useState<AdminTableUser | undefined>(undefined)
+    //const { mutate } = useSWRConfig()
     const initialParams: paramsType = {
         id: undefined,
         name: undefined,
@@ -40,7 +35,7 @@ const UsersTable = () => {
     const [params, setParams] = useState<paramsType>(initialParams)
     const [debouncedValue] = useDebounce(params, 300)
 
-    const { data, isValidating } = useSWR('get_users_for_users_table', () => getUsers(debouncedValue), {
+    const { data, error, mutate, isValidating } = useSWR('get_users_for_users_table', () => getUsers(debouncedValue), {
         fallbackData: { users: [], page: 1, total: 0, hasMore: false },
         shouldRetryOnError: false,
         revalidateOnFocus: false,
@@ -70,7 +65,17 @@ const UsersTable = () => {
         setParams({ ...params, page: data.page + 1 })
     }
 
+    const onUserSave =  useCallback((user: UserProfile) => {
+        const updatedUsers = data.users.map(value => user.id === value.id ? {...user, joinedDate: value.joinedDate} : value)
+        mutate({ ...data, users: updatedUsers }, {
+            revalidate: false
+        })
+        setSelectedUser(undefined)
+
+    }, [data, mutate])
+
     useEffect(() => {
+        // @ts-ignore
         mutate('get_users_for_users_table')
     }, [debouncedValue, mutate])
 
@@ -99,7 +104,7 @@ const UsersTable = () => {
                     <td>
                         <div className={styles.ActionButtons}>
                             <Tooltip label="Muuda">
-                                <button>
+                                <button onClick={() => setSelectedUser(row)}>
                                     <EditIcon width={20} height={20} />
                                 </button>
                             </Tooltip>
@@ -121,61 +126,85 @@ const UsersTable = () => {
     }, [data])
 
     return (
-        <div className={styles.Container}>
-            <table className={isValidating ? styles.Loading : undefined}>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nimi</th>
-                        <th>Email</th>
-                        <th>Liitus</th>
-                        <th></th>
-                    </tr>
-                    <tr className={styles.InputsTr}>
-                        <th>
-                            <input
-                                type={'number'}
-                                placeholder={'Otsi...'}
-                                min={1}
-                                onChange={(e) => onInputChange(e, 'id')}
-                            />
-                        </th>
-                        <th>
-                            <input type={'text'} placeholder={'Otsi...'} onChange={(e) => onInputChange(e, 'name')} />
-                        </th>
-                        <th>
-                            <input type={'text'} placeholder={'Otsi...'} onChange={(e) => onInputChange(e, 'email')} />
-                        </th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>{isValidating ? renderLoading() : renderRows()}</tbody>
-            </table>
-            <div className={styles.PaginationContainer}>
-                <div className={styles.PaginationButtons}>
-                    <div
-                        className={clsx(styles.PaginationButton, {
-                            [styles.Disabled]: data.page === 1 || isValidating,
-                        })}
-                        onClick={() => onPreviousPageClick()}
-                    >
-                        <ArrowLeftIcon />
+        <>
+            <div className={styles.Container}>
+                <table className={isValidating ? styles.Loading : undefined}>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nimi</th>
+                            <th>Email</th>
+                            <th>Liitus</th>
+                            <th></th>
+                        </tr>
+                        <tr className={styles.InputsTr}>
+                            <th>
+                                <input
+                                    type={'number'}
+                                    placeholder={'Otsi...'}
+                                    min={1}
+                                    onChange={(e) => onInputChange(e, 'id')}
+                                />
+                            </th>
+                            <th>
+                                <input
+                                    type={'text'}
+                                    placeholder={'Otsi...'}
+                                    onChange={(e) => onInputChange(e, 'name')}
+                                />
+                            </th>
+                            <th>
+                                <input
+                                    type={'text'}
+                                    placeholder={'Otsi...'}
+                                    onChange={(e) => onInputChange(e, 'email')}
+                                />
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>{isValidating ? renderLoading() : renderRows()}</tbody>
+                </table>
+                <div className={styles.PaginationContainer}>
+                    <div className={styles.PaginationButtons}>
+                        <div
+                            className={clsx(styles.PaginationButton, {
+                                [styles.Disabled]: data.page === 1 || isValidating,
+                            })}
+                            onClick={() => onPreviousPageClick()}
+                        >
+                            <ArrowLeftIcon />
+                        </div>
+                        <div
+                            className={clsx(styles.PaginationButton, {
+                                [styles.Disabled]: !data.hasMore || isValidating,
+                            })}
+                            onClick={() => onNextPageClick()}
+                        >
+                            <ArrowRightIcon />
+                        </div>
                     </div>
-                    <div
-                        className={clsx(styles.PaginationButton, {
-                            [styles.Disabled]: !data.hasMore || isValidating,
-                        })}
-                        onClick={() => onNextPageClick()}
-                    >
-                        <ArrowRightIcon />
+                    <div className={styles.PaginationInfo}>
+                        {'Kuvan ' +
+                            ((data.page - 1) * 10 + 1) +
+                            '-' +
+                            data.page * 10 +
+                            ' tulemust ' +
+                            data.total +
+                            '-st'}
                     </div>
-                </div>
-                <div className={styles.PaginationInfo}>
-                    {'Kuvan ' + ((data.page - 1) * 10 + 1) + '-' + data.page * 10 + ' tulemust ' + data.total + '-st'}
                 </div>
             </div>
-        </div>
+            {selectedUser !== undefined && (
+                <UserEditModal
+                    show={true}
+                    onUpdateSuccess={onUserSave}
+                    onHide={() => setSelectedUser(undefined)}
+                    user={selectedUser}
+                />
+            )}
+        </>
     )
 }
 

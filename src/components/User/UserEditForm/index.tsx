@@ -32,7 +32,12 @@ type Inputs = {
     notify_follow: boolean
 }
 
-const UserEditForm = (userProfile: UserProfile) => {
+type Props = {
+    user: UserProfile,
+    onUpdateSuccess?: (user: UserProfile) => void
+}
+
+const UserEditForm = ({user, onUpdateSuccess}: Props) => {
     const formRef = useRef<HTMLFormElement>(null)
     const registerSchema = yup
         .object()
@@ -65,17 +70,17 @@ const UserEditForm = (userProfile: UserProfile) => {
     } = useForm<Inputs>({
         resolver: yupResolver(registerSchema),
         defaultValues: {
-            name: userProfile.name,
-            email: userProfile.email,
-            description: userProfile.description,
-            gender: userProfile.gender ? String(userProfile.gender) : undefined,
-            birthyear: userProfile.birthYear,
-            facebook: userProfile.contact_facebook,
-            instagram: userProfile.contact_instagram,
-            twitter: userProfile.contact_twitter,
-            homepage: userProfile.contact_homepage,
-            notify_message: userProfile.notify_message,
-            notify_follow: userProfile.notify_follow,
+            name: user.name,
+            email: user.email,
+            description: user.description,
+            gender: user.gender ? String(user.gender) : undefined,
+            birthyear: user.birthYear,
+            facebook: user.contact_facebook,
+            instagram: user.contact_instagram,
+            twitter: user.contact_twitter,
+            homepage: user.contact_homepage,
+            notify_message: user.notify_message,
+            notify_follow: user.notify_follow,
         },
         criteriaMode: 'firstError',
         shouldFocusError: true,
@@ -91,10 +96,14 @@ const UserEditForm = (userProfile: UserProfile) => {
     }, [errors, setFocus])*/
 
     const handleUpdate: SubmitHandler<Inputs> = async (values: Inputs) => {
-        await updateUserProfile(userProfile.id, values)
+        await updateUserProfile(user, values)
             .then((res) => {
-                Router.push('/user/' + userProfile.id)
-                toast.success('Profiili uuendamine õnnestus!')
+                if (onUpdateSuccess) {
+                    onUpdateSuccess(res.data)
+                } else {
+                    Router.push('/user/' + user.id)
+                    toast.success('Profiili uuendamine õnnestus!')
+                }
             })
             .catch((err) => {
                 if (err.response?.data?.errors) {
@@ -118,7 +127,7 @@ const UserEditForm = (userProfile: UserProfile) => {
                                 return (
                                     <FormImageUpload
                                         id={'image'}
-                                        files={userProfile?.avatar ? [userProfile?.avatar] : []}
+                                        files={user?.avatar ? [user?.avatar] : []}
                                         onChange={field.onChange}
                                         error={fieldState.error?.message}
                                         disabled={isSubmitting}

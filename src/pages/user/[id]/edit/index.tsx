@@ -27,7 +27,7 @@ const UserEditPage = ({ user }: Props) => {
                     </div>
                     <div className={styles.Title}>Muuda profiili</div>
                     <div className={styles.Form}>
-                        <UserEditForm {...user} />
+                        <UserEditForm user={user} />
                     </div>
                 </div>
             </div>

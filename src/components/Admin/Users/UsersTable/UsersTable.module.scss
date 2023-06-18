@@ -6,6 +6,7 @@
     flex-wrap: wrap;
     gap: $spacer * 3 $spacer * 3;
     flex-direction: column;
+    overflow-x: auto;
 
     table {
         width: 100%;

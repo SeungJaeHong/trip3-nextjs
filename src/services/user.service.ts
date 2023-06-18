@@ -1,12 +1,12 @@
 import ApiClient from "../lib/ApiClient"
 import {AxiosResponse} from "axios"
-import {Image, UserMessage} from "../types"
+import {Image, UserMessage, UserProfile} from "../types"
 
 export const getLastComments = async (id: number): Promise<AxiosResponse> => {
     return await ApiClient.get('/user/' + id + '/comments')
 }
 
-export const updateUserProfile = async (userId: number, values: any): Promise<AxiosResponse> => {
+export const updateUserProfile = async (user: UserProfile, values: any): Promise<AxiosResponse<UserProfile>> => {
     const formDataObj = Object.keys(values).reduce((formData, key) => {
         if (values[key]) {
             if (key === 'image') {
@@ -18,7 +18,7 @@ export const updateUserProfile = async (userId: number, values: any): Promise<Ax
         return formData
     }, new FormData())
 
-    return await ApiClient.post('/user/' + userId + '/update', formDataObj, {
+    return await ApiClient.post('/user/' + user.id + '/update', formDataObj, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }

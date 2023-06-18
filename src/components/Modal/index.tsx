@@ -19,10 +19,14 @@ const Modal = ({show, className, children, onHide}: Props) => {
 
         if (show) {
             window.addEventListener('keydown', handleEsc)
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
         }
 
         return () => {
             window.removeEventListener('keydown', handleEsc)
+            document.body.style.overflow = 'unset';
         }
     }, [show, onHide])
 
