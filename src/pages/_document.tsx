@@ -5,7 +5,7 @@ export default function Document() {
     return (
         <Html>
             <Head>
-                <script defer data-domain="trip.ee" src="https://plausible.io/js/script.js"></script>
+                <script defer data-domain="trip.ee" src="https://plausible.trip.ee/js/script.js"></script>
             </Head>
             <body>
             <noscript>
